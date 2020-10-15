@@ -262,11 +262,6 @@ export default function QuestionsClassic() {
                 </div>
                 <div className={openTab === 3 ? "block" : "hidden"} id="link3">
 				    <div className="container mx-auto text-center">
-					  <img
-						  alt="..."
-						  src={require("assets/img/qualite_logo.png")}
-						  className="w-full align-center togBadge animate-ping ease-in-out"
-					  />
 					  <h4 className="text-2xl font-semibold">
 						  RESULTATS : 1ere NOTE DE CONFIANCE SUR 20
 					  </h4>
@@ -301,7 +296,7 @@ export default function QuestionsClassic() {
 										  "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
 										}
 									  >
-										<i className="far fa-laugh mr-1 animate-spin"></i> PAYER POUR OBTENIR Top List
+										<i className="far fa-laugh mr-1 animate-spin"></i> PAYER POUR OBTENIR Top LIST
 									  </a>
 								  </Link>
 					   </button>

@@ -244,7 +244,7 @@ export default function Index() {
                       <img
                         alt="..."
                         className="align-middle border-none max-w-full h-auto rounded-lg"
-                        src={require("assets/img/login.jpg")}
+                        src={require("assets/img/question_classic.jpg")}
                       />
                     </div>
                   </Link>
@@ -259,7 +259,7 @@ export default function Index() {
                       <img
                         alt="..."
                         className="align-middle border-none max-w-full h-auto rounded-lg"
-                        src={require("assets/img/profile.jpg")}
+                        src={require("assets/img/landing.jpg")}
                       />
                     </div>
                   </Link>
@@ -274,7 +274,7 @@ export default function Index() {
                       <img
                         alt="..."
                         className="align-middle border-none max-w-full h-auto rounded-lg"
-                        src={require("assets/img/landing.jpg")}
+                        src={require("assets/img/profile.jpg")}
                       />
                     </div>
                   </Link>

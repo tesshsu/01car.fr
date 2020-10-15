@@ -1,51 +1,104 @@
-import React from 'react'
-import axios, { post } from 'axios';
+import React, { PureComponent } from "react";
+import PropTypes from "prop-types";
+import { Form as FinalForm, Field } from "react-final-form";
 
-class FileUpload extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state ={
-      file:null
-    }
-    this.onFormSubmit = this.onFormSubmit.bind(this)
-    this.onChange = this.onChange.bind(this)
-    this.fileUpload = this.fileUpload.bind(this)
-  }
-  onFormSubmit(e){
-    e.preventDefault() // Stop form submit
-    this.fileUpload(this.state.file).then((response)=>{
-      console.log(response.data);
-    })
-  }
-  onChange(e) {
-    this.setState({file:e.target.files[0]})
-  }
-  fileUpload(file){
-    const url = 'http://example.com/file-upload';
+class FileUpload extends PureComponent {
+  static propTypes = {
+    message: PropTypes.string,
+    progress: PropTypes.number,
+    submitting: PropTypes.bool,
+    onSubmit: PropTypes.func,
+    onCancel: PropTypes.func
+  };
+  static defaultProps = {
+    message: "",
+    progress: 0,
+    submitting: false,
+    onSubmit: () => {},
+    onCancel: () => {}
+  };
+  handleCancel = e => {
+    e.preventDefault();
+    this.props.onCancel();
+  };
+  handleFormSubmit = () => {
+    const file = this.fileInput.files[0];
     const formData = new FormData();
-    formData.append('file[]', files[0]);
-	formData.append('file[]', files[1]);
-	formData.append('file[]', files[2]);
-    const config = {
-        headers: {
-            'content-type': 'multipart/form-data'
-        }
+    formData.append("image", file);
+    this.props.onSubmit(formData);
+  };
+  validateForm = values => {
+    const errors = {};
+    if (!values.file) {
+      errors.file = "No file selected.";
     }
-    return  post(url, formData,config)
-  }
-
+    return errors;
+  };
   render() {
+    const { message, progress, submitting } = this.props;
     return (
-      <form className="mt-6" onSubmit={this.onFormSubmit}>
-        <input type="file" hidden mutiple={true} ref={this.inputReference} onChange={this.onChange} />
-        <button
-							className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-							type="submit"
-						  ><i class="fas fa-download"></i> Télécharger</button>
-      </form>
-   )
+      <FinalForm
+        onSubmit={this.handleFormSubmit}
+        validate={this.validateForm}
+        render={props => (
+          <form className="ts form" onSubmit={props.handleSubmit}>
+            <Field name="file">
+              {({ input, meta: { error, touched } }) => (
+                <div className="items-center justify-center">
+                  <input
+                    //className="px-3 py-3 justify-center placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
+					ref={fileInput => (this.fileInput = fileInput)}
+                    key="fileInput"
+                    type="file"
+                    {...input}
+                  />
+                </div>
+              )}
+            </Field>
+            <div className="ts relaxed separated buttons">
+              {!submitting && (
+                <button
+                  id="send"
+                  type="submit"
+                  className="bg-orange-500 text-white px-4 py-2 rounded shadow mr-1 mt-2"
+                  disabled={submitting}
+                >
+                  <i class="fas fa-download"></i> Envoyer
+                </button>
+              )}
+              {!submitting && (
+                <button
+                  type="button"
+                  className="bg-gray-600 text-white px-4 py-2 rounded shadow mr-1"
+                  disabled={submitting}
+                  onClick={e => {
+                    props.form.reset();
+                    this.handleCancel(e);
+                  }}
+                >
+                  Reset
+                </button>
+              )}
+              {submitting && (
+                <button className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
+				    onClick={this.handleCancel}
+				>
+                  Cancel
+                </button>
+              )}
+            </div>
+            {(submitting || message) && <hr />}
+            {submitting && (
+              <div className="ts tiny primary progress">
+                <div className="bar" style={{ width: `${progress * 100}%` }} />
+              </div>
+            )}
+            {message}
+          </form>
+        )}
+      />
+    );
   }
 }
 
-export default FileUpload
+export default FileUpload;

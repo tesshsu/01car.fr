@@ -18,17 +18,16 @@ const PagesDropdown = () => {
   };
   return (
     <>
-      <a
-        className="lg:text-white lg:hover:text-gray-300 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
-        href="#pablo"
-        ref={btnDropdownRef}
-        onClick={(e) => {
-          e.preventDefault();
-          dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
-        }}
-      >
-        Demo Pages
-      </a>
+        <Link href="/prix">
+			<a
+				href="#pablo"
+				className={
+						"text-4xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
+						}
+			>
+				<i className="fas fa-money-check-alt"></i>
+			</a>						  
+		</Link>
       <div
         ref={popoverDropdownRef}
         className={

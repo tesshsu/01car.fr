@@ -45,6 +45,7 @@ export default function AnnonceDetails() {
             </div>		
           </div>
         </section>
+		
       </main>
       <Footer />
     </>
