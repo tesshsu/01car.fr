@@ -8,7 +8,7 @@ export default function Contact() {
     <>
       <IndexNavbar fixed />
       <main className="contact-page">
-        <section className="relative block h-500-px">
+        <section className="relative block h-screen">
           <div
             className="w-full h-full bg-center bg-gray-900"
           >			
@@ -18,7 +18,16 @@ export default function Contact() {
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap justify-center lg:-mt-64 -mt-48">
               <div className="w-full lg:w-6/12 px-4">
-                <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300">
+			    <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
+                    <div className="relative">
+                      <img
+                        alt="..."
+                        src={require("assets/img/logo.png")}
+                        className="shadow-xl rounded-full h-auto p-3 align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-210-px bg-white bg-white rounded text-sm shadow outline-none"
+                      />
+                    </div>
+                  </div>
+                <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white">
                   <div className="flex-auto p-5 lg:p-10">
                     <h4 className="text-2xl font-semibold">
                       Contactez o1car en remplissant le formulaire
@@ -34,7 +43,7 @@ export default function Contact() {
                       <input
                         type="text"
                         className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                        placeholder="Full Name"
+                        placeholder="Nom"
                       />
                     </div>
 

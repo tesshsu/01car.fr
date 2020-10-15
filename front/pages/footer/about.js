@@ -1,12 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import Navbar from "components/Navbars/AuthNavbar.js";
+import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 
 export default function About() {
   return (
     <>
-      <Navbar transparent />
+      <IndexNavbar fixed />
       <main className="profile-page">
         <section className="relative block h-500-px">
           <div
