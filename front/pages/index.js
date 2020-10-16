@@ -290,7 +290,7 @@ export default function Index() {
             <div className="w-full md:w-5/12 ml-auto px-12 md:px-4">
               <div className="md:pr-12">
                 <div className="text-orange-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
-                  <i className="fas fa-smile text-xl"></i>
+                  <i className="fas fa-thumbs-up text-xl animate-ping"></i>
                 </div>
                 <h3 className="text-3xl font-semibold">
                   Rejoignez nous o1car.fr
