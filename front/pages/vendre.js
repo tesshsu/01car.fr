@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Navbar from "components/Navbars/AuthNavbar.js";
+import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import QuestionsClassic from "components/Tabs/QuestionsClassic.js";
 import QuestionsPremier from "components/Tabs/QuestionsPremier.js";
@@ -8,7 +8,7 @@ import QuestionsPremier from "components/Tabs/QuestionsPremier.js";
 export default function Vendre() {
   return (
     <>
-      <Navbar transparent />
+      <IndexNavbar fixed />
       <main className="vendre-page">
         <section className="relative block h-350-px">
           <div
@@ -153,7 +153,7 @@ export default function Vendre() {
 					  </li>
 					</ul>
 					 <button
-									className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+									className="button-payer-top-list bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
 									type="button"
 								  >
 									<Link href="/prix">
@@ -163,7 +163,7 @@ export default function Vendre() {
 											  "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
 											}
 										  >
-											<i className="far fa-laugh mr-1 animate-spin"></i> PAYER POUR OBTENIR Top LIST
+											<i className="far fa-laugh mr-1 animate-spin"></i> PAYER POUR OBTENIR TOP LIST
 										  </a>
 									  </Link>
 						   </button>

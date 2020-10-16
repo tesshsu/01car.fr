@@ -594,16 +594,86 @@ video {
     max-width: 640px;
   }
 }
-
+/* for mobile part*/
 @media (max-width: 768px) {
   .mdxhidden {
     display: none;
+  }
+  .favoris-block .price{
+	display: flex;
+  }
+  .button-payer-top-list{
+	max-width: 22em;
+  }
+  .button-payer-top-list a{
+	white-space: initial;
+  }
+  .prix-page .premium-block{
+	 order: 1;
+  }
+  .prix-page .premium-block .togBadgePrix{
+	top: 0px;
+    right: 0px;
+    width: 100px;
+  }
+  .prix-page .classic-block{
+	margin-top: 2rem;
+	order: 2;
+	width: 100%;
+  }
+  .contact-page .contact-section{
+	height: 40vh;
+  }
+  .home-page .top-block .h-screen{
+	height: 95vh;  
+  }
+  .home-page .top-block .container{
+	margin-top: 33vh;  
+  }
+  .home-page .top-block .container h1{
+	font-size: 2rem;
+  }
+  .home-page .cote-form-block{
+	right: 0;
+	top: 260px;
+  }
+  .home-page .top-block .bgImg{
+	top: 26vh;
+  }
+  .home-page .compare-block p{
+	font-size: 14px;
+  }
+  .home-page .compare-block .class-block{
+	order: 2;
+	margin-top: 0;
+  }
+  .home-page .compare-block .premier-block{
+	order: 1;
+	margin-top: -20vh;
+  }
+  .home-page .comment-marche-block{
+	margin-top: 1rem;
+  }
+  .home-page .final-sideImg-block{
+	z-index: 99;
   }
 }
 
 @media (min-width: 768px) {
   .container {
     max-width: 768px;
+  }
+  .favoris-block{
+	display: flex;
+  }
+  .favoris-block .top{
+	display: flex;
+  }
+  .favoris-block .button-block{
+	margin-top: 2em;  
+  }
+  .home-page .top-block{
+	height: 75vh;	
   }
 }
 
@@ -1060,6 +1130,12 @@ video {
 
 .bg-gray-300 {
   --bg-opacity: 1;
+  background-color: #e2e8f0;
+  background-color: rgba(226, 232, 240, var(--bg-opacity));
+}
+
+.bg-gray-300-opcity {
+  --bg-opacity: 0.8;
   background-color: #e2e8f0;
   background-color: rgba(226, 232, 240, var(--bg-opacity));
 }

@@ -8,17 +8,18 @@ export default function Index() {
   return (
     <>
       <IndexNavbar fixed />
-      <section className="header relative pt-16 items-center flex h-screen max-h-860-px">
+      <main className="home-page">
+	  <section className="top-block header relative pt-16 items-center flex">
         <div className="container mx-auto items-center flex flex-wrap">
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
               <h1 className="font-bold text-4xl text-orange-700">
                 Mais o1car, c'est quoi ?
               </h1>
-              <h2 className="font-bold text-4xl text-orange-700">
+              <h1 className="font-bold text-4xl text-orange-700">
                 Sécuriser au maximum l'achat de son véhicule.
 
-              </h2>
+              </h1>
               <p className="mt-4 text-lg leading-relaxed text-gray-500">
                 ACHETER FACILEMENT VOTRE VÉHICULE AVEC UN MINIMUM DE RISQUES.
                 1er SITE D’ACCOMPAGNEMENT AFIN DE SÉCURISER LA VENTE DE VÉHICULES.
@@ -59,8 +60,8 @@ export default function Index() {
             </div>
           </div>
         </div>
-		<div className="absolute mdxhidden top-210-px b-auto right-100 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-w-580-px z-40" >
-                <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300">
+		<div className="cote-form-block absolute top-210-px b-auto right-100 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-12/12 max-w-580-px z-40" >
+                <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300-opcity">
                   <div className="flex-auto p-5 lg:p-10">
                     <h4 className="text-2xl font-semibold">
                       Estimez votre voiture en 2 min !
@@ -105,17 +106,17 @@ export default function Index() {
 						  </button>
 						</div>
                     </div>
-                  </div>
                 </div>
-              </div>
+            </div>
+        </div>
         <img
-          className="absolute top-0 b-auto right-0 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860-px"
+          className="bgImg absolute top-0 b-auto right-0 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860-px"
           src={require("assets/img/pattern_nextjs.png")}
           alt="..."
         />
       </section>
 
-      <section className="mt-48 md:mt-40 pb-40 relative bg-gray-200">
+      <section className="compare-block mt-48 md:mt-40 pb-40 relative bg-gray-200">
         <div
           className="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
           style={{ transform: "translateZ(0)" }}
@@ -137,7 +138,7 @@ export default function Index() {
         </div>
         <div className="container mx-auto">
           <div className="flex flex-wrap items-center">
-            <div className="w-10/12 md:w-6/12 lg:w-4/12 px-12 md:px-4 mr-auto ml-auto -mt-32">
+            <div className="class-block w-10/12 md:w-6/12 lg:w-4/12 px-12 md:px-4 mr-auto ml-auto -mt-32">
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-gray-800">
                 <img
                   alt="..."
@@ -172,7 +173,7 @@ export default function Index() {
               </div>
             </div>
 
-            <div className="w-full md:w-6/12 px-4">
+            <div className="premier-block w-full md:w-6/12 px-4">
               <div className="flex flex-wrap items-center">
                 <div className="w-full md:w12 px-4">
                   <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-gray-800">
@@ -223,7 +224,7 @@ export default function Index() {
 			
           </div>
         </div>
-        <div className="justify-center text-center flex flex-wrap mt-24">
+        <div className="comment-marche-block justify-center text-center flex flex-wrap mt-16">
           <div className="w-full md:w-6/12 px-12 md:px-4">
             <h2 className="font-semibold text-4xl">comment ça marche ?</h2>
           </div>
@@ -284,8 +285,8 @@ export default function Index() {
           </div>
         </div>
       </section>
-      <section className="block relative z-1 bg-white-700">
-	  <div className="container mx-auto px-4 pb-32 pt-48">
+      <section className="final-block block relative z-1 bg-white-700">
+	  <div className="container mx-auto px-4 pb-32 pt-16">
           <div className="items-center flex flex-wrap">
             <div className="w-full md:w-5/12 ml-auto px-12 md:px-4">
               <div className="md:pr-12">
@@ -345,10 +346,10 @@ export default function Index() {
               </div>
             </div>
 
-            <div className="w-full md:w-6/12 mr-auto px-4 pt-24 md:pt-0">
+            <div className="final-sideImg-block w-full md:w-6/12 mr-auto px-4 pt-24 md:pt-0">
               <img
                 alt="..."
-                className="max-w-full rounded-lg shadow-xl"
+                className="max-w-full rounded-lg shadow-2xl"
                 style={{
                   transform:
                     "scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg)",
@@ -419,6 +420,7 @@ export default function Index() {
           </div>
         </div>
       </section>
+	  </main>
       <Footer />
     </>
   );

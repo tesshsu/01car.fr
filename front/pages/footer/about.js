@@ -7,7 +7,7 @@ export default function About() {
   return (
     <>
       <IndexNavbar fixed />
-      <main className="profile-page">
+      <main className="about-page">
         <section className="relative block h-500-px">
           <div
             className="absolute top-0 w-full h-full bg-center bg-cover"
@@ -55,20 +55,20 @@ export default function About() {
                       />
                     </div>
                   </div>
-                  <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
+                  <div className="mdxhidden w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
                     <div className="py-6 px-3 mt-32 sm:mt-0">
                       <button
 						  className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
 						  type="button"
 						>
-						  <Link href="/auth/login">
+						  <Link href="/vendre">
 						  <a
 							href="#"
 							className={
 							  "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
 							}
 						  >
-							Connexion
+							VENDRE
 						  </a>
 						</Link>
 					   </button>
@@ -140,7 +140,7 @@ export default function About() {
           </div>
         </section>
 		<section className="block relative z-1 bg-white-700">
-		    <div className="container mx-auto px-4 pb-32 pt-48">
+		    <div className="container mx-auto px-4 pb-32 pt-16">
 			  <div className="items-center flex flex-wrap">
 				<div className="w-full md:w-5/12 ml-auto px-12 md:px-4">
 				  <div className="md:pr-12">
@@ -198,7 +198,7 @@ export default function About() {
 					  </li>
 					</ul>
 					 <button
-									className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+									className="button-payer-top-list bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
 									type="button"
 								  >
 									<Link href="/prix">

@@ -5,7 +5,7 @@ export default function AnnonceFavoris() {
   return (
     <>
         <div className="container px-4 mx-auto">
-		  <div className="flex flex-wrap">
+		  <div className="favoris-block flex-wrap">
 			<div className="w-full px-4 mt-4 flex-1">
 			  <img
                     alt="..."
@@ -15,12 +15,11 @@ export default function AnnonceFavoris() {
 			</div>
 			<div className="w-full px-4 flex-1">
 			  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">
-			        <div class="flex justify-between">
+			        <div class="top justify-between">
 					  <div class="font-bold text-lg text-orange-700 text-center py-2 m-2">
 					     RENAULT - GRAND SCENIC IV
 					  </div>
-					  <div class="text-gray-700 text-center bg-gray-400 py-2 m-2"></div>
-					  <div class="font-bold text-orange-500  text-xl text-center bg-gray-400 px-4 py-2 m-2">
+					  <div class="price font-bold text-orange-500  text-2xl text-center bg-gray-400 px-4 py-2">
 					    10 700 €
 					  </div>
 					</div>					
@@ -29,23 +28,23 @@ export default function AnnonceFavoris() {
 						<div className="w-1/3">
 						  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">Essence</span>
 						</div>
-						<div className="w-1/3 px-3">
+						<div className="w-1/3">
 						  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">Manuelle</span>
 						</div>
-						<div className="w-1/3 px-3">
+						<div className="w-1/3">
 						  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">82 000 km</span>
 						</div>
-						<div className="w-1/3 px-3">
+						<div className="w-1/3">
 						  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">2017</span>
 						</div>
 					  </div>
 					</div>
-					<div className="mt-8">
+					<div className="button-block justify-left">
 						<button
-						  className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+						  className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 mr-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
 						  type="button"
 						>
-						  <Link href="/vendre">
+						  <Link href="/annonce_details">
 							  <a
 								href="#pablo"
 								className={
@@ -57,7 +56,7 @@ export default function AnnonceFavoris() {
 						  </Link>
 						</button>
 						 <button
-						  className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+						  className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
 						  type="button"
 						>
 						  <Link href="/annonce">
@@ -67,7 +66,7 @@ export default function AnnonceFavoris() {
 								  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
 								}
 							  >
-								Supprimer l'annonce dans ma list favoris
+								Supprimer l'annonce
 							  </a>
 						  </Link>
 						</button>

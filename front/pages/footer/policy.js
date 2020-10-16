@@ -7,7 +7,7 @@ export default function Policy() {
   return (
     <>
       <IndexNavbar fixed />
-      <main className="profile-page">
+      <main className="policy-page">
         <section className="relative block h-500-px">
           <div
             className="absolute top-0 w-full h-full bg-center bg-cover"
@@ -55,20 +55,20 @@ export default function Policy() {
                       />
                     </div>
                   </div>
-                  <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
+                  <div className="mdxhidden w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
                     <div className="py-6 px-3 mt-32 sm:mt-0">
                       <button
 						  className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
 						  type="button"
 						>
-						  <Link href="/auth/login">
+						  <Link href="/vendre">
 						  <a
 							href="#"
 							className={
 							  "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
 							}
 						  >
-							Connexion
+							Vendre
 						  </a>
 						</Link>
 					   </button>

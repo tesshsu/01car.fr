@@ -8,7 +8,7 @@ export default function Contact() {
     <>
       <IndexNavbar fixed />
       <main className="contact-page">
-        <section className="relative block h-screen">
+        <section className="relative block h-screen contact-section">
           <div
             className="w-full h-full bg-center bg-gray-900"
           >			
