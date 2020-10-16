@@ -1,7 +1,18 @@
 import React from "react";
-
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
+import { Form, Field } from 'react-final-form';
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+const required = value => (value ? undefined : 'Champs obligatoires')
+const mustBeNumber = value => (isNaN(value) ? 'Must be a number' : undefined)
+const composeValidators = (...validators) => value =>
+  validators.reduce((error, validator) => error || validator(value), undefined)
+const onSubmit = async values => {
+  await sleep(300)
+  window.alert(JSON.stringify(values, 0, 2))
+}
+
 
 export default function Contact() {
   return (
@@ -33,58 +44,99 @@ export default function Contact() {
                       Contactez o1car en remplissant le formulaire
                     </h4>
                     
-                    <div className="relative w-full mb-3 mt-8">
-                      <label
-                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                        htmlFor="full-name"
-                      >
-                        Nom
-                      </label>
-                      <input
-                        type="text"
-                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                        placeholder="Nom"
-                      />
-                    </div>
+					<Form
+						onSubmit={onSubmit}
+						render={({ handleSubmit, form, submitting, pristine, values }) => (
+						<form onSubmit={handleSubmit}>                 
+						    <Field name="name" validate={required}>
+							    {({ input, meta }) => (
+								  <div className="relative w-full mb-3">
+									<label
+									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
+									  htmlFor="name"
+									>
+									  Nom
+									</label>
+									<input
+									  {...input}
+									  type="name"
+									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+									  placeholder="Votre nom"
+									/>{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
+								  </div>
+								)}
+                            </Field>
+							<Field name="email" validate={required}>
+							    {({ input, meta }) => (
+								  <div className="relative w-full mb-3">
+									<label
+									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
+									  htmlFor="email"
+									>
+									  Email
+									</label>
+									<input
+									  {...input}
+									  type="email"
+									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+									  placeholder="Email"
+									/>{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
+								  </div>
+								)}
+                            </Field>
+							<Field name="message" validate={required}>
+							    {({ input, meta }) => (
+								  <div className="relative w-full mb-3">
+									<label
+									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
+									  htmlFor="message"
+									>
+									  Message
+									</label>
+									<textarea
+									  {...input}
+									  type="text"
+									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+									  placeholder="Message"
+									/>{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
+								  </div>
+								)}
+                            </Field>
+						  <div>
+								<label className="inline-flex items-center cursor-pointer">
+								  <input
+									id="customCheckLogin"
+									type="checkbox"
+									disabled = {submitting}
+									className="form-checkbox text-gray-800 ml-1 w-5 h-5 ease-linear transition-all duration-150"
+								  />
+								  <span className="ml-2 text-sm font-semibold text-gray-700">
+									J'ai lu et j'accepte les{" "}
+									<a
+									  href="#pablo"
+									  className="text-blue-500"
+									  onClick={(e) => e.preventDefault()}
+									>
+									  Politique de confidentialité de 01car.fr
+									</a>
+								  </span>
+								</label>
+						  </div>
 
-                    <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                        htmlFor="email"
-                      >
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                        placeholder="Email"
-                      />
-                    </div>
-
-                    <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                        htmlFor="message"
-                      >
-                        Message
-                      </label>
-                      <textarea
-                        rows="4"
-                        cols="80"
-                        className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-                        placeholder="Type a message..."
-                      />
-                    </div>
-                    <div className="text-center mt-6">
-                      <button
-                        className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                        type="button"
-                      >
-                        Envoyer
-                      </button>
-                    </div>
-                  </div>
-                </div>
+						  <div className="text-center mt-6">
+							<button
+							  className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+							  type="submit"
+							  disabled = {submitting}
+							>
+							  Envoyer
+							</button>
+						  </div>
+						</form>
+					)}
+				 />                 
+                 </div>
+               </div>
               </div>
             </div>
           </div>

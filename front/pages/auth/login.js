@@ -1,9 +1,22 @@
 import React from "react";
 import Link from "next/link";
-
-// layout for page
-
+import { Form, Field } from 'react-final-form';
 import Auth from "layouts/Auth.js";
+import { FORM_ERROR } from 'final-form';
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
+const required = value => (value ? undefined : 'Champs obligatoires')
+const onSubmit = async values => {
+  await sleep(300)
+  if (values.email !== 'test@gmail.com') {
+    return { email: 'Email inconnu' }
+  }
+  if (values.password !== '1234') {
+    return { [FORM_ERROR]: 'Mot de pass pas correct' }
+  }
+  window.alert('LOGIN SUCCESS!')
+}
+
 
 export default function Login() {
   return (
@@ -38,45 +51,76 @@ export default function Login() {
                 <div className="text-gray-500 text-center mb-3 font-bold">
                   <small>Se connecter avec </small>
                 </div>
-                <form>
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                      placeholder="Email"
-                    />
-                  </div>
+                 <Form
+					  onSubmit={onSubmit}
+					  validate={values => {
+						const errors = {}
+						if (!values.username) {
+						  errors.username = 'Required'
+						}
+						if (!values.password) {
+						  errors.password = 'Required'
+						}
+						return errors
+					  }}
+					  render={({ submitError, handleSubmit, form, submitting, pristine, values
+					  }) => (
+						<form onSubmit={handleSubmit}>
+						  <Field name="email" validate={required}>
+							    {({ input, meta }) => (
+								  <div className="relative w-full mb-3">
+									<label
+									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
+									  htmlFor="email"
+									>
+									  Email
+									</label>
+									<input
+									  {...input}
+									  type="email"
+									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+									  placeholder="Email"
+									/>
+									{(meta.error || meta.submitError) && meta.touched && (
+									  <span className="text-orange-500 text-sm">{meta.error || meta.submitError}</span>
+									)}
+								  </div>
+								)}
+                            </Field>
 
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-gray-700 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Mot de passe
-                    </label>
-                    <input
-                      type="password"
-                      className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                      placeholder="Password"
-                    />
-                  </div>
-                 
+						  <Field name="password" validate={required}>
+							    {({ input, meta }) => (
+								  <div className="relative w-full mb-3">
+									<label
+									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
+									  htmlFor="password"
+									>
+									  Mot de passe
+									</label>
+									<input
+									  {...input}
+									  type="password"
+									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+									  placeholder="Mot de passe"
+									/>
+									{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
+								  </div>
+								)}
+                            </Field>
+						 
 
-                  <div className="text-center mt-6">
-                    <button
-                      className="bg-orange-500 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                      type="button"
-                    >
-                      Sign In
-                    </button>
-                  </div>
-                </form>
+						  <div className="text-center mt-6">
+							<button
+							  className="bg-orange-500 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+							  type="submit"
+							  disabled={submitting}
+							>
+							  Sign In
+							</button>
+						  </div>
+						</form>
+					)}
+				/>
               </div>
             </div>
             <div className="flex flex-wrap mt-6 relative">
