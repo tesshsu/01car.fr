@@ -3,6 +3,8 @@ import Link from "next/link";
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
+import PubContent from "layouts/PubContent.js";
+import PubContent2 from "layouts/PubContent2.js";
 
 export default function Index() {
   return (
@@ -138,7 +140,7 @@ export default function Index() {
         </div>
         <div className="container mx-auto">
           <div className="flex flex-wrap items-center">
-            <div className="class-block w-10/12 md:w-6/12 lg:w-4/12 px-12 md:px-4 mr-auto ml-auto -mt-32">
+            <div className="class-block w-10/12 md:w-6/12 lg:w-4/12 px-12 md:px-4 mr-auto ml-auto -mt-32 z-40">
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-gray-800">
                 <img
                   alt="..."
@@ -173,10 +175,10 @@ export default function Index() {
               </div>
             </div>
 
-            <div className="premier-block w-full md:w-6/12 px-4">
+            <div className="premier-block w-full md:w-6/12 px-4 z-40 animate-bounce-small">
               <div className="flex flex-wrap items-center">
                 <div className="w-full md:w12 px-4">
-                  <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-gray-800">
+                  <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-gray-800 shadow-2xl">
 					<img
 					  alt="..."
 					  src={require("assets/img/top.png")}
@@ -205,17 +207,26 @@ export default function Index() {
 						></polygon>
 					  </svg>
 					  <h4 className="text-3xl font-bold text-orange-500">
-						20 questions
+						20 questions :
 					  </h4>
-					  <p className="text-lg font-light mt-2 text-white">
-						Note de confiance 20/20 max
-						<button
-							  className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+					  <span className="text-lg font-light mt-2 text-white mr-2">
+						Note de confiance 20/20 max 
+					  </span>
+					  <button
+							  className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
 							  type="button"
 							>
-							  <i className="fas fa-thumbs-up"></i> Vendre en Top list
+							<Link href="/prix">
+										  <a
+											href="#pablo"
+											className={
+											  "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
+											}
+										  >
+											<i className="fas fa-thumbs-up"></i> Vendre en Top list
+										  </a>
+							</Link>
 						</button>
-					  </p>
 					</blockquote>
 				  </div>               
                 </div>              
@@ -285,8 +296,9 @@ export default function Index() {
           </div>
         </div>
       </section>
+	  <PubContent />
       <section className="final-block block relative z-1 bg-white-700">
-	  <div className="container mx-auto px-4 pb-32 pt-16">
+	  <div className="container mx-auto px-4 pb-32">
           <div className="items-center flex flex-wrap">
             <div className="w-full md:w-5/12 ml-auto px-12 md:px-4">
               <div className="md:pr-12">
@@ -360,66 +372,7 @@ export default function Index() {
           </div>
         </div>
 	  </section>
-     
-
-      <section className="pb-16 bg-gray-300 relative pt-32">
-        <div
-          className="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
-          style={{ transform: "translateZ(0)" }}
-        >
-          <svg
-            className="absolute bottom-0 overflow-hidden"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none"
-            version="1.1"
-            viewBox="0 0 2560 100"
-            x="0"
-            y="0"
-          >
-            <polygon
-              className="text-gray-300 fill-current"
-              points="2560 0 2560 100 0 100"
-            ></polygon>
-          </svg>
-        </div>
-
-        <div className="container mx-auto">
-          <div className="flex flex-wrap justify-center bg-orange-500 shadow-xl rounded-lg -mt-64 py-16 px-12 relative z-10">
-            <div className="w-full text-center lg:w-8/12">
-              <h3 className="font-semibold text-3xl">
-                Bien vendre votre vehicule
-              </h3>
-              <p className="text-white-600 text-lg leading-relaxed mt-4 mb-4">
-                On vous accompagne dans l'achat de votre véhicule.
-                vous avez des questions, contactez-nous, nous allons vous aider.
-              </p>
-              <div className="sm:block flex flex-col mt-10">
-                <Link href="/vendre">
-					<a
-					  href="#"
-					  target="_blank"
-					  className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-2 bg-gray-600 active:bg-gray-700 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-					>
-					   <i className="fas fa-car text-lg mr-1"></i>
-					   <span> Vendre</span>
-					</a>
-				</Link>
-                <Link href="/prix">
-					<a
-					  href="#"
-					  target="_blank"
-					  className="github-star sm:ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-gray-800 active:bg-gray-700 uppercase text-sm shadow hover:shadow-lg"
-					>
-					  <i className="fas fa-euro-sign"></i>
-					  <span> Tarif</span>
-					</a>
-				</Link>
-              </div>
-              <div className="text-center mt-16"></div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PubContent2 />
 	  </main>
       <Footer />
     </>
