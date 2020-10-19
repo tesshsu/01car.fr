@@ -22,5 +22,6 @@ module.exports = withFonts(
         },
       })
     )
-  )
+  ),
+  distDir: 'build'
 );
