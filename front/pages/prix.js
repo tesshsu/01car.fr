@@ -103,7 +103,16 @@ export default function Prix() {
 							  className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
 							  type="button"
 							>
-							  <i className="fas fa-thumbs-up"></i> Vendre
+							  <Link href="/vendre">
+								  <a
+									href="#pablo"
+									className={
+									  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
+									}
+								  >
+									<i className="fas fa-car"></i> Vendre
+								  </a>
+							  </Link>
 					  </button>
 					</div>
 				  </div>
@@ -173,7 +182,16 @@ export default function Prix() {
 							  className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-6 py-4 rounded shadow hover\:shadow-md:hover outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 hover:-mt-2 ease-linear transition-all duration-150"
 							  type="button"
 							>
-							  <i className="fas fa-thumbs-up"></i> Vendre votre véhicule sur Top list
+							  <Link href="/vendre_premium">
+								  <a
+									href="#pablo"
+									className={
+									  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
+									}
+								  >
+									<i className="fas fa-thumbs-up"></i> Vendre votre véhicule sur Top list
+								  </a>
+							  </Link>
 					  </button>
 					</div>
 				  </div>

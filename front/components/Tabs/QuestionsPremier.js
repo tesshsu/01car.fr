@@ -333,12 +333,12 @@ export default function QuestionsPremier() {
                                       <img
                                           alt="..."
                                           src={require("assets/img/top.png")}
-                                          className="w-full align-center topImage"
+                                          className="w-full align-center topImage animate-bounce"
                                         />
                                       <img
                                           alt="..."
                                           src={require("assets/img/qualite_logo.png")}
-                                          className="w-full align-center togBadge"
+                                          className="w-full align-center togBadge animate-ping"
                                       />
                                       <h4 className="text-2xl font-semibold">
                                           RESULTATS : NOTE DE CONFIANCE FINALE
