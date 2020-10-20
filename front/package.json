@@ -27,12 +27,11 @@
     "react-final-form": "^6.5.1",
     "react-google-maps": "9.4.5",
     "react-scripts": "3.4.3",
-    "tailwindcss": "1.8.10",
-    "webpack": "4.44.2"
+    "tailwindcss": "1.8.10"
   },
   "scripts": {
     "start": "next start",
-    "build": "next build",
+    "build": "next build && next export",
     "dev": "next dev",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm run build:tailwind && npm run dev",
     "build:tailwind": "tailwind build assets/styles/index.css -o assets/styles/tailwind.css"
@@ -57,5 +56,8 @@
     "@types/markerclustererplus": "2.1.33",
     "@types/react": "16.9.49",
     "typescript": "4.0.3"
+  },
+  "devDependencies": {
+    "webpack": "^4.44.2"
   }
 }

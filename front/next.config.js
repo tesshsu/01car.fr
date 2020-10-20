@@ -6,6 +6,7 @@ const withFonts = require("next-fonts");
 const webpack = require("webpack");
 const path = require("path");
 
+
 module.exports = withFonts(
   withCSS(
     withImages(
@@ -22,6 +23,5 @@ module.exports = withFonts(
         },
       })
     )
-  ),
-  distDir: 'build'
+  )
 );
