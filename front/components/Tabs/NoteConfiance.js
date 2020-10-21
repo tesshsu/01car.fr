@@ -1,7 +1,7 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
 
-const ContactVendeur = () => {
+const NoteConfiance = () => {
   const [popoverShow, setPopoverShow] = React.useState(false);
   const btnRef = React.createRef();
   const popoverRef = React.createRef();
@@ -19,12 +19,12 @@ const ContactVendeur = () => {
       <div className="flex flex-wrap">
         <div className="w-full text-center">
           <button
-            className="bg-gray-500 text-gray-500 active:bg-gray-600 font-bold uppercase text-sm px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
+            className="bg-gray-600 text-white active:bg-gray-600 font-bold uppercase text-sm px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
             onMouseEnter={openTooltip}
             onMouseLeave={closeTooltip}
             ref={btnRef}
           >
-            Info
+            Note de confiance: 14/20
           </button>
           <div
             className={
@@ -42,16 +42,16 @@ const ContactVendeur = () => {
               <div className="text-white p-3">
                 <ul className="list-unstyled">
 								    <li>
-					                  1. Ne jamais verser d'argent avant d'avoir vu le véhicule, quelle que soit l'urgence évoquée
+					                  1. Le vendeur a répondu favorablement aux questions
                                     </li>
 									<li>
-					                  2. Rencontrez le vendeur et essayez le véhicule
+					                  2. Les documents téléchargés sont valides
                                     </li>
 									<li>
-					                  3. N'envoyez jamais vos coordonnées bancaires à un inconnu
+					                  3. Garantie l'état réel du véhicule
                                     </li>
 									<li>
-					                  4. Assurez-vous d'avoir pu joindre par téléphone au moins une fois votre interlocuteur
+					                  4. Garantie la fiabilité de l annonce
                                     </li>
                                 </ul> 		
               </div>
@@ -63,4 +63,4 @@ const ContactVendeur = () => {
   );
 };
 
-export default ContactVendeur;
+export default NoteConfiance;

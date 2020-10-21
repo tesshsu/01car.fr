@@ -232,14 +232,13 @@ export default function QuestionsPremier() {
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
                                                 htmlFor="question-17"
                                           >
-                                            Q17- Date du prochain entretien ?
+                                            Q17- Prochain entretien ?
                                           </label>
                                           <div className="relative flex w-full flex-wrap items-stretch mb-3">
                                               <Field name="question-17" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                   <option></option>
-                                                  <option value="1">Immédiatement</option>
-                                                  <option value="0">Moins un 6 mois</option>
-                                                  <option value="0">Plus un mois</option>
+                                                  <option value="0">Moins de 5000km</option>
+                                                  <option value="1">Plus de 5000km</option>
                                               </Field>
                                               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                                   <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -356,7 +355,7 @@ export default function QuestionsPremier() {
                                           Prix de vente Suzuki SWIFT - 2012
                                       </h4>
                                       <CardPriceVehicule />
-                                      <div className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600"><i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> Finale mise à jour les inforamtion et  publier </div>
+                                      <div className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600"><i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> ETAPE FINALE ET PUBLICATION </div>
                                       <button
                                                 className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                                 type="button"
@@ -365,7 +364,7 @@ export default function QuestionsPremier() {
                                               >
                                                 <i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> Lancer!!
                                       </button>
-                                       <p className="text-md leading-relaxed text-gray-500"> Votre annonce sera pré-remplie à l’issue de ce questionnaire. Vous auriez accorder le terms et conditions pour publier votre annonce </p>
+                                       <p className="text-md leading-relaxed text-gray-500"> Le site vous garantie la qualite de l annonce Le site protege les documents telecharges et non visible par l acheteur</p>
                                     </div>
                                 </div>
                               </div>

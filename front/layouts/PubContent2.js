@@ -11,10 +11,10 @@ export default function PubContent2() {
 				<div className="w-full md:w-6/12 ml-auto px-12 md:px-4 mt-4">
 				  <div className="md:pr-12">
 					<h3 className="text-3xl font-semibold">
-					  Vous etes le Vendeur ?
+					  Vous êtes Vendeur ?
 					</h3>
 					<p className="mt-4 text-md leading-relaxed text-white">
-					 Vendez votre voiture à un particulier en toute tranquillité.
+					 Vendez votre véhicule  à un particulier en toute transparence
 					</p>
 					<ul className="list-none mt-6">
 					  <li className="py-2">
@@ -26,7 +26,7 @@ export default function PubContent2() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-							  d'avoir la confiance par Note
+							  Obtenir une confiance grace a une NOTE
 							</h4>
 						  </div>
 						</div>
@@ -40,7 +40,7 @@ export default function PubContent2() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-							  Publie rapide selon votre questionaires
+							  Rapidité dans la publication de l' annonce
 							</h4>
 						  </div>
 						</div>
@@ -54,7 +54,7 @@ export default function PubContent2() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-							  D'avoir le contact par l'acheteur facile
+							  Facilité dans la prise de contact avec l' acheteur
 							</h4>
 						  </div>
 						</div>
@@ -84,7 +84,7 @@ export default function PubContent2() {
 					  Vous etes l'acheteur ?
 					</h3>
 					<p className="mt-4 text-md leading-relaxed text-white">
-					 Acheter une voiture d'occasion à un particulier en toute sécurité.
+					 Acheter un véhicule à un particulier avec un minimum de risques.
 					</p>
 					<ul className="list-none mt-6">
 					  <li className="py-2">
@@ -110,7 +110,7 @@ export default function PubContent2() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-							  Annonce simple, tete en liste garantie en sécurisé
+							  Acheter un véhicule à un particulier avec un minimum de risques
 							</h4>
 						  </div>
 						</div>
@@ -124,7 +124,7 @@ export default function PubContent2() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-							  Contacter vendeur facile sans frais de charge
+							  Contacter le vendeur immédiatement
 							</h4>
 						  </div>
 						</div>

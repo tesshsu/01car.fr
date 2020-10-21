@@ -621,6 +621,9 @@ video {
 	order: 2;
 	width: 100%;
   }
+  .logoNoteConfiance {
+    top: 160px !important;
+  }
   .contact-page .contact-section{
 	height: 40vh;
   }
@@ -639,6 +642,9 @@ video {
   }
   .home-page .top-block .bgImg{
 	top: 26vh;
+  }
+  .home-page .compare-description-block{
+	display: none;
   }
   .home-page .compare-block p{
 	font-size: 14px;
@@ -2826,8 +2832,12 @@ video {
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
 
-.shadow-2xl{
-  box-shadow: 0 25px 50px -12px #ed8936;
+.shadow-2xl-orange{
+  box-shadow: 25px 25px 50px -12px #ed8936;
+}
+
+.shadow-md-orange{
+  box-shadow: 0 5px 5px 5px #ed8936;
 }
 
 .shadow-none {
@@ -3230,6 +3240,10 @@ video {
 
 .w-16 {
   width: 4rem;
+}
+
+.w-70 {
+  width: 70rem;
 }
 
 .w-auto {
@@ -3864,6 +3878,17 @@ video {
 }
 
 /*pages layout*/
+.bannerCompare{
+	position: absolute;
+    top: 10px;
+    left: -20px;
+}
+.logoNoteConfiance{
+	position: absolute;
+    top: 300px;
+    left: 0;
+    width: 100px;
+}
 .topImage{
 	position: absolute;
     top: 0;

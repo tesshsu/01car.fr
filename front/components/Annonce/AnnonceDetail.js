@@ -5,6 +5,7 @@ import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import DetailsDropdown from "components/Dropdowns/AnnonceDetails/DetailsDropdown.js";
 import DetailsPremiumDropdown from "components/Dropdowns/AnnonceDetails/DetailsPremiumDropdown.js";
 import MondalContact from "components/Mondal/MondalContact.js";
+import NoteConfiance from "components/Tabs/NoteConfiance.js";
 
 export default function AnnonceDetail() {
   return (
@@ -46,11 +47,9 @@ export default function AnnonceDetail() {
         <div className="w-full lg:w-4/12 px-4 mt-10">
 		    <div className="flex flex-wrap">
 				<div className="w-full px-8 py-2 px-2 flex-1">
-					  <p className="mt-2 px-2 py-2 text-md leading-relaxed bg-gray-600 text-white font-bold uppercase rounded text-center">
-						Note de Conficance: 14/20
-					  </p>
+					 <NoteConfiance />
 				</div>
-				<div className="w-full mt-2 py-2 flex-1">					  	 
+				<div className="w-full py-2 flex-1">					  	 
 					  <span className="font-bold px-1 text-xl text-orange-500 text-right">
 					    10 700 €
 					  </span>

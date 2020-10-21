@@ -184,9 +184,9 @@ export default function QuestionsClassic() {
 								<div className="relative flex w-full flex-wrap items-stretch mb-3">
                                   <Field name="question-5" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                     <option></option>
-                                    <option  value="1">Pour acheter autre</option>
-                                    <option  value="0">Pour debarraser</option>
-                                    <option value="autre">autre</option>
+                                    <option  value="1">Changer de véhicule</option>
+                                    <option  value="1">Autre projet</option>
+                                    <option value="1">Autre</option>
                                   </Field>
                                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                     <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -353,8 +353,8 @@ export default function QuestionsClassic() {
 								  Prix de vente Suzuki SWIFT - 2012
 							  </h4>
 							  <CardPriceVehicule />
-							  <div className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600"><i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> Final étapes pour publier </div>
-							  <p className="text-md leading-relaxed text-gray-500"> Telecharger maixma 10 photos de votre vehicule </p>
+							  <div className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600"><i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> ETAPE SUIVANTE </div>
+							  <p className="text-md leading-relaxed text-gray-500"> Telecharger 10 photos MAX pour publier votre annonce </p>
 							  <FileUpload />
 							  <div className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600"><i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> Publier votre annonce </div>
 							  <button
@@ -379,11 +379,11 @@ export default function QuestionsClassic() {
 												  "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
 												}
 											  >
-												<i className="far fa-laugh mr-1 animate-spin"></i> PAYER POUR OBTENIR Top LIST
+												<i className="far fa-laugh mr-1 animate-spin"></i> CONTINUER POUR PASSER A LA TOPLIST
 											  </a>
 										  </Link>
 							   </button>
-							   <p className="text-md leading-relaxed text-gray-500"> Votre annonce sera pré-remplie à l’issue de ce questionnaire. Vous auriez accorder le terms et conditions pour publier votre annonce </p>
+							   <p className="text-md leading-relaxed text-gray-500"> Votre annonce sera pré-remplie à l’issue de ce questionnaire. Vous ACCEPTEZ les conditions pour publier votre annonce </p>
 							</div>
 						</div>
 						</div>

@@ -79,7 +79,7 @@ export default function Index() {
 						  <span className="z-10 h-full leading-snug font-normal absolute text-center text-gray-400 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-2 py-1">
 							<i className="fas fa-lock"></i>
 						  </span>
-						  <input type="text" placeholder="AA-001-ZZ" className="px-2 py-1 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"/>
+						  <input type="text" placeholder="AA-001-ZZ" pattern="^([A-HJ-NP-TV-Z]{2}|[0-9]{3,4})-?([A-HJ-NP-TV-Z]{2,3}|[0-9]{3})-?([A-HJ-NP-TV-Z]{2}|[0-9]{2})$" className="px-2 py-1 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10" title="Number should be correct"/>
 						</div>
 						<div className="w-full lg:w-6/12 px-4">
 						  <button
@@ -118,12 +118,17 @@ export default function Index() {
         />
       </section>
 
-      <section className="compare-block mt-48 md:mt-40 pb-40 relative bg-gray-200">
-        <div
+	  <section className="compare-block mt-48 md:mt-40 pb-40 relative bg-gray-200">
+        <div className="compare-description-block items-center flex flex-wrap justify-center mb-3 md\:hidden">
+			<h1 className="font-bold text-3xl text-gray-800 break-words w-70">
+				Concept:  répondez au questionnaire de <span className="font-bold text-3xl text-orange-500">confiance</span> afin de vendre ou d'acheter plus facilement son véhicule
+			</h1>
+		  </div>
+		<div
           className="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
           style={{ transform: "translateZ(0)" }}
         >
-          <svg
+		  <svg
             className="absolute bottom-0 overflow-hidden"
             xmlns="http://www.w3.org/2000/svg"
             preserveAspectRatio="none"
@@ -138,11 +143,20 @@ export default function Index() {
             ></polygon>
           </svg>
         </div>
+		
         <div className="container mx-auto">
           <div className="flex flex-wrap items-center">
             <div className="class-block w-10/12 md:w-6/12 lg:w-4/12 px-12 md:px-4 mr-auto ml-auto -mt-32 z-40">
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-gray-800">
-                <img
+                <div className="w-full align-center bannerCompare">
+				  <button
+							  className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+							  type="button"
+							>
+							  <i className="fas fa-pencil-alt "></i> 1 - 10 questions à répondre
+					</button>
+				</div>
+				<img
                   alt="..."
                   src={require("assets/img/bedcar.jpg")}
                   className="w-full align-middle rounded-t-lg"
@@ -178,12 +192,23 @@ export default function Index() {
             <div className="premier-block w-full md:w-6/12 px-4 z-40 animate-bounce-small">
               <div className="flex flex-wrap items-center">
                 <div className="w-full md:w12 px-4">
-                  <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-gray-800 shadow-2xl">
-					<img
-					  alt="..."
-					  src={require("assets/img/top.png")}
-					  className="w-full align-center topImage"
-					/>
+                  <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-gray-800 shadow-md-orange shadow-2xl">
+					<div className="w-full align-center bannerCompare">
+					  <button
+								  className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+								  type="button"
+								>
+								  <i className="fas fa-pencil-alt "></i> 11 - 20 questions à répondre
+						</button>
+					</div>
+					<div className="w-full align-center logoNoteConfiance">
+					  <button
+								  className="bg-orange-500 text-white active:bg-gray-700 border-dashed border-2 shadow-2xl-orange text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-xl outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+								  type="button"
+								>
+								  <i className="far fa-thumbs-up"></i> Note de confiance
+						</button>
+					</div>
 					<img
 					  alt="..."
 					  src={require("assets/img/qualite_logo.png")}
@@ -249,7 +274,7 @@ export default function Index() {
               <div className="flex flex-wrap">
                 <div className="w-full lg:w-4/12 px-4">
                   <h5 className="text-xl font-semibold pb-4 text-center">
-                    Répondre aux questionnaires en ligne
+                    Répondre au questionnaire en ligne
                   </h5>
                   <Link href="/auth/login">
                     <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
@@ -264,7 +289,7 @@ export default function Index() {
 
                 <div className="w-full lg:w-4/12 px-4">
                   <h5 className="text-xl font-semibold pb-4 text-center">
-                    on cherche et compare les meilleurs offre
+                    on cherche et comparez les meilleurs offre
                   </h5>
                   <Link href="/profile">
                     <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
@@ -279,7 +304,7 @@ export default function Index() {
 
                 <div className="w-full lg:w-4/12 px-4">
                   <h5 className="text-xl font-semibold pb-4 text-center">
-                    Le meilleur vehicule est a vous! c'est parti!
+                    Le meilleur véhicule est à vous! c'est parti!
                   </h5>
                   <Link href="/landing">
                     <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">

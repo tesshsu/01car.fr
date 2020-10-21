@@ -63,7 +63,7 @@ export default function Prix() {
             <div className="classic-block w-12/12 md:w-4/12 lg:w-5/12 px-12 md:px-4 -mt-32 pt-6 bg-gray-200">
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-white-800 border-2 border-gray-200">
                 <h2 class="mt-2 text-center text-3xl leading-9 font-semibold font-display text-gray-900">
-					Classic gratuite
+					Classic gratuit
 				</h2>
 				<div class="mt-4 flex items-center justify-center font-display">
 					<span class="px-3 flex items-start text-6xl leading-none tracking-tight font-medium text-gray-900">
@@ -149,7 +149,7 @@ export default function Prix() {
 						 <i class="fas fa-check"></i>
 						</div>
 						<p class="ml-3 text-base leading-6 font-medium text-gray-500">
-						  Rassurer acheteur ; rapport complet sur l'historique du véhicule
+						  Rassurer acheteur grâce aux réponses
 						</p>
 					  </li>
 					  <li class="mt-4 mx-4 flex items-start">
