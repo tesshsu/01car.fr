@@ -1,11 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import { Form, Field } from 'react-final-form';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import AnnoncePremier from "components/Annonce/AnnoncePremier.js";
 import AnnonceClassic from "components/Annonce/AnnonceClassic.js";
+import AnnonceSearchForm from "components/Annonce/AnnonceSearchForm.js";
 import Pagination from "components/Annonce/Pagination.js";
+
 
 export default function Annonce() {
    return (
@@ -37,43 +38,13 @@ export default function Annonce() {
                       </div>
                     </div>
 		</section>
-	    <section className="mt-6">
-		  <div className="container mx-auto px-4">
-			    <div class="grid grid-rows-4 grid-flow-col">
-				     <div className="relative flex w-full flex-wrap items-stretch mb-3">
-					  <span className="z-10 h-full leading-snug font-normal absolute text-center text-gray-400 absolute bg-transparent rounded text-lg items-center justify-center w-8 pl-3 py-4">
-						<i className="fas fa-search"></i>
-					  </span>
-					  <input type="text" placeholder="Recherche" className="px-3 py-4 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"/>
-					</div>
-				    <div className="relative flex w-full flex-wrap items-stretch mb-3">
-					  <span className="z-10 h-full leading-snug font-normal absolute text-center text-gray-400 absolute bg-transparent rounded text-lg items-center justify-center w-8 pl-3 py-4">
-						<i className="fas fa-search"></i>
-					  </span>
-					  <input type="text" placeholder="Recherche" className="px-3 py-4 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"/>
-					</div>
-				    <div className="relative flex w-full flex-wrap items-stretch mb-3">
-					  <span className="z-10 h-full leading-snug font-normal absolute text-center text-gray-400 absolute bg-transparent rounded text-lg items-center justify-center w-8 pl-3 py-4">
-						<i className="fas fa-search"></i>
-					  </span>
-					  <input type="text" placeholder="Recherche" className="px-3 py-4 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"/>
-					</div>
-					 <div className="relative flex w-full flex-wrap items-stretch mb-3">
-					  <span className="z-10 h-full leading-snug font-normal absolute text-center text-gray-400 absolute bg-transparent rounded text-lg items-center justify-center w-8 pl-3 py-4">
-						<i className="fas fa-search"></i>
-					  </span>
-					  <input type="text" placeholder="Recherche" className="px-3 py-4 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-base shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"/>
-					</div>
-				</div>	
-		  </div>
-        </section>
+	    <AnnonceSearchForm />
 		<section className="pt-10 pb-8 mt-4">
           <div className="container mx-auto px-4">            
             <div className="flex flex-wrap">
                 <AnnoncePremier transparent />
                 <AnnonceClassic transparent />
-                <AnnonceClassic transparent />
-                <AnnonceClassic transparent />				
+                <AnnonceClassic transparent />               				
             </div>
 			<div className="flex content-center items-center justify-center h-full mb-24 mt-8">
                <Pagination transparent />

@@ -78,7 +78,6 @@ export default function QuestionsClassic() {
             <div className="px-4 py-5 flex-auto">
 				<Form
 					onSubmit={onSubmit}
-					initialValues={{ employed: true, stooge: 'larry' }}
 					subscription={{ submitting: true, pristine: true }}
 				>
 					{({ handleSubmit, form, submitting, pristine, values }) => (
@@ -248,7 +247,7 @@ export default function QuestionsClassic() {
 							
 							<QuestionsOptions />
 							
-							<div className="flex flex-wrap mt-12">
+							<div className="flex flex-wrap mt-8">
 								<div className="w-full lg:w-6/12 px-4">
 								  <label
 										className="block uppercase text-gray-700 text-md font-bold mb-2"
@@ -289,7 +288,7 @@ export default function QuestionsClassic() {
 								</div>
 							</div>
 
-							<div className="flex flex-wrap mt-12 px-4">
+							<div className="flex flex-wrap mt-8 px-4">
 								  <label
 										className="block uppercase text-gray-700 text-md font-bold mb-2"
 										htmlFor="question-10"
