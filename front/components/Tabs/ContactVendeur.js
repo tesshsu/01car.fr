@@ -17,7 +17,7 @@ const ContactVendeur = () => {
   return (
     <>
       <div className="flex flex-wrap">
-        <div className="w-full text-center">
+        <div className="w-full text-right">
           <button
             className="bg-gray-500 text-gray-500 active:bg-gray-600 font-bold uppercase text-sm px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button"
             onMouseEnter={openTooltip}

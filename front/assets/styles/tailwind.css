@@ -660,6 +660,14 @@ video {
   .home-page .comment-marche-block{
 	margin-top: 1rem;
   }
+  .marqueBlock {
+    top: 329px !important;
+	padding-top: 0!important;
+	padding-bottom: 0.5rem!important;
+  }
+  .marqueBlock span{
+	  font-size: 14px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -2023,6 +2031,10 @@ video {
 
 .-m-24 {
   margin: -6rem;
+}
+
+.-my-1 {
+  margin-top: -1.5rem;
 }
 
 .my-2 {
@@ -3925,4 +3937,8 @@ video {
 }
 .home-page .final-sideImg-block{
 	z-index: 49;
+}
+.marqueBlock{
+	position: absolute;
+    top: 259px;
 }

@@ -19,8 +19,8 @@ const DetailsPremiumDropdown = () => {
   return (
     <>
         <div className="w-full px-8 py-2 px-2 flex-1">
-			<h4 className="mt-2 px-2 py-2 text-xl leading-relaxed text-gray-800 font-bold uppercase rounded animate-bounce-once">
-				<i class="fas fa-thumbs-up"></i> Informations transparence totale du véhicule ( 11- 20 questionaires ) 
+			<h4 className="mt-2 px-2 py-2 text-xl leading-relaxed text-gray-800 font-bold underline uppercase rounded animate-bounce-once">
+				<i class="fas fa-certificate"></i> NOTE DE CONFINANCE TOP GARANTIE
 			</h4>
 		</div>
 		<div className="container px-2 mx-auto">
@@ -72,86 +72,108 @@ const DetailsPremiumDropdown = () => {
 								</div>
 							</div>			
 						</div>
-					  </li>
-
-					  <li className="flex items-center">
-						<button
-						  className="text-gray-500 active:bg-gray-700 text-xs font-bold uppercase px-3 py-4 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
-						  type="button"
-						>
-						  <Link href="/vendre">
-							  <a
-								href="#pablo"
-								className={
-								  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
-								}
-							  >
-								Vendre
-							  </a>
-						  </Link>
-						</button>
-					  </li>					 					   					 					  
+					  </li>	  			 					   					 					  
 				</ul>                  				
                 <div className="container px-2 mx-auto">
 					  <div className="flex flex-wrap">
 						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-male"></i> subit 1 Accident : </span>
+						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i class="fas fa-certificate"></i> Sous garantie : </span>
 						</div>
 						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-orange-500 underline"> oui</span>
+						  <span className="question-11 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">oui</span>
 						</div>						
 					  </div>
 					</div>
 					<div className="container px-2 mx-auto">
 					  <div className="flex flex-wrap">
 						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="far fa-calendar-alt"></i> Sous garantie : </span>
+						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i class="fas fa-car-crash"></i> Ayant déjà subit 1 accident : </span>
 						</div>
 						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-orange-500 underline">oui</span>
+						  <span className="question-12 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">oui</span>
 						</div>						
 					  </div>
 					</div>
 					<div className="container px-2 mx-auto">
 					  <div className="flex flex-wrap">
 						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-file-invoice-dollar"></i> Respect des entretiens périodiques :</span>
+						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-file-invoice-dollar"></i> des défauts griffes, coups, usures :</span>
 						</div>
 						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-orange-500 underline">oui</span>
+						  <span className="question-13 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">oui</span>
 						</div>						
 					  </div>
 					</div>
 					<div className="container px-2 mx-auto">
 					  <div className="flex flex-wrap">
 						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-certificate"></i> Date du prochain entretien :</span>
+						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-certificate"></i> Justifier le parcours kilometrique :</span>
 						</div>
 						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-orange-500 underline">01/12/2022</span>
+						  <span className="question-14 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">oui</span>
 						</div>						
 					  </div>
 					</div>
 					<div className="container px-2 mx-auto">
 					  <div className="flex flex-wrap">
 						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-key"></i> Carte Grise : </span>
+						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i class="fas fa-calendar-check"></i> Contrôle technique ok : </span>
 						</div>
 						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-orange-500 underline">oui</span>
+						  <span className="question-15 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">oui</span>
 						</div>						
 					  </div>
 					</div>
 					<div className="container px-2 mx-auto">
 					  <div className="flex flex-wrap">
 						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-globe-europe"></i> Possédez-vous le carnet d’entretien : </span>
+						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i class="far fa-list-alt"></i> Respect des entretiens périodiques: </span>
 						</div>
 						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-orange-500 underline">Oui</span>
+						  <span className="question-16 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">Oui</span>
 						</div>						
 					  </div>
-					</div>				
+					</div>
+                    <div className="container px-2 mx-auto">
+					  <div className="flex flex-wrap">
+						<div className="w-full px-4 flex-1">
+						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i class="far fa-calendar-alt"></i> Prochaine entretien: </span>
+						</div>
+						<div className="w-full px-4 flex-1">
+						  <span className="question-17 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">Moins de 5000km</span>
+						</div>						
+					  </div>
+					</div>
+                    <div className="container px-2 mx-auto">
+					  <div className="flex flex-wrap">
+						<div className="w-full px-4 flex-1">
+						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i class="fas fa-print"></i> Facture d'achat: </span>
+						</div>
+						<div className="w-full px-4 flex-1">
+						  <span className="question-18 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">Oui</span>
+						</div>						
+					  </div>
+					</div>
+                    <div className="container px-2 mx-auto">
+					  <div className="flex flex-wrap">
+						<div className="w-full px-4 flex-1">
+						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i class="far fa-id-badge"></i> Carte grise: </span>
+						</div>
+						<div className="w-full px-4 flex-1">
+						  <span className="question-18 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">Oui</span>
+						</div>						
+					  </div>
+					</div>
+                     <div className="container px-2 mx-auto">
+					  <div className="flex flex-wrap">
+						<div className="w-full px-4 flex-1">
+						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i class="fas fa-copy"></i> Possède le carnet d'entretien: </span>
+						</div>
+						<div className="w-full px-4 flex-1">
+						  <span className="question-19 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">Oui</span>
+						</div>						
+					  </div>
+					</div>					
 	        </div>
 	    </div>
     </>
