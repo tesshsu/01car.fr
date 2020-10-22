@@ -129,7 +129,7 @@ export default function QuestionsPremier() {
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
                                                 htmlFor="question-13"
                                              >
-                                                Q13- Le véhicule a-t’il des défauts (griffes, coups, usures…) :
+                                                Q13- Le véhicule a t-il des défauts (griffes, coups, usures…) :
                                             </label>
                                             <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
                                                 <Field name="question-13" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
@@ -266,6 +266,10 @@ export default function QuestionsPremier() {
                                               </div>
                                               <Error name="question-18" />
                                            </div>
+										   <Condition when="question-18" is="1" className="mt-2">
+												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre facture d'achat </p>
+												<FileUpload />
+                                           </Condition>
                                         </div>
                                         <div className="w-full lg:w-6/12 px-4">
                                           <label
@@ -309,6 +313,10 @@ export default function QuestionsPremier() {
                                               </div>
                                               <Error name="question-20" />
                                            </div>
+										    <Condition when="question-20" is="1" className="mt-2">
+												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre carnet d’entretien </p>
+												<FileUpload />
+                                           </Condition>
                                   </div>
                                     <div className="flex flex-wrap mt-12 px-4 align-center justify-center">
                                        <a
@@ -331,7 +339,7 @@ export default function QuestionsPremier() {
                                     <div className="container mx-auto text-center">
                                       <img
                                           alt="..."
-                                          src={require("assets/img/top.png")}
+                                          src={require("assets/img/qualite_logo_satisfait.png")}
                                           className="w-full align-center topImage animate-bounce"
                                         />
                                       <img

@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import CardPriceVehicule from "components/Cards/CardPriceVehicule.js";
+import QuestionsOptions from "components/Tabs/QuestionsOptions.js";
 import FileUpload from "components/Tabs/FileUpload.js";
 import { Form, Field } from 'react-final-form';
 
@@ -223,9 +224,8 @@ export default function QuestionsClassic() {
 						</div>
 
 						<div className={openTab === 2 ? "block" : "hidden"} id="link2">
-							<div className="flex flex-wrap">
-								<div className="w-full lg:w-6/12 px-4">
-									<label
+							<div className="flex flex-wrap px-4">
+								<label
 										className="block uppercase text-gray-700 text-md font-bold mb-2"
 										htmlFor="question-6"
 									>
@@ -240,29 +240,14 @@ export default function QuestionsClassic() {
 									  className="px-3 py-3 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 									/>
 									<Error name="question-6" />
-								</div>
-								<div className="w-full lg:w-6/12 px-4">
-									<label
-										className="block uppercase text-gray-700 text-md font-bold mb-2"
-										htmlFor="question-7"
-									>
-									  Q7- Options du véhicule :
-									</label>
-									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-                                      <Field name="question-7" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                        <option></option>
-                                        <option value="1">Immédiatement</option>
-                                        <option value="0">Moins un mois</option>
-                                        <option value="0">Plus un mois</option>
-                                      </Field>
-                                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                        <i className="fas fa-angle-down text-2xl my-2"></i>
-                                      </div>
-                                      <Error name="question-7" />
-									</div>
-								</div>
 							</div>
-
+							
+							<div className="flex flex-wrap mt-12 px-4">
+							   <p className="block uppercase text-gray-700 text-md font-bold mb-2">Q7- Équipements de série et options :</p>
+							</div>
+							
+							<QuestionsOptions />
+							
 							<div className="flex flex-wrap mt-12">
 								<div className="w-full lg:w-6/12 px-4">
 								  <label

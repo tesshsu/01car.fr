@@ -3479,6 +3479,10 @@ video {
   animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
+.animate-ping-small{
+  animation: pingsmall 3s cubic-bezier(0, 0, 0.7, 1) infinite;
+}
+
 @keyframes ping {
   0% {
     transform: scale(0.5);
@@ -3495,6 +3499,18 @@ video {
   100% {
     transform: scale(1.2);
     opacity: 1;
+  }
+}
+
+@keyframes pingsmall {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
 }
 
@@ -3891,9 +3907,9 @@ video {
 }
 .topImage{
 	position: absolute;
-    top: 0;
-    left: 0;
-    width: 100px;
+    top: -10px;
+    left: -20px;
+    width: 200px;
 }
 .togBadge{
 	position: absolute;

@@ -8,7 +8,7 @@ export default function AnnoncePremier() {
 		<div className="relative w-full md:w-6/12 lg:w-4/12 lg:mb-0 mb-12 mr-4 my-6 shadow-lg max-w-400-px rounded-lg border-2 border-gray-200 ">
 				<img
 					  alt="..."
-					  src={require("assets/img/top.png")}
+					  src={require("assets/img/qualite_logo_satisfait.png")}
 					  className="w-full align-center topImage"
 					/>
 				<img
@@ -38,7 +38,7 @@ export default function AnnoncePremier() {
 				<hr className="border-b-1 border-gray-400" />
 				<div className="flex flex-wrap">
 					<div className="w-full px-8 py-2 px-2 flex-1">
-					  <p className="mt-2 px-2 py-2 text-md leading-relaxed bg-orange-500 text-white font-bold uppercase rounded text-center">
+					  <p className="mt-2 px-2 py-2 text-md leading-relaxed bg-orange-500 text-white font-bold uppercase rounded text-center animate-ping-small">
 						Note de Conficance: 19/20
 					  </p>
 					</div>
@@ -72,7 +72,7 @@ export default function AnnoncePremier() {
 		<div className="relative w-full md:w-6/12 lg:w-4/12 lg:mb-0 mb-12 mr-4 my-6 shadow-lg max-w-400-px rounded-lg border-2 border-gray-200 ">
 				<img
 					  alt="..."
-					  src={require("assets/img/top.png")}
+					  src={require("assets/img/qualite_logo_satisfait.png")}
 					  className="w-full align-center topImage"
 					/>
 				<img
@@ -102,7 +102,7 @@ export default function AnnoncePremier() {
 				<hr className="border-b-1 border-gray-400" />
 				<div className="flex flex-wrap">
 					<div className="w-full px-8 py-2 px-2 flex-1">
-					  <p className="mt-2 px-2 py-2 text-md leading-relaxed bg-orange-500 text-white font-bold uppercase rounded text-center">
+					  <p className="mt-2 px-2 py-2 text-md leading-relaxed bg-orange-500 text-white font-bold uppercase rounded text-center animate-ping-small">
 						Note de Conficance: 19/20
 					  </p>
 					</div>
@@ -136,7 +136,7 @@ export default function AnnoncePremier() {
 		<div className="relative w-full md:w-6/12 lg:w-4/12 lg:mb-0 mb-12 mr-4 my-6 shadow-lg max-w-400-px rounded-lg border-2 border-gray-200 ">
 				<img
 					  alt="..."
-					  src={require("assets/img/top.png")}
+					  src={require("assets/img/qualite_logo_satisfait.png")}
 					  className="w-full align-center topImage"
 					/>
 				<img
@@ -166,7 +166,7 @@ export default function AnnoncePremier() {
 				<hr className="border-b-1 border-gray-400" />
 				<div className="flex flex-wrap">
 					<div className="w-full px-8 py-2 px-2 flex-1">
-					  <p className="mt-2 px-2 py-2 text-md leading-relaxed bg-orange-500 text-white font-bold uppercase rounded text-center">
+					  <p className="mt-2 px-2 py-2 text-md leading-relaxed bg-orange-500 text-white font-bold uppercase rounded text-center animate-ping-small">
 						Note de Conficance: 15/20
 					  </p>
 					</div>
