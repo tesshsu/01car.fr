@@ -25,22 +25,22 @@ const DetailsDropdown = () => {
 				</h4>
 			</div>		
 			<div className="container px-2 mx-auto">
-				<div className="flex flex-wrap">
-					<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-male"></i> Annonce par : </span>
+					<div className="flex flex-wrap">
+						<div className="w-full px-4 flex-1">
+							  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-male"></i> Annonce par : </span>
+						</div>
+						<div className="w-full px-4 flex-1">
+							  <span className="question-1 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200"> particulier</span>
+						</div>						
 					</div>
-					<div className="w-full px-4 flex-1">
-						  <span className="vendeurStatus text-xl block my-2 p-3 text-orange-500 underline"> particulier</span>
-					</div>						
-				</div>
-			</div>
+					</div>
 					<div className="container px-2 mx-auto">
 					  <div className="flex flex-wrap">
 						<div className="w-full px-4 flex-1">
 						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="far fa-calendar-alt"></i> Vehicule est disponible : </span>
 						</div>
 						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">Dans un mois</span>
+						  <span className="question-2 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">Dans un mois</span>
 						</div>						
 					  </div>
 					</div>
@@ -50,7 +50,7 @@ const DetailsDropdown = () => {
 						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-file-invoice-dollar"></i> Véhicule est Non fumeur :</span>
 						</div>
 						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">oui</span>
+						  <span className="question-3 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">oui</span>
 						</div>						
 					  </div>
 					</div>
@@ -60,7 +60,17 @@ const DetailsDropdown = () => {
 						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-certificate"></i> Le double des clés :</span>
 						</div>
 						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">oui</span>
+						  <span className="question-4 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">oui</span>
+						</div>						
+					  </div>
+					</div>
+					<div className="container px-2 mx-auto">
+					  <div className="flex flex-wrap">
+						<div className="w-full px-4 flex-1">
+						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-certificate"></i> La raison pour vendre :</span>
+						</div>
+						<div className="w-full px-4 flex-1">
+						  <span className="question-5 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">Autre project</span>
 						</div>						
 					  </div>
 					</div>
@@ -70,7 +80,7 @@ const DetailsDropdown = () => {
 						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-key"></i> Nombre de mains : </span>
 						</div>
 						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">3ème mains ou plus</span>
+						  <span className="question-8 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">3ème mains ou plus</span>
 						</div>						
 					  </div>
 					</div>
@@ -80,7 +90,7 @@ const DetailsDropdown = () => {
 						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-globe-europe"></i> Etat de vehicule : </span>
 						</div>
 						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">Neuf ou moins de 4 ans</span>
+						  <span className="question-9 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">Neuf ou moins de 4 ans</span>
 						</div>						
 					  </div>
 					</div>
@@ -90,7 +100,7 @@ const DetailsDropdown = () => {
 						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-globe-europe"></i> Origine du véhicule : </span>
 						</div>
 						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">France</span>
+						  <span className="question-10 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">France</span>
 						</div>						
 					  </div>
 					</div>

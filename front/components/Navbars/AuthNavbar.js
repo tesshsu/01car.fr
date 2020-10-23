@@ -87,7 +87,7 @@ export default function Navbar(props) {
               </li>
 
               <li className="flex items-center">
-				<Link href="/auth/login">
+				<Link href="/auth/setting_user">
 				  <a
 					href="#"
 					className={
