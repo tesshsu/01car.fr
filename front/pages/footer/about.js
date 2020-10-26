@@ -77,7 +77,7 @@ export default function About() {
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-1">
                     <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                      <div className="mr-4 p-3 text-center">                       
+                      <div className="mr-4 p-3 text-center">
 						<span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
                           <i className="far fa-smile text-lg mr-1"></i>
                         </span>
@@ -100,14 +100,14 @@ export default function About() {
                 </div>
                 <div className="text-center mt-12">
                   <h3 className="text-4xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
-                    Mais o1car, c'est quoi ?
+                   o1car, c'est quoi ?
                   </h3>
                 </div>
                 <div className="mt-10 py-10 border-t border-gray-300 text-left">
                   <div className="flex flex-wrap justify-center">
                     <div className="w-full lg:w-9/12 px-4">
                       <p className="mb-4 text-lg leading-relaxed text-gray-800">
-                        o1car est une start-up qui sécurise la vente de véhicules. 
+                        o1car est une start-up qui sécurise la vente de véhicules.
 						On vous accompagne dans l'achat de votre véhicule.
 						On vous garantit le maximum de sécurité.
 						En effet, un questionnaire de 20 questions permet d'évaluer la confiance du vendeur.
@@ -120,9 +120,9 @@ export default function About() {
 						vous avez des questions, contactez-nous gratuitement, nous allons vous aider.
                       </p>
 					   <p className="mb-4 text-lg leading-relaxed text-gray-800">
-                        Cet outil permet aux professionnels, particuliers de visualiser et analyser toutes les données du véhicule afin de 
-						sécuriser la vente et l'achat du véhicule. 
-						Grâce à une gestion technico-économique plus fine , 
+                        Cet outil permet aux professionnels, particuliers de visualiser et d'analyser toutes les données du véhicule afin de
+						sécuriser la vente et l'achat.
+						Grâce à une gestion technico-économique plus fine ,
 						nous leur permettons de prendre la bonne décision.
                       </p>
 					  <Link href="/vendre">

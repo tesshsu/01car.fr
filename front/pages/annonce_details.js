@@ -3,8 +3,6 @@ import Link from "next/link";
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
-import AnnoncePremier from "components/Annonce/AnnoncePremier.js";
-import AnnonceClassic from "components/Annonce/AnnonceClassic.js";
 import AnnonceDetail from "components/Annonce/AnnonceDetail.js";
 
 
@@ -18,7 +16,7 @@ export default function AnnonceDetails() {
                 Annonces avec note de confiance
             </h4>
 			 <div className="flex justify-center">
-                      <div className="mr-4 p-3 text-center">                       
+                      <div className="mr-4 p-3 text-center">
 						<span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
                           <i className="far fa-smile text-lg mr-1"></i>
                         </span>
@@ -39,13 +37,13 @@ export default function AnnonceDetails() {
                     </div>
 		</section>
 		<section className="pt-10 pb-8 mt-4 mb-24">
-          <div className="container mx-auto px-4">            
+          <div className="container mx-auto px-4">
             <div className="flex flex-wrap">
-                <AnnonceDetail transparent />				
-            </div>		
+                <AnnonceDetail transparent />
+            </div>
           </div>
         </section>
-		
+
       </main>
       <Footer />
     </>

@@ -26,7 +26,7 @@ export default function PubContent2() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-							  Obtenir une confiance grace a une NOTE
+								Obtenez une note de confiance
 							</h4>
 						  </div>
 						</div>
@@ -40,7 +40,7 @@ export default function PubContent2() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-							  Rapidité dans la publication de l' annonce
+								Publiez une annonce rapidement
 							</h4>
 						  </div>
 						</div>
@@ -54,7 +54,7 @@ export default function PubContent2() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-							  Facilité dans la prise de contact avec l' acheteur
+								Prise de contact facile avec l'acheteur
 							</h4>
 						  </div>
 						</div>
@@ -81,10 +81,10 @@ export default function PubContent2() {
 				<div className="w-full md:w-6/12 mr-auto px-4 pt-24 md:pt-0 mt-4">
 				 <div className="md:pr-12">
 					<h3 className="text-3xl font-semibold">
-					  Vous etes l'acheteur ?
+						Vous êtes acheteur ?
 					</h3>
 					<p className="mt-4 text-md leading-relaxed text-white">
-					 Acheter un véhicule à un particulier avec un minimum de risques.
+						Achetez  un véhicule à un particulier avec un minimum de risques.
 					</p>
 					<ul className="list-none mt-6">
 					  <li className="py-2">
@@ -96,7 +96,7 @@ export default function PubContent2() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-							  Assurer le meilleur achat
+								Le meilleur achat assuré
 							</h4>
 						  </div>
 						</div>
@@ -110,7 +110,7 @@ export default function PubContent2() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-							  Acheter un véhicule à un particulier avec un minimum de risques
+							  Acheter un véhicule à un particulier avec minimum de risques
 							</h4>
 						  </div>
 						</div>
@@ -124,7 +124,7 @@ export default function PubContent2() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-							  Contacter le vendeur immédiatement
+								contact rapide avec le vendeur immédiatement
 							</h4>
 						  </div>
 						</div>

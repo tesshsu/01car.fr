@@ -29,7 +29,7 @@ export default function Footer() {
             <div className="w-full lg:w-6/12 px-4">
               <h4 className="text-3xl font-semibold">01car.fr</h4>
               <h5 className="text-lg mt-0 mb-2 text-gray-700">
-                Sécuriser au maximum l'achat de son véhicule.
+                Sécuriser au maximum l'achat de votre véhicule.
               </h5>
               <div className="mt-6 lg:mb-0 mb-6">
                 <button

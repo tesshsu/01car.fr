@@ -6,7 +6,7 @@ import FileUpload from "components/Tabs/FileUpload.js";
 import { Form, Field } from 'react-final-form';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-const required = value => (value ? undefined : 'Champs obligatoires')
+const required = value => (value ? undefined : 'champs obligatoire')
 const Error = ({ name }) => (
   <Field name={name} subscription={{ error: true, touched: true }}>
     {({ meta: { error, touched } }) =>
@@ -91,13 +91,13 @@ export default function QuestionsClassic() {
 										className="block uppercase text-gray-700 text-md font-bold mb-2"
 										htmlFor="question-1"
 									>
-										Q1 - VOUS ETES :
+										Q1 - VOUS êtes :
 									</label>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
                                       <Field name="question-1" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                         <option></option>
                                         <option value="1">particulier</option>
-                                        <option value="0">professionel</option>
+                                        <option value="0">professionnel</option>
                                       </Field>
                                       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                         <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -118,8 +118,7 @@ export default function QuestionsClassic() {
                                         <option></option>
                                         <option value="1">Immédiatement</option>
                                         <option value="0">Dans un mois</option>
-                                        <option value="0">Dans un 2 mois</option>
-                                        <option value="plus">plus 2 mois</option>
+                                        <option value="0">plus tard</option>
                                       </Field>
                                       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                         <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -186,7 +185,6 @@ export default function QuestionsClassic() {
                                     <option></option>
                                     <option  value="1">Changer de véhicule</option>
                                     <option  value="1">Autre projet</option>
-                                    <option value="1">Autre</option>
                                   </Field>
                                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                     <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -217,7 +215,7 @@ export default function QuestionsClassic() {
 										href="#link2"
 										role="tablist"
 									>
-									<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>  2eme etapt: 6 -10 questions
+									<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>  2ème étape: 6 -10 questions
 								</a>
 							</div>
 						</div>
@@ -240,13 +238,13 @@ export default function QuestionsClassic() {
 									/>
 									<Error name="question-6" />
 							</div>
-							
+
 							<div className="flex flex-wrap mt-12 px-4">
 							   <p className="block uppercase text-gray-700 text-md font-bold mb-2">Q7- Équipements de série et options :</p>
 							</div>
-							
+
 							<QuestionsOptions />
-							
+
 							<div className="flex flex-wrap mt-8">
 								<div className="w-full lg:w-6/12 px-4">
 								  <label

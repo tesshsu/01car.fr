@@ -11,10 +11,10 @@ export default function PubContent() {
 				<div className="w-full md:w-5/12 ml-auto px-12 md:px-4">
 				  <div className="md:pr-12">
 					<h3 className="text-xl font-semibold">
-					  Payer le questionnaire 20 pour obtenir une note de <span className="font-bold text-3xl text-orange-500">confiance MAXIMALE</span> et tous les <span className="font-bold text-3xl text-orange-500">AVANTAGES</span> pour vendre son vehicule sur o1car.fr
+						Payez le questionnaire 20 pour obtenir une note de <span className="font-bold text-3xl text-orange-500">confiance MAXIMALE</span> et tous les <span className="font-bold text-3xl text-orange-500">AVANTAGES</span> pour vendre votre vehicule sur o1car.fr
 					</h3>
 					<p className="mt-4 text-lg leading-relaxed text-gray-600">
-					 Faites des économies en mettant toutes les chances de votre côté
+						Mettez toutes les chances de votre côté
 					</p>
 					<ul className="list-none mt-2">
 					  <li className="py-2">
@@ -26,7 +26,7 @@ export default function PubContent() {
 						  </div>
 						  <div>
 							<h4 className="text-lg text-gray-600">
-							  rapport complet sur l'historique du véhicule
+								informations principales du véhicule
 							</h4>
 						  </div>
 						</div>
@@ -68,7 +68,7 @@ export default function PubContent() {
 						  </div>
 						  <div>
 							<h4 className="text-lg 	text-gray-600">
-							  Fiabilite des donnees du véhicule
+								Fiabilité des données du véhicule
 							</h4>
 						  </div>
 						</div>
@@ -85,7 +85,7 @@ export default function PubContent() {
 											  "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
 											}
 										  >
-											<i className="far fa-laugh mr-1 animate-spin"></i> PAYER POUR OBTENIR Top LIST
+											<i className="far fa-laugh mr-1 animate-spin"></i> payez pour passer en tête de liste
 										  </a>
 									  </Link>
 						   </button>

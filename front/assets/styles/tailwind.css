@@ -628,10 +628,10 @@ video {
 	height: 40vh;
   }
   .home-page .top-block .h-screen{
-	height: 95vh;  
+	height: 95vh;
   }
   .home-page .top-block .container{
-	margin-top: 33vh;  
+	margin-top: 33vh;
   }
   .home-page .top-block .container h1{
 	font-size: 2rem;
@@ -681,10 +681,10 @@ video {
 	display: flex;
   }
   .favoris-block .button-block{
-	margin-top: 2em;  
+	margin-top: 2em;
   }
   .home-page .top-block{
-	height: 75vh;	
+	height: 75vh;
   }
 }
 
@@ -3934,6 +3934,18 @@ video {
     top: 30px;
     right: 30px;
     width: 150px;
+}
+.prixCompare{
+  position: absolute;
+  top: 300px;
+  right: 10px;
+  width: 150px;
+}
+.prixCompareGratuit{
+  position: absolute;
+  top: 180px;
+  right: 10px;
+  width: 150px;
 }
 .home-page .final-sideImg-block{
 	z-index: 49;

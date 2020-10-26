@@ -22,7 +22,7 @@ export default function AnnonceFavoris() {
 					  <div class="price font-bold text-orange-500  text-2xl text-center bg-gray-400 px-4 py-2">
 					    10 700 €
 					  </div>
-					</div>					
+					</div>
 					<div className="container mx-auto">
 					  <div className="flex flex-wrap">
 						<div className="w-1/3">
@@ -51,7 +51,7 @@ export default function AnnonceFavoris() {
 								  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
 								}
 							  >
-								Voir le détail
+								Voir
 							  </a>
 						  </Link>
 						</button>
@@ -74,10 +74,10 @@ export default function AnnonceFavoris() {
 					<p className="mt-4 px-6 py-2 text-md leading-relaxed bg-gray-600 text-white font-bold uppercase rounded text-center">
 						Note de Conficance: 14/20
 				    </p>
-					
+
 			  </span>
 			</div>
-		  </div>		 
+		  </div>
 		</div>
     </>
   );

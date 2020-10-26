@@ -5,7 +5,7 @@ import FileUpload from "components/Tabs/FileUpload.js";
 import { Form, Field } from 'react-final-form';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-const required = value => (value ? undefined : 'Questionaire repondre obligatoires')
+const required = value => (value ? undefined : 'champs obligatoire')
 const Error = ({ name }) => (
 	<Field name={name} subscription={{ error: true, touched: true }}>
 		{({ meta: { error, touched } }) =>
@@ -89,7 +89,7 @@ export default function QuestionsPremier() {
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
                                                 htmlFor="question-11"
                                           >
-                                            Q11- le véhicule est il sous garantie?
+                                            Q11- le véhicule Est-il sous garantie?
                                           </label>
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
                                               <Field name="question-11" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
@@ -201,7 +201,7 @@ export default function QuestionsPremier() {
                                             href="#link2"
                                             role="tablist"
                                           >
-                                            <i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>  3eme etapt: 16 -20 questions
+                                            <i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>  3ème étape: 16 -20 questions
                                         </a>
                                   </div>
 
@@ -331,7 +331,7 @@ export default function QuestionsPremier() {
                                             href="#link3"
                                             role="tablist"
                                                       >
-                                            <i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>  Envoyer pour voir resultat
+                                            <i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>  Valider
                                         </a>
                                     </div>
                                 </div>
@@ -339,7 +339,7 @@ export default function QuestionsPremier() {
                                     <div className="container mx-auto text-center">
                                       <img
                                           alt="..."
-                                          src={require("assets/img/qualite_logo_satisfait.png")}
+                                          src={require("assets/img/qualite_logo_premium.png")}
                                           className="w-full align-center topImage animate-bounce"
                                         />
                                       <img
@@ -372,7 +372,7 @@ export default function QuestionsPremier() {
                                               >
                                                 <i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> Lancer!!
                                       </button>
-                                       <p className="text-md leading-relaxed text-gray-500"> Le site vous garantie la qualite de l annonce Le site protege les documents telecharges et non visible par l acheteur</p>
+                                       <p className="text-md leading-relaxed text-gray-500">  Le site vous garantit la qualité de l'annonce. Le site protège les documents téléchargés et restent non visibles par l'acheteur.</p>
                                     </div>
                                 </div>
                               </div>

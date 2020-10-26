@@ -16,14 +16,14 @@ export default function Index() {
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
               <h1 className="font-bold text-4xl text-orange-700">
-                Mais o1car, c'est quoi ?
+                  o1car, c'est quoi?
               </h1>
               <h1 className="font-bold text-4xl text-orange-700">
-                Sécuriser au maximum l'achat de son véhicule.
+                Sécuriser au maximum l'achat de votre véhicule.
 
               </h1>
               <p className="mt-4 text-lg leading-relaxed text-gray-500">
-                ACHETER FACILEMENT VOTRE VÉHICULE AVEC UN MINIMUM DE RISQUES.
+                  ACHETEZ FACILEMENT VOTRE VÉHICULE AVEC UN MINIMUM DE RISQUES.
                 1er SITE D’ACCOMPAGNEMENT AFIN DE SÉCURISER LA VENTE DE VÉHICULES.
 
               </p>
@@ -54,7 +54,7 @@ export default function Index() {
 						  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
 						}
 					  >
-						Annonce
+                          Annonces
 					  </a>
 				  </Link>
                 </button>
@@ -91,12 +91,12 @@ export default function Index() {
 						</div>
                     </div>
                     <div className="flex flex-wrap">
-					    <div className="w-full lg:w-6/12 px-4">						
+					    <div className="w-full lg:w-6/12 px-4">
 						  <label
 							className="block uppercase text-gray-700 text-xs font-bold mb-2 my-4"
 							htmlFor="full-name"
 						  >
-							Ou repondre votre questionnaires &#8594;
+                              Répondez au Questionnaire &#8594;
 						  </label>
 						</div>
 						<div className="w-full lg:w-6/12 px-4">
@@ -104,7 +104,7 @@ export default function Index() {
 							className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
 							type="button"
 						  >
-							10 questionnaires
+                              10 Questions
 						  </button>
 						</div>
                     </div>
@@ -143,7 +143,7 @@ export default function Index() {
             ></polygon>
           </svg>
         </div>
-		
+
         <div className="container mx-auto">
           <div className="flex flex-wrap items-center">
             <div className="class-block w-10/12 md:w-6/12 lg:w-4/12 px-12 md:px-4 mr-auto ml-auto -mt-32 z-40">
@@ -153,9 +153,12 @@ export default function Index() {
 							  className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
 							  type="button"
 							>
-							  <i className="fas fa-pencil-alt "></i> 1 - 10 questions à répondre
+							  <i className="fas fa-pencil-alt "></i> 1-10 Questions
 					</button>
 				</div>
+                  <div className="w-full align-center text-white prixCompareGratuit">
+                      <span className="font-bold px-1 text-4xl text-right underline">gratuit</span>
+                  </div>
 				<img
                   alt="..."
                   src={require("assets/img/bedcar.jpg")}
@@ -198,7 +201,7 @@ export default function Index() {
 								  className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
 								  type="button"
 								>
-								  <i className="fas fa-pencil-alt "></i> 11 - 20 questions à répondre
+								  <i className="fas fa-pencil-alt "></i> 11 - 20 questions
 						</button>
 					</div>
 					<div className="w-full align-center logoNoteConfiance">
@@ -209,6 +212,9 @@ export default function Index() {
 								  <i className="far fa-thumbs-up"></i> Note de confiance
 						</button>
 					</div>
+                      <div className="w-full align-center text-white prixCompare">
+                          <span className="font-bold px-1 text-4xl text-right underline">6.99</span> € / 2 mois
+                      </div>
 					<img
 					  alt="..."
 					  src={require("assets/img/qualite_logo.png")}
@@ -235,7 +241,7 @@ export default function Index() {
 						20 questions :
 					  </h4>
 					  <span className="text-lg font-light mt-2 text-white mr-2">
-						Note de confiance 20/20 max 
+						Note de confiance 20/20 max
 					  </span>
 					  <button
 							  className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
@@ -248,16 +254,16 @@ export default function Index() {
 											  "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
 											}
 										  >
-											<i className="fas fa-thumbs-up"></i> Vendre en Top list
+											<i className="fas fa-thumbs-up"></i> Vendre en tête de liste
 										  </a>
 							</Link>
 						</button>
 					</blockquote>
-				  </div>               
-                </div>              
+				  </div>
+                </div>
               </div>
             </div>
-			
+
           </div>
         </div>
         <div className="comment-marche-block justify-center text-center flex flex-wrap mt-16">
@@ -274,7 +280,7 @@ export default function Index() {
               <div className="flex flex-wrap">
                 <div className="w-full lg:w-4/12 px-4">
                   <h5 className="text-xl font-semibold pb-4 text-center">
-                    Répondre au questionnaire en ligne
+                      Répondez au questionnaire en ligne
                   </h5>
                   <Link href="/auth/login">
                     <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
@@ -289,7 +295,7 @@ export default function Index() {
 
                 <div className="w-full lg:w-4/12 px-4">
                   <h5 className="text-xl font-semibold pb-4 text-center">
-                    on cherche et comparez les meilleurs offre
+                    on cherche et compare les meilleurs offres
                   </h5>
                   <Link href="/profile">
                     <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
@@ -331,55 +337,8 @@ export default function Index() {
                   <i className="fas fa-thumbs-up text-xl animate-ping"></i>
                 </div>
                 <h3 className="text-3xl font-semibold">
-                  Rejoignez nous o1car.fr
+                    Rejoignez-nous sur o1car.fr
                 </h3>
-                <p className="mt-4 text-lg leading-relaxed text-gray-600">
-                 Faites des économies en mettant toutes les chances de votre côté
-                </p>
-                <ul className="list-none mt-6">
-                  <li className="py-2">
-                    <div className="flex items-center">
-                      <div>
-                        <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-orange-500 bg-gray-100 mr-3">
-                          <i className="fas fa-hands-helping"></i>
-                        </span>
-                      </div>
-                      <div>
-                        <h4 className="text-gray-600">
-                          Un intermédiaire de confiance
-                        </h4>
-                      </div>
-                    </div>
-                  </li>
-                  <li className="py-2">
-                    <div className="flex items-center">
-                      <div>
-                        <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-orange-500 bg-gray-100 mr-3">
-                          <i className="fas fa-clipboard-check"></i>
-                        </span>
-                      </div>
-                      <div>
-                        <h4 className="text-gray-600">
-                          Sécuriser au maximum l'achat de son véhicule
-                        </h4>
-                      </div>
-                    </div>
-                  </li>
-                  <li className="py-2">
-                    <div className="flex items-center">
-                      <div>
-                        <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-orange-500 bg-gray-100 mr-3">
-                          <i className="far fa-paper-plane"></i>
-                        </span>
-                      </div>
-                      <div>
-                        <h4 className="text-gray-600">
-                          ACHETER FACILEMENT VOTRE VÉHICULE
-                        </h4>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
               </div>
             </div>
 
