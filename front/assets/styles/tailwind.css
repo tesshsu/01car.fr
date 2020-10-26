@@ -594,8 +594,12 @@ video {
     max-width: 640px;
   }
 }
-/* for mobile part*/
+/* for portable part*/
 @media (max-width: 768px) {
+  .annoceSlider .sliderImg {
+    width: 35rem !important;
+    height: 20rem !important;
+  }
   .mdxhidden {
     display: none;
   }
@@ -3953,4 +3957,19 @@ video {
 .marqueBlock{
 	position: absolute;
     top: 259px;
+}
+.annoceSlider .sliderImg{
+	width: 55rem;
+	height: 30rem;
+	overflow: hidden;
+}
+.annoceSlider .slick-dots li{
+	width: 65px !important;
+	height: 65px !important;
+}
+.annoceSlider .slick-dots{
+	bottom: -20px;
+}
+.annoceSlider .slick-dots img{
+	border: 1px solid #fff;
 }
