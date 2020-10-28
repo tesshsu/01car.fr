@@ -7,9 +7,14 @@ import { Form, Field } from 'react-final-form';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'champs obligatoire')
+const pattern= new RegExp("^([A-HJ-NP-TV-Z]{2}|[0-9]{3,4})-?([A-HJ-NP-TV-Z]{2,3}|[0-9]{3})-?([A-HJ-NP-TV-Z]{2}|[0-9]{2})$");
+const matchImmatriculation = value => (!pattern.test(value) ? "immatriculation inconnu" : undefined);
+const composeValidators = (...validators) => value =>
+  validators.reduce((error, validator) => error || validator(value), undefined);
+
 const Error = ({ name }) => (
-  <Field name={name} subscription={{ error: true, touched: true }}>
-    {({ meta: { error, touched } }) =>
+  <Field name={name} subscription={{ error: true, touched: true, value: true }}>
+    {({ meta: { error, touched, value } }) =>
       error && touched ? <span className="text-orange-500 text-sm">{error}</span> : null
     }
   </Field>
@@ -19,6 +24,7 @@ const Condition = ({ when, is, children }) => (
       {({ input: { value } }) => (value === is ? children : null)}
     </Field>
 )
+
 const onSubmit = async values => {
   await sleep(300)
   window.alert(JSON.stringify(values, 0, 2))
@@ -224,19 +230,19 @@ export default function QuestionsClassic() {
 							<div className="flex flex-wrap px-4">
 								<label
 										className="block uppercase text-gray-700 text-md font-bold mb-2"
-										htmlFor="question-6"
+										htmlFor="immatriculation"
 									>
 									  Q6- IMMATRICULATION DU VEHICULE :
 									</label>
 									<Field
-									  validate={required}
-									  name="question-6"
+									  name="immatriculation"
+									  validate={composeValidators(required, matchImmatriculation)}
 									  component="input"
 									  type="text"
 									  placeholder="AA-001-ZZ"
 									  className="px-3 py-3 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 									/>
-									<Error name="question-6" />
+									<Error name="immatriculation" />
 							</div>
 
 							<div className="flex flex-wrap mt-12 px-4">

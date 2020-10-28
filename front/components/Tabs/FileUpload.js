@@ -46,7 +46,6 @@ class FileUpload extends PureComponent {
               {({ input, meta: { error, touched } }) => (
                 <div className="items-center justify-center">
                   <input
-                    //className="px-3 py-3 justify-center placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 					ref={fileInput => (this.fileInput = fileInput)}
                     key="fileInput"
                     type="file"

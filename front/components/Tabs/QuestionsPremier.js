@@ -20,7 +20,7 @@ const Condition = ({ when, is, children }) => (
 )
 const onSubmit = async values => {
 	await sleep(300)
-	window.alert(JSON.stringify(values, 0, 2))
+	window.alert(JSON.stringify(values, 0, 2))	
 }
 
 export default function QuestionsPremier() {
@@ -319,7 +319,15 @@ export default function QuestionsPremier() {
                                            </Condition>
                                   </div>
                                     <div className="flex flex-wrap mt-12 px-4 align-center justify-center">
-                                       <a
+                                       <button
+                                                className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                                type="button"
+                                                type="submit"
+                                                disabled={submitting}
+                                              >
+                                                Valider
+                                        </button>
+									   <a
                                             className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
                                             onClick={e => {
                                               e.preventDefault();

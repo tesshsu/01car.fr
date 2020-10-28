@@ -87,7 +87,7 @@ export default function PubContent() {
 										  >
 											<i className="far fa-laugh mr-1 animate-spin"></i> Vendre votre véhicule sur Top list
 										  </a>
-									  </Link>
+									</Link>
 						   </button>
 				  </div>
 				</div>
