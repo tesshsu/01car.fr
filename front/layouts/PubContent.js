@@ -85,7 +85,7 @@ export default function PubContent() {
 											  "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
 											}
 										  >
-											<i className="far fa-laugh mr-1 animate-spin"></i> payez pour passer en tête de liste
+											<i className="far fa-laugh mr-1 animate-spin"></i> Vendre votre véhicule sur Top list
 										  </a>
 									  </Link>
 						   </button>

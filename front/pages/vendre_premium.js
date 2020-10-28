@@ -50,24 +50,6 @@ export default function Vendre() {
               <div className="px-6">
                 <div className="flex flex-wrap justify-center">				
                   <div className="w-full lg:w-12/12 px-4 lg:order-1">
-				    <div className="text-center">
-						 <div className="relative pt-1">
-							  <div className="flex mb-2 items-center justify-between">
-								<div>
-								  <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-gray-200">
-									Task in progress
-								  </span>
-								</div>
-								<div className="text-right">
-								  <span className="text-xs font-semibold inline-block text-gray-600">
-									0%
-								  </span>
-								</div>
-							  </div>
-							  <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-gray-200">
-							  </div>
-							</div>
-						</div>
                     <div className="flex justify-center">
                       <div className="mr-4 p-3 text-center">                       
 						<span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
