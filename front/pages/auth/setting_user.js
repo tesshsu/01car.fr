@@ -1,17 +1,28 @@
 import React from "react";
 import { Form, Field } from 'react-final-form';
 import Auth from "layouts/Auth.js";
+import formatString from "format-string-by-pattern";
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
 const mustBeNumber = value => (isNaN(value) ? 'Must be a number' : undefined)
 const composeValidators = (...validators) => value =>
   validators.reduce((error, validator) => error || validator(value), undefined)
+const masks = [
+  { name: "email", type: "email", placeholder: "Votre email" },
+  { name: "password", type: "password", placeholder: "mot de pass" },
+  { name: "phone", type: "number", placeholder: "Votre portable" }
+];
+
 const onSubmit = async values => {
   await sleep(300)
-  window.alert(JSON.stringify(values, 0, 2))
+  if (values.formPolicy) {
+    window.alert('Merci accorder')
+  }else{
+	window.alert(JSON.stringify(values, 0, 2))
+  }
+  
 }
-
 export default function Setting_user() {
   return (
     <>
@@ -32,78 +43,32 @@ export default function Setting_user() {
 				  onSubmit={onSubmit}
 				  render={({ handleSubmit, form, submitting, pristine, values }) => (
 						<form onSubmit={handleSubmit}>                 
-						    <Field name="email">
-							    {({ input, meta }) => (
-								  <div className="relative w-full mb-3">
-									<label
-									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
-									  htmlFor="email"
-									>
-									  Votre Email
-									</label>
-									<input
-									  {...input}
-									  type="email"
-									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-									  placeholder="Email"
-									/>{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
-								  </div>
-								)}
-                            </Field>
-							<Field name="password">
-							    {({ input, meta }) => (
-								  <div className="relative w-full mb-3">
-									<label
-									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
-									  htmlFor="password"
-									>
-									  Mot de passe
-									</label>
-									<input
-									  {...input}
-									  type="password"
-									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-									  placeholder="Mot de passe"
-									/>{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
-								  </div>
-								)}
-                            </Field>
-							<Field name="phone">
-							    {({ input, meta }) => (
-								  <div className="relative w-full mb-3">
-									<label
-									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
-									  htmlFor="phone"
-									>
-									  Votre contact numéro
-									</label>
-									<input
-									  {...input}
-									  type="number"
-									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-									  placeholder="phone"
-									/>{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
-								  </div>
-								)}
-                            </Field>
+						    {masks.map(mask => (
+								<Field name={mask.name} validate={required}>
+									{({ input, meta }) => (
+									  <div className="relative w-full mb-3">
+										<label
+										  className="block uppercase text-gray-700 text-xs font-bold mb-2"
+										  htmlFor={mask.name}
+										>
+										  {mask.name}
+										</label>
+										<input
+										  {...input}
+										  type={mask.type}										  
+										  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+										  placeholder={mask.placeholder}
+										/>{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
+									  </div>
+									)}
+								</Field>																
+							))}
 						  <div>
-							<label className="inline-flex items-center cursor-pointer">
-							  <input
-								id="customCheckLogin"
-								type="checkbox"
-								className="form-checkbox text-gray-800 ml-1 w-5 h-5 ease-linear transition-all duration-150"
-							  />
-							  <span className="ml-2 text-sm font-semibold text-gray-700">
-								J'ai lu et j'accepte les{" "}
-								<a
-								  href="#pablo"
-								  className="text-blue-500"
-								  onClick={(e) => e.preventDefault()}
-								>
-								  Politique de confidentialité de 01car.fr
-								</a>
-							  </span>
-							</label>
+							<label className="inline-flex items-center cursor-pointer">							 
+							  <Field name="formPolicy" component="input" type="checkbox" required={required} checked
+							  />{' '}
+							    &nbsp;J'ai lu et j'accepte les Politique de confidentialité de 01car.fr						  
+							</label>							
 						  </div>
 
 						  <div className="text-center mt-6">

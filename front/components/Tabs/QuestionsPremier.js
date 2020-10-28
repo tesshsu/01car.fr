@@ -20,7 +20,12 @@ const Condition = ({ when, is, children }) => (
 )
 const onSubmit = async values => {
 	await sleep(300)
-	window.alert(JSON.stringify(values, 0, 2))	
+	if(!values.file){
+	   window.alert('télécharger votre fiche')
+    }else{
+	   window.alert(JSON.stringify(values, 0, 2))
+	}
+		
 }
 
 export default function QuestionsPremier() {
@@ -75,8 +80,7 @@ export default function QuestionsPremier() {
           <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
             <div className="px-4 py-5 flex-auto">
 				<Form
-					onSubmit={onSubmit}
-					initialValues={{ employed: true, stooge: 'larry' }}
+					onSubmit={onSubmit}					
 					subscription={{ submitting: true, pristine: true }}
 				>
 					{({ handleSubmit, form, submitting, pristine, values }) => (
