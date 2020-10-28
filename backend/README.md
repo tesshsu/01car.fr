@@ -59,3 +59,127 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Debuf
+
+First, download the Laravel installer using Composer:
+
+```
+../tools/composer.phar global require laravel/installer
+
+../tools/composer.phar install
+```
+sudo apt-get autoremove --purge phpmyadmin
+
+sudo dpkg-reconfigure phpmyadmin
+
+php artisan serve
+
+
+/etc/init.d/mysql stop
+
+Now you should start up the database in the background, via the mysqld_safe command:
+
+root@steve:~# /usr/bin/mysqld_safe --skip-grant-tables &
+[1] 6702
+Starting mysqld daemon with databases from /var/lib/mysql
+mysqld_safe[6763]: started
+
+Here you can see the new job (number "1") has started and the server is running with the process ID (PID) of 6702.
+
+Now that the server is running with the --skip-grant-tables flag you can connect to it without a password and complete the job:
+
+root@steve:~$ mysql --user=root mysql
+Enter password:
+
+mysql> update user set Password=PASSWORD('root') WHERE User='root';
+
+flush privileges;
+
+SELECT User, Host, plugin FROM mysql.user;
+
+
+```
+
+
+Edit file /usr/share/phpmyadmin/libraries/sql.lib.php:
+
+sudo nano /usr/share/phpmyadmin/libraries/sql.lib.php
+
+On line 613 the count function always evaluates to true since there is no closing parenthesis after $analyzed_sql_results['select_expr']. Making the below replacements resolves this, then you will need to delete the last closing parenthesis on line 614, as it's now an extra parenthesis.
+
+Replace:
+
+((empty($analyzed_sql_results['select_expr']))
+    || (count($analyzed_sql_results['select_expr'] == 1)
+        && ($analyzed_sql_results['select_expr'][0] == '*')))
+
+With:
+
+((empty($analyzed_sql_results['select_expr']))
+    || (count($analyzed_sql_results['select_expr']) == 1)
+        && ($analyzed_sql_results['select_expr'][0] == '*'))
+
+Restart the server apache:
+
+sudo service apache2 restart
+
+```
+
+
+
+To log in as root in phpmyadmin:
+
+echo "UPDATE mysql.user SET plugin = 'mysql_native_password' WHERE user = 'root' AND plugin = 'unix_socket';FLUSH PRIVILEGES;" | mysql -u root -p
+
+Found at the end of this tutorial
+
+Worked for me :)
+
+
+
+php artisan make:migration create_users_roles_table
+
+php artisan migrate
+
+php artisan make:seeder UsersTableSeeder
+
+../tools/composer.phar dump-autoload
+
+php artisan db:seed
+
+https://github.com/cloudcreativity/demo-laravel-json-api/blob/5.6/database/migrations/2016_06_04_063426_create-posts-and-comments-tables.php
+
+
+php artisan route:list
+
+# passport
+https://medium.com/techcompose/create-rest-api-in-laravel-with-authentication-using-passport-133a1678a876
+https://laravel.com/docs/5.8/passport
+
+php artisan migrate
+php artisan passport:install
+
+## Passing The Access Token
+
+When calling routes that are protected by Passport, your application's API consumers should specify their access token as a Bearer token in the Authorization header of their request. For example, when using the Guzzle HTTP library:
+
+$response = $client->request('GET', '/api/user', [
+    'headers' => [
+        'Accept' => 'application/json',
+        'Authorization' => 'Bearer '.$accessToken,
+    ],
+]);
+
+
+
+CREATE USER 'biandangUser'@'localhost' IDENTIFIED BY 'biandangPassword';
+
+GRANT ALL PRIVILEGES ON biandang.* TO 'biandangUser'@'localhost';
+
+FLUSH PRIVILEGES;
+
+
+php artisan passport:install
+
+php artisan passport:client --personal
