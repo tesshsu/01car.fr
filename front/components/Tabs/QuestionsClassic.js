@@ -24,12 +24,10 @@ const Condition = ({ when, is, children }) => (
       {({ input: { value } }) => (value === is ? children : null)}
     </Field>
 )
-
 const onSubmit = async values => {
   await sleep(300)
   window.alert(JSON.stringify(values, 0, 2))
 }
-
 
 export default function QuestionsClassic() {
   const [openTab, setOpenTab] = React.useState(1);
@@ -91,7 +89,6 @@ export default function QuestionsClassic() {
 						<div className="tab-content tab-space">
 						<div className={openTab === 1 ? "block" : "hidden"} id="link1">
 							<div className="flex flex-wrap">
-
                               <div className="w-full lg:w-6/12 px-4">
 									<label
 										className="block uppercase text-gray-700 text-md font-bold mb-2"

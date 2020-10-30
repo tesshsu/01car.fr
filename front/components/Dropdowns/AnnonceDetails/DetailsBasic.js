@@ -16,6 +16,14 @@ const DetailsBasic = () => {
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
+  const basics = [
+	  { icon: "fas fa-gas-pump", name: "Energie", value: "Essence sans plomb" },
+	  { icon: "fas fa-tachometer-alt", name: "Kilométrage", value: "23000" },
+	  { icon: "fas fa-file-invoice-dollar", name: "Boîte de vitesses", value: "Manuelle" },
+	  { icon: "fas fa-car-side", name: "Nombre de portes", value: "5" },
+	  { icon: "fas fa-car-battery", name: "Deuxième jeu de clés ou carte", value: "7 CV / 130 ch" },
+	  { icon: "far fa-calendar-alt", name: "Année", value: "2012" }
+  ];
   return (
     <>
         <div className="flex flex-wrap">
@@ -24,66 +32,18 @@ const DetailsBasic = () => {
 				    <i className="fas fa-info"></i> DETAILS DU VÉHICULE
 				</h4>
 			</div>
-			<div className="container px-2 mx-auto">
-				<div className="flex flex-wrap">
-					<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-gas-pump"></i> Energie: </span>
-					</div>
-					<div className="w-full px-4 flex-1">
-						  <span className="carburant text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200"> Essence sans plomb</span>
+			{basics.map(basic => (
+				<div className="container px-2 mx-auto">
+					<div className="flex flex-wrap">
+						<div className="w-full px-4 flex-1">
+							  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className={basic.icon}></i> {basic.name}: </span>
+						</div>
+						<div className="w-full px-4 flex-1">
+							  <span className="carburant text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200"> {basic.value}</span>
+						</div>
 					</div>
 				</div>
-			</div>
-					<div className="container px-2 mx-auto">
-					  <div className="flex flex-wrap">
-						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-tachometer-alt"></i> Kilométrage: </span>
-						</div>
-						<div className="w-full px-4 flex-1">
-						  <span className="km text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">23000 <span>km</span></span>
-						</div>
-					  </div>
-					</div>
-					<div className="container px-2 mx-auto">
-					  <div className="flex flex-wrap">
-						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-file-invoice-dollar"></i> Boîte de vitesses :</span>
-						</div>
-						<div className="w-full px-4 flex-1">
-						  <span className="boiteVitesse text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">Manuelle</span>
-						</div>
-					  </div>
-					</div>
-					<div className="container px-2 mx-auto">
-					  <div className="flex flex-wrap">
-						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-car-side"></i> Nombre de portes :</span>
-						</div>
-						<div className="w-full px-4 flex-1">
-						  <span className="doors text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">5</span>
-						</div>
-					  </div>
-					</div>
-					<div className="container px-2 mx-auto">
-					  <div className="flex flex-wrap">
-						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-car-battery"></i> Deuxième jeu de clés ou carte : </span>
-						</div>
-						<div className="w-full px-4 flex-1">
-						  <span className="cv text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">7 CV / 130 ch</span>
-						</div>
-					  </div>
-					</div>
-					<div className="container px-2 mx-auto">
-					  <div className="flex flex-wrap">
-						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="far fa-calendar-alt"></i> Année : </span>
-						</div>
-						<div className="w-full px-4 flex-1">
-						  <span className="annee text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">2012</span>
-						</div>
-					  </div>
-					</div>
+            ))}			
 		</div>
     </>
   );

@@ -3,8 +3,6 @@ import DetailsBasic from "components/Dropdowns/AnnonceDetails/DetailsBasic.js";
 import DetailsSide from "components/Dropdowns/AnnonceDetails/DetailsSide.js";
 import DetailsDropdown from "components/Dropdowns/AnnonceDetails/DetailsDropdown.js";
 import DetailsPremiumDropdown from "components/Dropdowns/AnnonceDetails/DetailsPremiumDropdown.js";
-//import Slider from "react-slick";
-//import { baseUrl } from "./config";
 import CardAnnonceSlide from "components/Cards/CardAnnonceSlider.js";
 
 

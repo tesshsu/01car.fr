@@ -4,6 +4,19 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+const annonce_photos = [
+  { src: require('assets/img/car/o1car_01.jpg'), alt: "pic-1" },
+  { src: require('assets/img/car/o1car_02.jpg'), alt: "pic-2" },
+  { src: require('assets/img/car/o1car_03.jpg'), alt: "pic-4" },
+  { src: require('assets/img/car/o1car_04.jpg'), alt: "pic-5" },
+  { src: require('assets/img/car/o1car_05.jpg'), alt: "pic-6" },
+  { src: require('assets/img/car/o1car_06.jpg'), alt: "pic-7" },
+  { src: require('assets/img/car/o1car_07.jpg'), alt: "pic-8" },
+  { src: require('assets/img/car/o1car_08.jpg'), alt: "pic-9" },
+  { src: require('assets/img/car/o1car_09.jpg'), alt: "pic-10" },
+  { src: require('assets/img/car/o1car_010.jpg'), alt: "pic-11" }
+];
+
 const settings = {
   customPaging: function(i) {
         return (
@@ -38,36 +51,11 @@ export default function CardAnnonceSlider() {
     return (
         <>
           <Slider {...settings}>
-            <div>
-              <img class="sliderImg" src={require('assets/img/car/o1car_01.jpg')} />
-            </div>
-            <div>
-              <img class="sliderImg" src={require('assets/img/car/o1car_02.jpg')} />
-            </div>
-            <div>
-              <img class="sliderImg" src={require('assets/img/car/o1car_03.jpg')} />
-            </div>
-            <div>
-             <img class="sliderImg" src={require('assets/img/car/o1car_04.jpg')} />
-            </div>
-			<div>
-             <img class="sliderImg" src={require('assets/img/car/o1car_05.jpg')} />
-            </div>
-			<div>
-             <img class="sliderImg" src={require('assets/img/car/o1car_06.jpg')} />
-            </div>
-			<div>
-             <img class="sliderImg" src={require('assets/img/car/o1car_07.jpg')} />
-            </div>
-			<div>
-             <img class="sliderImg" src={require('assets/img/car/o1car_08.jpg')} />
-            </div>
-			<div>
-             <img class="sliderImg" src={require('assets/img/car/o1car_09.jpg')} />
-            </div>
-			<div>
-             <img class="sliderImg" src={require('assets/img/car/o1car_010.jpg')} />
-            </div>
+            {annonce_photos.map(annonce_photo => (
+				<div>
+				  <img class="sliderImg" src={annonce_photo.src} alt={annonce_photo.alt} />
+				</div>
+			))}          
           </Slider>
         </>
     );

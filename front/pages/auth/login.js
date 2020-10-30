@@ -3,11 +3,24 @@ import Link from "next/link";
 import { Form, Field } from 'react-final-form';
 import Auth from "layouts/Auth.js";
 import { FORM_ERROR } from 'final-form';
-
+//import { userService } from '_services';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
 const onSubmit = async values => {
   await sleep(300)
+  //e.preventDefault();
+  //let user = {};
+  //user.email= this.state.email;
+  //user.password= this.state.password;
+  //const { dispatch } = this.props;
+  /*userService.login(user).then(
+        userInfo => {
+            dispatch(this.success(userInfo));			
+        },
+        error => {
+            
+        }
+    );*/
   if (values.email !== 'test@gmail.com') {
     return { email: 'Email inconnu' }
   }
