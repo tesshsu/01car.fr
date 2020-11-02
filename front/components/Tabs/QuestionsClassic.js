@@ -3,6 +3,7 @@ import Link from "next/link";
 import CardPriceVehicule from "components/Cards/CardPriceVehicule.js";
 import QuestionsOptions from "components/Tabs/QuestionsOptions.js";
 import FileUpload from "components/Tabs/FileUpload.js";
+import ImageUpload from "components/Tabs/ImageUpload.js";
 import { Form, Field } from 'react-final-form';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -339,8 +340,8 @@ export default function QuestionsClassic() {
 							  </h4>
 							  <CardPriceVehicule />
 							  <div className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600"><i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> ETAPE SUIVANTE </div>
-							  <p className="text-md leading-relaxed text-gray-500"> Telecharger 10 photos MAX pour publier votre annonce </p>
-							  <FileUpload />
+							  <p className="text-md leading-relaxed text-gray-500"> Telecharger 10 photos MAX pour publier votre annonce ( ficher jpg, png, gif ) </p>
+							  <ImageUpload />
 							  <div className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600"><i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> Publier votre annonce </div>
 							  <button
 										className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"

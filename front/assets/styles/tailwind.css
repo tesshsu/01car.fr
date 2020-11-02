@@ -3973,3 +3973,9 @@ video {
 .annoceSlider .slick-dots img{
 	border: 1px solid #fff;
 }
+.vendre-page .ImagelistPart img{
+	padding: 5px;
+    box-shadow: 0 0 8px 2px rgba(0,0,0,.1);
+    border: 1px solid #d0dbe4;
+    border-radius: 5px;
+}
