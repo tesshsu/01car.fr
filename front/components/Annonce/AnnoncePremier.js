@@ -61,7 +61,7 @@ export default function AnnoncePremier() {
 								<i className="far fa-thumbs-up"></i>
 							  </button>                  					  
 							  <span className="font-bold px-1 text-xl ml-3 text-orange-500 text-right">
-								{annonce.price} €
+								{annonce.price} € (Prix qualifié)
 							  </span>
 							  <div className="w-full mt-2 flex-1">
 								<p className="text-md text-gray-500 text-justify truncate">

@@ -10,6 +10,7 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'champs obligatoire')
 const pattern= new RegExp("^([A-HJ-NP-TV-Z]{2}|[0-9]{3,4})-?([A-HJ-NP-TV-Z]{2,3}|[0-9]{3})-?([A-HJ-NP-TV-Z]{2}|[0-9]{2})$");
 const matchImmatriculation = value => (!pattern.test(value) ? "immatriculation inconnu" : undefined);
+const mustBeNumber = value => (isNaN(value) ? "Doit être en chiffre" : undefined);
 const composeValidators = (...validators) => value =>
   validators.reduce((error, validator) => error || validator(value), undefined);
 
@@ -56,10 +57,10 @@ export default function QuestionsClassic() {
                 href="#link1"
                 role="tablist"
               >
-                <i className="fas fa-space-shuttle text-base mr-1"></i> Questions 1 - 5 Informations générales
+                <i className="fas fa-space-shuttle text-base mr-1"></i> votre véhicule Informations générales
               </a>
             </li>
-            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+			<li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
               <a
                 className={
                   "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
@@ -73,6 +74,25 @@ export default function QuestionsClassic() {
                 }}
                 data-toggle="tab"
                 href="#link2"
+                role="tablist"
+              >
+                <i className="fas fa-space-shuttle text-base mr-1"></i> Questions 1 - 5 Informations générales
+              </a>
+            </li>
+            <li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+              <a
+                className={
+                  "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+                  (openTab === 3
+                    ? "text-white bg-orange-500"
+                    : "text-gray-600 bg-white")
+                }
+                onClick={e => {
+                  e.preventDefault();
+                  setOpenTab(3);
+                }}
+                data-toggle="tab"
+                href="#link3"
                 role="tablist"
               >
                 <i className="fas fa-cog text-base mr-1"></i>  Questions 6 - 10 : Caractéristiques du véhicule
@@ -89,6 +109,108 @@ export default function QuestionsClassic() {
                         <form onSubmit={handleSubmit}>
 						<div className="tab-content tab-space">
 						<div className={openTab === 1 ? "block" : "hidden"} id="link1">
+						    <div className="flex flex-wrap">
+							    <div className="w-full lg:w-6/12 px-4">
+									<label
+										className="block uppercase text-gray-700 text-md font-bold mb-2"
+										htmlFor="marque"
+									>
+										* Marque modèle :
+									</label>
+									<div className="relative flex w-full flex-wrap items-stretch mb-3">
+                                      <Field
+										  name="marque"
+										  validate={composeValidators(required, matchImmatriculation)}
+										  component="input"
+										  type="text"
+										  placeholder="BMW SERIE 3"
+										  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded border border-gray-400 text-sm shadow focus:outline-none focus:shadow-outline w-full pl-10"
+										/>
+									    <Error name="marque" />
+								    </div>
+								</div>
+								
+								<div className="w-full lg:w-6/12 px-4">
+									<label
+										className="block uppercase text-gray-700 text-md font-bold mb-2"
+										htmlFor="dt_entry_service"
+									>
+										* Date de mec :
+									</label>
+									<div className="relative flex w-full flex-wrap items-stretch mb-3">
+                                      <Field
+										  name="dt_entry_service"
+										  validate={required}
+										  component="input"
+										  type="date"
+										  placeholder="11/22/2015"
+										  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded border border-gray-400 text-sm shadow focus:outline-none focus:shadow-outline w-full pl-10"
+										/>
+                                      <Error name="dt_entry_service" />
+								    </div>
+                                </div>
+							</div>
+							
+							<div className="flex flex-wrap">
+							    <div className="w-full lg:w-6/12 px-4">
+									<label
+										className="block uppercase text-gray-700 text-md font-bold mb-2"
+										htmlFor="fuel"
+									>
+										* Energie :
+									</label>
+									<div className="relative flex w-full flex-wrap items-stretch mb-3">
+                                      <Field name="fuel" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                        <option></option>
+                                        <option value="Diesel">Diesel (Diesel)</option> 
+										<option value="Electric">Electric (Électrique)</option>
+										<option value="Gasoline">Gasoline (Essence)</option> 
+										<option value="Ethanol">Ethanol (Ethanol)</option> 
+										<option value="LPG">LPG (GPL)</option> 
+										<option value="Hybrid">Hybrid (Hybride)</option>
+                                      </Field>
+                                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
+                                        <i className="fas fa-angle-down text-2xl my-2"></i>
+                                      </div>
+                                      <Error name="fuel" />
+								    </div>								
+                                </div>
+								<div className="w-full lg:w-6/12 px-4">
+									<label
+										className="block uppercase text-gray-700 text-md font-bold mb-2"
+										htmlFor="km"
+									>
+									  *Kilométrage :
+									</label>
+									<Field
+									  name="km"
+									  validate={composeValidators(required, mustBeNumber)}
+									  component="input"
+									  type="text"
+									  placeholder="12000"
+									  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative border border-gray-400 bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
+									/>
+									<Error name="km" />
+								</div>
+							</div>
+							
+							<div className="flex flex-wrap mt-12 px-4 align-center justify-center">
+								<a
+									className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
+											onClick={e => {
+											  e.preventDefault();
+											  setOpenTab(2);
+											}}
+										data-toggle="tab"
+										href="#link2"
+										role="tablist"
+									>
+									<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>  1ème étape: 1 - 5 questions
+								</a>
+							</div>
+							
+						</div>
+						<div className={openTab === 2 ? "block" : "hidden"} id="link2">
 							<div className="flex flex-wrap">
                               <div className="w-full lg:w-6/12 px-4">
 									<label
@@ -213,10 +335,10 @@ export default function QuestionsClassic() {
 									className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
 											onClick={e => {
 											  e.preventDefault();
-											  setOpenTab(2);
+											  setOpenTab(3);
 											}}
 										data-toggle="tab"
-										href="#link2"
+										href="#link3"
 										role="tablist"
 									>
 									<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>  2ème étape: 6 -10 questions
@@ -224,23 +346,23 @@ export default function QuestionsClassic() {
 							</div>
 						</div>
 
-						<div className={openTab === 2 ? "block" : "hidden"} id="link2">
+						<div className={openTab === 3 ? "block" : "hidden"} id="link3">
 							<div className="flex flex-wrap px-4">
 								<label
 										className="block uppercase text-gray-700 text-md font-bold mb-2"
-										htmlFor="immatriculation"
+										htmlFor="estimate_price"
 									>
-									  Q6- IMMATRICULATION DU VEHICULE :
+									  Q6- Quel prix vendez-vous :
 									</label>
 									<Field
-									  name="immatriculation"
-									  validate={composeValidators(required, matchImmatriculation)}
+									  name="estimate_price"
+									  validate={composeValidators(required, mustBeNumber)}
 									  component="input"
 									  type="text"
-									  placeholder="AA-001-ZZ"
-									  className="px-3 py-3 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
+									  placeholder="12420"
+									  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white border border-gray-400 rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 									/>
-									<Error name="immatriculation" />
+									<Error name="estimate_price" />
 							</div>
 
 							<div className="flex flex-wrap mt-12 px-4">
@@ -315,19 +437,19 @@ export default function QuestionsClassic() {
 									className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
 									onClick={e => {
 									  e.preventDefault();
-									  setOpenTab(3);
+									  setOpenTab(4);
 									}}
                                     type="submit"
                                     disabled={submitting}
 									data-toggle="tab"
-									href="#link3"
+									href="#link4"
 									role="tablist"
 											  >
 									<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>  Envoyer pour voir resultat
 								</a>
 							</div>
 						</div>
-						<div className={openTab === 3 ? "block" : "hidden"} id="link3">
+						<div className={openTab === 4 ? "block" : "hidden"} id="link4">
 							<div className="container mx-auto text-center">
 							  <h4 className="text-2xl font-semibold">
 								  RESULTATS : 1ere NOTE DE CONFIANCE SUR 20

@@ -80,7 +80,7 @@ export default function Index() {
                 <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300-opcity">
                   <div className="flex-auto p-5 lg:p-10">
                     <h4 className="text-2xl font-semibold">
-                      Estimez votre voiture en 2 min !
+                      Publiez votre voiture en 2 min !
                     </h4>
 					<Form
 					  onSubmit={onSubmit}
@@ -255,7 +255,7 @@ export default function Index() {
 						</button>
 					</div>
                       <div className="w-full align-center text-white prixCompare">
-                          <span className="font-bold px-1 text-4xl text-right underline">6.99</span> € / 2 mois
+                          <span className="font-bold px-1 text-4xl text-right underline">6.99</span> €
                       </div>
 					<img
 					  alt="..."

@@ -55,7 +55,7 @@ export default function Navbar(props) {
 						  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
 						}
 					  >
-						Annonce
+						Annonces
 					  </a>
 				  </Link>
                 </button>

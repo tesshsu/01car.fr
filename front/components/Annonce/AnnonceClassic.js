@@ -38,7 +38,7 @@ export default function AnnonceClassic() {
 						  </p>
 						</div>
 						<div className="w-full mt-2 py-2 flex-1">					  	 
-						  <span className="font-bold px-1 text-xl text-orange-500 text-right">
+						  <span className="font-bold px-1 text-md text-gray-600 text-right">
 							{annonce.price} €
 						  </span>
 						  <div className="w-full mt-2 flex-1">

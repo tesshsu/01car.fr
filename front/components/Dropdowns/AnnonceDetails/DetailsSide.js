@@ -13,6 +13,7 @@ const DetailsSide = () => {
 			<div className="priceVehicule font-bold px-1 text-xl text-gray-800 text-left">
 				<span className="font-bold px-1 text-4xl text-orange-500 text-left underline">10 800</span> € Prix pro
 			</div>
+			<p className="text-lg block my-4 p-3 text-orange-500 rounded border border-solid border-gray-200">Valeur de transaction qualifié !!</p>
 			<div className="flex flex-wrap">
 			   <NoteConfiance />
 			</div>

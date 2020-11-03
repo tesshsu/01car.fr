@@ -30,7 +30,7 @@ export default function Prix() {
               <div className="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
                 <div className="pr-12">
                   <h1 className="text-white font-semibold text-5xl">
-                    Payer pour d'avoir plus conficance
+                    Obtenez plus de confiance
                   </h1>
                   <div className="flex justify-center">
                       <div className="mr-4 p-3 text-center">                       
@@ -149,7 +149,7 @@ export default function Prix() {
 						 <i class="fas fa-check"></i>
 						</div>
 						<p class="ml-3 text-base leading-6 font-medium text-gray-500">
-						  Rassurer acheteur grâce aux réponses
+						  Rassurer l'acheteur grâce aux réponses
 						</p>
 					  </li>
 					  <li class="mt-4 mx-4 flex items-start">
@@ -165,7 +165,7 @@ export default function Prix() {
 						 <i class="fas fa-check"></i>
 						</div>
 						<p class="ml-3 text-base leading-6 font-medium text-gray-500">
-						 Logo qualite garantie
+						 Logo qualité  garantie
 						</p>
 					  </li>
 					   <li class="mt-4 mx-4 flex items-start">
@@ -174,6 +174,14 @@ export default function Prix() {
 						</div>
 						<p class="ml-3 text-base leading-6 font-medium text-gray-500">
 						 Modifier à tout moment le prix du véhicule
+						</p>
+					  </li>
+					  <li class="mt-4 mx-4 flex items-start">
+						<div class="flex-shrink-0">
+						 <i class="fas fa-check"></i>
+						</div>
+						<p class="ml-3 text-base leading-6 font-medium text-gray-500">
+						 Les valeurs de déclenchement de transaction particulier et professionel qualifié
 						</p>
 					  </li>
 					</ul>
@@ -189,7 +197,7 @@ export default function Prix() {
 									  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
 									}
 								  >
-									<i className="fas fa-thumbs-up"></i> Vendre votre véhicule sur Top list
+									<i className="fas fa-thumbs-up"></i> Vendre votre voiture en tête de liste
 								  </a>
 							  </Link>
 					  </button>
