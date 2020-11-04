@@ -1,15 +1,21 @@
 import React from "react";
 import Link from "next/link";
-
+const favorits = [
+	  { src: require("assets/img/team-4-800x800.jpg"), marque: "RENAULT", model: "GRAND SCENIC IV", prix:"14 700", Energie:"Essence", Boite:"Manual", km:"34000", year:"2017", nc:"14" },
+	  { src: require("assets/img/team-3-800x800.jpg"), marque: "RENAULT", model: "GRAND SCENIC IV", prix:"12 700", Energie:"Essence", Boite:"Manual", km:"14000", year:"2015", nc:"16" },
+	  { src: require("assets/img/team-2-800x800.jpg"), marque: "RENAULT", model: "GRAND SCENIC IV", prix:"8 700", Energie:"Essence", Boite:"Manual", km:"24000", year:"2016", nc:"12" },
+	  { src: require("assets/img/team-6-800x800.jpg"), marque: "RENAULT", model: "GRAND SCENIC IV", prix:"6 700", Energie:"Essence", Boite:"Manual", km:"8000", year:"2012", nc:"10" }
+  ];
 export default function AnnonceFavoris() {
   return (
-    <>
-        <div className="container px-4 mx-auto">
+   <>
+        {favorits.map(favorit => (
+		<div className="container px-4 mx-auto">
 		  <div className="favoris-block flex-wrap">
 			<div className="w-full px-4 mt-4 flex-1">
 			  <img
-                    alt="..."
-                    src={require("assets/img/team-4-800x800.jpg")}
+                    alt={favorit.src}
+					src={favorit.src}
                     className="shadow-lg mx-auto rounded-lg"
                   />
 			</div>
@@ -17,27 +23,27 @@ export default function AnnonceFavoris() {
 			  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">
 			        <div class="top justify-between">
 					  <div class="font-bold text-lg text-orange-700 text-center py-2 m-2">
-					     RENAULT - GRAND SCENIC IV
+					     {favorit.marque} - {favorit.model}
 					  </div>
 					  <div class="price font-bold text-orange-500  text-2xl text-center bg-gray-400 px-4 py-2">
-					    10 700 €
+					    {favorit.prix} €
 					  </div>
 					</div>
 					<div className="container mx-auto">
 					  <div className="flex flex-wrap">
-						<div className="w-1/3">
-						  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">Essence</span>
-						</div>
-						<div className="w-1/3">
-						  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">Manuelle</span>
-						</div>
-						<div className="w-1/3">
-						  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">82 000 km</span>
-						</div>
-						<div className="w-1/3">
-						  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">2017</span>
-						</div>
-					  </div>
+							<div className="w-1/3">
+							  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorit.Energie}</span>
+							</div>
+							<div className="w-1/3">
+							  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorit.Boite}</span>
+							</div>
+							<div className="w-1/3">
+							  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorit.km} km</span>
+							</div>
+							<div className="w-1/3">
+							  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorit.year}</span>
+							</div>
+						  </div>
 					</div>
 					<div className="button-block justify-left">
 						<button
@@ -72,13 +78,14 @@ export default function AnnonceFavoris() {
 						</button>
                     </div>
 					<p className="mt-4 px-6 py-2 text-md leading-relaxed bg-gray-600 text-white font-bold uppercase rounded text-center">
-						Note de Conficance: 14/20
+						Note de Conficance: {favorit.nc}/20
 				    </p>
 
 			  </span>
 			</div>
 		  </div>
 		</div>
+		))}
     </>
   );
 }
