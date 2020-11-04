@@ -47,8 +47,8 @@ export function ImageUpload() {
 				  <div key={index} className="image-item w-full px-3 flex-1">
 					<img src={image["data_url"]} />
 					<div className="image-item__btn-wrapper">
-					  <button className="upload bg-gray-600 text-white px-2 py-1 rounded shadow mr-1 mt-2" onClick={() => onImageUpdate(index)}>Changer</button>
-					  <button className="upload bg-gray-600 text-white px-2 py-1 rounded shadow mr-1 mt-2" onClick={() => onImageRemove(index)}>Retirer</button>
+					  <button className="upload text-2xl text-gray-600 mr-1 mt-2" onClick={() => onImageUpdate(index)}><i class="fas fa-pen-square"></i></button>
+					  <button className="uploadRemove text-2xl text-gray-600 mr-1 mt-2" onClick={() => onImageRemove(index)}><i class="fas fa-window-close"></i></button>
 					</div>
 				  </div>
 				))}

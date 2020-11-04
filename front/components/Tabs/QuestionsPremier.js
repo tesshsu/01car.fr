@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import CardPriceVehicule from "components/Cards/CardPriceVehicule.js";
 import FileUpload from "components/Tabs/FileUpload.js";
+import NotificationDropdown from "components/Dropdowns/NotificationDropdown.js";
 import { Form, Field } from 'react-final-form';
 import ImageUpload from "components/Tabs/ImageUpload.js";
 
@@ -191,8 +192,8 @@ export default function QuestionsPremier() {
                                                <Error name="question-15" />
                                             </div>
                                             <Condition when="question-15" is="1" className="mt-2">
-                                              <p className="text-md leading-relaxed text-gray-500"> Telecharger votre contrôle technique </p>
-                                              <FileUpload />
+											  <p className="text-md leading-relaxed text-gray-500"> Telecharger votre contrôle technique <span><NotificationDropdown /></span></p>
+                                              <FileUpload />											  
                                             </Condition>
                                   </div>
                                   <div className="flex flex-wrap mt-12 px-4 align-center justify-center">
@@ -272,7 +273,9 @@ export default function QuestionsPremier() {
                                               <Error name="question-18" />
                                            </div>
 										   <Condition when="question-18" is="1" className="mt-2">
-												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre facture d'achat </p>
+												
+												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre facture d'achat <span><NotificationDropdown /></span> </p>
+												
 												<FileUpload />
                                            </Condition>
                                         </div>
@@ -294,9 +297,9 @@ export default function QuestionsPremier() {
                                                </div>
                                                <Error name="question-19" />
                                            </div>
-                                            <Condition when="question-19" is="1" className="mt-2">
-                                                <p className="text-md leading-relaxed text-gray-500"> Telecharger votre carte grise </p>
-                                                <FileUpload />
+                                            <Condition when="question-19" is="1" className="mt-2">                                          
+												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre carte grise <span><NotificationDropdown /></span></p>                                               
+												<FileUpload />
                                             </Condition>
                                         </div>
                                   </div>
@@ -319,7 +322,7 @@ export default function QuestionsPremier() {
                                               <Error name="question-20" />
                                            </div>
 										    <Condition when="question-20" is="1" className="mt-2">
-												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre carnet d’entretien </p>
+												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre carnet d’entretien <span><NotificationDropdown /></span></p>
 												<FileUpload />
                                            </Condition>
                                   </div>

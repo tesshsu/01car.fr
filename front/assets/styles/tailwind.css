@@ -3979,3 +3979,6 @@ video {
     border: 1px solid #d0dbe4;
     border-radius: 5px;
 }
+.ImagelistPart .image-item__btn-wrapper{
+	text-align: center;
+}

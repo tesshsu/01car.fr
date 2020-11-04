@@ -85,6 +85,7 @@ class FileUpload extends PureComponent {
                   Annuler
                 </button>
               )}
+			  
             </div>
             {(submitting || message) && <hr />}
             {submitting && (

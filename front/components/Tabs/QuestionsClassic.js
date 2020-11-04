@@ -30,6 +30,11 @@ const onSubmit = async values => {
   await sleep(300)
   window.alert(JSON.stringify(values, 0, 2))
 }
+const questionTitle_tabs = [
+	  { openTab: "1", herf: "#link1", icon: "fas fa-space-shuttle text-base mr-1", title: "votre véhicule Informations générales" },
+	  { openTab: "2", herf: "#link2", icon: "fas fa-space-shuttle text-base mr-1", title: "Questions 1 - 5 Informations générales" },
+	  { openTab: "3", herf: "#link3", icon: "fas fa-space-shuttle text-base mr-1", title: "Questions 6 - 10 Caractéristiques du véhicule" }
+  ];
 
 export default function QuestionsClassic() {
   const [openTab, setOpenTab] = React.useState(1);
@@ -98,6 +103,7 @@ export default function QuestionsClassic() {
                 <i className="fas fa-cog text-base mr-1"></i>  Questions 6 - 10 : Caractéristiques du véhicule
               </a>
             </li>
+			
           </ul>
           <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
             <div className="px-4 py-5 flex-auto">
