@@ -3,6 +3,7 @@ import Link from "next/link";
 import CardPriceVehicule from "components/Cards/CardPriceVehicule.js";
 import FileUpload from "components/Tabs/FileUpload.js";
 import { Form, Field } from 'react-final-form';
+import ImageUpload from "components/Tabs/ImageUpload.js";
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'champs obligatoire')
@@ -147,7 +148,7 @@ export default function QuestionsPremier() {
                                                 <Error name="question-13" />
                                                 <Condition when="question-13" is="0" className="mt-2">
                                                     <p className="text-md leading-relaxed text-gray-500"> Telecharger votre photos griffes </p>
-                                                    <FileUpload />
+                                                    <ImageUpload />
                                                 </Condition>
                                             </div>
                                         </div>
@@ -323,14 +324,6 @@ export default function QuestionsPremier() {
                                            </Condition>
                                   </div>
                                     <div className="flex flex-wrap mt-12 px-4 align-center justify-center">
-                                       <button
-                                                className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                                type="button"
-                                                type="submit"
-                                                disabled={submitting}
-                                              >
-                                                Valider
-                                        </button>
 									   <a
                                             className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
                                             onClick={e => {

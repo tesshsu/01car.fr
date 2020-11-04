@@ -80,7 +80,7 @@ export default function Index() {
                 <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300-opcity">
                   <div className="flex-auto p-5 lg:p-10">
                     <h4 className="text-2xl font-semibold">
-                      Publiez votre voiture en 2 min !
+                      Publiez votre annonce en 2 min !
                     </h4>
 					<Form
 					  onSubmit={onSubmit}

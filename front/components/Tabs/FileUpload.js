@@ -75,14 +75,14 @@ class FileUpload extends PureComponent {
                     this.handleCancel(e);
                   }}
                 >
-                  Reset
+                  Retirer
                 </button>
               )}
               {submitting && (
                 <button className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
 				    onClick={this.handleCancel}
 				>
-                  Cancel
+                  Annuler
                 </button>
               )}
             </div>

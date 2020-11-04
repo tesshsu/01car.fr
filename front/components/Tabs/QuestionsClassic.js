@@ -487,7 +487,7 @@ export default function QuestionsClassic() {
 												  "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
 												}
 											  >
-												<i className="far fa-laugh mr-1 animate-spin"></i> CONTINUER POUR PASSER A LA TOPLIST
+												<i className="far fa-laugh mr-1 animate-spin"></i> Continuez pour passer en tête de liste
 											  </a>
 										  </Link>
 							   </button>
