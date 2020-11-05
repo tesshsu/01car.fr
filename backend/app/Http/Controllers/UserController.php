@@ -44,9 +44,6 @@ class UserController extends Controller
 
             $user = User::with( 'roles', 'roles.permissions')->find($user->id);
 
-            return response()->json($user, $this->successStatus);
-
-
             $answer['token'] =  $user->createToken('MyApp')-> accessToken;
             $answer['user'] = new UserResource($user);
             return response()->json($answer, $this->successStatus);

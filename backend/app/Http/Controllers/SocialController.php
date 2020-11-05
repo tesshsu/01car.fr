@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Http\Controllers\Controller;
 use App\Models\SocialAccount;
 use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
