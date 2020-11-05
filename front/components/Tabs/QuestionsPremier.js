@@ -114,7 +114,7 @@ export default function QuestionsPremier() {
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
                                                 htmlFor="question-12"
                                           >
-                                            Q12- Véhicule ayant déjà subit 1 Accident (même mineur) :
+                                            Q12- Véhicule ayant déjà subit 1 Accident (même mineur) ?
                                           </label>
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
                                               <Field name="question-12" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
@@ -135,7 +135,7 @@ export default function QuestionsPremier() {
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
                                                 htmlFor="question-13"
                                              >
-                                                Q13- Le véhicule a t-il des défauts (griffes, coups, usures…) :
+                                                Q13- Le véhicule a t-il des défauts (griffes, coups, usures…) ?
                                             </label>
                                             <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
                                                 <Field name="question-13" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
@@ -148,7 +148,7 @@ export default function QuestionsPremier() {
                                                 </div>
                                                 <Error name="question-13" />
                                                 <Condition when="question-13" is="0" className="mt-2">
-                                                    <p className="text-md leading-relaxed text-gray-500"> Telecharger votre photos griffes </p>
+                                                    <p className="text-md leading-relaxed text-gray-500"> Télécharger les défauts du véhicule  </p>
                                                     <ImageUpload />
                                                 </Condition>
                                             </div>
@@ -158,7 +158,7 @@ export default function QuestionsPremier() {
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
                                                 htmlFor="question-14"
                                               >
-                                                Q14- Pouvez-vous justifier le parcours kilométrique :
+                                                Q14- Pouvez-vous justifier le parcours kilométrique ?
                                              </label>
                                             <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
                                                 <Field name="question-14" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
@@ -219,7 +219,7 @@ export default function QuestionsPremier() {
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
                                                 htmlFor="question-16"
                                           >
-                                            Q16- Respect des entretiens périodiques :
+                                            Q16- Respect des entretiens périodiques ?
                                           </label>
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
                                               <Field name="question-16" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
@@ -308,7 +308,7 @@ export default function QuestionsPremier() {
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
                                                 htmlFor="question-20"
                                           >
-                                            Q20- Possédez-vous le carnet d’entretien?
+                                            Q20- Possédez-vous le Carnet d’entretien?
                                           </label>
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
                                               <Field name="question-20" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">

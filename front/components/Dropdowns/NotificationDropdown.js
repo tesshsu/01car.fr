@@ -35,7 +35,7 @@ const NotificationDropdown = () => {
               <div
                 className="bg-gray-600 text-white opacity-75 font-semibold p-3 mb-0 border-b border-solid border-gray-200 uppercase rounded-t-lg"
               >
-                Votre données personnelles ?
+                Vos données personnelles resteront confidentielles
               </div>
               <div className="text-white p-3">
                 <ul className="list-unstyled">

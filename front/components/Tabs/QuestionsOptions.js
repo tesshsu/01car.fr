@@ -113,7 +113,7 @@ export default function QuestionsOptions() {
 										className="uppercase text-gray-700 text-sm"
 										htmlFor="question-7-1"
 									>
-										Q7 - 1 ÉQUIPEMENTS EXTÉRIEUR ET CHÂSSIS ?
+										Q7 - 1 ÉQUIPEMENTS EXTÉRIEUR ET CHÂSSIS
 									</label>
 									<Field name="question-7-1" component="input" type="checkbox" className="ml-2 form-checkbox">
                                     </Field>
@@ -141,7 +141,7 @@ export default function QuestionsOptions() {
 										className="uppercase text-gray-700 text-sm"
 										htmlFor="question-7-2"
 									>
-										Q7 - 2 Intérieur ?
+										Q7 - 2 Intérieur
 									</label>
 									<Field name="question-7-2" component="input" type="checkbox" className="ml-2 form-checkbox">
                                     </Field>
@@ -169,7 +169,7 @@ export default function QuestionsOptions() {
 										className="uppercase text-gray-700 text-sm"
 										htmlFor="question-7-3"
 									>
-										Q7 - 3 Sécurité ?
+										Q7 - 3 Sécurité
 									</label>
 									<Field name="question-7-3" component="input" type="checkbox" className="ml-2 form-checkbox">
                                     </Field>
@@ -199,7 +199,7 @@ export default function QuestionsOptions() {
 										className="uppercase text-gray-700 text-sm"
 										htmlFor="question-7-4"
 									>
-										Q7 - 4 Antivol ?
+										Q7 - 4 Antivol
 									</label>
 									<Field name="question-7-4" component="input" type="checkbox" className="ml-2 form-checkbox">
                                     </Field>
@@ -227,7 +227,7 @@ export default function QuestionsOptions() {
 										className="uppercase text-gray-700 text-sm"
 										htmlFor="question-7-5"
 									>
-										Q7- 5 CONFORT ?
+										Q7- 5 CONFORT
 									</label>
 									<Field name="question-7-5" component="input" type="checkbox" className="ml-2 form-checkbox">
                                     </Field>
@@ -255,7 +255,7 @@ export default function QuestionsOptions() {
 										className="uppercase text-gray-700 text-sm"
 										htmlFor="question-7-6"
 									>
-										Q7 -6 AUTRES ?
+										Q7 -6 AUTRES
 									</label>
 									<Field name="question-7-6" component="input" type="checkbox" className="ml-2 form-checkbox">
                                     </Field>

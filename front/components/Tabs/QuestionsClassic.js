@@ -30,11 +30,6 @@ const onSubmit = async values => {
   await sleep(300)
   window.alert(JSON.stringify(values, 0, 2))
 }
-const questionTitle_tabs = [
-	  { openTab: "1", herf: "#link1", icon: "fas fa-space-shuttle text-base mr-1", title: "votre véhicule Informations générales" },
-	  { openTab: "2", herf: "#link2", icon: "fas fa-space-shuttle text-base mr-1", title: "Questions 1 - 5 Informations générales" },
-	  { openTab: "3", herf: "#link3", icon: "fas fa-space-shuttle text-base mr-1", title: "Questions 6 - 10 Caractéristiques du véhicule" }
-  ];
 
 export default function QuestionsClassic() {
   const [openTab, setOpenTab] = React.useState(1);
@@ -358,7 +353,7 @@ export default function QuestionsClassic() {
 										className="block uppercase text-gray-700 text-md font-bold mb-2"
 										htmlFor="estimate_price"
 									>
-									  Q6- Quel prix vendez-vous :
+									  Q6- Annoncez votre prix de vente :
 									</label>
 									<Field
 									  name="estimate_price"
@@ -407,8 +402,10 @@ export default function QuestionsClassic() {
 								   <div className="relative flex w-full flex-wrap items-stretch mb-3">
                                      <Field name="question-9" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                        <option></option>
-                                       <option value="1">Neuf ou moins de 4 ans </option>
-                                       <option value="0">Occasion plus de 4 ans </option>
+                                       <option value="1">Neuf</option>
+                                       <option value="1">Très bon état</option>
+									   <option value="1">Bon état</option>
+									   <option value="0">satisfaisant</option>
                                      </Field>
                                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                        <i className="fas fa-angle-down text-2xl my-2"></i>
