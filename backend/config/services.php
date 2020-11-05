@@ -13,6 +13,16 @@ return [
     | a conventional file to locate the various service credentials.
     |
     */
+    'facebook' => [
+        'client_id' => '662992494584898',
+        'client_secret' => '3d792115f30bb2e09b2d405a1c757680',
+        'redirect' => 'https://www.tutsmake.com/laravel-example/callback/facebook',
+    ],
+    'google' => [
+        'client_id' => 'xxxx',
+        'client_secret' => 'xxx',
+        'redirect' => 'https://www.tutsmake.com/laravel-example/callback/facebook',
+    ],
 
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),

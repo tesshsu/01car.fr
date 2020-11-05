@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::post('/auth/login', 'App\Http\Controllers\UserController@login');
+Route::post('/auth/register', 'App\Http\Controllers\UserController@register');
+Route::get('/auth/redirect/{provider}', 'App\Http\Controllers\SocialController@redirect');
+Route::get('/auth/callback/{provider}', 'App\Http\Controllers\SocialController@callback');
+
+/*
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/

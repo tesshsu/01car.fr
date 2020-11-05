@@ -60,6 +60,15 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
+# Composer
+
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'c31c1e292ad7be5f49291169c0ac8f683499edddcfd4e42232982d0fd193004208a58ff6f353fde0012d35fdd72bc394') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+
+
+
 ## Debuf
 
 First, download the Laravel installer using Composer:
@@ -136,6 +145,17 @@ Found at the end of this tutorial
 
 Worked for me :)
 
+# Laradock
+
+https://laradock.io/getting-started/
+```
+docker-compose up -d nginx mysql phpmyadmin
+
+docker-compose exec --user=laradock workspace bash
+```
+
+
+php artisan make:model SocialFacebookAccount -m
 
 
 php artisan make:migration create_users_roles_table
@@ -156,6 +176,9 @@ php artisan route:list
 # passport
 https://medium.com/techcompose/create-rest-api-in-laravel-with-authentication-using-passport-133a1678a876
 https://laravel.com/docs/5.8/passport
+
+
+
 
 php artisan migrate
 php artisan passport:install
