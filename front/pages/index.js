@@ -1,26 +1,14 @@
 import React from "react";
 import Link from "next/link";
-
+import {useRouter} from 'next/router'
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import PubContent from "layouts/PubContent.js";
 import PubContent2 from "layouts/PubContent2.js";
-import { Form, Field } from 'react-final-form';
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-const required = value => (value ? undefined : 'champs obligatoire')
-const pattern="^([A-HJ-NP-TV-Z]{2}|[0-9]{3,4})-?([A-HJ-NP-TV-Z]{2,3}|[0-9]{3})-?([A-HJ-NP-TV-Z]{2}|[0-9]{2})$";
-const onSubmit = async values => {
-  await sleep(300)
-  if (values.immatriculation.match(pattern)) {
-    window.alert('Immatriculation go!')
-  }else{
-	  return { immatriculation: 'immatriculation inconnu' }
-  }
-  
-}
 
 export default function Index() {
+  const router = useRouter()
   return (
     <>
       <IndexNavbar fixed />
@@ -79,77 +67,21 @@ export default function Index() {
 		<div className="cote-form-block absolute top-210-px b-auto right-100 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-12/12 max-w-580-px z-40" >
                 <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300-opcity">
                   <div className="flex-auto p-5 lg:p-10">
-                    <h4 className="text-2xl font-semibold">
+                    <h4 className="text-3xl font-semibold">
                       Publiez votre annonce en 2 min !
                     </h4>
-					<Form
-					  onSubmit={onSubmit}
-					  validate={values => {
-						const errors = {}
-						if (!values.immatriculation) {
-						  errors.immatriculation = 'Required'
-						}
-						return errors
-					  }}
-					  render={({ submitError, handleSubmit, form, submitting, pristine, values
-					  }) => (
-						<form onSubmit={handleSubmit}>
-							<div className="flex flex-wrap">
-							    <div className="w-full lg:w-6/12 px-4">
-								    <Field name="immatriculation" validate={required}>
-										{({ input, meta }) => (
-										  <div className="relative w-full mb-3">
-											<label
-											  className="block uppercase text-gray-700 text-xs font-bold mb-2"
-											  htmlFor="immatriculation"
-											>
-											  Entrez votre immatriculation :
-											</label>
-											<input
-											  {...input}
-											  type="text"
-											  className="px-2 py-1 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
-											  placeholder="AA-001-ZZ"
-											/>
-											{(meta.error || meta.submitError) && meta.touched && (
-											  <span className="text-orange-500 text-sm">{meta.error || meta.submitError}</span>
-											)}
-										  </div>
-										)}
-                                    </Field>
-								</div>
-								
-								<div className="w-full lg:w-6/12 px-4">
-								  <button
-									className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-									type="submit"
-							        disabled={submitting}
-								  >
-									Envoyer
-								  </button>
-								</div>
-							</div>
-							<div className="flex flex-wrap">
-								<div className="w-full lg:w-6/12 px-4">
-								  <label
-									className="block uppercase text-gray-700 text-xs font-bold mb-2 my-4"
-									htmlFor="full-name"
-								  >
-									  Répondez au Questionnaire &#8594;
-								  </label>
-								</div>
-								<div className="w-full lg:w-6/12 px-4">
-								  <button
-									className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-									type="button"
-								  >
-									  10 Questions
-								  </button>
-								</div>
-							</div>
-							</form>
-				        )}
-				    />
+                    <h4 className="text-xl font-semibold">
+                      RÉPONDEZ AU QUESTIONNAIRE
+                    </h4>					
+					<div className="flex flex-wrap">													 
+						<button
+								className="bg-orange-500 text-white active:bg-grey-500 text-xl font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+								type="submit"
+								onClick={() => router.push('/vendre')}
+						>
+							Allez go!! <i class="fas fa-arrow-circle-right animate-bounce"></i>
+						</button>						
+					</div>							
                 </div>
             </div>
         </div>

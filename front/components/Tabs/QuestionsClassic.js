@@ -473,14 +473,37 @@ export default function QuestionsClassic() {
 								  RESULTATS : 1ere NOTE DE CONFIANCE SUR 20
 							  </h4>
 							  <h4 className="text-xl font-semibold">
-								  7/20 Annonce offre GRATUITE
+								  <span className="noteTotal">7</span>/20 Annonce offre GRATUITE
 							  </h4>
 							  <h4 className="text-xl font-semibold">
-								  Prix de vente Suzuki SWIFT - 2012
+								  Prix de vente <span className="marqueModel">Suzuki SWIFT</span> - <span className="dt_entry_service">2012</span>
 							  </h4>
 							  <CardPriceVehicule />
 							  <div className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600"><i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> ETAPE SUIVANTE </div>
 							  <p className="text-md leading-relaxed text-gray-500"> Telecharger 10 photos MAX pour publier votre annonce ( ficher jpg, png, gif ), Téléchargez des photos de votre voiture depuis l'extérieur, du tableau de bord avec le moteur allumé, de la console centrale etc </p>
+							  <div className="demoPhotos flex justify-center">
+							    <div className="mr-4 p-3">
+								<img
+									alt="..."
+									src={require("assets/img/img-example-full-outside.jpg")}
+									className="shadow-xl rounded-full h-auto p-3 align-middle border-none max-w-210-px bg-white bg-white rounded text-sm shadow outline-none"
+								  />
+								</div>
+								<div className="mr-4 p-3">
+								  <img
+									alt="..."
+									src={require("assets/img/img-example-full-dashboard.jpg")}
+									className="shadow-xl rounded-full h-auto p-3 align-middle border-none max-w-210-px bg-white bg-white rounded text-sm shadow outline-none"
+								  />
+								</div>
+								<div className="mr-4 p-3">
+								  <img
+									alt="..."
+									src={require("assets/img/img-example-full-seats.jpg")}
+									className="shadow-xl rounded-full h-auto p-3 align-middle border-none max-w-210-px bg-white bg-white rounded text-sm shadow outline-none"
+								  />
+								</div>
+							  </div>
 							  <ImageUpload />
 							  <div className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600"><i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> Publier votre annonce </div>
 							  <button

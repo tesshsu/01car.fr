@@ -148,7 +148,7 @@ export default function Prix() {
 						<div class="flex-shrink-0">
 						 <i class="fas fa-check"></i>
 						</div>
-						<p class="ml-3 text-base leading-6 font-medium text-gray-500">
+						<p class="ml-3 text-base leading-6 font-medium text-gray-500 text-xl">
 						  Rassurer l'acheteur grâce aux réponses
 						</p>
 					  </li>
@@ -156,15 +156,15 @@ export default function Prix() {
 						<div class="flex-shrink-0">
 						 <i class="fas fa-check"></i>
 						</div>
-						<p class="ml-3 text-base leading-6 font-medium text-gray-500">
+						<p class="ml-3 text-base leading-6 font-medium text-gray-500 text-xl">
 						 Tête de liste, grande visibilité
 						</p>
 					  </li>
 					   <li class="mt-4 mx-4 flex items-start">
 						<div class="flex-shrink-0">
 						 <i class="fas fa-check"></i>
-						</div>
-						<p class="ml-3 text-base leading-6 font-medium text-gray-500">
+						</div> 
+						<p class="ml-3 text-base leading-6 font-medium text-gray-500 text-xl">
 						 Logo qualité  garantie
 						</p>
 					  </li>
@@ -172,7 +172,7 @@ export default function Prix() {
 						<div class="flex-shrink-0">
 						 <i class="fas fa-check"></i>
 						</div>
-						<p class="ml-3 text-base leading-6 font-medium text-gray-500">
+						<p class="ml-3 text-base leading-6 font-medium text-gray-500 text-xl">
 						 Modifier à tout moment le prix du véhicule
 						</p>
 					  </li>
@@ -180,21 +180,21 @@ export default function Prix() {
 						<div class="flex-shrink-0">
 						 <i class="fas fa-check"></i>
 						</div>
-						<p class="ml-3 text-base leading-6 font-medium text-gray-500">
+						<p class="ml-3 text-base leading-6 font-medium text-gray-500 text-xl">
 						 Les valeurs de déclenchement de transaction particulier et professionel qualifié
 						</p>
 					  </li>
 					</ul>
 					<div class="mt-8 text-center my-4">
 					  <button
-							  className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-6 py-4 rounded shadow hover\:shadow-md:hover outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 hover:-mt-2 ease-linear transition-all duration-150"
+							  className="bg-orange-500 text-white active:bg-gray-700 uppercase px-6 py-4 rounded shadow hover\:shadow-md:hover outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 hover:-mt-2 ease-linear transition-all duration-150"
 							  type="button"
 							>
 							  <Link href="/vendre_premium">
 								  <a
 									href="#pablo"
 									className={
-									  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
+									  "premiumButton text-lg py-1 px-4 font-normal block font-bold w-full whitespace-no-wrap bg-transparent text-white-500"
 									}
 								  >
 									<i className="fas fa-thumbs-up"></i> Vendre votre voiture en tête de liste

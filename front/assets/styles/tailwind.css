@@ -614,11 +614,15 @@ video {
   }
   .prix-page .premium-block{
 	 order: 1;
+	 max-width: 420px;
   }
   .prix-page .premium-block .togBadgePrix{
 	top: 0px;
     right: 0px;
     width: 100px;
+  }
+  .prix-page .premiumButton{
+	 font-size: 0.75rem !important;
   }
   .prix-page .classic-block{
 	margin-top: 2rem;
@@ -671,6 +675,12 @@ video {
   }
   .marqueBlock span{
 	  font-size: 14px;
+  }
+  .demoPhotos{
+	  display: block !important;
+  }
+  .vendre-page .ImagelistPart{
+	  display: block !important;
   }
 }
 
