@@ -145,6 +145,14 @@ Found at the end of this tutorial
 
 Worked for me :)
 
+
+CREATE USER 'biandangUser'@'localhost' IDENTIFIED BY 'biandangPassword';
+
+GRANT ALL PRIVILEGES ON biandang.* TO 'biandangUser'@'localhost';
+
+FLUSH PRIVILEGES;
+
+
 # Laradock
 
 https://laradock.io/getting-started/
@@ -174,14 +182,17 @@ https://github.com/cloudcreativity/demo-laravel-json-api/blob/5.6/database/migra
 php artisan route:list
 
 # passport
+
 https://medium.com/techcompose/create-rest-api-in-laravel-with-authentication-using-passport-133a1678a876
 https://laravel.com/docs/5.8/passport
 
-
-
-
+```
 php artisan migrate
 php artisan passport:install
+```
+```
+php artisan passport:client --personal
+```
 
 ## Passing The Access Token
 
@@ -196,13 +207,6 @@ $response = $client->request('GET', '/api/user', [
 
 
 
-CREATE USER 'biandangUser'@'localhost' IDENTIFIED BY 'biandangPassword';
-
-GRANT ALL PRIVILEGES ON biandang.* TO 'biandangUser'@'localhost';
-
-FLUSH PRIVILEGES;
 
 
-php artisan passport:install
 
-php artisan passport:client --personal

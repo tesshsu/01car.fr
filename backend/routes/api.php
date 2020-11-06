@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::post('/auth/login', 'App\Http\Controllers\UserController@login');
-Route::post('/auth/register', 'App\Http\Controllers\UserController@register');
-Route::get('/auth/redirect/{provider}', 'App\Http\Controllers\SocialController@redirect');
-Route::get('/auth/callback/{provider}', 'App\Http\Controllers\SocialController@callback');
+Route::post('/auth/login', 'App\Http\Controllers\Auth\LoginController@login');
+Route::post('/auth/register', 'App\Http\Controllers\Auth\LoginController@register');
+Route::get('/auth/redirect/{provider}', 'App\Http\Controllers\Auth\SocialController@redirect');
+Route::get('/auth/callback/{provider}', 'App\Http\Controllers\Auth\SocialController@callback');
 
 /*
 Route::middleware('auth:api')->get('/user', function (Request $request) {
