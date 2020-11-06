@@ -8,8 +8,6 @@ import { Form, Field } from 'react-final-form';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'champs obligatoire')
-const pattern= new RegExp("^([A-HJ-NP-TV-Z]{2}|[0-9]{3,4})-?([A-HJ-NP-TV-Z]{2,3}|[0-9]{3})-?([A-HJ-NP-TV-Z]{2}|[0-9]{2})$");
-const matchImmatriculation = value => (!pattern.test(value) ? "immatriculation inconnu" : undefined);
 const mustBeNumber = value => (isNaN(value) ? "Doit être en chiffre" : undefined);
 const composeValidators = (...validators) => value =>
   validators.reduce((error, validator) => error || validator(value), undefined);
@@ -26,9 +24,17 @@ const Condition = ({ when, is, children }) => (
       {({ input: { value } }) => (value === is ? children : null)}
     </Field>
 )
+
 const onSubmit = async values => {
   await sleep(300)
   window.alert(JSON.stringify(values, 0, 2))
+}
+const pattern= new RegExp("(.+ .*)|(.* .+)");
+const matchMarqueModel = value => (!pattern.test(value) ? "Il faut Marque avec model par example CITROEN C4" : undefined);
+
+const formatDate = value => {
+  if (!value) return value;
+  return `${value.slice(0, 4)}-${value.slice(5, 7)}-${value.slice(8,10)}`;
 }
 
 export default function QuestionsClassic() {
@@ -114,20 +120,21 @@ export default function QuestionsClassic() {
 							    <div className="w-full lg:w-6/12 px-4">
 									<label
 										className="block uppercase text-gray-700 text-md font-bold mb-2"
-										htmlFor="marque"
+										htmlFor="marqueModel"
 									>
 										* Marque modèle :
 									</label>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
                                       <Field
-										  name="marque"
-										  validate={composeValidators(required, matchImmatriculation)}
+										  name="marqueModel"
+										  validate={composeValidators(required, matchMarqueModel)}
 										  component="input"
 										  type="text"
+										  value=""
 										  placeholder="BMW SERIE 3"
 										  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded border border-gray-400 text-sm shadow focus:outline-none focus:shadow-outline w-full pl-10"
 										/>
-									    <Error name="marque" />
+									    <Error name="marqueModel" />
 								    </div>
 								</div>
 								
@@ -144,7 +151,8 @@ export default function QuestionsClassic() {
 										  validate={required}
 										  component="input"
 										  type="date"
-										  placeholder="11/22/2015"
+										  value=""
+										  format={formatDate}
 										  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded border border-gray-400 text-sm shadow focus:outline-none focus:shadow-outline w-full pl-10"
 										/>
                                       <Error name="dt_entry_service" />
@@ -161,7 +169,11 @@ export default function QuestionsClassic() {
 										* Energie :
 									</label>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-                                      <Field name="fuel" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                      <Field name="fuel" 
+									         validate={required} 
+											 component="select"
+											 className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline"									         
+									  >
                                         <option></option>
                                         <option value="Diesel">Diesel (Diesel)</option> 
 										<option value="Electric">Electric (Électrique)</option>
@@ -188,6 +200,7 @@ export default function QuestionsClassic() {
 									  validate={composeValidators(required, mustBeNumber)}
 									  component="input"
 									  type="text"
+									  value=""
 									  placeholder="12000"
 									  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative border border-gray-400 bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 									/>
@@ -223,8 +236,8 @@ export default function QuestionsClassic() {
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
                                       <Field name="question-1" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                         <option></option>
-                                        <option value="1">particulier</option>
-                                        <option value="0">professionnel</option>
+                                        <option value="particulier" note="1">particulier</option>
+                                        <option value="professionnel" note="0">professionnel</option>
                                       </Field>
                                       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                         <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -243,9 +256,9 @@ export default function QuestionsClassic() {
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
                                       <Field name="question-2" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                         <option></option>
-                                        <option value="1">Immédiatement</option>
-                                        <option value="0">Dans un mois</option>
-                                        <option value="0">plus tard</option>
+                                        <option value="Immédiatement" note="1">Immédiatement</option>
+                                        <option value="Dans un mois" note="0">Dans un mois</option>
+                                        <option value="plus tard" note="0">plus tard</option>
                                       </Field>
                                       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                         <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -269,8 +282,8 @@ export default function QuestionsClassic() {
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
                                       <Field name="question-3" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                         <option></option>
-                                        <option value="1">non fumeur</option>
-                                        <option value="0">fumeur</option>
+                                        <option value="non fumeur" note="1">non fumeur</option>
+                                        <option value="fumeur" note="0">fumeur</option>
                                       </Field>
                                       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                         <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -289,8 +302,8 @@ export default function QuestionsClassic() {
 									<div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
                                       <Field name="question-4" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                         <option></option>
-                                        <option value="1">Oui &#xf164;</option>
-                                        <option value="0">Non &#xf165;</option>
+                                        <option value="Oui" note="1">Oui &#xf164;</option>
+                                        <option value="Non" note="0">Non &#xf165;</option>
                                       </Field>
                                       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                         <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -310,8 +323,8 @@ export default function QuestionsClassic() {
 								<div className="relative flex w-full flex-wrap items-stretch mb-3">
                                   <Field name="question-5" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                     <option></option>
-                                    <option  value="1">Changer de véhicule</option>
-                                    <option  value="1">Autre projet</option>
+                                    <option value="Changer de véhicule" note="1">Changer de véhicule</option>
+                                    <option value="Autre projet" note="0">Autre projet</option>
                                   </Field>
                                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                     <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -324,6 +337,7 @@ export default function QuestionsClassic() {
                                         name="question-6"
                                         component="input"
                                         type="text"
+										value=""
                                         placeholder="votre raison"
                                         className="px-3 py-3 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
                                     />
@@ -360,6 +374,7 @@ export default function QuestionsClassic() {
 									  validate={composeValidators(required, mustBeNumber)}
 									  component="input"
 									  type="text"
+									  value=""
 									  placeholder="12420"
 									  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white border border-gray-400 rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 									/>
@@ -383,8 +398,8 @@ export default function QuestionsClassic() {
 								  <div className="relative flex w-full flex-wrap items-stretch mb-3">
                                     <Field name="question-8" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                       <option></option>
-                                      <option value="1">1ère ou 2ème main</option>
-                                      <option value="0">3ème main ou plus</option>
+                                      <option value="1ère ou 2ème main" note="1">1ère ou 2ème main</option>
+                                      <option value="3ème main ou plus" note="0">3ème main ou plus</option>
                                     </Field>
                                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                       <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -402,10 +417,10 @@ export default function QuestionsClassic() {
 								   <div className="relative flex w-full flex-wrap items-stretch mb-3">
                                      <Field name="question-9" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                        <option></option>
-                                       <option value="1">Neuf</option>
-                                       <option value="1">Très bon état</option>
-									   <option value="1">Bon état</option>
-									   <option value="0">satisfaisant</option>
+                                       <option value="Neuf" note="1">Neuf</option>
+                                       <option value="Très bon état" note="1">Très bon état</option>
+									   <option value="Bon état" note="1">Bon état</option>
+									   <option value="satisfaisant" note="0">satisfaisant</option>
                                      </Field>
                                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                        <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -425,8 +440,8 @@ export default function QuestionsClassic() {
 								  <div className="relative flex w-full flex-wrap items-stretch mb-3">
                                     <Field name="question-10" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                       <option></option>
-                                      <option value="1">française</option>
-                                      <option value="0">étrangère</option>
+                                      <option value="FR" note="1">française</option>
+                                      <option value="0" note="0">étrangère</option>
                                     </Field>
                                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                       <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -465,7 +480,7 @@ export default function QuestionsClassic() {
 							  </h4>
 							  <CardPriceVehicule />
 							  <div className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600"><i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> ETAPE SUIVANTE </div>
-							  <p className="text-md leading-relaxed text-gray-500"> Telecharger 10 photos MAX pour publier votre annonce ( ficher jpg, png, gif ) </p>
+							  <p className="text-md leading-relaxed text-gray-500"> Telecharger 10 photos MAX pour publier votre annonce ( ficher jpg, png, gif ), Téléchargez des photos de votre voiture depuis l'extérieur, du tableau de bord avec le moteur allumé, de la console centrale etc </p>
 							  <ImageUpload />
 							  <div className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600"><i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> Publier votre annonce </div>
 							  <button

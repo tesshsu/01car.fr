@@ -100,8 +100,8 @@ export default function QuestionsPremier() {
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
                                               <Field name="question-11" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                   <option></option>
-                                                  <option value="1">Oui &#xf164;</option>
-                                                  <option value="0">Non &#xf165;</option>
+                                                  <option value="Oui" note="1">Oui &#xf164;</option>
+                                                  <option value="Non" note="0">Non &#xf165;</option>
                                               </Field>
                                               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                                   <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -119,8 +119,8 @@ export default function QuestionsPremier() {
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
                                               <Field name="question-12" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                   <option></option>
-                                                  <option value="1">Oui &#xf164;</option>
-                                                  <option value="0">Non &#xf165;</option>
+                                                  <option value="Oui" note="1">Oui &#xf164;</option>
+                                                  <option value="Non" note="0">Non &#xf165;</option>
                                               </Field>
                                               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                                   <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -140,8 +140,8 @@ export default function QuestionsPremier() {
                                             <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
                                                 <Field name="question-13" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                     <option></option>
-                                                    <option value="1">Non &#xf164;</option>
-                                                    <option value="0">Oui &#xf165;</option>
+                                                    <option value="Oui" note="1">Oui &#xf164;</option>
+                                                    <option value="Non" note="0">Non &#xf165;</option>
                                                 </Field>
                                                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                                     <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -163,8 +163,8 @@ export default function QuestionsPremier() {
                                             <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
                                                 <Field name="question-14" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                     <option></option>
-                                                    <option value="1">Oui &#xf164;</option>
-                                                    <option value="0">Non &#xf165;</option>
+                                                    <option value="Oui" note="1">Oui &#xf164;</option>
+                                                    <option value="Non" note="0">Non &#xf165;</option>
                                                 </Field>
                                                 <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                                     <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -183,8 +183,8 @@ export default function QuestionsPremier() {
                                            <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
                                                <Field name="question-15" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                    <option></option>
-                                                   <option value="1">Oui &#xf164;</option>
-                                                   <option value="0">Non &#xf165;</option>
+                                                   <option value="Oui" note="1">Oui &#xf164;</option>
+                                                   <option value="Non" note="0">Non &#xf165;</option>
                                                </Field>
                                                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                                    <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -224,8 +224,8 @@ export default function QuestionsPremier() {
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
                                               <Field name="question-16" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                   <option></option>
-                                                  <option value="1">Oui &#xf164;</option>
-                                                  <option value="0">Non &#xf165;</option>
+                                                  <option value="Oui" note="1">Oui &#xf164;</option>
+                                                  <option value="Non" note="0">Non &#xf165;</option>
                                               </Field>
                                               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                                   <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -243,8 +243,8 @@ export default function QuestionsPremier() {
                                           <div className="relative flex w-full flex-wrap items-stretch mb-3">
                                               <Field name="question-17" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                   <option></option>
-                                                  <option value="0">Moins de 5000km</option>
-                                                  <option value="1">Plus de 5000km</option>
+                                                  <option value="Moins de 5000km" note="0">Moins de 5000km</option>
+                                                  <option value="Plus de 5000km" note="1">Plus de 5000km</option>
                                               </Field>
                                               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                                   <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -264,8 +264,8 @@ export default function QuestionsPremier() {
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
                                               <Field name="question-18" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                   <option></option>
-                                                  <option value="1">Oui &#xf164;</option>
-                                                  <option value="0">Non &#xf165;</option>
+                                                  <option value="Oui" note="1">Oui &#xf164;</option>
+                                                  <option value="Non" note="0">Non &#xf165;</option>
                                               </Field>
                                               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                                   <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -289,8 +289,8 @@ export default function QuestionsPremier() {
                                            <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
                                                <Field name="question-19" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                    <option></option>
-                                                   <option value="1">Oui &#xf164;</option>
-                                                   <option value="0">Non &#xf165;</option>
+                                                   <option value="Oui" note="1">Oui &#xf164;</option>
+                                                   <option value="Non" note="0">Non &#xf165;</option>
                                                </Field>
                                                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                                    <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -298,7 +298,7 @@ export default function QuestionsPremier() {
                                                <Error name="question-19" />
                                            </div>
                                             <Condition when="question-19" is="1" className="mt-2">                                          
-												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre carte grise <span><NotificationDropdown /></span></p>                                               
+												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre carte grise. Attention : le numéro d'identification du véhicule (VIN) doit être clairement lisible. <span><NotificationDropdown /></span></p>                                               
 												<FileUpload />
                                             </Condition>
                                         </div>
@@ -313,8 +313,8 @@ export default function QuestionsPremier() {
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
                                               <Field name="question-20" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                   <option></option>
-                                                  <option value="1">Oui &#xf164;</option>
-                                                  <option value="0">Non &#xf165;</option>
+                                                  <option value="Oui" note="1">Oui &#xf164;</option>
+                                                  <option value="Non" note="0">Non &#xf165;</option>
                                               </Field>
                                               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                                   <i className="fas fa-angle-down text-2xl my-2"></i>
