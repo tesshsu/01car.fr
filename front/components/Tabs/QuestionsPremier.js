@@ -147,7 +147,7 @@ export default function QuestionsPremier() {
                                                     <i className="fas fa-angle-down text-2xl my-2"></i>
                                                 </div>
                                                 <Error name="question-13" />
-                                                <Condition when="question-13" is="0" className="mt-2">
+                                                <Condition when="question-13" is="Oui" className="mt-2">
                                                     <p className="text-md leading-relaxed text-gray-500"> Télécharger les défauts du véhicule  </p>
                                                     <ImageUpload />
                                                 </Condition>
@@ -191,7 +191,7 @@ export default function QuestionsPremier() {
                                                </div>
                                                <Error name="question-15" />
                                             </div>
-                                            <Condition when="question-15" is="1" className="mt-2">
+                                            <Condition when="question-15" is="Oui" className="mt-2">
 											  <p className="text-md leading-relaxed text-gray-500"> Telecharger votre contrôle technique <span><NotificationDropdown /></span></p>
                                               <FileUpload />											  
                                             </Condition>
@@ -272,10 +272,8 @@ export default function QuestionsPremier() {
                                               </div>
                                               <Error name="question-18" />
                                            </div>
-										   <Condition when="question-18" is="1" className="mt-2">
-												
-												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre facture d'achat <span><NotificationDropdown /></span> </p>
-												
+										   <Condition when="question-18" is="Oui" className="mt-2">												
+												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre facture d'achat <span><NotificationDropdown /></span> </p>												
 												<FileUpload />
                                            </Condition>
                                         </div>
@@ -297,7 +295,7 @@ export default function QuestionsPremier() {
                                                </div>
                                                <Error name="question-19" />
                                            </div>
-                                            <Condition when="question-19" is="1" className="mt-2">                                          
+                                            <Condition when="question-19" is="Oui" className="mt-2">                                          
 												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre carte grise. Attention : le numéro d'identification du véhicule (VIN) doit être clairement lisible. <span><NotificationDropdown /></span></p>                                               
 												<FileUpload />
                                             </Condition>
@@ -321,7 +319,7 @@ export default function QuestionsPremier() {
                                               </div>
                                               <Error name="question-20" />
                                            </div>
-										    <Condition when="question-20" is="1" className="mt-2">
+										    <Condition when="question-20" is="Oui" className="mt-2">
 												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre carnet d’entretien <span><NotificationDropdown /></span></p>
 												<FileUpload />
                                            </Condition>

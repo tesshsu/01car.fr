@@ -179,7 +179,7 @@ export default function Index() {
 						</button>
 					</div>
 					<div className="w-full align-center logoNoteConfiance">
-					  <button
+					    <button
 								  className="bg-orange-500 text-white active:bg-gray-700 border-dashed border-2 shadow-2xl-orange text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-xl outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
 								  type="button"
 								>
