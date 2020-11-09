@@ -3,35 +3,17 @@ import Link from "next/link";
 import { Form, Field } from 'react-final-form';
 import Auth from "layouts/Auth.js";
 import { FORM_ERROR } from 'final-form';
-//import { userService } from '_services';
+//import useLogguedUser from 'service/hooks/useLogguedUser';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
-const onSubmit = async values => {
-  await sleep(300)
-  //e.preventDefault();
-  //let user = {};
-  //user.email= this.state.email;
-  //user.password= this.state.password;
-  //const { dispatch } = this.props;
-  /*userService.login(user).then(
-        userInfo => {
-            dispatch(this.success(userInfo));			
-        },
-        error => {
-            
-        }
-    );*/
-  if (values.email !== 'test@gmail.com') {
-    return { email: 'Email inconnu' }
-  }
-  if (values.password !== '1234') {
-    return { [FORM_ERROR]: 'Mot de pass pas correct' }
-  }
-  window.alert('LOGIN SUCCESS!')
-}
-
 
 export default function Login() {
+  /*const {
+    login,
+    isAuthentificated,
+    logguedUser
+  } = useLogguedUser();*/
+  
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -65,7 +47,17 @@ export default function Login() {
                   <small>Se connecter avec </small>
                 </div>
                  <Form
-					  onSubmit={onSubmit}
+					  onSubmit={async ({ email, password }) => {
+						await sleep(300)
+						try {
+						  await login(
+							email.trim(),
+							password.trim()
+						  );
+						} catch (err) {
+						  Alert.alert('Authentification', 'Identifiants incorrects');
+						}
+					  }}
 					  validate={values => {
 						const errors = {}
 						if (!values.username) {
