@@ -1,8 +1,8 @@
 import axios from 'axios';
-import env from '../environment';
+import ENVS from '../environment';
 
 const client = axios.create({
-  baseURL: env.API_URL,
+  baseURL: ENVS.DEV.API_URL,
   timeout: 10000
 });
 

@@ -9,10 +9,6 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
 
 export default function Login() {
-  const onSubmit = async values => {
-	  await sleep(300)
-	  window.alert(JSON.stringify(values, 0, 2))
-	}
   const {
     login,
     isAuthentificated,
@@ -71,20 +67,10 @@ export default function Login() {
 							email.trim(),
 							password.trim()
 						  );
-						  Router.push("/vendre");
+						Router.push("/vendre");
 						} catch (err) {
-						  Alert.alert('Authentification', 'Identifiants incorrects');
+						  window.alert('Identifiants incorrects');
 						}
-					  }}
-					  validate={values => {
-						const errors = {}
-						if (!values.username) {
-						  errors.username = 'Required'
-						}
-						if (!values.password) {
-						  errors.password = 'Required'
-						}
-						return errors
 					  }}
 					  render={({ submitError, handleSubmit, form, submitting, pristine, values
 					  }) => (
@@ -101,6 +87,7 @@ export default function Login() {
 									<input
 									  {...input}
 									  type="email"
+									  value= {values.email}
 									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
 									  placeholder="Email"
 									/>
@@ -123,15 +110,14 @@ export default function Login() {
 									<input
 									  {...input}
 									  type="password"
+									  value= {values.password}
 									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
 									  placeholder="Mot de passe"
 									/>
 									{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
 								  </div>
 								)}
-                            </Field>
-						 
-
+                            </Field>						 
 						  <div className="text-center mt-6">
 							<button
 							  className="bg-orange-500 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"

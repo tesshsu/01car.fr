@@ -1,6 +1,5 @@
 import * as API from '../../api';
 import * as LOADING_OVERLAY_ACTIONS from './loadingOverlay';
-import ENV from '../../environment';
 
 export const LOGIN = 'logguedUser/LOGIN';
 export const LOGOUT = 'logguedUser/LOGOUT';
@@ -10,11 +9,9 @@ export const FETCH = 'logguedUser/FETCH';
 export function login({ email, password }) {
   return async (dispatch) => {
     dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Connexion...'));
-
     try {
       const { token, user: { id: userId } } = await API.Auth.login({ email, password });
       await localStorage.setItem('ACCESS_TOKEN', token);
-      await dispatch(fetch());
       await dispatch({ type: LOGIN });
     } catch (err) {
       await dispatch({ type: LOGIN });
