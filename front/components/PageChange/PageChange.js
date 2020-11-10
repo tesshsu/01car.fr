@@ -1,9 +1,5 @@
 import React from "react";
 
-// reactstrap components
-// import { Spinner } from "reactstrap";
-
-// core components
 
 export default function PageChange(props) {
   return (
@@ -21,7 +17,7 @@ export default function PageChange(props) {
           <i className="fas fa-circle-notch animate-spin text-white mx-auto text-6xl"></i>
         </div>
         <h4 className="text-lg font-medium text-white">
-          Loading page contents for: {props.path}
+          Chargement du contenu de la page pour : {props.path}
         </h4>
       </div>
     </div>

@@ -5,6 +5,7 @@ import { Form, Field } from 'react-final-form';
 import Auth from "layouts/Auth.js";
 import { FORM_ERROR } from 'final-form';
 import useLogguedUser from 'service/hooks/useLogguedUser';
+import Alert from 'components/Alerts/Alert';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
 
@@ -13,13 +14,7 @@ export default function Login() {
     login,
     isAuthentificated,
     logguedUser
-  } = useLogguedUser();
-  
-  useEffect(() => {
-    if (isAuthentificated && logguedUser) {
-      Router.push("/vendre");
-    }
-  }, [isAuthentificated, logguedUser]);
+  } = useLogguedUser();  
   
   
   return (
@@ -62,17 +57,19 @@ export default function Login() {
 					  onSubmit={async ({ email, password }) => {
 						await sleep(300)
 						
-						try {
-						  await login(
-							email.trim(),
-							password.trim()
-						  );
-						Router.push("/vendre");
+							try {
+							  await login(
+								email.trim(),
+								password.trim()
+							  );
+						  
+						    Router.push("/vendre");
 						} catch (err) {
-						  window.alert('Identifiants incorrects');
+						  //alert("Identifiants incorrects!");
+						  return <Alert text="identifian incorrects" />
 						}
-					  }}
-					  render={({ submitError, handleSubmit, form, submitting, pristine, values
+					  }}					 
+					  render={({ submitError, handleSubmit, form, submitting, pristine, values, invalid
 					  }) => (
 						<form onSubmit={handleSubmit}>
 						  <Field name="email" validate={required}>
@@ -91,7 +88,7 @@ export default function Login() {
 									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
 									  placeholder="Email"
 									/>
-									{(meta.error || meta.submitError) && meta.touched && (
+									{(meta.error || meta.submitError ) && meta.touched && (
 									  <span className="text-orange-500 text-sm">{meta.error || meta.submitError}</span>
 									)}
 								  </div>
@@ -114,19 +111,25 @@ export default function Login() {
 									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
 									  placeholder="Mot de passe"
 									/>
-									{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
+									{(meta.error || meta.submitError ) && meta.touched && (
+									  <span className="text-orange-500 text-sm">{meta.error || meta.submitError}</span>
+									)}
 								  </div>
 								)}
-                            </Field>						 
-						  <div className="text-center mt-6">
+                            </Field>
+							
+							<div className="text-center mt-6">
 							<button
 							  className="bg-orange-500 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
 							  type="submit"
-							  disabled={submitting}
+							  disabled={submitting || invalid}
 							>
 							  Connexion
 							</button>
 						  </div>
+                          {submitError || invalid && (
+							 <Alert text="identifian incorrects" />
+						  )}						  
 						</form>
 					)}
 				/>
@@ -134,6 +137,7 @@ export default function Login() {
             </div>
             <div className="flex flex-wrap mt-6 relative">
               <div className="w-1/2">
+			  
                 <Link href="/auth/forget_password">
 					<a
 					  href="#pablo"

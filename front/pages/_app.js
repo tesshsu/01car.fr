@@ -9,7 +9,6 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
 import * as reducers from '../service/reducers';
-
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/styles/tailwind.css";
 
@@ -19,6 +18,7 @@ const store = createStore(
   rootReducers,
   applyMiddleware(thunkMiddleware, logger)
 );
+
 
 Router.events.on("routeChangeStart", (url) => {
   console.log(`Loading: ${url}`);
@@ -61,7 +61,7 @@ export default class MyApp extends App {
           />
           <title>01car.fr</title>
         </Head>
-        <Provider store={store}>
+        <Provider store={store} >
 		<Layout>
           <Component {...pageProps} />
         </Layout>

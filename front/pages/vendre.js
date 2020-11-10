@@ -11,8 +11,9 @@ export default function Vendre() {
     <>
       <IndexNavbar fixed />
       <main className="vendre-page">
-        <section className="relative block h-350-px">
-          <div
+        
+		<section className="relative block h-350-px">
+		  <div
             className="absolute top-0 w-full h-full bg-center bg-cover"
             style={{
               backgroundImage:
@@ -24,6 +25,7 @@ export default function Vendre() {
               className="w-full h-full absolute opacity-50 bg-black"
             ></span>
           </div>
+		  
           <div
             className="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-16"
             style={{ transform: "translateZ(0)" }}
@@ -44,10 +46,14 @@ export default function Vendre() {
             </svg>
           </div>
         </section>
-        <section className="relative py-16 bg-gray-300">
-          <div className="container mx-auto px-4">
+		
+        <section className="relative py-16 bg-gray-300">          
+		  <div className="container mx-auto px-4">
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
-              <div className="px-6">
+              <h1 className="font-bold text-4xl text-orange-700 mt-4 text-center">
+				Répondez au questionnaire de confiance afin de vendre votre véhicule
+			  </h1>
+			  <div className="px-6">
                 <div className="flex flex-wrap justify-center">				
                   <div className="w-full lg:w-12/12 px-4 lg:order-1">				    
                     <div className="flex justify-center">
