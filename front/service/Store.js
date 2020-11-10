@@ -1,16 +1,24 @@
-import {createStore, applyMiddleware, compose} from 'redux';
-import {browserHistory, Router, Route, IndexRoute} from 'react-router';
-import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import reduxPromise from 'redux-promise';
+import { AsyncStorage } from 'react-native';
+
+import { persistCombineReducers } from 'redux-persist';
 
 import * as reducers from './reducers';
 
-const initial_state = {};
+const config = {
+  key: 'primary',
+  storage: AsyncStorage,
+  timeout: 0,
+};
 
-let middleware = applyMiddleware(routerMiddleware(browserHistory));
-        if (process.env.NODE_ENV !== 'production') {
-            middleware = compose(middleware, window.devToolsExtension && window.devToolsExtension());
-        }
-        const store   = createStore(reducers, initial_state, middleware);
-        const history = syncHistoryWithStore(browserHistory, store);
+const Store = createStore(
+  persistCombineReducers(config, reducers),
+  applyMiddleware(
+    thunk,
+    reduxPromise
+  )
+);
 
 export default Store;

@@ -30,8 +30,8 @@ export default function useLogguedUser() {
 
 
   return {
-    //isAuthentificated: logguedUser.isAuthentificated,
-    //logguedUser: logguedUser.user,
+    isAuthentificated: logguedUser.isAuthentificated,
+    logguedUser: logguedUser.user,
     login,
     register,
     signInUsingFacebook,

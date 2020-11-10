@@ -3,11 +3,22 @@ import ReactDOM from "react-dom";
 import App from "next/app";
 import Head from "next/head";
 import Router from "next/router";
-
+import { Provider } from 'react-redux';
 import PageChange from "components/PageChange/PageChange.js";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunkMiddleware from "redux-thunk";
+import { createLogger } from "redux-logger";
+import * as reducers from '../service/reducers';
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/styles/tailwind.css";
+
+const logger = createLogger();
+const rootReducers = combineReducers(reducers);
+const store = createStore(
+  rootReducers,
+  applyMiddleware(thunkMiddleware, logger)
+);
 
 Router.events.on("routeChangeStart", (url) => {
   console.log(`Loading: ${url}`);
@@ -50,9 +61,11 @@ export default class MyApp extends App {
           />
           <title>01car.fr</title>
         </Head>
-        <Layout>
+        <Provider store={store}>
+		<Layout>
           <Component {...pageProps} />
         </Layout>
+		</Provider>
       </React.Fragment>
     );
   }

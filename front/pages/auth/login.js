@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
+import Router from "next/router";
 import { Form, Field } from 'react-final-form';
 import Auth from "layouts/Auth.js";
 import { FORM_ERROR } from 'final-form';
-//import useLogguedUser from 'service/hooks/useLogguedUser';
+import useLogguedUser from 'service/hooks/useLogguedUser';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
 
 export default function Login() {
-  /*const {
+  const onSubmit = async values => {
+	  await sleep(300)
+	  window.alert(JSON.stringify(values, 0, 2))
+	}
+  const {
     login,
     isAuthentificated,
     logguedUser
-  } = useLogguedUser();*/
+  } = useLogguedUser();
+  
+  useEffect(() => {
+    if (isAuthentificated && logguedUser) {
+      Router.push("/vendre");
+    }
+  }, [isAuthentificated, logguedUser]);
+  
   
   return (
     <>
@@ -47,13 +59,19 @@ export default function Login() {
                   <small>Se connecter avec </small>
                 </div>
                  <Form
+					  initialValues={{
+						email: '',
+						password: ''
+					  }}
 					  onSubmit={async ({ email, password }) => {
 						await sleep(300)
+						
 						try {
 						  await login(
 							email.trim(),
 							password.trim()
 						  );
+						  Router.push("/vendre");
 						} catch (err) {
 						  Alert.alert('Authentification', 'Identifiants incorrects');
 						}
@@ -120,7 +138,7 @@ export default function Login() {
 							  type="submit"
 							  disabled={submitting}
 							>
-							  Sign In
+							  Connexion
 							</button>
 						  </div>
 						</form>
