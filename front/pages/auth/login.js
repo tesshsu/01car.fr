@@ -16,10 +16,15 @@ export default function Login() {
     logguedUser
   } = useLogguedUser();  
   
+  useEffect(() => {
+    if (isAuthentificated && logguedUser) {
+      Router.push("/vendre");
+    }
+  }, [isAuthentificated, logguedUser]);
   
   return (
     <>
-      <div className="container mx-auto px-4 h-full">
+      <div className="container mx-auto px-4 mt-16 h-full">
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-4/12 px-4">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
@@ -65,8 +70,8 @@ export default function Login() {
 						  
 						    Router.push("/vendre");
 						} catch (err) {
-						  //alert("Identifiants incorrects!");
-						  return <Alert text="identifian incorrects" />
+						  alert("Identifiants incorrects!");
+						  //return <Alert text="identifian incorrects" />
 						}
 					  }}					 
 					  render={({ submitError, handleSubmit, form, submitting, pristine, values, invalid
@@ -161,5 +166,6 @@ export default function Login() {
     </>
   );
 }
+
 
 Login.layout = Auth;
