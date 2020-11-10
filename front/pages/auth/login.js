@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
+import Router from "next/router";
 import { Form, Field } from 'react-final-form';
 import Auth from "layouts/Auth.js";
 import { FORM_ERROR } from 'final-form';
-//import useLogguedUser from 'service/hooks/useLogguedUser';
+import useLogguedUser from 'service/hooks/useLogguedUser';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
 
 export default function Login() {
-  /*const {
+  const {
     login,
     isAuthentificated,
     logguedUser
-  } = useLogguedUser();*/
+  } = useLogguedUser();
+  
+  useEffect(() => {
+    if (isAuthentificated && logguedUser) {
+      Router.push("/vendre");
+    }
+  }, [isAuthentificated, logguedUser]);
+  
   
   return (
     <>
@@ -47,26 +55,22 @@ export default function Login() {
                   <small>Se connecter avec </small>
                 </div>
                  <Form
+					  initialValues={{
+						email: '',
+						password: ''
+					  }}
 					  onSubmit={async ({ email, password }) => {
 						await sleep(300)
+						
 						try {
 						  await login(
 							email.trim(),
 							password.trim()
 						  );
+						Router.push("/vendre");
 						} catch (err) {
-						  Alert.alert('Authentification', 'Identifiants incorrects');
+						  window.alert('Identifiants incorrects');
 						}
-					  }}
-					  validate={values => {
-						const errors = {}
-						if (!values.username) {
-						  errors.username = 'Required'
-						}
-						if (!values.password) {
-						  errors.password = 'Required'
-						}
-						return errors
 					  }}
 					  render={({ submitError, handleSubmit, form, submitting, pristine, values
 					  }) => (
@@ -83,6 +87,7 @@ export default function Login() {
 									<input
 									  {...input}
 									  type="email"
+									  value= {values.email}
 									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
 									  placeholder="Email"
 									/>
@@ -105,22 +110,21 @@ export default function Login() {
 									<input
 									  {...input}
 									  type="password"
+									  value= {values.password}
 									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
 									  placeholder="Mot de passe"
 									/>
 									{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
 								  </div>
 								)}
-                            </Field>
-						 
-
+                            </Field>						 
 						  <div className="text-center mt-6">
 							<button
 							  className="bg-orange-500 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
 							  type="submit"
 							  disabled={submitting}
 							>
-							  Sign In
+							  Connexion
 							</button>
 						  </div>
 						</form>
