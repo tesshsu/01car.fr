@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 // components
 
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
+import useLogguedUser from 'service/hooks/useLogguedUser';
+import Router from "next/router";
+
+const initialState = {
+  isAuthentificated: false
+};
 
 export default function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
+  
+  const {
+    isAuthentificated,
+	logguedUser
+  } = useLogguedUser();
+
+  useEffect(() => {
+    if (!isAuthentificated) {
+      Router.push("/auth/login");
+    }
+  }, [isAuthentificated]);
+  
+  
+  
   return (
     <>
       <nav className="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-white shadow">
@@ -97,7 +117,8 @@ export default function Navbar(props) {
                 </button>
               </li>
 			  
-			   <li className="flex items-center">
+			   <li className="flex items-center">			   
+			   {!isAuthentificated ? (
 				<Link href="/auth/login">
 				  <a
 					href="#"
@@ -108,8 +129,19 @@ export default function Navbar(props) {
 					<i className="text-orange-900 fas fa-user" />
 				  </a>
 				</Link>
-              </li>
-
+				) : (
+				<Link href="/auth/setting_user">
+				  <a
+					href="#"
+					className={
+					  "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
+					}
+				  >
+					<i className="text-orange-900 fas fa-address-card" />
+				  </a>
+				</Link>
+			   )}
+			   </li>
             </ul>
           </div>
         </div>

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Field } from 'react-final-form';
 import Auth from "layouts/Auth.js";
 import formatString from "format-string-by-pattern";
+import useLogguedUser from 'service/hooks/useLogguedUser';
+import Router from "next/router";
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
@@ -24,9 +26,28 @@ const onSubmit = async values => {
   
 }
 export default function Setting_user() {
+  const {
+    login,
+    isAuthentificated,
+    logguedUser,
+	logout
+  } = useLogguedUser();  
+  
+  
+  useEffect(() => {
+    if (!isAuthentificated) {
+      Router.push("/auth/login");
+    }
+  }, [isAuthentificated]);
+  
+  async function onSignOut() {
+    await logout();
+	Router.push("/auth/login");
+  }
+  
   return (
     <>
-      <div className="container mx-auto px-4 h-full">
+      <div className="container mx-auto px-4 mt-16 h-full">
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-6/12 px-4">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
@@ -73,7 +94,7 @@ export default function Setting_user() {
 
 						  <div className="text-center mt-6">
 							<button
-							  className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+							  className="bg-orange-500 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
 							  type="submit"
 							  disabled = {submitting}
 							>
@@ -83,6 +104,15 @@ export default function Setting_user() {
 						</form>
 					)}
 				/>
+				<div className="text-center mt-6">
+					<button
+						className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+						type="submit"
+						onClick = {onSignOut}
+					>
+						Me déconnecter
+					</button>
+				</div>
               </div>
             </div>
           </div>
