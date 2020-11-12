@@ -1,18 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Field } from 'react-final-form';
 import Auth from "layouts/Auth.js";
+import useLogguedUser from 'service/hooks/useLogguedUser';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
 const mustBeNumber = value => (isNaN(value) ? 'Must be a number' : undefined)
 const composeValidators = (...validators) => value =>
   validators.reduce((error, validator) => error || validator(value), undefined)
-const onSubmit = async values => {
-  await sleep(300)
-  window.alert(JSON.stringify(values, 0, 2))
-}
 
 export default function Register() {
+  const {
+	register,
+    isAuthentificated,
+    logguedUser
+  } = useLogguedUser();  
+  
+  useEffect(() => {
+    if (isAuthentificated && logguedUser) {
+      Router.push("/vendre");
+    }
+  }, [isAuthentificated, logguedUser]);
+  
+  const onSubmit =async (formValues)=>{
+	try {
+      let {
+        ...payload
+      } = formValues;
+
+      const data = { ...payload };
+      await register(data);
+    } catch (err) {
+      console.log(err.response);
+      if (err.response && err.response.status === 422) {
+        submitError({
+          email: 'Cet email est déjà utilisé'
+        });
+      } else {
+        alert('Impossible de créer le compte');
+      }
+    }
+  }
+  
   return (
     <>
       <div className="container mx-auto px-4 mt-16 h-full">
@@ -46,10 +75,35 @@ export default function Register() {
                   <small>Créez un compte avec</small>
                 </div>
                 <Form
+				  initialValues={{
+						name:'',
+						email: '',
+						password: '',
+						password_confirmation: ''
+					  }}
 				  onSubmit={onSubmit}
-				  render={({ handleSubmit, form, submitting, pristine, values }) => (
+				  render={({ submitError, handleSubmit, form, submitting, pristine, values, invalid }) => (
 						<form onSubmit={handleSubmit}>                 
-						    <Field name="email" validate={required}>
+						    <Field name="name" validate={required}>
+							    {({ input, meta }) => (
+								  <div className="relative w-full mb-3">
+									<label
+									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
+									  htmlFor="name"
+									>
+									  Votre nom ( ou votre identifiant )
+									</label>
+									<input
+									  {...input}
+									  type="text"
+									  value= {values.name}
+									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+									  placeholder="Votre nom ou prénom"
+									/>{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
+								  </div>
+								)}
+                            </Field>
+							<Field name="email" validate={required}>
 							    {({ input, meta }) => (
 								  <div className="relative w-full mb-3">
 									<label
@@ -61,6 +115,7 @@ export default function Register() {
 									<input
 									  {...input}
 									  type="email"
+									  value= {values.email}
 									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
 									  placeholder="Email"
 									/>{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
@@ -79,8 +134,28 @@ export default function Register() {
 									<input
 									  {...input}
 									  type="password"
+									  value= {values.password}
 									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
 									  placeholder="Mot de passe"
+									/>{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
+								  </div>
+								)}
+                            </Field>
+							<Field name="password_confirmation" validate={required}>
+							    {({ input, meta }) => (
+								  <div className="relative w-full mb-3">
+									<label
+									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
+									  htmlFor="password_confirmation"
+									>
+									  Confirmer Mot de passe
+									</label>
+									<input
+									  {...input}
+									  type="password"
+									  value= {values.password_confirmation}
+									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+									  placeholder="Mot de passe confirme"
 									/>{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
 								  </div>
 								)}

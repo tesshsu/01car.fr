@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Link from "next/link";
 // components
 
@@ -20,7 +20,7 @@ export default function Navbar(props) {
 
   useEffect(() => {
     if (!isAuthentificated) {
-      Router.push("/auth/login");
+      //Router.push("/auth/login");
     }
   }, [isAuthentificated]);
   

@@ -5,9 +5,14 @@ import { Form, Field } from 'react-final-form';
 import Auth from "layouts/Auth.js";
 import { FORM_ERROR } from 'final-form';
 import useLogguedUser from 'service/hooks/useLogguedUser';
-import Alert from 'components/Alerts/Alert';
+
+
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
+const patternEmail= new RegExp("^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
+const matchEmail = value => (!patternEmail.test(value) ? "Il faut votre email" : undefined);
+const composeValidators = (...validators) => value =>
+  validators.reduce((error, validator) => error || validator(value), undefined)
 
 export default function Login() {
   const {
@@ -77,7 +82,7 @@ export default function Login() {
 					  render={({ submitError, handleSubmit, form, submitting, pristine, values, invalid
 					  }) => (
 						<form onSubmit={handleSubmit}>
-						  <Field name="email" validate={required}>
+						  <Field name="email" validate={composeValidators(required, matchEmail)}>
 							    {({ input, meta }) => (
 								  <div className="relative w-full mb-3">
 									<label
