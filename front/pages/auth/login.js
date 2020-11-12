@@ -5,12 +5,10 @@ import { Form, Field } from 'react-final-form';
 import Auth from "layouts/Auth.js";
 import { FORM_ERROR } from 'final-form';
 import useLogguedUser from 'service/hooks/useLogguedUser';
-
+import Alert from 'components/Alerts/Alert';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
-const patternEmail= new RegExp("^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$");
-const matchEmail = value => (!patternEmail.test(value) ? "Il faut votre email" : undefined);
 const composeValidators = (...validators) => value =>
   validators.reduce((error, validator) => error || validator(value), undefined)
 
@@ -65,8 +63,7 @@ export default function Login() {
 						password: ''
 					  }}
 					  onSubmit={async ({ email, password }) => {
-						await sleep(300)
-						
+						await sleep(300)						
 							try {
 							  await login(
 								email.trim(),
@@ -76,13 +73,12 @@ export default function Login() {
 						    Router.push("/vendre");
 						} catch (err) {
 						  alert("Identifiants incorrects!");
-						  //return <Alert text="identifian incorrects" />
 						}
 					  }}					 
 					  render={({ submitError, handleSubmit, form, submitting, pristine, values, invalid
 					  }) => (
 						<form onSubmit={handleSubmit}>
-						  <Field name="email" validate={composeValidators(required, matchEmail)}>
+						  <Field name="email" validate={required}>
 							    {({ input, meta }) => (
 								  <div className="relative w-full mb-3">
 									<label
