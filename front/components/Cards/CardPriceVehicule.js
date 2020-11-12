@@ -15,7 +15,8 @@ export default function CardPriceVehicule({
   return (
     <>
 	  <div className="min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg mt-4">      
-          <div className="w-full flex-1">
+          <h1 className="font-bold text-4xl text-orange-500"> Prix qualifié par programmation </h1>
+		  <div className="w-full flex-1">
 				<span className="text-2xl block p-3 text-gray-800 font-bold rounded"><i className="fas fa-tag"></i> {statSubtitleCote} : </span>
 				<span className="font-semibold text-4xl text-orange-500">
                 {statCote} €
@@ -52,12 +53,8 @@ CardPriceVehicule.propTypes = {
   statSubtitlePro: PropTypes.string,
   statCotePro: PropTypes.string,
   statArrow: PropTypes.oneOf(["up", "down"]),
-  // can be any of the text color utilities
-  // from tailwindcss
   statPercentColor: PropTypes.string,
   statDescripiron: PropTypes.string,
   statIconName: PropTypes.string,
-  // can be any of the background color utilities
-  // from tailwindcss
   statIconColor: PropTypes.string,
 };
