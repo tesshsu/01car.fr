@@ -481,16 +481,16 @@ export default function QuestionsClassic() {
 						</div>
 						<div className={openTab === 4 ? "block" : "hidden"} id="link4">
 							<div className="container mx-auto text-center">
+							  <h4 className="text-4xl font-semibold">
+								  <i className="fas fa-poll animate-bounce"></i> RESULTATS : 1ere NOTE DE CONFIANCE SUR 20
+							  </h4>
 							  <h4 className="text-2xl font-semibold">
-								  RESULTATS : 1ere NOTE DE CONFIANCE SUR 20
+								  <span className="noteTotal text-orange-500">7</span>/20 Annonce offre GRATUITE
 							  </h4>
-							  <h4 className="text-xl font-semibold">
-								  <span className="noteTotal">7</span>/20 Annonce offre GRATUITE
+							  <h4 className="text-3xl font-semibold">
+								  VOTRE PRIX DE VENTE <span className="marqueModel" value="">Suzuki SWIFT</span> - <span className="dt_entry_service" value="">2012</span> : <span className="price" value=""> 5670 </span> € 
 							  </h4>
-							  <h4 className="text-xl font-semibold">
-								  Prix de vente <span className="marqueModel">Suzuki SWIFT</span> - <span className="dt_entry_service">2012</span>
-							  </h4>
-							  <CardPriceVehicule />
+							  <p className="notifyForPrice text-md leading-relaxed text-gray-500 text-left"> <i className="fas fa-flag-checkered animate-bounce"></i> Attention votre prix de vente pour annonce n'ont pas inscrits dans les colonnes de la cote qui sont issus de modèles statistiques éprouvés et élaborés par nos ingénieurs et experts automobiles.Calculez vous-même la cote personnalisée de votre véhicule avec <Link href="/prix">notre abonnement Premium</Link> </p>
 							  <div className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600"><i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> ETAPE SUIVANTE </div>
 							  <p className="text-md leading-relaxed text-gray-500"> Telecharger 10 photos MAX pour publier votre annonce ( ficher jpg, png, gif ), Téléchargez des photos de votre voiture depuis l'extérieur, du tableau de bord avec le moteur allumé, de la console centrale etc </p>
 							  <div className="demoPhotos flex justify-center">

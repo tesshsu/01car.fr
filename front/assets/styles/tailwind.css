@@ -3989,6 +3989,10 @@ video {
     border: 1px solid #d0dbe4;
     border-radius: 5px;
 }
+.vendre-page .notifyForPrice a{
+	color: #ed8936;
+	text-decoration: underline;
+}
 .ImagelistPart .image-item__btn-wrapper{
 	text-align: center;
 }
