@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useEffect, useState} from 'react';
 import Link from "next/link";
+import Router from "next/router";
 import CardPriceVehicule from "components/Cards/CardPriceVehicule.js";
 import QuestionsOptions from "components/Tabs/QuestionsOptions.js";
 import FileUpload from "components/Tabs/FileUpload.js";
 import ImageUpload from "components/Tabs/ImageUpload.js";
 import { Form, Field } from 'react-final-form';
+import useLogguedUser from 'service/hooks/useLogguedUser';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'champs obligatoire')
@@ -39,6 +41,16 @@ const formatDate = value => {
 
 export default function QuestionsClassic() {
   const [openTab, setOpenTab] = React.useState(1);
+   const {
+    isAuthentificated,
+    logguedUser
+  } = useLogguedUser();  
+  
+  useEffect(() => {
+    if (isAuthentificated && logguedUser) {
+      //Router.push("/auth/login");
+    }
+  }, [isAuthentificated, logguedUser]);
   return (
     <>
       <div className="flex flex-wrap">
@@ -506,14 +518,27 @@ export default function QuestionsClassic() {
 							  </div>
 							  <ImageUpload />
 							  <div className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600"><i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> Publier votre annonce </div>
-							  <button
+                              {!isAuthentificated ? (
+								<Link href="/auth/login">
+								  <a
+									href="#"
+									className={
+									  "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
+									}
+								  >
+									<i className="text-orange-900 fas fa-user" /> Connecxion pour publier
+								  </a>
+								</Link>
+								) : (
+								<button
 										className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
 										type="button"
                                         type="submit"
                                         disabled={submitting}
 									  >
 										<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> PUBLIER
-							  </button>
+							    </button>
+							   )}
 							   <h4 className="text-xl font-semibold">
 								  OU
 							  </h4>
