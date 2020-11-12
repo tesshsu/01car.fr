@@ -6,7 +6,7 @@ const Alert = (props) => {
     <>
       {showAlert ? (
         <div
-          className="text-orange-500 px-6 py-4 border-0 rounded relative bg-white"
+          className="text-orange-500 px-6 py-4 border border-gray-400 p-3 rounded relative bg-white animate-bounce"
         >
           <span className="text-xl inline-block align-middle">
             <i className="fas fa-exclamation-triangle"></i>

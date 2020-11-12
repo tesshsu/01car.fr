@@ -353,10 +353,10 @@ export default function QuestionsPremier() {
                                           src={require("assets/img/qualite_logo.png")}
                                           className="w-full align-center togBadge animate-ping"
                                       />
-                                      <h4 className="text-2xl font-semibold">
+                                      <h4 className="text-4xl font-semibold">
                                           RESULTATS : NOTE DE CONFIANCE FINALE
                                       </h4>
-                                      <h4 className="text-xl font-semibold">
+                                      <h4 className="text-2xl font-semibold">
                                           19/20 Annonce payante pour une vente plus fiable et en toute sécurité
                                       </h4>
                                       <p className="text-lg font-semibold">
@@ -365,8 +365,8 @@ export default function QuestionsPremier() {
                                       <p className="text-lg font-semibold">
                                           Notre équipe d’experts vérifie le contenu des éléments transmis par le vendeur afin de vous garantir la qualité des données
                                       </p>
-                                      <h4 className="text-xl font-semibold">
-                                          Prix de vente Suzuki SWIFT - 2012
+                                      <h4 className="text-2xl font-semibold">
+                                          Prix de vente <span className="marqueModel" value="">Suzuki SWIFT</span> - <span className="dt_entry_service" value="">2012</span>
                                       </h4>
                                       <CardPriceVehicule />
                                       <div className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600"><i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> ETAPE FINALE ET PUBLICATION </div>
