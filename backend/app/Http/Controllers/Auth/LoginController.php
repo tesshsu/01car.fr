@@ -31,7 +31,7 @@ class LoginController extends Controller
         if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
             $user = Auth::user();
 
-            $user = User::with( 'roles', 'roles.permissions')->find($user->id);
+            $user = User::find($user->id);
             $answer['token'] =  $user->createToken('MyApp')-> accessToken;
             $answer['user'] = new UserResource($user);
             return response()->json($answer, $this->successStatus);
@@ -62,6 +62,6 @@ class LoginController extends Controller
         $user = User::create($input);
         $success['token'] =  $user->createToken('MyApp')-> accessToken;
         $success['name'] =  $user->name;
-        return response()->json(['success'=>$success], $this-> successStatus);
+        return response()->json(['success'=> $success], $this->successStatus);
     }
 }

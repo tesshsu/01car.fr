@@ -32,7 +32,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'phone'
+        'phone',
+        'admin'
     ];
 
     /**
@@ -54,17 +55,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // custom function used for relationshisp
-    // user can have many roles
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class, 'users_roles');
-    }
-
-
     public function isAdminUser()
     {
-        return true;
+        return $this->admin;
     }
 
 

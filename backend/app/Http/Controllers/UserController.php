@@ -32,16 +32,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $usersReq = User::with( 'roles');
-
-        $currentUser = Auth::user();
-        if(!$currentUser->hasPermissions(Permission::USER_VIEW)){
-            return response()->json(['error'=>'Unauthorised'], 403);
-        } else if( !$currentUser->hasPermissions(Permission::COMPANY_VIEW_OTHER) ){
-            $usersReq->where('company_id', $currentUser->company_id);
-        }
-
-        $users = $usersReq->get();
+        $users = User::all();
         return response()->json( $users);
     }
 
@@ -53,10 +44,6 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        if(!Auth::user()->hasPermissions(Permission::USER_CREATE)){
-            return response()->json(['error'=>'Unauthorised'], 403);
-        }
-
         $reqUser = (object)$request->json()->all();
 
         // Validate
@@ -68,7 +55,6 @@ class UserController extends Controller
         // Create entity
         $newUser = new User;
         $this->updateUserFields($newUser, $reqUser);
-        $newUser->company_id = $reqUser->company_id;
         $newUser->password = isset($reqUser->password) ? bcrypt($reqUser->password) : bcrypt('password');
 
         $newUser->save();
@@ -83,12 +69,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        if(!Auth::user()->hasPermissions(Permission::USER_VIEW)){
-            return response()->json(['error'=>'Unauthorised'], 403);
-        }
         return $this->renderJson($id);
     }
-
 
 
     /**
@@ -101,11 +83,6 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $reqUser = (object)$request->json()->all();
-
-        $currentUser = Auth::user();
-        if (!$currentUser->hasPermissions(Permission::USER_EDIT)) {
-            return response()->json(['error' => 'Unauthorised'], 403);
-        }
 
         // check that id are the same
         if ($reqUser->id != $user->id) {
@@ -135,9 +112,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $currentUser = Auth::user();
-        if (!$currentUser->hasPermissions(Permission::USER_DELETE)
-            || ($currentUser->id == $user->id)
-        )  {
+        if ( $currentUser->id == $user->id)  {
             return response()->json(['error' => 'Unauthorised'], 403);
         }
         $user->delete();
@@ -154,9 +129,6 @@ class UserController extends Controller
             ],
             'password' => 'max:' . User::fieldsSizeMax('password'),
             'phone' => 'max:' . User::fieldsSizeMax('phone'),
-            'mobile' => 'max:' . User::fieldsSizeMax('mobile'),
-            'fax' => 'max:' . User::fieldsSizeMax('fax'),
-            'lineID' => 'max:' . User::fieldsSizeMax('lineID')
         ]);
 
         return $validator;
@@ -173,7 +145,7 @@ class UserController extends Controller
 
     private function renderJson($id)
     {
-        $user = User::with('roles', 'roles.permissions')->find($id);
+        $user = User::find($id);
         return response()->json( new UserResource($user));
     }
 }

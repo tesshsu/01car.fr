@@ -172,7 +172,7 @@ php artisan migrate
 
 php artisan make:seeder UsersTableSeeder
 
-../tools/composer.phar dump-autoload
+../tools/composer.phar dump-autoload 
 
 php artisan db:seed
 
