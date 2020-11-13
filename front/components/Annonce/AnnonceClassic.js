@@ -1,11 +1,16 @@
-import React from "react";
+import React, {useEffect, useState} from 'react';
 import Link from "next/link";
+import useLogguedUser from 'service/hooks/useLogguedUser';
+import Router from "next/router";
+import Alert from 'components/Alerts/Alert';
+import FavorisButton from 'components/Favoris/FavorisButton';
 const annonces = [
   { brand: "RENAULT", model: "GRAND SCENIC", generation: "IV", year: "2012", km:"82000", nc: "14", price:"10 700", fuel: "Essence", transmission: "Manuelle" },
   { brand: "RENAULT", model: "CAPTUR", generation: "V", year: "2015", km:"92000", nc: "12", price:"12 700", fuel: "Essence", transmission: "Manuelle" },
   { brand: "DACIA", model: "DUSTER", generation: "IV", year: "2012", km:"62000", nc: "13", price:"10 700", fuel: "Essence", transmission: "Manuelle" }
 ];
 export default function AnnonceClassic() {
+  
   return (
     <>
         {annonces.map(annonce => (
@@ -18,13 +23,8 @@ export default function AnnonceClassic() {
 					  />
 					<div className="w-full px-4 py-2 flex-1">				
 						  <h4 className="font-bold text-lg text-orange-700">
-						  {annonce.brand} - {annonce.model} {annonce.generation}
-							  <button
-									className="bg-gray-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none ml-2 mb-1"
-									type="button"
-								>
-								  <i className="far fa-heart"></i>
-								</button>
+						  {annonce.brand} - {annonce.model} {annonce.generation}							    
+						   <FavorisButton />								
 						  </h4>
 						  <p className="text-md leading-relaxed text-gray-500">
 							{annonce.year} / <span>{annonce.km}</span> KM

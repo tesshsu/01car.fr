@@ -139,6 +139,7 @@ export default function Login() {
 						</form>
 					)}
 				/>
+				<p className="notifyForLogin text-md leading-relaxed text-gray-600 text-left">  La Connexion qui vous permet dedéposer et gérer vos annonces. Ajouter les annonces aux favoris qui vous intéressent </p>
               </div>
             </div>
             <div className="flex flex-wrap mt-6 relative">

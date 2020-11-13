@@ -41,16 +41,28 @@ const formatDate = value => {
 
 export default function QuestionsClassic() {
   const [openTab, setOpenTab] = React.useState(1);
-   const {
+  let [tokken,settokken]=useState(null);
+  const {
     isAuthentificated,
     logguedUser
   } = useLogguedUser();  
   
   useEffect(() => {
     if (isAuthentificated && logguedUser) {
-      //Router.push("/auth/login");
+        try{
+			const getTokken=async ()=>{
+              const tok= await localStorage.getItem('ACCESS_TOKEN');
+			  if(tok){
+				settokken(tok);
+			  }
+			}
+			getTokken();
+		}catch(err){
+			console.log(err);
+        }
     }
   }, [isAuthentificated, logguedUser]);
+  
   return (
     <>
       <div className="flex flex-wrap">
@@ -518,7 +530,7 @@ export default function QuestionsClassic() {
 							  </div>
 							  <ImageUpload />
 							  <div className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600"><i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> Publier votre annonce </div>
-                              {!isAuthentificated ? (
+                              {!isAuthentificated || (tokken = null) ? (
 								<Link href="/auth/login">
 								  <a
 									href="#"

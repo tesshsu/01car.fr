@@ -676,6 +676,12 @@ video {
   .marqueBlock span{
 	  font-size: 14px;
   }
+  .socialBlock{
+    right: 0;
+	top: 329px !important;
+	padding-top: 0!important;
+	padding-bottom: 0.5rem!important;
+  }
   .demoPhotos{
 	  display: block !important;
   }
@@ -3967,6 +3973,13 @@ video {
 .marqueBlock{
 	position: absolute;
     top: 259px;
+}
+.socialBlock{
+	position: absolute;
+    top: 320px;
+}
+.socialBlock span{
+	margin-left: 5px;
 }
 .annoceSlider .sliderImg{
 	width: 55rem;
