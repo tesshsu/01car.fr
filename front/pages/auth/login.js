@@ -70,7 +70,7 @@ export default function Login() {
 								password.trim()
 							  );
 						  
-						    Router.push("/vendre");
+						    Router.back();
 						} catch (err) {
 						  alert("Identifiants incorrects!");
 						}

@@ -1,12 +1,36 @@
-import React from "react";
+import React, {useEffect, useState} from 'react';
 import Link from "next/link";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import QuestionsClassic from "components/Tabs/QuestionsClassic.js";
 import QuestionsPremier from "components/Tabs/QuestionsPremier.js";
 import PubContent from "layouts/PubContent.js";
+import useLogguedUser from 'service/hooks/useLogguedUser';
+import Router from "next/router";
 
 export default function Vendre() {
+  const {
+    isAuthentificated,
+    logguedUser
+  } = useLogguedUser();   
+  
+  let [tokken,settokken]=useState(null);
+  
+  useEffect(() => {
+    if (isAuthentificated && logguedUser) {
+        try{
+			const getTokken=async ()=>{
+              const tok= await localStorage.getItem('ACCESS_TOKEN');
+			  if(tok){
+				settokken(tok);
+			  }
+			}
+			getTokken();
+		}catch(err){
+			console.log(err);
+        }
+    }
+  }, [isAuthentificated, logguedUser]);
   return (
     <>
       <IndexNavbar fixed />
@@ -78,7 +102,10 @@ export default function Vendre() {
                     </div>
                   </div>
                 </div>
-				<QuestionsClassic transparent />
+				{!isAuthentificated || (tokken = null) ? (
+				  <QuestionsClassic /> ) : (
+				  <QuestionsPremier /> )
+				}
               </div>
             </div>
           </div>

@@ -97,9 +97,8 @@ export function signInUsingFacebook() {
   };
 }
 
-export function logout() {
+export function logout(id) {
   return async (dispatch, getState) => {
-    //const { user: { id: userId } } = getState().logguedUser;
     await localStorage.removeItem('ACCESS_TOKEN');
     await dispatch({ type: LOGOUT });
   };
