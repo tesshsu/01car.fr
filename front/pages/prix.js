@@ -190,7 +190,7 @@ export default function Prix() {
 							  className="bg-orange-500 text-white active:bg-gray-700 uppercase px-6 py-4 rounded shadow hover\:shadow-md:hover outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 hover:-mt-2 ease-linear transition-all duration-150"
 							  type="button"
 							>
-							  <Link href="/vendre_premium">
+							  <Link href="/vendre">
 								  <a
 									href="#pablo"
 									className={

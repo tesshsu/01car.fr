@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import Link from "next/link";
 import useLogguedUser from 'service/hooks/useLogguedUser';
 import Router from "next/router";
-import Alert from 'components/Alerts/Alert';
 
 
 export default function FavorisButton() {
@@ -31,6 +30,10 @@ export default function FavorisButton() {
   
   const [isClick, setIsClick] = React.useState(false);
   
+  const style = {
+    color: isClick ? '#ed8936' : '#fff',
+  }
+  
   const onClickFavoris = (e) => {
     e.preventDefault()
     setIsClick(true)
@@ -48,9 +51,9 @@ export default function FavorisButton() {
 				type="button"
 				onClick={!isAuthentificated || (tokken = null) ? handleClickToLogin : onClickFavoris}
 		>
-		  <i className="far fa-heart"></i>
+		  <i className="far fa-heart" style={style}></i>
 		</button>
-        { isClick ? <Alert text=" ajoutées à vos favoris" /> : null }
+        { isClick ? <span className="text-xs text-gray-500"> Ajoutées</span> : null }
     </>
   );
 }
