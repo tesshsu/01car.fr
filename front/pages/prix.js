@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-
+import MondalContact from "components/Mondal/MondalContact.js";
 // components
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
@@ -186,21 +186,7 @@ export default function Prix() {
 					  </li>
 					</ul>
 					<div class="mt-8 text-center my-4">
-					  <button
-							  className="bg-orange-500 text-white active:bg-gray-700 uppercase px-6 py-4 rounded shadow hover\:shadow-md:hover outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 hover:-mt-2 ease-linear transition-all duration-150"
-							  type="button"
-							>
-							  <Link href="/vendre">
-								  <a
-									href="#pablo"
-									className={
-									  "premiumButton text-lg py-1 px-4 font-normal block font-bold w-full whitespace-no-wrap bg-transparent text-white-500"
-									}
-								  >
-									<i className="fas fa-thumbs-up"></i> Vendre votre voiture en tête de liste
-								  </a>
-							  </Link>
-					  </button>
+					  <MondalContact />
 					</div>
 				  </div>
               </div>
