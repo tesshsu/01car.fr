@@ -192,6 +192,8 @@ php artisan passport:install
 ```
 ```
 php artisan passport:client --personal
+
+php artisan migrate:fresh --seed
 ```
 
 ## Passing The Access Token
@@ -206,7 +208,13 @@ $response = $client->request('GET', '/api/user', [
 ]);
 
 
+# server
 
+```
+/opt/plesk/php/7.3/bin/php artisan migrate:fresh --seed
+
+/opt/plesk/php/7.3/bin/php artisan passport:client --personal
+```
 
 
 
