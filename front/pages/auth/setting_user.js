@@ -30,7 +30,8 @@ export default function Setting_user() {
     login,
     isAuthentificated,
     logguedUser,
-	logout
+	logout,
+	udate
   } = useLogguedUser();  
   
   
@@ -39,6 +40,26 @@ export default function Setting_user() {
       Router.push("/auth/login");
     }
   }, [isAuthentificated]);
+  
+  const onSubmit = async (values)=>{
+	try {
+      let {
+        ...payload
+      } = values;
+
+      const data = { ...payload };
+      await update(data);
+    } catch (err) {
+      console.log(err.response);
+      if (err.response && err.response.status === 422) {
+        submitError({
+          email: 'Cet email est déjà utilisé'
+        });
+      } else {
+        alert('Impossible de créer le compte');
+      }
+    }
+  }
   
   async function onSignOut() {
     await logout();

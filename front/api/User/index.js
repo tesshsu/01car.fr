@@ -8,6 +8,11 @@ export function me() {
 
 export function getUser(id) {
   return client
-    .get(`users/${id}`)
+    .get(`profil/${id}`)
     .then(({ data }) => data);
+}
+
+export async function updateprofil(id, payload) {
+  return client
+    .put(`profil/${id}`, payload);
 }

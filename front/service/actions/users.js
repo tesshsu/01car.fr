@@ -1,7 +1,6 @@
 import * as API from '../../Api';
 import { useCallback } from 'react';
 
-export const SET_USERS = 'users/SET_USERS';
 export const UPDATE_USER = 'users/UPDATE_USER';
 export const FETCH_USER = 'users/FETCH_USER'
 
@@ -23,20 +22,21 @@ export function fetchUser(id) {
   };
 }
 
-export function setUsers(users = {}) {
-  return {
-    type: SET_USERS,
-    payload: {
-      users
-    }
-  };
-}
+export function updateUser(id) {
+   return async (dispatch, getState) => {
+    const { user } = getState().logguedUser;
 
-export function updateUser(user) {
-  return {
-    type: UPDATE_USER,
-    payload: {
-      user
+    try {
+      await API.User.updateprofil(id, payload);
+      dispatch({
+        type: UPDATE_USER,
+        payload: {
+          user
+        }
+      });
+    } catch (err) {
+      console.warn(err);
+      throw err;
     }
   };
 }

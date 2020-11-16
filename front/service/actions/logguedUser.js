@@ -104,27 +104,6 @@ export function logout(id) {
   };
 }
 
-/*export function updateSettings(payload) {
-  return async (dispatch, getState) => {
-    const { user } = getState().logguedUser;
-
-    try {
-      await API.User.updateSettings(user.id, payload);
-      user.settings = payload;
-      dispatch(update(user));
-    } catch (err) {
-      console.warn(err);
-      throw err;
-    }
-  };
-}
-
-const updateGlobalSettings = useCallback(
-    settings => dispatch(LOGGUED_USER_ACTIONS.updateSettings(settings)),
-    [dispatch]
-  );
-*/
-
 export function update(user) {
   return {
     type: UPDATE,
