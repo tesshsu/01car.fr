@@ -1,13 +1,34 @@
-import React from "react";
+import React, {useEffect, useState} from 'react';
 import Link from "next/link";
-import MondalContact from "components/Mondal/MondalContact.js";
-// components
-
+import ModalPayment from "components/Mondal/ModalPayment.js";
+import useLogguedUser from 'service/hooks/useLogguedUser';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import PubContent from "layouts/PubContent.js";
 
 export default function Prix() {
+   const {
+    isAuthentificated,
+    logguedUser
+  } = useLogguedUser();   
+  
+  let [tokken,settokken]=useState(null);
+  
+  useEffect(() => {
+    if (isAuthentificated && logguedUser) {
+        try{
+			const getTokken=async ()=>{
+              const tok= await localStorage.getItem('ACCESS_TOKEN');
+			  if(tok){
+				settokken(tok);
+			  }
+			}
+			getTokken();
+		}catch(err){
+			console.log(err);
+        }
+    }
+  }, [isAuthentificated, logguedUser]);
   return (
     <>
       <IndexNavbar fixed />
@@ -185,8 +206,27 @@ export default function Prix() {
 						</p>
 					  </li>
 					</ul>
-					<div class="mt-8 text-center my-4">
-					  <MondalContact />
+					<div class="ProductBlock mt-8 text-center my-4">
+					  {!isAuthentificated || (tokken = null) ? (
+					       <button
+							  className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+							  type="button"
+							>
+							  <Link href="/auth/login">
+								  <a
+									href="#pablo"
+									className={
+									  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
+									}
+								  >
+									<i class="far fa-laugh mr-1 animate-spin"></i> Vendre votre véhicule sur Top list
+								  </a>
+							  </Link>
+					  </button>
+					     ) : (
+					       <ModalPayment />
+						 )
+					  }
 					</div>
 				  </div>
               </div>

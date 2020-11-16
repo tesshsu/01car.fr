@@ -1,93 +1,77 @@
-import React from "react";
-import ContactVendeur from "components/Tabs/ContactVendeur.js";
-import Link from "next/link";
+import React, { useState, useEffect } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import ReactDOM from 'react-dom';
 
-export default function ModalContact() {
-  const [showModal, setShowModal] = React.useState(false);
-  const [openTab, setOpenTab] = React.useState(1);
-  return (
-    <>
-      <button
-        className="bg-orange-500 text-white active:bg-gray-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-        type="button"
-        onClick={() => setShowModal(true)}
-      >
-        Vendeur contacter
-      </button>
-      {showModal ? (
-        <>
-          <div
-            className="justify-center items-center flex overflow-x-hidden overflow-y-auto inset-0 z-50 outline-none focus:outline-none"
-            onClick={() => setShowModal(false)}
-          >
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              {/*content*/}
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                {/*header*/}
-                <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
-                  <h3 className="text-3xl font-semibold">
-                     Contacter le vendeur
-                  </h3>
-                  <button
-                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
-                    onClick={() => setShowModal(false)}
-                  >
-                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                      <i class="fas fa-info-circle animate-ping"></i>
-                    </span>
-                  </button>
-                </div>
-                {/*body*/}
-					<div className="relative p-6 flex-auto">
-						<div className="container px-2 mx-auto">
-							  <div className="flex flex-wrap">
-								<div className="w-full flex-1">
-								  <span className="text-md block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-phone"></i> Par telephone : </span>
-								</div>
-								<div className="w-full flex-1">
-								  <span className="text-md block my-2 p-3 text-orange-500 underline vendeurPhone">+33 654332109</span>
-								</div>						
-							  </div>
-						</div>
-						<div className="container px-2 mx-auto">
-							  <div className="flex flex-wrap ">
-								<div className="w-full flex-1">
-								  <span className="text-md block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-envelope"></i> Par email :</span>
-								</div>
-								<div className="w-full flex-1">
-								  <span className="text-md block my-2 p-3 text-orange-500 underline vendeurEmail">jesica2234@gmail.com</span>
-								</div>
-           
-                                						
-						</div>
-                        <ContactVendeur transparent />						
-					</div>
+const stripePromise = loadStripe("pk_test_51HgmzIBjqnSC21bhUov33uWhuXhCFQBnwRcy1pfJgKmXv42GkV7vLZJ0uNR26SdEUomqGHDnGhCXvxn0MY6GjIg100F67arXkO");
 
-                </div>
-                {/*footer*/}
-                <div className="flex items-center justify-between p-6 border-t border-solid border-gray-300 rounded-b">
-                  <Link href="/footer/data_personal">
-						  <a
-							className="text-gray-700 hover:text-gray-900 font-semibold block pb-2 text-sm"
-							href="#"
-						  >
-							Données personnelles
-						  </a>
-				   </Link>
-				  <button
-                    className="bg-gray-800 text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => setShowModal(false)}
-                  >
-                    fermer <i class="fas fa-times-circle"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-        </>
-      ) : null}
-    </>
+const ProductDisplay = ({ handleClick }) => (
+  <section>
+    <div className="product flex flex-wrap justify-center mt-4">
+      <div className="w-6/12 sm:w-6/12 px-4">
+	  <img
+        src={require("assets/img/profile.jpg")}
+        alt="Abonement Premium"
+		className="ProductImg shadow rounded-full max-w-full h-auto align-middle border-none"
+      />
+	  </div>
+	  <div className="w-6/12 sm:w-6/12 px-4">
+      <div className="description">
+        <p className="ml-3 leading-6 font-medium text-orange-500 text-2xl">Abonement Premium</p>
+        <div className="ml-3 leading-6 font-medium text-orange-500 text-4xl">6.99€</div>
+      </div>
+	  </div>
+    </div>
+    <button id="checkout-button" role="link" onClick={handleClick}>
+      Vendre votre véhicule sur Top list
+    </button>
+  </section>
+);
+
+export default function ModalPayment() {
+    const [message, setMessage] = useState("");
+     useEffect(() => {
+		// Check to see if this is a redirect back from Checkout
+		const query = new URLSearchParams(window.location.search);
+
+		if (query.get("success")) {
+		  setMessage("Order placed! You will receive an email confirmation.");
+		}
+
+		if (query.get("canceled")) {
+		  setMessage(
+			"Order canceled -- continue to shop around and checkout when you're ready."
+		  );
+		}
+	  }, []);
+
+	  const handleClick = async (event) => {
+		const stripe = await stripePromise;
+
+		const response = await fetch("/create-checkout-session", {
+		  headers : { 
+			'Content-Type': 'application/json',
+			'Accept': 'application/json'
+		   },
+		  method: "POST",
+		});
+
+		const session = await response.json();
+
+		// When the customer clicks on the button, redirect them to Checkout.
+		const result = await stripe.redirectToCheckout({
+		  sessionId: session.id,
+		});
+
+		if (result.error) {
+		  // If `redirectToCheckout` fails due to a browser or network
+		  // error, display the localized error message to your customer
+		  // using `result.error.message`.
+		  console.log('strip error', result.error);
+		}
+	  };
+  return message ? (
+    <Message message={message} />
+  ) : (
+    <ProductDisplay handleClick={handleClick} />
   );
 }
