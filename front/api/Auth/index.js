@@ -1,12 +1,12 @@
 import client from '../client';
 
-export function login(payload) {
-  return client.post('auth/login', payload)
+export function login({ email, password }) {
+  return client.post('auth/login', { email, password })
     .then(({ data }) => data);
 }
 
-export function register({ email, password }) {
-  return client.post('auth/register', { email, password })
+export function register(payload) {
+  return client.post('auth/register', payload)
     .then(({ data }) => data);
 }
 

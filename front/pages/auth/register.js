@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Form, Field } from 'react-final-form';
+import Router from "next/router";
 import Auth from "layouts/Auth.js";
 import useLogguedUser from 'service/hooks/useLogguedUser';
 
@@ -22,11 +23,11 @@ export default function Register() {
     }
   }, [isAuthentificated, logguedUser]);
   
-  const onSubmit =async (formValues)=>{
+  const onSubmit = async (values)=>{
 	try {
       let {
         ...payload
-      } = formValues;
+      } = values;
 
       const data = { ...payload };
       await register(data);
@@ -184,7 +185,7 @@ export default function Register() {
 							<button
 							  className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
 							  type="submit"
-							  disabled = {submitting}
+							  disabled={submitting || invalid}
 							>
 							  Create Account
 							</button>
