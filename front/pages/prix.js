@@ -5,7 +5,29 @@ import useLogguedUser from 'service/hooks/useLogguedUser';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import PubContent from "layouts/PubContent.js";
+import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
 
+const classics = [
+	{list: "Annonce pré-remplie"},
+	{list: "Annonce gratuite"},
+	{list: "Contacter vendeur direct"}
+];
+const premiums = [
+	{list: "Rassurer l'acheteur grâce aux réponses"},
+	{list: "Tête de liste, grande visibilité"},
+	{list: "Logo qualité garantie"},
+	{list: "Modifier à tout moment le prix du véhicule"},
+	{list: "Les valeurs de déclenchement de transaction particulier et professionel qualifié"},
+	{list: "Contacter vendeur direct"}
+];
+const pubTransparents = [
+	  { icon: "fas fa-database", width: {width: '15%'} , name: "Récupération des données 15%" },
+	  { icon: "fas fa-money-check-alt", width: {width: '21%'}, name: "Salaires 21%" },
+	  { icon: "fas fa-server", width: {width: '21%'}, name: "Hébergement 21%" },
+	  { icon: "fas fa-wallet", width: {width: '15%'}, name: "Dépenses 15%" },
+	  { icon: "fas fa-cash-register", width: {width: '15%'}, name: "Frais 15%"},
+	  { icon: "fas fa-users", width: {width: '17%'}, name: "Bénéfices 17%"}
+  ];
 export default function Prix() {
    const {
     isAuthentificated,
@@ -53,26 +75,7 @@ export default function Prix() {
                   <h1 className="text-white font-semibold text-5xl">
                     Obtenez plus de confiance
                   </h1>
-                  <div className="flex justify-center">
-                      <div className="mr-4 p-3 text-center">                       
-						<span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
-                          <i className="far fa-smile text-lg mr-1"></i>
-                        </span>
-                        <span className="text-sm text-gray-500">Note de confiance</span>
-                      </div>
-                      <div className="mr-4 p-3 text-center">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
-                          <i className="fas fa-unlock-alt text-lg mr-1"></i>
-                        </span>
-                        <span className="text-sm text-gray-500">Sécuriser au maximum</span>
-                      </div>
-                      <div className="lg:mr-4 p-3 text-center">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
-                          <i className="fas fa-certificate text-lg mr-1"></i>
-                        </span>
-                        <span className="text-sm text-gray-500">Vendre facilement</span>
-                      </div>
-                    </div>
+                  <PubContentThreeIcons />
                 </div>
               </div>
             </div>
@@ -102,22 +105,16 @@ export default function Prix() {
 				<hr className="mt-6 border-b-1 border-gray-400" />
                 <div class="flex-1 flex flex-col justify-between border-t-2 border-gray-100 p-6 bg-gray-50 sm:p-10 lg:p-6 xl:p-10">
 					<ul>
-					  <li class="mt-4 mx-4 flex items-start">
-						<div class="flex-shrink-0">
-						 <i class="fas fa-check"></i>
-						</div>
-						<p class="ml-3 text-base leading-6 font-medium text-gray-500">
-						  Annonce pré-remplie
-						</p>
-					  </li>
-					  <li class="mt-4 mx-4 flex items-start">
-						<div class="flex-shrink-0">
-						 <i class="fas fa-check"></i>
-						</div>
-						<p class="ml-3 text-base leading-6 font-medium text-gray-500">
-						  Annonce gratuite
-						</p>
-					  </li>
+					 {classics.map(classic => (
+						  <li class="mt-4 mx-4 flex items-start">
+							<div class="flex-shrink-0">
+							 <i class="fas fa-check"></i>
+							</div>
+							<p class="ml-3 text-base leading-6 font-medium text-gray-500">
+							{classic.list}
+							</p>
+						  </li>
+					 ))}
 					</ul>
 					<div class="mt-8 text-center my-4">
 					  <button
@@ -165,46 +162,16 @@ export default function Prix() {
 				<hr className="mt-6 border-b-1 border-gray-400" />
                 <div class="flex-1 flex flex-col justify-between border-t-2 border-gray-100 p-6 bg-gray-50 sm:p-10 lg:p-6 xl:p-10">
 					<ul>
-					  <li class="mt-4 mx-4 flex items-start">
-						<div class="flex-shrink-0">
-						 <i class="fas fa-check"></i>
-						</div>
-						<p class="ml-3 text-base leading-6 font-medium text-gray-500 text-xl">
-						  Rassurer l'acheteur grâce aux réponses
-						</p>
-					  </li>
-					  <li class="mt-4 mx-4 flex items-start">
-						<div class="flex-shrink-0">
-						 <i class="fas fa-check"></i>
-						</div>
-						<p class="ml-3 text-base leading-6 font-medium text-gray-500 text-xl">
-						 Tête de liste, grande visibilité
-						</p>
-					  </li>
-					   <li class="mt-4 mx-4 flex items-start">
-						<div class="flex-shrink-0">
-						 <i class="fas fa-check"></i>
-						</div> 
-						<p class="ml-3 text-base leading-6 font-medium text-gray-500 text-xl">
-						 Logo qualité  garantie
-						</p>
-					  </li>
-					   <li class="mt-4 mx-4 flex items-start">
-						<div class="flex-shrink-0">
-						 <i class="fas fa-check"></i>
-						</div>
-						<p class="ml-3 text-base leading-6 font-medium text-gray-500 text-xl">
-						 Modifier à tout moment le prix du véhicule
-						</p>
-					  </li>
-					  <li class="mt-4 mx-4 flex items-start">
-						<div class="flex-shrink-0">
-						 <i class="fas fa-check"></i>
-						</div>
-						<p class="ml-3 text-base leading-6 font-medium text-gray-500 text-xl">
-						 Les valeurs de déclenchement de transaction particulier et professionel qualifié
-						</p>
-					  </li>
+					  {premiums.map(premium => (
+						  <li class="mt-4 mx-4 flex items-start">
+							<div class="flex-shrink-0">
+							 <i class="fas fa-check"></i>
+							</div>
+							<p class="ml-3 text-base leading-6 font-medium text-gray-500 text-xl">
+							{premium.list}
+							</p>
+						  </li>
+					   ))}
 					</ul>
 					<div class="ProductBlock mt-8 text-center my-4">
 					  {!isAuthentificated || (tokken = null) ? (
@@ -271,136 +238,30 @@ export default function Prix() {
                     Où va votre argent quand vous payez 6.99 € ?
                   </p>
                   <ul className="list-none mt-6">
-                    <li className="py-2">
-                      <div className="flex items-center">
-                        <div>
-                          <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-gray-200 mr-3">
-                            <i className="fas fa-user-friends"></i>
-                          </span>
-                        </div>
-                        <div>
-                          <h4 className="text-gray-600">
-                            Récupération des données  15%
-                          </h4>
-                        </div>
-						<div className="relative w-full">
-						  <div className="overflow-hidden h-2 text-xs flex rounded bg-gray-800">
-							<div
-							  style={{ width: "15%" }}
-							  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-orange-500"
-							></div>
-						 </div>	 
-                        </div>						 
-                      </div>
-                    </li>
-                    <li className="py-2">
-                      <div className="flex items-center">
-                        <div>
-                          <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-gray-200 mr-3">
-                            <i className="fas fa-user-friends"></i>
-                          </span>
-                        </div>
-                        <div>
-                          <h4 className="text-gray-600">
-                            Salaires  21%
-                          </h4>
-                        </div>
-						<div className="relative w-full">
-						  <div className="overflow-hidden h-2 text-xs flex rounded bg-gray-800">
-							<div
-							  style={{ width: "21%" }}
-							  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-orange-500"
-							></div>
-						 </div>
-                    </div>
-                      </div>
-                    </li>
-                    <li className="py-2">
-                      <div className="flex items-center">
-                        <div>
-                          <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-gray-200 mr-3">
-                            <i className="fas fa-user-friends"></i>
-                          </span>
-                        </div>
-                        <div>
-                          <h4 className="text-gray-600">
-                            Hébergement  21%
-                          </h4>
-                        </div>
-						<div className="relative w-full">
-						  <div className="overflow-hidden h-2 text-xs flex rounded bg-gray-800">
-							<div
-							  style={{ width: "21%" }}
-							  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-orange-500"
-							></div>
-						 </div>
-                        </div>
-                      </div>
-                    </li>
-					<li className="py-2">
-                      <div className="flex items-center">
-                        <div>
-                          <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-gray-200 mr-3">
-                            <i className="fas fa-money-check-alt"></i>
-                          </span>
-                        </div>
-                        <div>
-                          <h4 className="text-gray-600">Dépenses  15%</h4>
-                        </div>
-						<div className="relative w-full">
-						  <div className="overflow-hidden h-2 text-xs flex rounded bg-gray-800">
-							<div
-							  style={{ width: "15%" }}
-							  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-orange-500"
-							></div>
-					    </div>
-                      </div>
-					  </div>
-                    </li>
-					 <li className="py-2">
-                      <div className="flex items-center">
-                        <div>
-                          <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-gray-200 mr-3">
-                            <i className="fas fa-user-friends"></i>
-                          </span>
-                        </div>
-                        <div>
-                          <h4 className="text-gray-600">
-                            Frais  15%
-                          </h4>
-                        </div>
-						<div className="relative w-full">
-						  <div className="overflow-hidden h-2 text-xs flex rounded bg-gray-800">
-							<div
-							  style={{ width: "15%" }}
-							  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-orange-500"
-							></div>
-						 </div>
-                        </div>
-                      </div>
-                    </li>
-					 <li className="py-2">
-                      <div className="flex items-center">
-                        <div>
-                          <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-gray-200 mr-3">
-                            <i className="fas fa-user-friends"></i>
-                          </span>
-                        </div>
-                        <div>
-                          <h4 className="text-gray-600">
-                            Bénéfices  17%
-                          </h4>
-                        </div>
-						<div className="relative w-full">
-						  <div className="overflow-hidden h-2 text-xs flex rounded bg-gray-800">
-							<div
-							  style={{ width: "17%" }}
-							  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-orange-500"
-							></div>
-						 </div>
-                        </div>
-                      </div>
-                    </li>
+                    {pubTransparents.map(pubTransparent => (
+						<li className="py-2">
+						  <div className="flex items-center">
+							<div>
+							  <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-gray-600 bg-gray-200 mr-3">
+								<i className={pubTransparent.icon}></i>
+							  </span>
+							</div>
+							<div>
+							  <h4 className="text-gray-600">
+								{pubTransparent.name}
+							  </h4>
+							</div>
+							<div className="relative w-full">
+							  <div className="overflow-hidden h-2 text-xs flex rounded bg-gray-800">
+								<div
+								  style={pubTransparent.width}
+								  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-orange-500"
+								></div>
+							 </div>	 
+							</div>						 
+						  </div>
+						</li>                                  				 
+					 ))}
                   </ul>
                 </div>
               </div>
