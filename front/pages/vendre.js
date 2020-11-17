@@ -5,6 +5,8 @@ import Footer from "components/Footers/Footer.js";
 import QuestionsClassic from "components/Tabs/QuestionsClassic.js";
 import QuestionsPremier from "components/Tabs/QuestionsPremier.js";
 import PubContent from "layouts/PubContent.js";
+import PubContent2 from "layouts/PubContent2.js";
+import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
 import useLogguedUser from 'service/hooks/useLogguedUser';
 import Router from "next/router";
 
@@ -80,26 +82,7 @@ export default function Vendre() {
 			  <div className="px-6">
                 <div className="flex flex-wrap justify-center">				
                   <div className="w-full lg:w-12/12 px-4 lg:order-1">				    
-                    <div className="flex justify-center">
-                      <div className="mr-4 p-3 text-center">                       
-						<span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
-                          <i className="far fa-smile text-lg mr-1"></i>
-                        </span>
-                        <span className="text-sm text-gray-500">Note de confiance</span>
-                      </div>
-                      <div className="mr-4 p-3 text-center">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
-                          <i className="fas fa-unlock-alt text-lg mr-1"></i>
-                        </span>
-                        <span className="text-sm text-gray-500">Sécuriser au maximum</span>
-                      </div>
-                      <div className="lg:mr-4 p-3 text-center">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
-                          <i className="fas fa-certificate text-lg mr-1"></i>
-                        </span>
-                        <span className="text-sm text-gray-500">Vendre facilement</span>
-                      </div>
-                    </div>
+                    <PubContentThreeIcons />
                   </div>
                 </div>
 				{!isAuthentificated || (tokken = null) ? (
@@ -110,7 +93,9 @@ export default function Vendre() {
             </div>
           </div>
         </section>
-		<PubContent />
+		{!isAuthentificated || (tokken = null) ? (
+			<PubContent /> ) : ( null )
+		}
       </main>
       <Footer />
     </>

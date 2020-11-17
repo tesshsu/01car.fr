@@ -6,7 +6,7 @@ import AnnoncePremier from "components/Annonce/AnnoncePremier.js";
 import AnnonceClassic from "components/Annonce/AnnonceClassic.js";
 import AnnonceSearchForm from "components/Annonce/AnnonceSearchForm.js";
 import Pagination from "components/Annonce/Pagination.js";
-
+import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
 
 export default function Annonce() {
    return (
@@ -17,26 +17,7 @@ export default function Annonce() {
 		    <h4 className="text-3xl font-bold text-white text-center">
                 Annonces avec note de confiance
             </h4>
-			 <div className="flex justify-center">
-                      <div className="mr-4 p-3 text-center">                       
-						<span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
-                          <i className="far fa-smile text-lg mr-1"></i>
-                        </span>
-                        <span className="text-sm text-gray-500">Note de confiance</span>
-                      </div>
-                      <div className="mr-4 p-3 text-center">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
-                          <i className="fas fa-unlock-alt text-lg mr-1"></i>
-                        </span>
-                        <span className="text-sm text-gray-500">Sécuriser au maximum</span>
-                      </div>
-                      <div className="lg:mr-4 p-3 text-center">
-                        <span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
-                          <i className="far fa-thumbs-up text-lg mr-1"></i>
-                        </span>
-                        <span className="text-sm text-gray-500">Vendre facilement</span>
-                      </div>
-                    </div>
+			<PubContentThreeIcons />
 		</section>
 	    <AnnonceSearchForm />
 		<section className="pt-10 pb-8 mt-4">
