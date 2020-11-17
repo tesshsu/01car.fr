@@ -22,7 +22,7 @@ export default function ShareButton() {
 		   <li>
 		      <FacebookShareButton
 					hashtag="Bonjour, Je Partager cette Annonce"
-					quote={shareUrl}
+					url={shareUrl}
 				>
 				<FacebookIcon size={32} round />
 				</FacebookShareButton> 
@@ -46,7 +46,7 @@ export default function ShareButton() {
 		    <li>
 		      <WhatsappShareButton
 					title="Bonjour, Je Partager cette Annonce"
-					separator={shareUrl}
+					url={shareUrl}
 				>
 				<WhatsappIcon size={32} round />
 				</ WhatsappShareButton> 

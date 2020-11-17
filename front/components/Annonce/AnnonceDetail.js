@@ -14,7 +14,10 @@ export default function AnnonceDetail() {
 			<CardAnnonceSlide />
 				<h4 className="marqueBlock bg-orange-500 font-bold text-2xl text-white px-4 py-3 shadow-lg">
 					 <span className="brand">RENAULT</span> - <span className="model">GRAND SCENIC</span> <span className="generation">IV</span>
-					 <span className="favoris"><FavorisButton /> <ShareButton /></span>
+					 <span className="favoris"><FavorisButton /></span>
+				</h4>
+				<h4 className="marqueBlock font-bold text-2xl text-white mt-16 px-4 py-3">
+					 <span className="favoris"><ShareButton /></span>
 				</h4>
 				
 				<div className="flex flex-wrap">
