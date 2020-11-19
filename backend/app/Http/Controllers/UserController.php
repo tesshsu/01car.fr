@@ -146,6 +146,9 @@ class UserController extends Controller
     private function renderJson($id)
     {
         $user = User::find($id);
+        if ($user == NULL) {
+            return response()->json(['error' => 'NotFound'], 404);
+        }
         return response()->json( new UserResource($user));
     }
 }

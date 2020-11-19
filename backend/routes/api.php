@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -28,8 +29,10 @@ Route::get('/auth/callback/{provider}', 'App\Http\Controllers\Auth\SocialControl
 // Protected routes
 Route::group(['middleware' => ['auth:api']], function () {
 
-    Route::middleware('auth:api')->get('/v1/profil/{id}', 'App\Http\Controllers\ProfilController@show');
-    Route::middleware('auth:api')->patch('/v1/profil/{id}', 'App\Http\Controllers\ProfilController@update');
+    Route::get('/v1/profil', 'App\Http\Controllers\ProfilController@show');
+    Route::patch('/v1/profil', 'App\Http\Controllers\ProfilController@update');
+
+    Route::apiResource('/v1/ads/cars', CarController::class);
 
 //    Route::post('/v1/adds/{id}/files', 'ProductController@addFiles')->middleware('auth:api');
 });
