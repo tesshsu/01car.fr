@@ -1,60 +1,35 @@
-import * as API from '../../Api';
+// Create Redux action types
+export const GET_POSTS = 'GET_POSTS'
+export const GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS'
+export const GET_POSTS_FAILURE = 'GET_POSTS_FAILURE'
 
-export const SET_FETCHING = 'annonces/SET_FETCHING';
-export const SET_ANNONCE = 'annonces/SET_ANNONCES';
-export const ADD_ANNONCE = 'annonces/ADD_ANNONCE';
 
-export function fetchAll() {
+// Create Redux action creators that return an action
+export const getPosts = () => ({
+  type: GET_POSTS,
+})
+
+export const getPostsSuccess = (posts) => ({
+  type: GET_POSTS_SUCCESS,
+  payload: posts,
+})
+
+export const getPostsFailure = () => ({
+  type: GET_POSTS_FAILURE,
+})
+
+// Combine them all in an asynchronous thunk
+export function fetchPosts() {
   return async (dispatch) => {
+    dispatch(getPosts())
+
     try {
-      dispatch({
-        type: SET_FETCHING,
-        payload: {
-          isFetching: true
-        }
-      });
-      const annonces = await API.annonces.get();
-    } catch (err) {
-      console.warn(err);
-      throw err;
-    } finally {
-      dispatch({
-        type: SET_FETCHING,
-        payload: {
-          isFetching: false
-        }
-      });
-    }
-  };
-}
+      const response = await fetch('https://api.01car.fr/api/v1/ads/cars/search')
+      const data = await response.json()
 
-export function createAnnonce(id) {
-  return async (dispatch) => {
-    try {
-      const Annonce = await API.Annonces.create({
-        id
-      });
-
-      if (Annonce !== '') {
-        dispatch({
-          type: ADD_ANNONCE,
-          payload: {
-            annonce
-          }
-        });
-      }
-    } catch (err) {
-      console.warn(err);
-      throw err;
+      dispatch(getPostsSuccess(data))
+    } catch (error) {
+      dispatch(getPostsFailure())
     }
-  };
-}
-
-export function setAnnonces(annonces) {
-  return {
-    type: SET_ANNONCE,
-    payload: {
-      annonces,
-    }
-  };
+  }
 }

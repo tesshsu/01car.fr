@@ -1,9 +1,9 @@
 import loadingOverlay from './loadingOverlay';
 import logguedUser from './logguedUser';
-import user from './user';
+import annonce from './annonces';
 
 export {
   loadingOverlay,
   logguedUser,
-  user
+  annonce
 };
