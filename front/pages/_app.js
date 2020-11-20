@@ -9,11 +9,17 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
 import * as reducers from '../service/reducers';
+import userReducer from '../service/reducers/user';
+import { setupApiClient } from '../api/client';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/styles/tailwind.css";
 
+//combien all the reducers
 const logger = createLogger();
-const rootReducers = combineReducers(reducers);
+const rootReducers = combineReducers({
+  user: userReducer,
+  ...reducers
+})
 const store = createStore(
   rootReducers,
   applyMiddleware(thunkMiddleware, logger)
@@ -36,6 +42,8 @@ Router.events.on("routeChangeError", () => {
   ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
   document.body.classList.remove("body-page-transition");
 });
+
+setupApiClient();
 
 export default class MyApp extends App {
   static async getInitialProps({ Component, router, ctx }) {

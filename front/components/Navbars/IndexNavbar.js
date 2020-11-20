@@ -5,26 +5,32 @@ import Link from "next/link";
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
 import useLogguedUser from 'service/hooks/useLogguedUser';
 import Router from "next/router";
+import {fetchUser} from 'service/actions/user';
+import {connect} from 'react-redux';
 
 const initialState = {
   isAuthentificated: false
 };
 
-export default function Navbar(props) {
+const Navbar = ({dispatch, loading, user, hasErrors}) => {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   
   const {
     isAuthentificated,
 	logguedUser
   } = useLogguedUser();
-
+  
   useEffect(() => {
-    if (!isAuthentificated) {
-      //Router.push("/auth/login");
+    if (isAuthentificated) {
+      dispatch(fetchUser())
     }
-  }, [isAuthentificated]);
-  
-  
+  }, [isAuthentificated, logguedUser]);
+
+  const renderUser = () => {
+    if (loading) return <p>Loading user...</p>
+    if (hasErrors) return <p>Unable to display user.</p>
+    return <span className="text-orange-500 text-sm">Bonjour, {user.name}</span>
+  }
   
   return (
     <>
@@ -137,7 +143,7 @@ export default function Navbar(props) {
 					  "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
 					}
 				  >
-					<i className="text-orange-900 fas fa-address-card" />
+					<i className="text-orange-900 fas fa-address-card" /> {renderUser()}
 				  </a>
 				</Link>
 			   )}
@@ -149,3 +155,11 @@ export default function Navbar(props) {
     </>
   );
 }
+
+const mapStateToProps = (state) => ({
+  loading: state.user.loading,
+  user: state.user.user,
+  hasErrors: state.user.hasErrors,
+})
+export default connect(mapStateToProps)(Navbar) 
+

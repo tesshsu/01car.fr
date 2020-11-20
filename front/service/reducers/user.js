@@ -1,12 +1,21 @@
-import * as USERS_ACTIONS from '../actions/users';
+import { combineReducers } from 'redux';
+import * as actions from '../actions/user';
 
-export default function reducer(state = {}, action) {
+export const initialState = {
+  user: [],
+  loading: false,
+  hasErrors: false,
+}
+
+export default function userReducer(state = initialState, action) {
   switch (action.type) {
-    case USERS_ACTIONS.FETCH_USER:
-      return { ...action.payload.users };
-    case USERS_ACTIONS.UPDATE_USER:
-      return { ...state, [action.payload.user.id]: action.payload.user };
+    case actions.GET_USER:
+      return {...state, loading: true}
+    case actions.GET_USER_SUCCESS:
+      return {user: action.payload, loading: false, hasErrors: false}
+    case actions.GET_USER_FAILURE:
+      return {...state, loading: false, hasErrors: true}
     default:
-      return state;
+      return state
   }
 }
