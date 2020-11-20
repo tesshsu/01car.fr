@@ -54,6 +54,7 @@ class CarController extends Controller
     public function store(Request $request)
     {
         $reqCar = (object)$request->json()->all();
+        $currentUser = Auth::user();
 
         // Validate
         $validator = $this->validateEntity($reqCar, null);
@@ -64,6 +65,7 @@ class CarController extends Controller
         // Create entity
         $newCar = new Car;
         $this->updateCarFields($newCar, $reqCar);
+        $newCar->user_id = $currentUser->id;
 
         $newCar->save();
         return $this->renderJson($newCar->id);
@@ -136,16 +138,16 @@ class CarController extends Controller
     private function validateEntity($reqCar, $car)
     {
         return Validator::make((array)$reqCar, [
-            'brand'=> 'max:' . User::fieldsSizeMax('brand'),
-            'model'=> 'max:' . User::fieldsSizeMax('model'),
-            'generation'=> 'max:' . User::fieldsSizeMax('generation'),
-            'fuel'=> 'max:' . User::fieldsSizeMax('fuel'),
-            'transmission'=> 'max:' . User::fieldsSizeMax('transmission'),
-            'carBody'=> 'max:' . User::fieldsSizeMax('carBody'),
-            'finition'=> 'max:' . User::fieldsSizeMax('finition'),
-            'displacement'=> 'max:' . User::fieldsSizeMax('displacement'),
-            'version'=> 'max:' . User::fieldsSizeMax('version'),
-            'currency'=> 'max:' . User::fieldsSizeMax('currency'),
+            'brand'=> 'max:' . Car::fieldsSizeMax('brand'),
+            'model'=> 'max:' . Car::fieldsSizeMax('model'),
+            'generation'=> 'max:' . Car::fieldsSizeMax('generation'),
+            'fuel'=> 'max:' . Car::fieldsSizeMax('fuel'),
+            'transmission'=> 'max:' . Car::fieldsSizeMax('transmission'),
+            'carBody'=> 'max:' . Car::fieldsSizeMax('carBody'),
+            'finition'=> 'max:' . Car::fieldsSizeMax('finition'),
+            'displacement'=> 'max:' . Car::fieldsSizeMax('displacement'),
+            'version'=> 'max:' . Car::fieldsSizeMax('version'),
+            'currency'=> 'max:' . Car::fieldsSizeMax('currency'),
         ]);
     }
 

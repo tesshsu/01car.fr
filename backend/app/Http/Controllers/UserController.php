@@ -78,7 +78,7 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, User $user)
     {
@@ -86,7 +86,7 @@ class UserController extends Controller
 
         // check that id are the same
         if ($reqUser->id != $user->id) {
-            throw new ModelNotFoundException;
+            return response()->json(['error' => 'NotFound'], 404);
         }
 
         // Validation
