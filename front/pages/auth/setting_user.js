@@ -4,62 +4,82 @@ import Auth from "layouts/Auth.js";
 import formatString from "format-string-by-pattern";
 import useLogguedUser from 'service/hooks/useLogguedUser';
 import Router from "next/router";
+import * as userRequest from 'service/actions/user';
+import {connect} from 'react-redux';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
 const mustBeNumber = value => (isNaN(value) ? 'Must be a number' : undefined)
 const composeValidators = (...validators) => value =>
   validators.reduce((error, validator) => error || validator(value), undefined)
-const masks = [
-  { name: "email", type: "email", placeholder: "Votre email" },
-  { name: "password", type: "password", placeholder: "mot de pass" },
-  { name: "phone", type: "number", placeholder: "Votre portable" }
-];
 
-const onSubmit = async values => {
-  await sleep(300)
-  if (values.formPolicy) {
-    window.alert('Merci accorder')
-  }else{
-	window.alert(JSON.stringify(values, 0, 2))
-  }
+/*const masks = [
+  { name: "nom", type: "text", placeholder: "Votre nom", validate: null, value:{user.name} },
+  { name: "email", type: "email", placeholder: "Votre email", validate: null, value:{user.email} },
+  { name: "password", type: "password", placeholder: "mot de pass",  validate: null, value:{user.password},
+  { name: "phone", type: "number", placeholder: "Votre portable", validate: {mustBeNumber}, value:{user.phone} }
+  ];*/
   
-}
-export default function Setting_user() {
+  /*const masks = [
+  { name: "nom", type: "text", placeholder: "Votre nom", validate: null, value:"" },
+  { name: "email", type: "email", placeholder: "Votre email", validate: null, value:"" },
+  { name: "password", type: "password", placeholder: "mot de pass",  validate: null, value:""},
+  { name: "phone", type: "number", placeholder: "Votre portable", validate: {mustBeNumber}, value:"" }
+  ];*/
+  
+  
+const Setting_user= ({dispatch, loading, user, hasErrors}) => {
   const {
     login,
     isAuthentificated,
     logguedUser,
-	logout,
-	udate
-  } = useLogguedUser();  
-  
+	logout
+  } = useLogguedUser();
   
   useEffect(() => {
-    if (!isAuthentificated) {
-      Router.push("/auth/login");
+    if (isAuthentificated) {
     }
-  }, [isAuthentificated]);
+  }, [isAuthentificated, logguedUser]);
   
-  const onSubmit = async (values)=>{
-	try {
-      let {
-        ...payload
-      } = values;
+  const initialFormState = { id: null, name: '', email: '', password:'', phone:'' }
+  const [userInfo, setUserInfo] = useState(initialFormState)
 
-      const data = { ...payload };
-      await update(data);
+  /*const masks = [
+  { name: "nom", type: "text", placeholder: "Votre nom", validate: null, value: user.name },
+  { name: "email", type: "email", placeholder: "Votre email", validate: null, value: user.email },
+  { name: "password", type: "password", placeholder: "mot de pass",  validate: null, value: user.password },
+  { name: "phone", type: "number", placeholder: "Votre portable", validate: null, value: user.phone }
+  ];*/
+  
+  const masks = [
+  { name: "nom", type: "text", placeholder: "Votre nom", validate: null },
+  { name: "email", type: "email", placeholder: "Votre email", validate: null },
+  { name: "password", type: "password", placeholder: "mot de pass",  validate: null },
+  { name: "phone", type: "number", placeholder: "Votre portable", validate: null }
+  ];
+  
+ const handleInputChange = (event) => {
+    const { name, value } = event.target
+
+    setUserInfo({ ...userInfo, [name]: value })
+  }
+  
+  const onSubmit = async ()=>{
+	try {
+      await dispatch(updateUser());
+	  alert('Le compte ete modifie !');
     } catch (err) {
-      console.log(err.response);
+      console.log('modify error', err.response);
       if (err.response && err.response.status === 422) {
         submitError({
           email: 'Cet email est déjà utilisé'
         });
       } else {
-        alert('Impossible de créer le compte');
+        alert('Impossible de modifier le compte');
       }
     }
   }
+  
   
   async function onSignOut() {
     await logout();
@@ -82,11 +102,17 @@ export default function Setting_user() {
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">                
                 <Form
+				  initialValues={{
+						name:'',
+						email: '',
+						password: '',
+						phone: ''
+					  }}
 				  onSubmit={onSubmit}
-				  render={({ handleSubmit, form, submitting, pristine, values }) => (
+				  render={({ submitError, handleSubmit, form, submitting, pristine, values, invalid }) => (
 						<form onSubmit={handleSubmit}>                 
 						    {masks.map(mask => (
-								<Field name={mask.name} validate={required}>
+								<Field name={mask.name} validate={mask.validate}>
 									{({ input, meta }) => (
 									  <div className="relative w-full mb-3">
 										<label
@@ -97,7 +123,9 @@ export default function Setting_user() {
 										</label>
 										<input
 										  {...input}
-										  type={mask.type}										  
+										  type={mask.type}
+                                          value= {mask.value}	
+                                          onChange={handleInputChange}										  
 										  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
 										  placeholder={mask.placeholder}
 										/>{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
@@ -142,5 +170,12 @@ export default function Setting_user() {
     </>
   );
 }
+
+const mapStateToProps = (state) => ({
+  loading: state.user.loading,
+  user: state.user.user,
+  hasErrors: state.user.hasErrors,
+})
+export default connect(mapStateToProps)(Setting_user) 
 
 Setting_user.layout = Auth;
