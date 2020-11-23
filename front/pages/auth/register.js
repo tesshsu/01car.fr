@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Form, Field } from 'react-final-form';
 import Router from "next/router";
 import Auth from "layouts/Auth.js";
-import useLogguedUser from 'service/hooks/useLogguedUser';
+import useLoggedUser from 'service/hooks/useLoggedUser';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
@@ -13,9 +13,9 @@ const composeValidators = (...validators) => value =>
 export default function Register() {
   const {
 	register
-  } = useLogguedUser();  
- 
-  
+  } = useLoggedUser();
+
+
   const onSubmit = async (values)=>{
 	try {
       let {
@@ -38,7 +38,7 @@ export default function Register() {
       }
     }
   }
-  
+
   return (
     <>
       <div className="container mx-auto px-4 mt-16 h-full">
@@ -80,7 +80,7 @@ export default function Register() {
 					  }}
 				  onSubmit={onSubmit}
 				  render={({ submitError, handleSubmit, form, submitting, pristine, values, invalid }) => (
-						<form onSubmit={handleSubmit}>                 
+						<form onSubmit={handleSubmit}>
 						    <Field name="name" validate={required}>
 							    {({ input, meta }) => (
 								  <div className="relative w-full mb-3">

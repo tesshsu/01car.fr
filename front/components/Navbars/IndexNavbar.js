@@ -3,7 +3,7 @@ import Link from "next/link";
 // components
 
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
-import useLogguedUser from 'service/hooks/useLogguedUser';
+import useLoggedUser from 'service/hooks/useLoggedUser';
 import Router from "next/router";
 import {fetchUser} from 'service/actions/user';
 import {connect} from 'react-redux';
@@ -14,24 +14,24 @@ const initialState = {
 
 const Navbar = ({dispatch, loading, user, hasErrors}) => {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
-  
+
   const {
     isAuthentificated,
-	logguedUser
-  } = useLogguedUser();
-  
+	loggedUser
+  } = useLoggedUser();
+
   useEffect(() => {
     if (isAuthentificated) {
       dispatch(fetchUser())
     }
-  }, [isAuthentificated, logguedUser]);
+  }, [isAuthentificated, loggedUser]);
 
   const renderUser = () => {
     if (loading) return <p>Loading user...</p>
     if (hasErrors) return <p>Unable to display user.</p>
     return <span className="text-orange-500 text-sm">Bonjour, {user.name}</span>
   }
-  
+
   return (
     <>
       <nav className="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-white shadow">
@@ -63,7 +63,7 @@ const Navbar = ({dispatch, loading, user, hasErrors}) => {
               (navbarOpen ? " block" : " hidden")
             }
             id="example-navbar-warning"
-          >            
+          >
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
               <li className="flex items-center">
                 <IndexDropdown />
@@ -123,7 +123,7 @@ const Navbar = ({dispatch, loading, user, hasErrors}) => {
 					</button>
                 </li>
 			  )}
-			   <li className="flex items-center">			   
+			   <li className="flex items-center">
 			   {!isAuthentificated ? (
 				<Link href="/auth/login">
 				  <a
@@ -161,5 +161,5 @@ const mapStateToProps = (state) => ({
   user: state.user.user,
   hasErrors: state.user.hasErrors,
 })
-export default connect(mapStateToProps)(Navbar) 
+export default connect(mapStateToProps)(Navbar)
 

@@ -4,7 +4,7 @@ import Router from "next/router";
 import { Form, Field } from 'react-final-form';
 import Auth from "layouts/Auth.js";
 import { FORM_ERROR } from 'final-form';
-import useLogguedUser from 'service/hooks/useLogguedUser';
+import useLoggedUser from 'service/hooks/useLoggedUser';
 import Alert from 'components/Alerts/Alert';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -16,15 +16,15 @@ export default function Login() {
   const {
     login,
     isAuthentificated,
-    logguedUser
-  } = useLogguedUser();  
-  
+    loggedUser
+  } = useLoggedUser();
+
   useEffect(() => {
-    if (isAuthentificated && logguedUser) {
+    if (isAuthentificated && loggedUser) {
       Router.push("/vendre");
     }
-  }, [isAuthentificated, logguedUser]);
-  
+  }, [isAuthentificated, loggedUser]);
+
   return (
     <>
       <div className="container mx-auto px-4 mt-16 h-full">
@@ -63,18 +63,18 @@ export default function Login() {
 						password: ''
 					  }}
 					  onSubmit={async ({ email, password }) => {
-						await sleep(300)						
+						await sleep(300)
 							try {
 							  await login(
 								email.trim(),
 								password.trim()
 							  );
-						  
+
 						    Router.back();
 						} catch (err) {
 						  alert("Identifiants incorrects!");
 						}
-					  }}					 
+					  }}
 					  render={({ submitError, handleSubmit, form, submitting, pristine, values, invalid
 					  }) => (
 						<form onSubmit={handleSubmit}>
@@ -123,7 +123,7 @@ export default function Login() {
 								  </div>
 								)}
                             </Field>
-							
+
 							<div className="text-center mt-6">
 							<button
 							  className="bg-orange-500 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
@@ -135,7 +135,7 @@ export default function Login() {
 						  </div>
                           {submitError || invalid && (
 							 <Alert text="identifian incorrects" />
-						  )}						  
+						  )}
 						</form>
 					)}
 				/>
@@ -144,7 +144,7 @@ export default function Login() {
             </div>
             <div className="flex flex-wrap mt-6 relative">
               <div className="w-1/2">
-			  
+
                 <Link href="/auth/forget_password">
 					<a
 					  href="#pablo"

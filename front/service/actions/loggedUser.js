@@ -2,10 +2,10 @@ import * as API from '../../api';
 import * as LOADING_OVERLAY_ACTIONS from './loadingOverlay';
 import { useCallback } from 'react';
 
-export const LOGIN = 'logguedUser/LOGIN';
-export const LOGOUT = 'logguedUser/LOGOUT';
-export const UPDATE = 'logguedUser/UPDATE';
-export const FETCH = 'logguedUser/FETCH';
+export const LOGIN = 'loggedUser/LOGIN';
+export const LOGOUT = 'loggedUser/LOGOUT';
+export const UPDATE = 'loggedUser/UPDATE';
+export const FETCH = 'loggedUser/FETCH';
 
 
 export function login({ email, password }) {
@@ -14,9 +14,14 @@ export function login({ email, password }) {
     try {
       const { token, user } = await API.Auth.login({ email, password });
       await localStorage.setItem('ACCESS_TOKEN', token);
-      await dispatch({ type: LOGIN });
+      dispatch({
+        type: LOGIN,
+        payload: {
+          user
+        }
+      });
     } catch (err) {
-      await dispatch({ type: LOGIN });
+      await dispatch({ type: LOGOUT });
       throw err;
     } finally {
       dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
@@ -41,20 +46,24 @@ export function forget_password({ email }) {
 export function register(payload) {
   return async (dispatch) => {
     dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Création du compte...'));
-    
+
     try {
 		const {
 			  token, user
 		} = await API.Auth.register(payload);
-		 
+
 		await localStorage.setItem('ACCESS_TOKEN', token);
-		dispatch({ type: LOGIN }); 
-		 
-      
+		dispatch({
+          type: LOGIN,
+          payload: {
+            user
+          }
+        });
+
     } catch (err) {
       throw err;
     } finally {
-      dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false)); 
+      dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
     }
   };
 }
@@ -71,7 +80,7 @@ export function signInUsingFacebook() {
 
       if (type === 'success') {
         const { token, user: { id: userId } } = await API.Auth.signInWithFacebook({ accessToken });
-        await localStorage.setItem('ACCESS_TOKEN', token);    
+        await localStorage.setItem('ACCESS_TOKEN', token);
         await dispatch(fetch());
         await dispatch({ type: LOGIN });
       } else {
@@ -90,6 +99,21 @@ export function logout(id) {
   return async (dispatch, getState) => {
     await localStorage.removeItem('ACCESS_TOKEN');
     await dispatch({ type: LOGOUT });
+  };
+}
+
+export function updateUserInfo(payload) {
+   return async (dispatch, getState) => {
+    const { loggedUser } = getState().loggedUser;
+
+    try {
+      const user = await API.User.updateProfil(loggedUser.id, payload);
+      console.log(user);
+      dispatch(update(user));
+    } catch (err) {
+      console.warn(err);
+      throw err;
+    }
   };
 }
 

@@ -1,4 +1,6 @@
 import {authHeader, jsonHeader} from '../../api/authRequest';
+import * as API from "../../api";
+import {update} from "./loggedUser";
 // Create Redux action types
 export const GET_USER = 'GET_USER'
 export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
@@ -19,7 +21,7 @@ export const getUserFailure = () => ({
   type: GET_USER_FAILURE,
 })
 
-export const updateUserInfo = () => ({
+export const updateUserInfo = (id, user) => ({
   type: UPDATE_USER,
   payload: user,
 })
@@ -29,16 +31,17 @@ export const updateUserFailure = () => ({
 })
 
 // Combine them all in an asynchronous thunk
+
 export function fetchUser() {
   const requestOptions = {
         headers: { ...authHeader(), ...jsonHeader() }
     };
-	
+
   return async (dispatch) => {
     dispatch(getUser())
 
     try {
-      const response = await fetch('https://api.01car.fr/public/api/v1/profil', requestOptions)
+      const response = await fetch('https://api.01car.fr/api/v1/profil', requestOptions)
       const data = await response.json()
 
       dispatch(getUserSuccess(data))
@@ -48,22 +51,26 @@ export function fetchUser() {
   }
 }
 
-function updateUser() {
+
+export function updateUser(data) {
     const requestOptions = {
         method: 'PATCH',
         headers: { ...authHeader(), ...jsonHeader() }
     };
 
-    return async (dispatch) => {
-    dispatch(updateUserInfo())
+    return async (dispatch, getState) => {
+        const { user } = getState().loggedUser;
+        //dispatch(getUser())
 
-    try {
-      const response = await fetch('https://api.01car.fr/public/api/v1/profil', requestOptions)
-      const data = await response.json()
+        try {
+          const response = await fetch('https://api.01car.fr/api/v1/profil', requestOptions);
 
-      dispatch(getUserSuccess(data))
-    } catch (error) {
-      dispatch(updateUserFailure())
-    }
+          const data = await response.json();
+
+          dispatch(updateUserInfo(user.id, data))
+        } catch (error) {
+          dispatch(updateUserFailure())
+        }
   }
 }
+

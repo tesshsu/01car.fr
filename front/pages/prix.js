@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Link from "next/link";
 import ModalPayment from "components/Mondal/ModalPayment.js";
-import useLogguedUser from 'service/hooks/useLogguedUser';
+import useLoggedUser from 'service/hooks/useLoggedUser';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import PubContent from "layouts/PubContent.js";
@@ -31,13 +31,13 @@ const pubTransparents = [
 export default function Prix() {
    const {
     isAuthentificated,
-    logguedUser
-  } = useLogguedUser();   
-  
+    loggedUser
+  } = useLoggedUser();
+
   let [tokken,settokken]=useState(null);
-  
+
   useEffect(() => {
-    if (isAuthentificated && logguedUser) {
+    if (isAuthentificated && loggedUser) {
         try{
 			const getTokken=async ()=>{
               const tok= await localStorage.getItem('ACCESS_TOKEN');
@@ -50,7 +50,7 @@ export default function Prix() {
 			console.log(err);
         }
     }
-  }, [isAuthentificated, logguedUser]);
+  }, [isAuthentificated, loggedUser]);
   return (
     <>
       <IndexNavbar fixed />
@@ -197,7 +197,7 @@ export default function Prix() {
 					</div>
 				  </div>
               </div>
-            </div>			
+            </div>
           </div>
         </div>
       </section>
@@ -257,10 +257,10 @@ export default function Prix() {
 								  style={pubTransparent.width}
 								  className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-orange-500"
 								></div>
-							 </div>	 
-							</div>						 
+							 </div>
+							</div>
 						  </div>
-						</li>                                  				 
+						</li>
 					 ))}
                   </ul>
                 </div>

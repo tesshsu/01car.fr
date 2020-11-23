@@ -1,19 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import Link from "next/link";
-import useLogguedUser from 'service/hooks/useLogguedUser';
+import useLoggedUser from 'service/hooks/useLoggedUser';
 import Router from "next/router";
 
 
 export default function FavorisButton() {
   const {
     isAuthentificated,
-    logguedUser
-  } = useLogguedUser();   
-  
+    loggedUser
+  } = useLoggedUser();
+
   let [tokken,settokken]=useState(null);
-  
+
   useEffect(() => {
-    if (isAuthentificated && logguedUser) {
+    if (isAuthentificated && loggedUser) {
         try{
 			const getTokken=async ()=>{
               const tok= await localStorage.getItem('ACCESS_TOKEN');
@@ -26,24 +26,24 @@ export default function FavorisButton() {
 			console.log(err);
         }
     }
-  }, [isAuthentificated, logguedUser]);
-  
+  }, [isAuthentificated, loggedUser]);
+
   const [isClick, setIsClick] = React.useState(false);
-  
+
   const style = {
     color: isClick ? '#ed8936' : '#fff',
   }
-  
+
   const onClickFavoris = (e) => {
     e.preventDefault()
     setIsClick(true)
   }
-  
+
   const handleClickToLogin = (e) => {
     e.preventDefault()
     Router.push("/auth/login")
   }
-  
+
   return (
    <>
         <button

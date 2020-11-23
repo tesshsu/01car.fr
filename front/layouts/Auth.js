@@ -2,9 +2,8 @@ import React, { useEffect } from "react";
 
 // components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
-import Navbar from "components/Navbars/AuthNavbar.js";
 import FooterSmall from "components/Footers/FooterSmall.js";
-import useLogguedUser from 'service/hooks/useLogguedUser';
+
 
 export default function Auth({ children }) {
   return (

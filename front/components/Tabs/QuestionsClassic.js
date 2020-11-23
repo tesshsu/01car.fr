@@ -6,7 +6,7 @@ import QuestionsOptions from "components/Tabs/QuestionsOptions.js";
 import FileUpload from "components/Tabs/FileUpload.js";
 import ImageUpload from "components/Tabs/ImageUpload.js";
 import { Form, Field } from 'react-final-form';
-import useLogguedUser from 'service/hooks/useLogguedUser';
+import useLoggedUser from 'service/hooks/useLoggedUser';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'champs obligatoire')
@@ -44,11 +44,11 @@ export default function QuestionsClassic() {
   let [tokken,settokken]=useState(null);
   const {
     isAuthentificated,
-    logguedUser
-  } = useLogguedUser();  
-  
+    loggedUser
+  } = useLoggedUser();
+
   useEffect(() => {
-    if (isAuthentificated && logguedUser) {
+    if (isAuthentificated && loggedUser) {
         try{
 			const getTokken=async ()=>{
               const tok= await localStorage.getItem('ACCESS_TOKEN');
@@ -61,8 +61,8 @@ export default function QuestionsClassic() {
 			console.log(err);
         }
     }
-  }, [isAuthentificated, logguedUser]);
-  
+  }, [isAuthentificated, loggedUser]);
+
   return (
     <>
       <div className="flex flex-wrap">
@@ -128,7 +128,7 @@ export default function QuestionsClassic() {
                 <i className="fas fa-cog text-base mr-1"></i>  Questions 6 - 10 : Caractéristiques du véhicule
               </a>
             </li>
-			
+
           </ul>
           <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
             <div className="px-4 py-5 flex-auto">
@@ -161,7 +161,7 @@ export default function QuestionsClassic() {
 									    <Error name="marqueModel" />
 								    </div>
 								</div>
-								
+
 								<div className="w-full lg:w-6/12 px-4">
 									<label
 										className="block uppercase text-gray-700 text-md font-bold mb-2"
@@ -183,7 +183,7 @@ export default function QuestionsClassic() {
 								    </div>
                                 </div>
 							</div>
-							
+
 							<div className="flex flex-wrap">
 							    <div className="w-full lg:w-6/12 px-4">
 									<label
@@ -193,24 +193,24 @@ export default function QuestionsClassic() {
 										* Energie :
 									</label>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-                                      <Field name="fuel" 
-									         validate={required} 
+                                      <Field name="fuel"
+									         validate={required}
 											 component="select"
-											 className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline"									         
+											 className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
 									  >
                                         <option></option>
-                                        <option value="Diesel">Diesel (Diesel)</option> 
+                                        <option value="Diesel">Diesel (Diesel)</option>
 										<option value="Electric">Electric (Électrique)</option>
-										<option value="Gasoline">Gasoline (Essence)</option> 
-										<option value="Ethanol">Ethanol (Ethanol)</option> 
-										<option value="LPG">LPG (GPL)</option> 
+										<option value="Gasoline">Gasoline (Essence)</option>
+										<option value="Ethanol">Ethanol (Ethanol)</option>
+										<option value="LPG">LPG (GPL)</option>
 										<option value="Hybrid">Hybrid (Hybride)</option>
                                       </Field>
                                       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                         <i className="fas fa-angle-down text-2xl my-2"></i>
                                       </div>
                                       <Error name="fuel" />
-								    </div>								
+								    </div>
                                 </div>
 								<div className="w-full lg:w-6/12 px-4">
 									<label
@@ -231,7 +231,7 @@ export default function QuestionsClassic() {
 									<Error name="km" />
 								</div>
 							</div>
-							
+
 							<div className="flex flex-wrap mt-12 px-4 align-center justify-center">
 								<a
 									className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
@@ -246,7 +246,7 @@ export default function QuestionsClassic() {
 									<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>  1ème étape: 1 - 5 questions
 								</a>
 							</div>
-							
+
 						</div>
 						<div className={openTab === 2 ? "block" : "hidden"} id="link2">
 							<div className="flex flex-wrap">
@@ -500,7 +500,7 @@ export default function QuestionsClassic() {
 								  <span className="noteTotal text-orange-500">7</span>/20 Annonce offre GRATUITE
 							  </h4>
 							  <h4 className="text-3xl font-semibold">
-								  VOTRE PRIX DE VENTE <span className="marqueModel" value="">Suzuki SWIFT</span> - <span className="dt_entry_service" value="">2012</span> : <span className="price" value=""> 5670 </span> € 
+								  VOTRE PRIX DE VENTE <span className="marqueModel" value="">Suzuki SWIFT</span> - <span className="dt_entry_service" value="">2012</span> : <span className="price" value=""> 5670 </span> €
 							  </h4>
 							  <p className="notifyForPrice text-md leading-relaxed text-gray-500 text-left"> <i className="fas fa-flag-checkered animate-bounce"></i> Attention le prix de vente de votre annonce n’est pas inscrit dans la colonne de la côte car celle-ci est destinée à l’estimation élaborée et prouvée par nos ingénieurs et experts automobiles.Calculez votre côte personnalisée de votre véhicule avec <Link href="/prix">notre abonnement Premium</Link>.</p>
 							  <div className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600"><i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> ETAPE SUIVANTE </div>

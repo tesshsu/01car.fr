@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Link from "next/link";
-import useLogguedUser from 'service/hooks/useLogguedUser';
+import useLoggedUser from 'service/hooks/useLoggedUser';
 import ModalPayment from "components/Mondal/ModalPayment.js";
 
 const basics = [
@@ -13,13 +13,13 @@ const basics = [
 export default function PubContent() {
   const {
     isAuthentificated,
-    logguedUser
-  } = useLogguedUser();   
-  
+    loggedUser
+  } = useLoggedUser();
+
   let [tokken,settokken]=useState(null);
-  
+
   useEffect(() => {
-    if (isAuthentificated && logguedUser) {
+    if (isAuthentificated && loggedUser) {
         try{
 			const getTokken=async ()=>{
               const tok= await localStorage.getItem('ACCESS_TOKEN');
@@ -32,7 +32,7 @@ export default function PubContent() {
 			console.log(err);
         }
     }
-  }, [isAuthentificated, logguedUser]);
+  }, [isAuthentificated, loggedUser]);
   return (
     <>
       <section className="block relative z-1 bg-white-700">
@@ -62,7 +62,7 @@ export default function PubContent() {
 							  </div>
 							</div>
 						  </li>
-					  ))}										  
+					  ))}
 					</ul>
 					{!isAuthentificated || (tokken = null) ? (
 					       <button

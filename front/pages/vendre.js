@@ -7,19 +7,19 @@ import QuestionsPremier from "components/Tabs/QuestionsPremier.js";
 import PubContent from "layouts/PubContent.js";
 import PubContent2 from "layouts/PubContent2.js";
 import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
-import useLogguedUser from 'service/hooks/useLogguedUser';
+import useLoggedUser from 'service/hooks/useLoggedUser';
 import Router from "next/router";
 
 export default function Vendre() {
   const {
     isAuthentificated,
-    logguedUser
-  } = useLogguedUser();   
-  
+    loggedUser
+  } = useLoggedUser();
+
   let [tokken,settokken]=useState(null);
-  
+
   useEffect(() => {
-    if (isAuthentificated && logguedUser) {
+    if (isAuthentificated && loggedUser) {
         try{
 			const getTokken=async ()=>{
               const tok= await localStorage.getItem('ACCESS_TOKEN');
@@ -32,12 +32,12 @@ export default function Vendre() {
 			console.log(err);
         }
     }
-  }, [isAuthentificated, logguedUser]);
+  }, [isAuthentificated, loggedUser]);
   return (
     <>
       <IndexNavbar fixed />
       <main className="vendre-page">
-        
+
 		<section className="relative block h-350-px">
 		  <div
             className="absolute top-0 w-full h-full bg-center bg-cover"
@@ -51,7 +51,7 @@ export default function Vendre() {
               className="w-full h-full absolute opacity-50 bg-black"
             ></span>
           </div>
-		  
+
           <div
             className="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-16"
             style={{ transform: "translateZ(0)" }}
@@ -72,16 +72,16 @@ export default function Vendre() {
             </svg>
           </div>
         </section>
-		
-        <section className="relative py-16 bg-gray-300">          
+
+        <section className="relative py-16 bg-gray-300">
 		  <div className="container mx-auto px-4">
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
               <h1 className="font-bold text-4xl text-orange-700 mt-4 text-center">
 				Répondez au questionnaire de confiance afin de vendre votre véhicule
 			  </h1>
 			  <div className="px-6">
-                <div className="flex flex-wrap justify-center">				
-                  <div className="w-full lg:w-12/12 px-4 lg:order-1">				    
+                <div className="flex flex-wrap justify-center">
+                  <div className="w-full lg:w-12/12 px-4 lg:order-1">
                     <PubContentThreeIcons />
                   </div>
                 </div>
