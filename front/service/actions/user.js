@@ -39,7 +39,6 @@ export function fetchUser() {
 
     try {
       const response = await fetch('https://api.01car.fr/public/api/v1/profil', requestOptions)
-	  const token = JSON.parse(sessionStorage.getItem('data'))
       const data = await response.json()
 
       dispatch(getUserSuccess(data))

@@ -6,7 +6,7 @@ export const LOGIN = 'logguedUser/LOGIN';
 export const LOGOUT = 'logguedUser/LOGOUT';
 export const UPDATE = 'logguedUser/UPDATE';
 export const FETCH = 'logguedUser/FETCH';
-
+export const RIGESTER = 'logguedUser/RIGESTER';
 export function fetch() {
   return async (dispatch) => {
     dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Récupération du profil...'));
@@ -29,7 +29,7 @@ export function login({ email, password }) {
       const { token, user: { id: userId } } = await API.Auth.login({ email, password });
       await localStorage.setItem('ACCESS_TOKEN', token);
       await dispatch({ type: LOGIN });
-	  //await dispatch(fetch());
+	  await dispatch(fetch());
     } catch (err) {
       await dispatch({ type: LOGIN });
       throw err;
@@ -56,16 +56,20 @@ export function forget_password({ email }) {
 export function register(payload) {
   return async (dispatch) => {
     dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Création du compte...'));
-
+    
     try {
-      const { user, token } = await API.Auth.register(payload);
-      await localStorage.setItem('ACCESS_TOKEN', token);
-      await dispatch(update(user));
-      dispatch({ type: LOGIN });
+		 const {
+			success : { name, token } 
+		  } = await API.Auth.register(payload);
+		  
+			await localStorage.setItem('ACCESS_TOKEN', token);
+			dispatch({ type: LOGIN }); 
+		 
+      
     } catch (err) {
       throw err;
     } finally {
-      dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
+      dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false)); 
     }
   };
 }

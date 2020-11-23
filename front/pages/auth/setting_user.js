@@ -12,44 +12,23 @@ const required = value => (value ? undefined : 'Champs obligatoires')
 const mustBeNumber = value => (isNaN(value) ? 'Must be a number' : undefined)
 const composeValidators = (...validators) => value =>
   validators.reduce((error, validator) => error || validator(value), undefined)
-
-/*const masks = [
-  { name: "nom", type: "text", placeholder: "Votre nom", validate: null, value:{user.name} },
-  { name: "email", type: "email", placeholder: "Votre email", validate: null, value:{user.email} },
-  { name: "password", type: "password", placeholder: "mot de pass",  validate: null, value:{user.password},
-  { name: "phone", type: "number", placeholder: "Votre portable", validate: {mustBeNumber}, value:{user.phone} }
-  ];*/
-  
-  /*const masks = [
-  { name: "nom", type: "text", placeholder: "Votre nom", validate: null, value:"" },
-  { name: "email", type: "email", placeholder: "Votre email", validate: null, value:"" },
-  { name: "password", type: "password", placeholder: "mot de pass",  validate: null, value:""},
-  { name: "phone", type: "number", placeholder: "Votre portable", validate: {mustBeNumber}, value:"" }
-  ];*/
   
   
-const Setting_user= ({dispatch, loading, user, hasErrors}) => {
+export default function Setting_user ({dispatch, loading, user, hasErrors}) {
   const {
-    login,
     isAuthentificated,
     logguedUser,
 	logout
   } = useLogguedUser();
   
-  useEffect(() => {
-    if (isAuthentificated) {
+  useEffect( async() => {
+    if (!isAuthentificated && !logguedUser) {
+		Router.push("/auth/login");
     }
   }, [isAuthentificated, logguedUser]);
   
   const initialFormState = { id: null, name: '', email: '', password:'', phone:'' }
   const [userInfo, setUserInfo] = useState(initialFormState)
-
-  /*const masks = [
-  { name: "nom", type: "text", placeholder: "Votre nom", validate: null, value: user.name },
-  { name: "email", type: "email", placeholder: "Votre email", validate: null, value: user.email },
-  { name: "password", type: "password", placeholder: "mot de pass",  validate: null, value: user.password },
-  { name: "phone", type: "number", placeholder: "Votre portable", validate: null, value: user.phone }
-  ];*/
   
   const masks = [
   { name: "nom", type: "text", placeholder: "Votre nom", validate: null },
@@ -170,12 +149,5 @@ const Setting_user= ({dispatch, loading, user, hasErrors}) => {
     </>
   );
 }
-
-const mapStateToProps = (state) => ({
-  loading: state.user.loading,
-  user: state.user.user,
-  hasErrors: state.user.hasErrors,
-})
-export default connect(mapStateToProps)(Setting_user) 
 
 Setting_user.layout = Auth;
