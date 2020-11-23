@@ -12,16 +12,9 @@ const composeValidators = (...validators) => value =>
 
 export default function Register() {
   const {
-	register,
-    isAuthentificated,
-    logguedUser
+	register
   } = useLogguedUser();  
-  
-  useEffect(() => {
-    if (isAuthentificated && logguedUser) {
-      Router.push("/vendre");
-    }
-  }, [isAuthentificated, logguedUser]);
+ 
   
   const onSubmit = async (values)=>{
 	try {
@@ -31,6 +24,9 @@ export default function Register() {
 
       const data = { ...payload };
       await register(data);
+	  if(data){
+		 Router.push("/vendre");
+	  }
     } catch (err) {
       console.log(err.response);
       if (err.response && err.response.status === 422) {
@@ -38,7 +34,7 @@ export default function Register() {
           email: 'Cet email est déjà utilisé'
         });
       } else {
-        alert('Impossible de créer le compte');
+        alert('Impossible de créer le compte, merci de constacter notre equipe');
       }
     }
   }

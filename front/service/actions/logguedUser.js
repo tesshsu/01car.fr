@@ -6,30 +6,15 @@ export const LOGIN = 'logguedUser/LOGIN';
 export const LOGOUT = 'logguedUser/LOGOUT';
 export const UPDATE = 'logguedUser/UPDATE';
 export const FETCH = 'logguedUser/FETCH';
-export const RIGESTER = 'logguedUser/RIGESTER';
-export function fetch() {
-  return async (dispatch) => {
-    dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Récupération du profil...'));
-    try {
-      const user = await API.User.me();
-      dispatch(update(user));
-    } catch (err) {
-      throw err;
-    } finally {
-      dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
-    }
-  };
-}
 
 
 export function login({ email, password }) {
   return async (dispatch) => {
     dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Connexion...'));
     try {
-      const { token, user: { id: userId } } = await API.Auth.login({ email, password });
+      const { token, user } = await API.Auth.login({ email, password });
       await localStorage.setItem('ACCESS_TOKEN', token);
       await dispatch({ type: LOGIN });
-	  await dispatch(fetch());
     } catch (err) {
       await dispatch({ type: LOGIN });
       throw err;
@@ -43,7 +28,7 @@ export function forget_password({ email }) {
   return async (dispatch) => {
     dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Sending...'));
     try {
-      const { token, user: { id: userId } } = await API.Auth.forget_password({ email });
+      const { token, user } = await API.Auth.forget_password({ email });
       await dispatch(fetch());
     } catch (err) {
       throw err;
@@ -58,12 +43,12 @@ export function register(payload) {
     dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Création du compte...'));
     
     try {
-		 const {
-			success : { name, token } 
-		  } = await API.Auth.register(payload);
-		  
-			await localStorage.setItem('ACCESS_TOKEN', token);
-			dispatch({ type: LOGIN }); 
+		const {
+			  token, user
+		} = await API.Auth.register(payload);
+		 
+		await localStorage.setItem('ACCESS_TOKEN', token);
+		dispatch({ type: LOGIN }); 
 		 
       
     } catch (err) {
