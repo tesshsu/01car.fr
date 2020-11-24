@@ -1,6 +1,5 @@
 import client from '../client';
 
-
 export function getUser(id) {
   return client
     .get(`v1/profil/${id}`)

@@ -32,7 +32,8 @@ export default function useLoggedUser() {
     () => dispatch(LOGGED_USER_ACTIONS.logout()),
     [dispatch]
   );
-
+ 
+  
   return {
     isAuthentificated: loggedUser.isAuthentificated,
     loggedUser: loggedUser,
