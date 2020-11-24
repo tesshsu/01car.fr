@@ -24,8 +24,7 @@ export default function Annonce() {
           <div className="container mx-auto px-4">            
             <div className="flex flex-wrap">
                 <AnnoncePremier transparent />
-                <AnnonceClassic transparent />
-                <AnnonceClassic transparent />               				
+                <AnnonceClassic transparent />        				
             </div>
 			<div className="flex content-center items-center justify-center h-full mb-24 mt-8">
                <Pagination transparent />

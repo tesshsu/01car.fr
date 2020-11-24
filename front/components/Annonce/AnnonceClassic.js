@@ -12,11 +12,10 @@ const AnnonceClassic = ({dispatch, loading, posts, hasErrors}) => {
   useEffect(() => {
 	  dispatch(fetchPosts())
   }, [dispatch])
-
   return (
     <>
         {posts.map(post => (post.prenium != null && post.prenium == 0) &&
-			<Link key={post.id} href="/annonce_details">
+			<Link key={post.id} post={post} href={`/annonce_details/${post.id}`}>
 			    <div id={post.id} statu={post.prenium} className="relative w-full md:w-6/12 lg:w-4/12 lg:mb-0 mb-12 mr-4 my-6 shadow-lg max-w-400-px rounded-lg border-2 border-gray-200 ">
 					<img
 						alt="..."
