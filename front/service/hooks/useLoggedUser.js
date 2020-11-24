@@ -33,7 +33,6 @@ export default function useLoggedUser() {
     [dispatch]
   );
 
-
   return {
     isAuthentificated: loggedUser.isAuthentificated,
     loggedUser: loggedUser,

@@ -162,4 +162,3 @@ const mapStateToProps = (state) => ({
   hasErrors: state.user.hasErrors,
 })
 export default connect(mapStateToProps)(Navbar)
-

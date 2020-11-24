@@ -4,25 +4,15 @@ import Auth from "layouts/Auth.js";
 
 import useLoggedUser from 'service/hooks/useLoggedUser';
 import Router from "next/router";
-import {updateUser} from 'service/actions/user';
 
 
-export default function Setting_user ({dispatch, loading, user, hasErrors}) {
+export default function Setting_user () {
   const {
     isAuthentificated,
     loggedUser,
 	logout,
-	  updateLoggedUser
+	updateLoggedUser
   } = useLoggedUser();
-
-
-
-  useEffect( async() => {
-    if (!isAuthentificated && !loggedUser) {
-		Router.push("/auth/login");
-    }
-  }, [isAuthentificated, loggedUser]);
-
 
   const onSubmit = async (values)=>{
 	try {
@@ -33,17 +23,12 @@ export default function Setting_user ({dispatch, loading, user, hasErrors}) {
       const data = { ...payload };
       console.log(data);
       await updateLoggedUser(data);
-
+     
     } catch (err) {
-      console.log(err.response);
-      if (err.response && err.response.status === 422) {
-        submitError({
-          email: 'Cet email est déjà utilisé'
-        });
-      } else {
-        alert(err);
-      }
-    }
+       console.log(err.response);
+    } finally {
+	  alert("votre profil été modifié");
+	}
   }
 
   async function onSignOut() {
@@ -69,7 +54,7 @@ export default function Setting_user ({dispatch, loading, user, hasErrors}) {
                 <Form
 				  initialValues={{
 						name:'',
-						email: 'root@email.com',
+						email: loggedUser.email,
 						phone: ''
 					  }}
 				  onSubmit={onSubmit}
@@ -93,32 +78,13 @@ export default function Setting_user ({dispatch, loading, user, hasErrors}) {
 									/>{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
 								  </div>
 								)}
-                            </Field>
-							<Field name="email">
-							    {({ input, meta }) => (
-								  <div className="relative w-full mb-3">
-									<label
-									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
-									  htmlFor="email"
-									>
-									  Email
-									</label>
-									<input
-									  {...input}
-									  type="email"
-									  value= {values.email}
-									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-									  placeholder="Email"
-									/>{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
-								  </div>
-								)}
-                            </Field>
+                            </Field>							
 							<Field name="phone">
 							    {({ input, meta }) => (
 								  <div className="relative w-full mb-3">
 									<label
 									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
-									  htmlFor="password"
+									  htmlFor="phone"
 									>
 									  Phone
 									</label>
@@ -127,7 +93,7 @@ export default function Setting_user ({dispatch, loading, user, hasErrors}) {
 									  type="phone"
 									  value= {values.phone}
 									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-									  placeholder="Mot de passe"
+									  placeholder="votre numero"
 									/>{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
 								  </div>
 								)}
