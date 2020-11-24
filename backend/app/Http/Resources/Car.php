@@ -19,8 +19,7 @@ class Car extends JsonResource
             'id' => $this->id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'prenium' => $this->prenium,
-
+            'prenium' => $this->prenium > 0 ? true : false,
             'brand' => $this->brand,
             'model' => $this->model,
             'generation' => $this->generation,

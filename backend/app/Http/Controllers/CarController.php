@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Car as CarResource;
-use App\Http\Resources\Role as RoleResource;
+use App\Http\Resources\CarPaginatorCollection;
 use App\Models\Car;
-use App\Models\User;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 class CarController extends Controller
 {
@@ -40,15 +37,15 @@ class CarController extends Controller
             $carsReq->where('prenium', $prenium);
         }
 
-        $cars = $carsReq->get();
+        $carsLengthAwarePaginator = $carsReq->paginate($request->perPage, ['*'], $request->pageName, $request->page);
 
-        return response()->json( CarResource::collection($cars));
+        return response()->json(new CarPaginatorCollection($carsLengthAwarePaginator));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
@@ -74,7 +71,7 @@ class CarController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Car
+     * @param \App\Models\Car
      * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
@@ -86,8 +83,8 @@ class CarController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $car
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\User $car
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Car $car)
@@ -100,9 +97,9 @@ class CarController extends Controller
         }
 
         $currentUser = Auth::user();
-        if ( $currentUser->id != $car->user_id
-             || ($currentUser->id == $car->user_id && !$car->prenium)
-            || ! $currentUser->isAdminUser() )  {
+        if ($currentUser->id != $car->user_id
+            || ($currentUser->id == $car->user_id && !$car->prenium)
+            || !$currentUser->isAdminUser()) {
             return response()->json(['error' => 'Unauthorised'], 403);
         }
 
@@ -123,13 +120,13 @@ class CarController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Car $car)
     {
         $currentUser = Auth::user();
-        if ( $currentUser->id != $car->user_id || ! $currentUser->isAdminUser())  {
+        if ($currentUser->id != $car->user_id || !$currentUser->isAdminUser()) {
             return response()->json(['error' => 'Unauthorised'], 403);
         }
         $car->delete();
@@ -138,16 +135,16 @@ class CarController extends Controller
     private function validateEntity($reqCar, $car)
     {
         return Validator::make((array)$reqCar, [
-            'brand'=> 'max:' . Car::fieldsSizeMax('brand'),
-            'model'=> 'max:' . Car::fieldsSizeMax('model'),
-            'generation'=> 'max:' . Car::fieldsSizeMax('generation'),
-            'fuel'=> 'max:' . Car::fieldsSizeMax('fuel'),
-            'transmission'=> 'max:' . Car::fieldsSizeMax('transmission'),
-            'carBody'=> 'max:' . Car::fieldsSizeMax('carBody'),
-            'finition'=> 'max:' . Car::fieldsSizeMax('finition'),
-            'displacement'=> 'max:' . Car::fieldsSizeMax('displacement'),
-            'version'=> 'max:' . Car::fieldsSizeMax('version'),
-            'currency'=> 'max:' . Car::fieldsSizeMax('currency'),
+            'brand' => 'max:' . Car::fieldsSizeMax('brand'),
+            'model' => 'max:' . Car::fieldsSizeMax('model'),
+            'generation' => 'max:' . Car::fieldsSizeMax('generation'),
+            'fuel' => 'max:' . Car::fieldsSizeMax('fuel'),
+            'transmission' => 'max:' . Car::fieldsSizeMax('transmission'),
+            'carBody' => 'max:' . Car::fieldsSizeMax('carBody'),
+            'finition' => 'max:' . Car::fieldsSizeMax('finition'),
+            'displacement' => 'max:' . Car::fieldsSizeMax('displacement'),
+            'version' => 'max:' . Car::fieldsSizeMax('version'),
+            'currency' => 'max:' . Car::fieldsSizeMax('currency'),
         ]);
     }
 
@@ -187,6 +184,6 @@ class CarController extends Controller
         if ($car == NULL) {
             return response()->json(['error' => 'NotFound'], 404);
         }
-        return response()->json( new CarResource($car));
+        return response()->json(new CarResource($car));
     }
 }

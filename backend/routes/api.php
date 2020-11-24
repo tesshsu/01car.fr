@@ -24,6 +24,9 @@ Route::get('/auth/redirect/{provider}', 'App\Http\Controllers\Auth\SocialControl
 Route::get('/auth/callback/{provider}', 'App\Http\Controllers\Auth\SocialController@callback');
 
 // public routes
+Route::get('/v1/cars/search', 'App\Http\Controllers\CarController@index');
+Route::get('/v1/cars/{id}', 'App\Http\Controllers\CarController@show');
+
 //Route::apiResource('/v1/adds', 'ProductController');
 
 // Protected routes
@@ -32,7 +35,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/v1/profil', 'App\Http\Controllers\ProfilController@show');
     Route::patch('/v1/profil', 'App\Http\Controllers\ProfilController@update');
 
-    Route::apiResource('/v1/ads/cars', CarController::class);
+    Route::apiResource('/v1/cars', CarController::class);
 
 //    Route::post('/v1/adds/{id}/files', 'ProductController@addFiles')->middleware('auth:api');
 });
