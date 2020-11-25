@@ -152,6 +152,18 @@ GRANT ALL PRIVILEGES ON biandang.* TO 'biandangUser'@'localhost';
 
 FLUSH PRIVILEGES;
 
+# login social
+
+https://www.toptal.com/laravel/passport-tutorial-auth-user-access
+
+https://www.nicesnippets.com/blog/laravel-8-socialite-login-with-facebook-tutorial
+https://www.tutsmake.com/laravel-7-6-facebook-login-tutorial-example/
+
+
+# factory
+
+https://fakerphp.github.io/formatters/
+
 
 # Laradock
 
@@ -163,7 +175,7 @@ docker-compose exec --user=laradock workspace bash
 ```
 
 
-php artisan make:model SocialFacebookAccount -m
+php artisan make:model SocialFacebookAccount -m -c
 
 
 php artisan make:migration create_users_roles_table
@@ -192,6 +204,8 @@ php artisan passport:install
 ```
 ```
 php artisan passport:client --personal
+
+php artisan migrate:fresh --seed
 ```
 
 ## Passing The Access Token
@@ -206,7 +220,13 @@ $response = $client->request('GET', '/api/user', [
 ]);
 
 
+# server
 
+```
+/opt/plesk/php/7.3/bin/php artisan migrate:fresh --seed
+
+/opt/plesk/php/7.3/bin/php artisan passport:client --personal
+```
 
 
 
