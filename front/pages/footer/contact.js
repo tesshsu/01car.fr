@@ -2,7 +2,7 @@ import React from "react";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import { Form, Field } from 'react-final-form';
-
+import CardAcceptCondition from "components/Cards/CardAcceptCondition.js";
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
 const mustBeNumber = value => (isNaN(value) ? 'Must be a number' : undefined)
@@ -102,27 +102,7 @@ export default function Contact() {
 								  </div>
 								)}
                             </Field>
-						  <div>
-								<label className="inline-flex items-center cursor-pointer">
-								  <input
-									id="customCheckLogin"
-									type="checkbox"
-									disabled = {submitting}
-									className="form-checkbox text-gray-800 ml-1 w-5 h-5 ease-linear transition-all duration-150"
-								  />
-								  <span className="ml-2 text-sm font-semibold text-gray-700">
-									J'ai lu et j'accepte les{" "}
-									<a
-									  href="#pablo"
-									  className="text-blue-500"
-									  onClick={(e) => e.preventDefault()}
-									>
-									  Politique de confidentialité de 01car.fr
-									</a>
-								  </span>
-								</label>
-						  </div>
-
+						    <CardAcceptCondition />
 						  <div className="text-center mt-6">
 							<button
 							  className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
