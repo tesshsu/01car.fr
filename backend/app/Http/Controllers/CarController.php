@@ -37,6 +37,7 @@ class CarController extends Controller
             $carsReq->where('prenium', $prenium);
         }
 
+        $carsReq->orderBy('prenium', 'desc');
         $carsLengthAwarePaginator = $carsReq->paginate($request->perPage, ['*'], $request->pageName, $request->page);
 
         return response()->json(new CarPaginatorCollection($carsLengthAwarePaginator));
