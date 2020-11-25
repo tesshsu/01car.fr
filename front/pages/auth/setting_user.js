@@ -33,6 +33,7 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
      
     } catch (err) {
        console.log(err.response);
+	   alert(err.response);
     } finally {
 	  alert("votre profil été modifié");
 	}

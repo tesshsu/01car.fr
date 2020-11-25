@@ -1,9 +1,9 @@
 {
-  "name": "tailwind-webapp-nexjs",
-  "homepage": "https://demos.creative-tim.com/tailwind-webapp-nexjs",
+  "name": "01car",
+  "homepage": "https://01car.fr/",
   "version": "1.0.0",
-  "description": "Tailwind WebApp NextJS - A free Tailwind CSS, NextJS and React WebApp template by Creative Tim.",
-  "repository": "https://github.com/creativetimofficial/tailwind-webapp-nextjs",
+  "description": "1er SITE D’ACCOMPAGNEMENT AFIN DE SÉCURISER LA VENTE DE VÉHICULES.",
+  "repository": "https://github.com/tesshsu/01car.fr",
   "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.14.0",

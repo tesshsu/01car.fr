@@ -19,7 +19,7 @@ const AnnonceDetail = ({
 }) => {
   useEffect(() => {
     //const { id } = match.params
-	const id = 2
+	const id = post.id
     dispatch(fetchPost(id))
   }, [dispatch, match])
   return (
