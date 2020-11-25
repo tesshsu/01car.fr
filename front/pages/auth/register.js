@@ -3,7 +3,7 @@ import { Form, Field } from 'react-final-form';
 import Router from "next/router";
 import Auth from "layouts/Auth.js";
 import useLoggedUser from 'service/hooks/useLoggedUser';
-
+import CardAcceptCondition from "components/Cards/CardAcceptCondition.js";
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
 const mustBeNumber = value => (isNaN(value) ? 'Must be a number' : undefined)
@@ -157,25 +157,7 @@ export default function Register() {
 								  </div>
 								)}
                             </Field>
-						  <div>
-							<label className="inline-flex items-center cursor-pointer">
-							  <input
-								id="customCheckLogin"
-								type="checkbox"
-								className="form-checkbox text-gray-800 ml-1 w-5 h-5 ease-linear transition-all duration-150"
-							  />
-							  <span className="ml-2 text-sm font-semibold text-gray-700">
-								J'ai lu et j'accepte les{" "}
-								<a
-								  href="#pablo"
-								  className="text-blue-500"
-								  onClick={(e) => e.preventDefault()}
-								>
-								  Politique de confidentialité de 01car.fr
-								</a>
-							  </span>
-							</label>
-						  </div>
+						    <CardAcceptCondition />
 
 						  <div className="text-center mt-6">
 							<button
