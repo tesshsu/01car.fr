@@ -10,7 +10,7 @@ import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
 import * as reducers from '../service/reducers';
 import userReducer from '../service/reducers/user';
-import postsReducer from '../service/reducers/annonces';
+import carsReducer from '../service/reducers/cars';
 import postReducer from '../service/reducers/annonce';
 import { setupApiClient } from '../api/client';
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -20,7 +20,7 @@ import "assets/styles/tailwind.css";
 const logger = createLogger();
 const rootReducers = combineReducers({
   user: userReducer,
-  posts: postsReducer,
+  carsReducer: carsReducer,
   post: postReducer,
   ...reducers
 })

@@ -33,7 +33,7 @@ const AnnonceDetail = ({
 				<h4 className="marqueBlock font-bold text-2xl text-white mt-16 px-4 py-3">
 					 <span className="favoris"><ShareButton /></span>
 				</h4>
-				
+
 				<div className="flex flex-wrap">
 				     <DetailsBasic />
 				</div>

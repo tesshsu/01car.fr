@@ -1,6 +1,6 @@
 import loadingOverlay from './loadingOverlay';
 import loggedUser from './loggedUser';
-import annonce from './annonces';
+import annonce from './cars';
 
 export {
   loadingOverlay,

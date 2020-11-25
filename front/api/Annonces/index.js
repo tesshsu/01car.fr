@@ -2,12 +2,19 @@ import client from '../client';
 
 export function create(payload) {
   return client
-    .post('/annonce', payload)
+    .post('/api/v1/cars/search', payload)
     .then(({ data }) => data);
 }
 
-export function get() {
+export function get(id) {
   return client
-    .get('/annonce')
-    .then(({ data }) => data);
+      .get(`/api/v1/cars/search/${id}`)
+      .then(({ data }) => data);
 }
+
+export function search(perPage, page) {
+  return client
+      .get(`/api/v1/cars/search?perPage=${perPage}&page=${page}`)
+      .then(({ data }) => data);
+}
+
