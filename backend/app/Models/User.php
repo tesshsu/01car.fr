@@ -60,23 +60,7 @@ class User extends Authenticatable
         return $this->admin;
     }
 
-
-    public function hasPermissions($permissions)
-    {
-        $requestPermissions = array();
-        if (is_array($permissions)) {
-            $requestPermissions = array_merge($requestPermissions, $permissions);
-        } else {
-            $requestPermissions[] = $permissions;
-        }
-        $currentUser = $this->loadMissing('roles', 'roles.permissions');
-        $userPermissions = array();
-        foreach ($currentUser->roles as $role) {
-            foreach ($role->permissions as $permissionObj) {
-                $userPermissions[] = $permissionObj->permission;
-            }
-        }
-
-        return count(array_intersect($requestPermissions, $userPermissions)) == count($requestPermissions);
+    public function cars(){
+        return $this->hasMany('App\Models\Car', 'user_id');
     }
 }

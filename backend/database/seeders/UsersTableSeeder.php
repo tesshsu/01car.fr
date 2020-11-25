@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
+        DB::table('users')->upsert([
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'name' => 'Admin',
@@ -23,17 +23,17 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('root'),
             'phone' => '11111111111 #33',
             'admin' => true
-        ]);
+        ], 'email');
 
-        DB::table('users')->insert([
+        DB::table('users')->upsert([
             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => \Carbon\Carbon::now()->toDateTimeString(),
             'name' => 'customer',
             'email' => 'customer@email.com',
             'email_verified_at' => now(),
             'password' => bcrypt('customer'),
-            'phone' => '11111111111 #33',
+            'phone' => '222222222 #33',
             'admin' => false
-        ]);
+        ], 'email');
     }
 }

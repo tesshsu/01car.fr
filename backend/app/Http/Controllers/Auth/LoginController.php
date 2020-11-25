@@ -50,7 +50,7 @@ class LoginController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users',
             'password' => 'required',
             'password_confirmation' => 'required|same:password',
         ]);
@@ -60,8 +60,8 @@ class LoginController extends Controller
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['token'] =  $user->createToken('MyApp')-> accessToken;
-        $success['name'] =  $user->name;
-        return response()->json(['success'=> $success], $this->successStatus);
+        $answer['token'] =  $user->createToken('MyApp')-> accessToken;
+        $answer['user'] = new UserResource($user);
+        return response()->json($answer, $this->successStatus);
     }
 }
