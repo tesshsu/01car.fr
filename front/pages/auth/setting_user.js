@@ -6,7 +6,6 @@ import {fetchUser} from 'service/actions/user';
 import useLoggedUser from 'service/hooks/useLoggedUser';
 import Router from "next/router";
 import {connect} from 'react-redux';
-
 const Setting_user = ({dispatch, loading, user, hasErrors}) => {
   const {
     isAuthentificated,
