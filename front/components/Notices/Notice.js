@@ -1,6 +1,6 @@
 import React from "react";
 
-const Alert = (props) => {
+export default function Notice (props){
   const [showAlert, setShowAlert] = React.useState(true);
   return (
     <>
@@ -25,5 +25,3 @@ const Alert = (props) => {
     </>
   );
 };
-
-export default Alert;

@@ -8,6 +8,7 @@ import Router from "next/router";
 import {connect} from 'react-redux';
 import LoadSaveReinitializeForm from 'helpers/LoadSaveReinitializeForm'
 import CardAcceptCondition from "components/Cards/CardAcceptCondition.js";
+import Notice from "components/Notices/Notice.js";
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -56,11 +57,11 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 		loggedUser,
 		logout,
 		updateLoggedUser
-	  } = useLoggedUser();
+	  } = useLoggedUser();	  
 	  
 	  useEffect(() => {
-		if (isAuthentificated) {
-		  dispatch(fetchUser())
+		if (isAuthentificated && loggedUser) {
+		  dispatch(fetchUser())		  
 		}
 	  }, [isAuthentificated, loggedUser]);
 	  
@@ -72,13 +73,11 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 
 		  const data = { ...payload };
 		  console.log(data);
-		  await updateLoggedUser(data);
-		 
+		  await updateLoggedUser(data);		  
 		} catch (err) {
 		   console.log(err.response);
-		   alert(err.response);
 		} finally {
-		  alert("votre profil été modifié");
+		   alert("votre profil été modifier");
 		}
 	  }
 
@@ -98,7 +97,8 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
           <div className="w-full mt-20 mb-8 lg:w-6/12 px-4">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
               <div className="rounded-t mb-0 px-6 py-6">
-                <div className="text-center mb-3">
+                { isAuthentificated && loggedUser ? (
+				<div className="text-center mb-3">
 				  <h6 className="text-gray-600 text-md font-bold">
                     Les details de votre compte
                   </h6>
@@ -106,7 +106,13 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
                   <p className="text-gray-800 text-sm font-bold">votre contact email :  <span className="text-gray-600 text-sm"> {user.email}</span></p>
                   <p className="text-gray-800 text-sm font-bold">Phone :  <span className="text-gray-600 text-sm"> {user.phone}</span> </p>
 				</div>
-                
+                ) : (
+				   <div className="text-center mb-3">
+				      <h6 className="text-gray-600 text-md font-bold">
+						votre compte n'ai pas encore des informations
+					  </h6>
+				   </div>
+				)}
 				<div className="text-center mb-3">
                   <h6 className="text-gray-600 text-md font-bold">
                     Modifier votre compte
@@ -157,7 +163,7 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 							  disabled={submitting}
 							/>
 						   </div>
-                          <CardAcceptCondition />				   
+                          <CardAcceptCondition />						  					  
 						  <div className="text-center mt-6">
 							<button
 							  className="bg-orange-500 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
@@ -172,7 +178,7 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 							  onClick={form.reset}
 							  disabled={submitting || pristine}
 							>
-							  Reset
+							  Réinitialiser
 							</button>
 						  </div>
 						</form>

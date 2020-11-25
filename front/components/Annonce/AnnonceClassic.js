@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import Link from "next/link";
 import useLoggedUser from 'service/hooks/useLoggedUser';
 import Router from "next/router";
-import Alert from 'components/Alerts/Alert';
 import FavorisButton from 'components/Favoris/FavorisButton';
 import {connect} from 'react-redux'
 import Moment from 'react-moment';
