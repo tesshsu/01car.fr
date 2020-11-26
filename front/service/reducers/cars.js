@@ -9,6 +9,7 @@ export const initialState = {
   last_page: 0,
   total: 0,
   cars: [],
+  selectedCar: undefined,
   loading: false,
   hasErrors: false,
 }
@@ -28,8 +29,18 @@ export default function carsReducer(state = initialState, action) {
         cars: action.payload.data,
         loading: false,
         hasErrors: false}
+    case actions.GET_CAR_FAILURE:
+      return {...state, loading: false, hasErrors: true}
+    case actions.GET_CAR:
+      return {...state, loading: true}
+    case actions.GET_CAR_SUCCESS:
+      return {
+        selectedCar: action.payload,
+        loading: false,
+        hasErrors: false}
     case actions.GET_CARS_FAILURE:
       return {...state, loading: false, hasErrors: true}
+
     default:
       return state
   }

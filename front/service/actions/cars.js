@@ -1,12 +1,30 @@
 // Create Redux action types
 import * as API from "../../api";
 
+export const GET_CAR = 'GET_CAR'
+export const GET_CAR_SUCCESS = 'GET_CAR_SUCCESS'
+export const GET_CAR_FAILURE = 'GET_CAR_FAILURE'
+
 export const GET_CARS = 'GET_CARS'
 export const GET_CARS_SUCCESS = 'GET_CARS_SUCCESS'
 export const GET_CARS_FAILURE = 'GET_CARS_FAILURE'
 
 
 // Create Redux action creators that return an action
+export const getCar = () => ({
+  type: GET_CAR,
+});
+
+export const getCarSuccess = (response) => ({
+  type: GET_CAR_SUCCESS,
+  payload: response,
+});
+
+export const getCarFailure = () => ({
+  type: GET_CAR_FAILURE,
+});
+
+
 export const getCars = () => ({
   type: GET_CARS,
 })
@@ -27,13 +45,24 @@ export function fetchCars(page=1, perPage=18) {
 
     try {
       const response = await API.Annonces.search(perPage, page);
-
-      console.log(response);
-
       dispatch(getCarsSuccess(response));
 
     } catch (error) {
       dispatch(getCarsFailure())
+    }
+  }
+}
+
+export function fetchCar(id) {
+  return async (dispatch) => {
+    dispatch(getCar())
+
+    try {
+      const response = await API.Annonces.get(id);
+      dispatch(getCarSuccess(response));
+
+    } catch (error) {
+      dispatch(getCarFailure())
     }
   }
 }

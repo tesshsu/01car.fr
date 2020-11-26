@@ -11,7 +11,7 @@ const AnnoncePremier = ({ loading,
 
   return (
     <>
-        {cars.map(post => (post.prenium != null && post.prenium) &&
+        {cars?.map(post => (post.prenium != null && post.prenium) &&
 			<Link key={post.id} href={`/annonce?id=${post.id}`}>
 				<div id={post.id} status={post.prenium} className="relative w-full md:w-6/12 lg:w-4/12 lg:mb-0 mb-12 mr-4 my-6 shadow-lg max-w-400-px rounded-lg border-2 border-gray-200 ">
 						<img
