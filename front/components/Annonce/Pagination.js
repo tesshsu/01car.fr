@@ -2,8 +2,17 @@ import React, {useEffect, } from "react";
 import Link from "next/link";
 
 
+
 export default function Pagination(props) {
-	const items = Array.from({ length: props.last_page }, (_, i) => i)
+	const nb_pagination_selectors = props.nb_pagination_selectors ? props.nb_pagination_selectors : 5;
+
+	const nb_previous_selectors = Math.floor(nb_pagination_selectors / 2);
+	const items = Array.from({ length: nb_pagination_selectors },
+
+
+		(_, i) => Math.max(1,
+				Math.min(props.last_page - nb_pagination_selectors + 1, props.current_page - nb_previous_selectors)
+			) + i)
 
 	return (
 		<>
@@ -22,7 +31,10 @@ export default function Pagination(props) {
 						</li>
 							{items.map((num) => (
 								<li>
-									<a href={`?page=${num}`} className="first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0 rounded-full items-center justify-center leading-tight relative border border-solid border-gray-500 text-orange-500 bg-gray-500">
+									<a href={`?page=${num}`} className={`first:ml-0 text-xs font-semibold flex w-8 h-8 mx-1 p-0
+									rounded-full items-center justify-center leading-tight relative
+									border border-solid border-gray-500 text-orange-500
+									${num == props.current_page ? 'bg-gray-600' : 'bg-gray-500'}`} >
 										{num}
 									</a>
 								</li>

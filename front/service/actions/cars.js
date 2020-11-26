@@ -27,7 +27,11 @@ export function fetchCars(page=1, perPage=18) {
 
     try {
       const response = await API.Annonces.search(perPage, page);
-      dispatch(getCarsSuccess(response))
+
+      console.log(response);
+
+      dispatch(getCarsSuccess(response));
+
     } catch (error) {
       dispatch(getCarsFailure())
     }

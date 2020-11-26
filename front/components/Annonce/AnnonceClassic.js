@@ -5,19 +5,10 @@ import {connect} from 'react-redux'
 import Moment from 'react-moment';
 import {fetchCars} from 'service/actions/cars';
 
-const AnnonceClassic = ({dispatch,
+const AnnonceClassic = ({
                           loading,
                           cars,
-                          current_page,
-                          from,
-                          to,
-                          per_page,
-                          last_page,
-                          total,
                           hasErrors}) => {
-  useEffect(() => {
-	  dispatch(fetchCars())
-  }, [dispatch])
   return (
     <>
         {cars?.map(post => (post.prenium != null && !post.prenium) &&
@@ -65,12 +56,6 @@ const AnnonceClassic = ({dispatch,
 const mapStateToProps = (state) => ({
   loading: state.carsReducer.loading,
   cars: state.carsReducer.cars,
-  current_page: state.carsReducer.current_page,
-  from: state.carsReducer.from,
-  to:  state.carsReducer.to,
-  per_page: state.carsReducer.per_page,
-  last_page: state.carsReducer.last_page,
-  total: state.carsReducer.total,
   hasErrors: state.carsReducer.hasErrors,
 })
 

@@ -9,25 +9,28 @@ import ShareButton from 'components/Annonce/ShareButton';
 
 import { connect } from 'react-redux'
 import {fetchPost} from 'service/actions/annonce';
+import {useRouter} from "next/router";
 
 const AnnonceDetail = ({
-  match,
   dispatch,
-  post,
+  cars,
   hasErrors,
   loading,
 }) => {
+	const router = useRouter();
+	let post;
   useEffect(() => {
     //const { id } = match.params
-	const id = post.id
-    dispatch(fetchPost(id))
-  }, [dispatch, match])
+	const id = router.query.id;
+	post = cars.filter(c => c.id = id);
+	console.log(car);
+  }, [dispatch])
   return (
     <>
 		<div className="w-full lg:w-8/12 lg:mb-0 mb-12  my-6 shadow-lg rounded-lg">
 			<CardAnnonceSlide />
 				<h4 className="marqueBlock bg-orange-500 font-bold text-2xl text-white px-4 py-3 shadow-lg">
-					 <span className="brand">{post.brand}</span> - <span className="model">{post.model}</span> <span className="generation">{post.generation}</span>
+					 <span className="brand">{post?.brand}</span> - <span className="model">{post?.model}</span> <span className="generation">{post.generation}</span>
 					 <span className="favoris"><FavorisButton /></span>
 				</h4>
 				<h4 className="marqueBlock font-bold text-2xl text-white mt-16 px-4 py-3">
@@ -53,10 +56,10 @@ const AnnonceDetail = ({
   );
 }
 
-const mapStateToProps = state => ({
-  post: state.post.post,
-  loading: { post: state.post.loading },
-  hasErrors: { post: state.post.hasErrors },
+const mapStateToProps = (state) => ({
+	loading: state.carsReducer.loading,
+	cars: state.carsReducer.cars,
+	hasErrors: state.carsReducer.hasErrors,
 })
 
 export default connect(mapStateToProps)(AnnonceDetail)

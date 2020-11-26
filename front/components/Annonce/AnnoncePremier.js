@@ -5,19 +5,10 @@ import FavorisButton from 'components/Favoris/FavorisButton';
 import Moment from 'react-moment';
 import {fetchCars} from 'service/actions/cars';
 
-const AnnoncePremier = ({dispatch,
-                          loading,
+const AnnoncePremier = ({ loading,
                           cars,
-                          current_page,
-                          from,
-                          to,
-                          per_page,
-                          last_page,
-                          total,
                           hasErrors}) => {
-   useEffect(() => {
-	  dispatch(fetchCars())
-  }, [dispatch])
+
   return (
     <>
         {cars.map(post => (post.prenium != null && post.prenium) &&

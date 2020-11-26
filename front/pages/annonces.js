@@ -21,7 +21,7 @@ const Annonces = ({ dispatch,
                     last_page,
                     total,
                     hasErrors}) => {
-    const router = useRouter()
+    const router = useRouter();
     useEffect(() => {
         dispatch(fetchCars(router.query.page, router.query.perPage))
     }, [dispatch])
