@@ -2,14 +2,8 @@ import React, {useEffect, useState} from 'react';
 import Link from "next/link";
 import useLoggedUser from 'service/hooks/useLoggedUser';
 import ModalPayment from "components/Mondal/ModalPayment.js";
+import {basics} from "helpers/constant";
 
-const basics = [
-	  { icon: "fas fa-hands-helping", name: "informations principales du véhicule" },
-	  { icon: "fas fa-clipboard-check", name: "Tête de liste, grande visibilité" },
-	  { icon: "far fa-paper-plane", name: "Modifier à tout moment le prix du véhicule" },
-	  { icon: "fas fa-database", name: "Fiabilité des données du véhicule" },
-	  { icon: "fas fa-award", name: "Les valeurs de déclenchement de transaction particulier et professionel qualifié"}
-  ];
 export default function PubContent() {
   const {
     isAuthentificated,

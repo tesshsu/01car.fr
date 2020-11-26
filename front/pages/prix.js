@@ -6,28 +6,8 @@ import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import PubContent from "layouts/PubContent.js";
 import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
+import {classics, premiums, pubTransparents } from "helpers/constant";
 
-const classics = [
-	{list: "Annonces pré-remplie"},
-	{list: "Annonces gratuite"},
-	{list: "Contacter vendeur direct"}
-];
-const premiums = [
-	{list: "Rassurer l'acheteur grâce aux réponses"},
-	{list: "Tête de liste, grande visibilité"},
-	{list: "Logo qualité garantie"},
-	{list: "Modifier à tout moment le prix du véhicule"},
-	{list: "Les valeurs de déclenchement de transaction particulier et professionel qualifié"},
-	{list: "Contacter vendeur direct"}
-];
-const pubTransparents = [
-	  { icon: "fas fa-database", width: {width: '15%'} , name: "Récupération des données 15%" },
-	  { icon: "fas fa-money-check-alt", width: {width: '21%'}, name: "Salaires 21%" },
-	  { icon: "fas fa-server", width: {width: '21%'}, name: "Hébergement 21%" },
-	  { icon: "fas fa-wallet", width: {width: '15%'}, name: "Dépenses 15%" },
-	  { icon: "fas fa-cash-register", width: {width: '15%'}, name: "Frais 15%"},
-	  { icon: "fas fa-users", width: {width: '17%'}, name: "Bénéfices 17%"}
-  ];
 export default function Prix() {
    const {
     isAuthentificated,

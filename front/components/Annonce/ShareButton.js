@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import Link from "next/link";
 import Router from "next/router";
+import {connect} from 'react-redux';
+
 import {
   EmailShareButton,
   EmailIcon,
@@ -12,16 +14,23 @@ import {
   WhatsappIcon
 } from "react-share";
 
-const shareUrl = "https://01car.fr/annonce";
 
-export default function ShareButton() {
 
+const ShareButton= ({
+						 dispatch,
+						 car,
+						 loading,
+					   }) => {
+
+  let carId = car?.id;
+  const title = "Bonjour, Je Partager cette Annonce de véhicule";
+  const shareUrl = carId ? `http://localhost:3000/annonce?id=${carId}`  : "https://01car.fr/" ;
   return (
    <>
         <ul className="flex pl-0 rounded list-none flex-wrap">
 		   <li>
 		      <FacebookShareButton
-					hashtag="Bonjour, Je Partager cette Annonce"
+					hashtag={title}
 					url={shareUrl}
 				>
 				<FacebookIcon size={32} round />
@@ -29,7 +38,7 @@ export default function ShareButton() {
 		   </li>
 		   <li>
 		      <TwitterShareButton
-					title="Bonjour, Je Partager cette Annonce"
+					title={title}
 					url={shareUrl}
 				>
 				<TwitterIcon size={32} round />
@@ -37,7 +46,7 @@ export default function ShareButton() {
 		   </li>
 		   <li>
 		      <EmailShareButton
-					subject="Bonjour, Je Partager cette Annonce"
+					subject={title}
 					body={shareUrl}
 				>
 				<EmailIcon size={32} round />
@@ -45,7 +54,7 @@ export default function ShareButton() {
 		   </li>
 		    <li>
 		      <WhatsappShareButton
-					title="Bonjour, Je Partager cette Annonce"
+					title={title}
 					url={shareUrl}
 				>
 				<WhatsappIcon size={32} round />
@@ -56,3 +65,11 @@ export default function ShareButton() {
     </>
   );
 }
+
+const mapStateToProps = (state) => ({
+	loading: state.carsReducer.loading,
+	car: state.carsReducer.selectedCar,
+	hasErrors: state.carsReducer.hasErrors,
+})
+
+export default connect(mapStateToProps)(ShareButton)

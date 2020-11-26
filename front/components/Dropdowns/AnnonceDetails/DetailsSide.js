@@ -3,7 +3,7 @@ import Link from "next/link";
 import MondalContact from "components/Mondal/MondalContact.js";
 import NoteConfiance from "components/Tabs/NoteConfiance.js";
 import {connect} from "react-redux";
-
+import {pubs} from 'helpers/constant';
 const DetailsSide = ({ dispatch,
 					  loading,
 					  car}) => {
@@ -13,12 +13,6 @@ const DetailsSide = ({ dispatch,
 	  { icon: "fas fa-magic", value: car?.transmission },
 	  { icon: "fas fa-car-side", value: car?.doors },
 	  { icon: "fas fa-key", value: car?.finition }
-  ];
-  
-  const pubs = [
-	  { icon: "fas fa-hands-helping", name: "Un intermédiaire de confiance" },
-	  { icon: "fas fa-clipboard-check", name: "Sécuriser au maximum l'achat de son véhicule" },
-	  { icon: "far fa-paper-plane", name: "ACHETER FACILEMENT VOTRE VÉHICULE" }
   ];
   
   return (

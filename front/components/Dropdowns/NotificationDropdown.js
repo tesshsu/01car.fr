@@ -1,5 +1,6 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
+import {lists} from 'helpers/constant';
 
 const NotificationDropdown = (props) => {
   const [popoverShow, setPopoverShow] = React.useState(false);
@@ -14,11 +15,7 @@ const NotificationDropdown = (props) => {
   const closeTooltip = () => {
     setPopoverShow(false);
   };
-  const lists = [
-  { detail: "1. 01car ne peut toutefois pas garantir de manière absolue l'exactitude et l'exhaustivité de l'ensemble de ces informations." },
-  { detail: "2. 01car s'engage dans le cadre de l'accès et de l'utilisation du Site, à traiter les données à caractère personnel des personnes physiques, dans le respect de la règlementation française et européenne en matière de protection des données personnelles." },
-  { detail: "3. 01car ne saurait donc être tenue pour responsable d'un quelconque dommage que tout internaute pourrait subir à la suite d'une telle utilisation" }
-  ];
+  
   return (
     <>      
           <button

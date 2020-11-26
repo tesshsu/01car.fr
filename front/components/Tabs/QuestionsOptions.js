@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Form, Field } from 'react-final-form';
+import {exterieur_equipements, interieur_equipements, securite_equipements, antivol_equipements, confort_equipements, autre_equipements} from 'helpers/constant';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
@@ -20,90 +21,6 @@ const onSubmit = async values => {
   await sleep(300)
   window.alert(JSON.stringify(values, 0, 2))
 }
-
-const equipe_exterieurs = [
-	  { name: "toit ouvrant", value: "toit ouvrant" },
-	  { name: "4 roues motrices", value: "4 roues motrices" },
-	  { name: "aide parking av/ar", value: "aide parking av/ar" },
-	  { name: "caméra de recul", value: "caméra de recul" },
-	  { name: "radar de recul", value: "radar de recul" },
-	  { name: "attelage", value: "attelage" },
-	  { name: "attelage", value: "toit ouvrant" },
-	  { name: "jantes alu (numero remplir)", value: "jantes alu" },
-	  { name: "pack sport", value: "pack sport" },
-	  { name: "projecteurs bi-xénon", value: "projecteurs bi-xénon" },
-	  { name: "régulateur adaptatif", value: "régulateur adaptatif" },
-	  { name: "rétroviseurs dégivrants", value: "rétroviseurs dégivrants" },
-	  { name: "rétroviseurs électriques", value: "rétroviseurs électriques" },
-	  { name: "rétroviseurs rabattables", value: "rétroviseurs rabattables" },
-	  { name: "rétroviseurs rabattables électriquement", value: "rétroviseurs rabattables électriquement" },
-	  { name: "sorties d'échappement chromées", value: "sorties d'échappement chromées" }
-  ];
-  
-const equipe_interieurs = [
-	  { name: "vitres électriques", value: "vitres électriques" },
-	  { name: "vitres électriques", value: "vitres électriques" },
-	  { name: "banquette 1/3 - 2/3", value: "banquette 1/3 - 2/3" },
-	  { name: "banquette rabattable", value: "banquette rabattable" },
-	  { name: "boite automatique", value: "boite automatique" },
-	  { name: "climatisation automatique", value: "climatisation automatique" },
-	  { name: "démarrage sans clef", value: "démarrage sans clef" },
-	  { name: "direction assistée", value: "direction assistée" },
-	  { name: "écran tactile", value: "écran tactile" },
-	  { name: "fermeture électrique", value: "fermeture électrique" },
-	  { name: "fermeture électrique automatique", value: "fermeture électrique automatique" },
-	  { name: "GPS", value: "GPS" },
-	  { name: "intérieur cuir", value: "intérieur cuir" },
-	  { name: "rétroviseurs rabattables", value: "rétroviseurs rabattables" },
-	  { name: "kit téléphone main libre", value: "kit téléphone main libre" },
-	  { name: "ouverture du coffre électrique", value: "ouverture du coffre électrique" },
-	  { name: "palettes au volant", value: "palettes au volant" },
-	  { name: "pare-brise chauffant", value: "pare-brise chauffant" },
-	  { name: "pédalier alu", value: "pédalier alu" },
-	  { name: "prédisposition téléphone", value: "prédisposition téléphone" },
-	  { name: "prise 12V", value: "prise 12V" },
-	  { name: "prise audio mini USB", value: "prise audio mini USB" },
-	  { name: "prise audio USB", value: "prise audio USB" },
-	  { name: "régulateur de vitesse", value: "régulateur de vitesse" },
-	  { name: "siège conducteur réglable hauteur", value: "siège conducteur réglable hauteur" },
-	  { name: "sièges chauffants", value: "sièges chauffants" },
-	  { name: "sièges électrique à mémoire", value: "sièges électrique à mémoire" },
-	  { name: "vitres surteintées", value: "vitres surteintées" },
-	  { name: "volant sport", value: "volant sport" }
-  ];
-  
-const equipe_securites = [
-	  { name: "Airbags", value: "Airbags" },
-	  { name: "APPLE CAR PLAY", value: "APPLE CAR PLAY" },
-	  { name: "ABS", value: "ABS" },
-	  { name: "affichage tête haute", value: "affichage tête haute" },
-	  { name: "aide au démarrage en côte", value: "aide au démarrage en côte" },
-	  { name: "alerte franchissement ligne", value: "alerte franchissement ligne" },
-	  { name: "avertisseur d'angle mort", value: "avertisseur d'angle mort" },
-	  { name: "essuie-glaces automatiques", value: "essuie-glaces automatiques" },
-	  { name: "feux et essuie-glaces automatiques", value: "feux et essuie-glaces automatiques" },
-	  { name: "fixations ISOFIX", value: "fixations ISOFIX" },
-	  { name: "kit téléphone main libre bluetooth", value: "kit téléphone main libre bluetooth" },
-	  { name: "phares av. de jour à LED", value: "phares av. de jour à LED" }
-  ];
-  
-const equipe_antivols = [
-	  { name: "alarme", value: "alarme" },
-	  { name: "anti démarrage", value: "anti démarrage" },
-	  { name: "gravage des vitres", value: "gravage des vitres" }
-  ];
-
-const equipe_conforts = [
-	  { name: "Bluetooth", value: "Bluetooth" },
-	  { name: "système d'entrée sans clef", value: "système d'entrée sans clef" },
-	  { name: "virtual cockpit", value: "virtual cockpit" }
-  ];
-  
-const equipe_autres = [
-	  { name: "kit de réparation crevaison", value: "kit de réparation crevaison" },
-	  { name: "système Start & Stop", value: "système Start & Stop" }
-  ];
-
 export default function QuestionsOptions() {
   return (
     <>
@@ -120,15 +37,15 @@ export default function QuestionsOptions() {
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">		  
                                       <Condition when="question-7-1" is={true} className="mt-2">
                                         <div className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
-											 {equipe_exterieurs.map(equipe_exterieur => (
+											 {exterieur_equipements.map(exterieur_equipement => (
 											    <label className="border border-gray-400 hover:border-gray-500 px-2 py-2 rounded shadow leading-tight">
 												<Field
-												  name={equipe_exterieur.name}
+												  name={exterieur_equipement.name}
 												  component="input"
 												  type="checkbox"
-												  value={equipe_exterieur.value}
+												  value={exterieur_equipement.value}
 												/>{' '}
-												{equipe_exterieur.name}
+												{exterieur_equipement.name}
 											    </label>											    
 											 ))}											 											  										  
 										</div>
@@ -148,15 +65,15 @@ export default function QuestionsOptions() {
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
                                       <Condition when="question-7-2" is={true} className="mt-2">
                                         <div className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
-											 {equipe_interieurs.map(equipe_interieur => (
+											 {interieur_equipements.map(interieur_equipement => (
 											    <label className="border border-gray-400 hover:border-gray-500 px-2 py-2 rounded shadow leading-tight">
 												<Field
-												  name={equipe_interieur.name}
+												  name={interieur_equipement.name}
 												  component="input"
 												  type="checkbox"
-												  value={equipe_interieur.value}
+												  value={interieur_equipement.value}
 												/>{' '}
-												{equipe_interieur.name}
+												{interieur_equipement.name}
 											    </label>											    
 											 ))}								  
 										</div>
@@ -176,15 +93,15 @@ export default function QuestionsOptions() {
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
                                       <Condition when="question-7-3" is={true} className="mt-2">
                                         <div className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
-											 {equipe_securites.map(equipe_securite => (
+											 {securite_equipements.map(securite_equipement => (
 											    <label className="border border-gray-400 hover:border-gray-500 px-2 py-2 rounded shadow leading-tight">
 												<Field
-												  name={equipe_securite.name}
+												  name={securite_equipement.name}
 												  component="input"
 												  type="checkbox"
-												  value={equipe_securite.value}
+												  value={securite_equipement.value}
 												/>{' '}
-												{equipe_securite.name}
+												{securite_equipement.name}
 											    </label>											    
 											 ))}                       											  
 											</div>
@@ -206,15 +123,15 @@ export default function QuestionsOptions() {
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
                                       <Condition when="question-7-4" is={true} className="mt-2">
                                         <div className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
-											{equipe_antivols.map(equipe_antivol => (
+											{antivol_equipements.map(antivol_equipement => (
 											    <label className="border border-gray-400 hover:border-gray-500 px-2 py-2 rounded shadow leading-tight">
 												<Field
-												  name={equipe_antivol.name}
+												  name={antivol_equipement.name}
 												  component="input"
 												  type="checkbox"
-												  value={equipe_antivol.value}
+												  value={antivol_equipement.value}
 												/>{' '}
-												{equipe_antivol.name}
+												{antivol_equipement.name}
 											    </label>											    
 											 ))}										 											                         											  
 											</div>
@@ -234,15 +151,15 @@ export default function QuestionsOptions() {
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
                                       <Condition when="question-7-5" is={true} className="mt-2">
                                         <div className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
-											 {equipe_conforts.map(equipe_confort => (
+											 {confort_equipements.map(confort_equipement => (
 											    <label className="border border-gray-400 hover:border-gray-500 px-2 py-2 rounded shadow leading-tight">
 												<Field
-												  name={equipe_confort.name}
+												  name={confort_equipement.name}
 												  component="input"
 												  type="checkbox"
-												  value={equipe_confort.value}
+												  value={confort_equipement.value}
 												/>{' '}
-												{equipe_confort.name}
+												{confort_equipement.name}
 											    </label>											    
 											 ))}									 											                         											  
 											</div>
@@ -262,15 +179,15 @@ export default function QuestionsOptions() {
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
                                       <Condition when="question-7-6" is={true} className="mt-2">
                                         <div className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
-											 {equipe_autres.map(equipe_autre => (
+											 {autre_equipements.map(autre_equipement => (
 											    <label className="border border-gray-400 hover:border-gray-500 px-2 py-2 rounded shadow leading-tight">
 												<Field
-												  name={equipe_autre.name}
+												  name={autre_equipement.name}
 												  component="input"
 												  type="checkbox"
-												  value={equipe_autre.value}
+												  value={autre_equipement.value}
 												/>{' '}
-												{equipe_autre.name}
+												{autre_equipement.name}
 											    </label>											    
 											 ))}										 											                         											  
 											</div>

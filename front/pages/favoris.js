@@ -5,12 +5,8 @@ import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import AnnonceFavoris from "components/Favoris/AnnonceFavoris.js";
 import Pagination from "components/Annonces/Pagination.js";
+import {listPubs} from "helpers/constant";
 
-const listPubs = [
-	  { icon: "far fa-smile text-lg mr-1", title: "Note de confiance" },
-	  { icon: "fas fa-unlock-alt text-lg mr-1", title: "Sécuriser au maximum" },
-	  { icon: "far fa-thumbs-up text-lg mr-1", title: "Vendre facilement" }
-  ];
 export default function Favoris() {
    return (
     <>

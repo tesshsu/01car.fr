@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { createPopper } from "@popperjs/core";
+import {premium_ncs} from 'helpers/constant';
 
 const DetailsPremiumDropdown = () => {
   // dropdown props
@@ -16,18 +17,6 @@ const DetailsPremiumDropdown = () => {
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
-  const premium_ncs = [
-	  { icon: "fas fa-certificate", name: "Sous garantie", value: "oui" },
-	  { icon: "fas fa-car-crash", name: "Ayant déjà subit 1 accident", value: "non" },
-	  { icon: "fas fa-car-crash", name: "Des défauts griffes, coups, usures", value: "oui" },
-	  { icon: "fas fa-certificate", name: "Justifier le parcours kilometrique", value: "oui" },
-	  { icon: "fas fa-calendar-check", name: "Contrôle technique ok", value: "oui" },
-	  { icon: "far fa-list-alt", name: "Respect des entretiens périodiques", value: "oui" },
-	  { icon: "far fa-calendar-alt", name: "Prochaine entretien", value: "Moins de 5000km" },
-	  { icon: "fas fa-print", name: "Facture d'achat", value: "oui" },
-	  { icon: "far fa-id-badge", name: "Carte grise", value: "Oui" },
-	  { icon: "fas fa-copy", name: "Possède le carnet d'entretien", value: "Oui" }
-  ];
   return (
     <>
         <div className="w-full px-8 py-2 px-2 flex-1">
