@@ -1,21 +1,10 @@
 import React from "react";
 import Link from "next/link";
-import { createPopper } from "@popperjs/core";
+import {connect} from "react-redux";
 
-const DetailsDropdown = () => {
-  // dropdown props
-  const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
-  const btnDropdownRef = React.createRef();
-  const popoverDropdownRef = React.createRef();
-  const openDropdownPopover = () => {
-    createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: "bottom-start",
-    });
-    setDropdownPopoverShow(true);
-  };
-  const closeDropdownPopover = () => {
-    setDropdownPopoverShow(false);
-  };
+const DetailsDropdown = ({ dispatch,
+					  loading,
+					  car}) => {
   const ncs = [
 	  { icon: "fas fa-male", name: "Annonces par", value: "particulier" },
 	  { icon: "far fa-calendar-alt", name: "Vehicule est disponible", value: "Dans un mois" },
@@ -154,4 +143,10 @@ const DetailsDropdown = () => {
   );
 };
 
-export default DetailsDropdown;
+const mapStateToProps = (state) => ({
+	loading: state.carsReducer.loading,
+	car: state.carsReducer.selectedCar,
+	hasErrors: state.carsReducer.hasErrors,
+})
+
+export default connect(mapStateToProps)(DetailsDropdown)

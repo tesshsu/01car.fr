@@ -1,8 +1,11 @@
 import React from "react";
 import ContactVendeur from "components/Tabs/ContactVendeur.js";
 import Link from "next/link";
+import {connect} from "react-redux";
 
-export default function ModalContact() {
+const ModalContact = ({ dispatch,
+					  loading,
+					  car}) => {
   const [showModal, setShowModal] = React.useState(false);
   const [openTab, setOpenTab] = React.useState(1);
   return (
@@ -42,23 +45,21 @@ export default function ModalContact() {
 						<div className="container px-2 mx-auto">
 							  <div className="flex flex-wrap">
 								<div className="w-full flex-1">
-								  <span className="text-md block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-phone"></i> Par telephone : </span>
+								  <span className="text-md block my-2 text-gray-800 font-bold"><i className="fas fa-phone"></i></span>
 								</div>
 								<div className="w-full flex-1">
-								  <span className="text-md block my-2 p-3 text-orange-500 underline vendeurPhone">+33 654332109</span>
+								  <span className="text-md block my-2 text-orange-500 underline vendeurPhone">{car.owner.phone}</span>
 								</div>						
 							  </div>
 						</div>
 						<div className="container px-2 mx-auto">
 							  <div className="flex flex-wrap ">
 								<div className="w-full flex-1">
-								  <span className="text-md block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className="fas fa-envelope"></i> Par email :</span>
+								  <span className="text-md block my-2 text-gray-800 font-bold"><i className="fas fa-envelope"></i></span>
 								</div>
 								<div className="w-full flex-1">
-								  <span className="text-md block my-2 p-3 text-orange-500 underline vendeurEmail">jesica2234@gmail.com</span>
-								</div>
-           
-                                						
+								  <span className="text-md block my-2 text-orange-500 underline vendeurEmail"><a href={`mailto:${car.owner.email}`}>en clicker ici</a></span>
+								</div>			
 						</div>
                         <ContactVendeur transparent />						
 					</div>
@@ -91,3 +92,11 @@ export default function ModalContact() {
     </>
   );
 }
+
+const mapStateToProps = (state) => ({
+	loading: state.carsReducer.loading,
+	car: state.carsReducer.selectedCar,
+	hasErrors: state.carsReducer.hasErrors,
+})
+
+export default connect(mapStateToProps)(ModalContact)

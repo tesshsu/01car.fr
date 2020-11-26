@@ -1,28 +1,22 @@
-import React from "react";
+import React, {useEffect} from 'react';
 import Link from "next/link";
-import { createPopper } from "@popperjs/core";
+import {fetchCar} from 'service/actions/cars';
+import {connect} from 'react-redux'
+import moment from 'moment';
 
-const DetailsBasic = () => {
-  // dropdown props
-  const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
-  const btnDropdownRef = React.createRef();
-  const popoverDropdownRef = React.createRef();
-  const openDropdownPopover = () => {
-    createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: "bottom-start",
-    });
-    setDropdownPopoverShow(true);
-  };
-  const closeDropdownPopover = () => {
-    setDropdownPopoverShow(false);
-  };
+const DetailsBasic = ({
+						 dispatch,
+						 car,
+						 loading,
+					   }) => {
+  let yearOfcar = car?.dt_entry_service;
   const basics = [
-	  { icon: "fas fa-gas-pump", name: "Energie", value: "Essence sans plomb" },
-	  { icon: "fas fa-tachometer-alt", name: "Kilométrage", value: "23000" },
-	  { icon: "fas fa-file-invoice-dollar", name: "Boîte de vitesses", value: "Manuelle" },
-	  { icon: "fas fa-car-side", name: "Nombre de portes", value: "5" },
-	  { icon: "fas fa-car-battery", name: "Deuxième jeu de clés ou carte", value: "7 CV / 130 ch" },
-	  { icon: "far fa-calendar-alt", name: "Année", value: "2012" }
+	  { icon: "fas fa-gas-pump", name: "Energie", value: car?.fuel },
+	  { icon: "fas fa-tachometer-alt", name: "Kilométrage", value: car?.km },
+	  { icon: "fas fa-file-invoice-dollar", name: "Boîte de vitesses", value: car?.transmission },
+	  { icon: "fas fa-car-side", name: "Nombre de portes", value: car?.doors },
+	  { icon: "fas fa-car-battery", name: "cylindrée", value: car?.displacement },
+	  { icon: "far fa-calendar-alt", name: "Année", value: moment(yearOfcar).format("DD/MM/YYYY")}
   ];
   return (
     <>
@@ -49,4 +43,10 @@ const DetailsBasic = () => {
   );
 };
 
-export default DetailsBasic;
+const mapStateToProps = (state) => ({
+	loading: state.carsReducer.loading,
+	car: state.carsReducer.selectedCar,
+	hasErrors: state.carsReducer.hasErrors,
+})
+
+export default connect(mapStateToProps)(DetailsBasic)
