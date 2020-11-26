@@ -3,17 +3,17 @@ import Link from "next/link";
 import {connect} from 'react-redux'
 import FavorisButton from 'components/Favoris/FavorisButton';
 import Moment from 'react-moment';
-import {fetchPosts} from 'service/actions/annonces';
+import {fetchCars} from 'service/actions/cars';
 
-const AnnoncePremier = ({dispatch, loading, posts, hasErrors}) => {
-   useEffect(() => {
-	  dispatch(fetchPosts())
-  }, [dispatch])
+const AnnoncePremier = ({ loading,
+                          cars,
+                          hasErrors}) => {
+
   return (
     <>
-        {posts.map(post => (post.prenium == true) &&	   
-			<Link key={post.id} href="/annonce_details">
-				<div id={post.id} statu={post.prenium} className="relative w-full md:w-6/12 lg:w-4/12 lg:mb-0 mb-12 mr-4 my-6 shadow-lg max-w-400-px rounded-lg border-2 border-gray-200 ">
+        {cars?.map(post => (post.prenium != null && post.prenium) &&
+			<Link key={post.id} href={`/annonce?id=${post.id}`}>
+				<div id={post.id} status={post.prenium} className="relative w-full md:w-6/12 lg:w-4/12 lg:mb-0 mb-12 mr-4 my-6 shadow-lg max-w-400-px rounded-lg border-2 border-gray-200 ">
 						<img
 							  alt="..."
 							  src={require("assets/img/qualite_logo_satisfait.png")}
@@ -29,7 +29,7 @@ const AnnoncePremier = ({dispatch, loading, posts, hasErrors}) => {
 							src={require("assets/img/team-2-800x800.jpg")}
 							className="shadow-lg mx-auto rounded-lg"
 						  />
-						<div className="w-full px-4 py-2 flex-1">				
+						<div className="w-full px-4 py-2 flex-1">
 							  <h4 className="font-bold text-lg text-orange-700">
 								<span className="uppercase">{post.brand}</span> - {post.model} | {post.version}
 								<FavorisButton />
@@ -51,13 +51,13 @@ const AnnoncePremier = ({dispatch, loading, posts, hasErrors}) => {
 								type="button"
 							  >
 								<i className="fas fa-unlock-alt"></i>
-							  </button>	
+							  </button>
 							  <button
 								className="bg-gray-600 text-white w-8 h-8 rounded-full outline-none focus:outline-none mr-1 mb-1"
 								type="button"
 							  >
 								<i className="far fa-thumbs-up"></i>
-							  </button>                  					  
+							  </button>
 							  <span className="font-bold px-1 text-xl ml-3 text-orange-500 text-right">
 								{post.price} € (Prix qualifié)
 							  </span>
@@ -65,7 +65,7 @@ const AnnoncePremier = ({dispatch, loading, posts, hasErrors}) => {
 								<p className="text-md text-gray-500 text-justify truncate">
 								  {post.fuel} | {post.transmission}
 								</p>
-							  </div>					   
+							  </div>
 							</div>
 						</div>
 				</div>
@@ -76,9 +76,15 @@ const AnnoncePremier = ({dispatch, loading, posts, hasErrors}) => {
 }
 
 const mapStateToProps = (state) => ({
-  loading: state.posts.loading,
-  posts: state.posts.posts,
-  hasErrors: state.posts.hasErrors,
+  loading: state.carsReducer.loading,
+  cars: state.carsReducer.cars,
+  current_page: state.carsReducer.current_page,
+  from: state.carsReducer.from,
+  to:  state.carsReducer.to,
+  per_page: state.carsReducer.per_page,
+  last_page: state.carsReducer.last_page,
+  total: state.carsReducer.total,
+  hasErrors: state.carsReducer.hasErrors,
 })
 
 export default connect(mapStateToProps)(AnnoncePremier)

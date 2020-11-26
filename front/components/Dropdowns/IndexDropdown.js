@@ -26,7 +26,7 @@ const IndexDropdown = () => {
 						}
 			>
 				<i className="fas fa-money-check-alt"></i>
-			</a>						  
+			</a>
 	  </Link>
       <div
         ref={popoverDropdownRef}
@@ -138,7 +138,7 @@ const IndexDropdown = () => {
             Prix
           </a>
         </Link>
-		<Link href="/annonce">
+		<Link href="/annonces">
           <a
             href="#pablo"
             className={

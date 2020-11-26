@@ -4,7 +4,7 @@ import Link from "next/link";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import AnnonceFavoris from "components/Favoris/AnnonceFavoris.js";
-import Pagination from "components/Annonce/Pagination.js";
+import Pagination from "components/Annonces/Pagination.js";
 
 const listPubs = [
 	  { icon: "far fa-smile text-lg mr-1", title: "Note de confiance" },
@@ -22,13 +22,13 @@ export default function Favoris() {
             </h4>
 			 <div className="flex justify-center">
                       {listPubs.map(listPub => (
-						  <div className="mr-4 p-3 text-center">					
+						  <div className="mr-4 p-3 text-center">
 								<span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
 								  <i className={listPub.icon}></i>
 								</span>
 								<span className="text-sm text-gray-500">{listPub.title}</span>
 						  </div>
-					  ))} 
+					  ))}
              </div>
 		</section>
 		<section className="pt-10 pb-8 mt-4">

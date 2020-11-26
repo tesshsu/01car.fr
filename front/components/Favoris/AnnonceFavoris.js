@@ -50,7 +50,7 @@ export default function AnnonceFavoris() {
 						  className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 mr-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
 						  type="button"
 						>
-						  <Link href="/annonce_details">
+						  <Link href="/annonce">
 							  <a
 								href="#pablo"
 								className={
@@ -65,7 +65,7 @@ export default function AnnonceFavoris() {
 						  className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
 						  type="button"
 						>
-						  <Link href="/annonce">
+						  <Link href="/annonces">
 							  <a
 								href="#pablo"
 								className={

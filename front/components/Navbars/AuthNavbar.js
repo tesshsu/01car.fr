@@ -31,13 +31,13 @@ export default function Navbar(props) {
               <li className="flex items-center">
                 <PagesDropdown />
               </li>
-              
+
               <li className="flex items-center">
                <button
                   className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
                   type="button"
                 >
-                  <Link href="/annonce">
+                  <Link href="/annonces">
 					  <a
 						href="#pablo"
 						className={
@@ -49,7 +49,7 @@ export default function Navbar(props) {
 				  </Link>
                 </button>
               </li>
-			  
+
 			  <li className="flex items-center">
                 <button
                   className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"

@@ -12,10 +12,10 @@ import {
   WhatsappIcon
 } from "react-share";
 
-const shareUrl = "https://01car.fr/annonce_details";
+const shareUrl = "https://01car.fr/annonce";
 
 export default function ShareButton() {
- 
+
   return (
    <>
         <ul className="flex pl-0 rounded list-none flex-wrap">
@@ -25,7 +25,7 @@ export default function ShareButton() {
 					url={shareUrl}
 				>
 				<FacebookIcon size={32} round />
-				</FacebookShareButton> 
+				</FacebookShareButton>
 		   </li>
 		   <li>
 		      <TwitterShareButton
@@ -33,7 +33,7 @@ export default function ShareButton() {
 					url={shareUrl}
 				>
 				<TwitterIcon size={32} round />
-				</TwitterShareButton> 
+				</TwitterShareButton>
 		   </li>
 		   <li>
 		      <EmailShareButton
@@ -41,7 +41,7 @@ export default function ShareButton() {
 					body={shareUrl}
 				>
 				<EmailIcon size={32} round />
-				</EmailShareButton> 
+				</EmailShareButton>
 		   </li>
 		    <li>
 		      <WhatsappShareButton
@@ -49,10 +49,10 @@ export default function ShareButton() {
 					url={shareUrl}
 				>
 				<WhatsappIcon size={32} round />
-				</ WhatsappShareButton> 
+				</ WhatsappShareButton>
 		   </li>
 		</ul>
-		 
+
     </>
   );
 }

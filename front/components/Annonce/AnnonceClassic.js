@@ -1,21 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import Link from "next/link";
-import useLoggedUser from 'service/hooks/useLoggedUser';
-import Router from "next/router";
 import FavorisButton from 'components/Favoris/FavorisButton';
 import {connect} from 'react-redux'
 import Moment from 'react-moment';
-import {fetchPosts} from 'service/actions/annonces';
+import {fetchCars} from 'service/actions/cars';
 
-const AnnonceClassic = ({dispatch, loading, posts, hasErrors}) => {
-  useEffect(() => {
-	  dispatch(fetchPosts())
-  }, [dispatch])
+const AnnonceClassic = ({
+                          loading,
+                          cars,
+                          hasErrors}) => {
   return (
     <>
-        {posts.map(post => (post.prenium != null && post.prenium == 0) &&
-			<Link key={post.id} post={post} href={`/annonce_details/${post.id}`}>
-			    <div id={post.id} statu={post.prenium} className="relative w-full md:w-6/12 lg:w-4/12 lg:mb-0 mb-12 mr-4 my-6 shadow-lg max-w-400-px rounded-lg border-2 border-gray-200 ">
+        {cars?.map(post => (post.prenium != null && !post.prenium) &&
+			<Link key={post.id} post={post} href={`/annonce?id=${post.id}`}>
+			    <div id={post.id} status={post.prenium} className="relative w-full md:w-6/12 lg:w-4/12 lg:mb-0 mb-12 mr-4 my-6 shadow-lg max-w-400-px rounded-lg border-2 border-gray-200 ">
 					<img
 						alt="..."
 						src={require("assets/img/team-4-800x800.jpg")}
@@ -56,9 +54,9 @@ const AnnonceClassic = ({dispatch, loading, posts, hasErrors}) => {
 }
 
 const mapStateToProps = (state) => ({
-  loading: state.posts.loading,
-  posts: state.posts.posts,
-  hasErrors: state.posts.hasErrors,
+  loading: state.carsReducer.loading,
+  cars: state.carsReducer.cars,
+  hasErrors: state.carsReducer.hasErrors,
 })
 
 export default connect(mapStateToProps)(AnnonceClassic)

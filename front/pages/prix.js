@@ -8,8 +8,8 @@ import PubContent from "layouts/PubContent.js";
 import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
 
 const classics = [
-	{list: "Annonce pré-remplie"},
-	{list: "Annonce gratuite"},
+	{list: "Annonces pré-remplie"},
+	{list: "Annonces gratuite"},
 	{list: "Contacter vendeur direct"}
 ];
 const premiums = [

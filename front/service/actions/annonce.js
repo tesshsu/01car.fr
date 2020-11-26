@@ -1,3 +1,5 @@
+import * as API from "../../api";
+
 export const GET_POST = 'GET POSTS'
 export const GET_POST_SUCCESS = 'GET_POST_SUCCESS'
 export const GET_POST_FAILURE = 'GET_POST_FAILURE'
@@ -14,10 +16,7 @@ export function fetchPost(id) {
     dispatch(getPost())
 
     try {
-      const response = await fetch(
-        `https://api.01car.fr/api/v1/ads/cars/${id}`
-      )
-      const data = await response.json()
+      const data = await API.Annonces.get(id);
 
       dispatch(getPostSuccess(data))
     } catch (error) {
