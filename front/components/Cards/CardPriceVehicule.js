@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Alert from 'components/Alerts/Alert';
+import Notice from 'components/Notices/Notice';
 
 export default function CardPriceVehicule({
   statSubtitleCote,
@@ -29,7 +29,7 @@ export default function CardPriceVehicule({
                 {statCotePro} €
               </span>
 		  </div>
-		  <Alert text="C'est ainsi un prix auquel on peut se fier pour vendre ou acheter son véhicule, les mises à jour sont quotidiennes conférant aux prix une très bonne fiabilité à tous les instants de la transaction.La cote de l'année en cours est publiée seulement après 6 mois d'existence du millésime" />
+		  <Notice text="C'est ainsi un prix auquel on peut se fier pour vendre ou acheter son véhicule, les mises à jour sont quotidiennes conférant aux prix une très bonne fiabilité à tous les instants de la transaction.La cote de l'année en cours est publiée seulement après 6 mois d'existence du millésime" />
       </div>
     </>
   );

@@ -5,7 +5,7 @@ import { Form, Field } from 'react-final-form';
 import Auth from "layouts/Auth.js";
 import { FORM_ERROR } from 'final-form';
 import useLoggedUser from 'service/hooks/useLoggedUser';
-import Alert from 'components/Alerts/Alert';
+import Notice from 'components/Notices/Notice';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
@@ -134,7 +134,7 @@ export default function Login() {
 							</button>
 						  </div>
                           {submitError || invalid && (
-							 <Alert text="identifian incorrects" />
+							 <Notice text="identifian incorrects" />
 						  )}
 						</form>
 					)}
