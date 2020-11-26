@@ -4,6 +4,7 @@ import Router from "next/router";
 import Auth from "layouts/Auth.js";
 import useLoggedUser from 'service/hooks/useLoggedUser';
 import CardAcceptCondition from "components/Cards/CardAcceptCondition.js";
+import Notice from 'components/Notices/Notice';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
 const mustBeNumber = value => (isNaN(value) ? 'Must be a number' : undefined)
@@ -47,24 +48,11 @@ export default function Register() {
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-3">
-                  <h6 className="text-gray-600 text-sm font-bold">
+                  <h6 className="text-orange-500 text-sm font-bold">
                     Créez un compte gratuit
                   </h6>
                 </div>
-                <div className="btn-wrapper text-center">
-                  <button
-                    className="bg-white active:bg-gray-100 text-gray-800 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                    type="button"
-                  >
-                    <i className="fab fa-facebook text-xl mr-1 text-orange-500"></i>
-                  </button>
-                  <button
-                    className="bg-white active:bg-gray-100 text-gray-800 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                    type="button"
-                  >
-                   <i className="fab fa-google text-xl mr-1 text-orange-500"></i>
-                  </button>
-                </div>
+                <p className="notifyForLogin text-md leading-relaxed text-gray-800 text-left">  La Connexion qui vous permet dedéposer et gérer vos annonces. Un accès de paiement en sécurisé. Ajouter les annonces aux favoris qui vous intéressent </p>
                 <hr className="mt-6 border-b-1 border-gray-400" />
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">

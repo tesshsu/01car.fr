@@ -79,7 +79,7 @@ export function signInUsingFacebook() {
       } = await API.Auth.signInWithFacebook(payload);
 
       if (type === 'success') {
-        const { token, user: { id: userId } } = await API.Auth.signInWithFacebook({ accessToken });
+        const { token, user } = await API.Auth.signInWithFacebook({ accessToken });
         await localStorage.setItem('ACCESS_TOKEN', token);
         await dispatch(fetch());
         await dispatch({ type: LOGIN });
@@ -95,6 +95,32 @@ export function signInUsingFacebook() {
   };
 }
 
+export function signInUsingGoogle() {
+  return async (dispatch) => {
+    dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Connexion a Google...'));
+
+    try {
+      const {
+        type,
+        token: accessToken
+      } = await API.Auth.signInWithGoogle(payload);
+
+      if (type === 'success') {
+        const { token, user } = await API.Auth.signInWithFacebook({ accessToken });
+        await localStorage.setItem('ACCESS_TOKEN', token);
+        await dispatch(fetch());
+        await dispatch({ type: LOGIN });
+      } else {
+        return;
+      }
+    } catch (err) {
+      console.warn('Connexion error',err);
+      throw err;
+    } finally {
+      dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
+    }
+  };
+}
 export function logout(id) {
   return async (dispatch, getState) => {
     await localStorage.removeItem('ACCESS_TOKEN');

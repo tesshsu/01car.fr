@@ -19,3 +19,8 @@ export function signInWithFacebook(payload) {
   return client.post('/api/auth/signInWithFacebook', payload)
     .then(({ data }) => data);
 }
+
+export function signInWithGoogle(payload) {
+  return client.post('/api/auth/google', payload)
+    .then(({ data }) => data);
+}
