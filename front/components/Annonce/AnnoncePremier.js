@@ -11,7 +11,7 @@ const AnnoncePremier = ({dispatch, loading, posts, hasErrors}) => {
   }, [dispatch])
   return (
     <>
-        {posts.map(post => (post.prenium != null && post.prenium == 1) &&	   
+        {posts.map(post => (post.prenium == true) &&	   
 			<Link key={post.id} href="/annonce_details">
 				<div id={post.id} statu={post.prenium} className="relative w-full md:w-6/12 lg:w-4/12 lg:mb-0 mb-12 mr-4 my-6 shadow-lg max-w-400-px rounded-lg border-2 border-gray-200 ">
 						<img

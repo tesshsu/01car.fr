@@ -16,6 +16,11 @@ export function forget_password({ email }) {
 }
 
 export function signInWithFacebook(payload) {
-  return client.post('auth/signInWithFacebook', payload)
+  return client.post('auth/facebook', payload)
+    .then(({ data }) => data);
+}
+
+export function signInWithGoogle(payload) {
+  return client.post('auth/google', payload)
     .then(({ data }) => data);
 }

@@ -27,6 +27,11 @@ export default function useLoggedUser() {
     () => dispatch(LOGGED_USER_ACTIONS.signInUsingFacebook()),
     [dispatch]
   );
+  
+  const signInUsingGoogle = useCallback(
+    () => dispatch(LOGGED_USER_ACTIONS.signInUsingGoogle()),
+    [dispatch]
+  );
 
   const logout = useCallback(
     () => dispatch(LOGGED_USER_ACTIONS.logout()),
