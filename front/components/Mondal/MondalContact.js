@@ -7,7 +7,6 @@ const ModalContact = ({ dispatch,
 					  loading,
 					  car}) => {
   const [showModal, setShowModal] = React.useState(false);
-  const [openTab, setOpenTab] = React.useState(1);
   return (
     <>
       <button

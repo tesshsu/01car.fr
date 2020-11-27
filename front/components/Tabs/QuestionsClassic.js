@@ -1,12 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, Component} from 'react';
 import Link from "next/link";
-import Router from "next/router";
+import {Router, useRouter} from 'next/router'
 import CardPriceVehicule from "components/Cards/CardPriceVehicule.js";
 import QuestionsOptions from "components/Tabs/QuestionsOptions.js";
 import FileUpload from "components/Tabs/FileUpload.js";
 import ImageUpload from "components/Tabs/ImageUpload.js";
 import { Form, Field } from 'react-final-form';
 import useLoggedUser from 'service/hooks/useLoggedUser';
+import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
+import PubContentConnection from "layouts/PubContentConnection.js";
+//modal
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'champs obligatoire')
@@ -41,11 +46,13 @@ const formatDate = value => {
 
 export default function QuestionsClassic() {
   const [openTab, setOpenTab] = React.useState(1);
-  let [tokken,settokken]=useState(null);
+  const [showModal, setShowModal] = React.useState(false);
   const {
     isAuthentificated,
     loggedUser
   } = useLoggedUser();
+
+  let [tokken,settokken]=useState(null);
 
   useEffect(() => {
     if (isAuthentificated && loggedUser) {
@@ -60,13 +67,25 @@ export default function QuestionsClassic() {
 		}catch(err){
 			console.log(err);
         }
-    }
+    }else{
+		return setShowModal(true);
+	}
   }, [isAuthentificated, loggedUser]);
+  
 
   return (
     <>
       <div className="flex flex-wrap">
-        <div className="w-full">
+      {showModal ? (
+	     <> 
+		    <Modal closeOnEsc={false} open={open} onClose={() => setShowModal(true)}>
+				<h2 className="text-2xl font-semibold text-center">Connectez-vous pour répondez au questionnaire de confiance</h2>
+				<PubContentThreeIcons />
+				<PubContentConnection />
+            </Modal>
+		 </>
+      ) : null}
+		<div className="w-full">
           <ul
             className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
             role="tablist"
@@ -475,20 +494,34 @@ export default function QuestionsClassic() {
 							</div>
 
 							<div className="flex flex-wrap mt-12 px-4 align-center justify-center">
-							   <a
-									className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
-									onClick={e => {
-									  e.preventDefault();
-									  setOpenTab(4);
-									}}
-                                    type="submit"
-                                    disabled={submitting}
-									data-toggle="tab"
-									href="#link4"
-									role="tablist"
-											  >
-									<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>  Envoyer pour voir resultat
-								</a>
+							   {!isAuthentificated || (tokken = null) ? (
+							        <Link href="/auth/login">
+										  <a
+											href="#pablo"
+											className={
+											  "text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
+											}
+										  >
+											Login pour voir resultat
+										  </a>
+									 </Link>
+								 ) : (								   
+									<a
+										className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
+										onClick={e => {
+										  e.preventDefault();
+										  setOpenTab(4);
+										}}
+										type="submit"
+										disabled={submitting}
+										data-toggle="tab"
+										href="#link4"
+										role="tablist"
+												  >
+										<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>  Envoyer pour voir resultat
+								    </a>
+								 )
+							   }
 							</div>
 						</div>
 						<div className={openTab === 4 ? "block" : "hidden"} id="link4">

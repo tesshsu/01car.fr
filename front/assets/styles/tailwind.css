@@ -4039,3 +4039,6 @@ video {
 #checkout-button:hover {
   opacity: 0.8;
 }
+.react-responsive-modal-closeButton{
+	display: none !important;
+}
