@@ -1,9 +1,7 @@
-import React, {useEffect, useState, Component} from 'react';
+import React, {useEffect, useState} from 'react';
 import Link from "next/link";
-import {Router, useRouter} from 'next/router'
-import CardPriceVehicule from "components/Cards/CardPriceVehicule.js";
 import QuestionsOptions from "components/Tabs/QuestionsOptions.js";
-import FileUpload from "components/Tabs/FileUpload.js";
+
 import ImageUpload from "components/Tabs/ImageUpload.js";
 import { Form, Field } from 'react-final-form';
 import useLoggedUser from 'service/hooks/useLoggedUser';
@@ -11,7 +9,7 @@ import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
 import PubContentConnection from "layouts/PubContentConnection.js";
 //modal
 import "react-responsive-modal/styles.css";
-import { Modal } from "react-responsive-modal";
+import { Modal } from 'react-responsive-modal';
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'champs obligatoire')
@@ -71,13 +69,13 @@ export default function QuestionsClassic() {
 		return setShowModal(true);
 	}
   }, [isAuthentificated, loggedUser]);
-  
+
 
   return (
     <>
       <div className="flex flex-wrap">
       {showModal ? (
-	     <> 
+	     <>
 		    <Modal closeOnEsc={false} open={open} onClose={() => setShowModal(true)}>
 				<h2 className="text-2xl font-semibold text-center">Connectez-vous pour répondez au questionnaire de confiance</h2>
 				<PubContentThreeIcons />
@@ -505,7 +503,7 @@ export default function QuestionsClassic() {
 											Login pour voir resultat
 										  </a>
 									 </Link>
-								 ) : (								   
+								 ) : (
 									<a
 										className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
 										onClick={e => {
