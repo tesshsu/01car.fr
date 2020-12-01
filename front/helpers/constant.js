@@ -1,15 +1,4 @@
 // page annonce car details
-export const ncs = [
-	  { icon: "fas fa-male", name: "Annonces par", value: "particulier" },
-	  { icon: "far fa-calendar-alt", name: "Vehicule est disponible", value: "Dans un mois" },
-	  { icon: "fas fa-file-invoice-dollar", name: "Véhicule est Non fumeur", value: "oui" },
-	  { icon: "fas fa-certificate", name: "Le double des clés", value: "oui" },
-	  { icon: "fas fa-certificate", name: "La raison pour vendre", value: "Autre project" },
-	  { icon: "fas fa-key", name: "Nombre de mains", value: "3ème mains ou plus" },
-	  { icon: "fas fa-globe-europe", name: "Etat de vehicule", value: "Neuf ou moins de 4 ans" },
-	  { icon: "fas fa-globe-europe", name: "Nombre de mains", value: "3ème mains ou plus" },
-	  { icon: "fas fa-key", name: "Origine du véhicule", value: "France" },
-  ];
 
 export const exterieur_equipements = [
 	  { name: "toit ouvrant", value: "toit ouvrant" },
