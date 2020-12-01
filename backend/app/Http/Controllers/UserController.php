@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Constants\Permission;
 use App\Http\Resources\User as UserResource;
+use App\Http\Resources\UserPaginatorCollection;
 use App\Models\User;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -28,18 +27,22 @@ class UserController extends Controller
     /**
      * List all users
      *
-     * @return \Illuminate\Http\Response json
+     * @return \Illuminate\Http\JsonResponse json
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
-        return response()->json( $users);
+        $usersReq = User::query();
+
+        $usersReq->orderBy('name', 'desc');
+        $usersLengthAwarePaginator = $usersReq->paginate($request->perPage, ['*'], $request->pageName, $request->page);
+
+        return response()->json(new UserPaginatorCollection($usersLengthAwarePaginator));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -64,7 +67,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $company
+     * @param \App\Models\User $company
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -76,8 +79,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, User $user)
@@ -106,13 +109,13 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
     {
         $currentUser = Auth::user();
-        if ( $currentUser->id == $user->id)  {
+        if ($currentUser->id == $user->id) {
             return response()->json(['error' => 'Unauthorised'], 403);
         }
         $user->delete();
@@ -149,6 +152,6 @@ class UserController extends Controller
         if ($user == NULL) {
             return response()->json(['error' => 'NotFound'], 404);
         }
-        return response()->json( new UserResource($user));
+        return response()->json(new UserResource($user));
     }
 }
