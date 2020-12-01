@@ -1,9 +1,14 @@
 import React from "react";
 import Link from "next/link";
+import {connect} from 'react-redux'
 import { createPopper } from "@popperjs/core";
 import {premium_ncs} from 'helpers/constant';
 
-const DetailsPremiumDropdown = () => {
+const DetailsPremiumDropdown = ({
+						 dispatch,
+						 car,
+						 loading,
+					   }) => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
@@ -19,9 +24,11 @@ const DetailsPremiumDropdown = () => {
   };
   return (
     <>
-        <div className="w-full px-8 py-2 px-2 flex-1">
-			<h4 className="mt-2 px-2 py-2 text-xl leading-relaxed text-gray-800 font-bold underline uppercase rounded animate-bounce-once">
-				<i class="fas fa-certificate"></i> NOTE DE CONFINANCE TOP GARANTIE
+       {premium_ncs.length ? (
+		<div className="container px-2 mx-auto">
+		<div className="w-full px-8 py-2 px-2 flex-1">
+			<h4 className="mt-2 px-2 py-2 text-2xl leading-relaxed text-orange-500 font-bold underline uppercase rounded animate-bounce-once">
+				<i class="fas fa-award animate-ping"></i> NOTE DE CONFINANCE TOP GARANTIE
 			</h4>
 		</div>
 		<div className="container px-2 mx-auto">
@@ -39,7 +46,7 @@ const DetailsPremiumDropdown = () => {
 						  >
 							 <div className="container px-2 mx-auto rounded border border-solid border-gray-200 text-gray-500 active:bg-grey-500">
 								<div className="flex flex-wrap">				
-										<span className="text-sm block my-2 p-3"> Rapport Sécurité </span>
+										<span className="text-sm block my-2 p-3 animate-bounce"> Rapport Sécurité </span>
 										<span className="text-sm block my-2 p-3"><i class="fas fa-chevron-circle-down"></i></span>										
 								</div>
 							</div>
@@ -76,21 +83,28 @@ const DetailsPremiumDropdown = () => {
 					  </li>	  			 					   					 					  
 				</ul> 
 				{premium_ncs.map(premium_nc => (				
-                    <div className="container px-2 mx-auto">
-					  <div className="flex flex-wrap">
-						<div className="w-full px-4 flex-1">
-						  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i class={premium_nc.icon}></i> {premium_nc.name} : </span>
+					<div className="container px-2 mx-auto">
+						<div className="flex flex-wrap">
+							<div className="w-full px-4 flex-1">
+							  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i class={premium_nc.icon}></i> {premium_nc.name} : </span>
+							</div>
+							<div className="w-full px-4 flex-1">
+							  <span className="question-11 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">{premium_nc.value}</span>
+							</div>						
 						</div>
-						<div className="w-full px-4 flex-1">
-						  <span className="question-11 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">{premium_nc.value}</span>
-						</div>						
-					  </div>
 					</div>
 				))}
 			</div>
 	    </div>
+        </div>) : (null)}
     </>
   );
 };
 
-export default DetailsPremiumDropdown;
+const mapStateToProps = (state) => ({
+	loading: state.carsReducer.loading,
+	car: state.carsReducer.selectedCar,
+	hasErrors: state.carsReducer.hasErrors,
+})
+
+export default connect(mapStateToProps)(DetailsPremiumDropdown)

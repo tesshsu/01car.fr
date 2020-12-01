@@ -1,12 +1,22 @@
 import React from "react";
 import Link from "next/link";
 import {connect} from "react-redux";
-import {ncs, exterieur_equipements, interieur_equipements, securite_equipements, antivol_equipements, confort_equipements, autre_equipements} from 'helpers/constant';
+import {exterieur_equipements, interieur_equipements, securite_equipements, antivol_equipements, confort_equipements, autre_equipements} from 'helpers/constant';
 
 const DetailsDropdown = ({ dispatch,
 					  loading,
 					  car}) => {
- 
+  const ncs = [
+	  { icon: "fas fa-male", name: "Annonces par", value: "particulier" },
+	  { icon: "far fa-calendar-alt", name: "Vehicule est disponible", value: "Dans un mois" },
+	  { icon: "fas fa-file-invoice-dollar", name: "Véhicule est Non fumeur", value: "oui" },
+	  { icon: "fas fa-certificate", name: "Le double des clés", value: "oui" },
+	  { icon: "fas fa-certificate", name: "La raison pour vendre", value: "Autre project" },
+	  { icon: "fas fa-key", name: "Nombre de mains", value: "3ème mains ou plus" },
+	  { icon: "fas fa-globe-europe", name: "Etat de vehicule", value: "Neuf ou moins de 4 ans" },
+	  { icon: "fas fa-globe-europe", name: "Nombre de mains", value: "3ème mains ou plus" },
+	  { icon: "fas fa-key", name: "Origine du véhicule", value: "France" },
+  ];
   return (
     <>
         <div className="flex flex-wrap">
@@ -15,7 +25,7 @@ const DetailsDropdown = ({ dispatch,
 				    <i class="fas fa-thumbs-up"></i> NOTE DE CONFIANCE
 				</h4>
 			</div>
-            {ncs.map(nc => (
+            {ncs ?.map(nc => (
 				<div className="container px-2 mx-auto">
 						<div className="flex flex-wrap">
 							<div className="w-full px-4 flex-1">
@@ -28,63 +38,80 @@ const DetailsDropdown = ({ dispatch,
 				</div>
 			))}
 
-			<h4 className="mt-2 px-6 py-2 text-md leading-relaxed text-gray-600 underline font-bold uppercase rounded">
+			<h4 className="mt-2 px-6 py-2 text-xl leading-relaxed text-gray-600 underline font-bold uppercase rounded">
 				ÉQUIPEMENTS DE SÉRIE ET OPTIONS :
 		    </h4>
+			       {exterieur_equipements.length ? (
 					<div className="container px-2 mx-auto">
+					  <div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Exterieur equipements :</div>
 					  <div className="flex flex-wrap">
-					    {exterieur_equipements.map(exterieur_equipement => (
+					    {exterieur_equipements ?.map(exterieur_equipement => (
 							<div className="w-full px-3 flex-1">
 							  <span className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {exterieur_equipement.name} </span>
 							</div>
 						))}
 					  </div>
-					</div>
+				    </div> ) : (null)}
+					
+				   {interieur_equipements.length ? (
 					<div className="container px-2 mx-auto">
+					  <div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Interieur equipements :</div>
 					  <div className="flex flex-wrap">
-					    {interieur_equipements.map(interieur_equipement => (
+					    {interieur_equipements ?.map(interieur_equipement => (
 							<div className="w-full px-3 flex-1">
 							  <span className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {interieur_equipement.name} </span>
 							</div>
 						))}
 					  </div>
-					</div>
+					</div> ) : (null)}
+					
+				   {securite_equipements.length ? (
 					<div className="container px-2 mx-auto">
+					  <div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Securite equipements :</div>
 					  <div className="flex flex-wrap">
-					    {securite_equipements.map(securite_equipement => (
+					    {securite_equipements ?.map(securite_equipement => (
 							<div className="w-full px-3 flex-1">
 							  <span className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {securite_equipement.name} </span>
 							</div>
 						))}
 					  </div>
-					</div>
+					</div>) : (null)}
+					
+				   {antivol_equipements.length ? (
 					<div className="container px-2 mx-auto">
+					  <div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Antivol equipements :</div>
 					  <div className="flex flex-wrap">
-					    {antivol_equipements.map(antivol_equipement => (
+					    {antivol_equipements ?.map(antivol_equipement => (
 						    <div className="w-full px-3 flex-1">
 							  <span className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {antivol_equipement.name} </span>
 							</div>
 						))}
 					  </div>
-					</div>
+					</div>) : (null)}
+					
+				   {confort_equipements.length ? (
 					<div className="container px-2 mx-auto">
+					  <div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Confort equipements :</div>
 					  <div className="flex flex-wrap">
-					    {confort_equipements.map(confort_equipement => (
+					    {confort_equipements ?.map(confort_equipement => (
 							<div className="w-full px-3 flex-1">
 							  <span className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {confort_equipement.name} </span>
 							</div>
                         ))}
 					  </div>
-					</div>
+					</div>) : (null)}
+					
+				   {autre_equipements.length ? (
 					<div className="container px-2 mx-auto">
+					  <div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Autre equipements :</div>
 					  <div className="flex flex-wrap">
-					    {autre_equipements.map(autre_equipement => (
+					    {autre_equipements ?.map(autre_equipement => (
 							<div className="w-full px-3 flex-1">
-							  <span className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {autre_equipement.value} </span>
+							  <span className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {autre_equipement.name} </span>
 							</div>
                         ))}
 					  </div>
-					</div>
+					</div>) : (null)}
 		</div>
     </>
   );
