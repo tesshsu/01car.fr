@@ -1,48 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import Link from "next/link";
 import QuestionsOptions from "components/Tabs/QuestionsOptions.js";
-
+import {connect} from 'react-redux';
 import ImageUpload from "components/Tabs/ImageUpload.js";
 import { Form, Field } from 'react-final-form';
 import useLoggedUser from 'service/hooks/useLoggedUser';
 import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
 import PubContentConnection from "layouts/PubContentConnection.js";
-//modal
+import useVendre from 'service/hooks/useVendre';
+import * as constant from 'helpers/constant';
+import * as formValidate from 'helpers/formValidate';
+import {Condition, Error} from 'helpers/formValidate';
 import "react-responsive-modal/styles.css";
 import { Modal } from 'react-responsive-modal';
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-const required = value => (value ? undefined : 'champs obligatoire')
-const mustBeNumber = value => (isNaN(value) ? "Doit être en chiffre" : undefined);
-const composeValidators = (...validators) => value =>
-  validators.reduce((error, validator) => error || validator(value), undefined);
-
-const Error = ({ name }) => (
-  <Field name={name} subscription={{ error: true, touched: true, value: true }}>
-    {({ meta: { error, touched, value } }) =>
-      error && touched ? <span className="text-orange-500 text-sm">{error}</span> : null
-    }
-  </Field>
-)
-const Condition = ({ when, is, children }) => (
-    <Field name={when} subscription={{ value: true }}>
-      {({ input: { value } }) => (value === is ? children : null)}
-    </Field>
-)
-
-const onSubmit = async values => {
-  await sleep(300)
-  window.alert(JSON.stringify(values, 0, 2))
-}
-const pattern= new RegExp("(.+ .*)|(.* .+)");
-const matchMarqueModel = value => (!pattern.test(value) ? "Il faut Marque avec model par example CITROEN C4" : undefined);
-
-const formatDate = value => {
-  if (!value) return value;
-  return `${value.slice(0, 4)}-${value.slice(5, 7)}-${value.slice(8,10)}`;
-}
-
-export default function QuestionsClassic() {
+const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
   const [openTab, setOpenTab] = React.useState(1);
   const [showModal, setShowModal] = React.useState(false);
   const {
@@ -69,20 +41,35 @@ export default function QuestionsClassic() {
 		return setShowModal(true);
 	}
   }, [isAuthentificated, loggedUser]);
+ 
+  //submit
+	/*const {
+		submitReponses
+	  } = useVendre();*/
+	  
 
+	const onSubmit = async (values)=>{
+		try {
+		  let {
+			...payload
+		  } = values;
 
+		  const data = { ...payload };
+		  await submitReponses(data);
+		} catch (err) {
+		  console.log(err.response);
+		  if (err.response && err.response.status === 422) {
+			alert('Annonce deja existe');
+		  } else {
+			alert('Impossible de créer le compte, merci de constacter notre equipe');
+		  }
+		}
+	  }
+  
+  
   return (
     <>
       <div className="flex flex-wrap">
-      {showModal ? (
-	     <>
-		    <Modal closeOnEsc={false} open={open} onClose={() => setShowModal(true)}>
-				<h2 className="text-2xl font-semibold text-center">Connectez-vous pour répondez au questionnaire de confiance</h2>
-				<PubContentThreeIcons />
-				<PubContentConnection />
-            </Modal>
-		 </>
-      ) : null}
 		<div className="w-full">
           <ul
             className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
@@ -150,10 +137,23 @@ export default function QuestionsClassic() {
           <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
             <div className="px-4 py-5 flex-auto">
 				<Form
+				    initialValues={{
+						marqueModel:'',
+						dt_entry_service: '',
+						fuel: '',
+						km: '',
+						statu_vendeur: '',
+						date_disponible: '',
+						car_fumeur: '',
+						double_cles: '',
+						raison_vendre: '',
+						estimate_price: '',
+						num_de_mains: '',
+						etat_car: '',
+						origin_car: '',
+					}}
 					onSubmit={onSubmit}
-					subscription={{ submitting: true, pristine: true }}
-				>
-					{({ handleSubmit, form, submitting, pristine, values }) => (
+					render={({ submitError, handleSubmit, form, submitting, pristine, values, invalid }) => (
                         <form onSubmit={handleSubmit}>
 						<div className="tab-content tab-space">
 						<div className={openTab === 1 ? "block" : "hidden"} id="link1">
@@ -168,10 +168,10 @@ export default function QuestionsClassic() {
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
                                       <Field
 										  name="marqueModel"
-										  validate={composeValidators(required, matchMarqueModel)}
+										  validate={formValidate.composeValidators(formValidate.required, formValidate.matchMarqueModel)}
 										  component="input"
-										  type="text"
-										  value=""
+										  value= {values.marqueModel}
+										  type="text"										  
 										  placeholder="BMW SERIE 3"
 										  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded border border-gray-400 text-sm shadow focus:outline-none focus:shadow-outline w-full pl-10"
 										/>
@@ -189,11 +189,11 @@ export default function QuestionsClassic() {
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
                                       <Field
 										  name="dt_entry_service"
-										  validate={required}
+										  validate={formValidate.required}
 										  component="input"
 										  type="date"
-										  value=""
-										  format={formatDate}
+										  value= {values.dt_entry_service}
+										  format={formValidate.formatDate}
 										  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded border border-gray-400 text-sm shadow focus:outline-none focus:shadow-outline w-full pl-10"
 										/>
                                       <Error name="dt_entry_service" />
@@ -210,23 +210,14 @@ export default function QuestionsClassic() {
 										* Energie :
 									</label>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-                                      <Field name="fuel"
-									         validate={required}
-											 component="select"
-											 className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-									  >
-                                        <option></option>
-                                        <option value="Diesel">Diesel (Diesel)</option>
-										<option value="Electric">Electric (Électrique)</option>
-										<option value="Gasoline">Gasoline (Essence)</option>
-										<option value="Ethanol">Ethanol (Ethanol)</option>
-										<option value="LPG">LPG (GPL)</option>
-										<option value="Hybrid">Hybrid (Hybride)</option>
-                                      </Field>
-                                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                        <i className="fas fa-angle-down text-2xl my-2"></i>
-                                      </div>
-                                      <Error name="fuel" />
+                                        <Field
+											name="fuel"
+											component={formValidate.ReactSelectAdapter}
+											options={constant.fuelOptions}
+											value={values.fuel}
+											className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+										  />
+									     <Error name="fuel" />
 								    </div>
                                 </div>
 								<div className="w-full lg:w-6/12 px-4">
@@ -238,10 +229,10 @@ export default function QuestionsClassic() {
 									</label>
 									<Field
 									  name="km"
-									  validate={composeValidators(required, mustBeNumber)}
+									  validate={formValidate.composeValidators(formValidate.required, formValidate.mustBeNumber)}
 									  component="input"
 									  type="text"
-									  value=""
+									  value= {values.km}
 									  placeholder="12000"
 									  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative border border-gray-400 bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 									/>
@@ -270,32 +261,31 @@ export default function QuestionsClassic() {
                               <div className="w-full lg:w-6/12 px-4">
 									<label
 										className="block uppercase text-gray-700 text-md font-bold mb-2"
-										htmlFor="question-1"
+										htmlFor="statu_vendeur"
 									>
 										Q1 - VOUS êtes :
 									</label>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-                                      <Field name="question-1" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                        <option></option>
-                                        <option value="particulier" note="1">particulier</option>
-                                        <option value="professionnel" note="0">professionnel</option>
-                                      </Field>
-                                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                        <i className="fas fa-angle-down text-2xl my-2"></i>
-                                      </div>
-                                      <Error name="question-1" />
+                                      <Field
+											name="statu_vendeur"
+											component={formValidate.ReactSelectAdapter}
+											options={constant.statuVendeurOptions}
+											value={values.statu_vendeurl}
+											className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+										  />
+									  <Error name="statu_vendeur" />									  
 									</div>
                               </div>
 
                               <div className="w-full lg:w-6/12 px-4">
 									<label
 										className="block uppercase text-gray-700 text-md font-bold mb-2"
-										htmlFor="question-2"
+										htmlFor="date_disponible"
 									>
 										Q2 - Votre véhicule est disponible :
 									</label>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-                                      <Field name="question-2" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                      <Field name="date_disponible" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                         <option></option>
                                         <option value="Immédiatement" note="1">Immédiatement</option>
                                         <option value="Dans un mois" note="0">Dans un mois</option>
@@ -303,9 +293,9 @@ export default function QuestionsClassic() {
                                       </Field>
                                       <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                         <i className="fas fa-angle-down text-2xl my-2"></i>
-                                      </div>
-                                      <Error name="question-2" />
-                                      <Condition when="question-2" is="plus" className="mt-2">
+                                      </div>				  
+									  <Error name="date_disponible" />
+                                      <Condition when="date_disponible" is="plus tard" className="mt-2">
                                         <p className="text-md leading-relaxed text-gray-500"> Votre annonce durée juste 2 mois </p>
                                       </Condition>
 									</div>
@@ -316,40 +306,40 @@ export default function QuestionsClassic() {
 								<div className="w-full lg:w-6/12 px-4">
 									<label
 										className="block uppercase text-gray-700 text-md font-bold mb-2"
-										htmlFor="question-3"
+										htmlFor="car_fumeur"
 									>
 										Q3 - Votre véhicule est :
 									</label>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-                                      <Field name="question-3" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                        <option></option>
-                                        <option value="non fumeur" note="1">non fumeur</option>
-                                        <option value="fumeur" note="0">fumeur</option>
-                                      </Field>
-                                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                        <i className="fas fa-angle-down text-2xl my-2"></i>
-                                      </div>
-                                      <Error name="question-3" />
+                                        <Field
+											name="car_fumeur"
+											component={formValidate.ReactSelectAdapter}
+											validate={formValidate.required}
+											options={constant.furmeurOptions}
+											value={values.car_fumeur}
+											className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+										  />
+									    <Error name="car_fumeur" />                                    									  
 									</div>
 								</div>
 
 								<div className="w-full lg:w-6/12 px-4">
 									<label
 										className="block uppercase text-gray-700 text-md font-bold mb-2"
-										htmlFor="question-4"
+										htmlFor="double_cles"
 									>
 										Q4 - Avez-vous le Double des clés :
 									</label>
 									<div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                      <Field name="question-4" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                        <option></option>
-                                        <option value="Oui" note="1">Oui &#xf164;</option>
-                                        <option value="Non" note="0">Non &#xf165;</option>
-                                      </Field>
-                                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                        <i className="fas fa-angle-down text-2xl my-2"></i>
-                                      </div>
-                                      <Error name="question-4" />
+                                       <Field
+											name="double_cles"
+											component={formValidate.ReactSelectAdapter}
+											validate={formValidate.required}
+											options={constant.OuiOptions}
+											value={values.double_cles}
+											className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+										  />
+									    <Error name="double_cles" />
 									</div>
 								</div>
 							</div>
@@ -357,26 +347,27 @@ export default function QuestionsClassic() {
 							<div className="flex flex-wrap mt-12 px-4">
 								<label
 									className="block uppercase text-gray-700 text-md font-bold mb-2"
-									htmlFor="question-5"
+									htmlFor="raison_vendre"
 								>
 									Q5 - Pourquoi vendez-vous votre véhicule ?
 								</label>
 								<div className="relative flex w-full flex-wrap items-stretch mb-3">
-                                  <Field name="question-5" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                    <option></option>
-                                    <option value="Changer de véhicule" note="1">Changer de véhicule</option>
-                                    <option value="Autre projet" note="0">Autre projet</option>
-                                  </Field>
-                                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                    <i className="fas fa-angle-down text-2xl my-2"></i>
-                                  </div>
-                                  <Error name="question-5" />
-                                  <Condition when="question-5" is="autre" className="mt-2">
+                                  <Field
+											name="raison_vendre"
+											component={formValidate.ReactSelectAdapter}
+											validate={formValidate.required}
+											options={constant.raisonVendreOptions}
+											value={values.raison_vendre}
+											className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+										  />  
+                                  <Error name="raison_vendre" />
+                                  <Condition when="raison_vendre" is="autre" className="mt-2">
                                     <p className="text-md leading-relaxed text-gray-500"> Indique votre raison : </p>
                                     <Field
-                                        validate={required}
-                                        name="question-6"
+                                        validate={formValidate.required}
+                                        name="raison_vendre"
                                         component="input"
+										value={values.raison_vendre}
                                         type="text"
 										value=""
                                         placeholder="votre raison"
@@ -412,10 +403,10 @@ export default function QuestionsClassic() {
 									</label>
 									<Field
 									  name="estimate_price"
-									  validate={composeValidators(required, mustBeNumber)}
+									  validate={formValidate.composeValidators(formValidate.required, formValidate.mustBeNumber)}
 									  component="input"
 									  type="text"
-									  value=""
+									  value={values.estimate_price}
 									  placeholder="12420"
 									  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white border border-gray-400 rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 									/>
@@ -432,41 +423,39 @@ export default function QuestionsClassic() {
 								<div className="w-full lg:w-6/12 px-4">
 								  <label
 										className="block uppercase text-gray-700 text-md font-bold mb-2"
-										htmlFor="question-8"
+										htmlFor="num_de_mains"
 								  >
 									Q8 - Nombre de mains:
 								  </label>
 								  <div className="relative flex w-full flex-wrap items-stretch mb-3">
-                                    <Field name="question-8" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                      <option></option>
-                                      <option value="1ère ou 2ème main" note="1">1ère ou 2ème main</option>
-                                      <option value="3ème main ou plus" note="0">3ème main ou plus</option>
-                                    </Field>
-                                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                      <i className="fas fa-angle-down text-2xl my-2"></i>
-                                    </div>
-                                    <Error name="question-8" />
+                                     <Field
+											name="num_de_mains"
+											component={formValidate.ReactSelectAdapter}
+											validate={formValidate.required}
+											options={constant.numMainsOptions}
+											value={values.num_de_mains}
+											className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+										  />
+                                    <Error name="num_de_mains" />
 								   </div>
 								</div>
 								<div className="w-full lg:w-6/12 px-4">
 								  <label
 										className="block uppercase text-gray-700 text-md font-bold mb-2"
-										htmlFor="question-9"
+										htmlFor="etat_car"
 								  >
 									Q9- État du véhicule:
 								  </label>
 								   <div className="relative flex w-full flex-wrap items-stretch mb-3">
-                                     <Field name="question-9" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                       <option></option>
-                                       <option value="Neuf" note="1">Neuf</option>
-                                       <option value="Très bon état" note="1">Très bon état</option>
-									   <option value="Bon état" note="1">Bon état</option>
-									   <option value="satisfaisant" note="0">satisfaisant</option>
-                                     </Field>
-                                     <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                       <i className="fas fa-angle-down text-2xl my-2"></i>
-                                     </div>
-                                     <Error name="question-9" />
+                                     <Field
+											name="etat_car"
+											component={formValidate.ReactSelectAdapter}
+											validate={formValidate.required}
+											options={constant.etatCarOptions}
+											value={values.etat_car}
+											className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+										  />
+                                     <Error name="etat_car" />
 								   </div>
 								</div>
 							</div>
@@ -474,20 +463,20 @@ export default function QuestionsClassic() {
 							<div className="flex flex-wrap mt-8 px-4">
 								  <label
 										className="block uppercase text-gray-700 text-md font-bold mb-2"
-										htmlFor="question-10"
+										htmlFor="origin_car"
 								  >
 									Q10- Origine du véhicule :
 								  </label>
 								  <div className="relative flex w-full flex-wrap items-stretch mb-3">
-                                    <Field name="question-10" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                      <option></option>
-                                      <option value="FR" note="1">française</option>
-                                      <option value="0" note="0">étrangère</option>
-                                    </Field>
-                                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                      <i className="fas fa-angle-down text-2xl my-2"></i>
-                                    </div>
-                                    <Error name="question-10" />
+                                    <Field
+											name="origin_car"
+											component={formValidate.ReactSelectAdapter}
+											validate={formValidate.required}
+											options={constant.originCarOptions}
+											value={values.origin_car}
+											className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+										  />
+                                    <Error name="origin_car" />
 								   </div>
 							</div>
 
@@ -606,7 +595,7 @@ export default function QuestionsClassic() {
 						</div>
                         </form>
 					)}
-				</Form>
+				/>
             </div>
           </div>
         </div>
@@ -614,3 +603,12 @@ export default function QuestionsClassic() {
     </>
   );
 }
+
+/*const mapStateToProps = (state) => ({
+  loading: state.response.loading,
+  response: state.response.response,
+  hasErrors: state.response.hasErrors,
+})
+export default connect(mapStateToProps)(QuestionsClassic)*/
+
+export default QuestionsClassic

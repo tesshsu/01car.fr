@@ -1,3 +1,56 @@
+//page questions part
+export const fuelOptions = [
+    {note: 0, label: 'Diesel', value: 'Diesel'},
+    {note: 0, label: 'Électrique', value: 'Électrique'},
+    {note: 0, label: 'Essence', value: 'Essence'},
+    {note: 0, label: 'Ethanol', value: 'Ethanol'},
+	{note: 0, label: 'GPL', value: 'GPL'},
+	{note: 0, label: 'Hybrid', value: 'Hybrid'}
+  ];
+
+export const statuVendeurOptions = [
+    {note: "1", label: 'particulier', value: 'particulier'},
+    {note: "0", label: 'professionnel', value: 'professionnel'}
+  ]
+
+export const dateDispoOptions = [
+    {note: 1, label: 'Immédiatement', value: 'Immédiatement'},
+    {note: 0, label: 'Dans un mois', value: 'Dans un mois'},
+	{note: 0, label: 'plus tard', value: 'plus tard'}
+  ]
+
+export const furmeurOptions = [
+    {note: 1, label: 'non fumeur', value: 'non fumeur'},
+    {note: 0, label: 'fumeur', value: 'fumeur'}
+  ]
+
+export const OuiOptions = [
+    {note: 1, label: 'Oui', value: 'Oui'},
+    {note: 0, label: 'Non', value: 'Non'}
+  ]
+
+export const raisonVendreOptions = [
+    {note: 1, label: 'Changer de véhicule', value: 'Changer de véhicule'},
+    {note: 0, label: 'Autre projet', value: 'Autre projet'}
+  ]
+
+export const numMainsOptions = [
+    {note: 1, label: '1ère ou 2ème main', value: '1ère ou 2ème main'},
+    {note: 0, label: '3ème main ou plus', value: '3ème main ou plus'}
+  ]
+  
+export const etatCarOptions = [
+    {note: 1, label: 'Neuf', value: 'Neuf'},
+    {note: 1, label: 'Très bon état', value: 'Très bon état'},
+	{note: 1, label: 'Bon état', value: 'Bon état'},
+	{note: 0, label: 'satisfaisant', value: 'satisfaisant'},
+  ]
+
+export const originCarOptions = [
+    {note: 1, label: 'française', value: 'FR'},
+    {note: 0, label: 'étrangère', value: 'autre'}
+  ]
+  
 // page annonce car details
 
 export const exterieur_equipements = [

@@ -9,6 +9,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
 import * as reducers from '../service/reducers';
+import vendreReducer from '../service/reducers/vendre';
 import userReducer from '../service/reducers/user';
 import carsReducer from '../service/reducers/cars';
 import { setupApiClient } from '../api/client';
@@ -20,6 +21,7 @@ const logger = createLogger();
 const rootReducers = combineReducers({
   user: userReducer,
   carsReducer: carsReducer,
+  response: vendreReducer,
   ...reducers
 })
 const store = createStore(
