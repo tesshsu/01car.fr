@@ -11,6 +11,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = 'users';
+
     public static $fields_sizeMax = array(
         'name' => 64,
         'email' => 256,

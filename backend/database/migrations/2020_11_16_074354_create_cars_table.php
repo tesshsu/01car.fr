@@ -40,9 +40,21 @@ class CreateCarsTable extends Migration
             $table->double('scoreRecognition', 5, 2)->nullable();
             $table->double('scoreValuation', 5, 2)->nullable();
 
+            $table->double('estimate_price', 15, 2)->nullable();
             $table->double('price', 15, 2)->nullable();
             $table->string('currency', 4)->nullable();
+
             $table->boolean('prenium')->default(false);
+
+            $table->string('owner_type', 8)->nullable();
+            $table->string('available', 12)->nullable();
+            $table->boolean('smoking')->nullable()->default(false);
+            $table->boolean('duplicate_keys')->nullable()->default(false);
+            $table->string('sale_reason', 8)->nullable();
+            $table->integer('hand_number')->nullable();
+            $table->string('state', 12)->nullable();
+            $table->string('country', 2)->nullable();
+
         });
 
         Schema::table('cars', function(Blueprint $table) {

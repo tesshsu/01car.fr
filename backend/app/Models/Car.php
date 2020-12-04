@@ -9,6 +9,8 @@ class Car extends Model
 {
     use HasFactory;
 
+    protected $table = 'cars';
+
     public static $fields_sizeMax = array(
         'brand' => 32,
         'model' => 32,
@@ -20,7 +22,11 @@ class Car extends Model
         'displacement' => 16,
         'version' => 32,
         'currency' => 4,
-
+        'owner_type' => 8,
+        'available' => 12,
+        'sale_reason' => 8,
+        'state' => 12,
+        'country' => 2,
     );
 
     public static function fieldsSizeMax($name)
@@ -43,13 +49,32 @@ class Car extends Model
         'finition',
         'displacement',
         'version',
+        'estimate_price',
         'price',
         'currency',
+        'owner_type',
+        'available',
+        'smoking',
+        'duplicate_keys',
+        'sale_reason',
+        'hand_number',
+        'state',
+        'country',
     ];
 
     public function user()
     {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function equipments()
+    {
+        return $this->hasMany(User::class,'id', 'car_id' );
+    }
+
+    public function carEquipments()
+    {
+        return $this->equipments();
     }
 
 }
