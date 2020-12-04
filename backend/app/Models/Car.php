@@ -69,12 +69,8 @@ class Car extends Model
 
     public function equipments()
     {
-        return $this->hasMany(User::class,'id', 'car_id' );
+        return $this->hasMany(CarEquipment::class);
     }
 
-    public function carEquipments()
-    {
-        return $this->equipments();
-    }
 
 }

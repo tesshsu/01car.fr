@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
 
         User::factory(100)
-            ->has( Car::factory()->count(1)->has(CarEquipment::factory()->count(rand (0 , 15) )))
+            ->has( Car::factory()->has( CarEquipment::factory(rand (0 , 15)), 'equipments' ))
             ->create();
 
     }

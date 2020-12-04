@@ -23,8 +23,10 @@ class CarEquipment extends Model
         return self::$fields_sizeMax[$name];
     }
 
+
     public function car()
     {
         return $this->belongsTo(Car::class);
     }
+
 }
