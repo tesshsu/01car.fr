@@ -5,33 +5,40 @@ import FileUpload from "components/Tabs/FileUpload.js";
 import NotificationDropdown from "components/Dropdowns/NotificationDropdown.js";
 import { Form, Field } from 'react-final-form';
 import ImageUpload from "components/Tabs/ImageUpload.js";
+import useVendre from 'service/hooks/useVendre';
+import * as constant from 'helpers/constant';
+import * as formValidate from 'helpers/formValidate';
+import {Condition, Error} from 'helpers/formValidate';
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-const required = value => (value ? undefined : 'champs obligatoire')
-const Error = ({ name }) => (
-	<Field name={name} subscription={{ error: true, touched: true }}>
-		{({ meta: { error, touched } }) =>
-			error && touched ? <span className="text-orange-500 text-sm">{error}</span> : null
-		}
-	</Field>
-)
-const Condition = ({ when, is, children }) => (
-    <Field name={when} subscription={{ value: true }}>
-        {({ input: { value } }) => (value === is ? children : null)}
-    </Field>
-)
-const onSubmit = async values => {
-	await sleep(300)
-	if(!values.file){
-	   window.alert('télécharger votre fiche')
-    }else{
-	   window.alert(JSON.stringify(values, 0, 2))
-	}
-		
-}
 
-export default function QuestionsPremier() {
+const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
   const [openTab, setOpenTab] = React.useState(1);
+  
+  //submit
+	/*const {
+		submitReponses
+	  } = useVendre();*/
+	  
+
+	const onSubmit = async (values)=>{
+		try {
+		  let {
+			...payload
+		  } = values;
+
+		  const data = { ...payload };
+		  await submitReponses(data);
+		} catch (err) {
+		  console.log(err.response);
+		  if (err.response && err.response.status === 422) {
+			alert('Annonce deja existe');
+		  } else {
+			alert('Impossible de créer le compte, merci de constacter notre equipe');
+		  }
+		}
+	  }
+	  
+	  
   return (
     <>
       <div className="flex flex-wrap">
@@ -82,50 +89,58 @@ export default function QuestionsPremier() {
           <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
             <div className="px-4 py-5 flex-auto">
 				<Form
-					onSubmit={onSubmit}					
-					subscription={{ submitting: true, pristine: true }}
-				>
-					{({ handleSubmit, form, submitting, pristine, values }) => (
-                        <form onSubmit={handleSubmit}>
+					initialValues={{
+						garantie:'',
+						accident:'',
+						defauts:'',
+						justifier_km:'',
+						controle_technique:'',
+						respect_entretiens:'',
+						prochain_entretiens:'',
+						facture:'',
+						carte_grise:'',
+						carnet_entretien:'',
+					}}
+					onSubmit={onSubmit}
+				    render={({ submitError, handleSubmit, form, submitting, pristine, values, invalid }) => (
+                            <form onSubmit={handleSubmit}>
                                 <div className="tab-content tab-space">
                                 <div className={openTab === 1 ? "block" : "hidden"} id="link1">
                                   <div className="flex flex-wrap">
                                         <div className="w-full lg:w-6/12 px-4">
                                           <label
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
-                                                htmlFor="question-11"
+                                                htmlFor="garantie"
                                           >
                                             Q11- le véhicule Est-il sous garantie?
                                           </label>
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                              <Field name="question-11" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                                  <option></option>
-                                                  <option value="Oui" note="1">Oui &#xf164;</option>
-                                                  <option value="Non" note="0">Non &#xf165;</option>
-                                              </Field>
-                                              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                                  <i className="fas fa-angle-down text-2xl my-2"></i>
-                                              </div>
-                                              <Error name="question-11" />
+                                              <Field
+													name="garantie"
+													component={formValidate.ReactSelectAdapter}
+													options={constant.OuiOptions}
+													value={values.garantie}
+													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+												 />
+                                              <Error name="garantie" />
                                           </div>
                                         </div>
                                         <div className="w-full lg:w-6/12 px-4">
                                           <label
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
-                                                htmlFor="question-12"
+                                                htmlFor="accident"
                                           >
                                             Q12- Véhicule ayant déjà subit 1 Accident (même mineur) ?
                                           </label>
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                              <Field name="question-12" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                                  <option></option>
-                                                  <option value="Oui" note="1">Oui &#xf164;</option>
-                                                  <option value="Non" note="0">Non &#xf165;</option>
-                                              </Field>
-                                              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                                  <i className="fas fa-angle-down text-2xl my-2"></i>
-                                              </div>
-                                              <Error name="question-12" />
+                                              <Field
+													name="accident"
+													component={formValidate.ReactSelectAdapter}
+													options={constant.NonOptions}
+													value={values.accident}
+													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+												 />
+                                              <Error name="accident" />
                                           </div>
                                         </div>
                                   </div>
@@ -133,21 +148,20 @@ export default function QuestionsPremier() {
                                         <div className="w-full lg:w-6/12 px-4">
                                              <label
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
-                                                htmlFor="question-13"
+                                                htmlFor="defauts"
                                              >
                                                 Q13- Le véhicule a t-il des défauts (griffes, coups, usures…) ?
                                             </label>
                                             <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                                <Field name="question-13" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                                    <option></option>
-                                                    <option value="Oui" note="1">Oui &#xf164;</option>
-                                                    <option value="Non" note="0">Non &#xf165;</option>
-                                                </Field>
-                                                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                                    <i className="fas fa-angle-down text-2xl my-2"></i>
-                                                </div>
-                                                <Error name="question-13" />
-                                                <Condition when="question-13" is="Oui" className="mt-2">
+                                                <Field
+													name="defauts"
+													component={formValidate.ReactSelectAdapter}
+													options={constant.NonOptions}
+													value={values.defauts}
+													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+												 />				
+                                                <Error name="defauts" />
+                                                <Condition when="defauts" is="Oui" className="mt-2">
                                                     <p className="text-md leading-relaxed text-gray-500"> Télécharger les défauts du véhicule  </p>
                                                     <ImageUpload />
                                                 </Condition>
@@ -156,42 +170,40 @@ export default function QuestionsPremier() {
                                         <div className="w-full lg:w-6/12 px-4">
                                             <label
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
-                                                htmlFor="question-14"
+                                                htmlFor="justifier_km"
                                               >
                                                 Q14- Pouvez-vous justifier le parcours kilométrique ?
                                              </label>
                                             <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                                <Field name="question-14" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                                    <option></option>
-                                                    <option value="Oui" note="1">Oui &#xf164;</option>
-                                                    <option value="Non" note="0">Non &#xf165;</option>
-                                                </Field>
-                                                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                                    <i className="fas fa-angle-down text-2xl my-2"></i>
-                                                </div>
-                                                <Error name="question-14" />
+                                                <Field
+													name="justifier_km"
+													component={formValidate.ReactSelectAdapter}
+													options={constant.OuiOptions}
+													value={values.justifier_km}
+													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+												 />	                                               
+                                                <Error name="justifier_km" />
                                             </div>
                                         </div>
                                   </div>
                                   <div className="flex flex-wrap mt-12 px-4">
                                           <label
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
-                                                htmlFor="question-15"
+                                                htmlFor="controle_technique"
                                           >
                                             Q15- Contrôle technique OK ?
                                           </label>
                                            <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                               <Field name="question-15" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                                   <option></option>
-                                                   <option value="Oui" note="1">Oui &#xf164;</option>
-                                                   <option value="Non" note="0">Non &#xf165;</option>
-                                               </Field>
-                                               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                                   <i className="fas fa-angle-down text-2xl my-2"></i>
-                                               </div>
-                                               <Error name="question-15" />
+                                               <Field
+													name="controle_technique"
+													component={formValidate.ReactSelectAdapter}
+													options={constant.OuiOptions}
+													value={values.controle_technique}
+													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+												 />	
+                                               <Error name="controle_technique" />
                                             </div>
-                                            <Condition when="question-15" is="Oui" className="mt-2">
+                                            <Condition when="controle_technique" is="Oui" className="mt-2">
 											  <p className="text-md leading-relaxed text-gray-500"> Telecharger votre contrôle technique <span><NotificationDropdown title="Vos données personnelles resteront confidentielles" /></span></p>
                                               <FileUpload />											  
                                             </Condition>
@@ -217,20 +229,19 @@ export default function QuestionsPremier() {
                                         <div className="w-full lg:w-6/12 px-4">
                                           <label
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
-                                                htmlFor="question-16"
+                                                htmlFor="respect_entretiens"
                                           >
                                             Q16- Respect des entretiens périodiques ?
                                           </label>
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                              <Field name="question-16" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                                  <option></option>
-                                                  <option value="Oui" note="1">Oui &#xf164;</option>
-                                                  <option value="Non" note="0">Non &#xf165;</option>
-                                              </Field>
-                                              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                                  <i className="fas fa-angle-down text-2xl my-2"></i>
-                                              </div>
-                                              <Error name="question-16" />
+                                              <Field
+													name="respect_entretiens"
+													component={formValidate.ReactSelectAdapter}
+													options={constant.OuiOptions}
+													value={values.respect_entretiens}
+													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+												 />				 
+                                              <Error name="respect_entretiens" />
                                             </div>
                                         </div>
                                         <div className="w-full lg:w-6/12 px-4">
@@ -241,15 +252,14 @@ export default function QuestionsPremier() {
                                             Q17- Prochain entretien ?
                                           </label>
                                           <div className="relative flex w-full flex-wrap items-stretch mb-3">
-                                              <Field name="question-17" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                                  <option></option>
-                                                  <option value="Moins de 5000km" note="0">Moins de 5000km</option>
-                                                  <option value="Plus de 5000km" note="1">Plus de 5000km</option>
-                                              </Field>
-                                              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                                  <i className="fas fa-angle-down text-2xl my-2"></i>
-                                              </div>
-                                              <Error name="question-17" />
+                                              <Field
+													name="prochain_entretiens"
+													component={formValidate.ReactSelectAdapter}
+													options={constant.prochaineEntretienOptions}
+													value={values.prochain_entretiens}
+													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+												 />	
+                                              <Error name="prochain_entretiens" />
                                            </div>
                                         </div>
                                   </div>
@@ -262,17 +272,16 @@ export default function QuestionsPremier() {
                                             Q18- Facture d'achat?
                                           </label>
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                              <Field name="question-18" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                                  <option></option>
-                                                  <option value="Oui" note="1">Oui &#xf164;</option>
-                                                  <option value="Non" note="0">Non &#xf165;</option>
-                                              </Field>
-                                              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                                  <i className="fas fa-angle-down text-2xl my-2"></i>
-                                              </div>
-                                              <Error name="question-18" />
+                                              <Field
+													name="facture"
+													component={formValidate.ReactSelectAdapter}
+													options={constant.OuiOptions}
+													value={values.facture}
+													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+												 />	
+                                              <Error name="facture" />
                                            </div>
-										   <Condition when="question-18" is="Oui" className="mt-2">												
+										   <Condition when="facture" is="Oui" className="mt-2">												
 												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre facture d'achat <span><NotificationDropdown title="Vos données personnelles resteront confidentielles" /></span> </p>												
 												<FileUpload />
                                            </Condition>
@@ -285,17 +294,16 @@ export default function QuestionsPremier() {
                                             Q19- Carte Grise ?
                                           </label>
                                            <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                               <Field name="question-19" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                                   <option></option>
-                                                   <option value="Oui" note="1">Oui &#xf164;</option>
-                                                   <option value="Non" note="0">Non &#xf165;</option>
-                                               </Field>
-                                               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                                   <i className="fas fa-angle-down text-2xl my-2"></i>
-                                               </div>
-                                               <Error name="question-19" />
+                                                <Field
+													name="carte_grise"
+													component={formValidate.ReactSelectAdapter}
+													options={constant.OuiOptions}
+													value={values.carte_grise}
+													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+												 />
+                                               <Error name="carte_grise" />
                                            </div>
-                                            <Condition when="question-19" is="Oui" className="mt-2">                                          
+                                            <Condition when="carte_grise" is="Oui" className="mt-2">                                          
 												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre carte grise. Attention : le numéro d'identification du véhicule (VIN) doit être clairement lisible. <span><NotificationDropdown title="Vos données personnelles resteront confidentielles" /></span></p>                                               
 												<FileUpload />
                                             </Condition>
@@ -309,17 +317,16 @@ export default function QuestionsPremier() {
                                             Q20- Possédez-vous le Carnet d’entretien?
                                           </label>
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                              <Field name="question-20" validate={required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                                  <option></option>
-                                                  <option value="Oui" note="1">Oui &#xf164;</option>
-                                                  <option value="Non" note="0">Non &#xf165;</option>
-                                              </Field>
-                                              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                                  <i className="fas fa-angle-down text-2xl my-2"></i>
-                                              </div>
-                                              <Error name="question-20" />
+                                              <Field
+													name="carnet_entretien"
+													component={formValidate.ReactSelectAdapter}
+													options={constant.OuiOptions}
+													value={values.carnet_entretien}
+													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
+												 />
+                                              <Error name="carnet_entretien" />
                                            </div>
-										    <Condition when="question-20" is="Oui" className="mt-2">
+										    <Condition when="carnet_entretien" is="Oui" className="mt-2">
 												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre carnet d’entretien <span><NotificationDropdown title="Vos données personnelles resteront confidentielles"  /></span></p>
 												<FileUpload />
                                            </Condition>
@@ -384,7 +391,7 @@ export default function QuestionsPremier() {
                               </div>
                         </form>
                     )}
-				</Form>
+				/>
             </div>
           </div>
         </div>
@@ -392,3 +399,12 @@ export default function QuestionsPremier() {
     </>
   );
 }
+
+/*const mapStateToProps = (state) => ({
+  loading: state.response.loading,
+  response: state.response.response,
+  hasErrors: state.response.hasErrors,
+})
+export default connect(mapStateToProps)(QuestionsClassic)*/
+
+export default QuestionsPremier

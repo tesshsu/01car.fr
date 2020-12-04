@@ -29,6 +29,11 @@ export const OuiOptions = [
     {note: 0, label: 'Non', value: 'Non'}
   ]
 
+export const NonOptions = [
+    {note: 1, label: 'Non', value: 'Non'},
+    {note: 0, label: 'Oui', value: 'Oui'}
+  ]
+
 export const raisonVendreOptions = [
     {note: 1, label: 'Changer de véhicule', value: 'Changer de véhicule'},
     {note: 0, label: 'Autre projet', value: 'Autre projet'}
@@ -49,6 +54,11 @@ export const etatCarOptions = [
 export const originCarOptions = [
     {note: 1, label: 'française', value: 'FR'},
     {note: 0, label: 'étrangère', value: 'autre'}
+  ]
+
+export const prochaineEntretienOptions = [
+    {note: 1, label: 'Moins de 5000km', value: 'Moins de 5000km'},
+    {note: 0, label: 'Plus de 5000km', value: 'Plus de 5000km'}
   ]
   
 // page annonce car details
