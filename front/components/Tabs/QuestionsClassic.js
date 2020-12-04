@@ -285,19 +285,16 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 										Q2 - Votre véhicule est disponible :
 									</label>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-                                      <Field name="date_disponible" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                      <Field name="date_disponible" validate={formValidate.required} component="select" value={values.date_disponible}  className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                         <option></option>
                                         <option value="Immédiatement" note="1">Immédiatement</option>
                                         <option value="Dans un mois" note="0">Dans un mois</option>
                                         <option value="plus tard" note="0">plus tard</option>
-                                      </Field>
-                                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-                                        <i className="fas fa-angle-down text-2xl my-2"></i>
-                                      </div>				  
+                                      </Field>						  			  
 									  <Error name="date_disponible" />
-                                      <Condition when="date_disponible" is="plus tard" className="mt-2">
-                                        <p className="text-md leading-relaxed text-gray-500"> Votre annonce durée juste 2 mois </p>
-                                      </Condition>
+									   <Condition when="date_disponible" is="plus tard" className="mt-2">
+                                            <p className="text-md leading-relaxed text-gray-500"> Votre annonce durée juste 2 mois </p>                                           
+                                       </Condition>
 									</div>
                               </div>
 							</div>
