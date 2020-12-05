@@ -15,7 +15,6 @@ class CreateCarEquipmentsTable extends Migration
     {
         Schema::create('car_equipments', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->bigInteger('car_id')->unsigned();
 
             $table->string('category', 32)->nullable();

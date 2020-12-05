@@ -61,8 +61,8 @@ class Car extends JsonResource
 
             'owner_type' => $this->owner_type,
             'available' => $this->available,
-            'smoking' => $this->smoking,
-            'duplicate_keys' => $this->duplicate_keys,
+            'smoking' => $this->smoking > 0 ? true : false,
+            'duplicate_keys' => $this->duplicate_keys > 0 ? true : false,
             'sale_reason' => $this->sale_reason,
             'hand_number' => $this->hand_number,
             'state' => $this->state,
