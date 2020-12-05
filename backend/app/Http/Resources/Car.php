@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Constants\EquipmentCategory;
 use App\Http\Resources\User as UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -15,6 +16,13 @@ class Car extends JsonResource
      */
     public function toArray($request)
     {
+        $groupedEquipments = $this->whenLoaded('equipments')->groupBy('category');
+        $equipments =  collect(EquipmentCategory::list())->flatMap(function ($item, $key) use ($groupedEquipments) {
+            return [  $item => $groupedEquipments[$item]->map(function ($equip) {
+                return $equip->name;
+            }) ];
+        });
+
         return [
             'id' => $this->id,
             'created_at' => $this->created_at,
@@ -43,17 +51,16 @@ class Car extends JsonResource
             'price' => $this->price,
             'currency' => $this->currency,
 
-            'owner_type'=> $this->owner_type,
-            'available'=> $this->available,
-            'smoking'=> $this->smoking,
-            'duplicate_keys'=> $this->duplicate_keys,
-            'sale_reason'=> $this->sale_reason,
-            'hand_number'=> $this->hand_number,
-            'state'=> $this->state,
-            'country'=> $this->country,
+            'owner_type' => $this->owner_type,
+            'available' => $this->available,
+            'smoking' => $this->smoking,
+            'duplicate_keys' => $this->duplicate_keys,
+            'sale_reason' => $this->sale_reason,
+            'hand_number' => $this->hand_number,
+            'state' => $this->state,
+            'country' => $this->country,
             'owner' => new UserResource($this->whenLoaded('user')),
-
-            'equipments' => $this->equipments,
+            'equipments' => $equipments
         ];
     }
 }
