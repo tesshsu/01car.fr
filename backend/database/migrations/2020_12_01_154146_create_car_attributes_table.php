@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCarEquipmentsTable extends Migration
+class CreateCarAttributesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCarEquipmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('car_equipments', function (Blueprint $table) {
+        Schema::create('car_attributes', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('car_id')->unsigned();
 
@@ -21,7 +21,7 @@ class CreateCarEquipmentsTable extends Migration
             $table->string('name', 64)->nullable();
         });
 
-        Schema::table('car_equipments', function(Blueprint $table) {
+        Schema::table('car_attributes', function(Blueprint $table) {
             $table->foreign('car_id')->references('id')->on('cars')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
@@ -35,10 +35,10 @@ class CreateCarEquipmentsTable extends Migration
      */
     public function down()
     {
-        Schema::table('car_equipments', function(Blueprint $table) {
-            $table->dropForeign('car_equipments_user_id_foreign');
+        Schema::table('car_attributes', function(Blueprint $table) {
+            $table->dropForeign('car_attributes_car_id_foreign');
         });
 
-        Schema::dropIfExists('car_equipments');
+        Schema::dropIfExists('car_attributes');
     }
 }

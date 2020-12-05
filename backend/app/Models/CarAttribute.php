@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CarEquipment extends Model
+class CarAttribute extends Model
 {
     use HasFactory;
 
-    protected $table = 'car_equipments';
+    public $timestamps = false;
+
+    protected $table = 'car_attributes';
 
     protected $fillable = ['car_id', 'category', 'name'];
 

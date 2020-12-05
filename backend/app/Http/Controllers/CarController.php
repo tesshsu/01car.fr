@@ -30,7 +30,7 @@ class CarController extends Controller
      */
     public function index(Request $request)
     {
-        $carsReq = Car::with('equipments', 'user');
+        $carsReq = Car::with('attributes', 'user');
 
         if ($request->has('prenium')) {
             $prenium = $request->query('prenium');

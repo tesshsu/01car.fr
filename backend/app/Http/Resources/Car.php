@@ -16,7 +16,7 @@ class Car extends JsonResource
      */
     public function toArray($request)
     {
-        $groupedEquipments = $this->whenLoaded('equipments')->groupBy('category');
+        $groupedEquipments = $this->whenLoaded('attributes')->groupBy('category');
         $equipments = collect(EquipmentCategory::list())->reject(function ($value, $key) {
                 return $value == EquipmentCategory::PRENIUM;
             })->flatMap(function ($item, $key) use ($groupedEquipments) {

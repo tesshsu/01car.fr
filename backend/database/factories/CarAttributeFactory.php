@@ -3,17 +3,17 @@
 namespace Database\Factories;
 
 use App\Constants\EquipmentCategory;
-use App\Models\CarEquipment;
+use App\Models\CarAttribute;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class CarEquipmentFactory extends Factory
+class CarAttributeFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = CarEquipment::class;
+    protected $model = CarAttribute::class;
 
     /**
      * Define the model's default state.

@@ -67,9 +67,9 @@ class Car extends Model
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function equipments()
+    public function attributes()
     {
-        return $this->hasMany(CarEquipment::class);
+        return $this->hasMany(CarAttribute::class);
     }
 
 

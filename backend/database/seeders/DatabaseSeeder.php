@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Car;
-use App\Models\CarEquipment;
+use App\Models\CarAttribute;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UsersTableSeeder::class);
 
         User::factory(100)
-            ->has( Car::factory()->has( CarEquipment::factory(rand (0 , 15)), 'equipments' ))
+            ->has( Car::factory()->has( CarAttribute::factory(rand (0 , 15)), 'attributes' ))
             ->create();
 
     }
