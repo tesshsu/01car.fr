@@ -17,7 +17,15 @@ class Car extends JsonResource
     public function toArray($request)
     {
         $groupedEquipments = $this->whenLoaded('equipments')->groupBy('category');
-        $equipments =  collect(EquipmentCategory::list())->flatMap(function ($item, $key) use ($groupedEquipments) {
+        $equipments = collect(EquipmentCategory::list())->reject(function ($value, $key) {
+                return $value == EquipmentCategory::PRENIUM;
+            })->flatMap(function ($item, $key) use ($groupedEquipments) {
+                return [  $item => $groupedEquipments->has( [$item]) ?
+                    $groupedEquipments[$item]->map(function ($equip) { return $equip->name;}) : []
+            ];
+        });
+        $options = collect( [EquipmentCategory::PRENIUM] )
+            ->flatMap(function ($item, $key) use ($groupedEquipments) {
             return [  $item => $groupedEquipments->has( [$item]) ?
                 $groupedEquipments[$item]->map(function ($equip) { return $equip->name;}) : []
             ];
@@ -60,7 +68,8 @@ class Car extends JsonResource
             'state' => $this->state,
             'country' => $this->country,
             'owner' => new UserResource($this->whenLoaded('user')),
-            'equipments' => $equipments
+            'equipments' => $equipments,
+            'options' => $options,
         ];
     }
 }
