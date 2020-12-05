@@ -18,9 +18,9 @@ class Car extends JsonResource
     {
         $groupedEquipments = $this->whenLoaded('equipments')->groupBy('category');
         $equipments =  collect(EquipmentCategory::list())->flatMap(function ($item, $key) use ($groupedEquipments) {
-            return [  $item => $groupedEquipments[$item]->map(function ($equip) {
-                return $equip->name;
-            }) ];
+            return [  $item => $groupedEquipments->has( [$item]) ?
+                $groupedEquipments[$item]->map(function ($equip) { return $equip->name;}) : []
+            ];
         });
 
         return [

@@ -32,9 +32,9 @@ php_path='/opt/plesk/php/7.3/bin/php'
 cd ../backend
 cp .env.prod .env
 
-#zip -r backend.zip .
+zip -r backend.zip .
 
-#mv backend.zip ../server/target/backend.zip
+mv backend.zip ../server/target/backend.zip
 
 
 # restore
