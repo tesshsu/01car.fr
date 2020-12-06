@@ -65,4 +65,10 @@ class User extends Authenticatable
     public function cars(){
         return $this->hasMany('App\Models\Car', 'user_id');
     }
+
+    public function canEditCar($car){
+        return $this == $car->user_id || $this->isAdminUser();
+    }
+
+
 }

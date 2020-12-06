@@ -72,5 +72,16 @@ class Car extends Model
         return $this->hasMany(CarAttribute::class);
     }
 
+    /**
+     * The uploads that belong to the car.
+     */
+    public function uploads()
+    {
+        return $this->belongsToMany(Upload::class, 'cars_uploads');
+    }
+
+    public function getUploadPath(){
+        return  'files/u' . $this->user_id . '/c'  . $this->id . '/uploads/';
+}
 
 }
