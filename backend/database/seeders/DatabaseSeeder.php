@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         User::factory(100)
             ->has( Car::factory()
                 ->has( CarAttribute::factory(rand (0 , 15)), 'attributes' )
-                ->has( Upload::factory(1)->state(function (array $attributes, Car $car) {
+                ->has( Upload::factory(rand (1 , 4))->state(function (array $attributes, Car $car) {
                         $path = $car->getUploadPath();
                         $res = UploadFactory::addFile($attributes['name'] ,
                             $attributes['mime_content_type'],

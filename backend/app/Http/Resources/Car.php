@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Constants\EquipmentCategory;
 use App\Http\Resources\User as UserResource;
+use App\Http\Resources\Upload as UploadResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Car extends JsonResource
@@ -70,6 +71,7 @@ class Car extends JsonResource
             'owner' => new UserResource($this->whenLoaded('user')),
             'equipments' => $equipments,
             'options' => $options,
+            'uploads' => UploadResource::collection($this->uploads),
         ];
     }
 }

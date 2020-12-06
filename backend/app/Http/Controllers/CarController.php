@@ -246,7 +246,7 @@ class CarController extends Controller
 
     private function renderJson($id)
     {
-        $car = Car::with('user')->find($id);
+        $car = Car::with('attributes', 'user', 'uploads')->find($id);
         if ($car == NULL) {
             return response()->json(['error' => 'NotFound'], 404);
         }
