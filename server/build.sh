@@ -1,8 +1,17 @@
-#!/bin/bash
+#!/bin/bash -xe
 # Author- Alexandre Chatiron
 
-rm -rf target
-mkdir target
+project_path=$(pwd)
+laradock_path='/cygdrive/d/dev/websites/laradock'
+
+app_path='/var/www/vhosts/01car.fr/api.01car.fr/'
+server_address=51.210.190.6
+ssh_user=admin01car_ssh
+php_path='/opt/plesk/php/7.3/bin/php'
+
+
+#rm -rf target
+#mkdir target
 
 #cd ../front
 #cp .env.prod .env
@@ -24,7 +33,7 @@ mkdir target
 cd ../backend
 cp .env.prod .env
 
-#zip -r backend.zip .
+zip -r backend.zip .
 
 mv backend.zip ../server/target/backend.zip
 
@@ -33,14 +42,22 @@ mv backend.zip ../server/target/backend.zip
 cp .env.dev .env
 
 #DB
-cd ../server
+cd ${laradock_path}
 
-docker-compose exec --user=laradock mysql bash
+#docker-compose exec mysql bash -c "ls && mysqldump --user=root --password=root default > /docker-entrypoint-initdb.d/01car.sql"
 
-mysqldump --user=root --password=root default > target/01car.sql
+#mv ${laradock_path}/mysql/docker-entrypoint-initdb.d/01car.sql ${project_path}/target/
 
-51.210.190.6
-admin01car_ssh
-B9h5nZUwc6mmnw4caLB4
 
-ssh admin01car_ssh@51.210.190.6
+# Install on server
+
+cd ${project_path}
+
+scp target/backend.zip ${ssh_user}@${server_address}:${app_path}
+
+
+ssh -o StrictHostKeyChecking=no ${ssh_user}@${server_address}  "cd ${app_path} && \
+    unzip backend.zip && \
+    ${php_path} artisan migrate:fresh --seed  && \
+    ${php_path} artisan passport:client --personal"
+

@@ -2,6 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Constants\EquipmentCategory;
+use App\Constants\CarState;
+use App\Constants\OwnerType;
+use App\Constants\SaleReason;
 use App\Models\Car;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
@@ -44,8 +48,18 @@ class CarFactory extends Factory
 
             'scoreRecognition' => $this->faker->randomFloat( 1, 0.0, 10.0),
             'scoreValuation' => $this->faker->randomFloat( 1, 0.0, 10.0),
+            'estimate_price' => $this->faker->randomFloat( 2, 500.0, 15000.0),
             'price' => $this->faker->randomFloat( 2, 500.0, 15000.0),
-            'currency' => 'EUR'
+            'currency' => 'EUR',
+
+            'owner_type'=> $this->faker->randomElement( OwnerType::list() ),
+            'available'=> $this->faker->randomElement( EquipmentCategory::list() ),
+            'smoking'=> $this->faker->boolean(),
+            'duplicate_keys'=> $this->faker->boolean(),
+            'sale_reason'=> $this->faker->randomElement( SaleReason::list() ),
+            'hand_number'=> $this->faker->numberBetween(1, 3),
+            'state'=> $this->faker->randomElement( CarState::list() ),
+            'country'=> $this->faker->randomElement( ['FR', 'ZZ'] ),
         ];
     }
 }

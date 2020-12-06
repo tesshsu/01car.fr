@@ -11,6 +11,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = 'users';
+
     public static $fields_sizeMax = array(
         'name' => 64,
         'email' => 256,
@@ -63,4 +65,10 @@ class User extends Authenticatable
     public function cars(){
         return $this->hasMany('App\Models\Car', 'user_id');
     }
+
+    public function canEditCar($car){
+        return $this == $car->user_id || $this->isAdminUser();
+    }
+
+
 }
