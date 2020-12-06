@@ -6,6 +6,7 @@ laradock_path='/cygdrive/d/dev/websites/laradock'
 
 app_path='/var/www/vhosts/01car.fr/api.01car.fr/'
 server_address=51.210.190.6
+ssh_user=admin01car_ssh
 php_path='/opt/plesk/php/7.3/bin/php'
 
 
@@ -52,10 +53,10 @@ cd ${laradock_path}
 
 cd ${project_path}
 
-scp target/backend.zip admin01car_ssh@${server_address}:${app_path}
+scp target/backend.zip ${ssh_user}@${server_address}:${app_path}
 
 
-ssh -o StrictHostKeyChecking=no admin01car_ssh@${server_address}  "cd ${app_path} && \
+ssh -o StrictHostKeyChecking=no ${ssh_user}@${server_address}  "cd ${app_path} && \
     unzip backend.zip && \
     ${php_path} artisan migrate:fresh --seed  && \
     ${php_path} artisan passport:client --personal"

@@ -227,7 +227,7 @@ $response = $client->request('GET', '/api/user', [
 
 /opt/plesk/php/7.3/bin/php artisan passport:client --personal
 
-php artisan storage:link
+/opt/plesk/php/7.3/bin/php artisan storage:link
 ```
 
 
