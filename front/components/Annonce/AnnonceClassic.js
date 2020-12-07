@@ -4,6 +4,7 @@ import FavorisButton from 'components/Favoris/FavorisButton';
 import {connect} from 'react-redux'
 import Moment from 'react-moment';
 import {fetchCars} from 'service/actions/cars';
+import ENVS from '../../environment';
 
 const AnnonceClassic = ({
                           loading,
@@ -15,8 +16,8 @@ const AnnonceClassic = ({
 			<Link key={post.id} post={post} href={`/annonce?id=${post.id}`}>
 			    <div id={post.id} status={post.prenium} className="relative w-full md:w-6/12 lg:w-4/12 lg:mb-0 mb-12 mr-4 my-6 shadow-lg max-w-400-px rounded-lg border-2 border-gray-200 ">
 					<img
-						alt="..."
-						src={require("assets/img/team-4-800x800.jpg")}
+						alt={post.uploads[0].name}
+						src={ENVS.DEV.API_URL + post.uploads[0].url}
 						className="shadow-lg mx-auto rounded-lg"
 					  />
 					<div className="w-full px-4 py-2 flex-1">

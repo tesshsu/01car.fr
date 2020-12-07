@@ -25,6 +25,13 @@ const AnnonceDetail = ({
 		<>
 			<div className="w-full lg:w-8/12 lg:mb-0 mb-12  my-6 shadow-lg rounded-lg">
 				<CardAnnonceSlide/>
+				{ car?.prenium == true ? (
+					<img
+							alt="..."
+							src={require("assets/img/qualite_logo.png")}
+							className="hasPrenium w-full align-center togBadge animate-ping ease-in-out"
+					/> ) : ( null )
+				}
 				<h4 className="marqueBlock bg-orange-500 font-bold text-2xl text-white px-4 py-3 shadow-lg">
 					<span className="brand">{car?.brand}</span> - <span className="model">{car?.model}</span> <span
 					className="generation">{car?.generation}</span>

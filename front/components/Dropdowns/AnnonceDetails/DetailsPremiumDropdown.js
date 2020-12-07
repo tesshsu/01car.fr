@@ -22,9 +22,10 @@ const DetailsPremiumDropdown = ({
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
+  
   return (
     <>
-       {premium_ncs.length ? (
+       {car?.prenium == true ? (
 		<div className="container px-2 mx-auto">
 		<div className="w-full px-8 py-2 px-2 flex-1">
 			<h4 className="mt-2 px-2 py-2 text-2xl leading-relaxed text-orange-500 font-bold underline uppercase rounded animate-bounce-once">

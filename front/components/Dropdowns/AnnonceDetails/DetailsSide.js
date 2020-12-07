@@ -15,16 +15,30 @@ const DetailsSide = ({ dispatch,
 	  { icon: "fas fa-key", value: car?.finition }
   ];
   
+  let prix_api = car?.price
+  let prenium = car?.prenium
   return (
     <>
         <div className="w-full lg:w-4/12 px-12 mt-4">
-		    <div className="priceVehicule font-bold px-1 text-xl text-gray-800 text-left">
-				<span className="font-bold px-1 text-4xl text-orange-500 text-left underline">{car?.price}</span> € Prix marche
+			{ prix_api != null && prenium == true  ? (
+				<div className="flex flex-wrap rounded border border-solid border-gray-600 animate-bounce p-1">
+				<div className="priceVehicule font-bold px-1 text-xl text-gray-800 text-left">
+					<span className="font-bold px-1 text-4xl text-orange-500 text-left underline">{car?.price}</span> € Prix marche
+				</div>
+				<div className="priceVehicule font-bold px-1 text-xl text-gray-800 text-left">
+					<span className="font-bold px-1 text-4xl text-orange-500 text-left underline">10 800</span> € Prix pro
+				</div>
+				<p className="text-lg block my-4 p-3 text-orange-500 rounded"><i class="far fa-thumbs-up"></i> Valeur de transaction qualifié par notre analyse de données </p>
+				</div>
+				) : (
+				  null
+			)}
+			<div className="priceVehicule font-bold px-1 text-5xl text-orange-500 text-left underline">
+				{car?.estimate_price} €
 			</div>
-			<div className="priceVehicule font-bold px-1 text-xl text-gray-800 text-left">
-				<span className="font-bold px-1 text-4xl text-orange-500 text-left underline">10 800</span> € Prix pro
+			<div className="priceVehicule font-bold px-1 text-2xl text-gray-800 text-left">
+				Prix par le vendeur
 			</div>
-			<p className="text-lg block my-4 p-3 text-orange-500 rounded border border-solid border-gray-200">Valeur de transaction qualifié !!</p>
 			<div className="flex flex-wrap">
 			   <NoteConfiance />
 			</div>
