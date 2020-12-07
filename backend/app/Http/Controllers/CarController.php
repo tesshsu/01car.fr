@@ -34,12 +34,12 @@ class CarController extends Controller
     {
         $carsReq = Car::with('attributes', 'user', 'uploads');
 
-        if ($request->has('prenium')) {
-            $prenium = $request->query('prenium');
-            $carsReq->where('prenium', $prenium);
+        if ($request->has('premium')) {
+            $prenium = $request->query('premium');
+            $carsReq->where('premium', $prenium);
         }
 
-        $carsReq->orderBy('prenium', 'desc');
+        $carsReq->orderBy('premium', 'desc');
         $carsLengthAwarePaginator = $carsReq->paginate($request->perPage, ['*'], $request->pageName, $request->page);
 
         return response()->json(new CarPaginatorCollection($carsLengthAwarePaginator));
@@ -164,7 +164,7 @@ class CarController extends Controller
         $path = null;
         $filename = null;
         if ($uploadedFile != null) {
-            $path = 'files/u' . $car->user_id . '/c'  . $car->id . '/uploads/';
+            $path = $car->getUploadPath();
             $filename = $uploadedFile->getClientOriginalName();
 
             Storage::disk('public')->putFileAs(
@@ -199,7 +199,7 @@ class CarController extends Controller
             'fuel' => 'max:' . Car::fieldsSizeMax('fuel'),
             'transmission' => 'max:' . Car::fieldsSizeMax('transmission'),
             'carBody' => 'max:' . Car::fieldsSizeMax('carBody'),
-            'finition' => 'max:' . Car::fieldsSizeMax('finition'),
+            'finishing' => 'max:' . Car::fieldsSizeMax('finishing'),
             'displacement' => 'max:' . Car::fieldsSizeMax('displacement'),
             'version' => 'max:' . Car::fieldsSizeMax('version'),
             'currency' => 'max:' . Car::fieldsSizeMax('currency'),

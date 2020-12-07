@@ -28,7 +28,7 @@ class CreateCarsTable extends Migration
 
             $table->string('carBody', 32)->nullable();
             $table->integer('doors')->nullable();
-            $table->string('finition', 32)->nullable();
+            $table->string('finishing', 32)->nullable();
             $table->string('displacement', 16)->nullable();
             $table->integer('power')->nullable();
             $table->string('version', 32)->nullable();
@@ -44,7 +44,7 @@ class CreateCarsTable extends Migration
             $table->double('price', 15, 2)->nullable();
             $table->string('currency', 4)->nullable();
 
-            $table->boolean('prenium')->default(false);
+            $table->boolean('premium')->default(false);
 
             $table->string('owner_type', 8)->nullable();
             $table->string('available', 12)->nullable();

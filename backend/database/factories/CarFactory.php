@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Constants\AvailablePeriod;
 use App\Constants\EquipmentCategory;
 use App\Constants\CarState;
 use App\Constants\OwnerType;
@@ -27,7 +28,7 @@ class CarFactory extends Factory
     public function definition()
     {
         return [
-            'prenium' => $this->faker->boolean(),
+            'premium' => $this->faker->boolean(),
             'brand' => $this->faker->randomElement( ['renault', 'peugeot', 'porche']),
             'model' => $this->faker->randomElement( ['205', '306', 'cayenne']),
             'generation' => Str::random(2),
@@ -37,7 +38,7 @@ class CarFactory extends Factory
             'transmission' => $this->faker->randomElement(['automatic','manual']),
             'carBody' => $this->faker->word(),
             'doors' => $this->faker->randomElement([3, 5 ]),
-            'finition' => $this->faker->word(),
+            'finishing' => $this->faker->word(),
             'displacement' => $this->faker->word(),
             'power' => $this->faker->numberBetween(50, 1000),
             'version' =>  $this->faker->word(),
@@ -53,7 +54,7 @@ class CarFactory extends Factory
             'currency' => 'EUR',
 
             'owner_type'=> $this->faker->randomElement( OwnerType::list() ),
-            'available'=> $this->faker->randomElement( EquipmentCategory::list() ),
+            'available'=> $this->faker->randomElement( AvailablePeriod::list() ),
             'smoking'=> $this->faker->boolean(),
             'duplicate_keys'=> $this->faker->boolean(),
             'sale_reason'=> $this->faker->randomElement( SaleReason::list() ),

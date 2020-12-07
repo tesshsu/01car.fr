@@ -9,141 +9,139 @@ export const fuelOptions = [
   ];
 
 export const statuVendeurOptions = [
-    {note: "1", label: 'particulier', value: 'particulier'},
-    {note: "0", label: 'professionnel', value: 'professionnel'}
+    {note: "1", label: 'particulier', value: 'private'},
+    {note: "0", label: 'professionnel', value: 'pro'}
   ]
 
 export const dateDispoOptions = [
-    {note: 1, label: 'Immédiatement', value: 'Immédiatement'},
-    {note: 0, label: 'Dans un mois', value: 'Dans un mois'},
-	{note: 0, label: 'plus tard', value: 'plus tard'}
+    {note: 1, label: 'Immédiatement', value: 'immediately'},
+    {note: 0, label: 'Dans un mois', value: 'one_month'},
+	{note: 0, label: 'Plus tard', value: 'later'}
   ]
 
 export const furmeurOptions = [
-    {note: 1, label: 'non fumeur', value: 'non fumeur'},
-    {note: 0, label: 'fumeur', value: 'fumeur'}
+    {note: 1, label: 'non fumeur', value: 'false'},
+    {note: 0, label: 'fumeur', value: 'true'}
   ]
 
 export const OuiOptions = [
-    {note: 1, label: 'Oui', value: 'Oui'},
-    {note: 0, label: 'Non', value: 'Non'}
+    {note: 1, label: 'Oui', value: 'true'},
+    {note: 0, label: 'Non', value: 'false'}
   ]
 
 export const NonOptions = [
-    {note: 1, label: 'Non', value: 'Non'},
-    {note: 0, label: 'Oui', value: 'Oui'}
+    {note: 1, label: 'Non', value: 'false'},
+    {note: 0, label: 'Oui', value: 'true'}
   ]
 
 export const raisonVendreOptions = [
-    {note: 1, label: 'Changer de véhicule', value: 'Changer de véhicule'},
-    {note: 0, label: 'Autre projet', value: 'Autre projet'}
+    {note: 1, label: 'Changer de véhicule', value: 'change'},
+    {note: 0, label: 'Autre projet', value: 'other'}
   ]
 
 export const numMainsOptions = [
-    {note: 1, label: '1ère ou 2ème main', value: '1ère ou 2ème main'},
-    {note: 0, label: '3ème main ou plus', value: '3ème main ou plus'}
+    {note: 1, label: '1ère ou 2ème main', value: '1'},
+    {note: 0, label: '3ème main ou plus', value: '3'}
   ]
-  
+
 export const etatCarOptions = [
-    {note: 1, label: 'Neuf', value: 'Neuf'},
-    {note: 1, label: 'Très bon état', value: 'Très bon état'},
-	{note: 1, label: 'Bon état', value: 'Bon état'},
-	{note: 0, label: 'satisfaisant', value: 'satisfaisant'},
+    {note: 1, label: 'Neuf', value: 'new'},
+    {note: 1, label: 'Très bon état', value: 'very_good'},
+	{note: 1, label: 'Bon état', value: 'good'},
+	{note: 0, label: 'satisfaisant', value: 'satisfactory'},
   ]
 
 export const originCarOptions = [
     {note: 1, label: 'française', value: 'FR'},
-    {note: 0, label: 'étrangère', value: 'autre'}
+    {note: 0, label: 'étrangère', value: 'ZZ'}
   ]
 
 export const prochaineEntretienOptions = [
-    {note: 1, label: 'Moins de 5000km', value: 'Moins de 5000km'},
-    {note: 0, label: 'Plus de 5000km', value: 'Plus de 5000km'}
+    {note: 1, label: 'Moins de 5000km', value: 'true'},
+    {note: 0, label: 'Plus de 5000km', value: 'false'}
   ]
-  
+
 // page annonce car details equipement
   
 export const exterieur_equipements = [
-	  { name: "toit ouvrant", value: "toit ouvrant" },
-	  { name: "4 roues motrices", value: "4 roues motrices" },
-	  { name: "aide parking av/ar", value: "aide parking av/ar" },
-	  { name: "caméra de recul", value: "caméra de recul" },
-	  { name: "radar de recul", value: "radar de recul" },
-	  { name: "attelage", value: "attelage" },
-	  { name: "attelage", value: "toit ouvrant" },
-	  { name: "jantes alu (numero remplir)", value: "jantes alu" },
-	  { name: "pack sport", value: "pack sport" },
-	  { name: "projecteurs bi-xénon", value: "projecteurs bi-xénon" },
-	  { name: "régulateur adaptatif", value: "régulateur adaptatif" },
-	  { name: "rétroviseurs dégivrants", value: "rétroviseurs dégivrants" },
-	  { name: "rétroviseurs électriques", value: "rétroviseurs électriques" },
-	  { name: "rétroviseurs rabattables", value: "rétroviseurs rabattables" },
-	  { name: "rétroviseurs rabattables électriquement", value: "rétroviseurs rabattables électriquement" },
-	  { name: "sorties d'échappement chromées", value: "sorties d'échappement chromées" }
+	  { name: "toit ouvrant", value: "sunroof" },
+	  { name: "4 roues motrices", value: "4_wheel_drive" },
+	  { name: "aide parking av/ar", value: "front_rear_parking_aid" },
+	  { name: "caméra de recul", value: "reversing_camera" },
+	  { name: "radar de recul", value: "reversing_radar" },
+	  { name: "attelage", value: "hitch" },
+	  { name: "jantes alu (numero remplir)", value: "aluminum_rims" },
+	  { name: "pack sport", value: "sport_pack" },
+	  { name: "projecteurs bi-xénon", value: "bi_xenon_headlamps" },
+	  { name: "régulateur adaptatif", value: "adaptive_regulator" },
+	  { name: "rétroviseurs dégivrants", value: "de_icing_mirrors" },
+	  { name: "rétroviseurs électriques", value: "electric_mirrors" },
+	  { name: "rétroviseurs rabattables", value: "folding_mirrors" },
+	  { name: "rétroviseurs rabattables électriquement", value: "electrically_folding_mirrors" },
+	  { name: "sorties d'échappement chromées", value: "chrome_tailpipes" }
   ];
 
 export const interieur_equipements = [
-	  { name: "vitres électriques", value: "vitres électriques" },
-	  { name: "vitres électriques", value: "vitres électriques" },
-	  { name: "banquette 1/3 - 2/3", value: "banquette 1/3 - 2/3" },
-	  { name: "banquette rabattable", value: "banquette rabattable" },
-	  { name: "boite automatique", value: "boite automatique" },
-	  { name: "climatisation automatique", value: "climatisation automatique" },
-	  { name: "démarrage sans clef", value: "démarrage sans clef" },
-	  { name: "direction assistée", value: "direction assistée" },
-	  { name: "écran tactile", value: "écran tactile" },
-	  { name: "fermeture électrique", value: "fermeture électrique" },
-	  { name: "fermeture électrique automatique", value: "fermeture électrique automatique" },
-	  { name: "GPS", value: "GPS" },
-	  { name: "intérieur cuir", value: "intérieur cuir" },
-	  { name: "rétroviseurs rabattables", value: "rétroviseurs rabattables" },
-	  { name: "kit téléphone main libre", value: "kit téléphone main libre" },
-	  { name: "ouverture du coffre électrique", value: "ouverture du coffre électrique" },
-	  { name: "palettes au volant", value: "palettes au volant" },
-	  { name: "pare-brise chauffant", value: "pare-brise chauffant" },
-	  { name: "pédalier alu", value: "pédalier alu" },
-	  { name: "prédisposition téléphone", value: "prédisposition téléphone" },
-	  { name: "prise 12V", value: "prise 12V" },
-	  { name: "prise audio mini USB", value: "prise audio mini USB" },
-	  { name: "prise audio USB", value: "prise audio USB" },
-	  { name: "régulateur de vitesse", value: "régulateur de vitesse" },
-	  { name: "siège conducteur réglable hauteur", value: "siège conducteur réglable hauteur" },
-	  { name: "sièges chauffants", value: "sièges chauffants" },
-	  { name: "sièges électrique à mémoire", value: "sièges électrique à mémoire" },
-	  { name: "vitres surteintées", value: "vitres surteintées" },
-	  { name: "volant sport", value: "volant sport" }
+	  { name: "vitres électriques", value: "electric_windows" },
+	  { name: "banquette 1/3 - 2/3", value: "bench_1/3_-_2/3" },
+	  { name: "banquette rabattable", value: "folding_bench" },
+	  { name: "boite automatique", value: "automatic_gearbox" },
+	  { name: "climatisation automatique", value: "automatic_air_conditioning" },
+	  { name: "démarrage sans clef", value: "keyless_start" },
+	  { name: "direction assistée", value: "power_steering" },
+	  { name: "écran tactile", value: "touch_screen" },
+	  { name: "fermeture électrique", value: "electrical_closing" },
+	  { name: "fermeture électrique automatique", value: "automatic_electrical_closing" },
+	  { name: "GPS", value: "gps" },
+	  { name: "intérieur cuir", value: "leather_interior" },
+	  { name: "rétroviseurs rabattables", value: "folding_mirrors" },
+	  { name: "kit téléphone main libre", value: "hands_free_phone_kit" },
+	  { name: "ouverture du coffre électrique", value: "phone_predisposition" },
+	  { name: "palettes au volant", value: "paddle_shifters" },
+	  { name: "pare-brise chauffant", value: "heated_windshield" },
+	  { name: "pédalier alu", value: "aluminum_crankset" },
+	  { name: "prédisposition téléphone", value: "phone_predisposition" },
+	  { name: "prise 12V", value: "12V_socket" },
+	  { name: "prise audio mini USB", value: "mini_usb_audio_jack" },
+	  { name: "prise audio USB", value: "usb_audio_jack" },
+	  { name: "régulateur de vitesse", value: "speed_regulator" },
+	  { name: "siège conducteur réglable hauteur", value: "height_adjustable_driver_s_seat" },
+	  { name: "sièges chauffants", value: "heated_seats" },
+	  { name: "sièges électrique à mémoire", value: "electric_memory_seats" },
+	  { name: "vitres surteintées", value: "dark_tinted_windows" },
+	  { name: "volant sport", value: "sport_steering_wheel" }
   ];
-  
+
 export const securite_equipements = [
-	  { name: "Airbags", value: "Airbags" },
-	  { name: "APPLE CAR PLAY", value: "APPLE CAR PLAY" },
-	  { name: "ABS", value: "ABS" },
-	  { name: "affichage tête haute", value: "affichage tête haute" },
-	  { name: "aide au démarrage en côte", value: "aide au démarrage en côte" },
-	  { name: "alerte franchissement ligne", value: "alerte franchissement ligne" },
-	  { name: "avertisseur d'angle mort", value: "avertisseur d'angle mort" },
-	  { name: "essuie-glaces automatiques", value: "essuie-glaces automatiques" },
-	  { name: "feux et essuie-glaces automatiques", value: "feux et essuie-glaces automatiques" },
-	  { name: "fixations ISOFIX", value: "fixations ISOFIX" },
-	  { name: "kit téléphone main libre bluetooth", value: "kit téléphone main libre bluetooth" },
-	  { name: "phares av. de jour à LED", value: "phares av. de jour à LED" }
+	  { name: "Airbags", value: "airbags" },
+	  { name: "APPLE CAR PLAY", value: "apple_car_play" },
+	  { name: "ABS", value: "abs" },
+	  { name: "affichage tête haute", value: "head_up_display" },
+	  { name: "aide au démarrage en côte", value: "hill_start_aid" },
+	  { name: "alerte franchissement ligne", value: "line_crossing_alert" },
+	  { name: "avertisseur d'angle mort", value: "blind_spot_warning" },
+	  { name: "essuie-glaces automatiques", value: "automatic_wipers" },
+	  { name: "feux et essuie-glaces automatiques", value: "automatic_lights_and_wipers" },
+	  { name: "fixations ISOFIX", value: "isofix_bindings" },
+	  { name: "kit téléphone main libre bluetooth", value: "bluetooth_hands_free_phone_kit" },
+	  { name: "phares av. de jour à LED", value: "led_daytime_running_lights" }
   ];
 
 export const antivol_equipements = [
-	  { name: "alarme", value: "alarme" },
-	  { name: "anti démarrage", value: "anti démarrage" },
-	  { name: "gravage des vitres", value: "gravage des vitres" }
+	  { name: "alarme", value: "alarm" },
+	  { name: "anti démarrage", value: "immobilizer" },
+	  { name: "gravage des vitres", value: "windows_engraving" }
   ];
 
 export const confort_equipements = [
-	  { name: "Bluetooth", value: "Bluetooth" },
-	  { name: "système d'entrée sans clef", value: "système d'entrée sans clef" },
-	  { name: "virtual cockpit", value: "virtual cockpit" }
+	  { name: "Bluetooth", value: "bluetooth" },
+	  { name: "système d'entrée sans clef", value: "keyless_entry_system" },
+	  { name: "virtual cockpit", value: "virtual_cockpit" }
   ];
-  
+
 export const autre_equipements = [
-	  { name: "kit de réparation crevaison", value: "kit de réparation crevaison" },
-	  { name: "système Start & Stop", value: "système Start & Stop" }
+	  { name: "kit de réparation crevaison", value: "flat_tire_repair_kit" },
+	  { name: "système Start & Stop", value: "start_stop_system" }
   ];
 
 export const premium_ncs = [
@@ -164,14 +162,14 @@ export const lists = [
   { detail: "2. 01car s'engage dans le cadre de l'accès et de l'utilisation du Site, à traiter les données à caractère personnel des personnes physiques, dans le respect de la règlementation française et européenne en matière de protection des données personnelles." },
   { detail: "3. 01car ne saurait donc être tenue pour responsable d'un quelconque dommage que tout internaute pourrait subir à la suite d'une telle utilisation" }
   ];
-  
+
 //pub part
 export const pubs = [
 	  { icon: "fas fa-hands-helping", name: "Un intermédiaire de confiance" },
 	  { icon: "fas fa-clipboard-check", name: "Sécuriser au maximum l'achat de son véhicule" },
 	  { icon: "far fa-paper-plane", name: "ACHETER FACILEMENT VOTRE VÉHICULE" }
   ];
-  
+
 export const listPubs = [
 	  { icon: "far fa-smile text-lg mr-1", title: "Note de confiance" },
 	  { icon: "fas fa-unlock-alt text-lg mr-1", title: "Sécuriser au maximum" },
@@ -191,7 +189,7 @@ export const pubIconlists = [
 	  { icon: "fas fa-unlock-alt text-lg mr-1", name: "Sécuriser au maximum" },
 	  { icon: "fas fa-certificate text-lg mr-1", name: "Vendre facilement" }
   ];
-  
+
 //price page part
 export const classics = [
 	{list: "Annonces pré-remplie"},

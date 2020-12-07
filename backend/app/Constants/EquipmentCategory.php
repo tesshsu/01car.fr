@@ -7,24 +7,26 @@ use App\Constants\Equipments\ComfortEquipment;
 use App\Constants\Equipments\InsideEquipment;
 use App\Constants\Equipments\OtherEquipment;
 use App\Constants\Equipments\OutsideEquipment;
-use App\Constants\Equipments\PreniumEquipment;
+use App\Constants\Equipments\PreMiumEquipment;
 
 abstract class EquipmentCategory
 {
     const OUTSIDE = 'outside';
     const INSIDE = 'inside';
     const ANTI_THEFT = 'anti_theft';
-    const CONFORT = 'confort';
+    const COMFORT = 'comfort';
     const OTHER = 'other';
-    const PRENIUM = 'prenium';
+    const PREMIUM = 'premium';
+    const SECURITY = 'security';
 
     public static $available_periods_list = array(
         self::OUTSIDE,
         self::INSIDE,
         self::ANTI_THEFT,
-        self::CONFORT,
+        self::COMFORT,
         self::OTHER,
-        self::PRENIUM,
+        self::PREMIUM,
+        self::SECURITY,
     );
 
     public static function list()
@@ -41,12 +43,12 @@ abstract class EquipmentCategory
                 return InsideEquipment::list();
             case self::ANTI_THEFT:
                 return AntiTheftEquipment::list();
-            case self::CONFORT:
+            case self::COMFORT:
                 return ComfortEquipment::list();
             case self::OTHER:
                 return OtherEquipment::list();
-            case self::PRENIUM:
-                return PreniumEquipment::list();
+            case self::PREMIUM:
+                return PremiumEquipment::list();
             default:
                 return [];
         }

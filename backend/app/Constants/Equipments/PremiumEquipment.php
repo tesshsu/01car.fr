@@ -2,10 +2,10 @@
 
 namespace App\Constants\Equipments;
 
-abstract class PreniumEquipment
+abstract class PremiumEquipment
 {
 
-    const UNDER_WARRANTY = 'Under_warranty';
+    const UNDER_WARRANTY = 'under_warranty';
     const HAD_ACCIDENT = 'had_accident';
     const DEFECTS = 'defects';
     const KM_CERTIFICATE = 'km_certificate';

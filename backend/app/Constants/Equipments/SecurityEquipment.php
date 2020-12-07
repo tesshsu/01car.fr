@@ -15,7 +15,7 @@ abstract class SecurityEquipment
     const AUTOMATIC_LIGHTS_AND_WIPERS = 'automatic_lights_and_wipers';
     const ISOFIX_BINDINGS = 'isofix_bindings';
     const BLUETOOTH_HANDS_FREE_PHONE_KIT= 'bluetooth_hands_free_phone_kit';
-    const LED_DAYTIME_RUNNING_LIGHTS = 'LED_daytime_running_lights';
+    const LED_DAYTIME_RUNNING_LIGHTS = 'led_daytime_running_lights';
 
 
     public static $security_equipements_list = array(

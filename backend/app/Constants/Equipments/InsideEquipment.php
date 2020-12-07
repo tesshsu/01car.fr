@@ -15,7 +15,7 @@ abstract class InsideEquipment
     const TOUCH_SCREEN = 'touch_screen';
     const ELECTRICAL_CLOSING = 'electrical_closing';
     const AUTOMATIC_ELECTRICAL_CLOSING = 'automatic_electrical_closing';
-    const GPS = 'GPS';
+    const GPS = 'gps';
     const LEATHER_INTERIOR = 'leather_interior';
     const FOLDING_MIRRORS = 'folding_mirrors';
     const HANDS_FREE_PHONE_KIT = 'hands_free_phone_kit';
@@ -25,8 +25,8 @@ abstract class InsideEquipment
     const ALUMINUM_CRANKSET = 'aluminum_crankset';
     const PHONE_PREDISPOSITION = 'phone_predisposition';
     const _12V_SOCKET = '12V_socket';
-    const MINI_USB_AUDIO_JACK = 'mini_USB_audio_jack';
-    const usb_audio_jack = 'USB_audio_jack';
+    const MINI_USB_AUDIO_JACK = 'mini_usb_audio_jack';
+    const USB_AUDIO_JACK = 'usb_audio_jack';
     const SPEED_REGULATOR = 'speed_regulator';
     const HEIGHT_ADJUSTABLE_DRIVER_S_SEAT = 'height_adjustable_driver_s_seat';
     const HEATED_SEATS = 'heated_seats';
@@ -56,7 +56,7 @@ abstract class InsideEquipment
         self::PHONE_PREDISPOSITION,
         self::_12V_SOCKET,
         self::MINI_USB_AUDIO_JACK,
-        self::usb_audio_jack,
+        self::USB_AUDIO_JACK,
         self::SPEED_REGULATOR,
         self::HEIGHT_ADJUSTABLE_DRIVER_S_SEAT,
         self::HEATED_SEATS,

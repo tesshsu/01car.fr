@@ -4,7 +4,7 @@ namespace App\Constants\Equipments;
 
 abstract class ComfortEquipment
 {
-    const BLUETOOTH = 'Bluetooth';
+    const BLUETOOTH = 'bluetooth';
     const KEYLESS_ENTRY_SYSTEM = 'keyless_entry_system';
     const VIRTUAL_COCKPIT = 'virtual_cockpit';
 

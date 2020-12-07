@@ -19,13 +19,13 @@ class Car extends JsonResource
     {
         $groupedEquipments = $this->whenLoaded('attributes')->groupBy('category');
         $equipments = collect(EquipmentCategory::list())->reject(function ($value, $key) {
-                return $value == EquipmentCategory::PRENIUM;
+                return $value == EquipmentCategory::PREMIUM;
             })->flatMap(function ($item, $key) use ($groupedEquipments) {
                 return [  $item => $groupedEquipments->has( [$item]) ?
                     $groupedEquipments[$item]->map(function ($equip) { return $equip->name;}) : []
             ];
         });
-        $options = collect( [EquipmentCategory::PRENIUM] )
+        $options = collect( [EquipmentCategory::PREMIUM] )
             ->flatMap(function ($item, $key) use ($groupedEquipments) {
             return [  $item => $groupedEquipments->has( [$item]) ?
                 $groupedEquipments[$item]->map(function ($equip) { return $equip->name;}) : []
@@ -36,7 +36,7 @@ class Car extends JsonResource
             'id' => $this->id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'prenium' => $this->prenium > 0 ? true : false,
+            'premium' => $this->prenium > 0 ? true : false,
             'brand' => $this->brand,
             'model' => $this->model,
             'generation' => $this->generation,
@@ -46,7 +46,7 @@ class Car extends JsonResource
             'transmission' => $this->transmission,
             'car_body' => $this->carBody,
             'doors' => $this->doors,
-            'finition' => $this->finition,
+            'finishing' => $this->finishing,
             'displacement' => $this->displacement,
             'power' => $this->power,
             'version' => $this->version,
