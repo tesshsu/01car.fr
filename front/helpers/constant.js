@@ -61,8 +61,8 @@ export const prochaineEntretienOptions = [
     {note: 0, label: 'Plus de 5000km', value: 'Plus de 5000km'}
   ]
   
-// page annonce car details
-
+// page annonce car details equipement
+  
 export const exterieur_equipements = [
 	  { name: "toit ouvrant", value: "toit ouvrant" },
 	  { name: "4 roues motrices", value: "4 roues motrices" },

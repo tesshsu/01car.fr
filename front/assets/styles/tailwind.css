@@ -596,6 +596,10 @@ video {
 }
 /* for portable part*/
 @media (max-width: 768px) {
+  .hasPrenium {
+    position: absolute;
+    top: 350px !important;
+    right: 10% !important;  }
   .annoceSlider .sliderImg {
     width: 35rem !important;
     height: 20rem !important;
@@ -3973,6 +3977,11 @@ video {
 .marqueBlock{
 	position: absolute;
     top: 259px;
+}
+.hasPrenium{
+	position: absolute;
+    top: 270px;
+	right: 40%;
 }
 .socialBlock{
 	position: absolute;

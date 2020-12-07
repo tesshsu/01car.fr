@@ -6,17 +6,67 @@ import {exterieur_equipements, interieur_equipements, securite_equipements, anti
 const DetailsDropdown = ({ dispatch,
 					  loading,
 					  car}) => {
+  
+  
   const ncs = [
-	  { icon: "fas fa-male", name: "Annonces par", value: "particulier" },
-	  { icon: "far fa-calendar-alt", name: "Vehicule est disponible", value: "Dans un mois" },
-	  { icon: "fas fa-file-invoice-dollar", name: "Véhicule est Non fumeur", value: "oui" },
-	  { icon: "fas fa-certificate", name: "Le double des clés", value: "oui" },
-	  { icon: "fas fa-certificate", name: "La raison pour vendre", value: "Autre project" },
-	  { icon: "fas fa-key", name: "Nombre de mains", value: "3ème mains ou plus" },
-	  { icon: "fas fa-globe-europe", name: "Etat de vehicule", value: "Neuf ou moins de 4 ans" },
-	  { icon: "fas fa-globe-europe", name: "Nombre de mains", value: "3ème mains ou plus" },
-	  { icon: "fas fa-key", name: "Origine du véhicule", value: "France" },
+	  { icon: "fas fa-male", name: "Annonces par", value: car?.owner_type },
+	  { icon: "far fa-calendar-alt", name: "Vehicule est disponible", value: car?.available },
+	  { icon: "fas fa-file-invoice-dollar", name: "Véhicule est Non fumeur", value: car?.smoking },
+	  { icon: "fas fa-certificate", name: "Le double des clés", value: car?.duplicate_keys },
+	  { icon: "fas fa-certificate", name: "La raison pour vendre", value: car?.sale_reason },
+	  { icon: "fas fa-key", name: "Nombre de mains", value: car?.hand_number },
+	  { icon: "fas fa-globe-europe", name: "Etat de vehicule", value: car?.state },
+	  { icon: "fas fa-key", name: "Origine du véhicule", value: car?.country },
   ];
+  
+  const renderSwitchValue= (param) => {
+	  switch(param) {
+		case 'pro':
+		  return 'professionnel';
+		case 'private':
+		  return 'particulier';
+		case 'IMMEDIATELY':
+		  return 'ONE_MONTH';
+		case 'Dans un mois':
+		  return 'Dans un mois';
+		case 'LATER':
+		  return 'plus tard';
+		case true :
+		  return 'oui';
+		case false :
+		  return 'non';
+		case 'false':
+		  return 'non';
+		case 'change':
+		  return 'Changer de véhicule';
+		case 'other':
+		  return 'Autre project';
+		case 1 :
+		  return '1ère ou 2ème main';
+		case 2 :
+		  return '1ère ou 2ème main';
+		case 3 :
+		  return ' 3ème mains ou plus';
+		case 'satisfactory':
+		  return 'satisfaisant';
+		case 'good':
+		  return ' Bon état';
+		case 'very_good':
+		  return 'Très bon état';
+		case 'new':
+		  return 'Neuf';
+		case 'FR':
+		  return 'France';
+		case 'ZZ':
+		  return 'étrangère';
+		default:
+		  return param;
+	  }
+	}
+	
+	let Equips = car?.equipments
+	
+    console.log(Equips);
   return (
     <>
         <div className="flex flex-wrap">
@@ -30,9 +80,11 @@ const DetailsDropdown = ({ dispatch,
 						<div className="flex flex-wrap">
 							<div className="w-full px-4 flex-1">
 								  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className={nc.icon}></i> {nc.name} : </span>
-							</div>
+							</div>							
 							<div className="w-full px-4 flex-1">
-								  <span className="question-1 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200"> {nc.value}</span>
+							    <span className="question-1 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200"> 
+								  {renderSwitchValue(nc.value)}
+								</span>
 							</div>
 						</div>
 				</div>
@@ -41,73 +93,73 @@ const DetailsDropdown = ({ dispatch,
 			<h4 className="mt-2 px-6 py-2 text-xl leading-relaxed text-gray-600 underline font-bold uppercase rounded">
 				ÉQUIPEMENTS DE SÉRIE ET OPTIONS :
 		    </h4>
-			       {exterieur_equipements.length ? (
+			       {Equips?.outside.length > 0 ? (
 					<div className="container px-2 mx-auto">
 					  <div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Exterieur equipements :</div>
 					  <div className="flex flex-wrap">
-					    {exterieur_equipements ?.map(exterieur_equipement => (
+					    {Equips.outside ?.map(i => (
 							<div className="w-full px-3 flex-1">
-							  <span className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {exterieur_equipement.name} </span>
+							  <span className="exEquiplist text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {i} </span>
 							</div>
 						))}
 					  </div>
 				    </div> ) : (null)}
 					
-				   {interieur_equipements.length ? (
+				   {Equips?.inside.length > 0 ? (
 					<div className="container px-2 mx-auto">
 					  <div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Interieur equipements :</div>
 					  <div className="flex flex-wrap">
-					    {interieur_equipements ?.map(interieur_equipement => (
+					    {Equips.inside ?.map(i => (
 							<div className="w-full px-3 flex-1">
-							  <span className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {interieur_equipement.name} </span>
+							  <span className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {i} </span>
 							</div>
 						))}
 					  </div>
 					</div> ) : (null)}
 					
-				   {securite_equipements.length ? (
+				   {Equips?.security.length > 0 ? (
 					<div className="container px-2 mx-auto">
 					  <div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Securite equipements :</div>
 					  <div className="flex flex-wrap">
-					    {securite_equipements ?.map(securite_equipement => (
+					    {Equips.security ?.map(i => (
 							<div className="w-full px-3 flex-1">
-							  <span className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {securite_equipement.name} </span>
+							  <span className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {i} </span>
 							</div>
 						))}
 					  </div>
 					</div>) : (null)}
 					
-				   {antivol_equipements.length ? (
+				   {Equips?.anti_theft.length > 0 ? (
 					<div className="container px-2 mx-auto">
 					  <div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Antivol equipements :</div>
 					  <div className="flex flex-wrap">
-					    {antivol_equipements ?.map(antivol_equipement => (
+					    {Equips.anti_theft ?.map(i => (
 						    <div className="w-full px-3 flex-1">
-							  <span className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {antivol_equipement.name} </span>
+							  <span className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {i} </span>
 							</div>
 						))}
 					  </div>
 					</div>) : (null)}
 					
-				   {confort_equipements.length ? (
+				   {Equips?.confort.length > 0 ? (
 					<div className="container px-2 mx-auto">
 					  <div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Confort equipements :</div>
 					  <div className="flex flex-wrap">
-					    {confort_equipements ?.map(confort_equipement => (
+					    {Equips.confort ?.map(i => (
 							<div className="w-full px-3 flex-1">
-							  <span className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {confort_equipement.name} </span>
+							  <span className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {i} </span>
 							</div>
                         ))}
 					  </div>
 					</div>) : (null)}
 					
-				   {autre_equipements.length ? (
+				   {Equips?.other.length > 0 ? (
 					<div className="container px-2 mx-auto">
 					  <div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Autre equipements :</div>
 					  <div className="flex flex-wrap">
-					    {autre_equipements ?.map(autre_equipement => (
+					    {Equips.other ?.map(i => (
 							<div className="w-full px-3 flex-1">
-							  <span className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {autre_equipement.name} </span>
+							  <span className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {i} </span>
 							</div>
                         ))}
 					  </div>

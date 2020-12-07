@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import FavorisButton from 'components/Favoris/FavorisButton';
 import Moment from 'react-moment';
 import {fetchCars} from 'service/actions/cars';
+import ENVS from '../../environment';
 
 const AnnoncePremier = ({ loading,
                           cars,
@@ -25,8 +26,8 @@ const AnnoncePremier = ({ loading,
 							  className="w-full align-center togBadge animate-ping ease-in-out"
 							/>
 						<img
-							alt="..."
-							src={require("assets/img/team-2-800x800.jpg")}
+							alt={post.uploads[0].name}
+							src={ENVS.DEV.API_URL + post.uploads[0].url}
 							className="shadow-lg mx-auto rounded-lg"
 						  />
 						<div className="w-full px-4 py-2 flex-1">

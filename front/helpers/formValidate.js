@@ -1,5 +1,6 @@
 import Select from 'react-select'
-import { Form, Field } from 'react-final-form';
+import { Form, Field, FieldRenderProps } from 'react-final-form';
+
 //form validation
 export const required = value => (value ? undefined : 'champs obligatoire')
 export const mustBeNumber = value => (isNaN(value) ? "Doit être en chiffre" : undefined);
