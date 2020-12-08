@@ -9,7 +9,7 @@ abstract class PremiumEquipment
     const HAD_ACCIDENT = 'had_accident';
     const DEFECTS = 'defects';
     const KM_CERTIFICATE = 'km_certificate';
-    const TECHNICAL_CHECK_OK = 'Technical_check_ok';
+    const TECHNICAL_CHECK_OK = 'technical_check_ok';
     const PERIODIC_MAINTENANCE = 'periodic_maintenance';
     const NEXT_MAINTENANCE_UNDER_5000KM = 'next_maintenance_under_5000km';
     const PURCHASE_INVOICE = 'purchase_invoice';

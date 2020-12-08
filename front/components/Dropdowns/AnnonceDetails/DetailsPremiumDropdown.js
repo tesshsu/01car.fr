@@ -3,6 +3,7 @@ import Link from "next/link";
 import {connect} from 'react-redux'
 import { createPopper } from "@popperjs/core";
 import {premium_ncs} from 'helpers/constant';
+import {premium_options_display} from "../../../helpers/constant";
 
 const DetailsPremiumDropdown = ({
 						 dispatch,
@@ -22,7 +23,11 @@ const DetailsPremiumDropdown = ({
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
-  
+
+  const carHasOption = (premium_opt) => {
+      return premium_options_display(premium_opt, car?.options?.prenium?.includes(premium_opt.value));
+    }
+
   return (
     <>
        {car?.prenium == true ? (
@@ -34,7 +39,7 @@ const DetailsPremiumDropdown = ({
 		</div>
 		<div className="container px-2 mx-auto">
 			<div className="flex flex-wrap">
-			     <ul className="flex flex-col lg:flex-row lg:justify-start ist-none px-6">					  
+			     <ul className="flex flex-col lg:flex-row lg:justify-start ist-none px-6">
 					  <li className="flex items-center">
 						<a
 							className="lg:text-gray-800 lg:hover:text-gray-300 text-gray-800 px-5 py-2 lg:py-2 flex items-center text-xs uppercase font-bold"
@@ -46,12 +51,12 @@ const DetailsPremiumDropdown = ({
 							}}
 						  >
 							 <div className="container px-2 mx-auto rounded border border-solid border-gray-200 text-gray-500 active:bg-grey-500">
-								<div className="flex flex-wrap">				
+								<div className="flex flex-wrap">
 										<span className="text-sm block my-2 p-3 animate-bounce"> Rapport Sécurité </span>
-										<span className="text-sm block my-2 p-3"><i class="fas fa-chevron-circle-down"></i></span>										
+										<span className="text-sm block my-2 p-3"><i class="fas fa-chevron-circle-down"></i></span>
 								</div>
 							</div>
-							 
+
 						 </a>
 						<div
 							ref={popoverDropdownRef}
@@ -61,7 +66,7 @@ const DetailsPremiumDropdown = ({
 							}
 						>
 							<div className="flex justify-center">
-								<div className="mr-4 p-3 text-center">                       
+								<div className="mr-4 p-3 text-center">
 									<span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
 									  <i className="far fa-smile text-4xl mr-1"></i>
 									</span>
@@ -79,19 +84,19 @@ const DetailsPremiumDropdown = ({
 									</span>
 									<span className="text-sm text-gray-500">Garantie qualite</span>
 								</div>
-							</div>			
+							</div>
 						</div>
-					  </li>	  			 					   					 					  
-				</ul> 
-				{premium_ncs.map(premium_nc => (				
+					  </li>
+				</ul>
+				{premium_ncs.map(premium_nc => (
 					<div className="container px-2 mx-auto">
 						<div className="flex flex-wrap">
 							<div className="w-full px-4 flex-1">
 							  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i class={premium_nc.icon}></i> {premium_nc.name} : </span>
 							</div>
 							<div className="w-full px-4 flex-1">
-							  <span className="question-11 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">{premium_nc.value}</span>
-							</div>						
+							  <span className="question-11 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">{carHasOption(premium_nc)}</span>
+							</div>
 						</div>
 					</div>
 				))}

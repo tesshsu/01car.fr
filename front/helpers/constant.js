@@ -164,18 +164,45 @@ export const other_equipments = {
 
 export const autre_equipements =  mapToObject(other_equipments);
 
+export const premium_options_display = (premium_opt, res) => {
+    return premium_opt?.displayFunction(res);
+}
+
+export const premium_options_display_yes_no = (res) => {
+    return res ? 'Oui' : 'Non'
+}
+
+export const premium_options_display_next_maintenance = (res) => {
+    return res ? 'Moins de 5000km' : 'Plus de 5000km'
+}
+
+export const premuim_options = {
+    "under_warranty": "Sous garantie",
+    "had_accident": "Ayant déjà subit 1 accident",
+    "defects": "Des défauts griffes, coups, usures",
+    "km_certificate": "Justifier le parcours kilometrique",
+    "technical_check_ok": "Contrôle technique ok",
+    "periodic_maintenance": "Respect des entretiens périodiques",
+    "next_maintenance_under_5000km": "Prochain entretien dans moins de 5000km",
+    "purchase_invoice": "Facture d'achat",
+    "gray_card": "Carte grise",
+    "maintenance_log": "Possède le carnet d'entretien",
+}
+
 export const premium_ncs = [
-    {icon: "fas fa-certificate", name: "Sous garantie", value: "oui"},
-    {icon: "fas fa-car-crash", name: "Ayant déjà subit 1 accident", value: "non"},
-    {icon: "fas fa-car-crash", name: "Des défauts griffes, coups, usures", value: "oui"},
-    {icon: "fas fa-certificate", name: "Justifier le parcours kilometrique", value: "oui"},
-    {icon: "fas fa-calendar-check", name: "Contrôle technique ok", value: "oui"},
-    {icon: "far fa-list-alt", name: "Respect des entretiens périodiques", value: "oui"},
-    {icon: "far fa-calendar-alt", name: "Prochaine entretien", value: "Moins de 5000km"},
-    {icon: "fas fa-print", name: "Facture d'achat", value: "oui"},
-    {icon: "far fa-id-badge", name: "Carte grise", value: "Oui"},
-    {icon: "fas fa-copy", name: "Possède le carnet d'entretien", value: "Oui"}
+    {icon: "fas fa-certificate", name: "Sous garantie", value: "under_warranty", displayFunction: premium_options_display_yes_no},
+    {icon: "fas fa-car-crash", name: "Ayant déjà subit 1 accident", value: "had_accident", displayFunction: premium_options_display_yes_no},
+    {icon: "fas fa-car-crash", name: "Des défauts griffes, coups, usures", value: "defects", displayFunction: premium_options_display_yes_no},
+    {icon: "fas fa-certificate", name: "Justifier le parcours kilometrique", value: "km_certificate", displayFunction: premium_options_display_yes_no},
+    {icon: "fas fa-calendar-check", name: "Contrôle technique ok", value: "technical_check_ok", displayFunction: premium_options_display_yes_no},
+    {icon: "far fa-list-alt", name: "Respect des entretiens périodiques", value: "periodic_maintenance", displayFunction: premium_options_display_yes_no},
+    {icon: "far fa-calendar-alt", name: "Prochaine entretien", value: "next_maintenance_under_5000km", displayFunction: premium_options_display_next_maintenance},
+    {icon: "fas fa-print", name: "Facture d'achat", value: "purchase_invoice", displayFunction: premium_options_display_yes_no},
+    {icon: "far fa-id-badge", name: "Carte grise", value: "gray_card", displayFunction: premium_options_display_yes_no},
+    {icon: "fas fa-copy", name: "Possède le carnet d'entretien", value: "maintenance_log", displayFunction: premium_options_display_yes_no}
 ];
+
+
 
 export const lists = [
     {detail: "1. 01car ne peut toutefois pas garantir de manière absolue l'exactitude et l'exhaustivité de l'ensemble de ces informations."},
