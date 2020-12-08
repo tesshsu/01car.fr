@@ -177,7 +177,7 @@ export const premium_options_display_next_maintenance = (res) => {
 }
 
 export const premuim_options = {
-    "under_warranty": "Sous garantie",
+    "Under_warranty": "Sous garantie",
     "had_accident": "Ayant déjà subit 1 accident",
     "defects": "Des défauts griffes, coups, usures",
     "km_certificate": "Justifier le parcours kilometrique",

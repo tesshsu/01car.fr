@@ -268,7 +268,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
                                         <div className="w-full lg:w-6/12 px-4">
                                           <label
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
-                                                htmlFor="question-18"
+                                                htmlFor="facture"
                                           >
                                             Q18- Facture d'achat?
                                           </label>
@@ -290,7 +290,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
                                         <div className="w-full lg:w-6/12 px-4">
                                           <label
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
-                                                htmlFor="question-19"
+                                                htmlFor="carte_grise"
                                           >
                                             Q19- Carte Grise ?
                                           </label>
@@ -313,7 +313,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
                                   <div className="flex flex-wrap mt-12 px-4">
                                           <label
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
-                                                htmlFor="question-20"
+                                                htmlFor="carnet_entretien"
                                           >
                                             Q20- Possédez-vous le Carnet d’entretien?
                                           </label>
