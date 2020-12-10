@@ -54,17 +54,14 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 								<div className="w-full px-4">
 									<label
 										className="uppercase text-gray-700 text-sm"
-										htmlFor="exterieur_equipements"
+										htmlFor="question-7-1"
 									>
 										Q7 - 1 ÉQUIPEMENTS EXTÉRIEUR ET CHÂSSIS
 									</label>
-									<Field name="exterieur_equipements" component="input" type="checkbox"
-										   className="ml-2 form-checkbox">
-									</Field>
+									<Field name="question-7-1" component="input" type="checkbox" className="ml-2 form-checkbox" />
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-										<Condition when="exterieur_equipements" is={true} className="mt-2">
-											<div
-												className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
+										<Condition when="question-7-1" is={true} className="mt-2">
+											<div className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
 												{exterieur_equipements.map(exterieur_equipement => (
 													<label
 														className="border border-gray-400 hover:border-gray-500 px-2 py-2 rounded shadow leading-tight">
@@ -85,15 +82,15 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 								<div className="w-full px-4">
 									<label
 										className="uppercase text-gray-700 text-sm"
-										htmlFor="interieur_equipements"
+										htmlFor="question-7-2"
 									>
 										Q7 - 2 Intérieur
 									</label>
-									<Field name="interieur_equipements" component="input" type="checkbox"
+									<Field name="question-7-2" component="input" type="checkbox"
 										   className="ml-2 form-checkbox">
 									</Field>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-										<Condition when="interieur_equipements" is={true} className="mt-2">
+										<Condition when="question-7-2" is={true} className="mt-2">
 											<div
 												className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
 												{interieur_equipements.map(interieur_equipement => (
@@ -116,15 +113,15 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 								<div className="w-full px-4">
 									<label
 										className="uppercase text-gray-700 text-sm"
-										htmlFor="securite_equipements"
+										htmlFor="question-7-3"
 									>
 										Q7 - 3 Sécurité
 									</label>
-									<Field name="securite_equipements" component="input" type="checkbox"
+									<Field name="question-7-3" component="input" type="checkbox"
 										   className="ml-2 form-checkbox">
 									</Field>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-										<Condition when="securite_equipements" is={true} className="mt-2">
+										<Condition when="question-7-3" is={true} className="mt-2">
 											<div
 												className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
 												{securite_equipements.map(securite_equipement => (
@@ -147,15 +144,15 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 								<div className="w-full px-4">
 									<label
 										className="uppercase text-gray-700 text-sm"
-										htmlFor="antivol_equipements"
+										htmlFor="question-7-4"
 									>
 										Q7 - 4 Antivol
 									</label>
-									<Field name="antivol_equipements" component="input" type="checkbox"
+									<Field name="question-7-4" component="input" type="checkbox"
 										   className="ml-2 form-checkbox">
 									</Field>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-										<Condition when="antivol_equipements" is={true} className="mt-2">
+										<Condition when="question-7-4" is={true} className="mt-2">
 											<div
 												className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
 												{antivol_equipements.map(antivol_equipement => (
@@ -178,15 +175,15 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 								<div className="w-full px-4">
 									<label
 										className="uppercase text-gray-700 text-sm"
-										htmlFor="confort_equipements"
+										htmlFor="question-7-5"
 									>
 										Q7- 5 CONFORT
 									</label>
-									<Field name="confort_equipements" component="input" type="checkbox"
+									<Field name="question-7-5" component="input" type="checkbox"
 										   className="ml-2 form-checkbox">
 									</Field>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-										<Condition when="confort_equipements" is={true} className="mt-2">
+										<Condition when="question-7-5" is={true} className="mt-2">
 											<div
 												className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
 												{confort_equipements.map(confort_equipement => (
@@ -209,15 +206,15 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 								<div className="w-full px-4">
 									<label
 										className="uppercase text-gray-700 text-sm"
-										htmlFor="autre_equipements"
+										htmlFor="question-7-6"
 									>
 										Q7 -6 AUTRES
 									</label>
-									<Field name="autre_equipements" component="input" type="checkbox"
+									<Field name="question-7-6" component="input" type="checkbox"
 										   className="ml-2 form-checkbox">
 									</Field>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-										<Condition when="autre_equipements" is={true} className="mt-2">
+										<Condition when="question-7-6" is={true} className="mt-2">
 											<div
 												className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
 												{autre_equipements.map(autre_equipement => (

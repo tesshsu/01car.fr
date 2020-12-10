@@ -56,7 +56,7 @@ const AnnonceLists = ({ loading,
 						<img
 							alt={car.uploads[0].name}
 							src={ENVS.DEV.API_URL + car.uploads[0].url}
-							className="shadow-lg mx-auto rounded-lg"
+							className="carImageSingle shadow-lg mx-auto rounded-lg"
 						  />
 						<div className="w-full px-4 py-2 flex-1">
 							  <h4 className="font-bold text-lg text-orange-700">
@@ -99,12 +99,12 @@ const AnnonceLists = ({ loading,
 						</div>
 				</div>
 			</Link> ) : ( 
-			   <Link key={car.id} car={car} href={`/annonce?id=${car.id}`}>
+			   <Link key={idx} car={car} href={`/annonce?id=${car.id}`} {...car}>
 			    <div id={car.id} status={car.prenium} className="relative w-full md:w-6/12 lg:w-4/12 lg:mb-0 mb-12 mr-4 my-6 shadow-lg max-w-400-px rounded-lg border-2 border-gray-200 ">
 					<img
 						alt={car.uploads[0].name}
 						src={ENVS.DEV.API_URL + car.uploads[0].url}
-						className="shadow-lg mx-auto rounded-lg"
+						className="carImageSingle shadow-lg mx-auto rounded-lg"
 					  />
 					<div className="w-full px-4 py-2 flex-1">
 						  <h4 className="font-bold text-lg text-orange-700">

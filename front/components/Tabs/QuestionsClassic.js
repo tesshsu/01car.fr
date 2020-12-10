@@ -239,6 +239,25 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 														<Error name="km"/>
 													</div>
 												</div>
+												<div className="flex flex-wrap mt-2 px-4">
+														 <label
+															className="block uppercase text-gray-700 text-md font-bold mb-2"
+															htmlFor="immatriculation"
+														  >
+															*Immatriculation :
+														  </label>
+														  <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
+															  <Field
+															  name="immatriculation"
+															  validate={formValidate.composeValidators(formValidate.required, formValidate.matchImmatriculation)}
+															  component="input"
+															  type="text"
+															  placeholder="AA-123-BC"
+															  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative border border-gray-400 bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
+															/>
+															<Error name="immatriculation" />
+														   </div>
+												</div>
 
 												<div className="flex flex-wrap mt-12 px-4 align-center justify-center">
 													<a
@@ -495,19 +514,7 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 												</div>
 
 												<div className="flex flex-wrap mt-12 px-4 align-center justify-center">
-													{!isAuthentificated || (tokken = null) ? (
-														<Link href="/auth/login">
-															<a
-																href="#pablo"
-																className={
-																	"text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
-																}
-															>
-																Login pour voir resultat
-															</a>
-														</Link>
-													) : (
-														<a
+													<a
 															className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
 															onClick={e => {
 																e.preventDefault();
@@ -521,9 +528,7 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 														>
 															<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i> Envoyer
 															pour voir resultat
-														</a>
-													)
-													}
+													</a>
 												</div>
 											</div>
 											<div className={openTab === 4 ? "block" : "hidden"} id="link4">
@@ -558,7 +563,15 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 														Téléchargez des photos de votre voiture depuis l'extérieur, du
 														tableau de bord avec le moteur allumé, de la console centrale
 														etc </p>
+													<p className="text-md leading-relaxed text-orange-500"> <i class="fas fa-exclamation-triangle animate-bounce"></i> Votre plaque du véhicule devrait bien cacher  </p>
 													<div className="demoPhotos flex justify-center">
+														<div className="mr-4 p-3">
+															<img
+																alt="..."
+																src={require("assets/img/img-example-imma.jpg")}
+																className="shadow-xl rounded-full h-auto p-3 align-middle border-none max-w-210-px bg-white bg-white rounded text-sm shadow outline-none"
+															/>
+														</div>
 														<div className="mr-4 p-3">
 															<img
 																alt="..."
@@ -587,28 +600,14 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 														<i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> Publier
 														votre annonce
 													</div>
-													{!isAuthentificated || (tokken = null) ? (
-														<Link href="/auth/login">
-															<a
-																href="#"
-																className={
-																	"text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
-																}
-															>
-																<i className="text-orange-900 fas fa-user"/> Connecxion
-																pour publier
-															</a>
-														</Link>
-													) : (
-														<button
+													<button
 															className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
 															type="button"
 															type="submit"
 															disabled={submitting}
 														>
 															<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> PUBLIER
-														</button>
-													)}
+													</button>
 													<h4 className="text-xl font-semibold">
 														OU
 													</h4>

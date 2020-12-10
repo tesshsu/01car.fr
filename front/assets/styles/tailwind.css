@@ -4051,3 +4051,7 @@ video {
 .react-responsive-modal-closeButton{
 	display: none !important;
 }
+.carImageSingle{
+	width: 395px;
+	height: 223px !important;
+}

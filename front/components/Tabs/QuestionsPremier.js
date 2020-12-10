@@ -162,10 +162,8 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
 												 />				
                                                 <Error name="defauts" />
-                                                <Condition when="defauts" is="Oui" className="mt-2">
-                                                    <p className="text-md leading-relaxed text-gray-500"> Télécharger les défauts du véhicule  </p>
-                                                    <ImageUpload />
-                                                </Condition>
+                                                <p className="text-md leading-relaxed text-gray-500"> Télécharger les défauts du véhicule si il y aura les defauts</p>
+                                                <ImageUpload />
                                             </div>
                                         </div>
                                         <div className="w-full lg:w-6/12 px-4">
@@ -204,10 +202,8 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 												 />	
                                                <Error name="controle_technique" />
                                             </div>
-                                            <Condition when="controle_technique" is="Oui" className="mt-2">
-											  <p className="text-md leading-relaxed text-gray-500"> Telecharger votre contrôle technique <span><NotificationDropdown title="Vos données personnelles resteront confidentielles" /></span></p>
-                                              <FileUpload />											  
-                                            </Condition>
+                                            <p className="text-md leading-relaxed text-gray-500"> Telecharger votre contrôle technique <span><NotificationDropdown title="Vos données personnelles resteront confidentielles" /></span></p>
+                                            <FileUpload />
                                   </div>
                                   <div className="flex flex-wrap mt-12 px-4 align-center justify-center">
                                        <a
@@ -282,10 +278,8 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 												 />	
                                               <Error name="facture" />
                                            </div>
-										   <Condition when="facture" is="Oui" className="mt-2">												
-												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre facture d'achat <span><NotificationDropdown title="Vos données personnelles resteront confidentielles" /></span> </p>												
-												<FileUpload />
-                                           </Condition>
+										   <p className="text-md leading-relaxed text-gray-500">Telecharger votre facture d'achat <span><NotificationDropdown title="Vos données personnelles resteront confidentielles" /></span> </p>												
+										   <FileUpload />
                                         </div>
                                         <div className="w-full lg:w-6/12 px-4">
                                           <label
@@ -304,10 +298,8 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 												 />
                                                <Error name="carte_grise" />
                                            </div>
-                                            <Condition when="carte_grise" is="Oui" className="mt-2">                                          
-												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre carte grise. Attention : le numéro d'identification du véhicule (VIN) doit être clairement lisible. <span><NotificationDropdown title="Vos données personnelles resteront confidentielles" /></span></p>                                               
-												<FileUpload />
-                                            </Condition>
+                                            <p className="text-md leading-relaxed text-gray-500">Si oui telecharger votre carte grise. Attention : le numéro d'identification du véhicule (VIN) doit être clairement lisible. <span><NotificationDropdown title="Vos données personnelles resteront confidentielles" /></span></p>                                               
+											<FileUpload />
                                         </div>
                                   </div>
                                   <div className="flex flex-wrap mt-12 px-4">
@@ -327,10 +319,8 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 												 />
                                               <Error name="carnet_entretien" />
                                            </div>
-										    <Condition when="carnet_entretien" is="Oui" className="mt-2">
-												<p className="text-md leading-relaxed text-gray-500"> Telecharger votre carnet d’entretien <span><NotificationDropdown title="Vos données personnelles resteront confidentielles"  /></span></p>
-												<FileUpload />
-                                           </Condition>
+										    <p className="text-md leading-relaxed text-gray-500"> Si oui telecharger votre carnet d’entretien <span><NotificationDropdown title="Vos données personnelles resteront confidentielles"  /></span></p>
+											<FileUpload />
                                   </div>
                                     <div className="flex flex-wrap mt-12 px-4 align-center justify-center">
 									   <a
