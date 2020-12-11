@@ -153,10 +153,10 @@ export default function Prix() {
 						  </li>
 					   ))}
 					</ul>
-					<div class="ProductBlock mt-8 text-center my-4">
+					<div class="mt-8 text-center my-4">
 					  {!isAuthentificated || (tokken = null) ? (
 					       <button
-							  className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+							  className="ProductBlockButton bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
 							  type="button"
 							>
 							  <Link href="/auth/login">

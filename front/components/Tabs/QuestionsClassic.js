@@ -8,6 +8,7 @@ import * as constant from 'helpers/constant';
 import * as formValidate from 'helpers/formValidate';
 import {Condition, Error} from 'helpers/formValidate';
 import "react-responsive-modal/styles.css";
+import {submitReponses} from 'service/actions/vendre'
 
 const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 	const [openTab, setOpenTab] = React.useState(1);
@@ -38,10 +39,6 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 	}, [isAuthentificated, loggedUser]);
 
 	//submit
-	/*const {
-		submitReponses
-	  } = useVendre();*/
-
 
 	const onSubmit = async (values) => {
 		try {
@@ -51,6 +48,7 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 
 			const data = {...payload};
 			await submitReponses(data);
+			console.log(data)
 		} catch (err) {
 			console.log(err.response);
 			if (err.response && err.response.status === 422) {

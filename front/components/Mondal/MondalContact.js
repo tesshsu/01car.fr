@@ -14,7 +14,7 @@ const ModalContact = ({ dispatch,
         type="button"
         onClick={() => setShowModal(true)}
       >
-        Vendeur contacter
+        Contacter le vendeur
       </button>
       {showModal ? (
         <>

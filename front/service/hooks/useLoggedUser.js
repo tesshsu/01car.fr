@@ -17,7 +17,13 @@ export default function useLoggedUser() {
     payload => dispatch(LOGGED_USER_ACTIONS.register(payload)),
     [dispatch]
   );
-
+  
+  const forgetPassword = useCallback(
+    payload => dispatch(LOGGED_USER_ACTIONS.forget_password(payload)),
+    [dispatch]
+  );
+  
+  
   const updateLoggedUser = useCallback(
     payload => dispatch(LOGGED_USER_ACTIONS.updateUserInfo(payload)),
     [dispatch]
@@ -44,6 +50,7 @@ export default function useLoggedUser() {
     loggedUser: loggedUser,
     login,
     register,
+	forgetPassword,
     signInUsingFacebook,
     logout,
 	updateLoggedUser

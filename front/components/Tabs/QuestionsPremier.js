@@ -7,16 +7,10 @@ import ImageUpload from "components/Tabs/ImageUpload.js";
 import * as constant from 'helpers/constant';
 import * as formValidate from 'helpers/formValidate';
 import {Error} from 'helpers/formValidate';
-
+import {submitReponses} from 'service/actions/vendre';
 
 const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
   const [openTab, setOpenTab] = React.useState(1);
-
-  //submit
-	/*const {
-		submitReponses
-	  } = useVendre();*/
-
 
 	const onSubmit = async (values)=>{
 		try {
@@ -350,16 +344,16 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
                                           className="w-full align-center togBadge animate-ping"
                                       />
                                       <h4 className="text-4xl font-semibold">
-                                          RESULTATS : NOTE DE CONFIANCE FINALE
+                                          RÉSULTAT : NOTE DE CONFIANCE FINALE
                                       </h4>
                                       <h4 className="text-2xl font-semibold">
-                                          19/20 Annonce payante pour une vente plus fiable et en toute sécurité
+                                          19/20 Cette note vous permet de bénéficier à tous les avantages pour publier une annonce de qualité.
                                       </h4>
                                       <p className="text-lg font-semibold">
-                                          * Ce 2ème Questionnaire restera STRICTEMENT CONFIDENTIEL
+                                          * Les documents téléchargés resteront strictement confidentiel.
                                       </p>
                                       <p className="text-lg font-semibold">
-                                          Notre équipe d’experts vérifie le contenu des éléments transmis par le vendeur afin de vous garantir la qualité des données
+                                          Notre équipe d’experts vérifie le contenu des éléments transmis par vous à fin de valider votre annonce.
                                       </p>
                                       <h4 className="text-2xl font-semibold">
                                           Prix de vente <span className="marqueModel" value="">Suzuki SWIFT</span> - <span className="dt_entry_service" value="">2012</span>

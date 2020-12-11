@@ -6,21 +6,21 @@ const stripePromise = loadStripe("pk_test_51HgmzIBjqnSC21bhUov33uWhuXhCFQBnwRcy1
 const ProductDisplay = ({ handleClick }) => (
   <section>
     <div className="product flex flex-wrap justify-center mt-4">
-      <div className="w-6/12 sm:w-6/12 px-4">
+      <div className="w-full md:w-6/12 px-4">
 	  <img
         src={require("assets/img/profile.jpg")}
         alt="Abonement Premium"
 		className="ProductImg shadow rounded-full max-w-full h-auto align-middle border-none"
       />
 	  </div>
-	  <div className="w-6/12 sm:w-6/12 px-4">
+	  <div className="w-full md:w-6/12 px-4">
       <div className="description">
         <p className="ml-3 leading-6 font-medium text-orange-500 text-2xl">Abonnement Premium</p>
         <div className="ml-3 leading-6 font-medium text-orange-500 text-4xl">6.99€</div>
       </div>
 	  </div>
     </div>
-    <button id="checkout-button" role="link" onClick={handleClick}>
+    <button className="checkout-button" role="link" onClick={handleClick}>
       Vendez votre véhicule en tête de liste
     </button>
   </section>

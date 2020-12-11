@@ -2,17 +2,14 @@ import React from "react";
 import Link from "next/link";
 import Auth from "layouts/Auth.js";
 import { Form, Field } from 'react-final-form';
+import * as formValidate from 'helpers/formValidate';
+import useLoggedUser from 'service/hooks/useLoggedUser';
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-const required = value => (value ? undefined : 'Champs obligatoires')
-const composeValidators = (...validators) => value =>
-  validators.reduce((error, validator) => error || validator(value), undefined)
-const onSubmit = async values => {
-  await sleep(300)
-  window.alert('Nous vous envoyer le lien qui vous permettra de réinitialiser votre mot de passe.')
-}
-
-export default function Login() {
+export default function ForgetPassword() {
+  const {
+    forgetPassword
+  } = useLoggedUser();
+  
   return (
     <>
       <div className="container mx-auto px-4 mt-16 h-full">
@@ -27,10 +24,25 @@ export default function Login() {
                   <small>Réinitialisez votre mot de passe </small>
                 </div>
                 <Form
-				  onSubmit={onSubmit}
-				  render={({ handleSubmit, form, submitting, pristine, values }) => (
+					  initialValues={{
+						email: ''
+					  }}
+					  onSubmit={async ({ email, password }) => {
+						await formValidate.sleep(300)
+							try {
+							  await forgetPassword(
+								email.trim()
+							  );
+
+						    Router.back();
+						} catch (err) {
+						  alert("Email incorrects!");
+						}
+					  }}
+					  render={({ submitError, handleSubmit, form, submitting, pristine, values, invalid
+					  }) => (
 						<form onSubmit={handleSubmit}>                 
-						    <Field name="email" validate={required}>
+						    <Field name="email" validate={formValidate.required}>
 							    {({ input, meta }) => (
 								  <div className="relative w-full mb-3">
 									<label
@@ -88,4 +100,4 @@ export default function Login() {
   );
 }
 
-Login.layout = Auth;
+ForgetPassword.layout = Auth;

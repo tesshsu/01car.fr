@@ -22,13 +22,12 @@ const ShareButton= ({
 
   let carId = car?.id;
   const title = "Bonjour, Je Partager cette Annonce de véhicule";
-  const shareUrl = carId ? `http://localhost:3000/annonce?id=${carId}`  : "https://01car.fr/" ;
+  const shareUrl = carId ? `https://01car.fr/annonce?id=${carId}`  : "https://01car.fr/" ;
   return (
    <>
         <ul className="flex pl-0 rounded list-none flex-wrap">
 		   <li>
 		      <FacebookShareButton
-					hashtag={title}
 					url={shareUrl}
 				>
 				<FacebookIcon size={32} round />

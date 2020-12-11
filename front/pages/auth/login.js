@@ -8,11 +8,7 @@ import useLoggedUser from 'service/hooks/useLoggedUser';
 import Notice from 'components/Notices/Notice';
 import FacebookConnectButton from 'helpers/FacebookConnectButton';
 import GoogleConnectButton from 'helpers/GoogleConnectButton';
-
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-const required = value => (value ? undefined : 'Champs obligatoires')
-const composeValidators = (...validators) => value =>
-  validators.reduce((error, validator) => error || validator(value), undefined)
+import * as formValidate from 'helpers/formValidate';
 
 export default function Login() {
   const {
@@ -36,7 +32,7 @@ export default function Login() {
               <div className="rounded-t mb-0 px-6 py-2">
                 <div className="text-center mb-3">
                   <h6 className="text-gray-600 text-sm font-bold">
-                    Connexion rapide
+                    Connexion 
                   </h6>
                 </div>
               </div>
@@ -47,7 +43,7 @@ export default function Login() {
 						password: ''
 					  }}
 					  onSubmit={async ({ email, password }) => {
-						await sleep(300)
+						await formValidate.sleep(300)
 							try {
 							  await login(
 								email.trim(),
@@ -67,14 +63,14 @@ export default function Login() {
 							  <GoogleConnectButton />
 						  </div>
                           <hr className="mt-6 border-b-1 border-gray-400 mb-3" />
-						  <Field name="email" validate={required}>
+						  <Field name="email" validate={formValidate.required}>
 							    {({ input, meta }) => (
 								  <div className="relative w-full mb-3">
 									<label
 									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
 									  htmlFor="email"
 									>
-									  Email
+									  mail
 									</label>
 									<input
 									  {...input}
@@ -90,7 +86,7 @@ export default function Login() {
 								)}
                             </Field>
 
-						  <Field name="password" validate={required}>
+						  <Field name="password" validate={formValidate.required}>
 							    {({ input, meta }) => (
 								  <div className="relative w-full mb-3">
 									<label
@@ -123,13 +119,15 @@ export default function Login() {
 							</button>
 						  </div>
                           {submitError || invalid && (
-							 <Notice text="identifian incorrects" />
+							 <Notice text="identifiant ou mot de passe incorrects" />
 						  )}
 						</form>
 					)}
 				/>
-				<p className="notifyForLogin text-md leading-relaxed text-gray-600 text-left">  La Connexion qui vous permet dedéposer et gérer vos annonces. Un accès de paiement en sécurisé. Ajouter les annonces aux favoris qui vous intéressent </p>
-              </div>
+				<p className="notifyForLogin text-md leading-relaxed text-gray-600 text-left"> <i class="fas fa-pen-alt"></i> Cette connexion vous permet de déposer et gérer vos annonces.</p>
+                <p className="notifyForLogin text-md leading-relaxed text-gray-600 text-left mt-2"> <i class="fas fa-user-shield"></i> Un accès payant est recommandé pour sécuriser vos données personnelles.</p>
+			    <p className="notifyForLogin text-md leading-relaxed text-gray-600 text-left mt-2"> <i class="fas fa-star"></i> Ajouter vos annonces en favoris.</p>
+			  </div>
             </div>
             <div className="flex flex-wrap mt-6 relative">
               <div className="w-1/2">

@@ -8,7 +8,7 @@ export default function useVendre() {
   const dispatch = useDispatch();
 
   const submitReponses = useCallback(
-    payload => dispatch(LOGGED_USER_ACTIONS.submitReponses(payload)),
+    payload => dispatch(responses.submitReponses(payload)),
     [dispatch]
   );
  
