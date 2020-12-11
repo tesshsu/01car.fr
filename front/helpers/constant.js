@@ -224,11 +224,11 @@ export const listPubs = [
 ];
 
 export const basics = [
-    {icon: "fas fa-hands-helping", name: "informations principales du véhicule"},
+    {icon: "fas fa-hands-helping", name: "Informations principales du véhicule"},
     {icon: "fas fa-clipboard-check", name: "Tête de liste, grande visibilité"},
     {icon: "far fa-paper-plane", name: "Modifier à tout moment le prix du véhicule"},
     {icon: "fas fa-database", name: "Fiabilité des données du véhicule"},
-    {icon: "fas fa-award", name: "Les valeurs de déclenchement de transaction particulier et professionel qualifié"}
+    {icon: "fas fa-award", name: "Estimation du véhicule par des professionnels qualifiés"}
 ];
 
 export const pubIconlists = [
@@ -239,16 +239,17 @@ export const pubIconlists = [
 
 //price page part
 export const classics = [
-    {list: "Annonces pré-remplie"},
-    {list: "Annonces gratuite"},
-    {list: "Contacter vendeur direct"}
+    {list: "Annonce pré-remplie"},
+    {list: "Annonce gratuite"},
+	{list: "10 photos gratuites"}
 ];
 export const premiums = [
     {list: "Rassurer l'acheteur grâce aux réponses"},
     {list: "Tête de liste, grande visibilité"},
     {list: "Logo qualité garantie"},
     {list: "Modifier à tout moment le prix du véhicule"},
-    {list: "Les valeurs de déclenchement de transaction particulier et professionel qualifié"},
+    {list: "Estimation du véhicule par des professionnels qualifiés"},
+	{list: "10 photos gratuites"},
     {list: "Contacter vendeur direct"}
 ];
 export const pubTransparents = [
@@ -259,3 +260,11 @@ export const pubTransparents = [
     {icon: "fas fa-cash-register", width: {width: '15%'}, name: "Frais 15%"},
     {icon: "fas fa-users", width: {width: '17%'}, name: "Bénéfices 17%"}
 ];
+
+//favorits
+export const favorits = [
+	  { src: require("assets/img/car/o1car_02.jpg"), marque: "RENAULT", model: "GRAND SCENIC IV", prix:"14 700", Energie:"Essence", Boite:"Manual", km:"34000", year:"2017", nc:"14" },
+	  { src: require("assets/img/car/o1car_03.jpg"), marque: "RENAULT", model: "GRAND SCENIC IV", prix:"12 700", Energie:"Essence", Boite:"Manual", km:"14000", year:"2015", nc:"16" },
+	  { src: require("assets/img/car/o1car_04.jpg"), marque: "RENAULT", model: "GRAND SCENIC IV", prix:"8 700", Energie:"Essence", Boite:"Manual", km:"24000", year:"2016", nc:"12" },
+	  { src: require("assets/img/car/o1car_05.jpg"), marque: "RENAULT", model: "GRAND SCENIC IV", prix:"6 700", Energie:"Essence", Boite:"Manual", km:"8000", year:"2012", nc:"10" }
+  ];

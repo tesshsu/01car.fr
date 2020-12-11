@@ -3,17 +3,16 @@ import Link from "next/link";
 import {connect} from 'react-redux'
 import FavorisButton from 'components/Favoris/FavorisButton';
 import Moment from 'react-moment';
-import {fetchCars} from 'service/actions/cars';
 import ENVS from '../../environment';
 
 const AnnonceLists = ({ loading,
                           dispatch,
                           cars,
                           hasErrors}) => {
-	
+
     const [search, setSearch] = useState("");
     const [filteredCars, setFilteredCars] = useState([]);
-	
+
 	useEffect(() => {
 		 setFilteredCars(
 		  cars?.filter((car) =>
@@ -22,11 +21,11 @@ const AnnonceLists = ({ loading,
 		  )
 		);
 	}, [search, cars]);
-	
+
 	if (loading) {
     return <p>Loading annonces...</p>;
   }
-	
+
   return (
     <>
 		<div className="relative flex w-full flex-wrap items-stretch">
@@ -71,7 +70,7 @@ const AnnonceLists = ({ loading,
 						<div className="flex flex-wrap">
 							<div className="w-full px-8 py-2 px-2 flex-1">
 							  <p className="mt-2 px-2 py-2 text-md leading-relaxed bg-orange-500 text-white font-bold uppercase rounded text-center animate-ping-small">
-								Note de Conficance: {car.score_recognition}/20
+								NOTE DE CONFIANCE: {car.score_recognition}/20
 							  </p>
 							</div>
 							<div className="w-full mt-2 py-2 flex-1">
@@ -98,7 +97,7 @@ const AnnonceLists = ({ loading,
 							</div>
 						</div>
 				</div>
-			</Link> ) : ( 
+			</Link> ) : (
 			   <Link key={idx} car={car} href={`/annonce?id=${car.id}`} {...car}>
 			    <div id={car.id} status={car.prenium} className="relative w-full md:w-6/12 lg:w-4/12 lg:mb-0 mb-12 mr-4 my-6 shadow-lg max-w-400-px rounded-lg border-2 border-gray-200 ">
 					<img
@@ -119,7 +118,7 @@ const AnnonceLists = ({ loading,
 					<div className="flex flex-wrap">
 						<div className="w-full px-8 py-2 px-2 flex-1">
 						  <p className="mt-2 px-2 py-2 text-md leading-relaxed bg-gray-600 text-white font-bold uppercase rounded text-center">
-							Note de Conficance: {car.score_recognition}/20
+							NOTE DE CONFIANCE: {car.score_recognition}/20
 						  </p>
 						</div>
 						<div className="w-full mt-2 py-2 flex-1">

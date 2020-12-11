@@ -110,7 +110,7 @@ export default function PubContent2() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-							  Acheter un véhicule à un particulier avec minimum de risques
+							  Achetez un véhicule à un particulier avec minimum de risques
 							</h4>
 						  </div>
 						</div>
@@ -124,7 +124,7 @@ export default function PubContent2() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-								contact rapide avec le vendeur immédiatement
+								Prise de contact facile avec le vendeur
 							</h4>
 						  </div>
 						</div>

@@ -22,12 +22,10 @@ export default function Index() {
               </h1>
               <h1 className="font-bold text-4xl text-orange-700">
                 Sécuriser au maximum l'achat de votre véhicule.
-
               </h1>
               <p className="mt-4 text-lg leading-relaxed text-gray-500">
-                  ACHETEZ FACILEMENT VOTRE VÉHICULE AVEC UN MINIMUM DE RISQUES.
+                ACHETEZ FACILEMENT VOTRE VÉHICULE AVEC UN MINIMUM DE RISQUES.
                 1er SITE D’ACCOMPAGNEMENT AFIN DE SÉCURISER LA VENTE DE VÉHICULES.
-
               </p>
               <div className="mt-4">
                 <button
@@ -95,7 +93,7 @@ export default function Index() {
 	  <section className="compare-block mt-48 md:mt-40 pb-40 relative bg-gray-200">
         <div className="compare-description-block items-center flex flex-wrap justify-center mb-3 md\:hidden">
 			<h1 className="font-bold text-3xl text-gray-800 break-words w-70">
-				Concept:  répondez au questionnaire de <span className="font-bold text-3xl text-orange-500">confiance</span> afin de vendre ou d'acheter plus facilement son véhicule
+				Concept :  répondez au questionnaire de <span className="font-bold text-3xl text-orange-500">confiance</span> afin de vendre ou d'acheter plus facilement votre véhicule
 			</h1>
 		  </div>
 		<div
@@ -228,7 +226,7 @@ export default function Index() {
 											  "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
 											}
 										  >
-											<i className="fas fa-thumbs-up"></i> Vendre en tête de liste
+											<i className="fas fa-thumbs-up"></i> Vendez votre véhicule en tête de liste
 										  </a>
 							</Link>
 						</button>
@@ -242,7 +240,7 @@ export default function Index() {
         </div>
         <div className="comment-marche-block justify-center text-center flex flex-wrap mt-16">
           <div className="w-full md:w-6/12 px-12 md:px-4">
-            <h2 className="font-semibold text-4xl">comment ça marche ?</h2>
+            <h2 className="font-semibold text-4xl">Comment ça marche ?</h2>
           </div>
         </div>
       </section>
@@ -269,7 +267,7 @@ export default function Index() {
 
                 <div className="w-full lg:w-4/12 px-4">
                   <h5 className="text-xl font-semibold pb-4 text-center">
-                    on cherche et compare les meilleurs offres
+                    On cherche et compare les meilleures offres
                   </h5>
                   <Link href="/profile">
                     <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
@@ -284,7 +282,7 @@ export default function Index() {
 
                 <div className="w-full lg:w-4/12 px-4">
                   <h5 className="text-xl font-semibold pb-4 text-center">
-                    Le meilleur véhicule est à vous! c'est parti!
+                    Le meilleur véhicule est à vous ! C’est parti!
                   </h5>
                   <Link href="/landing">
                     <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">

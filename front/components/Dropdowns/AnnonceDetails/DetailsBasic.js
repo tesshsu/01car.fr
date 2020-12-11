@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import Link from "next/link";
 import {connect} from 'react-redux'
 import moment from 'moment';
 
@@ -36,7 +35,7 @@ const DetailsBasic = ({
 						</div>
 					</div>
 				</div>
-            ))}			
+            ))}
 		</div>
     </>
   );

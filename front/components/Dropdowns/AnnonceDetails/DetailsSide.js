@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import Link from "next/link";
 import MondalContact from "components/Mondal/MondalContact.js";
 import NoteConfiance from "components/Tabs/NoteConfiance.js";
 import {connect} from "react-redux";
@@ -14,7 +13,7 @@ const DetailsSide = ({ dispatch,
 	  { icon: "fas fa-car-side", value: car?.doors },
 	  { icon: "fas fa-key", value: car?.finition }
   ];
-  
+
   let prix_api = car?.price
   let prenium = car?.prenium
   return (
@@ -51,7 +50,7 @@ const DetailsSide = ({ dispatch,
 					  <span className="carburant text-lg block p-3 text-gray-800 rounded border border-solid border-gray-200">{basic.value}</span>
 					</div>
 				</div>
-			))}	
+			))}
 			<div className="flex flex-wrap">
 				<ul className="list-none">
                   {pubs.map(pub => (
@@ -69,7 +68,7 @@ const DetailsSide = ({ dispatch,
 						  </div>
 						</div>
 					  </li>
-				  ))}                
+				  ))}
                 </ul>
 				<div className="flex flex-wrap content-center items-center justify-center h-full">
 					<MondalContact transparent />

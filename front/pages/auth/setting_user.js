@@ -100,11 +100,11 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
                 { isAuthentificated && loggedUser ? (
 				<div className="text-center mb-3">
 				  <h6 className="text-gray-600 text-md font-bold">
-                    Les details de votre compte
+                    Détails de votre compte
                   </h6>
-				  <p className="text-gray-800 text-sm font-bold">Nom (votre identifiant ) :  <span className="text-gray-600 text-sm"> {user.name}</span></p>
-                  <p className="text-gray-800 text-sm font-bold">votre contact email :  <span className="text-gray-600 text-sm"> {user.email}</span></p>
-                  <p className="text-gray-800 text-sm font-bold">Phone :  <span className="text-gray-600 text-sm"> {user.phone}</span> </p>
+				  <p className="text-gray-800 text-sm font-bold">Nom ou identifiant  :  <span className="text-gray-600 text-sm"> {user.name}</span></p>
+                  <p className="text-gray-800 text-sm font-bold">Contact mail :  <span className="text-gray-600 text-sm"> {user.email}</span></p>
+                  <p className="text-gray-800 text-sm font-bold">Téléphone :  <span className="text-gray-600 text-sm"> {user.phone}</span> </p>
 				</div>
                 ) : (
 				   <div className="text-center mb-3">
@@ -136,7 +136,7 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
 									  htmlFor="name"
 									>
-									  Votre nom ( ou votre identifiant ) :
+									  Nom ou identifiant :
 							    </label>							
 								<Field
 								  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
@@ -152,7 +152,7 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
 									  htmlFor="phone"
 									>
-									  Votre numero :
+									  Téléphone :
 							    </label>
 							<Field
 							  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
@@ -170,7 +170,7 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 							  type="submit"
 							  disabled={submitting || pristine}
 							>
-							  Modifier votre compte
+							  Modifier le compte
 							</button>
 							<button
 							  className="bg-gray-600 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
@@ -190,7 +190,7 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 						type="submit"
 						onClick = {onSignOut}
 					>
-						Me déconnecter
+						Se déconnecter
 					</button>
 				</div>
               </div>

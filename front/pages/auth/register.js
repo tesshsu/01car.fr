@@ -4,12 +4,7 @@ import Router from "next/router";
 import Auth from "layouts/Auth.js";
 import useLoggedUser from 'service/hooks/useLoggedUser';
 import CardAcceptCondition from "components/Cards/CardAcceptCondition.js";
-import Notice from 'components/Notices/Notice';
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
-const mustBeNumber = value => (isNaN(value) ? 'Must be a number' : undefined)
-const composeValidators = (...validators) => value =>
-  validators.reduce((error, validator) => error || validator(value), undefined)
 
 export default function Register() {
   const {

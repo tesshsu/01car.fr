@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import {connect} from 'react-redux'
 import { createPopper } from "@popperjs/core";
 import {premium_ncs} from 'helpers/constant';

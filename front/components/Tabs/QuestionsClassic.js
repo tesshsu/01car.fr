@@ -139,6 +139,7 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 									dt_entry_service: '',
 									fuel: '',
 									km: '',
+									immatriculation: '',
 									statu_vendeur: '',
 									date_disponible: '',
 									car_fumeur: '',
@@ -252,6 +253,7 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 															  validate={formValidate.composeValidators(formValidate.required, formValidate.matchImmatriculation)}
 															  component="input"
 															  type="text"
+															  value={values.immatriculation}
 															  placeholder="AA-123-BC"
 															  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative border border-gray-400 bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 															/>

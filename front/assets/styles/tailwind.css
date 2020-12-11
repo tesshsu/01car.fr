@@ -3937,7 +3937,7 @@ video {
 }
 .logoNoteConfiance{
 	position: absolute;
-    top: 300px;
+    top: 250px;
     left: 0;
     width: 100px;
 }
@@ -3961,13 +3961,13 @@ video {
 }
 .prixCompare{
   position: absolute;
-  top: 300px;
+  top: 240px;
   right: 10px;
   width: 150px;
 }
 .prixCompareGratuit{
   position: absolute;
-  top: 180px;
+  top: 140px;
   right: 10px;
   width: 150px;
 }

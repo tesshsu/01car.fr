@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import Link from "next/link";
 import IndexNavbar from '../components/Navbars/IndexNavbar.js';
 import Footer from '../components/Footers/Footer.js';
 import AnnonceLists from '../components/Annonce/AnnonceLists.js';
@@ -7,7 +6,7 @@ import Pagination from '../components/Annonce/Pagination.js';
 import PubContentThreeIcons from '../layouts/PubContentThreeIcons.js';
 import {connect} from "react-redux";
 import {fetchCars} from 'service/actions/cars';
-import {Router, useRouter }  from "next/router";
+import {useRouter }  from "next/router";
 
 const Annonces = ({ dispatch,
                     loading,
@@ -29,14 +28,14 @@ const Annonces = ({ dispatch,
       <main>
 	    <section className="mt-24 relative bg-gray-800">
 		    <h4 className="text-3xl font-bold text-white text-center">
-                Annonces avec note de confiance
+                Annonces
             </h4>
 			<PubContentThreeIcons />
 		</section>
 		<section className="pt-10 pb-8 mt-4">
           <div className="container mx-auto px-4">
             <div className="flex flex-wrap">
-                <AnnonceLists transparent />               
+                <AnnonceLists transparent />
             </div>
 			<div className="flex content-center items-center justify-center h-full mb-24 mt-8">
                <Pagination transparent

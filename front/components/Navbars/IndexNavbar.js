@@ -27,8 +27,8 @@ const Navbar = ({dispatch, loading, user, hasErrors}) => {
   }, [isAuthentificated, loggedUser]);
 
   const renderUser = () => {
-    if (loading) return <p>Loading user...</p>
-    if (hasErrors) return <p>Unable to display user.</p>
+    if (loading) return <p>Chargement de l'utilisateur...</p>
+    if (hasErrors) return <p>Impossible d'afficher l'utilisateur.</p>
     return <span className="text-orange-500 text-sm">Bonjour, {user.name}</span>
   }
 

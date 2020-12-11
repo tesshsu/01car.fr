@@ -1,24 +1,22 @@
 import React from "react";
-import Link from "next/link";
 import CardPriceVehicule from "components/Cards/CardPriceVehicule.js";
 import FileUpload from "components/Tabs/FileUpload.js";
 import NotificationDropdown from "components/Dropdowns/NotificationDropdown.js";
 import { Form, Field } from 'react-final-form';
 import ImageUpload from "components/Tabs/ImageUpload.js";
-import useVendre from 'service/hooks/useVendre';
 import * as constant from 'helpers/constant';
 import * as formValidate from 'helpers/formValidate';
-import {Condition, Error} from 'helpers/formValidate';
+import {Error} from 'helpers/formValidate';
 
 
 const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
   const [openTab, setOpenTab] = React.useState(1);
-  
+
   //submit
 	/*const {
 		submitReponses
 	  } = useVendre();*/
-	  
+
 
 	const onSubmit = async (values)=>{
 		try {
@@ -37,8 +35,8 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 		  }
 		}
 	  }
-	  
-	  
+
+
   return (
     <>
       <div className="flex flex-wrap">
@@ -101,7 +99,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 						carte_grise:'',
 						carnet_entretien:'',
 					}}
-					onSubmit={onSubmit}					
+					onSubmit={onSubmit}
 
 				    render={({ submitError, handleSubmit, form, submitting, pristine, values, invalid }) => (
                             <form onSubmit={handleSubmit}>
@@ -160,7 +158,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 													options={constant.NonOptions}
 													value={values.defauts}
 													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
-												 />				
+												 />
                                                 <Error name="defauts" />
                                                 <p className="text-md leading-relaxed text-gray-500"> Télécharger les défauts du véhicule si il y aura les defauts</p>
                                                 <ImageUpload />
@@ -180,7 +178,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 													options={constant.OuiOptions}
 													value={values.justifier_km}
 													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
-												 />	                                               
+												 />
                                                 <Error name="justifier_km" />
                                             </div>
                                         </div>
@@ -199,7 +197,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 													options={constant.OuiOptions}
 													value={values.controle_technique}
 													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
-												 />	
+												 />
                                                <Error name="controle_technique" />
                                             </div>
                                             <p className="text-md leading-relaxed text-gray-500"> Telecharger votre contrôle technique <span><NotificationDropdown title="Vos données personnelles resteront confidentielles" /></span></p>
@@ -237,7 +235,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 													options={constant.OuiOptions}
 													value={values.respect_entretiens}
 													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
-												 />				 
+												 />
                                               <Error name="respect_entretiens" />
                                             </div>
                                         </div>
@@ -255,7 +253,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 													options={constant.prochaineEntretienOptions}
 													value={values.prochain_entretiens}
 													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
-												 />	
+												 />
                                               <Error name="prochain_entretiens" />
                                            </div>
                                         </div>
@@ -275,10 +273,10 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 													options={constant.OuiOptions}
 													value={values.facture}
 													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
-												 />	
+												 />
                                               <Error name="facture" />
                                            </div>
-										   <p className="text-md leading-relaxed text-gray-500">Telecharger votre facture d'achat <span><NotificationDropdown title="Vos données personnelles resteront confidentielles" /></span> </p>												
+										   <p className="text-md leading-relaxed text-gray-500">Telecharger votre facture d'achat <span><NotificationDropdown title="Vos données personnelles resteront confidentielles" /></span> </p>
 										   <FileUpload />
                                         </div>
                                         <div className="w-full lg:w-6/12 px-4">
@@ -298,7 +296,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 												 />
                                                <Error name="carte_grise" />
                                            </div>
-                                            <p className="text-md leading-relaxed text-gray-500">Si oui telecharger votre carte grise. Attention : le numéro d'identification du véhicule (VIN) doit être clairement lisible. <span><NotificationDropdown title="Vos données personnelles resteront confidentielles" /></span></p>                                               
+                                            <p className="text-md leading-relaxed text-gray-500">Si oui telecharger votre carte grise. Attention : le numéro d'identification du véhicule (VIN) doit être clairement lisible. <span><NotificationDropdown title="Vos données personnelles resteront confidentielles" /></span></p>
 											<FileUpload />
                                         </div>
                                   </div>

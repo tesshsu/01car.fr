@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-import ReactDOM from 'react-dom';
 
 const stripePromise = loadStripe("pk_test_51HgmzIBjqnSC21bhUov33uWhuXhCFQBnwRcy1pfJgKmXv42GkV7vLZJ0uNR26SdEUomqGHDnGhCXvxn0MY6GjIg100F67arXkO");
 
@@ -16,13 +15,13 @@ const ProductDisplay = ({ handleClick }) => (
 	  </div>
 	  <div className="w-6/12 sm:w-6/12 px-4">
       <div className="description">
-        <p className="ml-3 leading-6 font-medium text-orange-500 text-2xl">Abonement Premium</p>
+        <p className="ml-3 leading-6 font-medium text-orange-500 text-2xl">Abonnement Premium</p>
         <div className="ml-3 leading-6 font-medium text-orange-500 text-4xl">6.99€</div>
       </div>
 	  </div>
     </div>
     <button id="checkout-button" role="link" onClick={handleClick}>
-      Vendre votre véhicule sur Top list
+      Vendez votre véhicule en tête de liste
     </button>
   </section>
 );
@@ -48,7 +47,7 @@ export default function ModalPayment() {
 		const stripe = await stripePromise;
 
 		const response = await fetch("/create-checkout-session", {
-		  headers : { 
+		  headers : {
 			'Content-Type': 'application/json',
 			'Accept': 'application/json'
 		   },

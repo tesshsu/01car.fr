@@ -1,11 +1,7 @@
 import React from "react";
 import Link from "next/link";
-const favorits = [
-	  { src: require("assets/img/team-4-800x800.jpg"), marque: "RENAULT", model: "GRAND SCENIC IV", prix:"14 700", Energie:"Essence", Boite:"Manual", km:"34000", year:"2017", nc:"14" },
-	  { src: require("assets/img/team-3-800x800.jpg"), marque: "RENAULT", model: "GRAND SCENIC IV", prix:"12 700", Energie:"Essence", Boite:"Manual", km:"14000", year:"2015", nc:"16" },
-	  { src: require("assets/img/team-2-800x800.jpg"), marque: "RENAULT", model: "GRAND SCENIC IV", prix:"8 700", Energie:"Essence", Boite:"Manual", km:"24000", year:"2016", nc:"12" },
-	  { src: require("assets/img/team-6-800x800.jpg"), marque: "RENAULT", model: "GRAND SCENIC IV", prix:"6 700", Energie:"Essence", Boite:"Manual", km:"8000", year:"2012", nc:"10" }
-  ];
+import {favorits} from "helpers/constant";
+
 export default function AnnonceFavoris() {
   return (
    <>
@@ -78,7 +74,7 @@ export default function AnnonceFavoris() {
 						</button>
                     </div>
 					<p className="mt-4 px-6 py-2 text-md leading-relaxed bg-gray-600 text-white font-bold uppercase rounded text-center">
-						Note de Conficance: {favorit.nc}/20
+						NOTE DE CONFIANCE: {favorit.nc}/20
 				    </p>
 
 			  </span>
