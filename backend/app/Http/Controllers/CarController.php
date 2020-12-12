@@ -16,6 +16,7 @@ use App\Constants\SaleReason;
 use App\Http\Resources\Car as CarResource;
 use App\Http\Resources\CarPaginatorCollection;
 use App\Models\Car;
+use App\Models\CarAttribute;
 use App\Models\Upload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -107,7 +108,7 @@ class CarController extends Controller
         $reqCar = (object)$request->json()->all();
 
         // check that id are the same
-        if (!$car || $reqCar->id != $car->id) {
+        if (!isset($reqCar->id) || $reqCar->id != $car->id) {
             return response()->json(['error' => 'NotFound'], 404);
         }
 
@@ -124,7 +125,7 @@ class CarController extends Controller
         }
 
         // Update allowed fields
-        return $this->updateCarFields($car, $reqCar);
+        $this->updateCarFields($car, $reqCar);
 
         $car->save();
         //
@@ -146,11 +147,12 @@ class CarController extends Controller
         $car->delete();
     }
 
-    public function removeFiles(Request $request, $car_id, $id){
+    public function removeFiles(Request $request, $car_id, $id)
+    {
         $car = Car::with('uploads')->findOrFail($car_id);
         $upload = Upload::findOrFail($id);
         $currentUser = Auth::user();
-        if (!$currentUser->canEditCar($car) ) {
+        if (!$currentUser->canEditCar($car)) {
             return response()->json(['error' => 'Unauthorised'], 403);
         }
 
@@ -215,21 +217,21 @@ class CarController extends Controller
             'displacement' => 'max:' . Car::fieldsSizeMax('displacement'),
             'version' => 'max:' . Car::fieldsSizeMax('version'),
             'currency' => 'max:' . Car::fieldsSizeMax('currency'),
-            'owner_type' => [ 'max:' . Car::fieldsSizeMax('owner_type'), Rule::in(OwnerType::list()) ],
+            'owner_type' => ['max:' . Car::fieldsSizeMax('owner_type'), Rule::in(OwnerType::list())],
             'available' => 'max:' . Car::fieldsSizeMax('available'),
-            'smoking' => 'boolean' ,
+            'smoking' => 'boolean',
             'duplicate_keys' => 'boolean',
-            'sale_reason' => [ 'max:' . Car::fieldsSizeMax('sale_reason'), Rule::in(SaleReason::list()) ],
-            'hand_number' => [ 'integer' , 'min:1', 'max:3'],
-            'state' => [ 'max:' . Car::fieldsSizeMax('state'), Rule::in(CarState::list()) ],
-            'country' => [ 'max:' . Car::fieldsSizeMax('country') ],
-            'equipments.outside' => [ 'array' , Rule::in(OutsideEquipment::list()) ],
-            'equipments.inside' => [ 'array' , Rule::in(InsideEquipment::list()) ],
-            'equipments.anti_theft' => [ 'array' , Rule::in(AntiTheftEquipment::list()) ],
-            'equipments.comfort' => [ 'array' , Rule::in(ComfortEquipment::list()) ],
-            'equipments.other' => [ 'array' , Rule::in(OtherEquipment::list()) ],
-            'equipments.security' => [ 'array' , Rule::in(SecurityEquipment::list()) ],
-            'options.premium' => [ 'array' , Rule::in(PremiumEquipment::list()) ],
+            'sale_reason' => ['max:' . Car::fieldsSizeMax('sale_reason'), Rule::in(SaleReason::list())],
+            'hand_number' => ['integer', 'min:1', 'max:3'],
+            'state' => ['max:' . Car::fieldsSizeMax('state'), Rule::in(CarState::list())],
+            'country' => ['max:' . Car::fieldsSizeMax('country')],
+            'equipments.outside' => ['array', Rule::in(OutsideEquipment::list())],
+            'equipments.inside' => ['array', Rule::in(InsideEquipment::list())],
+            'equipments.anti_theft' => ['array', Rule::in(AntiTheftEquipment::list())],
+            'equipments.comfort' => ['array', Rule::in(ComfortEquipment::list())],
+            'equipments.other' => ['array', Rule::in(OtherEquipment::list())],
+            'equipments.security' => ['array', Rule::in(SecurityEquipment::list())],
+            'options.premium' => ['array', Rule::in(PremiumEquipment::list())],
         ],
             $messages = [
                 'required' => 'The :attribute field is required.',
@@ -277,24 +279,48 @@ class CarController extends Controller
         $car->state = isset($reqCar->state) ? $reqCar->state : $car->state;
         $car->country = isset($reqCar->country) ? $reqCar->country : $car->country;
 
-        return $this->updateAttributes($car, $reqCar, EquipmentCategory::PREMIUM);
+        $this->updateAttributes($car, $reqCar, EquipmentCategory::PREMIUM);
     }
 
-    private function updateAttributes(Car $car, $reqCar, $category){
-        if(isset($reqCar->options) && isset($reqCar->options["premium"])) {
+    private function updateAttributes(Car $car, $reqCar, $category)
+    {
+        if (isset($reqCar->options) && isset($reqCar->options["premium"])) {
+            $reqAttributes = (array) $reqCar->options["premium"];
 
-            $diff = array_diff($reqCar->options["premium"], PremiumEquipment::list());
-            if ($diff)
-            {
-                return response()->json("error");
-            }
+            $attributesInDB = $car->attributes()->getResults()->filter(function ($value, $key) use ($category) {
+                return $value->category == $category;
+            });
 
-            $car->attributes()->getResults();
-            return response()->json();
+            $deleteAttributes = $attributesInDB->filter(function ($value, $key) use ($reqAttributes) {
+                return !in_array($value->name, $reqAttributes);
+            })->flatten();
+
+            $categoryAttNames = $attributesInDB->map(function ($item, $key) {
+                return $item->name;
+            })->all();
+
+            $newAttributes = collect($reqAttributes)->filter(function ($value, $key) use ($categoryAttNames) {
+                return !in_array($value, $categoryAttNames);
+            });
+
+            // remove elements no longer in the list
+            $deleteAttributes->each(function ($item, $key) {
+                $item->delete();
+            });
+
+            // create new attributes
+            $newAttributes->each(function ($item, $key) use ($car, $category) {
+                $att =  new CarAttribute();
+                $att->category = $category;
+                $att->name = $item;
+                $att->car_id = $car->id;
+                $att->save();
+            });
+
         }
     }
 
-    private function renderJson($id)
+    private function renderJson($id): \Illuminate\Http\JsonResponse
     {
         $car = Car::with('attributes', 'user', 'uploads')->find($id);
         if ($car == NULL) {

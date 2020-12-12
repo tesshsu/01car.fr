@@ -5,16 +5,16 @@ Authorization: Bearer {{token}}
 {
   "id": 5,
   "premium": true,
-  "hand_number": 4,
+  "hand_number": 1,
   "equipments": {
     "outside":[
-      "sunroof",
+      "sunroof"
     ]
   },
   "options":{
     "premium":[
-      "under_warranty",
-      "technical_check_ok2"
+      "had_accident",
+      "technical_check_ok"
     ]
   }
 }
