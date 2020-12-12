@@ -1,0 +1,20 @@
+PUT {{host}}/api/v1/cars/5
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 5,
+  "premium": true,
+  "hand_number": 4,
+  "equipments": {
+    "outside":[
+      "sunroof",
+    ]
+  },
+  "options":{
+    "premium":[
+      "under_warranty",
+      "technical_check_ok2"
+    ]
+  }
+}

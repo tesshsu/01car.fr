@@ -7,7 +7,7 @@ use App\Constants\Equipments\ComfortEquipment;
 use App\Constants\Equipments\InsideEquipment;
 use App\Constants\Equipments\OtherEquipment;
 use App\Constants\Equipments\OutsideEquipment;
-use App\Constants\Equipments\PreMiumEquipment;
+use App\Constants\Equipments\PremiumEquipment;
 
 abstract class EquipmentCategory
 {

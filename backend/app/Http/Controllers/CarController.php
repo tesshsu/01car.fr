@@ -2,6 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\CarState;
+use App\Constants\EquipmentCategory;
+use App\Constants\Equipments\AntiTheftEquipment;
+use App\Constants\Equipments\ComfortEquipment;
+use App\Constants\Equipments\InsideEquipment;
+use App\Constants\Equipments\OtherEquipment;
+use App\Constants\Equipments\OutsideEquipment;
+use App\Constants\Equipments\PremiumEquipment;
+use App\Constants\Equipments\SecurityEquipment;
+use App\Constants\OwnerType;
+use App\Constants\SaleReason;
 use App\Http\Resources\Car as CarResource;
 use App\Http\Resources\CarPaginatorCollection;
 use App\Models\Car;
@@ -10,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class CarController extends Controller
 {
@@ -35,8 +47,8 @@ class CarController extends Controller
         $carsReq = Car::with('attributes', 'user', 'uploads');
 
         if ($request->has('premium')) {
-            $prenium = $request->query('premium');
-            $carsReq->where('premium', $prenium);
+            $premium = $request->query('premium');
+            $carsReq->where('premium', $premium);
         }
 
         $carsReq->orderBy('premium', 'desc');
@@ -95,13 +107,13 @@ class CarController extends Controller
         $reqCar = (object)$request->json()->all();
 
         // check that id are the same
-        if ($reqCar->id != $car->id) {
+        if (!$car || $reqCar->id != $car->id) {
             return response()->json(['error' => 'NotFound'], 404);
         }
 
         $currentUser = Auth::user();
         if (!$currentUser->canEditCar($car)
-            || ($currentUser->id == $car->user_id && !$car->prenium)) {
+            || ($currentUser->id == $car->user_id && !$car->premium)) {
             return response()->json(['error' => 'Unauthorised'], 403);
         }
 
@@ -112,7 +124,7 @@ class CarController extends Controller
         }
 
         // Update allowed fields
-        $this->updateCarFields($car, $reqCar);
+        return $this->updateCarFields($car, $reqCar);
 
         $car->save();
         //
@@ -203,7 +215,29 @@ class CarController extends Controller
             'displacement' => 'max:' . Car::fieldsSizeMax('displacement'),
             'version' => 'max:' . Car::fieldsSizeMax('version'),
             'currency' => 'max:' . Car::fieldsSizeMax('currency'),
-        ]);
+            'owner_type' => [ 'max:' . Car::fieldsSizeMax('owner_type'), Rule::in(OwnerType::list()) ],
+            'available' => 'max:' . Car::fieldsSizeMax('available'),
+            'smoking' => 'boolean' ,
+            'duplicate_keys' => 'boolean',
+            'sale_reason' => [ 'max:' . Car::fieldsSizeMax('sale_reason'), Rule::in(SaleReason::list()) ],
+            'hand_number' => [ 'integer' , 'min:1', 'max:3'],
+            'state' => [ 'max:' . Car::fieldsSizeMax('state'), Rule::in(CarState::list()) ],
+            'country' => [ 'max:' . Car::fieldsSizeMax('country') ],
+            'equipments.outside' => [ 'array' , Rule::in(OutsideEquipment::list()) ],
+            'equipments.inside' => [ 'array' , Rule::in(InsideEquipment::list()) ],
+            'equipments.anti_theft' => [ 'array' , Rule::in(AntiTheftEquipment::list()) ],
+            'equipments.comfort' => [ 'array' , Rule::in(ComfortEquipment::list()) ],
+            'equipments.other' => [ 'array' , Rule::in(OtherEquipment::list()) ],
+            'equipments.security' => [ 'array' , Rule::in(SecurityEquipment::list()) ],
+            'options.premium' => [ 'array' , Rule::in(PremiumEquipment::list()) ],
+        ],
+            $messages = [
+                'required' => 'The :attribute field is required.',
+                'max' => 'The :attribute value :input is larger than :max.',
+                'min' => 'The :attribute value :input is smaller than :min.',
+                'in' => 'The :attribute must be one of the following types: :values',
+            ]
+        );
     }
 
 
@@ -218,7 +252,7 @@ class CarController extends Controller
         $car->transmission = isset($reqCar->transmission) ? $reqCar->transmission : $car->transmission;
         $car->carBody = isset($reqCar->carBody) ? $reqCar->carBody : $car->carBody;
         $car->doors = isset($reqCar->doors) ? $reqCar->doors : $car->doors;
-        $car->finition = isset($reqCar->finition) ? $reqCar->finition : $car->finition;
+        $car->finishing = isset($reqCar->finishing) ? $reqCar->finishing : $car->finishing;
         $car->displacement = isset($reqCar->displacement) ? $reqCar->displacement : $car->displacement;
         $car->power = isset($reqCar->power) ? $reqCar->power : $car->power;
         $car->version = isset($reqCar->version) ? $reqCar->version : $car->version;
@@ -242,6 +276,22 @@ class CarController extends Controller
         $car->hand_number = isset($reqCar->hand_number) ? $reqCar->hand_number : $car->hand_number;
         $car->state = isset($reqCar->state) ? $reqCar->state : $car->state;
         $car->country = isset($reqCar->country) ? $reqCar->country : $car->country;
+
+        return $this->updateAttributes($car, $reqCar, EquipmentCategory::PREMIUM);
+    }
+
+    private function updateAttributes(Car $car, $reqCar, $category){
+        if(isset($reqCar->options) && isset($reqCar->options["premium"])) {
+
+            $diff = array_diff($reqCar->options["premium"], PremiumEquipment::list());
+            if ($diff)
+            {
+                return response()->json("error");
+            }
+
+            $car->attributes()->getResults();
+            return response()->json();
+        }
     }
 
     private function renderJson($id)
