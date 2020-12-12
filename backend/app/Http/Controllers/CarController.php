@@ -22,6 +22,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class CarController extends Controller
@@ -165,7 +166,7 @@ class CarController extends Controller
     }
 
 
-    public function addFiles(Request $request, $id)
+    public function addFiles(Request $request, $id): \Illuminate\Http\JsonResponse
     {
         $car = Car::with('uploads')->findOrFail($id);
         $currentUser = Auth::user();
@@ -173,22 +174,25 @@ class CarController extends Controller
             return response()->json(['error' => 'Unauthorised'], 403);
         }
 
-
         $uploadedFile = $request->file('file');
+
         $path = null;
         $filename = null;
         if ($uploadedFile != null) {
             $path = $car->getUploadPath();
             $filename = $uploadedFile->getClientOriginalName();
 
+            // check if file with same name exist
+            if(in_array( $filename, $car->uploads()->getResults()->map(function ($item, $key) {return $item->name; })->toArray() )){
+                $filename .= '_' . (string) Str::orderedUuid() . '.' . $uploadedFile->getClientOriginalExtension();
+            }
+            
             Storage::disk('public')->putFileAs(
                 $path,
                 $uploadedFile,
                 $filename
             );
-        }
 
-        if ($uploadedFile != null) {
             $upload = new Upload();
             // Update attachment information
             $upload->path = $path;
