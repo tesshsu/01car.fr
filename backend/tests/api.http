@@ -5,7 +5,9 @@ Authorization: Bearer {{token}}
 {
   "id": 5,
   "premium": true,
-  "hand_number": 1,
+  "brand": "Renault",
+  "hand_number": 2,
+  "smoking": true,
   "equipments": {
     "outside":[
       "sunroof"
@@ -18,7 +20,8 @@ Authorization: Bearer {{token}}
     "comfort":[
       "virtual_cockpit"
     ],
-    "other":[ "start_stop_system"
+    "other":[
+      "start_stop_system"
     ],
     "security":[
       "airbags", "abs"

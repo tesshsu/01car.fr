@@ -19,7 +19,7 @@ abstract class EquipmentCategory
     const PREMIUM = 'premium';
     const SECURITY = 'security';
 
-    public static $available_periods_list = array(
+    public static $available_category_list = array(
         self::OUTSIDE,
         self::INSIDE,
         self::ANTI_THEFT,
@@ -31,7 +31,7 @@ abstract class EquipmentCategory
 
     public static function list()
     {
-        return self::$available_periods_list;
+        return self::$available_category_list;
     }
 
     public static function listEquipements($category)

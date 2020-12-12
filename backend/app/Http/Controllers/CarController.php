@@ -216,6 +216,7 @@ class CarController extends Controller
             'finishing' => 'max:' . Car::fieldsSizeMax('finishing'),
             'displacement' => 'max:' . Car::fieldsSizeMax('displacement'),
             'version' => 'max:' . Car::fieldsSizeMax('version'),
+            'km' => 'integer',
             'currency' => 'max:' . Car::fieldsSizeMax('currency'),
             'owner_type' => ['max:' . Car::fieldsSizeMax('owner_type'), Rule::in(OwnerType::list())],
             'available' => 'max:' . Car::fieldsSizeMax('available'),
@@ -242,63 +243,19 @@ class CarController extends Controller
         );
     }
 
-
     private function updateCarFields($car, $reqCar)
     {
-        $car->brand = isset($reqCar->brand) ? $reqCar->brand : $car->brand;
-        $car->model = isset($reqCar->model) ? $reqCar->model : $car->model;
-        $car->generation = isset($reqCar->generation) ? $reqCar->generation : $car->generation;
-        $car->phase = isset($reqCar->phase) ? $reqCar->phase : $car->phase;
-        $car->id_carBody = isset($reqCar->id_carBody) ? $reqCar->id_carBody : $car->id_carBody;
-        $car->fuel = isset($reqCar->fuel) ? $reqCar->fuel : $car->fuel;
-        $car->transmission = isset($reqCar->transmission) ? $reqCar->transmission : $car->transmission;
-        $car->carBody = isset($reqCar->carBody) ? $reqCar->carBody : $car->carBody;
-        $car->doors = isset($reqCar->doors) ? $reqCar->doors : $car->doors;
-        $car->finishing = isset($reqCar->finishing) ? $reqCar->finishing : $car->finishing;
-        $car->displacement = isset($reqCar->displacement) ? $reqCar->displacement : $car->displacement;
-        $car->power = isset($reqCar->power) ? $reqCar->power : $car->power;
-        $car->version = isset($reqCar->version) ? $reqCar->version : $car->version;
-        $car->km = isset($reqCar->km) ? $reqCar->km : $car->km;
-
-        $car->dt_entry_service = isset($reqCar->dt_entry_service) ? $reqCar->dt_entry_service : $car->dt_entry_service;
-
-        $car->dt_valuation = isset($reqCar->dt_valuation) ? $reqCar->dt_valuation : $car->dt_valuation;
-        $car->scoreRecognition = isset($reqCar->scoreRecognition) ? $reqCar->scoreRecognition : $car->scoreRecognition;
-        $car->scoreValuation = isset($reqCar->scoreValuation) ? $reqCar->scoreValuation : $car->scoreValuation;
-
-        $car->estimate_price = isset($reqCar->estimate_price) ? $reqCar->estimate_price : $car->estimate_price;
-        $car->price = isset($reqCar->price) ? $reqCar->price : $car->price;
-        $car->currency = isset($reqCar->currency) ? $reqCar->currency : $car->currency;
-
-        $car->owner_type = isset($reqCar->owner_type) ? $reqCar->owner_type : $car->owner_type;
-        $car->available = isset($reqCar->available) ? $reqCar->available : $car->available;
-        $car->smoking = isset($reqCar->smoking) ? $reqCar->smoking : $car->smoking;
-        $car->duplicate_keys = isset($reqCar->duplicate_keys) ? $reqCar->duplicate_keys : $car->duplicate_keys;
-        $car->sale_reason = isset($reqCar->sale_reason) ? $reqCar->sale_reason : $car->sale_reason;
-        $car->hand_number = isset($reqCar->hand_number) ? $reqCar->hand_number : $car->hand_number;
-        $car->state = isset($reqCar->state) ? $reqCar->state : $car->state;
-        $car->country = isset($reqCar->country) ? $reqCar->country : $car->country;
+        collect($car->getFillable())->each(function ($item, $key) use ($car, $reqCar) {
+             $car->{ $item }  = isset($reqCar->{ $item } ) ? $reqCar->{ $item } : $car->{ $item } ;
+        });
 
         if (isset($reqCar->equipments)) {
+            collect(EquipmentCategory::list())->each(function ($item, $key) use ($car, $reqCar) {
+                if (isset($reqCar->equipments[$item])) {
+                    $this->updateAttributes($car, (array)$reqCar->equipments[$item], $item);
+                }
+            });
 
-            if (isset($reqCar->equipments["outside"])) {
-                $this->updateAttributes($car, (array)$reqCar->equipments["outside"], EquipmentCategory::OUTSIDE);
-            }
-            if (isset($reqCar->equipments["inside"])) {
-                $this->updateAttributes($car, (array)$reqCar->equipments["inside"], EquipmentCategory::INSIDE);
-            }
-            if (isset($reqCar->equipments["anti_theft"])) {
-                $this->updateAttributes($car, (array)$reqCar->equipments["anti_theft"], EquipmentCategory::ANTI_THEFT);
-            }
-            if (isset($reqCar->equipments["comfort"])) {
-                $this->updateAttributes($car, (array)$reqCar->equipments["comfort"], EquipmentCategory::COMFORT);
-            }
-            if (isset($reqCar->equipments["other"])) {
-                $this->updateAttributes($car, (array)$reqCar->equipments["other"], EquipmentCategory::OTHER);
-            }
-            if (isset($reqCar->equipments["security"])) {
-                $this->updateAttributes($car, (array)$reqCar->equipments["security"], EquipmentCategory::SECURITY);
-            }
         }
 
         if (isset($reqCar->options) && isset($reqCar->options["premium"])) {
