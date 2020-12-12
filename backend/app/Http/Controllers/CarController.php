@@ -279,45 +279,65 @@ class CarController extends Controller
         $car->state = isset($reqCar->state) ? $reqCar->state : $car->state;
         $car->country = isset($reqCar->country) ? $reqCar->country : $car->country;
 
-        $this->updateAttributes($car, $reqCar, EquipmentCategory::PREMIUM);
+        if (isset($reqCar->equipments)) {
+
+            if (isset($reqCar->equipments["outside"])) {
+                $this->updateAttributes($car, (array)$reqCar->equipments["outside"], EquipmentCategory::OUTSIDE);
+            }
+            if (isset($reqCar->equipments["inside"])) {
+                $this->updateAttributes($car, (array)$reqCar->equipments["inside"], EquipmentCategory::INSIDE);
+            }
+            if (isset($reqCar->equipments["anti_theft"])) {
+                $this->updateAttributes($car, (array)$reqCar->equipments["anti_theft"], EquipmentCategory::ANTI_THEFT);
+            }
+            if (isset($reqCar->equipments["comfort"])) {
+                $this->updateAttributes($car, (array)$reqCar->equipments["comfort"], EquipmentCategory::COMFORT);
+            }
+            if (isset($reqCar->equipments["other"])) {
+                $this->updateAttributes($car, (array)$reqCar->equipments["other"], EquipmentCategory::OTHER);
+            }
+            if (isset($reqCar->equipments["security"])) {
+                $this->updateAttributes($car, (array)$reqCar->equipments["security"], EquipmentCategory::SECURITY);
+            }
+        }
+
+        if (isset($reqCar->options) && isset($reqCar->options["premium"])) {
+            $this->updateAttributes($car, (array)$reqCar->options["premium"], EquipmentCategory::PREMIUM);
+        }
     }
 
-    private function updateAttributes(Car $car, $reqCar, $category)
+    private function updateAttributes(Car $car, $reqAttributes, $category)
     {
-        if (isset($reqCar->options) && isset($reqCar->options["premium"])) {
-            $reqAttributes = (array) $reqCar->options["premium"];
+        $attributesInDB = $car->attributes()->getResults()->filter(function ($value, $key) use ($category) {
+            return $value->category == $category;
+        });
 
-            $attributesInDB = $car->attributes()->getResults()->filter(function ($value, $key) use ($category) {
-                return $value->category == $category;
-            });
+        $deleteAttributes = $attributesInDB->filter(function ($value, $key) use ($reqAttributes) {
+            return !in_array($value->name, $reqAttributes);
+        })->flatten();
 
-            $deleteAttributes = $attributesInDB->filter(function ($value, $key) use ($reqAttributes) {
-                return !in_array($value->name, $reqAttributes);
-            })->flatten();
+        $categoryAttNames = $attributesInDB->map(function ($item, $key) {
+            return $item->name;
+        })->all();
 
-            $categoryAttNames = $attributesInDB->map(function ($item, $key) {
-                return $item->name;
-            })->all();
+        $newAttributes = collect($reqAttributes)->filter(function ($value, $key) use ($categoryAttNames) {
+            return !in_array($value, $categoryAttNames);
+        });
 
-            $newAttributes = collect($reqAttributes)->filter(function ($value, $key) use ($categoryAttNames) {
-                return !in_array($value, $categoryAttNames);
-            });
+        // remove elements no longer in the list
+        $deleteAttributes->each(function ($item, $key) {
+            $item->delete();
+        });
 
-            // remove elements no longer in the list
-            $deleteAttributes->each(function ($item, $key) {
-                $item->delete();
-            });
+        // create new attributes
+        $newAttributes->each(function ($item, $key) use ($car, $category) {
+            $att = new CarAttribute();
+            $att->category = $category;
+            $att->name = $item;
+            $att->car_id = $car->id;
+            $att->save();
+        });
 
-            // create new attributes
-            $newAttributes->each(function ($item, $key) use ($car, $category) {
-                $att =  new CarAttribute();
-                $att->category = $category;
-                $att->name = $item;
-                $att->car_id = $car->id;
-                $att->save();
-            });
-
-        }
     }
 
     private function renderJson($id): \Illuminate\Http\JsonResponse

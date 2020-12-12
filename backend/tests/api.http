@@ -9,6 +9,19 @@ Authorization: Bearer {{token}}
   "equipments": {
     "outside":[
       "sunroof"
+    ],
+    "inside":[
+      "automatic_electrical_closing"
+    ],
+    "anti_theft":[
+    ],
+    "comfort":[
+      "virtual_cockpit"
+    ],
+    "other":[ "start_stop_system"
+    ],
+    "security":[
+      "airbags", "abs"
     ]
   },
   "options":{
