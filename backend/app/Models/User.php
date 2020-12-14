@@ -57,7 +57,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function isAdminUser()
+    public function isAdminUser(): bool
     {
         return $this->admin;
     }
@@ -66,8 +66,9 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Car', 'user_id');
     }
 
-    public function canEditCar($car){
-        return $this == $car->user_id || $this->isAdminUser();
+    public function canEditCar($car): bool
+    {
+        return $this->id == $car->user_id || $this->isAdminUser();
     }
 
 
