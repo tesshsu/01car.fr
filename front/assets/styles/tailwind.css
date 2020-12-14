@@ -3965,6 +3965,13 @@ video {
     right: 30px;
     width: 150px;
 }
+.togBadgeTime{
+	position: absolute;
+	top: 200px;
+    left: 10px;
+    width: 100%;
+    color: #fff;
+}
 .prixCompare{
   position: absolute;
   top: 240px;

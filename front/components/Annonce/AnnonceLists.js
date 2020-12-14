@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import FavorisButton from 'components/Favoris/FavorisButton';
 import Moment from 'react-moment';
 import ENVS from '../../environment';
+//import AnnonceRestTime from './AnnonceRestTime';
 
 const AnnonceLists = ({ loading,
                           dispatch,
@@ -25,7 +26,7 @@ const AnnonceLists = ({ loading,
 	if (loading) {
     return <p>Loading annonces...</p>;
   }
-
+  
   return (
     <>
 		<div className="relative flex w-full flex-wrap items-stretch">
@@ -40,7 +41,8 @@ const AnnonceLists = ({ loading,
 					/>
 		</div>
 		{filteredCars.map((car, idx) => (car.prenium != null && car.prenium) ?
-			( <Link key={idx} href={`/annonce?id=${car.id}`} {...car}>
+			(
+			  <Link key={idx} href={`/annonce?id=${car.id}`} {...car}>
 				<div id={car.id} status={car.prenium} className="relative w-full md:w-6/12 lg:w-4/12 lg:mb-0 mb-12 mr-4 my-6 shadow-lg max-w-400-px rounded-lg border-2 border-gray-200 ">
 						<img
 							  alt="..."
@@ -52,6 +54,7 @@ const AnnonceLists = ({ loading,
 							  src={require("assets/img/qualite_logo.png")}
 							  className="w-full align-center togBadge animate-ping ease-in-out"
 							/>
+						<div className="togBadgeTime text-lg pb-2"> <i class="fas fa-hourglass-half"></i> <Moment from={car.created_at} format="DD">{car.created_at}</Moment> jours | {car.price} € </div>
 						<img
 							alt={car.uploads[0].name}
 							src={ENVS.DEV.API_URL + car.uploads[0].url}
@@ -63,7 +66,7 @@ const AnnonceLists = ({ loading,
 								<FavorisButton />
 							  </h4>
 							  <p className="text-md leading-relaxed text-gray-500">
-								<Moment format="DD/MM/YYYY">{car.created_at}</Moment> | <span>{car.km}</span> KM <i className="far fa-grin-beam text-orange-500"></i>
+								<Moment format="DD/MM/YYYY">{car.dt_entry_service}</Moment> | <span>{car.km}</span> KM <i className="far fa-grin-beam text-orange-500"></i>
 							  </p>
 						</div>
 						<hr className="border-b-1 border-gray-400" />
@@ -105,13 +108,14 @@ const AnnonceLists = ({ loading,
 						src={ENVS.DEV.API_URL + car.uploads[0].url}
 						className="carImageSingle shadow-lg mx-auto rounded-lg"
 					  />
+					  <div className="togBadgeTime text-lg pb-2"><i class="fas fa-hourglass-half"></i> <Moment format="DD" toNow>{car.created_at}</Moment> jours | {car.price} € </div>
 					<div className="w-full px-4 py-2 flex-1">
 						  <h4 className="font-bold text-lg text-orange-700">
 						   <span className="uppercase">{car.brand}</span> - {car.model} | {car.version}
 						   <FavorisButton />
 						  </h4>
 						  <p className="text-md leading-relaxed text-gray-500">
-							<Moment format="DD/MM/YYYY">{car.created_at}</Moment> | <span>{car.km}</span> KM <i className="far fa-grin-beam text-orange-500"></i>
+							<Moment format="DD/MM/YYYY">{car.dt_entry_service}</Moment> | <span>{car.km}</span> KM <i className="far fa-grin-beam text-orange-500"></i>
 						  </p>
 					</div>
 					<hr className="border-b-1 border-gray-400" />
