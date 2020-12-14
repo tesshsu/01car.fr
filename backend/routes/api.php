@@ -35,9 +35,8 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::patch('/v1/profil', 'App\Http\Controllers\ProfilController@update');
 
     Route::apiResource('/v1/cars', CarController::class);
-    Route::post('/v1/cars/{car_id}/uploads', 'ProductController@addFiles')->middleware('auth:api');
-    Route::delete('/v1/cars/{car_id}/uploads/{id}', 'ProductController@removeFiles')->middleware('auth:api');
-
+    Route::post('/v1/cars/{car_id}/uploads', 'App\Http\Controllers\CarController@addFiles');
+    Route::delete('/v1/cars/{car_id}/uploads/{id}', 'App\Http\Controllers\CarController@removeFiles');
 });
 
 

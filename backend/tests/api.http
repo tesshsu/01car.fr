@@ -1,0 +1,36 @@
+PUT {{host}}/api/v1/cars/5
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": 5,
+  "premium": true,
+  "brand": "Renault",
+  "hand_number": 2,
+  "smoking": true,
+  "equipments": {
+    "outside":[
+      "sunroof"
+    ],
+    "inside":[
+      "automatic_electrical_closing"
+    ],
+    "anti_theft":[
+    ],
+    "comfort":[
+      "virtual_cockpit"
+    ],
+    "other":[
+      "start_stop_system"
+    ],
+    "security":[
+      "airbags", "abs"
+    ]
+  },
+  "options":{
+    "premium":[
+      "had_accident",
+      "technical_check_ok"
+    ]
+  }
+}

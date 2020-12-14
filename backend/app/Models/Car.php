@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Car extends Model
 {
@@ -43,12 +46,22 @@ class Car extends Model
         'brand',
         'model',
         'generation',
+        'phase',
+        'id_carBody',
         'fuel',
         'transmission',
         'carBody',
+        'doors',
         'finishing',
         'displacement',
+        'power',
         'version',
+        'km',
+        'dt_entry_service',
+        'dt_valuation',
+        'scoreRecognition',
+        'scoreValuation',
+
         'estimate_price',
         'price',
         'currency',
@@ -62,12 +75,12 @@ class Car extends Model
         'country',
     ];
 
-    public function user()
+    public function user(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function attributes()
+    public function attributes(): HasMany
     {
         return $this->hasMany(CarAttribute::class);
     }
@@ -75,13 +88,14 @@ class Car extends Model
     /**
      * The uploads that belong to the car.
      */
-    public function uploads()
+    public function uploads(): BelongsToMany
     {
         return $this->belongsToMany(Upload::class, 'cars_uploads');
     }
 
-    public function getUploadPath(){
+    public function getUploadPath(): string
+    {
         return  'files/u' . $this->user_id . '/c'  . $this->id . '/uploads/';
-}
+    }
 
 }
