@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Link from "next/link";
 import App from "next/app";
 import Head from "next/head";
 import Router from "next/router";
@@ -15,7 +16,7 @@ import carsReducer from '../service/reducers/cars';
 import { setupApiClient } from '../api/client';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/styles/tailwind.css";
-
+import CookieConsent from "react-cookie-consent";
 //combien all the reducers
 const logger = createLogger();
 const rootReducers = combineReducers({
@@ -76,6 +77,30 @@ export default class MyApp extends App {
         <Provider store={store} >
 		<Layout>
           <Component {...pageProps} />
+		  <CookieConsent
+			  location="bottom"
+			  buttonText="Ok pour moi!!"
+			  cookieName="01carCookies"
+			  style={{ background: "#2B373B" }}
+			  buttonStyle={{ color: "#4e503b", fontSize: "15px" }}
+			  expires={30}
+			>
+			  En poursuivant votre navigation sur ce site, vous acceptez qu'on vous accompagne pour analyser le fonctionnement et l’efficacité du site, vous proposer des publicités adaptées et des interactions par le biais des réseaux sociaux.{" "}
+			  <span style={{ fontSize: "10px" }}>C'est OK pour vous ?</span>
+			  <span style={{ fontSize: "10px" }}>
+			   <Link href="/footer/policy">
+						  <a
+							href="#"
+							className={
+							  "text-sm font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
+							}
+						  >
+							Lire la politique de confidentialité
+						  </a>
+						</Link>
+			  </span>
+			 
+			</CookieConsent>
         </Layout>
 		</Provider>
       </React.Fragment>
