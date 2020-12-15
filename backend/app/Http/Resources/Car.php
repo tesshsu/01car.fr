@@ -36,6 +36,7 @@ class Car extends JsonResource
             'id' => $this->id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'exipre_at' => $this->exipre_at,
             'premium' => $this->premium > 0 ? true : false,
             'brand' => $this->brand,
             'model' => $this->model,
@@ -54,11 +55,13 @@ class Car extends JsonResource
             'dt_entry_service' => $this->dt_entry_service,
             'dt_valuation' => $this->dt_valuation,
 
-            'score_recognition' => $this->scoreRecognition,
-            'score_valuation' => $this->scoreValuation,
+            'score_recognition' => $this->score_recognition,
+            'score_valuation' => $this->score_valuation,
             'estimate_price' => $this->estimate_price,
             'price' => $this->price,
             'currency' => $this->currency,
+
+            'license_plate' => $this->license_plate,
 
             'owner_type' => $this->owner_type,
             'available' => $this->available,

@@ -13,17 +13,20 @@ use App\Constants\Equipments\PremiumEquipment;
 use App\Constants\Equipments\SecurityEquipment;
 use App\Constants\OwnerType;
 use App\Constants\SaleReason;
+use App\Constants\TimeConstant;
 use App\Http\Resources\Car as CarResource;
 use App\Http\Resources\CarPaginatorCollection;
 use App\Models\Car;
 use App\Models\CarAttribute;
 use App\Models\Upload;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Ramsey\Uuid\Type\Time;
 
 class CarController extends Controller
 {
@@ -80,7 +83,8 @@ class CarController extends Controller
         $newCar = new Car;
         $this->updateCarFields($newCar, $reqCar);
         $newCar->user_id = $currentUser->id;
-
+        // Update expiration date
+        $newCar->exipre_at = Carbon::now()->addDays(TimeConstant::EXPIRATION_DURATION_IN_DAYS);
         $newCar->save();
         return $this->renderJson($newCar->id);
     }
@@ -186,7 +190,7 @@ class CarController extends Controller
             if(in_array( $filename, $car->uploads()->getResults()->map(function ($item, $key) {return $item->name; })->toArray() )){
                 $filename .= '_' . (string) Str::orderedUuid() . '.' . $uploadedFile->getClientOriginalExtension();
             }
-            
+
             Storage::disk('public')->putFileAs(
                 $path,
                 $uploadedFile,
@@ -265,6 +269,8 @@ class CarController extends Controller
         if (isset($reqCar->options) && isset($reqCar->options["premium"])) {
             $this->updateAttributes($car, (array)$reqCar->options["premium"], EquipmentCategory::PREMIUM);
         }
+
+        $car->confidence_note = Car::calcConfidenceNote($car);
     }
 
     private function updateAttributes(Car $car, $reqAttributes, $category)
