@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class Upload extends JsonResource
@@ -17,8 +18,8 @@ class Upload extends JsonResource
     {
         return [
             'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'created_at' =>  Carbon::parse($this->created_at)->toIso8601String(),
+            'updated_at' =>  Carbon::parse($this->updated_at)->toIso8601String(),
             'name' => $this->name,
             'mime_content_type' => $this->mime_content_type,
             'size' => $this->size,

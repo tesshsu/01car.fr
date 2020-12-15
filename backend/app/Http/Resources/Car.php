@@ -6,6 +6,8 @@ use App\Constants\EquipmentCategory;
 use App\Http\Resources\User as UserResource;
 use App\Http\Resources\Upload as UploadResource;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Carbon;
+use phpDocumentor\Reflection\DocBlock\Tags\Formatter;
 
 class Car extends JsonResource
 {
@@ -22,21 +24,21 @@ class Car extends JsonResource
                 return $value == EquipmentCategory::PREMIUM;
             })->flatMap(function ($item, $key) use ($groupedEquipments) {
                 return [  $item => $groupedEquipments->has( [$item]) ?
-                    $groupedEquipments[$item]->map(function ($equip) { return $equip->name;}) : []
+                    $groupedEquipments[$item]->map(function ($equip) { return $equip->name;})->unique() : []
             ];
         });
         $options = collect( [EquipmentCategory::PREMIUM] )
             ->flatMap(function ($item, $key) use ($groupedEquipments) {
             return [  $item => $groupedEquipments->has( [$item]) ?
-                $groupedEquipments[$item]->map(function ($equip) { return $equip->name;}) : []
+                $groupedEquipments[$item]->map(function ($equip) { return $equip->name;})->unique() : []
             ];
         });
 
         return [
             'id' => $this->id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'exipre_at' => $this->exipre_at,
+            'created_at' => Carbon::parse($this->created_at)->toIso8601String(),
+            'updated_at' => Carbon::parse($this->updated_at)->toIso8601String(),
+            'expire_at' => Carbon::parse($this->expire_at)->toIso8601String(),
             'premium' => $this->premium > 0 ? true : false,
             'brand' => $this->brand,
             'model' => $this->model,
@@ -52,8 +54,8 @@ class Car extends JsonResource
             'power' => $this->power,
             'version' => $this->version,
             'km' => $this->km,
-            'dt_entry_service' => $this->dt_entry_service,
-            'dt_valuation' => $this->dt_valuation,
+            'dt_entry_service' =>  Carbon::parse($this->dt_entry_service)->toIso8601String(),
+            'dt_valuation' =>  Carbon::parse($this->dt_valuation)->toIso8601String(),
 
             'score_recognition' => $this->score_recognition,
             'score_valuation' => $this->score_valuation,
