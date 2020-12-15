@@ -31,8 +31,10 @@ class DatabaseSeeder extends Seeder
                             $attributes['path']
                         );
                         return [
+                            'name' => $res['name'],
                             'path' => $path,
                             'size' => $res['size'],
+                            'mime_content_type' => $res['mime_content_type'],
                             ];
                     }
                 ),  'uploads')
