@@ -16,6 +16,7 @@ class CreateCarsTable extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->timestamp('expire_at',)->nullable();
             $table->bigInteger('user_id')->unsigned();
 
             $table->string('brand', 32)->nullable();
@@ -37,15 +38,18 @@ class CreateCarsTable extends Migration
             $table->timestamp('dt_entry_service', 0)->nullable();
             $table->timestamp('dt_valuation', 0)->nullable();
 
-            $table->double('scoreRecognition', 5, 2)->nullable();
-            $table->double('scoreValuation', 5, 2)->nullable();
+            $table->double('score_recognition', 5, 2)->nullable();
+            $table->double('score_valuation', 5, 2)->nullable();
+
+            $table->integer('confidence_note')->nullable();
 
             $table->double('estimate_price', 15, 2)->nullable();
             $table->double('price', 15, 2)->nullable();
             $table->string('currency', 4)->nullable();
 
-            $table->boolean('premium')->default(false);
+            $table->string('license_plate', 16)->nullable();
 
+            $table->boolean('premium')->default(false);
             $table->string('owner_type', 8)->nullable();
             $table->string('available', 12)->nullable();
             $table->boolean('smoking')->nullable()->default(false);
