@@ -8,6 +8,7 @@ use App\Constants\Equipments\InsideEquipment;
 use App\Constants\Equipments\OtherEquipment;
 use App\Constants\Equipments\OutsideEquipment;
 use App\Constants\Equipments\PremiumEquipment;
+use App\Constants\Equipments\SecurityEquipment;
 
 abstract class EquipmentCategory
 {
@@ -37,18 +38,20 @@ abstract class EquipmentCategory
     public static function listEquipements($category)
     {
         switch ($category) {
-            case   self::OUTSIDE:
-                return OutsideEquipment::list();
-            case self::INSIDE:
-                return InsideEquipment::list();
             case self::ANTI_THEFT:
                 return AntiTheftEquipment::list();
             case self::COMFORT:
                 return ComfortEquipment::list();
+            case self::INSIDE:
+                return InsideEquipment::list();
             case self::OTHER:
                 return OtherEquipment::list();
+            case self::OUTSIDE:
+                return OutsideEquipment::list();
             case self::PREMIUM:
                 return PremiumEquipment::list();
+            case self::SECURITY:
+                return SecurityEquipment::list();
             default:
                 return [];
         }

@@ -7,8 +7,10 @@ use App\Constants\EquipmentCategory;
 use App\Constants\CarState;
 use App\Constants\OwnerType;
 use App\Constants\SaleReason;
+use App\Constants\TimeConstant;
 use App\Models\Car;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 
 class CarFactory extends Factory
@@ -28,6 +30,7 @@ class CarFactory extends Factory
     public function definition()
     {
         return [
+            'expire_at' => Carbon::now()->addDays(TimeConstant::EXPIRATION_DURATION_IN_DAYS),
             'premium' => $this->faker->boolean(),
             'brand' => $this->faker->randomElement( ['renault', 'peugeot', 'porche']),
             'model' => $this->faker->randomElement( ['205', '306', 'cayenne']),
@@ -47,11 +50,13 @@ class CarFactory extends Factory
             'dt_entry_service' => $this->faker->dateTime(),
             'dt_valuation' => $this->faker->dateTime(),
 
-            'scoreRecognition' => $this->faker->randomFloat( 1, 0.0, 10.0),
-            'scoreValuation' => $this->faker->randomFloat( 1, 0.0, 10.0),
+            'score_recognition' => $this->faker->randomFloat( 1, 0.0, 10.0),
+            'score_valuation' => $this->faker->randomFloat( 1, 0.0, 10.0),
             'estimate_price' => $this->faker->randomFloat( 2, 500.0, 15000.0),
             'price' => $this->faker->randomFloat( 2, 500.0, 15000.0),
             'currency' => 'EUR',
+
+            'license_plate' => Str::upper(Str::random(2) . '-' . $this->faker->numberBetween(100, 999) . '-' . Str::random(2)),
 
             'owner_type'=> $this->faker->randomElement( OwnerType::list() ),
             'available'=> $this->faker->randomElement( AvailablePeriod::list() ),
@@ -61,6 +66,7 @@ class CarFactory extends Factory
             'hand_number'=> $this->faker->numberBetween(1, 3),
             'state'=> $this->faker->randomElement( CarState::list() ),
             'country'=> $this->faker->randomElement( ['FR', 'ZZ'] ),
+            'confidence_note' =>  $this->faker->numberBetween(0, 20),
         ];
     }
 }
