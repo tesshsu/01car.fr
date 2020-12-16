@@ -24,11 +24,6 @@ const AnnonceDetail = ({
 		dispatch(fetchCar(router.query.id))
 	}, [dispatch])
 	
-	//counting rest days available
-	const currentDate = moment();
-	const future = moment("2020-12-30T10:13:39.000000Z");
-	const timeLeft = moment(future.diff(currentDate)).format("DD");
-	
 	return (
 		<>
 			<div className="w-full lg:w-8/12 lg:mb-0 mb-12  my-6 shadow-lg rounded-lg">
@@ -42,7 +37,7 @@ const AnnonceDetail = ({
 				}
 				<h4 className="marqueBlock bg-orange-500 font-bold text-2xl text-white px-4 py-3 shadow-lg">
 					<span className="brand">{car?.brand}</span> - <span className="model">{car?.model}</span> <span
-					className="generation">{car?.generation} | <i class="fas fa-hourglass-half"></i> {timeLeft} jours</span>
+					className="generation">{car?.generation} | <i class="fas fa-hourglass-half"></i> <Moment element="fr" locale="fr" fromNow>{car?.expire_at}</Moment></span>
 					<span className="favoris"><FavorisButton/></span>
 					
 				</h4>

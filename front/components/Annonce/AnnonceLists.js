@@ -40,7 +40,7 @@ const AnnonceLists = ({ loading,
 						onChange={(e) => setSearch(e.target.value)}
 					/>
 		</div>
-		{filteredCars.map((car, idx) => car?.premium ?
+		{filteredCars?.map((car, idx) => car?.premium ?
 			(
 			  <Link key={idx} href={`/annonce?id=${car.id}`} {...car}>
 				<div id={car.id} className="preniumAnnonce relative w-full md:w-6/12 lg:w-4/12 lg:mb-0 mb-12 mr-4 my-6 shadow-lg max-w-400-px rounded-lg border-2 border-gray-200 ">
@@ -54,7 +54,10 @@ const AnnonceLists = ({ loading,
 							  src={require("assets/img/qualite_logo.png")}
 							  className="w-full align-center togBadge animate-ping ease-in-out"
 							/>
-						<div className="togBadgeTime text-lg pb-2"> <i class="fas fa-hourglass-half"></i> <Moment from={car.created_at} format="DD">{car.created_at}</Moment> jours | {car.price} € </div>
+						 <div className="togBadgeTime text-lg pb-2">
+					        valable jusqu'au :  <Moment format="DD/MM/YYYY">{car.expire_at}</Moment> / 
+							 <Moment element="fr" locale="fr" fromNow>{car.expire_at}</Moment>
+					     </div>
 						<img
 							alt={car.uploads[0].name}
 							src={ENVS.DEV.API_URL + car.uploads[0].url}
@@ -73,7 +76,7 @@ const AnnonceLists = ({ loading,
 						<div className="flex flex-wrap">
 							<div className="w-full px-8 py-2 px-2 flex-1">
 							  <p className="mt-2 px-2 py-2 text-md leading-relaxed bg-orange-500 text-white font-bold uppercase rounded text-center animate-ping-small">
-								NOTE DE CONFIANCE: {car.score_recognition}/20
+								NOTE DE CONFIANCE: {car?.confidence_note}/20
 							  </p>
 							</div>
 							<div className="w-full mt-2 py-2 flex-1">
@@ -108,7 +111,9 @@ const AnnonceLists = ({ loading,
 						src={ENVS.DEV.API_URL + car.uploads[0].url}
 						className="carImageSingle shadow-lg mx-auto rounded-lg"
 					  />
-					  <div className="togBadgeTime text-lg pb-2"><i class="fas fa-hourglass-half"></i> <Moment format="DD" toNow>{car.created_at}</Moment> jours | {car.price} € </div>
+					  <div className="togBadgeTime text-lg pb-2">
+					  valable jusqu'au :  <Moment format="DD/MM/YYYY">{car.expire_at}</Moment> / <Moment element="fr" locale="fr" fromNow>{car.expire_at}</Moment>
+					  </div>
 					<div className="w-full px-4 py-2 flex-1">
 						  <h4 className="font-bold text-lg text-orange-700">
 						   <span className="uppercase">{car.brand}</span> - {car.model} | {car.version}
@@ -122,7 +127,7 @@ const AnnonceLists = ({ loading,
 					<div className="flex flex-wrap">
 						<div className="w-full px-8 py-2 px-2 flex-1">
 						  <p className="mt-2 px-2 py-2 text-md leading-relaxed bg-gray-600 text-white font-bold uppercase rounded text-center">
-							NOTE DE CONFIANCE: {car.score_recognition}/20
+							NOTE DE CONFIANCE: {car?.confidence_note}/20
 						  </p>
 						</div>
 						<div className="w-full mt-2 py-2 flex-1">

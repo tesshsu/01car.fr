@@ -1,7 +1,10 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
+import {connect} from "react-redux";
 
-const NoteConfiance = () => {
+const NoteConfiance = ({ dispatch,
+					  loading,
+					  car}) => {
   const [popoverShow, setPopoverShow] = React.useState(false);
   const btnRef = React.createRef();
   const popoverRef = React.createRef();
@@ -24,7 +27,7 @@ const NoteConfiance = () => {
             onMouseLeave={closeTooltip}
             ref={btnRef}
           >
-            <i className="fas fa-question-circle animate-bounce"></i> Note de confiance: <span className="noteConfiance underline text-xl"> 14/20 </span>
+            <i className="fas fa-question-circle animate-bounce"></i> Note de confiance: <span className="noteConfiance underline text-xl"> {car?.confidence_note} /20 </span>
           </button>
           <div
             className={
@@ -63,4 +66,10 @@ const NoteConfiance = () => {
   );
 };
 
-export default NoteConfiance;
+const mapStateToProps = (state) => ({
+	loading: state.carsReducer.loading,
+	car: state.carsReducer.selectedCar,
+	hasErrors: state.carsReducer.hasErrors,
+})
+
+export default connect(mapStateToProps)(NoteConfiance)
