@@ -33,7 +33,7 @@ const AnnonceDetail = ({
 		<>
 			<div className="w-full lg:w-8/12 lg:mb-0 mb-12  my-6 shadow-lg rounded-lg">
 				<CardAnnonceSlide/>
-				{ car?.prenium == true ? (
+				{ car?.premium ? (
 					<img
 							alt="..."
 							src={require("assets/img/qualite_logo.png")}

@@ -15,11 +15,10 @@ const DetailsSide = ({ dispatch,
   ];
 
   let prix_api = car?.price
-  let prenium = car?.prenium
   return (
     <>
         <div className="w-full lg:w-4/12 px-12 mt-4">
-			{ prix_api != null && prenium == true  ? (
+			{ prix_api != null && car?.premium  ? (
 				<div className="flex flex-wrap rounded border border-solid border-gray-600 animate-bounce p-1">
 				<div className="priceVehicule font-bold px-1 text-xl text-gray-800 text-left">
 					<span className="font-bold px-1 text-4xl text-orange-500 text-left underline">{car?.price}</span> € Prix du marché

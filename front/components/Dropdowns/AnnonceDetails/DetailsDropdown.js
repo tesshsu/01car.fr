@@ -4,6 +4,7 @@ import {
 	anti_theft_equipments,
 	comfort_equipments,
 	inside_equipments,
+	security_equipments,
 	other_equipments,
 	outside_equipments
 } from "../../../helpers/constant";
@@ -102,7 +103,7 @@ const DetailsDropdown = ({
 				<h4 className="mt-2 px-6 py-2 text-xl leading-relaxed text-gray-600 underline font-bold uppercase rounded">
 					ÉQUIPEMENTS DE SÉRIE ET OPTIONS:
 				</h4>
-				{Equips?.outside.length > 0 ? (
+				{Equips?.outside?.length > 0 ? (
 					<div className="container px-2 mx-auto">
 						<div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Exterieur equipements :
 						</div>
@@ -116,7 +117,7 @@ const DetailsDropdown = ({
 						</div>
 					</div>) : (null)}
 
-				{Equips?.inside.length > 0 ? (
+				{Equips?.inside?.length > 0 ? (
 					<div className="container px-2 mx-auto">
 						<div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Interieur equipements :
 						</div>
@@ -130,7 +131,7 @@ const DetailsDropdown = ({
 						</div>
 					</div>) : (null)}
 
-				{Equips?.security.length > 0 ? (
+				{Equips?.security?.length > 0 ? (
 					<div className="container px-2 mx-auto">
 						<div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Securite equipements :
 						</div>
@@ -144,7 +145,7 @@ const DetailsDropdown = ({
 						</div>
 					</div>) : (null)}
 
-				{Equips?.anti_theft.length > 0 ? (
+				{Equips?.anti_theft?.length > 0 ? (
 					<div className="container px-2 mx-auto">
 						<div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Antivol equipements :</div>
 						<div className="flex flex-wrap">
@@ -157,7 +158,7 @@ const DetailsDropdown = ({
 						</div>
 					</div>) : (null)}
 
-				{Equips?.confort.length > 0 ? (
+				{Equips?.confort?.length > 0 ? (
 					<div className="container px-2 mx-auto">
 						<div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Confort equipements :</div>
 						<div className="flex flex-wrap">
@@ -170,7 +171,7 @@ const DetailsDropdown = ({
 						</div>
 					</div>) : (null)}
 
-				{Equips?.other.length > 0 ? (
+				{Equips?.other?.length > 0 ? (
 					<div className="container px-2 mx-auto">
 						<div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Autre equipements :</div>
 						<div className="flex flex-wrap">
