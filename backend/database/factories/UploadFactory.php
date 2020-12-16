@@ -61,25 +61,27 @@ class UploadFactory extends Factory
 
     public static function addFile(string $filename, string $mime, string $path, string $url)
     {
-        $allFiles = Storage::disk('public')->allFiles($path);
-        if (!empty($allFiles)) {
-            $filename = Str::substr($allFiles[0], Str::of($allFiles[0])->dirname()->length() + 1);
-        } else {
+        if( !Storage::disk('public')->exists($path . $filename)) {
+            $allFiles = Storage::disk('public')->allFiles($path);
+            if (!empty($allFiles)) {
+                $filename = Str::substr($allFiles[0], Str::of($allFiles[0])->dirname()->length() + 1);
+            } else {
 
-            $temp = tmpfile();
+                $temp = tmpfile();
 
-            $content = file_get_contents($url);
+                $content = file_get_contents($url);
 
-            if ($content) {
-                fwrite($temp, $content);
+                if ($content) {
+                    fwrite($temp, $content);
+                }
+
+                $uploadedFile = new File(stream_get_meta_data($temp)['uri']);
+                Storage::disk('public')->putFileAs(
+                    $path,
+                    $uploadedFile,
+                    $filename
+                );
             }
-
-            $uploadedFile = new File(stream_get_meta_data($temp)['uri']);
-            Storage::disk('public')->putFileAs(
-                $path,
-                $uploadedFile,
-                $filename
-            );
         }
 
         return [

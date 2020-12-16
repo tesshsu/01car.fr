@@ -8,6 +8,9 @@ use App\Models\Upload;
 use App\Models\User;
 use Database\Factories\UploadFactory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use function PHPUnit\Framework\isEmpty;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,6 +28,15 @@ class DatabaseSeeder extends Seeder
                 ->has(CarAttribute::factory(rand(0, 15)), 'attributes')
                 ->has(Upload::factory(rand(1, 4))->state(function (array $attributes, Car $car) {
                     $path = $car->getUploadPath();
+
+                    // check if file with same name exist
+                    $allFiles = Storage::disk('public')->allFiles($path);
+                    if (!empty($allFiles) > 0)
+                    {
+                        $file = $allFiles[rand(0, sizeof($allFiles) - 1)];
+                        $attributes['name'] = Str::substr($file, Str::of($file)->dirname()->length() + 1);
+                    }
+
                     $res = UploadFactory::addFile($attributes['name'],
                         $attributes['mime_content_type'],
                         $path,
