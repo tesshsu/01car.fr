@@ -366,7 +366,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
                                                 type="submit"
                                                 disabled={submitting}
                                               >
-                                                <i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> Lancer!!
+                                                <i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> Publier Annonce
                                       </button>
                                        <p className="text-md leading-relaxed text-gray-500">  Le site vous garantit la qualité de l'annonce. Le site protège les documents téléchargés et restent non visibles par l'acheteur.</p>
                                     </div>

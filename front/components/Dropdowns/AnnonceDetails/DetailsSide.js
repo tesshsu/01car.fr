@@ -18,26 +18,24 @@ const DetailsSide = ({ dispatch,
   return (
     <>
         <div className="w-full lg:w-4/12 px-12 mt-4">
-			{ prix_api != null && car?.premium  ? (
-				<div className="flex flex-wrap rounded border border-solid border-gray-600 animate-bounce p-1">
-				<div className="priceVehicule font-bold px-1 text-xl text-gray-800 text-left">
-					<span className="font-bold px-1 text-4xl text-orange-500 text-left underline">{car?.price}</span> € Prix du marché
-				</div>
-				<div className="priceVehicule font-bold px-1 text-xl text-gray-800 text-left">
-					<span className="font-bold px-1 text-4xl text-orange-500 text-left underline">10 800</span> € Prix professionnel
-				</div>
-				<p className="text-lg block my-4 p-3 text-orange-500 rounded"><i class="far fa-thumbs-up"></i> Valeur estimée par la base de données nationale </p>
-				</div>
-				) : (
-				  null
-			)}
 			<div className="priceVehicule font-bold px-1 text-5xl text-orange-500 text-left underline">
 				{car?.estimate_price} €
 			</div>
 			<div className="priceVehicule font-bold px-1 text-2xl text-gray-800 text-left">
 				Prix du vendeur
 			</div>
-			<div className="flex flex-wrap">
+			{ prix_api != null && car?.premium  ? (
+				<div className="flex flex-wrap rounded border border-solid border-gray-600 p-1">
+				<div className="priceVehicule font-bold px-1 text-xl text-gray-800 text-left">
+					<span className="font-bold px-1 text-xl text-orange-500 text-left underline">Entre {car?.price} € et 19 278 €</span>
+				</div>
+				<p className="text-md block p-3 text-orange-500 rounded"><i class="far fa-thumbs-up"></i> Valeur estimée par la base de données nationale </p>
+				</div>
+				) : (
+				  null
+			)}
+			
+			<div className="flex flex-wrap mt-4">
 			   <NoteConfiance />
 			</div>
 			{basics.map(basic => (
@@ -50,7 +48,7 @@ const DetailsSide = ({ dispatch,
 					</div>
 				</div>
 			))}
-			<div className="flex flex-wrap">
+			<div className="flex flex-wrap mt-2">
 				<div className="flex flex-wrap content-center items-center justify-center h-full">
 					<MondalContact transparent />
                 </div>

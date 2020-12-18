@@ -278,6 +278,7 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 															  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative border border-gray-400 bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 															/>
 															<Error name="immatriculation" />
+															<div className="text-md leading-relaxed text-orange-500">Cette information n’est ni conservée ni visible sur l’annonce.</div>
 														   </div>
 												</div>
 

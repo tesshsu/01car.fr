@@ -33,14 +33,6 @@ export default function Footer() {
               </h5>
               <div className="mt-6 lg:mb-0 mb-6">
                 <button
-                  className="bg-white text-blue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
-				  type="button"
-                >
-                  <a href="https://01car.fr/"  target="_blank">
-				   <i className="fab fa-twitter"></i>
-				  </a>
-                </button>
-                <button
                   className="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
@@ -61,7 +53,7 @@ export default function Footer() {
                   type="button"
                 >
                   <a href="https://01car.fr/"  target="_blank">
-				   <i className="fab fa-youtube"></i>
+				   <i className="fab fa-pinterest-p"></i>
 				  </a>
                 </button>
               </div>

@@ -41,23 +41,25 @@ const ModalContact = ({ dispatch,
                 </div>
                 {/*body*/}
 					<div className="relative p-6 flex-auto">
+					{ car?.owner.phone ? (
 						<div className="container px-2 mx-auto">
 							  <div className="flex flex-wrap">
 								<div className="w-full flex-1">
 								  <span className="text-md block my-2 text-gray-800 font-bold"><i className="fas fa-phone"></i></span>
 								</div>
 								<div className="w-full flex-1">
-								  <span className="text-md block my-2 text-orange-500 underline vendeurPhone">{car.owner.phone}</span>
+								  <span className="text-md block my-2 text-orange-500 underline vendeurPhone">{car?.owner.phone}</span>
 								</div>						
 							  </div>
-						</div>
+						</div> ) : (null)
+					}
 						<div className="container px-2 mx-auto">
 							  <div className="flex flex-wrap ">
 								<div className="w-full flex-1">
 								  <span className="text-md block my-2 text-gray-800 font-bold"><i className="fas fa-envelope"></i></span>
 								</div>
 								<div className="w-full flex-1">
-								  <span className="text-md block my-2 text-orange-500 underline vendeurEmail"><a href={`mailto:${car.owner.email}`}>en clicker ici</a></span>
+								  <span className="text-md block my-2 text-orange-500 underline vendeurEmail"><a href={`mailto:${car?.owner.email}`}>en clicker ici</a></span>
 								</div>			
 						</div>
                         <ContactVendeur transparent />						
