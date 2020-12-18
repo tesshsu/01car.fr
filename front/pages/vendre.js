@@ -83,10 +83,7 @@ export default function Vendre() {
                                         <PubContentThreeIcons/>
                                     </div>
                                 </div>
-                                {!isAuthentificated || (token = null) ? (
-                                    <QuestionsClassic/>) : (
-                                    <QuestionsPremier/>)
-                                }
+                               <QuestionsClassic/>
                             </div>
                         </div>
                     </div>

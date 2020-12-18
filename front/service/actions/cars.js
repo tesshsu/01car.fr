@@ -9,6 +9,9 @@ export const GET_CARS = 'GET_CARS'
 export const GET_CARS_SUCCESS = 'GET_CARS_SUCCESS'
 export const GET_CARS_FAILURE = 'GET_CARS_FAILURE'
 
+export const POST_CAR = 'POST_CAR'
+export const POST_CAR_SUCCESS = 'POST_CAR_SUCCESS'
+export const POST_CAR_FAILURE = 'POST_CAR_FAILURE'
 
 // Create Redux action creators that return an action
 export const getCar = () => ({
@@ -65,4 +68,36 @@ export function fetchCar(id) {
       dispatch(getCarFailure())
     }
   }
+}
+
+export function update(car) {
+  return {
+    type: UPDATE,
+    payload: {
+      car
+    }
+  };
+}
+
+export function postCar(payload) {
+  return async (dispatch, getState) => {
+    dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Création annonce...'));
+    const { loggedUser } = getState().loggedUser;
+	
+    try {
+      const car = await API.Annonces.create(payload);
+      
+      dispatch({
+          type: POST_CAR,
+          payload: {
+            car
+          }
+        });
+    } catch (err) {
+      await dispatch({ type: POST_CAR_FAILURE });
+	  throw err;
+    } finally {
+      dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
+    }
+  };
 }

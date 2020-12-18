@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Link from "next/link";
+import {connect} from 'react-redux'
 import QuestionsOptions from "components/Tabs/QuestionsOptions.js";
 import ImageUpload from "components/Tabs/ImageUpload.js";
 import {Field, Form} from 'react-final-form';
@@ -8,7 +9,7 @@ import * as constant from 'helpers/constant';
 import * as formValidate from 'helpers/formValidate';
 import {Condition, Error} from 'helpers/formValidate';
 import "react-responsive-modal/styles.css";
-import {submitReponses} from 'service/actions/vendre'
+import useAnnonces from 'service/hooks/useAnnonces';
 
 const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 	const [openTab, setOpenTab] = React.useState(1);
@@ -17,6 +18,10 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 		isAuthentificated,
 		loggedUser
 	} = useLoggedUser();
+	
+	 const {
+		postCars
+	  } = useAnnonces();
 
 	let [tokken, settokken] = useState(null);
 
@@ -47,14 +52,17 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 			} = values;
 
 			const data = {...payload};
-			await submitReponses(data);
-			console.log(data)
+			await postCar(data);
+			console.log(data);
+			if(data){
+				 Router.push("/annonces");
+			  }
 		} catch (err) {
 			console.log(err.response);
 			if (err.response && err.response.status === 422) {
 				alert('Annonce deja existe');
 			} else {
-				alert('Impossible de créer le compte, merci de constacter notre equipe');
+				alert('Impossible de créer annonce, merci de constacter notre equipe');
 			}
 		}
 	}
@@ -133,20 +141,34 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 						<div className="px-4 py-5 flex-auto">
 							<Form
 								initialValues={{
-									marqueModel: '',
-									dt_entry_service: '',
-									fuel: '',
-									km: '',
-									immatriculation: '',
-									statu_vendeur: '',
-									date_disponible: '',
-									car_fumeur: '',
-									double_cles: '',
-									raison_vendre: '',
-									estimate_price: '',
-									num_de_mains: '',
-									etat_car: '',
-									origin_car: '',
+									  brand: "",
+									  model: "205",
+									  generation: "sg",
+									  phase: 6,
+									  id_carBody: 2,
+									  fuel: "",
+									  transmission: "automatic",
+									  car_body: "et",
+									  doors: 5,
+									  power: 526,
+									  version: "sequi",
+									  km: "",
+									  dt_entry_service: "",
+									  dt_valuation: "2021-09-01 12:12:49",
+									  score_recognition: 4.3,
+									  score_valuation: 6.3,
+									  estimate_price: "",
+									  license_plate: "",
+									  price: 9134.61,
+									  currency: "EUR",
+									  owner_type : "",
+									  available: "",
+									  smoking : true,
+									  duplicate_keys : true,
+									  sale_reason: "",
+									  hand_number: "",
+									  state : "",
+									  country: ""				
 								}}
 								onSubmit={onSubmit}
 								render={({submitError, handleSubmit, form, submitting, pristine, values, invalid}) => (
@@ -167,7 +189,7 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 																name="marqueModel"
 																validate={formValidate.composeValidators(formValidate.required, formValidate.matchMarqueModel)}
 																component="input"
-																value={values.marqueModel}
+																value={values.brand}
 																type="text"
 																placeholder="BMW SERIE 3"
 																className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded border border-gray-400 text-sm shadow focus:outline-none focus:shadow-outline w-full pl-10"
@@ -251,7 +273,7 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 															  validate={formValidate.composeValidators(formValidate.required, formValidate.matchImmatriculation)}
 															  component="input"
 															  type="text"
-															  value={values.immatriculation}
+															  value={values.license_plate}
 															  placeholder="AA-123-BC"
 															  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative border border-gray-400 bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 															/>
@@ -281,35 +303,35 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 													<div className="w-full lg:w-6/12 px-4">
 														<label
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
-															htmlFor="statu_vendeur"
+															htmlFor="owner_type"
 														>
 															Q1 - VOUS êtes :
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
 															<Field
-																name="statu_vendeur"
+																name="owner_type"
 																component={formValidate.ReactSelectAdapter}
 																options={constant.statuVendeurOptions}
-																value={values.statu_vendeurl}
+																value={values.owner_type}
 																className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
 															/>
-															<Error name="statu_vendeur"/>
+															<Error name="owner_type"/>
 														</div>
 													</div>
 
 													<div className="w-full lg:w-6/12 px-4">
 														<label
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
-															htmlFor="date_disponible"
+															htmlFor="available"
 														>
 															Q2 - Votre véhicule est disponible :
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
-															<Field name="date_disponible"
+															<Field name="available"
 																   validate={formValidate.required} component="select"
-																   value={values.date_disponible}
+																   value={values.available}
 																   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 																<option></option>
 																<option value="Immédiatement" note="1">Immédiatement
@@ -318,8 +340,8 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 																</option>
 																<option value="plus tard" note="0">plus tard</option>
 															</Field>
-															<Error name="date_disponible"/>
-															<Condition when="date_disponible" is="plus tard"
+															<Error name="available"/>
+															<Condition when="available" is="plus tard"
 																	   className="mt-2">
 																<p className="text-md leading-relaxed text-gray-500"> Votre
 																	annonce durée juste 2 mois </p>
@@ -332,42 +354,42 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 													<div className="w-full lg:w-6/12 px-4">
 														<label
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
-															htmlFor="car_fumeur"
+															htmlFor="smoking"
 														>
 															Q3 - Votre véhicule est :
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
 															<Field
-																name="car_fumeur"
+																name="smoking"
 																component={formValidate.ReactSelectAdapter}
 																validate={formValidate.required}
 																options={constant.furmeurOptions}
-																value={values.car_fumeur}
+																value={values.smoking}
 																className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
 															/>
-															<Error name="car_fumeur"/>
+															<Error name="smoking"/>
 														</div>
 													</div>
 
 													<div className="w-full lg:w-6/12 px-4">
 														<label
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
-															htmlFor="double_cles"
+															htmlFor="duplicate_keys"
 														>
 															Q4 - Avez-vous le Double des clés :
 														</label>
 														<div
 															className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
 															<Field
-																name="double_cles"
+																name="duplicate_keys"
 																component={formValidate.ReactSelectAdapter}
 																validate={formValidate.required}
 																options={constant.OuiOptions}
-																value={values.double_cles}
+																value={values.duplicate_keys}
 																className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
 															/>
-															<Error name="double_cles"/>
+															<Error name="duplicate_keys"/>
 														</div>
 													</div>
 												</div>
@@ -375,28 +397,28 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 												<div className="flex flex-wrap mt-12 px-4">
 													<label
 														className="block uppercase text-gray-700 text-md font-bold mb-2"
-														htmlFor="raison_vendre"
+														htmlFor="sale_reason"
 													>
 														Q5 - Pourquoi vendez-vous votre véhicule ?
 													</label>
 													<div className="relative flex w-full flex-wrap items-stretch mb-3">
 														<Field
-															name="raison_vendre"
+															name="sale_reason"
 															component={formValidate.ReactSelectAdapter}
 															validate={formValidate.required}
 															options={constant.raisonVendreOptions}
-															value={values.raison_vendre}
+															value={values.sale_reason}
 															className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
 														/>
-														<Error name="raison_vendre"/>
-														<Condition when="raison_vendre" is="autre" className="mt-2">
+														<Error name="sale_reason"/>
+														<Condition when="sale_reason" is="autre" className="mt-2">
 															<p className="text-md leading-relaxed text-gray-500"> Indique
 																votre raison : </p>
 															<Field
 																validate={formValidate.required}
-																name="raison_vendre"
+																name="sale_reason"
 																component="input"
-																value={values.raison_vendre}
+																value={values.sale_reason}
 																type="text"
 																value=""
 																placeholder="votre raison"
@@ -454,41 +476,41 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 													<div className="w-full lg:w-6/12 px-4">
 														<label
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
-															htmlFor="num_de_mains"
+															htmlFor="hand_number"
 														>
 															Q8 - Nombre de mains:
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
 															<Field
-																name="num_de_mains"
+																name="hand_number"
 																component={formValidate.ReactSelectAdapter}
 																validate={formValidate.required}
 																options={constant.numMainsOptions}
-																value={values.num_de_mains}
+																value={values.hand_number}
 																className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
 															/>
-															<Error name="num_de_mains"/>
+															<Error name="hand_number"/>
 														</div>
 													</div>
 													<div className="w-full lg:w-6/12 px-4">
 														<label
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
-															htmlFor="etat_car"
+															htmlFor="state"
 														>
 															Q9- État du véhicule:
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
 															<Field
-																name="etat_car"
+																name="state"
 																component={formValidate.ReactSelectAdapter}
 																validate={formValidate.required}
 																options={constant.etatCarOptions}
-																value={values.etat_car}
+																value={values.state}
 																className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
 															/>
-															<Error name="etat_car"/>
+															<Error name="state"/>
 														</div>
 													</div>
 												</div>
@@ -496,40 +518,30 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 												<div className="flex flex-wrap mt-8 px-4">
 													<label
 														className="block uppercase text-gray-700 text-md font-bold mb-2"
-														htmlFor="origin_car"
+														htmlFor="country"
 													>
 														Q10- Origine du véhicule :
 													</label>
 													<div className="relative flex w-full flex-wrap items-stretch mb-3">
 														<Field
-															name="origin_car"
+															name="country"
 															component={formValidate.ReactSelectAdapter}
 															validate={formValidate.required}
 															options={constant.originCarOptions}
-															value={values.origin_car}
+															value={values.country}
 															className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
 														/>
-														<Error name="origin_car"/>
+														<Error name="country"/>
 													</div>
 												</div>
 
-												<div className="flex flex-wrap mt-12 px-4 align-center justify-center">
-													<a
-															className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
-															onClick={e => {
-																e.preventDefault();
-																setOpenTab(4);
-															}}
+												<button
+															className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
 															type="submit"
-															disabled={submitting}
-															data-toggle="tab"
-															href="#link4"
-															role="tablist"
+															disabled={submitting || invalid}
 														>
-															<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i> Envoyer
-															pour voir resultat
-													</a>
-												</div>
+															<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> PUBLIER
+												</button>
 											</div>
 											<div className={openTab === 4 ? "block" : "hidden"} id="link4">
 												<div className="container mx-auto text-center">
@@ -603,8 +615,7 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 													<button
 															className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
 															type="button"
-															type="submit"
-															disabled={submitting}
+															
 														>
 															<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> PUBLIER
 													</button>
@@ -644,11 +655,11 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 	);
 }
 
-/*const mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({
   loading: state.response.loading,
   response: state.response.response,
   hasErrors: state.response.hasErrors,
 })
-export default connect(mapStateToProps)(QuestionsClassic)*/
+export default connect(mapStateToProps)(QuestionsClassic)
 
-export default QuestionsClassic
+//export default QuestionsClassic
