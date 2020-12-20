@@ -12,6 +12,10 @@ return [
     | has failed, such as for an invalid token or invalid new password.
     |
     */
+    'mail_reset_title' => 'Your password has been reset!',
+    'mail_reset_description' => 'You are receiving this email because we received a password reset request for your account.',
+    'mail_action' => 'Reset Password',
+    'mail_link_expire' => 'This password reset link will expire in :count minutes.',
 
     'reset' => 'Your password has been reset!',
     'sent' => 'We have emailed your password reset link!',
