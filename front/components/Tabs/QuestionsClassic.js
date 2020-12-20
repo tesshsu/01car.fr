@@ -10,6 +10,9 @@ import * as formValidate from 'helpers/formValidate';
 import {Condition, Error} from 'helpers/formValidate';
 import "react-responsive-modal/styles.css";
 import useAnnonces from 'service/hooks/useAnnonces';
+import { Modal } from "react-responsive-modal";
+import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
+import PubContentConnection from "layouts/PubContentConnection.js";
 
 const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 	const [openTab, setOpenTab] = React.useState(1);
@@ -24,7 +27,7 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 	  } = useAnnonces();
 
 	let [tokken, settokken] = useState(null);
-
+	
 	useEffect(() => {
 		if (isAuthentificated && loggedUser) {
 			try {
@@ -54,16 +57,9 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 			const data = {...payload};
 			await postCar(data);
 			console.log(data);
-			if(data){
-				 Router.push("/annonces");
-			  }
 		} catch (err) {
 			console.log(err.response);
-			if (err.response && err.response.status === 422) {
-				alert('Annonce deja existe');
-			} else {
-				alert('Impossible de créer annonce, merci de constacter notre equipe');
-			}
+			alert('Impossible de créer annonce, merci de constacter notre equipe');
 		}
 	}
 
@@ -71,7 +67,16 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 	return (
 		<>
 			<div className="flex flex-wrap">
-				<div className="w-full">
+				{showModal ? (
+						 <> 
+							<Modal closeOnEsc={false} open={open} onClose={() => setShowModal(true)}>
+								<h2 className="text-2xl font-semibold text-center">Connectez-vous pour répondez au questionnaire de confiance</h2>
+								<PubContentThreeIcons />
+								<PubContentConnection />
+							</Modal>
+						 </>
+			    ) : null}
+			    <div className="w-full">
 					<ul
 						className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
 						role="tablist"
@@ -133,6 +138,25 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 							>
 								<i className="fas fa-cog text-base mr-1"></i> Questions 6 - 10 : Caractéristiques du
 								véhicule
+							</a>
+						</li>
+						<li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+							<a
+								className={
+									"text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+									(openTab === 4
+										? "text-white bg-orange-500"
+										: "text-gray-600 bg-white")
+								}
+								onClick={e => {
+									e.preventDefault();
+									setOpenTab(4);
+								}}
+								data-toggle="tab"
+								href="#link3"
+								role="tablist"
+							>
+								<i class="fas fa-bullhorn"></i> Denier etape : publier
 							</a>
 						</li>
 
@@ -278,7 +302,7 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 															  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative border border-gray-400 bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 															/>
 															<Error name="immatriculation" />
-															<div className="text-md leading-relaxed text-orange-500">Cette information n’est ni conservée ni visible sur l’annonce.</div>
+															<div className="text-sm leading-relaxed text-gray-600">Cette information n’est ni conservée ni visible sur l’annonce.</div>
 														   </div>
 												</div>
 
@@ -536,40 +560,27 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 													</div>
 												</div>
 
-												<button
-															className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-															type="submit"
-															disabled={submitting || invalid}
-														>
-															<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> PUBLIER
-												</button>
+												<div className="flex flex-wrap mt-12 px-4 align-center justify-center">
+													<a
+														className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
+														onClick={e => {
+															e.preventDefault();
+															setOpenTab(4);
+														}}
+														data-toggle="tab"
+														href="#link2"
+														role="tablist"
+													>
+														<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
+														 Denier étape: publier votre photos d'annonce
+													</a>
+												</div>
 											</div>
 											<div className={openTab === 4 ? "block" : "hidden"} id="link4">
 												<div className="container mx-auto text-center">
-													<h4 className="text-4xl font-semibold">
-														<i className="fas fa-poll animate-bounce"></i> RESULTATS : 1ere
-														NOTE DE CONFIANCE SUR 20
-													</h4>
-													<h4 className="text-2xl font-semibold">
-														<span className="noteTotal text-orange-500">7</span>/20 Annonce
-														offre GRATUITE
-													</h4>
-													<h4 className="text-3xl font-semibold">
-														VOTRE PRIX DE VENTE <span className="marqueModel" value="">Suzuki SWIFT</span> - <span
-														className="dt_entry_service" value="">2012</span> : <span
-														className="price" value=""> 5670 </span> €
-													</h4>
-													<p className="notifyForPrice text-md leading-relaxed text-gray-500 text-left">
-														<i className="fas fa-flag-checkered animate-bounce"></i> Attention
-														le prix de vente de votre annonce n’est pas inscrit dans la
-														colonne de la côte car celle-ci est destinée à l’estimation
-														élaborée et prouvée par nos ingénieurs et experts
-														automobiles.Calculez votre côte personnalisée de votre véhicule
-														avec <Link href="/prix">notre abonnement Premium</Link>.</p>
 													<div
 														className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600">
-														<i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> ETAPE
-														SUIVANTE
+														<i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i>DERNIER ETAPE
 													</div>
 													<p className="text-md leading-relaxed text-gray-500"> Telecharger 10
 														photos MAX pour publier votre annonce ( ficher jpg, png, gif ),
@@ -615,11 +626,15 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 													</div>
 													<button
 															className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-															type="button"
+															type="submit"
+															disabled={submitting || invalid}
 															
 														>
 															<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> PUBLIER
 													</button>
+													<p className="text-md leading-relaxed text-gray-500"> Votre annonce
+														sera pré-remplie à l’issue de ce questionnaire. Vous ACCEPTEZ
+														les conditions pour publier votre annonce </p>
 													<h4 className="text-xl font-semibold">
 														OU
 													</h4>
@@ -639,9 +654,13 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 															</a>
 														</Link>
 													</button>
-													<p className="text-md leading-relaxed text-gray-500"> Votre annonce
-														sera pré-remplie à l’issue de ce questionnaire. Vous ACCEPTEZ
-														les conditions pour publier votre annonce </p>
+													<p className="notifyForPrice text-md leading-relaxed text-gray-500 text-left">
+														<i className="fas fa-flag-checkered animate-bounce"></i> Attention
+														le prix de vente de votre annonce n’est pas inscrit dans la
+														colonne de la côte car celle-ci est destinée à l’estimation
+														élaborée et prouvée par nos ingénieurs et experts
+														automobiles.Calculez votre côte personnalisée de votre véhicule
+														avec <Link href="/prix">notre abonnement Premium</Link>.</p>
 												</div>
 											</div>
 										</div>

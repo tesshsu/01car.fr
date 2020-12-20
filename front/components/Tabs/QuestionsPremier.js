@@ -82,16 +82,16 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
             <div className="px-4 py-5 flex-auto">
 				<Form
 					initialValues={{
-						garantie:'',
-						accident:'',
-						defauts:'',
-						justifier_km:'',
-						controle_technique:'',
-						respect_entretiens:'',
-						prochain_entretiens:'',
-						facture:'',
-						carte_grise:'',
-						carnet_entretien:'',
+						Under_warranty:'',
+						had_accident:'',
+						defects:'',
+						km_certificate:'',
+						technical_check_ok:'',
+						periodic_maintenance:'',
+						next_maintenance_under_5000km:'',
+						purchase_invoice:'',
+						gray_card:'',
+						maintenance_log:'',
 					}}
 					onSubmit={onSubmit}
 
@@ -112,7 +112,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 													name="garantie"
 													component={formValidate.ReactSelectAdapter}
 													options={constant.OuiOptions}
-													value={values.garantie}
+													value={values.Under_warranty}
 													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
 												 />
                                               <Error name="garantie" />
@@ -130,7 +130,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 													name="accident"
 													component={formValidate.ReactSelectAdapter}
 													options={constant.NonOptions}
-													value={values.accident}
+													value={values.had_accident}
 													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
 												 />
                                               <Error name="accident" />
@@ -150,7 +150,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 													name="defauts"
 													component={formValidate.ReactSelectAdapter}
 													options={constant.NonOptions}
-													value={values.defauts}
+													value={values.defects}
 													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
 												 />
                                                 <Error name="defauts" />
@@ -170,7 +170,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 													name="justifier_km"
 													component={formValidate.ReactSelectAdapter}
 													options={constant.OuiOptions}
-													value={values.justifier_km}
+													value={values.km_certificate}
 													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
 												 />
                                                 <Error name="justifier_km" />
@@ -189,7 +189,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 													name="controle_technique"
 													component={formValidate.ReactSelectAdapter}
 													options={constant.OuiOptions}
-													value={values.controle_technique}
+													value={values.technical_check_ok}
 													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
 												 />
                                                <Error name="controle_technique" />
@@ -227,7 +227,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 													name="respect_entretiens"
 													component={formValidate.ReactSelectAdapter}
 													options={constant.OuiOptions}
-													value={values.respect_entretiens}
+													value={values.periodic_maintenance}
 													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
 												 />
                                               <Error name="respect_entretiens" />
@@ -245,7 +245,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 													name="prochain_entretiens"
 													component={formValidate.ReactSelectAdapter}
 													options={constant.prochaineEntretienOptions}
-													value={values.prochain_entretiens}
+													value={values.next_maintenance_under_5000km}
 													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
 												 />
                                               <Error name="prochain_entretiens" />
@@ -265,7 +265,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 													name="facture"
 													component={formValidate.ReactSelectAdapter}
 													options={constant.OuiOptions}
-													value={values.facture}
+													value={values.purchase_invoice}
 													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
 												 />
                                               <Error name="facture" />
@@ -285,7 +285,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 													name="carte_grise"
 													component={formValidate.ReactSelectAdapter}
 													options={constant.OuiOptions}
-													value={values.carte_grise}
+													value={values.gray_card}
 													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
 												 />
                                                <Error name="carte_grise" />
@@ -306,7 +306,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 													name="carnet_entretien"
 													component={formValidate.ReactSelectAdapter}
 													options={constant.OuiOptions}
-													value={values.carnet_entretien}
+													value={values.maintenance_log}
 													className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
 												 />
                                               <Error name="carnet_entretien" />
