@@ -153,6 +153,188 @@
                 "body": {
                   "formBody": {
                     "overrideContentType": true,
+                    "encoding": "multipart/form-data",
+                    "items": [
+                      {
+                        "enabled": true,
+                        "type": "File",
+                        "name": "file"
+                      },
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "name",
+                        "value": "dfdf"
+                      }
+                    ]
+                  },
+                  "bodyType": "Form",
+                  "textBody": "{\n    \"id\": 5\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "${\"01car\"}",
+                  "path": "/api/v1/cars/5/uploads"
+                },
+                "id": "113912b8-91c2-4487-889a-d4e9fd8eba45",
+                "name": "Car - add picture",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer ${token_01car}"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "multipart/form-data"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.5",
+                  "name": "DELETE"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "multipart/form-data",
+                    "items": [
+                      {
+                        "enabled": true,
+                        "type": "File",
+                        "name": "file"
+                      },
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "name",
+                        "value": "dfdf"
+                      }
+                    ]
+                  },
+                  "bodyType": "Form",
+                  "textBody": "{\n    \"id\": 5\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "${\"01car\"}",
+                  "path": "/api/v1/cars/5/uploads/313"
+                },
+                "id": "710f10af-8b93-4132-a9ff-988a7fa687d6",
+                "name": "Car - delete picture",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer ${token_01car}"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.4",
+                  "name": "PUT"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": [
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "name",
+                        "value": "test"
+                      },
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "type",
+                        "value": "customer"
+                      }
+                    ]
+                  },
+                  "bodyType": "Text",
+                  "textBodyEditorHeight": 391,
+                  "textBody": "{\n  \"id\": 5,\n  \"premium\": true,\n  \"options\":{\n    \"premium\":[\n        \"under_warranty\",\n         \"technical_check_ok\"\n     ]\n  \t}\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "${\"01car\"}",
+                  "path": "/api/v1/cars/5"
+                },
+                "id": "c8741c26-0056-4dc4-a57b-6438118bb974",
+                "name": "car  update - one field",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer ${token_01car}"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                  "name": "POST"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
                     "encoding": "application/x-www-form-urlencoded",
                     "items": [
                       {
@@ -171,7 +353,7 @@
                   },
                   "bodyType": "Text",
                   "textBodyEditorHeight": 451,
-                  "textBody": "{\n  \"prenium\": 0,\n  \"brand\": \"porche\",\n  \"model\": \"205\",\n  \"generation\": \"sg\",\n  \"phase\": 4,\n  \"id_carBody\": 2,\n  \"fuel\": \"essence\",\n  \"transmission\": \"automatic\",\n  \"car_body\": \"et\",\n  \"doors\": 5,\n  \"finition\": \"voluptatem\",\n  \"displacement\": \"ipsam\",\n  \"power\": 526,\n  \"version\": \"sequi\",\n  \"km\": 457016532,\n  \"dt_entry_service\": \"1986-02-25 20:25:34\",\n  \"dt_valuation\": \"1982-09-01 12:12:49\",\n  \"score_recognition\": 4.3,\n  \"score_valuation\": 6.3,\n  \"estimate_price\": 9000.61,\n  \"price\": 9134.61,\n  \"currency\": \"EUR\",\n  \"owner_type\" : \"private\",\n  \"available\": \"immediately\",\n  \"smoking\" : true,\n  \"duplicate_keys\" : true,\n  \"sale_reason\": \"change\",\n  \"hand_number\": 1,\n  \"state\" : \"good\"\n  \"country\": \"FR\"\n}"
+                  "textBody": "{\n  \"prenium\": 0,\n  \"brand\": \"porche\",\n  \"model\": \"205\",\n  \"generation\": \"sg\",\n  \"phase\": 4,\n  \"id_carBody\": 2,\n  \"fuel\": \"essence\",\n  \"transmission\": \"automatic\",\n  \"car_body\": \"et\",\n  \"doors\": 5,\n  \"finition\": \"voluptatem\",\n  \"displacement\": \"ipsam\",\n  \"power\": 526,\n  \"version\": \"sequi\",\n  \"km\": 457016532,\n  \"dt_entry_service\": \"1986-02-25 20:25:34\",\n  \"dt_valuation\": \"1982-09-01 12:12:49\",\n  \"score_recognition\": 4.3,\n  \"score_valuation\": 6.3,\n  \"estimate_price\": 9000.61,\n  \"price\": 9134.61,\n  \"currency\": \"EUR\",\n  \"owner_type\" : \"private\",\n  \"available\": \"immediately\",\n  \"smoking\" : true,\n  \"duplicate_keys\" : true,\n  \"sale_reason\": \"change\",\n  \"hand_number\": 1,\n  \"state\" : \"good\",\n  \"country\": \"FR\"\n}"
                 },
                 "uri": {
                   "query": {
@@ -294,12 +476,16 @@
                   "textBody": "{\n\"name\": \"test\",\n\"type\": \"customer\",\n\"street\": null,\n\"postalcode\": null,\n\"city\": null,\n\"section\": null,\n}"
                 },
                 "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
                   "scheme": {
                     "name": "http",
                     "version": "V11"
                   },
                   "host": "${\"01car\"}",
-                  "path": "/storage/files/u4/c2/uploads/voluptatum.jpg"
+                  "path": "/api/v1/cars/5"
                 },
                 "id": "97827549-73a7-4287-867b-ca1747a2e38f",
                 "name": "car - show",
@@ -345,8 +531,8 @@
                     ]
                   },
                   "bodyType": "Text",
-                  "textBodyEditorHeight": 451,
-                  "textBody": "{\n  \"id\": 102,\n  \"price\": 19134.61,\n  \"currency\": \"EUR\"\n}"
+                  "textBodyEditorHeight": 743,
+                  "textBody": "{\n  \"id\": 5,\n  \"premium\": true,\n  \"brand\": \"peugeot\",\n  \"model\": \"cayenne\",\n  \"generation\": \"H2\",\n  \"phase\": 0,\n  \"id_carBody\": 3,\n  \"fuel\": \"essence\",\n  \"transmission\": \"automatic\",\n  \"car_body\": \"a\",\n  \"doors\": 5,\n  \"finishing\": \"voluptas\",\n  \"displacement\": \"voluptas\",\n  \"power\": 60,\n  \"version\": \"tempore\",\n  \"km\": 564485379,\n  \"dt_entry_service\": \"2001-02-01 02:01:19\",\n  \"dt_valuation\": \"2012-02-16 01:35:21\",\n  \"score_recognition\": 1.5,\n  \"score_valuation\": 9.6,\n  \"estimate_price\": 2211.62,\n  \"price\": 1327.54,\n  \"currency\": \"EUR\",\n  \"owner_type\": \"private\",\n  \"available\": \"anti_theft\",\n  \"smoking\": false,\n  \"duplicate_keys\": false,\n  \"sale_reason\": \"change\",\n  \"hand_number\": 1,\n  \"state\": \"good\",\n  \"country\": \"ZZ\"\n}"
                 },
                 "uri": {
                   "query": {
@@ -358,10 +544,10 @@
                     "version": "V11"
                   },
                   "host": "${\"01car\"}",
-                  "path": "/api/v1/cars/102"
+                  "path": "/api/v1/cars/5"
                 },
                 "id": "b87c1298-9b0d-4f6e-baca-142ab3d49234",
-                "name": "car - update",
+                "name": "car - update - all field",
                 "headers": [
                   {
                     "enabled": true,

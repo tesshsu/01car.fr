@@ -9,8 +9,8 @@ const ENVS = {
     ENV: 'DEV',
 	API_URL: 'https://api.01car.fr'
   },
-  PRO: {
-    ENV: 'PRO',
+  PROD: {
+    ENV: 'PROD',
 	API_URL: 'https://api.01car.fr'
   },
 };

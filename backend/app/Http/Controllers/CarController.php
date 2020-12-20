@@ -84,7 +84,7 @@ class CarController extends Controller
         $this->updateCarFields($newCar, $reqCar);
         $newCar->user_id = $currentUser->id;
         // Update expiration date
-        $newCar->exipre_at = Carbon::now()->addDays(TimeConstant::EXPIRATION_DURATION_IN_DAYS);
+        $newCar->expire_at = Carbon::now()->addDays(TimeConstant::EXPIRATION_DURATION_IN_DAYS);
         $newCar->save();
         return $this->renderJson($newCar->id);
     }
