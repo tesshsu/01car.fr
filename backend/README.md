@@ -220,6 +220,12 @@ $response = $client->request('GET', '/api/user', [
 ]);
 
 
+```mail
+php artisan vendor:publish --tag=laravel-notifications
+
+```
+
+
 # server
 
 ```
@@ -229,6 +235,8 @@ $response = $client->request('GET', '/api/user', [
 
 /opt/plesk/php/7.3/bin/php artisan storage:link
 ```
+
+
 
 
 

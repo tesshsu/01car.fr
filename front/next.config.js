@@ -8,20 +8,27 @@ const path = require("path");
 
 
 module.exports = withFonts(
-  withCSS(
-    withImages(
-      withSass({
-        webpack(config, options) {
-          config.module.rules.push({
-            test: /\.(eot|ttf|woff|woff2)$/,
-            use: {
-              loader: "url-loader",
-            },
-          });
-          config.resolve.modules.push(path.resolve("./"));
-          return config;
-        },
-      })
+    withCSS(
+        withImages(
+            withSass({
+                /*basePath: '',
+                exportPathMap: function () {
+                    return {
+                        '/': {page: '/'}
+                    };
+                },*/
+                webpack(config, options) {
+                     config.module.rules.push({
+                        test: /\.(eot|ttf|woff|woff2)$/,
+                        use: {
+                            loader: "url-loader",
+                        },
+                    });
+                    config.resolve.modules.push(path.resolve("./"));
+                    return config;
+                }
+            })
+        )
     )
-  )
-);
+)
+

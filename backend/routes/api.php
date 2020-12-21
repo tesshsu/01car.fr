@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\UserController;
@@ -18,25 +23,36 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::post('/auth/login', 'App\Http\Controllers\Auth\LoginController@login');
-Route::post('/auth/register', 'App\Http\Controllers\Auth\LoginController@register');
-Route::get('/auth/redirect/{provider}', 'App\Http\Controllers\Auth\SocialController@redirect');
-Route::get('/auth/callback/{provider}', 'App\Http\Controllers\Auth\SocialController@callback');
+Route::post('/auth/login', [LoginController::class, 'login'])->name('login');
+Route::post('/auth/logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::post('/auth/register', [RegisterController::class, 'register'])->name('register');
+
+// Password
+Route::post('/password/email', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+//Route::get('/password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/password/reset', [ResetPasswordController::class, 'reset'])->name('password.reset');
+//Route::get('/password/reset/{token}', ' App\Http\Controllers\Auth\ResetPasswordController@showResetForm');
+
+// socialite
+Route::get('/auth/redirect/{provider}', [SocialController::class, 'redirect'])->name('social.login');
+Route::get('/auth/callback/{provider}', [SocialController::class, 'callback'])->name('social.callback');
+
 
 // public routes
-Route::get('/v1/cars/search', 'App\Http\Controllers\CarController@index');
-Route::get('/v1/cars/{id}', 'App\Http\Controllers\CarController@show');
+Route::get('/v1/cars/search', [CarController::class, 'index'])->name('car.list');
+Route::get('/v1/cars/{id}', [CarController::class, 'show'])->name('car.show');
 
 
 // Protected routes
 Route::group(['middleware' => ['auth:api']], function () {
 
-    Route::get('/v1/profil', 'App\Http\Controllers\ProfilController@show');
-    Route::patch('/v1/profil', 'App\Http\Controllers\ProfilController@update');
+    Route::get('/v1/profil', [ProfilController::class,'show'])->name('profil.show');
+    Route::patch('/v1/profil', [ProfilController::class,'update'])->name('profil.update');
 
     Route::apiResource('/v1/cars', CarController::class);
-    Route::post('/v1/cars/{car_id}/uploads', 'App\Http\Controllers\CarController@addFiles');
-    Route::delete('/v1/cars/{car_id}/uploads/{id}', 'App\Http\Controllers\CarController@removeFiles');
+    Route::post('/v1/cars/{car_id}/uploads', [CarController::class,'addFiles'])->name('car.addFiles');
+    Route::delete('/v1/cars/{car_id}/uploads/{id}', [CarController::class,'removeFiles'])->name('car.removeFiles');
 });
 
 

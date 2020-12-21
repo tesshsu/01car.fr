@@ -12,12 +12,13 @@ return [
     | has failed, such as for an invalid token or invalid new password.
     |
     */
-    'mail_reset_title' => 'Your password has been reset!',
-    'mail_reset_description' => 'You are receiving this email because we received a password reset request for your account.',
-    'mail_action' => 'Reset Password',
-    'mail_link_expire' => 'This password reset link will expire in :count minutes.',
 
-    'reset' => 'Your password has been reset!',
+    'mail_reset_title' => 'Votre mot de passe a été réinitialisé',
+    'mail_reset_description' => 'Vous recevez cet e-mail car nous avons reçu une demande de réinitialisation de mot de passe pour votre compte. ',
+    'mail_action' => 'Réinitialiser le mot de passe',
+    'mail_link_expire' =>  'Ce lien de réinitialisation du mot de passe expirera dans :count de minutes.',
+
+
     'sent' => 'We have emailed your password reset link!',
     'throttled' => 'Please wait before retrying.',
     'token' => 'This password reset token is invalid.',
