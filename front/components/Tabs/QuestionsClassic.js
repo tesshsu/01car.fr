@@ -13,7 +13,7 @@ import useAnnonces from 'service/hooks/useAnnonces';
 import { Modal } from "react-responsive-modal";
 import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
 import PubContentConnection from "layouts/PubContentConnection.js";
-//import {create} from 'service/actions/cars';
+import {create} from 'service/actions/cars';
 
 const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 	const [openTab, setOpenTab] = React.useState(1);
@@ -43,9 +43,9 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 
 			const data = {...payload};
 			console.log("data=", data);
-			await createAnnonce(data);
+			await create(data);
 		} catch (err) {
-			console.log(err.response);
+			console.log(err);
 			alert('Impossible de créer annonce, merci de constacter notre equipe');
 		}
 	}

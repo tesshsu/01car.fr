@@ -12,6 +12,7 @@ import { createLogger } from "redux-logger";
 import * as reducers from '../service/reducers';
 import userReducer from '../service/reducers/user';
 import carsReducer from '../service/reducers/cars';
+import carReducer from '../service/reducers/car';
 import { setupApiClient } from '../api/client';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/styles/tailwind.css";
@@ -21,6 +22,7 @@ const logger = createLogger();
 const rootReducers = combineReducers({
   user: userReducer,
   carsReducer: carsReducer,
+  car: carReducer,
   ...reducers
 })
 const store = createStore(
@@ -97,7 +99,7 @@ export default class MyApp extends App {
 						  </a>
 						</Link>
 			  </span>
-			 
+
 			</CookieConsent>
         </Layout>
 		</Provider>

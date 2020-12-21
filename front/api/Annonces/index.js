@@ -1,8 +1,7 @@
 import client from '../client';
 import {authHeader, jsonHeader} from "../authRequest";
 
-export function create(userId, payload) {
-  userInfo.id = userId;
+export function create(payload) {
   return client
       .post('/api/v1/cars', payload)
     .then(({ data }) => data);

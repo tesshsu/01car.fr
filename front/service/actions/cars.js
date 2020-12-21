@@ -1,4 +1,5 @@
 // Create Redux action types
+import {authHeader, jsonHeader} from '../../api/authRequest';
 import * as API from "../../api";
 
 export const GET_CAR = 'GET_CAR'
@@ -13,7 +14,7 @@ export const GET_CARS_FAILURE = 'GET_CARS_FAILURE'
 export const CREATE_CAR = 'CREATE_CAR';
 export const CREATE_CAR_SUCCESS = 'CREATE_CAR_SUCCESS';
 export const CREATE_CAR_FAILURE = 'CREATE_CAR_FAILURE';
-
+  export const UPDATE_CAR = 'UPDATE_CAR';
 // Create Redux action creators that return an action
 export const getCar = () => ({
   type: GET_CAR,
@@ -84,36 +85,44 @@ export function fetchCar(id) {
   }
 }
 
-/*export function create(payload) {
+export function create(payload) {
   console.log("postcar-create=", payload);
   return async (dispatch) => {
-    console.log("postcar-create2=", payload);
-	console.log("postcar=", payload);
+
     try {
       const response = await API.Annonces.create(payload);
       dispatch(createCarsSuccess(response));
     } catch (err) {
       await dispatch({ type: POST_CAR_FAILURE });
 	  throw err;
+      console.log(err);
     } finally {
       dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
     }
   };
-}*/
+}
 
 
-export function create(payload) {
-  return async (dispatch, getState) => {
-    const { car } = getState().car;
-    //dispatch(getUser())
+export function update(car) {
+  return {
+    type: UPDATE_CAR,
+    payload: {
+      car
+    }
+  };
+}
 
+/*export function create(payload) {
+  return async (dispatch) => {
+    //const { loggedUser } = getState().loggedUser;
     try {
-      const car = await API.Annonces.create(car.id, payload);
-      console.log("api_car", car);
-      dispatch(createCarsSuccess(response));
+      const car = await API.Annonces.create(payload);
+      console.log("InAPIdata=", car);
+      dispatch(update(car));
+
     } catch (error) {
-      await dispatch(createCarFailure());
+      console.warn(error);
       throw err;
     }
   }
-}
+}*/
