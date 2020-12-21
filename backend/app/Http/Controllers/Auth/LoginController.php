@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
+    public $successStatus = 200;
 
     /**
      * Create a new controller instance.
