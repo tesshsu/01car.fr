@@ -51,6 +51,9 @@ export const createCarsSuccess = (response) => ({
   payload: response,
 })
 
+export const createCarFailure = () => ({
+  type: CREATE_CAR_FAILURE,
+})
 
 // Combine them all in an asynchronous thunk
 export function fetchCars(page=1, perPage=18) {
@@ -81,16 +84,7 @@ export function fetchCar(id) {
   }
 }
 
-export function update(car) {
-  return {
-    type: UPDATE,
-    payload: {
-      car
-    }
-  };
-}
-
-export function create(payload) {
+/*export function create(payload) {
   console.log("postcar-create=", payload);
   return async (dispatch) => {
     console.log("postcar-create2=", payload);
@@ -105,4 +99,21 @@ export function create(payload) {
       dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
     }
   };
+}*/
+
+
+export function create(payload) {
+  return async (dispatch, getState) => {
+    const { car } = getState().car;
+    //dispatch(getUser())
+
+    try {
+      const car = await API.Annonces.create(car.id, payload);
+      console.log("api_car", car);
+      dispatch(createCarsSuccess(response));
+    } catch (error) {
+      await dispatch(createCarFailure());
+      throw err;
+    }
+  }
 }

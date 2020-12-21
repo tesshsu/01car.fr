@@ -13,17 +13,18 @@ import useAnnonces from 'service/hooks/useAnnonces';
 import { Modal } from "react-responsive-modal";
 import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
 import PubContentConnection from "layouts/PubContentConnection.js";
+//import {create} from 'service/actions/cars';
 
-export default function QuestionsClassic() {
+const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 	const [openTab, setOpenTab] = React.useState(1);
 	const [showModal, setShowModal] = React.useState(false);
 	const {
 		isAuthentificated
 	} = useLoggedUser();
 
-	/*const {
-       postCars
-     } = useAnnonces();*/
+	const {
+       createAnnonce
+     } = useAnnonces();
 
 
 	useEffect(() => {
@@ -40,16 +41,9 @@ export default function QuestionsClassic() {
 				...payload
 			} = values;
 
-			console.log("values=", values);
-
 			const data = {...payload};
 			console.log("data=", data);
-
-			let response = await create(data);
-
-			if(response){
-				Router.push("/annonces");
-			}
+			await createAnnonce(data);
 		} catch (err) {
 			console.log(err.response);
 			alert('Impossible de créer annonce, merci de constacter notre equipe');
@@ -668,3 +662,9 @@ export default function QuestionsClassic() {
 	);
 }
 
+const mapStateToProps = (state) => ({
+	loading: state.carsReducer.loading,
+	car: state.carsReducer.car,
+	hasErrors: state.carsReducer.hasErrors,
+})
+export default connect(mapStateToProps)(QuestionsClassic)
