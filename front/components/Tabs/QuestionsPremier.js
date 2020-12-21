@@ -7,7 +7,7 @@ import ImageUpload from "components/Tabs/ImageUpload.js";
 import * as constant from 'helpers/constant';
 import * as formValidate from 'helpers/formValidate';
 import {Error} from 'helpers/formValidate';
-import {submitReponses} from 'service/actions/vendre';
+import {create} from 'service/actions/cars';
 
 const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
   const [openTab, setOpenTab] = React.useState(1);
@@ -19,7 +19,7 @@ const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
 		  } = values;
 
 		  const data = { ...payload };
-		  await submitReponses(data);
+		  await create(data);
 		} catch (err) {
 		  console.log(err.response);
 		  if (err.response && err.response.status === 422) {

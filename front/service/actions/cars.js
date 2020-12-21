@@ -9,9 +9,10 @@ export const GET_CARS = 'GET_CARS'
 export const GET_CARS_SUCCESS = 'GET_CARS_SUCCESS'
 export const GET_CARS_FAILURE = 'GET_CARS_FAILURE'
 
-export const POST_CAR = 'POST_CAR'
-export const POST_CAR_SUCCESS = 'POST_CAR_SUCCESS'
-export const POST_CAR_FAILURE = 'POST_CAR_FAILURE'
+
+export const CREATE_CAR = 'CREATE_CAR';
+export const CREATE_CAR_SUCCESS = 'CREATE_CAR_SUCCESS';
+export const CREATE_CAR_FAILURE = 'CREATE_CAR_FAILURE';
 
 // Create Redux action creators that return an action
 export const getCar = () => ({
@@ -40,6 +41,16 @@ export const getCarsSuccess = (response) => ({
 export const getCarsFailure = () => ({
   type: GET_CARS_FAILURE,
 })
+
+export const createCar = () => ({
+  type: CREATE_CAR,
+})
+
+export const createCarsSuccess = (response) => ({
+  type: CREATE_CAR_SUCCESS,
+  payload: response,
+})
+
 
 // Combine them all in an asynchronous thunk
 export function fetchCars(page=1, perPage=18) {
@@ -79,20 +90,14 @@ export function update(car) {
   };
 }
 
-export function postCar(payload) {
-  return async (dispatch, getState) => {
-    dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Création annonce...'));
-    const { loggedUser } = getState().loggedUser;
-	
+export function create(payload) {
+  console.log("postcar-create=", payload);
+  return async (dispatch) => {
+    console.log("postcar-create2=", payload);
+	console.log("postcar=", payload);
     try {
-      const car = await API.Annonces.create(payload);
-      
-      dispatch({
-          type: POST_CAR,
-          payload: {
-            car
-          }
-        });
+      const response = await API.Annonces.create(payload);
+      dispatch(createCarsSuccess(response));
     } catch (err) {
       await dispatch({ type: POST_CAR_FAILURE });
 	  throw err;

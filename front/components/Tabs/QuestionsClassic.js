@@ -14,37 +14,23 @@ import { Modal } from "react-responsive-modal";
 import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
 import PubContentConnection from "layouts/PubContentConnection.js";
 
-const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
+export default function QuestionsClassic() {
 	const [openTab, setOpenTab] = React.useState(1);
 	const [showModal, setShowModal] = React.useState(false);
 	const {
-		isAuthentificated,
-		loggedUser
+		isAuthentificated
 	} = useLoggedUser();
-	
-	 const {
-		postCars
-	  } = useAnnonces();
 
-	let [tokken, settokken] = useState(null);
-	
+	/*const {
+       postCars
+     } = useAnnonces();*/
+
+
 	useEffect(() => {
-		if (isAuthentificated && loggedUser) {
-			try {
-				const getTokken = async () => {
-					const tok = await localStorage.getItem('ACCESS_TOKEN');
-					if (tok) {
-						settokken(tok);
-					}
-				}
-				getTokken();
-			} catch (err) {
-				console.log(err);
-			}
-		} else {
+		if (!isAuthentificated) {
 			return setShowModal(true);
 		}
-	}, [isAuthentificated, loggedUser]);
+	}, [isAuthentificated]);
 
 	//submit
 
@@ -54,9 +40,16 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 				...payload
 			} = values;
 
+			console.log("values=", values);
+
 			const data = {...payload};
-			await postCar(data);
-			console.log(data);
+			console.log("data=", data);
+
+			let response = await create(data);
+
+			if(response){
+				Router.push("/annonces");
+			}
 		} catch (err) {
 			console.log(err.response);
 			alert('Impossible de créer annonce, merci de constacter notre equipe');
@@ -68,15 +61,15 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 		<>
 			<div className="flex flex-wrap">
 				{showModal ? (
-						 <> 
-							<Modal closeOnEsc={false} open={open} onClose={() => setShowModal(true)}>
-								<h2 className="text-2xl font-semibold text-center">Connectez-vous pour répondez au questionnaire de confiance</h2>
-								<PubContentThreeIcons />
-								<PubContentConnection />
-							</Modal>
-						 </>
-			    ) : null}
-			    <div className="w-full">
+					<>
+						<Modal closeOnEsc={false} open={open} onClose={() => setShowModal(true)}>
+							<h2 className="text-2xl font-semibold text-center">Connectez-vous pour répondez au questionnaire de confiance</h2>
+							<PubContentThreeIcons />
+							<PubContentConnection />
+						</Modal>
+					</>
+				) : null}
+				<div className="w-full">
 					<ul
 						className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
 						role="tablist"
@@ -165,34 +158,34 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 						<div className="px-4 py-5 flex-auto">
 							<Form
 								initialValues={{
-									  brand: "",
-									  model: "205",
-									  generation: "sg",
-									  phase: 6,
-									  id_carBody: 2,
-									  fuel: "",
-									  transmission: "automatic",
-									  car_body: "et",
-									  doors: 5,
-									  power: 526,
-									  version: "sequi",
-									  km: "",
-									  dt_entry_service: "",
-									  dt_valuation: "2021-09-01 12:12:49",
-									  score_recognition: 4.3,
-									  score_valuation: 6.3,
-									  estimate_price: "",
-									  license_plate: "",
-									  price: 9134.61,
-									  currency: "EUR",
-									  owner_type : "",
-									  available: "",
-									  smoking : true,
-									  duplicate_keys : true,
-									  sale_reason: "",
-									  hand_number: "",
-									  state : "",
-									  country: ""				
+									brand: "",
+									model: "205",
+									generation: "sg",
+									phase: 6,
+									id_carBody: 2,
+									fuel: "",
+									transmission: "automatic",
+									car_body: "et",
+									doors: 5,
+									power: 526,
+									version: "sequi",
+									dt_entry_service: "",
+									km: "",
+									license_plate: "",
+									dt_valuation: "2021-09-01 12:12:49",
+									score_recognition: 4.3,
+									score_valuation: 6.3,
+									estimate_price: "",
+									price: 9134.61,
+									currency: "EUR",
+									owner_type : "",
+									available: "",
+									smoking : "",
+									duplicate_keys : "",
+									sale_reason: "",
+									hand_number: "",
+									state : "",
+									country: ""
 								}}
 								onSubmit={onSubmit}
 								render={({submitError, handleSubmit, form, submitting, pristine, values, invalid}) => (
@@ -203,14 +196,14 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 													<div className="w-full lg:w-6/12 px-4">
 														<label
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
-															htmlFor="marqueModel"
+															htmlFor="brand"
 														>
 															* Marque modèle :
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
 															<Field
-																name="marqueModel"
+																name="brand"
 																validate={formValidate.composeValidators(formValidate.required, formValidate.matchMarqueModel)}
 																component="input"
 																value={values.brand}
@@ -218,7 +211,7 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 																placeholder="BMW SERIE 3"
 																className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded border border-gray-400 text-sm shadow focus:outline-none focus:shadow-outline w-full pl-10"
 															/>
-															<Error name="marqueModel"/>
+															<Error name="brand"/>
 														</div>
 													</div>
 
@@ -285,25 +278,25 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 													</div>
 												</div>
 												<div className="flex flex-wrap mt-2 px-4">
-														 <label
-															className="block uppercase text-gray-700 text-md font-bold mb-2"
-															htmlFor="immatriculation"
-														  >
-															*Immatriculation :
-														  </label>
-														  <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-															  <Field
-															  name="immatriculation"
-															  validate={formValidate.composeValidators(formValidate.required, formValidate.matchImmatriculation)}
-															  component="input"
-															  type="text"
-															  value={values.license_plate}
-															  placeholder="AA-123-BC"
-															  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative border border-gray-400 bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
-															/>
-															<Error name="immatriculation" />
-															<div className="text-sm leading-relaxed text-gray-600">Cette information n’est ni conservée ni visible sur l’annonce.</div>
-														   </div>
+													<label
+														className="block uppercase text-gray-700 text-md font-bold mb-2"
+														htmlFor="license_plate"
+													>
+														*Immatriculation :
+													</label>
+													<div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
+														<Field
+															name="license_plate"
+															validate={formValidate.composeValidators(formValidate.required, formValidate.matchImmatriculation)}
+															component="input"
+															type="text"
+															value={values.license_plate}
+															placeholder="AA-123-BC"
+															className="px-3 py-2 placeholder-gray-400 text-gray-700 relative border border-gray-400 bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
+														/>
+														<Error name="license_plate" />
+														<div className="text-sm leading-relaxed text-gray-600">Cette information n’est visible sur l’annonce.</div>
+													</div>
 												</div>
 
 												<div className="flex flex-wrap mt-12 px-4 align-center justify-center">
@@ -572,7 +565,7 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 														role="tablist"
 													>
 														<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
-														 Denier étape: publier votre photos d'annonce
+														Denier étape: publier votre photos d'annonce
 													</a>
 												</div>
 											</div>
@@ -625,12 +618,12 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 														votre annonce
 													</div>
 													<button
-															className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-															type="submit"
-															disabled={submitting || invalid}
-															
-														>
-															<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> PUBLIER
+														className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+														type="submit"
+														disabled={submitting || invalid}
+
+													>
+														<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> PUBLIER
 													</button>
 													<p className="text-md leading-relaxed text-gray-500"> Votre annonce
 														sera pré-remplie à l’issue de ce questionnaire. Vous ACCEPTEZ
@@ -675,11 +668,3 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 	);
 }
 
-const mapStateToProps = (state) => ({
-  loading: state.response.loading,
-  response: state.response.response,
-  hasErrors: state.response.hasErrors,
-})
-export default connect(mapStateToProps)(QuestionsClassic)
-
-//export default QuestionsClassic
