@@ -85,13 +85,21 @@ export function fetchCar(id) {
   }
 }
 
-export function create(payload) {
-  console.log("postcar-create=", payload);
+export function create(target, payload) {
   return async (dispatch) => {
-
+    console.log("data_dispatch ", payload);
     try {
-      const response = await API.Annonces.create(payload);
-      dispatch(createCarsSuccess(response));
+      const response = await API.Annonces.create({
+        target: target?.id,
+        payload
+      });
+      dispatch({
+        type: CREATE_CAR_SUCCESS,
+        payload: {
+          response,
+          payload
+        }
+      });
     } catch (err) {
       await dispatch({ type: POST_CAR_FAILURE });
 	  throw err;

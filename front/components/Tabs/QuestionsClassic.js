@@ -13,9 +13,9 @@ import useAnnonces from 'service/hooks/useAnnonces';
 import { Modal } from "react-responsive-modal";
 import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
 import PubContentConnection from "layouts/PubContentConnection.js";
-import {create} from 'service/actions/cars';
+//import {create} from 'service/actions/cars';
 
-const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
+export default function QuestionsClassic() {
 	const [openTab, setOpenTab] = React.useState(1);
 	const [showModal, setShowModal] = React.useState(false);
 	const {
@@ -23,7 +23,7 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 	} = useLoggedUser();
 
 	const {
-       createAnnonce
+       create
      } = useAnnonces();
 
 
@@ -662,9 +662,3 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 	);
 }
 
-const mapStateToProps = (state) => ({
-	loading: state.carsReducer.loading,
-	car: state.carsReducer.car,
-	hasErrors: state.carsReducer.hasErrors,
-})
-export default connect(mapStateToProps)(QuestionsClassic)

@@ -7,11 +7,14 @@ import ImageUpload from "components/Tabs/ImageUpload.js";
 import * as constant from 'helpers/constant';
 import * as formValidate from 'helpers/formValidate';
 import {Error} from 'helpers/formValidate';
-import {create} from 'service/actions/cars';
+import useAnnonces from "../../service/hooks/useAnnonces";
+//import {create} from 'service/actions/cars';
 
 const QuestionsPremier = ({dispatch, loading, response, hasErrors}) => {
   const [openTab, setOpenTab] = React.useState(1);
-
+    const {
+        create
+    } = useAnnonces();
 	const onSubmit = async (values)=>{
 		try {
 		  let {

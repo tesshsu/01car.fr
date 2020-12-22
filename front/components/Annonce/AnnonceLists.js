@@ -16,8 +16,8 @@ const AnnonceLists = ({ loading,
 	useEffect(() => {
 		 setFilteredCars(
 		  cars?.filter((car) =>
-			car.brand.toLowerCase().includes(search.toLowerCase()) ||
-			car.model.toLowerCase().includes(search.toLowerCase())
+			car.brand?.toLowerCase().includes(search.toLowerCase()) ||
+			car.model?.toLowerCase().includes(search.toLowerCase())
 		  )
 		);
 	}, [search, cars]);
@@ -25,7 +25,7 @@ const AnnonceLists = ({ loading,
 	if (loading) {
     return <p>Loading annonces...</p>;
   }
-  
+
   return (
     <>
 		<div className="relative flex w-full flex-wrap items-stretch">
@@ -54,7 +54,7 @@ const AnnonceLists = ({ loading,
 							  className="w-full align-center togBadge animate-ping ease-in-out"
 							/>
 						 <div className="togBadgeTime text-lg pb-2">
-					         <i class="far fa-clock"></i>  <Moment format="DD/MM/YYYY">{car?.created_at}</Moment> | 
+					         <i class="far fa-clock"></i>  <Moment format="DD/MM/YYYY">{car?.created_at}</Moment> |
 							 {car.price} €
 					     </div>
 						{car.uploads.length > 0 ? (
@@ -126,7 +126,7 @@ const AnnonceLists = ({ loading,
 						  )
 					}
 					  <div className="togBadgeTime text-lg pb-2">
-					  <i class="far fa-clock"></i>  <Moment format="DD/MM/YYYY">{car.created_at}</Moment> | 
+					  <i class="far fa-clock"></i>  <Moment format="DD/MM/YYYY">{car.created_at}</Moment> |
 					   {car.price} €
 					  </div>
 					<div className="w-full px-4 py-2 flex-1">
