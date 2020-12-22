@@ -9,14 +9,20 @@ import {
 	securite_equipements
 } from 'helpers/constant';
 import {Condition} from 'helpers/formValidate';
-
+import useAnnonces from 'service/hooks/useAnnonces';
 
 const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
-	//submit
-	/*const {
-		submitReponses
-	  } = useVendre();*/
-
+	const {
+		create
+	} = useAnnonces();
+	const sendPostEquipevalues = {
+		outside: [],
+		inside: [],
+		anti_theft: [],
+		comfort: [],
+		other: [],
+		security: []
+	}
 	const onSubmit = async (values) => {
 		try {
 			let {
@@ -24,14 +30,9 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 			} = values;
 
 			const data = {...payload};
-			await submitReponses(data);
+			await create(data);
 		} catch (err) {
-			console.log(err.response);
-			if (err.response && err.response.status === 422) {
-				alert('Annonce deja existe');
-			} else {
-				alert('Impossible de créer le compte, merci de constacter notre equipe');
-			}
+			console.log(err);
 		}
 	}
 
@@ -40,33 +41,26 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 			<div className="justify-center flex flex-wrap">
 				<div className="w-full">
 					<Form
-						initialValues={{
-							exterieur_equipements: [],
-							interieur_equipements: [],
-							securite_equipements: [],
-							antivol_equipements: [],
-							confort_equipements: [],
-							autre_equipements: [],
-						}}
+						initialValues={sendPostEquipevalues}
 						onSubmit={onSubmit}
 						render={({handleSubmit, form, submitting, pristine, values}) => (
 							<form onSubmit={handleSubmit}>
 								<div className="w-full px-4">
 									<label
 										className="uppercase text-gray-700 text-sm"
-										htmlFor="question-7-1"
+										htmlFor="outside"
 									>
 										Q7 - 1 ÉQUIPEMENTS EXTÉRIEUR ET CHÂSSIS
 									</label>
-									<Field name="question-7-1" component="input" type="checkbox" className="ml-2 form-checkbox" />
+									<Field name="question-outside" component="input" type="checkbox" className="ml-2 form-checkbox" />
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-										<Condition when="question-7-1" is={true} className="mt-2">
+										<Condition when="question-outside" is={true} className="mt-2">
 											<div className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
 												{exterieur_equipements.map(exterieur_equipement => (
 													<label
 														className="border border-gray-400 hover:border-gray-500 px-2 py-2 rounded shadow leading-tight">
 														<Field
-															name="exterieur_equipements"
+															name="outside"
 															component="input"
 															type="checkbox"
 															value={exterieur_equipement.value}
@@ -86,18 +80,18 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 									>
 										Q7 - 2 Intérieur
 									</label>
-									<Field name="question-7-2" component="input" type="checkbox"
+									<Field name="question-inside" component="input" type="checkbox"
 										   className="ml-2 form-checkbox">
 									</Field>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-										<Condition when="question-7-2" is={true} className="mt-2">
+										<Condition when="question-inside" is={true} className="mt-2">
 											<div
 												className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
 												{interieur_equipements.map(interieur_equipement => (
 													<label
 														className="border border-gray-400 hover:border-gray-500 px-2 py-2 rounded shadow leading-tight">
 														<Field
-															name="interieur_equipements"
+															name="inside"
 															component="input"
 															type="checkbox"
 															value={interieur_equipement.value}
@@ -117,18 +111,18 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 									>
 										Q7 - 3 Sécurité
 									</label>
-									<Field name="question-7-3" component="input" type="checkbox"
+									<Field name="question-security" component="input" type="checkbox"
 										   className="ml-2 form-checkbox">
 									</Field>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-										<Condition when="question-7-3" is={true} className="mt-2">
+										<Condition when="question-security" is={true} className="mt-2">
 											<div
 												className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
 												{securite_equipements.map(securite_equipement => (
 													<label
 														className="border border-gray-400 hover:border-gray-500 px-2 py-2 rounded shadow leading-tight">
 														<Field
-															name="securite_equipements"
+															name="security"
 															component="input"
 															type="checkbox"
 															value={securite_equipement.value}
@@ -144,22 +138,22 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 								<div className="w-full px-4">
 									<label
 										className="uppercase text-gray-700 text-sm"
-										htmlFor="question-7-4"
+										htmlFor="anti_theft"
 									>
 										Q7 - 4 Antivol
 									</label>
-									<Field name="question-7-4" component="input" type="checkbox"
+									<Field name="question-theft" component="input" type="checkbox"
 										   className="ml-2 form-checkbox">
 									</Field>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-										<Condition when="question-7-4" is={true} className="mt-2">
+										<Condition when="question-theft" is={true} className="mt-2">
 											<div
 												className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
 												{antivol_equipements.map(antivol_equipement => (
 													<label
 														className="border border-gray-400 hover:border-gray-500 px-2 py-2 rounded shadow leading-tight">
 														<Field
-															name="antivol_equipements"
+															name="anti_theft"
 															component="input"
 															type="checkbox"
 															value={antivol_equipement.value}
@@ -175,22 +169,22 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 								<div className="w-full px-4">
 									<label
 										className="uppercase text-gray-700 text-sm"
-										htmlFor="question-7-5"
+										htmlFor="comfort"
 									>
 										Q7- 5 CONFORT
 									</label>
-									<Field name="question-7-5" component="input" type="checkbox"
+									<Field name="question-comfort" component="input" type="checkbox"
 										   className="ml-2 form-checkbox">
 									</Field>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-										<Condition when="question-7-5" is={true} className="mt-2">
+										<Condition when="question-comfort" is={true} className="mt-2">
 											<div
 												className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
 												{confort_equipements.map(confort_equipement => (
 													<label
 														className="border border-gray-400 hover:border-gray-500 px-2 py-2 rounded shadow leading-tight">
 														<Field
-															name="confort_equipements"
+															name="comfort"
 															component="input"
 															type="checkbox"
 															value={confort_equipement.value}
@@ -206,22 +200,22 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 								<div className="w-full px-4">
 									<label
 										className="uppercase text-gray-700 text-sm"
-										htmlFor="question-7-6"
+										htmlFor="other"
 									>
 										Q7 -6 AUTRES
 									</label>
-									<Field name="question-7-6" component="input" type="checkbox"
+									<Field name="question-other" component="input" type="checkbox"
 										   className="ml-2 form-checkbox">
 									</Field>
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
-										<Condition when="question-7-6" is={true} className="mt-2">
+										<Condition when="question-other" is={true} className="mt-2">
 											<div
 												className="relative flex w-full flex-wrap items-stretch mb-3 px-2 mt-2">
 												{autre_equipements.map(autre_equipement => (
 													<label
 														className="border border-gray-400 hover:border-gray-500 px-2 py-2 rounded shadow leading-tight">
 														<Field
-															name="autre_equipements"
+															name="comfort"
 															component="input"
 															type="checkbox"
 															value={autre_equipement.value}

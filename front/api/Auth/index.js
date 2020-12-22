@@ -15,6 +15,11 @@ export function forget_password({ email }) {
     .then(({ data }) => data);
 }
 
+export function modify_password({ password }) {
+  return client.post('/api/auth/modify_password', { password })
+    .then(({ data }) => data);
+}
+
 export function signInWithFacebook(payload) {
   return client.post('/api/auth/signInWithFacebook', payload)
     .then(({ data }) => data);

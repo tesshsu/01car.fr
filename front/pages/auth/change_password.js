@@ -7,14 +7,14 @@ import useLoggedUser from 'service/hooks/useLoggedUser';
 
 export default function ForgetPassword() {
   const {
-    forgetPassword
+	modifyPassword
   } = useLoggedUser();
   
-  const onSubmit = async (email)=>{
+  const onSubmit = async (password)=>{
 	try {
-      await forgetPassword(email);
-	  if(email){
-		 alert("verifier votre email");
+      await modifyPassword(password);
+	  if(password){
+		Router.push('/auth/login');
 	  }
     } catch (err) {
       console.log(err.response);
@@ -32,41 +32,41 @@ export default function ForgetPassword() {
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                 <div className="text-gray-500 text-center mb-3 font-bold">
-                  <small>Réinitialisez votre mot de passe </small>
+                  <small>Modifier votre mot de passe</small>
                 </div>
                 <Form
 					  initialValues={{
-						email: ''
+						password: ''
 					  }}
-					  onSubmit={async ({ email, password }) => {
+					  onSubmit={async ({ password }) => {
 						await formValidate.sleep(300)
 							try {
-							  await forgetPassword(
-								email.trim()
+							  await modifyPassword(
+								password.trim()
 							  );
 
 						    Router.back();
 						} catch (err) {
-						  alert("Email incorrects!");
+						  alert("Error incorrects!");
 						}
 					  }}
 					  render={({ submitError, handleSubmit, form, submitting, pristine, values, invalid
 					  }) => (
 						<form onSubmit={handleSubmit}>                 
-						    <Field name="email" validate={formValidate.required}>
+						    <Field name="password" validate={formValidate.required}>
 							    {({ input, meta }) => (
 								  <div className="relative w-full mb-3">
 									<label
 									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
-									  htmlFor="email"
+									  htmlFor="password"
 									>
-									  Votre Email
+									  Votre nouveaux mot de passe
 									</label>
 									<input
 									  {...input}
-									  type="email"
+									  type="password"
 									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-									  placeholder="Email"
+									  placeholder="password"
 									/>{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
 								  </div>
 								)}

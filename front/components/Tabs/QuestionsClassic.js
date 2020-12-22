@@ -57,9 +57,10 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 		sale_reason: "",
 		hand_number: "",
 		state : "",
-		country: ""
+		country: "",
+		equipments: {}
 	}
-
+    
 	const {
 		isAuthentificated
 	} = useLoggedUser();
@@ -85,6 +86,9 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 
 			const data = {...payload};
 			await create(data);
+			if(data) {
+				Router.push('/annonces');
+			}
 		} catch (err) {
 			console.log(err);
 			alert('Impossible de créer annonce, merci de constacter notre equipe');

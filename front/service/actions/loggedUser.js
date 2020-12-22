@@ -33,7 +33,21 @@ export function forget_password({ email }) {
   return async (dispatch) => {
     dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Sending...'));
     try {
-      const { token, user } = await API.Auth.forget_password({ email });
+      await API.Auth.forget_password({ email });
+      await dispatch(fetch());
+    } catch (err) {
+      throw err;
+    } finally {
+      dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
+    }
+  };
+}
+
+export function modify_password( password ) {
+  return async (dispatch) => {
+    dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Sending...'));
+    try {
+      await API.Auth.modify_password({ password });
       await dispatch(fetch());
     } catch (err) {
       throw err;
