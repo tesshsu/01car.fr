@@ -1,11 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import Link from "next/link";
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import QuestionsOptions from "components/Tabs/QuestionsOptions.js";
 import ImageUpload from "components/Tabs/ImageUpload.js";
 import {Field, Form} from 'react-final-form';
 import useLoggedUser from 'service/hooks/useLoggedUser';
-import * as constant from 'helpers/constant';
+import {
+	fuelOptions,
+	statuVendeurOptions,
+	dateDispoOptions,
+	raisonVendreOptions,
+	numMainsOptions,
+	etatCarOptions,
+	furmeurOptions,
+	OuiOptions,
+	originCarOptions
+} from 'helpers/constant';
 import * as formValidate from 'helpers/formValidate';
 import {Condition, Error} from 'helpers/formValidate';
 import "react-responsive-modal/styles.css";
@@ -18,6 +29,37 @@ import Router from "next/router";
 const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 	const [openTab, setOpenTab] = React.useState(1);
 	const [showModal, setShowModal] = React.useState(false);
+	const sendPostQuestionsvalues ={
+		brand: "",
+		model: "",
+		generation: "sg",
+		phase: 6,
+		id_carBody: 2,
+		fuel: "",
+		transmission: "",
+		car_body: "",
+		doors: 5,
+		power: 526,
+		version: "",
+		dt_entry_service: "",
+		km: "",
+		license_plate: "",
+		dt_valuation: "",
+		score_recognition: 4.3,
+		score_valuation: 6.3,
+		estimate_price: "",
+		price: 9134.61,
+		currency: "EUR",
+		owner_type : "",
+		available: "",
+		smoking : "",
+		duplicate_keys : "",
+		sale_reason: "",
+		hand_number: "",
+		state : "",
+		country: ""
+	}
+
 	const {
 		isAuthentificated
 	} = useLoggedUser();
@@ -42,13 +84,10 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 			} = values;
 
 			const data = {...payload};
-			console.log("data=", data);
 			await create(data);
 		} catch (err) {
 			console.log(err);
 			alert('Impossible de créer annonce, merci de constacter notre equipe');
-		}finally {
-			Router.push("/annonces");
 		}
 	}
 
@@ -153,36 +192,7 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 					<div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
 						<div className="px-4 py-5 flex-auto">
 							<Form
-								initialValues={{
-									brand: "",
-									model: "",
-									generation: "sg",
-									phase: 6,
-									id_carBody: 2,
-									fuel: "",
-									transmission: "",
-									car_body: "",
-									doors: 5,
-									power: 526,
-									version: "",
-									dt_entry_service: "",
-									km: "",
-									license_plate: "",
-									dt_valuation: "",
-									score_recognition: 4.3,
-									score_valuation: 6.3,
-									estimate_price: "",
-									price: 9134.61,
-									currency: "EUR",
-									owner_type : "",
-									available: "",
-									smoking : true,
-									duplicate_keys : true,
-									sale_reason: "",
-									hand_number: "",
-									state : "",
-									country: ""
-								}}
+								initialValues={sendPostQuestionsvalues}
 								onSubmit={onSubmit}
 								render={({submitError, handleSubmit, form, submitting, pristine, values, invalid}) => (
 									<form onSubmit={handleSubmit}>
@@ -249,13 +259,9 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 																   component="select"
 																   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
 															>
-																<option></option>
-																<option value="Diesel">Diesel (Diesel)</option>
-																<option value="Electric">Electric (Électrique)</option>
-																<option value="Gasoline">Gasoline (Essence)</option>
-																<option value="Ethanol">Ethanol (Ethanol)</option>
-																<option value="LPG">LPG (GPL)</option>
-																<option value="Hybrid">Hybrid (Hybride)</option>
+																{fuelOptions.map(fuelOption => (
+																	<option value={fuelOption.value}>{fuelOption.label}</option>
+																))}
 															</Field>
 															<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
 																<i className="fas fa-angle-down text-2xl my-2"></i>
@@ -333,9 +339,9 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
 															<Field name="owner_type" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-																<option></option>
-																<option value="private" note="1">particulier</option>
-																<option value="pro" note="0">professionnel</option>
+																{statuVendeurOptions.map(statuVendeurOption => (
+																	<option value={statuVendeurOption.value}>{statuVendeurOption.label}</option>
+																))}
 															</Field>
 															<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
 																<i className="fas fa-angle-down text-2xl my-2"></i>
@@ -354,16 +360,15 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
 															<Field name="available" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-																<option></option>
-																<option value="immediately" note="1">Immédiatement</option>
-																<option value="one_month" note="0">Dans un mois</option>
-																<option value="later" note="0">plus tard</option>
+																{dateDispoOptions.map(dateDispoOption => (
+																	<option value={dateDispoOption.value}>{dateDispoOption.label}</option>
+																))}
 															</Field>
 															<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
 																<i className="fas fa-angle-down text-2xl my-2"></i>
 															</div>
 															<Error name="available"/>
-															<Condition when="available" is="plus tard"
+															<Condition when="available" is="later"
 																	   className="mt-2">
 																<p className="text-md leading-relaxed text-gray-500"> Votre
 																	annonce durée juste 1 mois </p>
@@ -383,9 +388,9 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
 															<Field name="smoking" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-																<option></option>
-																<option value="true" note="0">fumeur</option>
-																<option value="false" note="1">non fumeur</option>
+																{furmeurOptions.map(furmeurOption => (
+																	<option value={furmeurOption.value}>{furmeurOption.label}</option>
+																))}
 															</Field>
 															<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
 																<i className="fas fa-angle-down text-2xl my-2"></i>
@@ -404,9 +409,9 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 														<div
 															className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
 															<Field name="duplicate_keys" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-																<option></option>
-																<option value="true" note="1">Oui &#xf164;</option>
-																<option value="false" note="0">Non &#xf165;</option>
+																{OuiOptions.map(OuiOption => (
+																	<option value={OuiOption.value}>{OuiOption.label}</option>
+																))}
 															</Field>
 															<Error name="duplicate_keys"/>
 														</div>
@@ -422,27 +427,14 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 													</label>
 													<div className="relative flex w-full flex-wrap items-stretch mb-3">
 														<Field name="sale_reason" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-															<option></option>
-															<option value="change" note="1">Changer de véhicule</option>
-															<option value="other" note="0">Autre projet</option>
+															{raisonVendreOptions.map(raisonVendreOption => (
+																<option value={raisonVendreOption.value}>{raisonVendreOption.label}</option>
+															))}
 														</Field>
 														<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
 															<i className="fas fa-angle-down text-2xl my-2"></i>
 														</div>
 														<Error name="sale_reason"/>
-														<Condition when="sale_reason" is="autre" className="mt-2">
-															<p className="text-md leading-relaxed text-gray-500"> Indique
-																votre raison : </p>
-															<Field
-																validate={formValidate.required}
-																name="sale_reason"
-																component="input"
-																value={values.sale_reason.value}
-																type="text"
-																placeholder="votre raison"
-																className="px-3 py-3 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
-															/>
-														</Condition>
 													</div>
 												</div>
 
@@ -501,9 +493,9 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
 															<Field name="hand_number" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-																<option></option>
-																<option value="1" note="1">1ère ou 2ème main</option>
-																<option value="3" note="0">3ème main ou plus</option>
+																{numMainsOptions.map(numMainsOption => (
+																	<option value={numMainsOption.value}>{numMainsOption.label}</option>
+																))}
 															</Field>
 															<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
 																<i className="fas fa-angle-down text-2xl my-2"></i>
@@ -521,11 +513,9 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
 															<Field name="state" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-																<option></option>
-																<option value="new" note="1">Neuf</option>
-																<option value="very_good" note="1">Très bon état</option>
-																<option value="good" note="1">Bon état</option>
-																<option value="satisfactory" note="0">satisfaisant</option>
+																{etatCarOptions.map(etatCarOption => (
+																	<option value={etatCarOption.value}>{etatCarOption.label}</option>
+																))}
 															</Field>
 															<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
 																<i className="fas fa-angle-down text-2xl my-2"></i>
@@ -544,9 +534,9 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 													</label>
 													<div className="relative flex w-full flex-wrap items-stretch mb-3">
 														<Field name="country" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-															<option></option>
-															<option value="FR" note="1">française</option>
-															<option value="ZZ" note="0">étrangère</option>
+															{originCarOptions.map(originCarOption => (
+																<option value={originCarOption.value}>{originCarOption.label}</option>
+															))}
 														</Field>
 														<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
 															<i className="fas fa-angle-down text-2xl my-2"></i>

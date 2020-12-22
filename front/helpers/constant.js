@@ -7,51 +7,60 @@ export const mapToObject= function(m){
 }
 
 export const fuelOptions = [
-    {note: 0, label: 'Diesel', value: 'Diesel'},
-    {note: 0, label: 'Électrique', value: 'Électrique'},
-    {note: 0, label: 'Essence', value: 'Essence'},
+    {note: 0, label: '', value: ''},
+	{note: 0, label: 'Diesel', value: 'Diesel'},
+    {note: 0, label: 'Électrique', value: 'Electric'},
+    {note: 0, label: 'Gasoline (Essence)', value: 'Gasoline'},
     {note: 0, label: 'Ethanol', value: 'Ethanol'},
-    {note: 0, label: 'GPL', value: 'GPL'},
+    {note: 0, label: 'GPL', value: 'LPG'},
     {note: 0, label: 'Hybrid', value: 'Hybrid'}
 ];
 
 export const statuVendeurOptions = [
+    {note: 0, label: '', value: ''},
     {note: "1", label: 'particulier', value: 'private'},
     {note: "0", label: 'professionnel', value: 'pro'}
 ]
 
 export const dateDispoOptions = [
+    {note: 0, label: '', value: ''},
     {note: 1, label: 'Immédiatement', value: 'immediately'},
     {note: 0, label: 'Dans un mois', value: 'one_month'},
     {note: 0, label: 'Plus tard', value: 'later'}
 ]
 
 export const furmeurOptions = [
-    {note: 1, label: 'non fumeur', value: 'false'},
-    {note: 0, label: 'fumeur', value: 'true'}
+    {note: 0, label: '', value: ''},
+    {note: 1, label: 'non fumeur', value: '0'},
+    {note: 0, label: 'fumeur', value: '1'}
 ]
 
 export const OuiOptions = [
-    {note: 1, label: 'Oui', value: 'true'},
-    {note: 0, label: 'Non', value: 'false'}
+    {note: 0, label: '', value: ''},
+    {note: 1, label: 'Oui', value: '1'},
+    {note: 0, label: 'Non', value: '0'}
 ]
 
 export const NonOptions = [
+    {note: 0, label: '', value: ''},
     {note: 1, label: 'Non', value: 'false'},
     {note: 0, label: 'Oui', value: 'true'}
 ]
 
 export const raisonVendreOptions = [
+    {note: 0, label: '', value: ''},
     {note: 1, label: 'Changer de véhicule', value: 'change'},
     {note: 0, label: 'Autre projet', value: 'other'}
 ]
 
 export const numMainsOptions = [
+    {note: 0, label: '', value: ''},
     {note: 1, label: '1ère ou 2ème main', value: '1'},
     {note: 0, label: '3ème main ou plus', value: '3'}
 ]
 
 export const etatCarOptions = [
+    {note: 0, label: '', value: ''},
     {note: 1, label: 'Neuf', value: 'new'},
     {note: 1, label: 'Très bon état', value: 'very_good'},
     {note: 1, label: 'Bon état', value: 'good'},
@@ -59,11 +68,13 @@ export const etatCarOptions = [
 ]
 
 export const originCarOptions = [
+    {note: 0, label: '', value: ''},
     {note: 1, label: 'française', value: 'FR'},
     {note: 0, label: 'étrangère', value: 'ZZ'}
 ]
 
 export const prochaineEntretienOptions = [
+    {note: 0, label: '', value: ''},
     {note: 1, label: 'Moins de 5000km', value: 'true'},
     {note: 0, label: 'Plus de 5000km', value: 'false'}
 ]
