@@ -1,7 +1,7 @@
 // Create Redux action types
 import {authHeader, jsonHeader} from '../../api/authRequest';
 import * as API from "../../api";
-
+import * as LOADING_OVERLAY_ACTIONS from './loadingOverlay';
 export const GET_CAR = 'GET_CAR'
 export const GET_CAR_SUCCESS = 'GET_CAR_SUCCESS'
 export const GET_CAR_FAILURE = 'GET_CAR_FAILURE'
@@ -85,23 +85,21 @@ export function fetchCar(id) {
   }
 }
 
-export function create(target, payload) {
+export function create(payload) {
   return async (dispatch) => {
-    console.log("data_dispatch ", payload);
     try {
-      const response = await API.Annonces.create({
-        target: target?.id,
+      const response = await API.Annonces.create(
         payload
-      });
+      );
+      console.log("data_dispatch ", response);
       dispatch({
         type: CREATE_CAR_SUCCESS,
         payload: {
-          response,
-          payload
+          response
         }
       });
     } catch (err) {
-      await dispatch({ type: POST_CAR_FAILURE });
+      await dispatch(createCarFailure());
 	  throw err;
       console.log(err);
     } finally {

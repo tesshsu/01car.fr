@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import * as actions from '../actions/cars';
 
 export const initialState = {
-  car: [],
+  car: {},
   loading: false,
   hasErrors: false,
 }

@@ -22,7 +22,7 @@ const logger = createLogger();
 const rootReducers = combineReducers({
   user: userReducer,
   carsReducer: carsReducer,
-  car: carReducer,
+  carReducer: carReducer,
   ...reducers
 })
 const store = createStore(

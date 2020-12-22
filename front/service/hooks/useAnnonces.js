@@ -8,11 +8,11 @@ export default function useAnnonces() {
 
   const fetchAnnonces = useCallback(() => dispatch(ANNONCES_ACTIONS.fetchCars(page=1, perPage=18)), [dispatch]);
 
-  const create = useCallback(async (target) => {
+  const create = useCallback(async (payload) => {
     try {
-      await dispatch(ANNONCES_ACTIONS.create(target));
+      await dispatch(ANNONCES_ACTIONS.create(payload));
     } catch (err) {
-      alert('car create', err.message);
+      console.log("create_car_error", err);
     }
   }, [dispatch]);
 
