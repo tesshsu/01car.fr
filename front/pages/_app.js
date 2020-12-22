@@ -10,9 +10,9 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunkMiddleware from "redux-thunk";
 import { createLogger } from "redux-logger";
 import * as reducers from '../service/reducers';
-import vendreReducer from '../service/reducers/vendre';
 import userReducer from '../service/reducers/user';
 import carsReducer from '../service/reducers/cars';
+import carReducer from '../service/reducers/car';
 import { setupApiClient } from '../api/client';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/styles/tailwind.css";
@@ -22,7 +22,7 @@ const logger = createLogger();
 const rootReducers = combineReducers({
   user: userReducer,
   carsReducer: carsReducer,
-  response: vendreReducer,
+  carReducer: carReducer,
   ...reducers
 })
 const store = createStore(
@@ -85,7 +85,7 @@ export default class MyApp extends App {
 			  buttonStyle={{ color: "#4e503b", fontSize: "15px" }}
 			  expires={30}
 			>
-			  En poursuivant votre navigation sur ce site, vous acceptez qu'on vous accompagne pour analyser le fonctionnement et l’efficacité du site, vous proposer des publicités adaptées et des interactions par le biais des réseaux sociaux.{" "}
+			  En poursuivant votre navigation sur ce site, vous acceptez qu'on vous accompagne pour analyser le fonctionnement et l’efficacité du site, vous proposer des interactions par le biais des réseaux sociaux.{" "}
 			  <span style={{ fontSize: "10px" }}>C'est OK pour vous ?</span>
 			  <span style={{ fontSize: "10px" }}>
 			   <Link href="/footer/policy">
@@ -99,7 +99,7 @@ export default class MyApp extends App {
 						  </a>
 						</Link>
 			  </span>
-			 
+
 			</CookieConsent>
         </Layout>
 		</Provider>

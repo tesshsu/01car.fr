@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Link from "next/link";
+import {connect} from 'react-redux'
 import QuestionsOptions from "components/Tabs/QuestionsOptions.js";
 import ImageUpload from "components/Tabs/ImageUpload.js";
 import {Field, Form} from 'react-final-form';
@@ -8,35 +9,29 @@ import * as constant from 'helpers/constant';
 import * as formValidate from 'helpers/formValidate';
 import {Condition, Error} from 'helpers/formValidate';
 import "react-responsive-modal/styles.css";
-import {submitReponses} from 'service/actions/vendre'
+import useAnnonces from 'service/hooks/useAnnonces';
+import { Modal } from "react-responsive-modal";
+import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
+import PubContentConnection from "layouts/PubContentConnection.js";
+import Router from "next/router";
 
-const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
+const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 	const [openTab, setOpenTab] = React.useState(1);
 	const [showModal, setShowModal] = React.useState(false);
 	const {
-		isAuthentificated,
-		loggedUser
+		isAuthentificated
 	} = useLoggedUser();
 
-	let [tokken, settokken] = useState(null);
+	const {
+		create
+	} = useAnnonces();
+
 
 	useEffect(() => {
-		if (isAuthentificated && loggedUser) {
-			try {
-				const getTokken = async () => {
-					const tok = await localStorage.getItem('ACCESS_TOKEN');
-					if (tok) {
-						settokken(tok);
-					}
-				}
-				getTokken();
-			} catch (err) {
-				console.log(err);
-			}
-		} else {
+		if (!isAuthentificated) {
 			return setShowModal(true);
 		}
-	}, [isAuthentificated, loggedUser]);
+	}, [isAuthentificated]);
 
 	//submit
 
@@ -47,15 +42,13 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 			} = values;
 
 			const data = {...payload};
-			await submitReponses(data);
-			console.log(data)
+			console.log("data=", data);
+			await create(data);
 		} catch (err) {
-			console.log(err.response);
-			if (err.response && err.response.status === 422) {
-				alert('Annonce deja existe');
-			} else {
-				alert('Impossible de créer le compte, merci de constacter notre equipe');
-			}
+			console.log(err);
+			alert('Impossible de créer annonce, merci de constacter notre equipe');
+		}finally {
+			Router.push("/annonces");
 		}
 	}
 
@@ -63,6 +56,15 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 	return (
 		<>
 			<div className="flex flex-wrap">
+				{showModal ? (
+					<>
+						<Modal closeOnEsc={false} open={open} onClose={() => setShowModal(true)}>
+							<h2 className="text-2xl font-semibold text-center">Connectez-vous pour répondez au questionnaire de confiance</h2>
+							<PubContentThreeIcons />
+							<PubContentConnection />
+						</Modal>
+					</>
+				) : null}
 				<div className="w-full">
 					<ul
 						className="flex mb-0 list-none flex-wrap pt-3 pb-4 flex-row"
@@ -127,26 +129,59 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 								véhicule
 							</a>
 						</li>
+						<li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+							<a
+								className={
+									"text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+									(openTab === 4
+										? "text-white bg-orange-500"
+										: "text-gray-600 bg-white")
+								}
+								onClick={e => {
+									e.preventDefault();
+									setOpenTab(4);
+								}}
+								data-toggle="tab"
+								href="#link3"
+								role="tablist"
+							>
+								<i class="fas fa-bullhorn"></i> Denier etape : publier
+							</a>
+						</li>
 
 					</ul>
 					<div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
 						<div className="px-4 py-5 flex-auto">
 							<Form
 								initialValues={{
-									marqueModel: '',
-									dt_entry_service: '',
-									fuel: '',
-									km: '',
-									immatriculation: '',
-									statu_vendeur: '',
-									date_disponible: '',
-									car_fumeur: '',
-									double_cles: '',
-									raison_vendre: '',
-									estimate_price: '',
-									num_de_mains: '',
-									etat_car: '',
-									origin_car: '',
+									brand: "",
+									model: "",
+									generation: "sg",
+									phase: 6,
+									id_carBody: 2,
+									fuel: "",
+									transmission: "",
+									car_body: "",
+									doors: 5,
+									power: 526,
+									version: "",
+									dt_entry_service: "",
+									km: "",
+									license_plate: "",
+									dt_valuation: "",
+									score_recognition: 4.3,
+									score_valuation: 6.3,
+									estimate_price: "",
+									price: 9134.61,
+									currency: "EUR",
+									owner_type : "",
+									available: "",
+									smoking : true,
+									duplicate_keys : true,
+									sale_reason: "",
+									hand_number: "",
+									state : "",
+									country: ""
 								}}
 								onSubmit={onSubmit}
 								render={({submitError, handleSubmit, form, submitting, pristine, values, invalid}) => (
@@ -157,22 +192,22 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 													<div className="w-full lg:w-6/12 px-4">
 														<label
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
-															htmlFor="marqueModel"
+															htmlFor="brand"
 														>
 															* Marque modèle :
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
 															<Field
-																name="marqueModel"
+																name="brand"
 																validate={formValidate.composeValidators(formValidate.required, formValidate.matchMarqueModel)}
 																component="input"
-																value={values.marqueModel}
+																value={values.brand}
 																type="text"
 																placeholder="BMW SERIE 3"
 																className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded border border-gray-400 text-sm shadow focus:outline-none focus:shadow-outline w-full pl-10"
 															/>
-															<Error name="marqueModel"/>
+															<Error name="brand"/>
 														</div>
 													</div>
 
@@ -209,14 +244,23 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
-															<Field
-																name="fuel"
-																component={formValidate.ReactSelectAdapter}
-																options={constant.fuelOptions}
-																value={values.fuel}
-																className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
-															/>
-															<Error name="fuel"/>
+															<Field name="fuel"
+																   validate={formValidate.required}
+																   component="select"
+																   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+															>
+																<option></option>
+																<option value="Diesel">Diesel (Diesel)</option>
+																<option value="Electric">Electric (Électrique)</option>
+																<option value="Gasoline">Gasoline (Essence)</option>
+																<option value="Ethanol">Ethanol (Ethanol)</option>
+																<option value="LPG">LPG (GPL)</option>
+																<option value="Hybrid">Hybrid (Hybride)</option>
+															</Field>
+															<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
+																<i className="fas fa-angle-down text-2xl my-2"></i>
+															</div>
+															<Error name="fuel" />
 														</div>
 													</div>
 													<div className="w-full lg:w-6/12 px-4">
@@ -239,24 +283,25 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 													</div>
 												</div>
 												<div className="flex flex-wrap mt-2 px-4">
-														 <label
-															className="block uppercase text-gray-700 text-md font-bold mb-2"
-															htmlFor="immatriculation"
-														  >
-															*Immatriculation :
-														  </label>
-														  <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-															  <Field
-															  name="immatriculation"
-															  validate={formValidate.composeValidators(formValidate.required, formValidate.matchImmatriculation)}
-															  component="input"
-															  type="text"
-															  value={values.immatriculation}
-															  placeholder="AA-123-BC"
-															  className="px-3 py-2 placeholder-gray-400 text-gray-700 relative border border-gray-400 bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
-															/>
-															<Error name="immatriculation" />
-														   </div>
+													<label
+														className="block uppercase text-gray-700 text-md font-bold mb-2"
+														htmlFor="license_plate"
+													>
+														*Immatriculation :
+													</label>
+													<div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
+														<Field
+															name="license_plate"
+															validate={formValidate.composeValidators(formValidate.required, formValidate.matchImmatriculation)}
+															component="input"
+															type="text"
+															value={values.license_plate}
+															placeholder="AA-123-BC"
+															className="px-3 py-2 placeholder-gray-400 text-gray-700 relative border border-gray-400 bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
+														/>
+														<Error name="license_plate" />
+														<div className="text-sm leading-relaxed text-gray-600">Cette information n’est visible sur l’annonce.</div>
+													</div>
 												</div>
 
 												<div className="flex flex-wrap mt-12 px-4 align-center justify-center">
@@ -281,48 +326,47 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 													<div className="w-full lg:w-6/12 px-4">
 														<label
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
-															htmlFor="statu_vendeur"
+															htmlFor="owner_type"
 														>
 															Q1 - VOUS êtes :
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
-															<Field
-																name="statu_vendeur"
-																component={formValidate.ReactSelectAdapter}
-																options={constant.statuVendeurOptions}
-																value={values.statu_vendeurl}
-																className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
-															/>
-															<Error name="statu_vendeur"/>
+															<Field name="owner_type" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+																<option></option>
+																<option value="private" note="1">particulier</option>
+																<option value="pro" note="0">professionnel</option>
+															</Field>
+															<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
+																<i className="fas fa-angle-down text-2xl my-2"></i>
+															</div>
+															<Error name="owner_type"/>
 														</div>
 													</div>
 
 													<div className="w-full lg:w-6/12 px-4">
 														<label
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
-															htmlFor="date_disponible"
+															htmlFor="available"
 														>
 															Q2 - Votre véhicule est disponible :
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
-															<Field name="date_disponible"
-																   validate={formValidate.required} component="select"
-																   value={values.date_disponible}
-																   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+															<Field name="available" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 																<option></option>
-																<option value="Immédiatement" note="1">Immédiatement
-																</option>
-																<option value="Dans un mois" note="0">Dans un mois
-																</option>
-																<option value="plus tard" note="0">plus tard</option>
+																<option value="immediately" note="1">Immédiatement</option>
+																<option value="one_month" note="0">Dans un mois</option>
+																<option value="later" note="0">plus tard</option>
 															</Field>
-															<Error name="date_disponible"/>
-															<Condition when="date_disponible" is="plus tard"
+															<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
+																<i className="fas fa-angle-down text-2xl my-2"></i>
+															</div>
+															<Error name="available"/>
+															<Condition when="available" is="plus tard"
 																	   className="mt-2">
 																<p className="text-md leading-relaxed text-gray-500"> Votre
-																	annonce durée juste 2 mois </p>
+																	annonce durée juste 1 mois </p>
 															</Condition>
 														</div>
 													</div>
@@ -332,42 +376,39 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 													<div className="w-full lg:w-6/12 px-4">
 														<label
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
-															htmlFor="car_fumeur"
+															htmlFor="smoking"
 														>
 															Q3 - Votre véhicule est :
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
-															<Field
-																name="car_fumeur"
-																component={formValidate.ReactSelectAdapter}
-																validate={formValidate.required}
-																options={constant.furmeurOptions}
-																value={values.car_fumeur}
-																className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
-															/>
-															<Error name="car_fumeur"/>
+															<Field name="smoking" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+																<option></option>
+																<option value="true" note="0">fumeur</option>
+																<option value="false" note="1">non fumeur</option>
+															</Field>
+															<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
+																<i className="fas fa-angle-down text-2xl my-2"></i>
+															</div>
+															<Error name="smoking"/>
 														</div>
 													</div>
 
 													<div className="w-full lg:w-6/12 px-4">
 														<label
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
-															htmlFor="double_cles"
+															htmlFor="duplicate_keys"
 														>
 															Q4 - Avez-vous le Double des clés :
 														</label>
 														<div
 															className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-															<Field
-																name="double_cles"
-																component={formValidate.ReactSelectAdapter}
-																validate={formValidate.required}
-																options={constant.OuiOptions}
-																value={values.double_cles}
-																className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
-															/>
-															<Error name="double_cles"/>
+															<Field name="duplicate_keys" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+																<option></option>
+																<option value="true" note="1">Oui &#xf164;</option>
+																<option value="false" note="0">Non &#xf165;</option>
+															</Field>
+															<Error name="duplicate_keys"/>
 														</div>
 													</div>
 												</div>
@@ -375,30 +416,29 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 												<div className="flex flex-wrap mt-12 px-4">
 													<label
 														className="block uppercase text-gray-700 text-md font-bold mb-2"
-														htmlFor="raison_vendre"
+														htmlFor="sale_reason"
 													>
 														Q5 - Pourquoi vendez-vous votre véhicule ?
 													</label>
 													<div className="relative flex w-full flex-wrap items-stretch mb-3">
-														<Field
-															name="raison_vendre"
-															component={formValidate.ReactSelectAdapter}
-															validate={formValidate.required}
-															options={constant.raisonVendreOptions}
-															value={values.raison_vendre}
-															className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
-														/>
-														<Error name="raison_vendre"/>
-														<Condition when="raison_vendre" is="autre" className="mt-2">
+														<Field name="sale_reason" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+															<option></option>
+															<option value="change" note="1">Changer de véhicule</option>
+															<option value="other" note="0">Autre projet</option>
+														</Field>
+														<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
+															<i className="fas fa-angle-down text-2xl my-2"></i>
+														</div>
+														<Error name="sale_reason"/>
+														<Condition when="sale_reason" is="autre" className="mt-2">
 															<p className="text-md leading-relaxed text-gray-500"> Indique
 																votre raison : </p>
 															<Field
 																validate={formValidate.required}
-																name="raison_vendre"
+																name="sale_reason"
 																component="input"
-																value={values.raison_vendre}
+																value={values.sale_reason.value}
 																type="text"
-																value=""
 																placeholder="votre raison"
 																className="px-3 py-3 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 															/>
@@ -454,41 +494,43 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 													<div className="w-full lg:w-6/12 px-4">
 														<label
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
-															htmlFor="num_de_mains"
+															htmlFor="hand_number"
 														>
 															Q8 - Nombre de mains:
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
-															<Field
-																name="num_de_mains"
-																component={formValidate.ReactSelectAdapter}
-																validate={formValidate.required}
-																options={constant.numMainsOptions}
-																value={values.num_de_mains}
-																className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
-															/>
-															<Error name="num_de_mains"/>
+															<Field name="hand_number" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+																<option></option>
+																<option value="1" note="1">1ère ou 2ème main</option>
+																<option value="3" note="0">3ème main ou plus</option>
+															</Field>
+															<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
+																<i className="fas fa-angle-down text-2xl my-2"></i>
+															</div>
+															<Error name="hand_number"/>
 														</div>
 													</div>
 													<div className="w-full lg:w-6/12 px-4">
 														<label
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
-															htmlFor="etat_car"
+															htmlFor="state"
 														>
 															Q9- État du véhicule:
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
-															<Field
-																name="etat_car"
-																component={formValidate.ReactSelectAdapter}
-																validate={formValidate.required}
-																options={constant.etatCarOptions}
-																value={values.etat_car}
-																className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
-															/>
-															<Error name="etat_car"/>
+															<Field name="state" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+																<option></option>
+																<option value="new" note="1">Neuf</option>
+																<option value="very_good" note="1">Très bon état</option>
+																<option value="good" note="1">Bon état</option>
+																<option value="satisfactory" note="0">satisfaisant</option>
+															</Field>
+															<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
+																<i className="fas fa-angle-down text-2xl my-2"></i>
+															</div>
+															<Error name="state"/>
 														</div>
 													</div>
 												</div>
@@ -496,67 +538,44 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 												<div className="flex flex-wrap mt-8 px-4">
 													<label
 														className="block uppercase text-gray-700 text-md font-bold mb-2"
-														htmlFor="origin_car"
+														htmlFor="country"
 													>
 														Q10- Origine du véhicule :
 													</label>
 													<div className="relative flex w-full flex-wrap items-stretch mb-3">
-														<Field
-															name="origin_car"
-															component={formValidate.ReactSelectAdapter}
-															validate={formValidate.required}
-															options={constant.originCarOptions}
-															value={values.origin_car}
-															className="placeholder-gray-400 text-gray-700 relative rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full"
-														/>
-														<Error name="origin_car"/>
+														<Field name="country" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+															<option></option>
+															<option value="FR" note="1">française</option>
+															<option value="ZZ" note="0">étrangère</option>
+														</Field>
+														<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
+															<i className="fas fa-angle-down text-2xl my-2"></i>
+														</div>
+														<Error name="country"/>
 													</div>
 												</div>
 
 												<div className="flex flex-wrap mt-12 px-4 align-center justify-center">
 													<a
-															className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
-															onClick={e => {
-																e.preventDefault();
-																setOpenTab(4);
-															}}
-															type="submit"
-															disabled={submitting}
-															data-toggle="tab"
-															href="#link4"
-															role="tablist"
-														>
-															<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i> Envoyer
-															pour voir resultat
+														className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
+														onClick={e => {
+															e.preventDefault();
+															setOpenTab(4);
+														}}
+														data-toggle="tab"
+														href="#link2"
+														role="tablist"
+													>
+														<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
+														Denier étape: publier votre photos d'annonce
 													</a>
 												</div>
 											</div>
 											<div className={openTab === 4 ? "block" : "hidden"} id="link4">
 												<div className="container mx-auto text-center">
-													<h4 className="text-4xl font-semibold">
-														<i className="fas fa-poll animate-bounce"></i> RESULTATS : 1ere
-														NOTE DE CONFIANCE SUR 20
-													</h4>
-													<h4 className="text-2xl font-semibold">
-														<span className="noteTotal text-orange-500">7</span>/20 Annonce
-														offre GRATUITE
-													</h4>
-													<h4 className="text-3xl font-semibold">
-														VOTRE PRIX DE VENTE <span className="marqueModel" value="">Suzuki SWIFT</span> - <span
-														className="dt_entry_service" value="">2012</span> : <span
-														className="price" value=""> 5670 </span> €
-													</h4>
-													<p className="notifyForPrice text-md leading-relaxed text-gray-500 text-left">
-														<i className="fas fa-flag-checkered animate-bounce"></i> Attention
-														le prix de vente de votre annonce n’est pas inscrit dans la
-														colonne de la côte car celle-ci est destinée à l’estimation
-														élaborée et prouvée par nos ingénieurs et experts
-														automobiles.Calculez votre côte personnalisée de votre véhicule
-														avec <Link href="/prix">notre abonnement Premium</Link>.</p>
 													<div
 														className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600">
-														<i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> ETAPE
-														SUIVANTE
+														<i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i>DERNIER ETAPE
 													</div>
 													<p className="text-md leading-relaxed text-gray-500"> Telecharger 10
 														photos MAX pour publier votre annonce ( ficher jpg, png, gif ),
@@ -601,13 +620,16 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 														votre annonce
 													</div>
 													<button
-															className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-															type="button"
-															type="submit"
-															disabled={submitting}
-														>
-															<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> PUBLIER
+														className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+														type="submit"
+														disabled={submitting || invalid}
+
+													>
+														<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> PUBLIER
 													</button>
+													<p className="text-md leading-relaxed text-gray-500"> Votre annonce
+														sera pré-remplie à l’issue de ce questionnaire. Vous ACCEPTEZ
+														les conditions pour publier votre annonce </p>
 													<h4 className="text-xl font-semibold">
 														OU
 													</h4>
@@ -627,9 +649,13 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 															</a>
 														</Link>
 													</button>
-													<p className="text-md leading-relaxed text-gray-500"> Votre annonce
-														sera pré-remplie à l’issue de ce questionnaire. Vous ACCEPTEZ
-														les conditions pour publier votre annonce </p>
+													<p className="notifyForPrice text-md leading-relaxed text-gray-500 text-left">
+														<i className="fas fa-flag-checkered animate-bounce"></i> Attention
+														le prix de vente de votre annonce n’est pas inscrit dans la
+														colonne de la côte car celle-ci est destinée à l’estimation
+														élaborée et prouvée par nos ingénieurs et experts
+														automobiles.Calculez votre côte personnalisée de votre véhicule
+														avec <Link href="/prix">notre abonnement Premium</Link>.</p>
 												</div>
 											</div>
 										</div>
@@ -644,11 +670,9 @@ const QuestionsClassic = ({dispatch, loading, response, hasErrors}) => {
 	);
 }
 
-/*const mapStateToProps = (state) => ({
-  loading: state.response.loading,
-  response: state.response.response,
-  hasErrors: state.response.hasErrors,
+const mapStateToProps = (state) => ({
+	loading: state.carReducer.loading,
+	car: state.carReducer.car,
+	hasErrors: state.carReducer.hasErrors,
 })
-export default connect(mapStateToProps)(QuestionsClassic)*/
-
-export default QuestionsClassic
+export default connect(mapStateToProps)(QuestionsClassic)

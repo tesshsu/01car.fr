@@ -1,8 +1,9 @@
 import client from '../client';
+import {authHeader, jsonHeader} from "../authRequest";
 
 export function create(payload) {
   return client
-    .post('/api/v1/cars', payload)
+      .post('/api/v1/cars', payload)
     .then(({ data }) => data);
 }
 

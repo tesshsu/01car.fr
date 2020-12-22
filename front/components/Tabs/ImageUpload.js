@@ -41,7 +41,9 @@ export function ImageUpload() {
               Telecharger ici
             </button>
             &nbsp;
-            <button className="upload bg-gray-600 text-white px-4 py-2 rounded shadow mr-1 mt-2" onClick={onImageRemoveAll}>Supprimer toutes</button>
+			{imageList.length > 0 ? (
+              <button className="upload bg-gray-600 text-white px-4 py-2 rounded shadow mr-1 mt-2" onClick={onImageRemoveAll}>Supprimer toutes</button> ) :( null
+			)}
             <div className="ImagelistPart flex flex-wrap mt-2">	
 				{imageList.map((image, index) => (
 				  <div key={index} className="image-item w-full px-3 flex-1">
@@ -53,6 +55,15 @@ export function ImageUpload() {
 				  </div>
 				))}
 			</div>
+			{imageList.length > 0 ? (
+				<button
+						className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+						type="submit"
+			
+				>
+					<i className="fas fa-paper-plane text-base mr-1 animate-bounce"></i> ENVOYER
+				</button> ) : (null)
+			}
           </div>
         )}
       </ImageUploading>

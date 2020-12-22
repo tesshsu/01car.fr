@@ -21,10 +21,10 @@ export default function Vendre() {
                 const getTokken = async () => {
                     const tok = await localStorage.getItem('ACCESS_TOKEN');
                     if (tok) {
-                        settokken(tok);
+                      //  settokken(tok);
                     }
                 }
-                getTokken();
+               // getTokken();
             } catch (err) {
                 console.log(err);
             }
@@ -83,10 +83,7 @@ export default function Vendre() {
                                         <PubContentThreeIcons/>
                                     </div>
                                 </div>
-                                {!isAuthentificated || (token = null) ? (
-                                    <QuestionsClassic/>) : (
-                                    <QuestionsPremier/>)
-                                }
+                               <QuestionsClassic/>
                             </div>
                         </div>
                     </div>

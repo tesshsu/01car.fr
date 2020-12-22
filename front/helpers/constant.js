@@ -244,13 +244,12 @@ export const classics = [
 	{list: "10 photos gratuites"}
 ];
 export const premiums = [
-    {list: "Rassurer l'acheteur grâce aux réponses"},
+    {list: "Rassurer l'acheteur grâce notre questionnaires"},
     {list: "Tête de liste, grande visibilité"},
     {list: "Logo qualité garantie"},
     {list: "Modifier à tout moment le prix du véhicule"},
     {list: "Estimation du véhicule par des professionnels qualifiés"},
-	{list: "10 photos gratuites"},
-    {list: "Contacter vendeur direct"}
+	{list: "10 photos gratuites"}
 ];
 export const pubTransparents = [
     {icon: "fas fa-database", width: {width: '15%'}, name: "Récupération des données 15%"},
