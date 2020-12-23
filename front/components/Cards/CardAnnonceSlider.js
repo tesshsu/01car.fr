@@ -8,11 +8,11 @@ import ENVS from '../../environment';
 const CardAnnonceSlider = ({ dispatch,
 					  loading,
 					  car}) => {
-    
 
-	
+
+
 	let uploadFiles = car?.uploads
-	
+
 	const settings = {
 		  customPaging: function(i) {
 				return (
@@ -43,17 +43,25 @@ const CardAnnonceSlider = ({ dispatch,
 				}
 			  ]
 		};
-	
-	
+
+    //const imgSrc = uploadFiles ? (ENVS.DEV.API_URL + uploadFile.url) : (require("assets/img/car/default.jpg"))
+	//const imgAlt = uploadFiles ? uploadFile.name : "defalut carImg"
 	return (
         <>
-		  <Slider {...settings}>
-            {uploadFiles?.map(uploadFile => (
+			{uploadFiles?.length > 0 ? (
+				<Slider {...settings}>
+					{
+						uploadFiles?.map(uploadFile => (
+							<div>
+								<img class="sliderImg" src={ENVS.DEV.API_URL + uploadFile.url} alt={uploadFile.name}/>
+							</div>
+						))}
+				</Slider> ) : (
 				<div>
-				  <img class="sliderImg" src={ ENVS.DEV.API_URL + uploadFile.url } alt={uploadFile.name} />
+					<img className="sliderImg" src={require("assets/img/car/default_big.jpg")} alt="defalut carImg"/>
 				</div>
-			))}          
-          </Slider>
+			 )
+			}
         </>
     );
   }

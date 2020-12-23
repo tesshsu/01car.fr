@@ -19,3 +19,7 @@ export function search(perPage, page) {
       .then(({ data }) => data);
 }
 
+export async function addPhoto(carId, payload) {
+  return client
+      .post(`/api/v1/cars/${carId}/uploads`, payload);
+}

@@ -1,5 +1,5 @@
 // Create Redux action types
-import {authHeader, jsonHeader} from '../../api/authRequest';
+import {authHeader, jsonHeader, jsonHeaderPhoto} from '../../api/authRequest';
 import * as API from "../../api";
 import * as LOADING_OVERLAY_ACTIONS from './loadingOverlay';
 export const GET_CAR = 'GET_CAR'
@@ -108,6 +108,28 @@ export function create(payload) {
   };
 }
 
+export function addPhoto(carId, payload) {
+  return async (dispatch) => {
+    try {
+      const response = await API.Annonces.create(
+          payload
+      );
+      console.log("data_dispatch ", response);
+      dispatch({
+        type: CREATE_CAR_SUCCESS,
+        payload: {
+          response
+        }
+      });
+    } catch (err) {
+      await dispatch(createCarFailure());
+      throw err;
+      console.log(err);
+    } finally {
+      dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
+    }
+  };
+}
 
 export function update(car) {
   return {
