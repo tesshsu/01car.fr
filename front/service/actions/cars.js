@@ -14,7 +14,12 @@ export const GET_CARS_FAILURE = 'GET_CARS_FAILURE'
 export const CREATE_CAR = 'CREATE_CAR';
 export const CREATE_CAR_SUCCESS = 'CREATE_CAR_SUCCESS';
 export const CREATE_CAR_FAILURE = 'CREATE_CAR_FAILURE';
-  export const UPDATE_CAR = 'UPDATE_CAR';
+export const UPDATE_CAR = 'UPDATE_CAR';
+
+export const ADD_CAR_PHOTO = 'ADD_CAR_PHOTO';
+export const ADD_CAR_PHOTO_SUCCESS = 'ADD_CAR_PHOTO_SUCCESS';
+export const ADD_CAR_PHOTO_FAILURE = 'ADD_CAR_PHOTO_SUCCESS';
+
 // Create Redux action creators that return an action
 export const getCar = () => ({
   type: GET_CAR,
@@ -55,6 +60,12 @@ export const createCarsSuccess = (response) => ({
 export const createCarFailure = () => ({
   type: CREATE_CAR_FAILURE,
 })
+
+export const addCarPhotoFailure = () => ({
+  type: ADD_CAR_PHOTO_FAILURE,
+})
+
+
 
 // Combine them all in an asynchronous thunk
 export function fetchCars(page=1, perPage=18) {
@@ -108,21 +119,22 @@ export function create(payload) {
   };
 }
 
-export function addPhoto(carId, payload) {
-  return async (dispatch) => {
+export function addPhoto(payload) {
+  return async (dispatch, getState) => {
+	const { car } = getState().car;
     try {
-      const response = await API.Annonces.create(
-          payload
+      const response = await API.Annonces.addPhoto(
+        car.id,  payload
       );
       console.log("data_dispatch ", response);
       dispatch({
-        type: CREATE_CAR_SUCCESS,
+        type: ADD_CAR_PHOTO_SUCCESS,
         payload: {
           response
         }
       });
     } catch (err) {
-      await dispatch(createCarFailure());
+      await dispatch(addCarPhotoFailure());
       throw err;
       console.log(err);
     } finally {
@@ -140,17 +152,3 @@ export function update(car) {
   };
 }
 
-/*export function create(payload) {
-  return async (dispatch) => {
-    //const { loggedUser } = getState().loggedUser;
-    try {
-      const car = await API.Annonces.create(payload);
-      console.log("InAPIdata=", car);
-      dispatch(update(car));
-
-    } catch (error) {
-      console.warn(error);
-      throw err;
-    }
-  }
-}*/

@@ -20,6 +20,7 @@ export function search(perPage, page) {
 }
 
 export async function addPhoto(carId, payload) {
+  payload.id = carId;
   return client
       .post(`/api/v1/cars/${carId}/uploads`, payload);
 }
