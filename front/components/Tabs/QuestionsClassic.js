@@ -578,19 +578,23 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 															</p>
 														</div>
 															) : (
-														<a
-															className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
-															onClick={e => {
-																e.preventDefault();
-																setOpenTab(4);
-															}}
-															data-toggle="tab"
-															href="#link2"
-															role="tablist"
-														>
-															<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
-															Denier étape: publier votre photos d'annonce
-														</a> )
+														<div className="finalStep text-center">
+															<p className="text-md leading-relaxed text-gray-500">Felicitation! Votre annonces est bien envoyer!!</p>
+															<a
+																	className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
+																	onClick={e => {
+																		e.preventDefault();
+																		setOpenTab(4);
+																	}}
+																	data-toggle="tab"
+																	href="#link2"
+																	role="tablist"
+																>
+																	<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
+																	Denier étape: publier votre photos d'annonce
+																</a>
+														</div>
+															)
 													}
 												</div>
 											</div>

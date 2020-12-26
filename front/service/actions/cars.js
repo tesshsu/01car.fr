@@ -124,7 +124,7 @@ export function addPhoto(payload) {
 	const { car } = getState().car;
     try {
       const response = await API.Annonces.addPhoto(
-        car.id,  payload
+          car.id,  payload
       );
       console.log("data_dispatch ", response);
       dispatch({
