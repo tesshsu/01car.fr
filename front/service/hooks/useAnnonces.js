@@ -16,8 +16,17 @@ export default function useAnnonces() {
     }
   }, [dispatch]);
 
+  const addPhoto = useCallback(async (payload) => {
+    try {
+      await dispatch(ANNONCES_ACTIONS.addPhoto(payload));
+    } catch (err) {
+      console.log("add_car_photo_error", err);
+    }
+  }, [dispatch]);
+
   return {
     create,
+    addPhoto,
     fetchAnnonces
   };
 }

@@ -1,5 +1,5 @@
 // Create Redux action types
-import {authHeader, jsonHeader} from '../../api/authRequest';
+import {authHeader, jsonHeader, jsonHeaderPhoto} from '../../api/authRequest';
 import * as API from "../../api";
 import * as LOADING_OVERLAY_ACTIONS from './loadingOverlay';
 export const GET_CAR = 'GET_CAR'
@@ -14,7 +14,12 @@ export const GET_CARS_FAILURE = 'GET_CARS_FAILURE'
 export const CREATE_CAR = 'CREATE_CAR';
 export const CREATE_CAR_SUCCESS = 'CREATE_CAR_SUCCESS';
 export const CREATE_CAR_FAILURE = 'CREATE_CAR_FAILURE';
-  export const UPDATE_CAR = 'UPDATE_CAR';
+export const UPDATE_CAR = 'UPDATE_CAR';
+
+export const ADD_CAR_PHOTO = 'ADD_CAR_PHOTO';
+export const ADD_CAR_PHOTO_SUCCESS = 'ADD_CAR_PHOTO_SUCCESS';
+export const ADD_CAR_PHOTO_FAILURE = 'ADD_CAR_PHOTO_SUCCESS';
+
 // Create Redux action creators that return an action
 export const getCar = () => ({
   type: GET_CAR,
@@ -55,6 +60,12 @@ export const createCarsSuccess = (response) => ({
 export const createCarFailure = () => ({
   type: CREATE_CAR_FAILURE,
 })
+
+export const addCarPhotoFailure = () => ({
+  type: ADD_CAR_PHOTO_FAILURE,
+})
+
+
 
 // Combine them all in an asynchronous thunk
 export function fetchCars(page=1, perPage=18) {
@@ -108,6 +119,29 @@ export function create(payload) {
   };
 }
 
+export function addPhoto(payload) {
+  return async (dispatch, getState) => {
+	//const { car } = getState().car;
+    try {
+      const response = await API.Annonces.addPhoto(
+          payload
+      );
+      console.log("data_dispatch ", response);
+      dispatch({
+        type: ADD_CAR_PHOTO_SUCCESS,
+        payload: {
+          response
+        }
+      });
+    } catch (err) {
+      await dispatch(addCarPhotoFailure());
+      throw err;
+      console.log(err);
+    } finally {
+      dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
+    }
+  };
+}
 
 export function update(car) {
   return {
@@ -118,17 +152,3 @@ export function update(car) {
   };
 }
 
-/*export function create(payload) {
-  return async (dispatch) => {
-    //const { loggedUser } = getState().loggedUser;
-    try {
-      const car = await API.Annonces.create(payload);
-      console.log("InAPIdata=", car);
-      dispatch(update(car));
-
-    } catch (error) {
-      console.warn(error);
-      throw err;
-    }
-  }
-}*/

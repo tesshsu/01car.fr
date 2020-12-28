@@ -29,6 +29,7 @@ import Router from "next/router";
 const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 	const [openTab, setOpenTab] = React.useState(1);
 	const [showModal, setShowModal] = React.useState(false);
+	const [isFirst,setIsFrist] = React.useState(true)
 	const sendPostQuestionsvalues ={
 		brand: "",
 		model: "",
@@ -57,10 +58,9 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 		sale_reason: "",
 		hand_number: "",
 		state : "",
-		country: "",
-		equipments: {}
+		country: ""
 	}
-    
+
 	const {
 		isAuthentificated
 	} = useLoggedUser();
@@ -87,7 +87,8 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 			const data = {...payload};
 			await create(data);
 			if(data) {
-				Router.push('/annonces');
+				//Router.push('/annonces');
+				setIsFrist(false)
 			}
 		} catch (err) {
 			console.log(err);
@@ -549,20 +550,52 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 													</div>
 												</div>
 
-												<div className="flex flex-wrap mt-12 px-4 align-center justify-center">
-													<a
-														className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
-														onClick={e => {
-															e.preventDefault();
-															setOpenTab(4);
-														}}
-														data-toggle="tab"
-														href="#link2"
-														role="tablist"
-													>
-														<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
-														Denier étape: publier votre photos d'annonce
-													</a>
+												<div className="flex flex-wrap mt-6 px-4 align-center justify-center">
+													{isFirst ? (
+														<div className="sendQuestions text-center">
+															<button
+																className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+																type="submit"
+																disabled={submitting || invalid}
+
+															>
+																<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER
+															</button>
+															<p className="text-md leading-relaxed text-gray-500">
+																Votre annonce
+																sera pré-remplie à l’issue de ce questionnaire. Vous ACCEPTEZ
+																les conditions pour publier votre annonce
+																<Link href="/footer/policy">
+																	<a
+																		href="#"
+																		className={
+																			"text-sm font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
+																		}
+																	>
+																		Lire la politique de confidentialité
+																	</a>
+																</Link>
+															</p>
+														</div>
+															) : (
+														<div className="finalStep text-center">
+															<p className="text-md leading-relaxed text-gray-500">Felicitation! Votre annonces est bien envoyer!!</p>
+															<a
+																	className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
+																	onClick={e => {
+																		e.preventDefault();
+																		setOpenTab(4);
+																	}}
+																	data-toggle="tab"
+																	href="#link2"
+																	role="tablist"
+																>
+																	<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
+																	Denier étape: publier votre photos d'annonce
+																</a>
+														</div>
+															)
+													}
 												</div>
 											</div>
 											<div className={openTab === 4 ? "block" : "hidden"} id="link4">
@@ -610,22 +643,10 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 													<ImageUpload/>
 													<div
 														className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600">
-														<i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> Publier
-														votre annonce
+														<i className="fas fa-paper-plane text-base mr-1 animate-bounce"></i> C’est parti!
 													</div>
-													<button
-														className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-														type="submit"
-														disabled={submitting || invalid}
-
-													>
-														<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> PUBLIER
-													</button>
-													<p className="text-md leading-relaxed text-gray-500"> Votre annonce
-														sera pré-remplie à l’issue de ce questionnaire. Vous ACCEPTEZ
-														les conditions pour publier votre annonce </p>
 													<h4 className="text-xl font-semibold">
-														OU
+														ET VOUS POUVEZ
 													</h4>
 													<button
 														className="button-payer-top-list bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
