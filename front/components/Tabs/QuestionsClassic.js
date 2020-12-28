@@ -26,10 +26,11 @@ import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
 import PubContentConnection from "layouts/PubContentConnection.js";
 import Router from "next/router";
 
-const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
+const QuestionsClassic = ({dispatch, loading, car}) => {
 	const [openTab, setOpenTab] = React.useState(1);
 	const [showModal, setShowModal] = React.useState(false);
 	const [isFirst,setIsFrist] = React.useState(true)
+	const [hasErrors, setHasErrors] = React.useState(true)
 	const sendPostQuestionsvalues ={
 		brand: "",
 		model: "",
@@ -87,12 +88,11 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 			const data = {...payload};
 			await create(data);
 			if(data) {
-				//Router.push('/annonces');
 				setIsFrist(false)
 			}
 		} catch (err) {
 			console.log(err);
-			alert('Impossible de créer annonce, merci de constacter notre equipe');
+			setHasErrors(true)
 		}
 	}
 
@@ -173,26 +173,6 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 								véhicule
 							</a>
 						</li>
-						<li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
-							<a
-								className={
-									"text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
-									(openTab === 4
-										? "text-white bg-orange-500"
-										: "text-gray-600 bg-white")
-								}
-								onClick={e => {
-									e.preventDefault();
-									setOpenTab(4);
-								}}
-								data-toggle="tab"
-								href="#link3"
-								role="tablist"
-							>
-								<i class="fas fa-bullhorn"></i> Denier etape : publier
-							</a>
-						</li>
-
 					</ul>
 					<div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
 						<div className="px-4 py-5 flex-auto">
@@ -339,7 +319,7 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="owner_type"
 														>
-															Q1 - VOUS êtes :
+															* Q1 - VOUS êtes :
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
@@ -360,7 +340,7 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="available"
 														>
-															Q2 - Votre véhicule est disponible :
+															* Q2 - Votre véhicule est disponible :
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
@@ -388,7 +368,7 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="smoking"
 														>
-															Q3 - Votre véhicule est :
+															* Q3 - Votre véhicule est :
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
@@ -409,7 +389,7 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="duplicate_keys"
 														>
-															Q4 - Avez-vous le Double des clés :
+															* Q4 - Avez-vous le Double des clés :
 														</label>
 														<div
 															className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
@@ -428,7 +408,7 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 														className="block uppercase text-gray-700 text-md font-bold mb-2"
 														htmlFor="sale_reason"
 													>
-														Q5 - Pourquoi vendez-vous votre véhicule ?
+														* Q5 - Pourquoi vendez-vous votre véhicule ?
 													</label>
 													<div className="relative flex w-full flex-wrap items-stretch mb-3">
 														<Field name="sale_reason" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
@@ -466,7 +446,7 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 														className="block uppercase text-gray-700 text-md font-bold mb-2"
 														htmlFor="estimate_price"
 													>
-														Q6- Annoncez votre prix de vente :
+														* Q6- Annoncez votre prix de vente :
 													</label>
 													<Field
 														name="estimate_price"
@@ -493,7 +473,7 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="hand_number"
 														>
-															Q8 - Nombre de mains:
+															* Q8 - Nombre de mains:
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
@@ -513,7 +493,7 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="state"
 														>
-															Q9- État du véhicule:
+															* Q9- État du véhicule:
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
@@ -535,7 +515,7 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 														className="block uppercase text-gray-700 text-md font-bold mb-2"
 														htmlFor="country"
 													>
-														Q10- Origine du véhicule :
+														* Q10- Origine du véhicule :
 													</label>
 													<div className="relative flex w-full flex-wrap items-stretch mb-3">
 														<Field name="country" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
@@ -551,35 +531,55 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 												</div>
 
 												<div className="flex flex-wrap mt-6 px-4 align-center justify-center">
-													{isFirst ? (
-														<div className="sendQuestions text-center">
-															<button
-																className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-																type="submit"
-																disabled={submitting || invalid}
-
-															>
-																<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER
-															</button>
-															<p className="text-md leading-relaxed text-gray-500">
-																Votre annonce
-																sera pré-remplie à l’issue de ce questionnaire. Vous ACCEPTEZ
-																les conditions pour publier votre annonce
-																<Link href="/footer/policy">
-																	<a
-																		href="#"
-																		className={
-																			"text-sm font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
-																		}
+													{isFirst && !!hasErrors ? (
+														<div className="finalBlock text-center">
+															{invalid ? (
+																<div className="sendQuestions text-center">
+																	<button
+																		className="bg-gray-600 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+																		type="submit"
+																		disabled={invalid}
 																	>
-																		Lire la politique de confidentialité
-																	</a>
-																</Link>
-															</p>
+																		<i className="fas fa-exclamation-circle text-base mr-1 animate-bounce"></i> Veuillez remplir tous les champs
+
+																	</button>
+																	<p className="text-md leading-relaxed text-gray-500">
+																		Veuillez verifier les champs avec * pour repondre votre questionnaire
+																	</p>
+																</div>
+																	) : (
+																  <div className="sendQuestions text-center">
+																		<button
+																		className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+																		type="submit"
+																		disabled={submitting}
+																	    >
+																		  <i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER
+																	    </button>
+																		<p className="text-md leading-relaxed text-gray-500">
+																			Votre annonce
+																			sera pré-remplie à l’issue de ce questionnaire. Vous ACCEPTEZ
+																			les conditions pour publier votre annonce
+																			<Link href="/footer/policy">
+																				<a
+																					href="#"
+																					className={
+																						"text-sm font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
+																						}
+																				>
+																				   Lire la politique de confidentialité
+																				</a>
+																			</Link>
+																		</p>
+																  </div>
+															   )
+															}
+
 														</div>
 															) : (
 														<div className="finalStep text-center">
-															<p className="text-md leading-relaxed text-gray-500">Felicitation! Votre annonces est bien envoyer!!</p>
+															<p className="text-xl leading-relaxed text-gray-800">Felicitation! Votre annonces est bien envoyer!! <i
+																className="far fa-thumbs-up animate-ping"></i></p>
 															<a
 																	className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
 																	onClick={e => {
@@ -686,8 +686,8 @@ const QuestionsClassic = ({dispatch, loading, car, hasErrors}) => {
 }
 
 const mapStateToProps = (state) => ({
-	loading: state.carReducer.loading,
-	car: state.carReducer.car,
-	hasErrors: state.carReducer.hasErrors,
+	loading: state.car.loading,
+	car: state.car.car,
+	hasErrors: state.car.hasErrors,
 })
 export default connect(mapStateToProps)(QuestionsClassic)

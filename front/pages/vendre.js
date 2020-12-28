@@ -9,27 +9,9 @@ import useLoggedUser from 'service/hooks/useLoggedUser';
 
 export default function Vendre() {
     const {
-        isAuthentificated,
-        loggedUser
+        isAuthentificated
     } = useLoggedUser();
 
-    let [token, settokken] = useState(null);
-
-    useEffect(() => {
-        if (isAuthentificated && loggedUser) {
-            try {
-                const getTokken = async () => {
-                    const tok = await localStorage.getItem('ACCESS_TOKEN');
-                    if (tok) {
-                      //  settokken(tok);
-                    }
-                }
-               // getTokken();
-            } catch (err) {
-                console.log(err);
-            }
-        }
-    }, [isAuthentificated, loggedUser]);
     return (
         <>
             <IndexNavbar fixed/>
@@ -75,7 +57,7 @@ export default function Vendre() {
                         <div
                             className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
                             <h1 className="font-bold text-4xl text-orange-700 mt-4 text-center">
-                                Répondez au questionnaire de confiance afin de vendre votre véhicule
+                                Publier et vendre votre véhicule
                             </h1>
                             <div className="px-6">
                                 <div className="flex flex-wrap justify-center">
@@ -88,7 +70,7 @@ export default function Vendre() {
                         </div>
                     </div>
                 </section>
-                {!isAuthentificated || (token = null) ? (
+                {!isAuthentificated ? (
                     <PubContent/>) : (null)
                 }
             </main>

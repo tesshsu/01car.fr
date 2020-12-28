@@ -5,7 +5,7 @@ import * as ANNONCES_ACTIONS from '../actions/cars';
 
 export default function useAnnonces() {
   const dispatch = useDispatch();
-
+  const car = useSelector(state => state.car);
   const fetchAnnonces = useCallback(() => dispatch(ANNONCES_ACTIONS.fetchCars(page=1, perPage=18)), [dispatch]);
 
   const create = useCallback(async (payload) => {
@@ -25,6 +25,7 @@ export default function useAnnonces() {
   }, [dispatch]);
 
   return {
+    car: car,
     create,
     addPhoto,
     fetchAnnonces
