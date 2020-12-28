@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { loadStripe } from "@stripe/stripe-js";
-
+import Router from "next/router";
 const stripePromise = loadStripe("pk_test_51HgmzIBjqnSC21bhUov33uWhuXhCFQBnwRcy1pfJgKmXv42GkV7vLZJ0uNR26SdEUomqGHDnGhCXvxn0MY6GjIg100F67arXkO");
 
 const ProductDisplay = ({ handleClick }) => (
@@ -61,6 +61,9 @@ export default function ModalPayment() {
 		  sessionId: session.id,
 		});
 
+		if(result){
+			Router.push("/vendre");
+		}
 		if (result.error) {
 		  // If `redirectToCheckout` fails due to a browser or network
 		  // error, display the localized error message to your customer

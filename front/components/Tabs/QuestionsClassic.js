@@ -14,7 +14,8 @@ import {
 	etatCarOptions,
 	furmeurOptions,
 	OuiOptions,
-	originCarOptions
+	originCarOptions,
+	autre_equipements
 } from 'helpers/constant';
 import * as formValidate from 'helpers/formValidate';
 import {Condition, Error} from 'helpers/formValidate';
@@ -58,7 +59,8 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 		sale_reason: "",
 		hand_number: "",
 		state : "",
-		country: ""
+		country: "",
+		comfort: ""
 	}
 
 	const {
@@ -178,7 +180,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 							<Form
 								initialValues={sendPostQuestionsvalues}
 								onSubmit={onSubmit}
-								render={({submitError, handleSubmit, form, submitting, pristine, values, invalid}) => (
+								render={({handleSubmit, form, submitting, values, invalid}) => (
 									<form onSubmit={handleSubmit}>
 										<div className="tab-content tab-space">
 											<div className={openTab === 1 ? "block" : "hidden"} id="link1">
@@ -459,6 +461,18 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 													<Error name="estimate_price"/>
 												</div>
 
+												<div className="flex flex-wrap px-4">
+													<label
+														className="border border-gray-400 hover:border-gray-500 px-2 py-2 rounded shadow leading-tight">
+														<Field
+															name="comfort"
+															component="input"
+															type="checkbox"
+															value="start_stop_system"
+														/>{' '}
+														système Start & Stop
+													</label>
+												</div>
 												<div className="flex flex-wrap mt-12 px-4">
 													<p className="block uppercase text-gray-700 text-md font-bold mb-2">Q7-
 														Équipements de série et options :</p>

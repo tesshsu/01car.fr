@@ -43,8 +43,8 @@ export const OuiOptions = [
 
 export const NonOptions = [
     {note: 0, label: '', value: ''},
-    {note: 1, label: 'Non', value: 'false'},
-    {note: 0, label: 'Oui', value: 'true'}
+    {note: 1, label: 'Non', value: '0'},
+    {note: 0, label: 'Oui', value: '1'}
 ]
 
 export const raisonVendreOptions = [

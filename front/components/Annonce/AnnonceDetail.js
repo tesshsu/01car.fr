@@ -8,22 +8,19 @@ import FavorisButton from 'components/Favoris/FavorisButton';
 import ShareButton from 'components/Annonce/ShareButton';
 import {fetchCar} from 'service/actions/cars';
 import Moment from 'react-moment';
-import moment from 'moment';
 
 import {connect} from 'react-redux'
 import {useRouter} from "next/router";
 
 const AnnonceDetail = ({
 						   dispatch,
-						   car,
-						   hasErrors,
-						   loading,
+						   car
 					   }) => {
 	const router = useRouter();
 	useEffect(() => {
 		dispatch(fetchCar(router.query.id))
 	}, [dispatch])
-	
+
 	return (
 		<>
 			<div className="w-full lg:w-8/12 lg:mb-0 mb-12  my-6 shadow-lg rounded-lg">
@@ -39,7 +36,7 @@ const AnnonceDetail = ({
 					<span className="brand">{car?.brand}</span> - <span className="model">{car?.model}</span> <span
 					className="generation">{car?.generation} | <i class="fas fa-hourglass-half"></i> <Moment element="fr" locale="fr" fromNow>{car?.expire_at}</Moment></span>
 					<span className="favoris"><FavorisButton/></span>
-					
+
 				</h4>
 				<h4 className="marqueBlock font-bold text-2xl text-white mt-16 px-4 py-3">
 					<span className="favoris"><ShareButton/></span>

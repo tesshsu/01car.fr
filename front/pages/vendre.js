@@ -6,11 +6,32 @@ import QuestionsPremier from "components/Tabs/QuestionsPremier.js";
 import PubContent from "layouts/PubContent.js";
 import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
 import useLoggedUser from 'service/hooks/useLoggedUser';
+import {connect} from 'react-redux'
+import {fetchCar} from 'service/actions/cars';
+import {useRouter} from "next/router";
+import useAnnonces from 'service/hooks/useAnnonces';
+import {premium_options_display} from "helpers/constant";
 
-export default function Vendre() {
+const Vendre = ({
+                    dispatch
+                }) => {
+
     const {
         isAuthentificated
     } = useLoggedUser();
+
+    const {
+        car
+    } = useAnnonces();
+
+    const carHasOption = (premium_opt) => {
+        return premium_options_display(premium_opt, car?.options?.prenium?.includes(premium_opt.value));
+    }
+
+    const router = useRouter();
+    useEffect(() => {
+        dispatch(fetchCar(router.query.id))
+    }, [dispatch])
 
     return (
         <>
@@ -56,16 +77,26 @@ export default function Vendre() {
                     <div className="container mx-auto px-4">
                         <div
                             className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
-                            <h1 className="font-bold text-4xl text-orange-700 mt-4 text-center">
-                                Publier et vendre votre véhicule
-                            </h1>
+                            {car?.premium ? (
+                                <h1 className="font-bold text-4xl text-gray-700 mt-4 text-center">
+                                    RÉPONSES AU QUESTIONNAIRES DE CONFIANCE <span className="font-bold text-orange-500">(Premium)</span>
+                                </h1>) : (
+                                <h1 className="font-bold text-4xl text-gray-700 mt-4 text-center">
+                                    Publier et vendre votre véhicule
+                                </h1>
+                            )
+                            }
                             <div className="px-6">
                                 <div className="flex flex-wrap justify-center">
                                     <div className="w-full lg:w-12/12 px-4 lg:order-1">
                                         <PubContentThreeIcons/>
                                     </div>
                                 </div>
-                               <QuestionsClassic/>
+                                { car?.premium ? (
+                                    <QuestionsPremier/>
+                                    ) : ( <QuestionsClassic/> )
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -78,3 +109,11 @@ export default function Vendre() {
         </>
     );
 }
+
+const mapStateToProps = (state) => ({
+    loading: state.carsReducer.loading,
+    car: state.carsReducer.selectedCar,
+    hasErrors: state.carsReducer.hasErrors,
+})
+
+export default connect(mapStateToProps)(Vendre)
