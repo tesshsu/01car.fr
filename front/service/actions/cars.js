@@ -121,10 +121,10 @@ export function create(payload) {
 
 export function addPhoto(payload) {
   return async (dispatch, getState) => {
-	const { car } = getState().car;
+	//const { car } = getState().car;
     try {
       const response = await API.Annonces.addPhoto(
-          car.id,  payload
+          payload
       );
       console.log("data_dispatch ", response);
       dispatch({

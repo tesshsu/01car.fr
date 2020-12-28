@@ -91,7 +91,7 @@ export function ImageUpload() {
                     uploads: [],
                 }}*/
                 onSubmit={onSubmit}
-                render={({handleSubmit, form, submitting}) => (
+                render={({handleSubmit, form, submitting, values}) => (
                     <form onSubmit={handleSubmit}>
                         <div>
                             <Field
