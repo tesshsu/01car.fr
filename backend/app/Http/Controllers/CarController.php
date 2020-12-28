@@ -172,41 +172,53 @@ class CarController extends Controller
 
     public function addFiles(Request $request, $id): \Illuminate\Http\JsonResponse
     {
-        $car = Car::with('uploads')->findOrFail($id);
+        $car = Car::with('uploads')->find($id);
+
+        // check that id are the same
+        if (!isset($car)) {
+            return response()->json(['error' => 'NotFound'], 404);
+        }
         $currentUser = Auth::user();
         if (!$currentUser->canEditCar($car)) {
             return response()->json(['error' => 'Unauthorised'], 403);
         }
 
-        $uploadedFile = $request->file('file');
+        $uploadedFileArr = $request->file('file');
+        if(!is_array($uploadedFileArr)){
+            $uploadedFileArr = array($uploadedFileArr);
+        }
+        
+        foreach ($uploadedFileArr as $uploadedFile) {
+            $path = null;
+            $filename = null;
+            if ($uploadedFile != null) {
+                $path = $car->getUploadPath();
+                $filename = $uploadedFile->getClientOriginalName();
 
-        $path = null;
-        $filename = null;
-        if ($uploadedFile != null) {
-            $path = $car->getUploadPath();
-            $filename = $uploadedFile->getClientOriginalName();
+                // check if file with same name exist
+                if (in_array($filename, $car->uploads()->getResults()->map(function ($item, $key) {
+                    return $item->name;
+                })->toArray())) {
+                    $filename .= '_' . (string)Str::orderedUuid() . '.' . $uploadedFile->getClientOriginalExtension();
+                }
 
-            // check if file with same name exist
-            if(in_array( $filename, $car->uploads()->getResults()->map(function ($item, $key) {return $item->name; })->toArray() )){
-                $filename .= '_' . (string) Str::orderedUuid() . '.' . $uploadedFile->getClientOriginalExtension();
+                Storage::disk('public')->putFileAs(
+                    $path,
+                    $uploadedFile,
+                    $filename
+                );
+
+                $upload = new Upload();
+                // Update attachment information
+                $upload->path = $path;
+                $upload->name = $filename;
+                $upload->mime_content_type = $uploadedFile->getClientMimeType();
+                $upload->size = $uploadedFile->getSize();
+                $upload->save();
+
+                // save new entries
+                $car->uploads()->attach($upload);
             }
-
-            Storage::disk('public')->putFileAs(
-                $path,
-                $uploadedFile,
-                $filename
-            );
-
-            $upload = new Upload();
-            // Update attachment information
-            $upload->path = $path;
-            $upload->name = $filename;
-            $upload->mime_content_type = $uploadedFile->getClientMimeType();
-            $upload->size = $uploadedFile->getSize();
-            $upload->save();
-
-            // save new entries
-            $car->uploads()->attach($upload);
         }
 
         return $this->renderJson($car->id);
