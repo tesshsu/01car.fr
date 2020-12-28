@@ -11,10 +11,10 @@ export const GET_CARS_SUCCESS = 'GET_CARS_SUCCESS'
 export const GET_CARS_FAILURE = 'GET_CARS_FAILURE'
 
 
-export const CREATE_CAR = 'CREATE_CAR';
-export const CREATE_CAR_SUCCESS = 'CREATE_CAR_SUCCESS';
-export const CREATE_CAR_FAILURE = 'CREATE_CAR_FAILURE';
-export const UPDATE_CAR = 'UPDATE_CAR';
+export const CREATE_CAR = 'car/CREATE_CAR';
+export const CREATE_CAR_SUCCESS = 'car/CREATE_CAR_SUCCESS';
+export const CREATE_CAR_FAILURE = 'car/CREATE_CAR_FAILURE';
+export const UPDATE_CAR = 'car/UPDATE_CAR';
 
 export const ADD_CAR_PHOTO = 'ADD_CAR_PHOTO';
 export const ADD_CAR_PHOTO_SUCCESS = 'ADD_CAR_PHOTO_SUCCESS';

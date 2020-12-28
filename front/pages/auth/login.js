@@ -110,13 +110,23 @@ export default function Login() {
                             </Field>
 
 							<div className="text-center mt-6">
-							<button
-							  className="bg-orange-500 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-							  type="submit"
-							  disabled={submitting || invalid}
-							>
-							  Connexion
-							</button>
+							{invalid ?(
+								<button
+								  className="bg-gray-600 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+								  type="submit"
+								  disabled={invalid}
+								>
+								  Error
+								</button> ) : (
+								  <button
+								  className="bg-orange-500 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+								  type="submit"
+								  disabled={submitting}
+								>
+								  Connexion
+								</button>
+								) 
+							}
 						  </div>
                           {submitError || invalid && (
 							 <Notice text="identifiant ou mot de passe incorrects" />
