@@ -16,7 +16,7 @@ export default function useAnnonces() {
     }
   }, [dispatch]);
 
-  const updateCar = useCallback(async (payload) => {
+  const modifyCar = useCallback(async (payload) => {
     try {
       await dispatch(ANNONCES_ACTIONS.updateCar(payload));
     } catch (err) {
@@ -36,7 +36,7 @@ export default function useAnnonces() {
     car: car,
     create,
     addPhoto,
-    updateCar,
+    modifyCar,
     fetchAnnonces
   };
 }

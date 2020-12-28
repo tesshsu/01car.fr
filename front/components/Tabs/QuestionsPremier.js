@@ -20,8 +20,7 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
   const [hasErrors, setHasErrors] = React.useState(true)
     const [isFirst,setIsFrist] = React.useState(true)
   const {
-        create,
-        modifyCar
+      modifyCar
     } = useAnnonces();
 
 	const onSubmit = async (values)=>{

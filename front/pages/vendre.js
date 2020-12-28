@@ -10,9 +10,10 @@ import {connect} from 'react-redux'
 import {fetchCar} from 'service/actions/cars';
 import {useRouter} from "next/router";
 import useAnnonces from 'service/hooks/useAnnonces';
+import {premium_options_display} from "helpers/constant";
+
 const Vendre = ({
-                    dispatch,
-                    car
+                    dispatch
                 }) => {
 
     const {
@@ -20,8 +21,12 @@ const Vendre = ({
     } = useLoggedUser();
 
     const {
-        create
+        car
     } = useAnnonces();
+
+    const carHasOption = (premium_opt) => {
+        return premium_options_display(premium_opt, car?.options?.prenium?.includes(premium_opt.value));
+    }
 
     const router = useRouter();
     useEffect(() => {
@@ -72,24 +77,24 @@ const Vendre = ({
                     <div className="container mx-auto px-4">
                         <div
                             className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
-                            <h1 className="font-bold text-4xl text-orange-700 mt-4 text-center">
-                                Publier et vendre votre véhicule
-                            </h1>
+                            {car?.premium ? (
+                                <h1 className="font-bold text-4xl text-gray-700 mt-4 text-center">
+                                    RÉPONSES AU QUESTIONNAIRES DE CONFIANCE <span className="font-bold text-orange-500">(Premium)</span>
+                                </h1>) : (
+                                <h1 className="font-bold text-4xl text-gray-700 mt-4 text-center">
+                                    Publier et vendre votre véhicule
+                                </h1>
+                            )
+                            }
                             <div className="px-6">
                                 <div className="flex flex-wrap justify-center">
                                     <div className="w-full lg:w-12/12 px-4 lg:order-1">
                                         <PubContentThreeIcons/>
                                     </div>
                                 </div>
-                                <QuestionsClassic/>
-                                { create.length > 0 ? (
-                                    <div className="container mx-auto mt-6">
-                                        <h1 className="font-bold text-4xl text-orange-700 mt-4 text-center">
-                                            RÉPONSES AU QUESTIONNAIRES DE CONFIANCE
-                                        </h1>
-                                        <QuestionsPremier/>
-                                    </div>
-                                    ) : ( null )
+                                { car?.premium ? (
+                                    <QuestionsPremier/>
+                                    ) : ( <QuestionsClassic/> )
                                 }
 
                             </div>

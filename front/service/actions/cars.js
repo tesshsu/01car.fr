@@ -157,12 +157,13 @@ export function addPhoto(payload) {
   };
 }
 
-export function modifyCar(id) {
-  return async (dispatch) => {
+export function modifyCar(id, response) {
+  return async (dispatch, getState) => {
+    const { car } = getState().car;
     dispatch(updateCar())
 
     try {
-      const response = await API.Annonces.updateCar(id);
+      const car = await API.Annonces.updateCar(car.id, response);
       dispatch(updateCarSuccess(response));
 
     } catch (error) {
