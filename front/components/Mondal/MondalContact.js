@@ -19,7 +19,7 @@ const ModalContact = ({ dispatch,
       {showModal ? (
         <>
           <div
-            className="justify-center items-center flex overflow-x-hidden overflow-y-auto inset-0 z-50 outline-none focus:outline-none"
+            className="justify-center items-center flex overflow-x-hidden overflow-y-auto inset-0 z-10 outline-none focus:outline-none"
             onClick={() => setShowModal(false)}
           >
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
@@ -49,7 +49,7 @@ const ModalContact = ({ dispatch,
 								</div>
 								<div className="w-full flex-1">
 								  <span className="text-md block my-2 text-orange-500 underline vendeurPhone">{car?.owner.phone}</span>
-								</div>						
+								</div>
 							  </div>
 						</div> ) : (null)
 					}
@@ -60,9 +60,9 @@ const ModalContact = ({ dispatch,
 								</div>
 								<div className="w-full flex-1">
 								  <span className="text-md block my-2 text-orange-500 underline vendeurEmail"><a href={`mailto:${car?.owner.email}`}>en clicker ici</a></span>
-								</div>			
+								</div>
 						</div>
-                        <ContactVendeur transparent />						
+                        <ContactVendeur transparent />
 					</div>
 
                 </div>

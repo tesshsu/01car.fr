@@ -1,5 +1,6 @@
 import React from "react";
 import {Field, Form} from 'react-final-form';
+import {connect} from 'react-redux'
 import {
 	antivol_equipements,
 	autre_equipements,
@@ -11,10 +12,11 @@ import {
 import {Condition} from 'helpers/formValidate';
 import useAnnonces from 'service/hooks/useAnnonces';
 
-const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
+const QuestionsOptions = ({dispatch, loading, car}) => {
 	const {
 		create
 	} = useAnnonces();
+
 	const sendPostEquipevalues = {
 		outside: [],
 		inside: [],
@@ -50,7 +52,7 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 										className="uppercase text-gray-700 text-sm"
 										htmlFor="outside"
 									>
-										Q7 - 1 ÉQUIPEMENTS EXTÉRIEUR ET CHÂSSIS
+										1 ÉQUIPEMENTS EXTÉRIEUR ET CHÂSSIS
 									</label>
 									<Field name="question-outside" component="input" type="checkbox" className="ml-2 form-checkbox" />
 									<div className="relative flex w-full flex-wrap items-stretch mb-3">
@@ -78,7 +80,7 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 										className="uppercase text-gray-700 text-sm"
 										htmlFor="question-7-2"
 									>
-										Q7 - 2 Intérieur
+										2 Intérieur
 									</label>
 									<Field name="question-inside" component="input" type="checkbox"
 										   className="ml-2 form-checkbox">
@@ -109,7 +111,7 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 										className="uppercase text-gray-700 text-sm"
 										htmlFor="question-7-3"
 									>
-										Q7 - 3 Sécurité
+										3 Sécurité
 									</label>
 									<Field name="question-security" component="input" type="checkbox"
 										   className="ml-2 form-checkbox">
@@ -140,7 +142,7 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 										className="uppercase text-gray-700 text-sm"
 										htmlFor="anti_theft"
 									>
-										Q7 - 4 Antivol
+										4 Antivol
 									</label>
 									<Field name="question-theft" component="input" type="checkbox"
 										   className="ml-2 form-checkbox">
@@ -171,7 +173,7 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 										className="uppercase text-gray-700 text-sm"
 										htmlFor="comfort"
 									>
-										Q7- 5 CONFORT
+										5 CONFORT
 									</label>
 									<Field name="question-comfort" component="input" type="checkbox"
 										   className="ml-2 form-checkbox">
@@ -202,7 +204,7 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 										className="uppercase text-gray-700 text-sm"
 										htmlFor="other"
 									>
-										Q7 -6 AUTRES
+										6 AUTRES
 									</label>
 									<Field name="question-other" component="input" type="checkbox"
 										   className="ml-2 form-checkbox">
@@ -236,11 +238,9 @@ const QuestionsOptions = ({dispatch, loading, response, hasErrors}) => {
 	);
 }
 
-/*const mapStateToProps = (state) => ({
-  loading: state.response.loading,
-  response: state.response.response,
-  hasErrors: state.response.hasErrors,
+const mapStateToProps = (state) => ({
+	loading: state.car.loading,
+	car: state.car.car,
+	hasErrors: state.car.hasErrors,
 })
-export default connect(mapStateToProps)(QuestionsOptions)*/
-
-export default QuestionsOptions
+export default connect(mapStateToProps)(QuestionsOptions)

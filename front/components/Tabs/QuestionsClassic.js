@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import Link from "next/link";
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import QuestionsOptions from "components/Tabs/QuestionsOptions.js";
 import ImageUpload from "components/Tabs/ImageUpload.js";
@@ -24,7 +23,7 @@ import useAnnonces from 'service/hooks/useAnnonces';
 import { Modal } from "react-responsive-modal";
 import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
 import PubContentConnection from "layouts/PubContentConnection.js";
-import Router from "next/router";
+
 
 const QuestionsClassic = ({dispatch, loading, car}) => {
 	const [openTab, setOpenTab] = React.useState(1);
@@ -103,7 +102,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 				{showModal ? (
 					<>
 						<Modal closeOnEsc={false} open={open} onClose={() => setShowModal(true)}>
-							<h2 className="text-2xl font-semibold text-center">Connectez-vous pour répondez au questionnaire de confiance</h2>
+							<h2 className="text-2xl font-semibold text-center">Connectez-vous pour accéder au questionnaire de confiance</h2>
 							<PubContentThreeIcons />
 							<PubContentConnection />
 						</Modal>
@@ -446,7 +445,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														className="block uppercase text-gray-700 text-md font-bold mb-2"
 														htmlFor="estimate_price"
 													>
-														* Q6- Annoncez votre prix de vente :
+														* Q6- Indiquez votre prix de vente :
 													</label>
 													<Field
 														name="estimate_price"
@@ -591,7 +590,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 																	role="tablist"
 																>
 																	<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
-																	Denier étape: publier votre photos d'annonce
+																    Dernière étape : Télécharger vos photos pour publier votre annonce
 																</a>
 														</div>
 															)
@@ -602,14 +601,14 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 												<div className="container mx-auto text-center">
 													<div
 														className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600">
-														<i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i>DERNIER ETAPE
+														<i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i>DERNIÈRE ÉTAPE
 													</div>
 													<p className="text-md leading-relaxed text-gray-500"> Telecharger 10
 														photos MAX pour publier votre annonce ( ficher jpg, png, gif ),
 														Téléchargez des photos de votre voiture depuis l'extérieur, du
 														tableau de bord avec le moteur allumé, de la console centrale
 														etc </p>
-													<p className="text-md leading-relaxed text-orange-500"> <i class="fas fa-exclamation-triangle animate-bounce"></i> Votre plaque du véhicule devrait bien cacher  </p>
+													<p className="text-md leading-relaxed text-orange-500"> <i class="fas fa-exclamation-triangle animate-bounce"></i> Conseil : Cachez votre plaque d'immatriculation  </p>
 													<div className="demoPhotos flex justify-center">
 														<div className="mr-4 p-3">
 															<img
@@ -665,12 +664,9 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														</Link>
 													</button>
 													<p className="notifyForPrice text-md leading-relaxed text-gray-500 text-left">
-														<i className="fas fa-flag-checkered animate-bounce"></i> Attention
-														le prix de vente de votre annonce n’est pas inscrit dans la
-														colonne de la côte car celle-ci est destinée à l’estimation
-														élaborée et prouvée par nos ingénieurs et experts
-														automobiles.Calculez votre côte personnalisée de votre véhicule
-														avec <Link href="/prix">notre abonnement Premium</Link>.</p>
+														<i className="fas fa-flag-checkered animate-bounce"></i> Attention : le prix de vente de votre véhicule n'est pas inscrit dans la colonne de la côte car celle-ci est destinée à l'estimation élaborée par nos ingénieurs et experts automobiles.
+														Calculez la côte personnalisée de votre véhicule avec <Link href="/prix"> notre abonnement Premium </Link>.
+													</p>
 												</div>
 											</div>
 										</div>

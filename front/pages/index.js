@@ -77,7 +77,7 @@ export default function Index() {
 								type="submit"
 								onClick={() => router.push('/vendre')}
 						>
-							Allez go!! <i class="fas fa-arrow-circle-right animate-bounce"></i>
+                            C'est parti !! <i class="fas fa-arrow-circle-right animate-bounce"></i>
 						</button>
 					</div>
                 </div>

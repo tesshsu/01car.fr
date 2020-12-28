@@ -33,8 +33,8 @@ const DetailsPremiumDropdown = ({
 		<div className="container px-2 mx-auto">
 		<div className="w-full px-8 py-2 px-2 flex-1">
 			<h4 className="mt-2 px-2 py-2 text-2xl leading-relaxed text-orange-500 font-bold underline uppercase rounded animate-bounce-once">
-				<i class="fas fa-award animate-ping"></i> NOTE DE CONFINANCE TOP GARANTIE
-			</h4>
+				<i class="fas fa-award animate-ping"></i> Réponses au questionnaires de confiance
+            </h4>
 		</div>
 		<div className="container px-2 mx-auto">
 			<div className="flex flex-wrap">
@@ -51,7 +51,7 @@ const DetailsPremiumDropdown = ({
 						  >
 							 <div className="container px-2 mx-auto rounded border border-solid border-gray-200 text-gray-500 active:bg-grey-500">
 								<div className="flex flex-wrap">
-										<span className="text-sm block my-2 p-3 animate-bounce"> Rapport Sécurité </span>
+										<span className="text-sm block my-2 p-3 animate-bounce"> Rapport sécurisé  </span>
 										<span className="text-sm block my-2 p-3"><i class="fas fa-chevron-circle-down"></i></span>
 								</div>
 							</div>
@@ -81,7 +81,7 @@ const DetailsPremiumDropdown = ({
 									<span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
 										<i className="fas fa-certificate text-4xl mr-1"></i>
 									</span>
-									<span className="text-sm text-gray-500">Garantie qualite</span>
+									<span className="text-sm text-gray-500">Garantie qualité</span>
 								</div>
 							</div>
 						</div>

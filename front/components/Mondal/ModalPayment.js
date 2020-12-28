@@ -15,7 +15,7 @@ const ProductDisplay = ({ handleClick }) => (
 	  </div>
 	  <div className="w-full md:w-6/12 px-4">
       <div className="description">
-        <p className="ml-3 leading-6 font-medium text-orange-500 text-2xl">Abonnement Premium</p>
+        <p className="ml-3 leading-6 font-medium text-orange-500 text-2xl">Tarif Premium</p>
         <div className="ml-3 leading-6 font-medium text-orange-500 text-4xl">6.99€</div>
       </div>
 	  </div>

@@ -32,7 +32,7 @@ export default function Login() {
               <div className="rounded-t mb-0 px-6 py-2">
                 <div className="text-center mb-3">
                   <h6 className="text-gray-600 text-sm font-bold">
-                    Connexion 
+                    Connexion
                   </h6>
                 </div>
               </div>
@@ -125,17 +125,16 @@ export default function Login() {
 								>
 								  Connexion
 								</button>
-								) 
+								)
 							}
 						  </div>
                           {submitError || invalid && (
-							 <Notice text="identifiant ou mot de passe incorrects" />
+							 <Notice text="identifiant ou mot de passe incorrect" />
 						  )}
 						</form>
 					)}
 				/>
 				<p className="notifyForLogin text-md leading-relaxed text-gray-600 text-left"> <i class="fas fa-pen-alt"></i> Cette connexion vous permet de déposer et gérer vos annonces.</p>
-                <p className="notifyForLogin text-md leading-relaxed text-gray-600 text-left mt-2"> <i class="fas fa-user-shield"></i> Un accès payant est recommandé pour sécuriser vos données personnelles.</p>
 			    <p className="notifyForLogin text-md leading-relaxed text-gray-600 text-left mt-2"> <i class="fas fa-star"></i> Ajouter vos annonces en favoris.</p>
 			  </div>
             </div>
@@ -147,7 +146,7 @@ export default function Login() {
 					  href="#pablo"
 					  className="text-gray-300"
 					>
-					  <small>Oublié votre mot de passe ?</small>
+					  <small>Mot de passe oublié ?</small>
 					</a>
 				</Link>
               </div>

@@ -18,11 +18,11 @@ const DetailsSide = ({ dispatch,
   return (
     <>
         <div className="w-full lg:w-4/12 px-12 mt-4">
-			<div className="priceVehicule font-bold px-1 text-5xl text-orange-500 text-left underline">
-				{car?.estimate_price} €
-			</div>
 			<div className="priceVehicule font-bold px-1 text-2xl text-gray-800 text-left">
 				Prix du vendeur
+			</div>
+			<div className="priceVehicule font-bold px-1 text-5xl text-orange-500 text-left underline">
+				{car?.estimate_price} €
 			</div>
 			{ prix_api != null && car?.premium  ? (
 				<div className="flex flex-wrap rounded border border-solid border-gray-600 p-1">
@@ -34,7 +34,7 @@ const DetailsSide = ({ dispatch,
 				) : (
 				  null
 			)}
-			
+
 			<div className="flex flex-wrap mt-4">
 			   <NoteConfiance />
 			</div>

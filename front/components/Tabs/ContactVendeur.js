@@ -35,7 +35,7 @@ const ContactVendeur = () => {
           >
             <div>
               <div
-                className="bg-gray-600 text-white opacity-75 font-semibold p-3 mb-0 border-b border-solid border-gray-200 uppercase rounded-t-lg"
+                className="bg-gray-600 text-white opacity-75 font-semibold p-3 mt-2 mb-0 border-b border-solid border-gray-200 uppercase rounded-t-lg"
               >
                 Règles de prudence
               </div>
@@ -53,7 +53,7 @@ const ContactVendeur = () => {
 									<li>
 					                  4. Assurez-vous d'avoir pu joindre par téléphone au moins une fois votre interlocuteur
                                     </li>
-                                </ul> 		
+                                </ul>
               </div>
             </div>
           </div>

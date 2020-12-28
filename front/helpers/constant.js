@@ -49,8 +49,9 @@ export const NonOptions = [
 
 export const raisonVendreOptions = [
     {note: 0, label: '', value: ''},
-    {note: 1, label: 'Changer de véhicule', value: 'change'},
-    {note: 0, label: 'Autre projet', value: 'other'}
+    {note: 1, label: 'Ne correspond pas à mes attentes', value: 'Noneed'},
+    {note: 1, label: 'Changement de situation', value: 'change'},
+    {note: 1, label: 'Autre projet', value: 'other'}
 ]
 
 export const numMainsOptions = [
@@ -260,7 +261,8 @@ export const premiums = [
     {list: "Logo qualité garantie"},
     {list: "Modifier à tout moment le prix du véhicule"},
     {list: "Estimation du véhicule par des professionnels qualifiés"},
-	{list: "10 photos gratuites"}
+	{list: "10 photos gratuites"},
+    {list: "Vente rapide garantie"}
 ];
 export const pubTransparents = [
     {icon: "fas fa-database", width: {width: '15%'}, name: "Récupération des données 15%"},

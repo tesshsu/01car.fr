@@ -54,8 +54,7 @@ const AnnonceLists = ({ loading,
 							  className="w-full align-center togBadge animate-ping ease-in-out"
 							/>
 						 <div className="togBadgeTime text-lg pb-2">
-					         <i class="far fa-clock"></i>  <Moment format="DD/MM/YYYY">{car?.created_at}</Moment> |
-							 {car.price} €
+					         <i className="far fa-clock"></i>  <Moment format="DD/MM/YYYY">{car?.created_at}</Moment> <span className="float-right">{car.price} €</span>
 					     </div>
 						{car.uploads.length > 0 ? (
 							<img
