@@ -24,3 +24,9 @@ export async function addPhoto(payload) {
   return client
       .post(`/api/v1/cars/138/uploads`, payload);
 }
+
+export function updateCar(id) {
+  return client
+      .put(`/api/v1/cars/${id}`)
+      .then(({ data }) => data);
+}

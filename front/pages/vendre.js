@@ -6,11 +6,27 @@ import QuestionsPremier from "components/Tabs/QuestionsPremier.js";
 import PubContent from "layouts/PubContent.js";
 import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
 import useLoggedUser from 'service/hooks/useLoggedUser';
+import {connect} from 'react-redux'
+import {fetchCar} from 'service/actions/cars';
+import {useRouter} from "next/router";
+import useAnnonces from 'service/hooks/useAnnonces';
+const Vendre = ({
+                    dispatch,
+                    car
+                }) => {
 
-export default function Vendre() {
     const {
         isAuthentificated
     } = useLoggedUser();
+
+    const {
+        create
+    } = useAnnonces();
+
+    const router = useRouter();
+    useEffect(() => {
+        dispatch(fetchCar(router.query.id))
+    }, [dispatch])
 
     return (
         <>
@@ -65,7 +81,17 @@ export default function Vendre() {
                                         <PubContentThreeIcons/>
                                     </div>
                                 </div>
-                               <QuestionsClassic/>
+                                <QuestionsClassic/>
+                                { create.length > 0 ? (
+                                    <div className="container mx-auto mt-6">
+                                        <h1 className="font-bold text-4xl text-orange-700 mt-4 text-center">
+                                            RÉPONSES AU QUESTIONNAIRES DE CONFIANCE
+                                        </h1>
+                                        <QuestionsPremier/>
+                                    </div>
+                                    ) : ( null )
+                                }
+
                             </div>
                         </div>
                     </div>
@@ -78,3 +104,11 @@ export default function Vendre() {
         </>
     );
 }
+
+const mapStateToProps = (state) => ({
+    loading: state.carsReducer.loading,
+    car: state.carsReducer.selectedCar,
+    hasErrors: state.carsReducer.hasErrors,
+})
+
+export default connect(mapStateToProps)(Vendre)

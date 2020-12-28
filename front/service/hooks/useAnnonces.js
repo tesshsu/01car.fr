@@ -16,6 +16,14 @@ export default function useAnnonces() {
     }
   }, [dispatch]);
 
+  const updateCar = useCallback(async (payload) => {
+    try {
+      await dispatch(ANNONCES_ACTIONS.updateCar(payload));
+    } catch (err) {
+      console.log("update_car_error", err);
+    }
+  }, [dispatch]);
+
   const addPhoto = useCallback(async (payload) => {
     try {
       await dispatch(ANNONCES_ACTIONS.addPhoto(payload));
@@ -28,6 +36,7 @@ export default function useAnnonces() {
     car: car,
     create,
     addPhoto,
+    updateCar,
     fetchAnnonces
   };
 }

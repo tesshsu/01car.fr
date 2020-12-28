@@ -15,7 +15,13 @@ export default function carReducer(state = initialState, action) {
       return {car: action.payload, loading: false, hasErrors: false}
     case actions.CREATE_CAR_FAILURE:
       return {...state, loading: false, hasErrors: true}
-    default:
+     case actions.UPDATE_CAR:
+         return {...state, loading: true}
+     case actions.UPDATE_CAR_SUCCESS:
+         return {car: action.payload, loading: false, hasErrors: false}
+     case actions.UPDATE_CAR_FAILURE:
+         return {...state, loading: false, hasErrors: true}
+         default:
       return state
   }
 }
