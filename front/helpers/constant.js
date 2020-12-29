@@ -202,16 +202,16 @@ export const premuim_options = {
 }
 
 export const premium_ncs = [
-    {icon: "fas fa-certificate", name: "Sous garantie", value: "under_warranty", displayFunction: premium_options_display_yes_no},
+    {icon: "fas fa-file-contract", name: "Sous garantie", value: "under_warranty", displayFunction: premium_options_display_yes_no},
     {icon: "fas fa-car-crash", name: "Ayant déjà subit 1 accident", value: "had_accident", displayFunction: premium_options_display_yes_no},
-    {icon: "fas fa-car-crash", name: "Des défauts griffes, coups, usures", value: "defects", displayFunction: premium_options_display_yes_no},
-    {icon: "fas fa-certificate", name: "Justifier le parcours kilometrique", value: "km_certificate", displayFunction: premium_options_display_yes_no},
+    {icon: "fas fa-heart-broken", name: "Des défauts griffes, coups, usures", value: "defects", displayFunction: premium_options_display_yes_no},
+    {icon: "fas fa-file-medical-alt", name: "Justifier le parcours kilometrique", value: "km_certificate", displayFunction: premium_options_display_yes_no},
     {icon: "fas fa-calendar-check", name: "Contrôle technique ok", value: "technical_check_ok", displayFunction: premium_options_display_yes_no},
     {icon: "far fa-list-alt", name: "Respect des entretiens périodiques", value: "periodic_maintenance", displayFunction: premium_options_display_yes_no},
     {icon: "far fa-calendar-alt", name: "Prochaine entretien", value: "next_maintenance_under_5000km", displayFunction: premium_options_display_next_maintenance},
-    {icon: "fas fa-print", name: "Facture d'achat", value: "purchase_invoice", displayFunction: premium_options_display_yes_no},
+    {icon: "fas fa-receipt", name: "Facture d'achat", value: "purchase_invoice", displayFunction: premium_options_display_yes_no},
     {icon: "far fa-id-badge", name: "Carte grise", value: "gray_card", displayFunction: premium_options_display_yes_no},
-    {icon: "fas fa-copy", name: "Possède le carnet d'entretien", value: "maintenance_log", displayFunction: premium_options_display_yes_no}
+    {icon: "fas fa-id-badge", name: "Possède le carnet d'entretien", value: "maintenance_log", displayFunction: premium_options_display_yes_no}
 ];
 
 

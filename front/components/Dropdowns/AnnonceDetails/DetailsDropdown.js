@@ -18,13 +18,13 @@ const DetailsDropdown = ({
 
 	const ncs = [
 		{icon: "fas fa-male", name: "Annonces par", value: car?.owner_type},
-		{icon: "far fa-calendar-alt", name: "Vehicule est disponible", value: car?.available},
-		{icon: "fas fa-file-invoice-dollar", name: "Véhicule est Non fumeur", value: car?.smoking},
-		{icon: "fas fa-certificate", name: "Le double des clés", value: car?.duplicate_keys},
-		{icon: "fas fa-certificate", name: "La raison pour vendre", value: car?.sale_reason},
-		{icon: "fas fa-key", name: "Nombre de mains", value: car?.hand_number},
-		{icon: "fas fa-globe-europe", name: "Etat de vehicule", value: car?.state},
-		{icon: "fas fa-key", name: "Origine du véhicule", value: car?.country},
+		{icon: "far fa-calendar-check", name: "Vehicule est disponible", value: car?.available},
+		{icon: "fas fa-smoking", name: "Véhicule est Non fumeur", value: car?.smoking},
+		{icon: "fas fa-key", name: "Le double des clés", value: car?.duplicate_keys},
+		{icon: "far fa-question-circle", name: "La raison pour vendre", value: car?.sale_reason},
+		{icon: "fas fa-users-cog", name: "Nombre de mains", value: car?.hand_number},
+		{icon: "fas fa-heartbeat", name: "Etat de vehicule", value: car?.state},
+		{icon: "fas fa-globe-europe", name: "Origine du véhicule", value: car?.country},
 	];
 
 	const renderSwitchValue = (param) => {
@@ -88,7 +88,7 @@ const DetailsDropdown = ({
 							<div className="w-full px-4 flex-1">
 								<span
 									className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i
-									className={nc.icon}></i> {nc.name} : </span>
+									className={nc.icon}></i> {nc.name} </span>
 							</div>
 							<div className="w-full px-4 flex-1">
 							    <span
