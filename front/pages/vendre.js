@@ -7,8 +7,6 @@ import PubContent from "layouts/PubContent.js";
 import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
 import useLoggedUser from 'service/hooks/useLoggedUser';
 import {connect} from 'react-redux'
-import {fetchCar} from 'service/actions/cars';
-import {useRouter} from "next/router";
 import useAnnonces from 'service/hooks/useAnnonces';
 import {premium_options_display} from "helpers/constant";
 
@@ -28,9 +26,8 @@ const Vendre = ({
         return premium_options_display(premium_opt, car?.options?.prenium?.includes(premium_opt.value));
     }
 
-    const router = useRouter();
     useEffect(() => {
-        dispatch(fetchCar(router.query.id))
+
     }, [dispatch])
 
     return (

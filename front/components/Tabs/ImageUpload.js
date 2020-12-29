@@ -2,25 +2,20 @@ import React from 'react';
 import ImageUploading from "react-images-uploading";
 import useAnnonces from 'service/hooks/useAnnonces';
 import {Field, Form} from 'react-final-form';
+import {connect} from 'react-redux';
 
-export function ImageUpload() {
+const ImageUpload= ({
+                        dispatch,
+                        loading,
+                    }) => {
     const [images, setImages] = React.useState([]);
     const [isUpload, setIsUpload] = React.useState(false);
     const maxNumber = 10;
-    const onChange = (imageList, addUpdateIndex) => {
-        // data for submit
-        console.log(imageList, addUpdateIndex);
-        setImages(imageList);
-        setIsUpload(true);
-    };
-
     const ImgUploadAdapter = ({ input, values, ...rest }) => (
         <ImageUploading
             {...input}
             {...rest}
             multiple
-            value={images}
-            onChange={onChange}
             maxNumber={maxNumber}
             dataURLKey="data_url"
             imgExtension={[".jpg", ".gif", ".png", ".gif"]}
@@ -31,9 +26,7 @@ export function ImageUpload() {
                   onImageRemoveAll,
                   onImageUpdate,
                   onImageRemove,
-                  isDragging,
-                  dragProps,
-                  errors
+                  dragProps
               }) => (
                 // write your building UI
                 <div className="upload__image-wrapper">
@@ -67,7 +60,8 @@ export function ImageUpload() {
     )
 
     const {
-        addPhoto
+        addPhoto,
+        car
     } = useAnnonces();
 
     const onSubmit = async (values) => {
@@ -77,19 +71,20 @@ export function ImageUpload() {
             } = values;
 
             const data = {...payload};
-            await addPhoto(data);
+            await addPhoto(car.id, data);
             console.log("photo_data", data);
+            console.log("car_id",car.id);
         } catch (err) {
             console.log(err);
-            alert('Impossible de créer annonce, merci de constacter notre equipe');
+            alert('Impossible ajouter photos');
         }
     }
     return (
         <div className="blockUploadImage">
             <Form
-                /*initialValues={{
+                initialValues={{
                     uploads: [],
-                }}*/
+                }}
                 onSubmit={onSubmit}
                 render={({handleSubmit, form, submitting, values}) => (
                     <form onSubmit={handleSubmit}>
@@ -97,11 +92,11 @@ export function ImageUpload() {
                             <Field
                                 name="uploads"
                                 type="file"
-                                //value={valuesuploads.}
+                                value={values.uploads}
                                 component={ImgUploadAdapter}
                             />
                         </div>
-                        {isUpload ? (
+                        { values.uploads.length > 0 ? (
                             <button
                                 className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                 type="submit"
@@ -117,4 +112,11 @@ export function ImageUpload() {
     );
 }
 
-export default ImageUpload;
+const mapStateToProps = (state) => ({
+    loading: state.carsReducer.loading,
+    car: state.carsReducer.selectedCar,
+    hasErrors: state.carsReducer.hasErrors,
+})
+
+export default connect(mapStateToProps)(ImageUpload)
+

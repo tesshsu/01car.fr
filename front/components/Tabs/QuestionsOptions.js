@@ -12,9 +12,10 @@ import {
 import {Condition} from 'helpers/formValidate';
 import useAnnonces from 'service/hooks/useAnnonces';
 
-const QuestionsOptions = ({dispatch, loading, car}) => {
+const QuestionsOptions = ({dispatch, loading}) => {
 	const {
-		create
+		create,
+		car
 	} = useAnnonces();
 
 	const sendPostEquipevalues = {

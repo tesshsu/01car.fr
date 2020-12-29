@@ -133,12 +133,11 @@ export function create(payload) {
   };
 }
 
-export function addPhoto(payload) {
+export function addPhoto(id) {
   return async (dispatch, getState) => {
-	//const { car } = getState().car;
     try {
       const response = await API.Annonces.addPhoto(
-          payload
+          id
       );
       console.log("data_dispatch ", response);
       dispatch({
