@@ -35,7 +35,7 @@ class Car extends Model
         'currency' => 4,
         'owner_type' => 8,
         'available' => 12,
-        'sale_reason' => 8,
+        'sale_reason' => 16,
         'state' => 12,
         'country' => 2,
         'license_plate' => 16
@@ -113,10 +113,10 @@ class Car extends Model
         $confidence_note = 0;
         if(Str::of($car->licence_plate)->trim()->isNotEmpty()) $confidence_note++;
         if($car->owner_type == OwnerType::PRIVATE ) $confidence_note++;
-        if($car->available == AvailablePeriod::IMMEDIATELY ) $confidence_note++;
+        if($car->available == AvailablePeriod::IMMEDIATELY) $confidence_note++;
         if(!$car->smoking) $confidence_note++;
         if($car->duplicate_keys) $confidence_note++;
-        if($car->sale_reason == SaleReason::CHANGE) $confidence_note++;
+        if(Arr::exists(SaleReason::list(), $car->sale_reason) ) $confidence_note++;
         if($car->estimate_price  > 0) $confidence_note++;
         if($car->hand_number == 1 || $car->hand_number == 2) $confidence_note++;
         if($car->state == CarState::NEW) $confidence_note++;
