@@ -133,12 +133,10 @@ export function create(payload) {
   };
 }
 
-export function addPhoto(id) {
+export function addPhoto(carId, payload) {
   return async (dispatch, getState) => {
     try {
-      const response = await API.Annonces.addPhoto(
-          id
-      );
+      const response = await API.Annonces.addPhoto(carId, payload);
       console.log("data_dispatch ", response);
       dispatch({
         type: ADD_CAR_PHOTO_SUCCESS,
