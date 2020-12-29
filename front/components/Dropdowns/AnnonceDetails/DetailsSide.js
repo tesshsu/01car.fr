@@ -11,7 +11,7 @@ const DetailsSide = ({ dispatch,
 	  { icon: "fas fa-tachometer-alt", value: car?.km },
 	  { icon: "fas fa-magic", value: car?.transmission },
 	  { icon: "fas fa-car-side", value: car?.doors },
-	  { icon: "fas fa-key", value: car?.finition }
+	  { icon: "fas fa-car-battery", value: car?.power }
   ];
 
   let prix_api = car?.price
@@ -25,7 +25,7 @@ const DetailsSide = ({ dispatch,
 				{car?.estimate_price} €
 			</div>
 			{ prix_api != null && car?.premium  ? (
-				<div className="flex flex-wrap rounded border border-solid border-gray-600 p-1">
+				<div className="flex flex-wrap rounded border border-solid border-gray-500 p-1">
 				<div className="priceVehicule font-bold px-1 text-xl text-gray-800 text-left">
 					<span className="font-bold px-1 text-xl text-orange-500 text-left underline">Entre {car?.price} € et 19 278 €</span>
 				</div>
