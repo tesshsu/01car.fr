@@ -104,6 +104,25 @@ const Navbar = ({dispatch, loading, user, hasErrors}) => {
 				  </Link>
                 </button>
               </li>
+                {isAuthentificated && (
+                    <li className="flex items-center">
+                        <button
+                            className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+                            type="button"
+                        >
+                            <Link href="/monAnnonce">
+                                <a
+                                    href="#pablo"
+                                    className={
+                                        "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
+                                    }
+                                >
+                                    Mon Annonce
+                                </a>
+                            </Link>
+                        </button>
+                    </li>
+                )}
 			  {isAuthentificated && (
 			    <li className="flex items-center">
 					<button
