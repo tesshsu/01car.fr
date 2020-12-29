@@ -5,7 +5,7 @@ import * as ANNONCES_ACTIONS from '../actions/cars';
 
 export default function useAnnonces() {
   const dispatch = useDispatch();
-  const car = useSelector(state => state.car);
+  const car = useSelector(state => state.selectedCar);
   const fetchAnnonces = useCallback(() => dispatch(ANNONCES_ACTIONS.fetchCars(page=1, perPage=18)), [dispatch]);
 
   const create = useCallback(async (payload) => {
@@ -24,9 +24,9 @@ export default function useAnnonces() {
     }
   }, [dispatch]);
 
-  const addPhoto = useCallback(async (payload) => {
+  const addPhoto = useCallback(async (carId, payload) => {
     try {
-      await dispatch(ANNONCES_ACTIONS.addPhoto(payload));
+      await dispatch(ANNONCES_ACTIONS.addPhoto(carId, payload));
     } catch (err) {
       console.log("add_car_photo_error", err);
     }

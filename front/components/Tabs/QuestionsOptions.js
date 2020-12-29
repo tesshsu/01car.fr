@@ -240,8 +240,8 @@ const QuestionsOptions = ({dispatch, loading}) => {
 }
 
 const mapStateToProps = (state) => ({
-	loading: state.car.loading,
-	car: state.car.car,
-	hasErrors: state.car.hasErrors,
+	loading: state.carsReducer.loading,
+	car: state.carsReducer.selectedCar,
+	hasErrors: state.carsReducer.hasErrors,
 })
 export default connect(mapStateToProps)(QuestionsOptions)

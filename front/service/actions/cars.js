@@ -11,16 +11,16 @@ export const GET_CARS_SUCCESS = 'GET_CARS_SUCCESS'
 export const GET_CARS_FAILURE = 'GET_CARS_FAILURE'
 
 
-export const CREATE_CAR = 'car/CREATE_CAR';
-export const CREATE_CAR_SUCCESS = 'car/CREATE_CAR_SUCCESS';
-export const CREATE_CAR_FAILURE = 'car/CREATE_CAR_FAILURE';
+export const CREATE_CAR = 'CREATE_CAR';
+export const CREATE_CAR_SUCCESS = 'CREATE_CAR_SUCCESS';
+export const CREATE_CAR_FAILURE = 'CREATE_CAR_FAILURE';
 
 
 export const ADD_CAR_PHOTO = 'ADD_CAR_PHOTO';
 export const ADD_CAR_PHOTO_SUCCESS = 'ADD_CAR_PHOTO_SUCCESS';
 export const ADD_CAR_PHOTO_FAILURE = 'ADD_CAR_PHOTO_SUCCESS';
 
-export const UPDATE_CAR = 'car/UPDATE_CAR'
+export const UPDATE_CAR = 'UPDATE_CAR'
 export const UPDATE_CAR_SUCCESS = 'car/UPDATE_CAR_SUCCESS'
 export const UPDATE_CAR_FAILURE = 'car/UPDATE_CAR_FAILURE'
 
@@ -56,7 +56,7 @@ export const createCar = () => ({
   type: CREATE_CAR,
 })
 
-export const createCarsSuccess = (response) => ({
+export const createCarSuccess = (response) => ({
   type: CREATE_CAR_SUCCESS,
   payload: response,
 })
@@ -67,6 +67,11 @@ export const createCarFailure = () => ({
 
 export const addCarPhotoFailure = () => ({
   type: ADD_CAR_PHOTO_FAILURE,
+})
+
+export const addCarPhotoSuccess = (response) => ({
+  type: ADD_CAR_PHOTO_SUCCESS,
+  payload: response,
 })
 
 export const updateCar = () => ({
@@ -116,17 +121,10 @@ export function create(payload) {
       const response = await API.Annonces.create(
         payload
       );
-      console.log("data_dispatch ", response);
-      dispatch({
-        type: CREATE_CAR_SUCCESS,
-        payload: {
-          response
-        }
-      });
+      dispatch(createCarSuccess(response));
     } catch (err) {
       await dispatch(createCarFailure());
 	  throw err;
-      console.log(err);
     } finally {
       dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
     }
@@ -135,19 +133,13 @@ export function create(payload) {
 
 export function addPhoto(carId, payload) {
   return async (dispatch, getState) => {
+    dispatch(updateCar())
     try {
       const response = await API.Annonces.addPhoto(carId, payload);
-      console.log("data_dispatch ", response);
-      dispatch({
-        type: ADD_CAR_PHOTO_SUCCESS,
-        payload: {
-          response
-        }
-      });
+      dispatch(addCarPhotoSuccess(response));
     } catch (err) {
       await dispatch(addCarPhotoFailure());
       throw err;
-      console.log(err);
     } finally {
       dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
     }

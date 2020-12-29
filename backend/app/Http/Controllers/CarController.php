@@ -184,7 +184,7 @@ class CarController extends Controller
             return response()->json(['error' => 'Unauthorised'], 403);
         }
 
-        $uploadedFileArr = $request->file('file');
+        $uploadedFileArr = $request->file('uploads');
         if(!is_array($uploadedFileArr)){
             $uploadedFileArr = array($uploadedFileArr);
         }

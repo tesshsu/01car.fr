@@ -7,9 +7,14 @@ import {connect} from 'react-redux';
 const ImageUpload= ({
                         dispatch,
                         loading,
+    car,
+                        hasErrors
                     }) => {
     const [images, setImages] = React.useState([]);
     const [isUpload, setIsUpload] = React.useState(false);
+    const {
+        addPhoto
+    } = useAnnonces();
     const maxNumber = 10;
     const ImgUploadAdapter = ({ input, values, ...rest }) => (
         <ImageUploading
@@ -59,21 +64,18 @@ const ImageUpload= ({
         </ImageUploading>
     )
 
-    const {
-        addPhoto,
-        car
-    } = useAnnonces();
-
     const onSubmit = async (values) => {
         try {
             let {
                 ...payload
             } = values;
 
+            console.log("car_id=",car?.id);
+
             const data = {...payload};
-            await addPhoto(car.id, data);
+            await addPhoto(car?.id, data);
             console.log("photo_data", data);
-            console.log("car_id",car.id);
+            console.log("car_id",car?.id);
         } catch (err) {
             console.log(err);
             alert('Impossible ajouter photos');
