@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\AvailablePeriod;
 use App\Constants\CarState;
 use App\Constants\EquipmentCategory;
 use App\Constants\Equipments\AntiTheftEquipment;
@@ -172,41 +173,53 @@ class CarController extends Controller
 
     public function addFiles(Request $request, $id): \Illuminate\Http\JsonResponse
     {
-        $car = Car::with('uploads')->findOrFail($id);
+        $car = Car::with('uploads')->find($id);
+
+        // check that id are the same
+        if (!isset($car)) {
+            return response()->json(['error' => 'NotFound'], 404);
+        }
         $currentUser = Auth::user();
         if (!$currentUser->canEditCar($car)) {
             return response()->json(['error' => 'Unauthorised'], 403);
         }
 
-        $uploadedFile = $request->file('file');
+        $uploadedFileArr = $request->file('file');
+        if(!is_array($uploadedFileArr)){
+            $uploadedFileArr = array($uploadedFileArr);
+        }
 
-        $path = null;
-        $filename = null;
-        if ($uploadedFile != null) {
-            $path = $car->getUploadPath();
-            $filename = $uploadedFile->getClientOriginalName();
+        foreach ($uploadedFileArr as $uploadedFile) {
+            $path = null;
+            $filename = null;
+            if ($uploadedFile != null) {
+                $path = $car->getUploadPath();
+                $filename = $uploadedFile->getClientOriginalName();
 
-            // check if file with same name exist
-            if(in_array( $filename, $car->uploads()->getResults()->map(function ($item, $key) {return $item->name; })->toArray() )){
-                $filename .= '_' . (string) Str::orderedUuid() . '.' . $uploadedFile->getClientOriginalExtension();
+                // check if file with same name exist
+                if (in_array($filename, $car->uploads()->getResults()->map(function ($item, $key) {
+                    return $item->name;
+                })->toArray())) {
+                    $filename .= '_' . (string)Str::orderedUuid() . '.' . $uploadedFile->getClientOriginalExtension();
+                }
+
+                Storage::disk('public')->putFileAs(
+                    $path,
+                    $uploadedFile,
+                    $filename
+                );
+
+                $upload = new Upload();
+                // Update attachment information
+                $upload->path = $path;
+                $upload->name = $filename;
+                $upload->mime_content_type = $uploadedFile->getClientMimeType();
+                $upload->size = $uploadedFile->getSize();
+                $upload->save();
+
+                // save new entries
+                $car->uploads()->attach($upload);
             }
-
-            Storage::disk('public')->putFileAs(
-                $path,
-                $uploadedFile,
-                $filename
-            );
-
-            $upload = new Upload();
-            // Update attachment information
-            $upload->path = $path;
-            $upload->name = $filename;
-            $upload->mime_content_type = $uploadedFile->getClientMimeType();
-            $upload->size = $uploadedFile->getSize();
-            $upload->save();
-
-            // save new entries
-            $car->uploads()->attach($upload);
         }
 
         return $this->renderJson($car->id);
@@ -227,7 +240,7 @@ class CarController extends Controller
             'km' => 'integer',
             'currency' => 'max:' . Car::fieldsSizeMax('currency'),
             'owner_type' => ['max:' . Car::fieldsSizeMax('owner_type'), Rule::in(OwnerType::list())],
-            'available' => 'max:' . Car::fieldsSizeMax('available'),
+            'available' => ['max:' . Car::fieldsSizeMax('available'), Rule::in(AvailablePeriod::list())],
             'smoking' => 'boolean',
             'duplicate_keys' => 'boolean',
             'sale_reason' => ['max:' . Car::fieldsSizeMax('sale_reason'), Rule::in(SaleReason::list())],
