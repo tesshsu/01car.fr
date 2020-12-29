@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\AvailablePeriod;
 use App\Constants\CarState;
 use App\Constants\EquipmentCategory;
 use App\Constants\Equipments\AntiTheftEquipment;
@@ -187,7 +188,7 @@ class CarController extends Controller
         if(!is_array($uploadedFileArr)){
             $uploadedFileArr = array($uploadedFileArr);
         }
-        
+
         foreach ($uploadedFileArr as $uploadedFile) {
             $path = null;
             $filename = null;
@@ -239,7 +240,7 @@ class CarController extends Controller
             'km' => 'integer',
             'currency' => 'max:' . Car::fieldsSizeMax('currency'),
             'owner_type' => ['max:' . Car::fieldsSizeMax('owner_type'), Rule::in(OwnerType::list())],
-            'available' => 'max:' . Car::fieldsSizeMax('available'),
+            'available' => ['max:' . Car::fieldsSizeMax('available'), Rule::in(AvailablePeriod::list())],
             'smoking' => 'boolean',
             'duplicate_keys' => 'boolean',
             'sale_reason' => ['max:' . Car::fieldsSizeMax('sale_reason'), Rule::in(SaleReason::list())],
