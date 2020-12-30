@@ -1,9 +1,9 @@
 import loadingOverlay from './loadingOverlay';
 import loggedUser from './loggedUser';
-import annonce from './cars';
+import cars from './cars';
 
 export {
   loadingOverlay,
   loggedUser,
-  annonce
+  cars
 };
