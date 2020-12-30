@@ -6,7 +6,7 @@ import {useRouter }  from "next/router";
 import Moment from 'react-moment';
 import ENVS from '../../environment';
 
-const MonAnnonceLists = ({ dispatch,
+const MesAnnoncesLists = ({ dispatch,
 							 loading,
 							 cars,
 							 current_page,
@@ -19,7 +19,8 @@ const MonAnnonceLists = ({ dispatch,
 
 	const router = useRouter();
 	useEffect(() => {
-		dispatch(fetchCars(router.query.page, router.query.perPage))
+	    const owner = 1;
+		dispatch(fetchCars(router.query.page, router.query.perPage, owner))
 	}, [dispatch])
 
 	if (loading) {
@@ -133,8 +134,6 @@ const MonAnnonceLists = ({ dispatch,
                                     NOTE DE CONFIANCE: {car?.confidence_note}/20
 							  </p>
                             </span>
-
-
 						</div>
                     </div>
 				</div>
@@ -156,4 +155,4 @@ const mapStateToProps = (state) => ({
   hasErrors: state.carsReducer.hasErrors,
 })
 
-export default connect(mapStateToProps)(MonAnnonceLists)
+export default connect(mapStateToProps)(MesAnnoncesLists)

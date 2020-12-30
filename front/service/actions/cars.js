@@ -87,12 +87,12 @@ export const updateCarFailure = () => ({
   type: UPDATE_CAR_FAILURE,
 })
 // Combine them all in an asynchronous thunk
-export function fetchCars(page=1, perPage=18) {
+export function fetchCars(page=1, perPage=18, owner=undefined) {
   return async (dispatch) => {
     dispatch(getCars())
 
     try {
-      const response = await API.Annonces.search(perPage, page);
+      const response = await API.Annonces.search(perPage, page, owner);
       dispatch(getCarsSuccess(response));
 
     } catch (error) {

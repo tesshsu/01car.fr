@@ -13,9 +13,9 @@ export function get(id) {
       .then(({ data }) => data);
 }
 
-export function search(perPage, page) {
+export function search(perPage, page, owner) {
   return client
-      .get(`/api/v1/cars/search?perPage=${perPage}&page=${page}`)
+      .get(`/api/v1/cars/search?perPage=${perPage}&page=${page}&owner=${owner ? owner : ''}`)
       .then(({ data }) => data);
 }
 
