@@ -57,6 +57,13 @@ class CarController extends Controller
             $carsReq->where('premium', $premium);
         }
 
+        if ($request->has('owner')) {
+            $owner = Str::of($request->query('owner'))->trim();
+            if(!$owner->isEmpty()) {
+                $carsReq->where('user_id', $owner);
+            }
+        }
+
         $carsReq->orderBy('premium', 'desc');
         $carsLengthAwarePaginator = $carsReq->paginate($request->perPage, ['*'], $request->pageName, $request->page);
 

@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 const ImageUpload= ({
                         dispatch,
                         loading,
-    car,
+                        car,
                         hasErrors
                     }) => {
     const [images, setImages] = React.useState([]);
