@@ -1,5 +1,5 @@
 import client from '../client';
-import {authHeader, jsonHeader} from "../authRequest";
+import {authHeader, jsonHeader, jsonHeaderPhoto} from "../authRequest";
 
 export function create(payload) {
   return client

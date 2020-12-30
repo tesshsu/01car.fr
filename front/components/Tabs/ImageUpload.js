@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 const ImageUpload= ({
                         dispatch,
                         loading,
-    car,
+                        car,
                         hasErrors
                     }) => {
     const [images, setImages] = React.useState([]);
@@ -16,11 +16,44 @@ const ImageUpload= ({
         addPhoto
     } = useAnnonces();
     const maxNumber = 10;
+
+    const onChange = (imageList, addUpdateIndex) => {
+        // data for submit
+        console.log("onChange=",imageList, addUpdateIndex);
+      //  setImages(imageList);
+    };
+
+    const onImageUpdate= 	(updateIndex) => {
+        console.log("onImageUpdate=",updateIndex, images);
+    }
+    const onImageRemove= 	(deleteIndex) => {
+        console.log("onImageUpdate=",deleteIndex, images);
+    }
+
+    const onSubmit = async (values) => {
+        console.log("onSubmit=",values);
+        try {
+            let {
+                ...payload
+            } = values;
+
+            console.log("car_id=",car?.id);
+
+            const data = {...payload};
+            await addPhoto(car?.id, data);
+            console.log("photo_data", data);
+        } catch (err) {
+            console.log(err);
+            alert('Impossible ajouter photos');
+        }
+    }
+
     const ImgUploadAdapter = ({ input, values, ...rest }) => (
         <ImageUploading
             {...input}
             {...rest}
             multiple
+          //  onChange={onChange}
             maxNumber={maxNumber}
             dataURLKey="data_url"
             imgExtension={[".jpg", ".gif", ".png", ".gif"]}
@@ -64,23 +97,7 @@ const ImageUpload= ({
         </ImageUploading>
     )
 
-    const onSubmit = async (values) => {
-        try {
-            let {
-                ...payload
-            } = values;
 
-            console.log("car_id=",car?.id);
-
-            const data = {...payload};
-            await addPhoto(car?.id, data);
-            console.log("photo_data", data);
-            console.log("car_id",car?.id);
-        } catch (err) {
-            console.log(err);
-            alert('Impossible ajouter photos');
-        }
-    }
     return (
         <div className="blockUploadImage">
             <Form
@@ -89,7 +106,7 @@ const ImageUpload= ({
                 }}
                 onSubmit={onSubmit}
                 render={({handleSubmit, form, submitting, values}) => (
-                    <form onSubmit={handleSubmit}>
+                    <div>
                         <div>
                             <Field
                                 name="uploads"
@@ -107,7 +124,7 @@ const ImageUpload= ({
                                 <i className="fas fa-paper-plane text-base mr-1 animate-bounce"></i> ENVOYER
                             </button> ) : (null)
                         }
-                    </form>
+                    </div>
                 )}
             />
         </div>

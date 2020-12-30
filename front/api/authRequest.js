@@ -9,11 +9,11 @@ export function authHeader() {
     }
 }
 export function jsonHeader() {
-    return {'Content-Type': 'application/json', 'Accept': 'application/json'};
+    return { headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}};;
 
 }
 
 export function jsonHeaderPhoto() {
-    return {'Content-Type': 'multipart/form-data', 'Accept': 'application/json'};
+    return { headers: {'Content-Type': 'multipart/form-data', 'Accept': 'application/json'}};
 
 }
