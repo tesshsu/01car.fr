@@ -10,7 +10,7 @@ export const fuelOptions = [
     {note: 0, label: '', value: ''},
 	{note: 0, label: 'Diesel', value: 'Diesel'},
     {note: 0, label: 'Électrique', value: 'Electric'},
-    {note: 0, label: 'Gasoline (Essence)', value: 'Gasoline'},
+    {note: 0, label: 'Essence', value: 'Gasoline'},
     {note: 0, label: 'Ethanol', value: 'Ethanol'},
     {note: 0, label: 'GPL', value: 'LPG'},
     {note: 0, label: 'Hybrid', value: 'Hybrid'}
@@ -56,7 +56,7 @@ export const raisonVendreOptions = [
 
 export const numMainsOptions = [
     {note: 0, label: '', value: ''},
-    {note: 1, label: '1ère ou 2ème main', value: '1'},
+    {note: 1, label: '1ère main', value: '1'},
     {note: 0, label: '3ème main ou plus', value: '3'}
 ]
 

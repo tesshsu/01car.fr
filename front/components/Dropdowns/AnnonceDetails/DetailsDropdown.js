@@ -51,8 +51,6 @@ const DetailsDropdown = ({
 				return 'Autre project';
 			case 1 :
 				return '1ère ou 2ème main';
-			case 2 :
-				return '1ère ou 2ème main';
 			case 3 :
 				return ' 3ème mains ou plus';
 			case 'satisfactory':

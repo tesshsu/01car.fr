@@ -88,9 +88,9 @@ const MonAnnonceLists = ({ dispatch,
                                         className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 mr-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
                                         type="button"
                                     >
-                                      <Link key={idx} href={`/annonce?id=${car.id}`} {...car}>
+                                      <Link key={idx} href={idx? (`/annonce?id=${car?.id}`): ("#")} {...car}>
                                           <a
-                                              href="#pablo"
+                                              href={idx? (`/annonce?id=${car?.id}`): ("#")}
                                               className={
                                                   "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
                                               }

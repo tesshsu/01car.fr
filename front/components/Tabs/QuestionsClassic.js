@@ -130,7 +130,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 								href="#link1"
 								role="tablist"
 							>
-								<i className="fas fa-book text-base mr-1"></i> votre véhicule Informations générales
+								<i className="fas fa-car text-base mr-1"></i> MON VÉHICULE
 							</a>
 						</li>
 						<li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
@@ -149,8 +149,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 								href="#link2"
 								role="tablist"
 							>
-								<i className="fas fa-space-shuttle text-base mr-1"></i> Questions 1 - 5 Informations
-								générales
+								<i className="fas fa-space-shuttle text-base mr-1"></i> Questions 1 - 5 : INFORMATIONS
 							</a>
 						</li>
 						<li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
@@ -211,7 +210,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="dt_entry_service"
 														>
-															* Date de mec :
+															* Date de 1ère Immatriculation :
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
@@ -291,7 +290,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 															className="px-3 py-2 placeholder-gray-400 text-gray-700 relative border border-gray-400 bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 														/>
 														<Error name="license_plate" />
-														<div className="text-sm leading-relaxed text-gray-600">Cette information n’est visible sur l’annonce.</div>
+														<div className="text-sm leading-relaxed text-gray-600">cette information ne sera pas visible sur l'annonce.</div>
 													</div>
 												</div>
 
@@ -306,8 +305,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														href="#link2"
 														role="tablist"
 													>
-														<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i> 1ème
-														étape: 1 - 5 questions
+														<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i> QUESTIONS : 1-5
 													</a>
 												</div>
 
@@ -434,8 +432,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														href="#link3"
 														role="tablist"
 													>
-														<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i> 2ème
-														étape: 6 -10 questions
+														<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i> QUESTIONS : 6-10
 													</a>
 												</div>
 											</div>
@@ -541,7 +538,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 																		type="submit"
 																		disabled={invalid}
 																	>
-																		<i className="fas fa-exclamation-circle text-base mr-1 animate-bounce"></i> Veuillez remplir tous les champs
+																		<i className="fas fa-exclamation-circle text-base mr-1 animate-bounce"></i> Prenez soin de répondre à toutes les questions afin de valider votre annonce
 
 																	</button>
 																	<p className="text-md leading-relaxed text-gray-500">
@@ -579,7 +576,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														</div>
 															) : (
 														<div className="finalStep text-center">
-															<p className="text-xl leading-relaxed text-gray-800">Felicitation! Votre annonces est bien envoyer!! <i
+															<p className="text-xl leading-relaxed text-gray-800">Bravo ! Vous avez répondu à toutes les questions !! <i
 																className="far fa-thumbs-up animate-ping"></i></p>
 															<a
 																	className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
@@ -592,8 +589,8 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 																	role="tablist"
 																>
 																	<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
-																    Dernière étape : Télécharger vos photos pour publier votre annonce
-																</a>
+																    ÉTAPE SUIVANTE : TÉLÉCHARGER VOS PHOTOS POUR PUBLIER VOTRE ANNONCE
+															</a>
 														</div>
 															)
 													}
@@ -603,7 +600,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 												<div className="container mx-auto text-center">
 													<div
 														className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600">
-														<i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i>DERNIÈRE ÉTAPE
+														<i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> ÉTAPE 2
 													</div>
 													<p className="text-md leading-relaxed text-gray-500"> Telecharger 10
 														photos MAX pour publier votre annonce ( ficher jpg, png, gif ),
@@ -647,7 +644,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														<i className="fas fa-paper-plane text-base mr-1 animate-bounce"></i> C’est parti!
 													</div>
 													<h4 className="text-xl font-semibold">
-														ET VOUS POUVEZ
+														OU VOUS POUVEZ
 													</h4>
 													<button
 														className="button-payer-top-list bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -667,7 +664,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 													</button>
 													<p className="notifyForPrice text-md leading-relaxed text-gray-500 text-left">
 														<i className="fas fa-flag-checkered animate-bounce"></i> Attention : le prix de vente de votre véhicule n'est pas inscrit dans la colonne de la côte car celle-ci est destinée à l'estimation élaborée par nos ingénieurs et experts automobiles.
-														Calculez la côte personnalisée de votre véhicule avec <Link href="/prix"> notre abonnement Premium </Link>.
+														Calculez la côte personnalisée de votre véhicule avec <Link href="/prix"> notre tarif Premium  </Link>.
 													</p>
 												</div>
 											</div>

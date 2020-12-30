@@ -9,7 +9,7 @@ export default function PubContentConnection() {
 		    <div className="container mx-auto px-4 pb-32">
 			  <div className="items-center flex flex-wrap">
 			    <p className="mt-2 text-xl">
-					La Connexion qui vous permet de déposer et gérer vos annonces. Un accès de paiement en sécurisé. Ajouter les annonces aux favoris qui vous intéressent
+					La Connexion vous permet de déposer et gérer vos annonces. Un accès de paiement en sécurisé. Ajouter les annonces aux favoris qui vous intéressent
 				</p>
 
 				<div className="w-full md:w-6/12 ml-auto px-12 md:px-4">

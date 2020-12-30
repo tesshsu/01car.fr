@@ -34,14 +34,14 @@ const AnnonceLists = ({ loading,
 					</span>
 					<input
 						type="text"
-						placeholder="Search here..."
+						placeholder="Chercher ici..."
 						className="px-3 py-3 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 						onChange={(e) => setSearch(e.target.value)}
 					/>
 		</div>
 		{filteredCars?.map((car, idx) => car?.premium ?
 			(
-			  <Link key={idx} href={`/annonce?id=${car.id}`} {...car}>
+			  <Link key={idx} href={idx? (`/annonce?id=${car?.id}`): ("#")} {...car}>
 				<div id={car.id} className="preniumAnnonce relative w-full md:w-6/12 lg:w-4/12 lg:mb-0 mb-12 mr-4 my-6 shadow-lg max-w-400-px rounded-lg border-2 border-gray-200 ">
 						<img
 							  alt="..."
@@ -108,7 +108,7 @@ const AnnonceLists = ({ loading,
 						</div>
 				</div>
 			</Link> ) : (
-			   <Link key={idx} car={car} href={`/annonce?id=${car?.id}`} {...car}>
+			   <Link key={idx} car={car} href={idx? (`/annonce?id=${car?.id}`): ("#")} {...car}>
 			    <div id={car.id} className="classicAnnonce relative w-full md:w-6/12 lg:w-4/12 lg:mb-0 mb-12 mr-4 my-6 shadow-lg max-w-400-px rounded-lg border-2 border-gray-200 ">
 					{car.uploads.length > 0 ? (
 						<img
