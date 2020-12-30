@@ -25,7 +25,7 @@ const IndexDropdown = () => {
 						"text-4xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
 						}
 			>
-				<i className="fas fa-money-check-alt"></i>
+              <i className="fas fa-cart-plus"></i>
 			</a>
 	  </Link>
       <div

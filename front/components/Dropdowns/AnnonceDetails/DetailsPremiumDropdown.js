@@ -91,7 +91,7 @@ const DetailsPremiumDropdown = ({
 					<div className="container px-2 mx-auto">
 						<div className="flex flex-wrap">
 							<div className="w-full px-4 flex-1">
-							  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i class={premium_nc.icon}></i> {premium_nc.name} : </span>
+							  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i class={premium_nc.icon}></i> {premium_nc.name} </span>
 							</div>
 							<div className="w-full px-4 flex-1">
 							  <span className="question-11 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">{carHasOption(premium_nc)}</span>

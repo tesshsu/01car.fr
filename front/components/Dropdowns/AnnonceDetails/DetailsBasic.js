@@ -11,7 +11,7 @@ const DetailsBasic = ({
   const basics = [
 	  { icon: "fas fa-gas-pump", name: "Energie", value: car?.fuel },
 	  { icon: "fas fa-tachometer-alt", name: "Kilométrage", value: car?.km },
-	  { icon: "fas fa-file-invoice-dollar", name: "Boîte de vitesses", value: car?.transmission },
+	  { icon: "fas fa-magic", name: "Boîte de vitesses", value: car?.transmission },
 	  { icon: "fas fa-car-side", name: "Nombre de portes", value: car?.doors },
 	  { icon: "fas fa-car-battery", name: "cylindrée", value: car?.displacement },
 	  { icon: "far fa-calendar-alt", name: "Année", value: moment(yearOfcar).format("DD/MM/YYYY")}
