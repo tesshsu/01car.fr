@@ -19,7 +19,7 @@ export default function Login() {
 
   useEffect(() => {
     if (isAuthentificated && loggedUser) {
-      Router.push("/vendre");
+        localStorage.setItem("user", JSON.stringify(loggedUser));
     }
   }, [isAuthentificated, loggedUser]);
 
