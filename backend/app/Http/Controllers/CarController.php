@@ -127,7 +127,7 @@ class CarController extends Controller
 
         $currentUser = Auth::user();
         if (!$currentUser->canEditCar($car)
-            || ($currentUser->id == $car->user_id && !$car->premium)) {
+           /* || ($currentUser->id == $car->user_id && !$car->premium)*/) {
             return response()->json(['error' => 'Unauthorised'], 403);
         }
 
@@ -276,6 +276,10 @@ class CarController extends Controller
         collect($car->getFillable())->each(function ($item, $key) use ($car, $reqCar) {
              $car->{ $item }  = isset($reqCar->{ $item } ) ? $reqCar->{ $item } : $car->{ $item } ;
         });
+
+        // Handle date format
+        $car->dt_entry_service  = isset($reqCar->dt_entry_service ) ? Carbon::parse($reqCar->dt_entry_service)->toDateTime() : $car->dt_entry_service ;
+        $car->dt_valuation  = isset($reqCar->dt_valuation ) ? Carbon::parse($reqCar->dt_valuation)->toDateTime() : $car->dt_valuation ;
 
         if (isset($reqCar->equipments)) {
             collect(EquipmentCategory::list())->each(function ($item, $key) use ($car, $reqCar) {
