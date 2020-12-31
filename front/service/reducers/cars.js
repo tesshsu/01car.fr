@@ -19,13 +19,13 @@ export default function carsReducer(state = initialState, action) {
     case actions.CREATE_CAR:
       return {...state, loading: true}
     case actions.CREATE_CAR_SUCCESS:
-      return {selectedCar: action.payload, loading: false, hasErrors: false}
+      return {...state, selectedCar: action.payload, loading: false, hasErrors: false}
     case actions.CREATE_CAR_FAILURE:
       return {...state, loading: false, hasErrors: true}
     case actions.GET_CARS:
       return {...state, loading: true}
     case actions.GET_CARS_SUCCESS:
-      return {
+      return {...state,
         current_page: action.payload.current_page,
         from: action.payload.from,
         to: action.payload.to,
@@ -40,17 +40,13 @@ export default function carsReducer(state = initialState, action) {
     case actions.GET_CAR:
       return {...state, loading: true}
     case actions.GET_CAR_SUCCESS:
-      return {
+      return {...state,
         selectedCar: action.payload,
         loading: false,
-        hasErrors: false}
+        hasErrors: false
+      };
     case actions.GET_CARS_FAILURE:
       return {...state, loading: false, hasErrors: true}
-    case actions.GET_CAR_SUCCESS:
-      return {
-        selectedCar: action.payload,
-        loading: false,
-        hasErrors: false};
     case actions.UPDATE_CAR:
       return {...state, loading: true}
     case actions.UPDATE_CAR_SUCCESS:
@@ -60,8 +56,7 @@ export default function carsReducer(state = initialState, action) {
     case actions.DELETE_CAR:
       return {...state, loading: true}
     case actions.DELETE_CAR_SUCCESS:
-      return {
-        ...state,
+      return {...state,
         loading: false,
         hasErrors: false,
         cars: state.cars.filter(item => item.id !== action.payload.carId),
