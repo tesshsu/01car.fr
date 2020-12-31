@@ -6,17 +6,13 @@ import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
 import useLoggedUser from 'service/hooks/useLoggedUser';
 import {fetchUser} from 'service/actions/user';
 import {connect} from 'react-redux';
-
+import Router from "next/router";
 
 const Navbar = ({dispatch, loading, user, hasErrors}) => {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
-    const { isAuthentificated } = useLoggedUser();
-
-
   const {
     isAuthentificated,
     loggedUser
-	loggedUser
   } = useLoggedUser();
 
   useEffect(() => {
@@ -66,7 +62,7 @@ const Navbar = ({dispatch, loading, user, hasErrors}) => {
 
               <li className="flex items-center">
                 <button
-                  className={ (router.pathname === '/annonces' ? 'bg-orange-500' : 'bg-gray-800') + " text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"}
+                    className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
                   type="button"
                 >
                   <Link href="/annonces">
@@ -84,7 +80,7 @@ const Navbar = ({dispatch, loading, user, hasErrors}) => {
 
               <li className="flex items-center">
                 <button
-                  className={ (router.pathname === '/vendre' ? 'bg-orange-500' : 'bg-gray-800') + " text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"}
+                    className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
                   type="button"
                 >
                   <Link href="/vendre">
@@ -102,7 +98,7 @@ const Navbar = ({dispatch, loading, user, hasErrors}) => {
                 { isAuthentificated && loggedUser ? (
                     <li className="flex items-center">
                         <button
-                            className={ (router.pathname === '/mesAnnonces' ? 'bg-orange-500' : 'bg-gray-800') + " text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"}
+                            className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
                             type="button"
                         >
                             <Link href="/mesAnnonces">
@@ -121,7 +117,7 @@ const Navbar = ({dispatch, loading, user, hasErrors}) => {
                 { isAuthentificated && loggedUser ? (
 			    <li className="flex items-center">
 					<button
-					  className={ (router.pathname === '/favoris' ? 'bg-orange-500' : 'bg-gray-800') + " text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"}
+                        className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
 					  type="button"
 					>
                         <Link href="/favoris">
