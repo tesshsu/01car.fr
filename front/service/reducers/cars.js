@@ -63,6 +63,13 @@ export default function carsReducer(state = initialState, action) {
       };
     case actions.DELETE_CAR_FAILURE:
       return {...state, loading: false, hasErrors: true};
+    case actions.EDIT_CAR:
+      return {...state,
+        editing: true,
+        selectedCar: state.cars.filter(item => item.id === action.payload.carId).shift(),
+        loading: false,
+        hasErrors: true};
+      editingCar
     default:
       return state
   }

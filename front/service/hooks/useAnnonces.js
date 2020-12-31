@@ -24,9 +24,17 @@ export default function useAnnonces() {
     }
   }, [dispatch]);
 
+  const editCar = useCallback(async (carId) => {
+    try {
+      await dispatch(ANNONCES_ACTIONS.editCar(carId));
+    } catch (err) {
+      console.log("update_car_error", err);
+    }
+  }, [dispatch]);
+
   const modifyCar = useCallback(async (carId, payload) => {
     try {
-      await dispatch(ANNONCES_ACTIONS.updateCar(carId, payload));
+      await dispatch(ANNONCES_ACTIONS.modifyCar(carId, payload));
     } catch (err) {
       console.log("update_car_error", err);
     }
@@ -44,6 +52,7 @@ export default function useAnnonces() {
     car: car,
     create,
     addPhoto,
+    editCar,
     modifyCar,
     deleteCar,
     fetchAnnonces

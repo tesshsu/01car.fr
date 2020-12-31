@@ -24,6 +24,7 @@ const MesAnnoncesLists = ({
     const router = useRouter();
     const {isAuthentificated, loggedUser} = useLoggedUser();
     const {
+        editCar,
         modifyCar,
         deleteCar,
     } = useAnnonces();
@@ -43,6 +44,14 @@ const MesAnnoncesLists = ({
 
     if (loading) {
         return <p>Loading annonces...</p>;
+    }
+
+    const handleEdit = async (id) => {
+        try {
+            await editCar(id);
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     const handleDelete = async (id) => {
@@ -116,9 +125,9 @@ const MesAnnoncesLists = ({
                                         className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 mr-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
                                         type="button"
                                     >
-                                      <Link key={idx} href={idx ? (`/annonce?id=${car?.id}`) : ("#")} {...car}>
+                                      <Link href={car?.id ? (`/annonce?id=${car?.id}`) : ("#")} {...car}>
                                           <a
-                                              href={idx ? (`/annonce?id=${car?.id}`) : ("#")}
+                                              href={car?.id ? (`/annonce?id=${car?.id}`) : ("#")}
                                               className={
                                                   "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
                                               }
@@ -133,7 +142,8 @@ const MesAnnoncesLists = ({
                                     >
                                       <Link href="/vendre">
                                           <a
-                                              href="#pablo"
+                                              href="#"
+                                              onClick={(e) => handleEdit(car?.id)}
                                               className={
                                                   "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
                                               }
@@ -147,7 +157,7 @@ const MesAnnoncesLists = ({
                                          type="button"
                                      >
                                           <a
-                                              href="#pablo"
+                                              href="#"
                                               onClick={(e) => handleDelete(car?.id)}
                                               className={
                                                   "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
