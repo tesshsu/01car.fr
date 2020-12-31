@@ -139,6 +139,7 @@ export function logout(id) {
   return async (dispatch, getState) => {
     await localStorage.removeItem('ACCESS_TOKEN');
     await dispatch({ type: LOGOUT });
+    localStorage.clear();
   };
 }
 

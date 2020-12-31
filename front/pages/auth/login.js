@@ -9,8 +9,9 @@ import Notice from 'components/Notices/Notice';
 import FacebookConnectButton from 'helpers/FacebookConnectButton';
 import GoogleConnectButton from 'helpers/GoogleConnectButton';
 import * as formValidate from 'helpers/formValidate';
-
+import { useCookies } from "react-cookie"
 export default function Login() {
+    const [cookie, setCookie] = useCookies(["user"])
   const {
     login,
     isAuthentificated,
@@ -19,7 +20,11 @@ export default function Login() {
 
   useEffect(() => {
     if (isAuthentificated && loggedUser) {
-      Router.push("/vendre");
+        setCookie("user", JSON.stringify(loggedUser), {
+            path: "/",
+            maxAge: 3600, // Expires after 1hr
+            sameSite: true,
+        })
     }
   }, [isAuthentificated, loggedUser]);
 
