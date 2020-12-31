@@ -70,12 +70,10 @@ const ImageUpload= ({
                 ...payload
             } = values;
 
-            console.log("car_id=",car?.id);
+            console.log("car_id=", car?.id, values);
 
             const data = {...payload};
             await addPhoto(car?.id, data);
-            console.log("photo_data", data);
-            console.log("car_id",car?.id);
         } catch (err) {
             console.log(err);
             alert('Impossible ajouter photos');

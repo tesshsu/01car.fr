@@ -23,6 +23,7 @@ import useAnnonces from '../../service/hooks/useAnnonces';
 import {Modal} from "react-responsive-modal";
 import PubContentThreeIcons from "../../layouts/PubContentThreeIcons.js";
 import PubContentConnection from "../../layouts/PubContentConnection.js";
+import utils, {transformValueToBoolean} from "../../helpers/Utils";
 
 
 const QuestionsClassic = ({dispatch, loading, car}) => {
@@ -80,8 +81,11 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 
 	//submit
 
+
 	const onSubmit = async (values) => {
 		try {
+			values.smoking = transformValueToBoolean(values.smoking);
+			values.duplicate_keys = transformValueToBoolean(values.duplicate_keys);
 			if (car) {
 				await modifyCar(car?.id, values);
 			} else {

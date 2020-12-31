@@ -6,7 +6,7 @@ import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
 import useLoggedUser from 'service/hooks/useLoggedUser';
 import {fetchUser} from 'service/actions/user';
 import {connect} from 'react-redux';
-import Router from "next/router";
+import {router} from "next/client";
 
 const Navbar = ({dispatch, loading, user, hasErrors}) => {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
@@ -62,7 +62,7 @@ const Navbar = ({dispatch, loading, user, hasErrors}) => {
 
               <li className="flex items-center">
                 <button
-                    className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+                  className={ (router.pathname === '/annonces' ? 'bg-orange-500' : 'bg-gray-800') + " text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"}
                   type="button"
                 >
                   <Link href="/annonces">
@@ -80,7 +80,7 @@ const Navbar = ({dispatch, loading, user, hasErrors}) => {
 
               <li className="flex items-center">
                 <button
-                    className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+                  className={ (router.pathname === '/vendre' ? 'bg-orange-500' : 'bg-gray-800') + " text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"}
                   type="button"
                 >
                   <Link href="/vendre">
@@ -95,10 +95,10 @@ const Navbar = ({dispatch, loading, user, hasErrors}) => {
 				  </Link>
                 </button>
               </li>
-                { isAuthentificated && loggedUser ? (
+                {isAuthentificated && (
                     <li className="flex items-center">
                         <button
-                            className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+                            className={ (router.pathname === '/mesAnnonces' ? 'bg-orange-500' : 'bg-gray-800') + " text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"}
                             type="button"
                         >
                             <Link href="/mesAnnonces">
@@ -113,28 +113,28 @@ const Navbar = ({dispatch, loading, user, hasErrors}) => {
                             </Link>
                         </button>
                     </li>
-                ) : (null)}
-                { isAuthentificated && loggedUser ? (
+                )}
+			  {isAuthentificated && (
 			    <li className="flex items-center">
 					<button
-                        className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+					  className={ (router.pathname === '/favoris' ? 'bg-orange-500' : 'bg-gray-800') + " text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"}
 					  type="button"
 					>
-                        <Link href="/favoris">
+					 <Link href="/favoris">
 						  <a
-                                href="#pablo"
-                                className={
-                                  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
-                                }
+							href="#pablo"
+							className={
+							  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
+							}
 						  >
 							Favoris
 						  </a>
                         </Link>
 					</button>
                 </li>
-                ) : (null)}
+                ) }
 			   <li className="flex items-center">
-			   {isAuthentificated && loggedUser ? (
+			   {isAuthentificated ? (
                    <Link href="/auth/setting_user">
                        <a
                            href="#"
