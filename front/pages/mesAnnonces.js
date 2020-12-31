@@ -32,7 +32,7 @@ const MesAnnonces = ({
                         {listPubs.map(listPub => (
                             <div key={listPub.title.replace(/\s+/g, '_')} className="mr-4 p-3 text-center">
 								<span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
-								  <i className={listPub.icon}></i>
+								  <i className={listPub.icon}> </i>
 								</span>
                                 <span className="text-sm text-gray-500">{listPub.title}</span>
                             </div>
