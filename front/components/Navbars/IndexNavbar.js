@@ -1,27 +1,31 @@
 import React, {useEffect, useState} from 'react';
 import Link from "next/link";
+import { parseCookies } from "../../api/client";
 // components
-
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
 import useLoggedUser from 'service/hooks/useLoggedUser';
-import Router, {useRouter} from "next/router";
 import {fetchUser} from 'service/actions/user';
 import {connect} from 'react-redux';
 
-const initialState = {
-  isAuthentificated: false
-};
 
 const Navbar = ({dispatch, loading, user, hasErrors}) => {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
-    const router = useRouter();
     const { isAuthentificated } = useLoggedUser();
 
-  const renderUser = () => {
-    if (loading) return <p>Chargement de l'utilisateur...</p>
-    if (hasErrors) return <p>Impossible d'afficher l'utilisateur.</p>
-    return <span className="text-orange-500 text-sm">Bonjour, {user.name}</span>
-  }
+
+  const {
+    isAuthentificated,
+    loggedUser
+	loggedUser
+  } = useLoggedUser();
+
+  useEffect(() => {
+    if (isAuthentificated && loggedUser) {
+      dispatch(fetchUser())
+    }
+  }, [isAuthentificated, loggedUser]);
+
+
 
   return (
     <>
@@ -95,7 +99,7 @@ const Navbar = ({dispatch, loading, user, hasErrors}) => {
 				  </Link>
                 </button>
               </li>
-                {isAuthentificated && (
+                { isAuthentificated && loggedUser ? (
                     <li className="flex items-center">
                         <button
                             className={ (router.pathname === '/mesAnnonces' ? 'bg-orange-500' : 'bg-gray-800') + " text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"}
@@ -113,49 +117,49 @@ const Navbar = ({dispatch, loading, user, hasErrors}) => {
                             </Link>
                         </button>
                     </li>
-                )}
-			  {isAuthentificated && (
+                ) : (null)}
+                { isAuthentificated && loggedUser ? (
 			    <li className="flex items-center">
 					<button
 					  className={ (router.pathname === '/favoris' ? 'bg-orange-500' : 'bg-gray-800') + " text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"}
 					  type="button"
 					>
-					 <Link href="/favoris">
+                        <Link href="/favoris">
 						  <a
-							href="#pablo"
-							className={
-							  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
-							}
+                                href="#pablo"
+                                className={
+                                  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
+                                }
 						  >
 							Favoris
 						  </a>
-					  </Link>
+                        </Link>
 					</button>
                 </li>
-			  )}
+                ) : (null)}
 			   <li className="flex items-center">
-			   {!isAuthentificated ? (
-				<Link href="/auth/login">
-				  <a
-					href="#"
-					className={
-					  "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
-					}
-				  >
-					<i className="text-orange-900 fas fa-user" />
-				  </a>
-				</Link>
+			   {isAuthentificated && loggedUser ? (
+                   <Link href="/auth/setting_user">
+                       <a
+                           href="#"
+                           className={
+                               "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
+                           }
+                       >
+                           <i className="text-orange-900 fas fa-address-card" /> <span className="text-orange-500 text-sm">Bonjour, {user.name}</span>
+                       </a>
+                   </Link>
 				) : (
-				<Link href="/auth/setting_user">
-				  <a
-					href="#"
-					className={
-					  "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
-					}
-				  >
-					<i className="text-orange-900 fas fa-address-card" /> {renderUser()}
-				  </a>
-				</Link>
+                   <Link href="/auth/login">
+                       <a
+                           href="#"
+                           className={
+                               "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
+                           }
+                       >
+                           <i className="text-orange-900 fas fa-user" />
+                       </a>
+                   </Link>
 			   )}
 			   </li>
             </ul>
@@ -164,6 +168,21 @@ const Navbar = ({dispatch, loading, user, hasErrors}) => {
       </nav>
     </>
   );
+}
+
+Navbar.getInitialProps = async ({ req }) => {
+    const data = parseCookies(req)
+
+    if (res) {
+        if (Object.keys(data).length === 0 && data.constructor === Object) {
+            res.writeHead(301, { Location: "/" })
+            res.end()
+        }
+    }
+
+    return {
+        user: user && data,
+    }
 }
 
 const mapStateToProps = (state) => ({

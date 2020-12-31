@@ -14,7 +14,7 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 
 const Setting_user = ({dispatch, loading, user, hasErrors}) => {
-	
+
 	let record = {
 		  phone: user.phone,
 		  name: user.name,
@@ -57,14 +57,14 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 		loggedUser,
 		logout,
 		updateLoggedUser
-	  } = useLoggedUser();	  
-	  
+	  } = useLoggedUser();
+
 	  useEffect(() => {
 		if (isAuthentificated && loggedUser) {
-		  dispatch(fetchUser())		  
+		  dispatch(fetchUser())
 		}
 	  }, [isAuthentificated, loggedUser]);
-	  
+
 	  const onSubmit = async (values)=>{
 		try {
 		  let {
@@ -73,7 +73,7 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 
 		  const data = { ...payload };
 		  console.log(data);
-		  await updateLoggedUser(data);		  
+		  await updateLoggedUser(data);
 		} catch (err) {
 		   console.log(err.response);
 		} finally {
@@ -83,15 +83,16 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 
   async function onSignOut() {
     await logout();
+    localStorage.clear();
 	Router.push("/auth/login");
   }
-  
+
   return (
     <>
 	  <IndexNavbar fixed />
 	  <main>
 	  <section className="mt-20 px-12 bg-gray-800">
-	    
+
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full mt-20 mb-8 lg:w-6/12 px-4">
@@ -137,7 +138,7 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 									  htmlFor="name"
 									>
 									  Nom ou identifiant :
-							    </label>							
+							    </label>
 								<Field
 								  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
 								  name="name"
@@ -163,7 +164,7 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 							  disabled={submitting}
 							/>
 						   </div>
-                          <CardAcceptCondition />						  					  
+                          <CardAcceptCondition />
 						  <div className="text-center mt-6">
 							<button
 							  className="bg-orange-500 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
