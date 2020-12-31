@@ -29,6 +29,13 @@ export async function addPhoto(carId, payload) {
 export function updateCar(carId, payload) {
   payload.id = carId;
   return client
-      .put(`/api/v1/cars/${carId}`)
+      .put(`/api/v1/cars/${carId}`, payload)
+      .then(({ data }) => data);
+}
+
+export function deleteCar(carId, payload) {
+  payload.id = carId;
+  return client
+      .delete(`/api/v1/cars/${carId}`, payload)
       .then(({ data }) => data);
 }

@@ -21,8 +21,12 @@ export const ADD_CAR_PHOTO_SUCCESS = 'ADD_CAR_PHOTO_SUCCESS';
 export const ADD_CAR_PHOTO_FAILURE = 'ADD_CAR_PHOTO_SUCCESS';
 
 export const UPDATE_CAR = 'UPDATE_CAR'
-export const UPDATE_CAR_SUCCESS = 'car/UPDATE_CAR_SUCCESS'
-export const UPDATE_CAR_FAILURE = 'car/UPDATE_CAR_FAILURE'
+export const UPDATE_CAR_SUCCESS = 'UPDATE_CAR_SUCCESS'
+export const UPDATE_CAR_FAILURE = 'UPDATE_CAR_FAILURE'
+
+export const DELETE_CAR = 'DELETE_CAR'
+export const DELETE_CAR_SUCCESS = 'DELETE_CAR_SUCCESS'
+export const DELETE_CAR_FAILURE = 'DELETE_CAR_FAILURE'
 
 // Create Redux action creators that return an action
 export const getCar = () => ({
@@ -85,7 +89,23 @@ export const updateCarSuccess = (response) => ({
 
 export const updateCarFailure = () => ({
   type: UPDATE_CAR_FAILURE,
+});
+
+
+export const deleteCarAction = () => ({
+  type: DELETE_CAR,
+});
+
+export const deleteCarSuccess = (carId, response) => ({
+  type: DELETE_CAR_SUCCESS,
+  payload: { carId, response }
 })
+
+export const deleteCarFailure = (carId) => ({
+  type: DELETE_CAR_FAILURE,
+});
+
+
 // Combine them all in an asynchronous thunk
 export function fetchCars(page=1, perPage=18, owner=undefined) {
   return async (dispatch) => {
@@ -159,4 +179,19 @@ export function modifyCar(id, response) {
       dispatch(updateCarFailure())
     }
   }
+}
+
+
+export function deleteCar(carId, payload) {
+  return async (dispatch) => {
+    try {
+      const response = await API.Annonces.deleteCar(carId, payload);
+      dispatch(deleteCarSuccess(carId, response));
+    } catch (err) {
+      await dispatch(deleteCarFailure(carId, ));
+      throw err;
+    } finally {
+      dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
+    }
+  };
 }

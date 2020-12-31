@@ -16,9 +16,17 @@ export default function useAnnonces() {
     }
   }, [dispatch]);
 
-  const modifyCar = useCallback(async (payload) => {
+  const deleteCar = useCallback(async (carId, payload) => {
     try {
-      await dispatch(ANNONCES_ACTIONS.updateCar(payload));
+      await dispatch(ANNONCES_ACTIONS.deleteCar(carId, payload));
+    } catch (err) {
+      console.log("delete_car_error", err);
+    }
+  }, [dispatch]);
+
+  const modifyCar = useCallback(async (carId, payload) => {
+    try {
+      await dispatch(ANNONCES_ACTIONS.updateCar(carId, payload));
     } catch (err) {
       console.log("update_car_error", err);
     }
@@ -37,6 +45,7 @@ export default function useAnnonces() {
     create,
     addPhoto,
     modifyCar,
+    deleteCar,
     fetchAnnonces
   };
 }
