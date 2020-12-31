@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react"
 import {connect} from "react-redux";
 import Link from "next/link";
 import {fetchCars} from 'service/actions/cars';
-import {useRouter }  from "next/router";
+import Router, {useRouter }  from "next/router";
 import Moment from 'react-moment';
 import ENVS from '../../environment';
+import useLoggedUser from "../../service/hooks/useLoggedUser";
 
 const MesAnnoncesLists = ({ dispatch,
 							 loading,
@@ -18,8 +19,17 @@ const MesAnnoncesLists = ({ dispatch,
 							 hasErrors}) => {
 
 	const router = useRouter();
+    const { isAuthentificated, loggedUser } = useLoggedUser();
+
+    useEffect(() => {
+        console.log("loggedUser", isAuthentificated);
+        if (!isAuthentificated) {
+            Router.push("/");
+        }
+    }, [isAuthentificated]);
+
 	useEffect(() => {
-	    const owner = 1;
+	    const owner = loggedUser?.loggedUser?.id;
 		dispatch(fetchCars(router.query.page, router.query.perPage, owner))
 	}, [dispatch])
 
