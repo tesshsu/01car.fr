@@ -1,19 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import Link from "next/link";
+import { parseCookies } from "../../api/client";
 // components
-
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
 import useLoggedUser from 'service/hooks/useLoggedUser';
-import Router from "next/router";
 import {fetchUser} from 'service/actions/user';
 import {connect} from 'react-redux';
 
-const initialState = {
-  isAuthentificated: false
-};
 
 const Navbar = ({dispatch, loading, user, hasErrors}) => {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
+
   const {
     isAuthentificated,
 	loggedUser
@@ -168,6 +165,21 @@ const Navbar = ({dispatch, loading, user, hasErrors}) => {
       </nav>
     </>
   );
+}
+
+Navbar.getInitialProps = async ({ req }) => {
+    const data = parseCookies(req)
+
+    if (res) {
+        if (Object.keys(data).length === 0 && data.constructor === Object) {
+            res.writeHead(301, { Location: "/" })
+            res.end()
+        }
+    }
+
+    return {
+        user: user && data,
+    }
 }
 
 const mapStateToProps = (state) => ({

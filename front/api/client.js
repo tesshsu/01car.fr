@@ -1,6 +1,6 @@
 import axios from 'axios';
 import ENVS from '../environment';
-
+import Cookie from "js-cookie";
 const client = axios.create({
   baseURL: ENVS.DEV.API_URL,
   timeout: 10000
@@ -25,5 +25,8 @@ export function setupApiClient() {
   });
 }
 
+export function parseCookies(req) {
+  return Cookie.parse(req ? req.headers.cookie || "" : document.cookie);
+}
 
 export default client;
