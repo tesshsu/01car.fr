@@ -36,7 +36,9 @@ const MesAnnoncesLists = ({
 
     useEffect(() => {
         const owner = loggedUser?.loggedUser?.id;
-        dispatch(fetchCars(router.query.page, router.query.perPage, owner))
+        // set default value for by page
+        const per_page_req = router.query.perPage ? router.query.perPage : 10;
+        dispatch(fetchCars(router.query.page, per_page_req, owner))
     }, [dispatch])
 
     if (loading) {
@@ -55,7 +57,7 @@ const MesAnnoncesLists = ({
     return (
         <>
             {cars?.map((car, idx) => (
-                <div id={car.id} className="container px-4 mx-auto my-4">
+                <div key={`car_${car.id}`} id={`car_${car.id}`} className="container px-4 mx-auto my-4">
                     <div className="favoris-block flex-wrap">
                         {car.uploads.length > 0 ? (
                             <img

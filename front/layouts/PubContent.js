@@ -42,7 +42,7 @@ export default function PubContent() {
 					</p>
 					<ul className="list-none mt-2">
 					  {basics.map(basic => (
-						  <li className="py-2">
+						  <li key={basic.name.replace(/\s+/g, '_')} className="py-2">
 							<div className="flex items-center">
 							  <div>
 								<span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-orange-500 bg-gray-100 mr-3">
@@ -70,7 +70,7 @@ export default function PubContent() {
 									  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
 									}
 								  >
-									<i class="far fa-laugh mr-1 animate-spin"></i> Vendre votre véhicule sur Top list
+									<i className="far fa-laugh mr-1 animate-spin"> </i> Vendre votre véhicule sur Top list
 								  </a>
 							  </Link>
 					  </button>
