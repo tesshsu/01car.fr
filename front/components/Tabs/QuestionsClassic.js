@@ -5,6 +5,7 @@ import QuestionsOptions from "../../components/Tabs/QuestionsOptions.js";
 import ImageUpload from "../../components/Tabs/ImageUpload.js";
 import {Field, Form} from 'react-final-form';
 import useLoggedUser from '../../service/hooks/useLoggedUser';
+import {transformValueToBoolean} from "../../helpers/Utils";
 import {
 	dateDispoOptions,
 	etatCarOptions,
@@ -23,13 +24,13 @@ import useAnnonces from '../../service/hooks/useAnnonces';
 import {Modal} from "react-responsive-modal";
 import PubContentThreeIcons from "../../layouts/PubContentThreeIcons.js";
 import PubContentConnection from "../../layouts/PubContentConnection.js";
-import utils, {transformValueToBoolean} from "../../helpers/Utils";
 
 const QuestionsClassic = ({dispatch, loading, car}) => {
 	const [openTab, setOpenTab] = React.useState(1);
 	const [showModal, setShowModal] = React.useState(false);
 	const [isFirst, setIsFrist] = React.useState(true)
 	const [hasErrors, setHasErrors] = React.useState(true);
+	const [editCar, setEditCar] = React.useState(false);
 	const sendPostQuestionsvalues = car ? car : {
 		brand: "",
 		model: "",
@@ -75,6 +76,8 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 	useEffect(() => {
 		if (!isAuthentificated) {
 			return setShowModal(true);
+		}else if(isAuthentificated && car){
+			return setEditCar(true)
 		}
 	}, [isAuthentificated]);
 
@@ -82,11 +85,11 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 
 	const onSubmit = async (values) => {
 		try {
-			values.smoking = transformValueToBoolean(values.smoking);
-			values.duplicate_keys = transformValueToBoolean(values.duplicate_keys);
 			if (car) {
 				await modifyCar(car?.id, values);
 			} else {
+				values.smoking = transformValueToBoolean(values.smoking);
+				values.duplicate_keys = transformValueToBoolean(values.duplicate_keys);
 				await create(values);
 			}
 			setIsFrist(false)
@@ -190,7 +193,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="brand"
 														>
-															* Marque modèle :
+															{editCar ? "Marque modèle :" : "*Marque modèle :"}
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
@@ -212,7 +215,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="dt_entry_service"
 														>
-															* Date de 1ère Immatriculation :
+															{editCar ? "Date de 1ère Immatriculation  :" : "*Date de 1ère Immatriculation  :"}
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
@@ -236,7 +239,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="fuel"
 														>
-															* Energie :
+															{editCar ? "Energie  :" : "*Energie  :"}
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
@@ -262,7 +265,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="km"
 														>
-															*Kilométrage :
+															{editCar ? "Kilométrage :" : "*Kilométrage :"}
 														</label>
 														<Field
 															name="km"
@@ -281,7 +284,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														className="block uppercase text-gray-700 text-md font-bold mb-2"
 														htmlFor="license_plate"
 													>
-														*Immatriculation :
+														{editCar ? "Immatriculation :" : "*Immatriculation :"}
 													</label>
 													<div
 														className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
@@ -325,11 +328,12 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="owner_type"
 														>
-															* Q1 - VOUS êtes :
+															{editCar ? "Q1 - VOUS êtes :" : "* Q1 - VOUS êtes :"}
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
-															<Field name="owner_type" validate={formValidate.required}
+															<Field name="owner_type"
+																   validate={formValidate.required}
 																   component="select"
 																   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 																{statuVendeurOptions.map(statuVendeurOption => (
@@ -350,11 +354,12 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="available"
 														>
-															* Q2 - Votre véhicule est disponible :
+															{editCar ? "Q2 - Votre véhicule est disponible :" : "* Q2 - Votre véhicule est disponible :"}
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
-															<Field name="available" validate={formValidate.required}
+															<Field name="available"
+																   validate={formValidate.required}
 																   component="select"
 																   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 																{dateDispoOptions.map(dateDispoOption => (
@@ -382,11 +387,11 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="smoking"
 														>
-															* Q3 - Votre véhicule est :
+															{editCar ? "Q3 - Votre véhicule est :" : "* Q3 - Votre véhicule est :"}
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
-															<Field name="smoking" validate={formValidate.required}
+															<Field name="smoking"
 																   component="select"
 																   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 																{furmeurOptions.map(furmeurOption => (
@@ -407,12 +412,12 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="duplicate_keys"
 														>
-															* Q4 - Avez-vous le Double des clés :
+															{editCar ? "Q4 - Avez-vous le Double des clés :" : "* Q4 - Avez-vous le Double des clés :"}
 														</label>
 														<div
 															className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
 															<Field name="duplicate_keys"
-																   validate={formValidate.required} component="select"
+																   component="select"
 																   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 																{OuiOptions.map(OuiOption => (
 																	<option
@@ -429,10 +434,11 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														className="block uppercase text-gray-700 text-md font-bold mb-2"
 														htmlFor="sale_reason"
 													>
-														* Q5 - Pourquoi vendez-vous votre véhicule ?
+														{editCar ? "Q5 - Pourquoi vendez-vous votre véhicule ?" : "* Q5 - Pourquoi vendez-vous votre véhicule ?"}
 													</label>
 													<div className="relative flex w-full flex-wrap items-stretch mb-3">
-														<Field name="sale_reason" validate={formValidate.required}
+														<Field name="sale_reason"
+															   validate={formValidate.required}
 															   component="select"
 															   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 															{raisonVendreOptions.map(raisonVendreOption => (
@@ -471,7 +477,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														className="block uppercase text-gray-700 text-md font-bold mb-2"
 														htmlFor="estimate_price"
 													>
-														* Q6- Indiquez votre prix de vente :
+														{editCar ? "Q6- Indiquez votre prix de vente :" : "* Q6- Indiquez votre prix de vente :"}
 													</label>
 													<Field
 														name="estimate_price"
@@ -499,11 +505,12 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="hand_number"
 														>
-															* Q8 - Nombre de mains:
+															{editCar ? "Q8 - Nombre de mains:" : "* Q8 - Nombre de mains:"}
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
-															<Field name="hand_number" validate={formValidate.required}
+															<Field name="hand_number"
+																   validate={formValidate.required}
 																   component="select"
 																   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 																{numMainsOptions.map(numMainsOption => (
@@ -523,11 +530,12 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="state"
 														>
-															* Q9- État du véhicule:
+															{editCar ? "Q9- État du véhicule:" : "* Q9- État du véhicule:"}
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
-															<Field name="state" validate={formValidate.required}
+															<Field name="state"
+																   validate={formValidate.required}
 																   component="select"
 																   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 																{etatCarOptions.map(etatCarOption => (
@@ -549,10 +557,11 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														className="block uppercase text-gray-700 text-md font-bold mb-2"
 														htmlFor="country"
 													>
-														* Q10- Origine du véhicule :
+														{editCar ? "Q10- Origine du véhicule :" : "* Q10- Origine du véhicule :"}
 													</label>
 													<div className="relative flex w-full flex-wrap items-stretch mb-3">
-														<Field name="country" validate={formValidate.required}
+														<Field name="country"
+															   validate={formValidate.required}
 															   component="select"
 															   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 															{originCarOptions.map(originCarOption => (
@@ -569,9 +578,9 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 												</div>
 
 												<div className="flex flex-wrap mt-6 px-4 align-center justify-center">
-													{isFirst && !!hasErrors ? (
+													{isFirst ? (
 														<div className="finalBlock text-center">
-															{invalid ? (
+															{invalid && hasErrors ? (
 																<div className="sendQuestions text-center">
 																	<button
 																		className="bg-gray-600 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -593,7 +602,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 																	<button
 																		className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
 																		type="submit"
-																		disabled={submitting}
+																		disabled={invalid || submitting}
 																	>
 																		<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER
 																	</button>
