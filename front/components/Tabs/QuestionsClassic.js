@@ -132,7 +132,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 								href="#link1"
 								role="tablist"
 							>
-								<i className="fas fa-car text-base mr-1"> </i> MON VHICULE
+								<i className="fas fa-car text-base mr-1"> </i> MON VÉHICULE
 							</a>
 						</li>
 						<li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
@@ -488,7 +488,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 
 												<div className="flex flex-wrap mt-12 px-4">
 													<p className="block uppercase text-gray-700 text-md font-bold mb-2">Q7-
-														quipements de série et options :</p>
+														Équipements de série et options :</p>
 												</div>
 
 												<QuestionsOptions/>
@@ -523,7 +523,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="state"
 														>
-															* Q9- tat du véhicule:
+															* Q9- État du véhicule:
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
@@ -579,7 +579,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 																		disabled={invalid}
 																	>
 																		<i className="fas fa-exclamation-circle text-base mr-1 animate-bounce"></i> Prenez
-																		soin de répondre  toutes les questions afin de
+																		soin de répondre à toutes les questions afin de
 																		valider votre annonce
 
 																	</button>
@@ -599,7 +599,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 																	</button>
 																	<p className="text-md leading-relaxed text-gray-500">
 																		Votre annonce
-																		sera pré-remplie  l�issue de ce questionnaire.
+																		sera pré-remplie à l’issue de ce questionnaire.
 																		Vous ACCEPTEZ
 																		les conditions pour publier votre annonce
 																		<Link href="/footer/policy">
@@ -621,7 +621,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 													) : (
 														<div className="finalStep text-center">
 															<p className="text-xl leading-relaxed text-gray-800">Bravo !
-																Vous avez répondu  toutes les questions !! <i
+																Vous avez répondu à toutes les questions !! <i
 																	className="far fa-thumbs-up animate-ping"></i></p>
 															<a
 																className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
@@ -634,7 +634,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 																role="tablist"
 															>
 																<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
-																TAPE SUIVANTE : TLCHARGER VOS PHOTOS POUR PUBLIER
+																ÉTAPE SUIVANTE : TÉLÉCHARGER VOS PHOTOS POUR PUBLIER
 																VOTRE ANNONCE
 															</a>
 														</div>
@@ -646,7 +646,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 												<div className="container mx-auto text-center">
 													<div
 														className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600">
-														<i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> TAPE
+														<i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> ÉTAPE
 														2
 													</div>
 													<p className="text-md leading-relaxed text-gray-500"> Telecharger 10
@@ -690,7 +690,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 													<ImageUpload/>
 													<div
 														className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600">
-														<i className="fas fa-paper-plane text-base mr-1 animate-bounce"></i> C�est
+														<i className="fas fa-paper-plane text-base mr-1 animate-bounce"></i> C’est
 														parti!
 													</div>
 													<h4 className="text-xl font-semibold">
@@ -715,7 +715,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 													<p className="notifyForPrice text-md leading-relaxed text-gray-500 text-left">
 														<i className="fas fa-flag-checkered animate-bounce"></i> Attention
 														: le prix de vente de votre véhicule n'est pas inscrit dans la
-														colonne de la côte car celle-ci est destinée  l'estimation
+														colonne de la côte car celle-ci est destinée à l'estimation
 														élaborée par nos ingénieurs et experts automobiles.
 														Calculez la côte personnalisée de votre véhicule avec <Link
 														href="/prix"> notre tarif Premium </Link>.
