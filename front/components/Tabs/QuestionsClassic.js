@@ -593,8 +593,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 
 																	</button>
 																	<p className="text-md leading-relaxed text-gray-500">
-																		Veuillez verifier les champs avec * pour
-																		repondre votre questionnaire
+																		Veuillez vérifier les champs avec * afin de compléter le questionnaire
 																	</p>
 																</div>
 															) : (

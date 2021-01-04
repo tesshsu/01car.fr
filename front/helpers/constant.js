@@ -56,7 +56,7 @@ export const raisonVendreOptions = [
 
 export const numMainsOptions = [
     {note: 0, label: '', value: ''},
-    {note: 1, label: '1ère main', value: '1'},
+    {note: 1, label: '1ère main ou 2ème main', value: '1'},
     {note: 0, label: '3ème main ou plus', value: '3'}
 ]
 
