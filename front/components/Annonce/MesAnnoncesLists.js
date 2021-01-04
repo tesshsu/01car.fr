@@ -25,7 +25,6 @@ const MesAnnoncesLists = ({
     const {isAuthentificated, loggedUser} = useLoggedUser();
     const {
         editCar,
-        modifyCar,
         deleteCar,
     } = useAnnonces();
 

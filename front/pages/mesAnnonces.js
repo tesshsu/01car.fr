@@ -6,7 +6,6 @@ import MesAnnoncesLists from '../components/Annonce/MesAnnoncesLists.js';
 import Pagination from '../components/Annonce/Pagination.js';
 import {listPubs} from "../helpers/constant";
 import {connect} from "react-redux";
-import {useRouter} from "next/router";
 
 const MesAnnonces = ({
                          dispatch,
@@ -45,14 +44,19 @@ const MesAnnonces = ({
                             <MesAnnoncesLists/>
                         </div>
                         <div className="flex content-center items-center justify-center h-full mb-24 mt-8">
-                            <Pagination transparent
-                                        current_page={current_page}
-                                        from={from}
-                                        to={to}
-                                        per_page={per_page}
-                                        last_page={last_page}
-                                        total={total}
-                            />
+                            {total >= 11 ?(
+                                <Pagination transparent
+                                            current_page={current_page}
+                                            from={from}
+                                            to={to}
+                                            per_page={per_page}
+                                            last_page={last_page}
+                                            total={total}
+                                />
+                            ):(
+                                null
+                            ) }
+
                         </div>
                     </div>
                 </section>
