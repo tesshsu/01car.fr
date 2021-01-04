@@ -139,8 +139,8 @@ export default function Login() {
 						</form>
 					)}
 				/>
-				<p className="notifyForLogin text-md leading-relaxed text-gray-600 text-left"> <i class="fas fa-pen-alt"></i> Cette connexion vous permet de déposer et gérer vos annonces.</p>
-			    <p className="notifyForLogin text-md leading-relaxed text-gray-600 text-left mt-2"> <i class="fas fa-star"></i> Ajouter vos annonces en favoris.</p>
+				<p className="notifyForLogin text-md leading-relaxed text-gray-600 text-left"> <i className="fas fa-pen-alt"> </i> Cette connexion vous permet de déposer et gérer vos annonces.</p>
+			    <p className="notifyForLogin text-md leading-relaxed text-gray-600 text-left mt-2"> <i className="fas fa-star"> </i> Ajouter vos annonces en favoris.</p>
 			  </div>
             </div>
             <div className="flex flex-wrap mt-6 relative">

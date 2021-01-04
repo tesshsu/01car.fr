@@ -70,7 +70,7 @@ const ImageUpload= ({
                 ...payload
             } = values;
 
-            console.log("car_id=",car?.id);
+            console.log("car_id=", car?.id, values);
 
             const data = {...payload};
             await addPhoto(car?.id, data);

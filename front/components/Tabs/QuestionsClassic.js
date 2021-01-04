@@ -1,36 +1,36 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import Link from "next/link";
 import {connect} from 'react-redux'
-import QuestionsOptions from "components/Tabs/QuestionsOptions.js";
-import ImageUpload from "components/Tabs/ImageUpload.js";
+import QuestionsOptions from "../../components/Tabs/QuestionsOptions.js";
+import ImageUpload from "../../components/Tabs/ImageUpload.js";
 import {Field, Form} from 'react-final-form';
-import useLoggedUser from 'service/hooks/useLoggedUser';
+import useLoggedUser from '../../service/hooks/useLoggedUser';
 import {
-	fuelOptions,
-	statuVendeurOptions,
 	dateDispoOptions,
-	raisonVendreOptions,
-	numMainsOptions,
 	etatCarOptions,
+	fuelOptions,
 	furmeurOptions,
+	numMainsOptions,
+	originCarOptions,
 	OuiOptions,
-	originCarOptions
-} from 'helpers/constant';
-import * as formValidate from 'helpers/formValidate';
-import {Condition, Error} from 'helpers/formValidate';
+	raisonVendreOptions,
+	statuVendeurOptions
+} from '../../helpers/constant';
+import * as formValidate from '../../helpers/formValidate';
+import {Condition, Error} from '../../helpers/formValidate';
 import "react-responsive-modal/styles.css";
-import useAnnonces from 'service/hooks/useAnnonces';
-import { Modal } from "react-responsive-modal";
-import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
-import PubContentConnection from "layouts/PubContentConnection.js";
-
+import useAnnonces from '../../service/hooks/useAnnonces';
+import {Modal} from "react-responsive-modal";
+import PubContentThreeIcons from "../../layouts/PubContentThreeIcons.js";
+import PubContentConnection from "../../layouts/PubContentConnection.js";
+import utils, {transformValueToBoolean} from "../../helpers/Utils";
 
 const QuestionsClassic = ({dispatch, loading, car}) => {
 	const [openTab, setOpenTab] = React.useState(1);
 	const [showModal, setShowModal] = React.useState(false);
-	const [isFirst,setIsFrist] = React.useState(true)
-	const [hasErrors, setHasErrors] = React.useState(true)
-	const sendPostQuestionsvalues ={
+	const [isFirst, setIsFrist] = React.useState(true)
+	const [hasErrors, setHasErrors] = React.useState(true);
+	const sendPostQuestionsvalues = car ? car : {
 		brand: "",
 		model: "",
 		generation: "sg",
@@ -51,13 +51,13 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 		estimate_price: "",
 		price: 9134.61,
 		currency: "EUR",
-		owner_type : "",
+		owner_type: "",
 		available: "",
-		smoking : "",
-		duplicate_keys : "",
+		smoking: "",
+		duplicate_keys: "",
 		sale_reason: "",
 		hand_number: "",
-		state : "",
+		state: "",
 		country: "",
 		comfort: ""
 	}
@@ -67,7 +67,8 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 	} = useLoggedUser();
 
 	const {
-		create
+		create,
+		modifyCar
 	} = useAnnonces();
 
 
@@ -81,15 +82,15 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 
 	const onSubmit = async (values) => {
 		try {
-			let {
-				...payload
-			} = values;
-
-			const data = {...payload};
-			await create(data);
-			if(data) {
-				setIsFrist(false)
+			values.smoking = transformValueToBoolean(values.smoking);
+			values.duplicate_keys = transformValueToBoolean(values.duplicate_keys);
+			if (car) {
+				await modifyCar(car?.id, values);
+			} else {
+				await create(values);
 			}
+			setIsFrist(false)
+
 		} catch (err) {
 			console.log(err);
 			setHasErrors(true)
@@ -103,9 +104,10 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 				{showModal ? (
 					<>
 						<Modal closeOnEsc={false} open={open} onClose={() => setShowModal(true)}>
-							<h2 className="text-2xl font-semibold text-center">Connectez-vous pour accéder au questionnaire de confiance</h2>
-							<PubContentThreeIcons />
-							<PubContentConnection />
+							<h2 className="text-2xl font-semibold text-center">Connectez-vous pour accéder au
+								questionnaire de confiance</h2>
+							<PubContentThreeIcons/>
+							<PubContentConnection/>
 						</Modal>
 					</>
 				) : null}
@@ -130,7 +132,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 								href="#link1"
 								role="tablist"
 							>
-								<i className="fas fa-car text-base mr-1"></i> MON VÉHICULE
+								<i className="fas fa-car text-base mr-1"> </i> MON VÉHICULE
 							</a>
 						</li>
 						<li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
@@ -244,13 +246,15 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 																   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
 															>
 																{fuelOptions.map(fuelOption => (
-																	<option value={fuelOption.value}>{fuelOption.label}</option>
+																	<option
+																		value={fuelOption.value}>{fuelOption.label}</option>
 																))}
 															</Field>
-															<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
+															<div
+																className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
 																<i className="fas fa-angle-down text-2xl my-2"></i>
 															</div>
-															<Error name="fuel" />
+															<Error name="fuel"/>
 														</div>
 													</div>
 													<div className="w-full lg:w-6/12 px-4">
@@ -279,7 +283,8 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 													>
 														*Immatriculation :
 													</label>
-													<div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
+													<div
+														className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
 														<Field
 															name="license_plate"
 															validate={formValidate.composeValidators(formValidate.required, formValidate.matchImmatriculation)}
@@ -289,8 +294,10 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 															placeholder="AA-123-BC"
 															className="px-3 py-2 placeholder-gray-400 text-gray-700 relative border border-gray-400 bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 														/>
-														<Error name="license_plate" />
-														<div className="text-sm leading-relaxed text-gray-600">cette information ne sera pas visible sur l'annonce.</div>
+														<Error name="license_plate"/>
+														<div className="text-sm leading-relaxed text-gray-600">cette
+															information ne sera pas visible sur l'annonce.
+														</div>
 													</div>
 												</div>
 
@@ -305,7 +312,8 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														href="#link2"
 														role="tablist"
 													>
-														<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i> QUESTIONS : 1-5
+														<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i> QUESTIONS
+														: 1-5
 													</a>
 												</div>
 
@@ -321,12 +329,16 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
-															<Field name="owner_type" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+															<Field name="owner_type" validate={formValidate.required}
+																   component="select"
+																   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 																{statuVendeurOptions.map(statuVendeurOption => (
-																	<option value={statuVendeurOption.value}>{statuVendeurOption.label}</option>
+																	<option
+																		value={statuVendeurOption.value}>{statuVendeurOption.label}</option>
 																))}
 															</Field>
-															<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
+															<div
+																className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
 																<i className="fas fa-angle-down text-2xl my-2"></i>
 															</div>
 															<Error name="owner_type"/>
@@ -342,12 +354,16 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
-															<Field name="available" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+															<Field name="available" validate={formValidate.required}
+																   component="select"
+																   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 																{dateDispoOptions.map(dateDispoOption => (
-																	<option value={dateDispoOption.value}>{dateDispoOption.label}</option>
+																	<option
+																		value={dateDispoOption.value}>{dateDispoOption.label}</option>
 																))}
 															</Field>
-															<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
+															<div
+																className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
 																<i className="fas fa-angle-down text-2xl my-2"></i>
 															</div>
 															<Error name="available"/>
@@ -370,12 +386,16 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
-															<Field name="smoking" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+															<Field name="smoking" validate={formValidate.required}
+																   component="select"
+																   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 																{furmeurOptions.map(furmeurOption => (
-																	<option value={furmeurOption.value}>{furmeurOption.label}</option>
+																	<option
+																		value={furmeurOption.value}>{furmeurOption.label}</option>
 																))}
 															</Field>
-															<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
+															<div
+																className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
 																<i className="fas fa-angle-down text-2xl my-2"></i>
 															</div>
 															<Error name="smoking"/>
@@ -391,9 +411,12 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														</label>
 														<div
 															className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-															<Field name="duplicate_keys" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+															<Field name="duplicate_keys"
+																   validate={formValidate.required} component="select"
+																   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 																{OuiOptions.map(OuiOption => (
-																	<option value={OuiOption.value}>{OuiOption.label}</option>
+																	<option
+																		value={OuiOption.value}>{OuiOption.label}</option>
 																))}
 															</Field>
 															<Error name="duplicate_keys"/>
@@ -409,12 +432,16 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														* Q5 - Pourquoi vendez-vous votre véhicule ?
 													</label>
 													<div className="relative flex w-full flex-wrap items-stretch mb-3">
-														<Field name="sale_reason" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+														<Field name="sale_reason" validate={formValidate.required}
+															   component="select"
+															   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 															{raisonVendreOptions.map(raisonVendreOption => (
-																<option value={raisonVendreOption.value}>{raisonVendreOption.label}</option>
+																<option
+																	value={raisonVendreOption.value}>{raisonVendreOption.label}</option>
 															))}
 														</Field>
-														<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
+														<div
+															className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
 															<i className="fas fa-angle-down text-2xl my-2"></i>
 														</div>
 														<Error name="sale_reason"/>
@@ -432,7 +459,8 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														href="#link3"
 														role="tablist"
 													>
-														<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i> QUESTIONS : 6-10
+														<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i> QUESTIONS
+														: 6-10
 													</a>
 												</div>
 											</div>
@@ -475,12 +503,16 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
-															<Field name="hand_number" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+															<Field name="hand_number" validate={formValidate.required}
+																   component="select"
+																   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 																{numMainsOptions.map(numMainsOption => (
-																	<option value={numMainsOption.value}>{numMainsOption.label}</option>
+																	<option
+																		value={numMainsOption.value}>{numMainsOption.label}</option>
 																))}
 															</Field>
-															<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
+															<div
+																className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
 																<i className="fas fa-angle-down text-2xl my-2"></i>
 															</div>
 															<Error name="hand_number"/>
@@ -495,12 +527,16 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
-															<Field name="state" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+															<Field name="state" validate={formValidate.required}
+																   component="select"
+																   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 																{etatCarOptions.map(etatCarOption => (
-																	<option value={etatCarOption.value}>{etatCarOption.label}</option>
+																	<option
+																		value={etatCarOption.value}>{etatCarOption.label}</option>
 																))}
 															</Field>
-															<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
+															<div
+																className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
 																<i className="fas fa-angle-down text-2xl my-2"></i>
 															</div>
 															<Error name="state"/>
@@ -516,12 +552,16 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														* Q10- Origine du véhicule :
 													</label>
 													<div className="relative flex w-full flex-wrap items-stretch mb-3">
-														<Field name="country" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+														<Field name="country" validate={formValidate.required}
+															   component="select"
+															   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 															{originCarOptions.map(originCarOption => (
-																<option value={originCarOption.value}>{originCarOption.label}</option>
+																<option
+																	value={originCarOption.value}>{originCarOption.label}</option>
 															))}
 														</Field>
-														<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
+														<div
+															className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
 															<i className="fas fa-angle-down text-2xl my-2"></i>
 														</div>
 														<Error name="country"/>
@@ -538,61 +578,67 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 																		type="submit"
 																		disabled={invalid}
 																	>
-																		<i className="fas fa-exclamation-circle text-base mr-1 animate-bounce"></i> Prenez soin de répondre à toutes les questions afin de valider votre annonce
+																		<i className="fas fa-exclamation-circle text-base mr-1 animate-bounce"></i> Prenez
+																		soin de répondre à toutes les questions afin de
+																		valider votre annonce
 
 																	</button>
 																	<p className="text-md leading-relaxed text-gray-500">
-																		Veuillez verifier les champs avec * pour repondre votre questionnaire
+																		Veuillez verifier les champs avec * pour
+																		repondre votre questionnaire
 																	</p>
 																</div>
-																	) : (
-																  <div className="sendQuestions text-center">
-																		<button
+															) : (
+																<div className="sendQuestions text-center">
+																	<button
 																		className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
 																		type="submit"
 																		disabled={submitting}
-																	    >
-																		  <i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER
-																	    </button>
-																		<p className="text-md leading-relaxed text-gray-500">
-																			Votre annonce
-																			sera pré-remplie à l’issue de ce questionnaire. Vous ACCEPTEZ
-																			les conditions pour publier votre annonce
-																			<Link href="/footer/policy">
-																				<a
-																					href="#"
-																					className={
-																						"text-sm font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
-																						}
-																				>
-																				   Lire la politique de confidentialité
-																				</a>
-																			</Link>
-																		</p>
-																  </div>
-															   )
+																	>
+																		<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER
+																	</button>
+																	<p className="text-md leading-relaxed text-gray-500">
+																		Votre annonce
+																		sera pré-remplie à l’issue de ce questionnaire.
+																		Vous ACCEPTEZ
+																		les conditions pour publier votre annonce
+																		<Link href="/footer/policy">
+																			<a
+																				href="#"
+																				className={
+																					"text-sm font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
+																				}
+																			>
+																				Lire la politique de confidentialité
+																			</a>
+																		</Link>
+																	</p>
+																</div>
+															)
 															}
 
 														</div>
-															) : (
+													) : (
 														<div className="finalStep text-center">
-															<p className="text-xl leading-relaxed text-gray-800">Bravo ! Vous avez répondu à toutes les questions !! <i
-																className="far fa-thumbs-up animate-ping"></i></p>
+															<p className="text-xl leading-relaxed text-gray-800">Bravo !
+																Vous avez répondu à toutes les questions !! <i
+																	className="far fa-thumbs-up animate-ping"></i></p>
 															<a
-																	className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
-																	onClick={e => {
-																		e.preventDefault();
-																		setOpenTab(4);
-																	}}
-																	data-toggle="tab"
-																	href="#link2"
-																	role="tablist"
-																>
-																	<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
-																    ÉTAPE SUIVANTE : TÉLÉCHARGER VOS PHOTOS POUR PUBLIER VOTRE ANNONCE
+																className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
+																onClick={e => {
+																	e.preventDefault();
+																	setOpenTab(4);
+																}}
+																data-toggle="tab"
+																href="#link2"
+																role="tablist"
+															>
+																<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
+																ÉTAPE SUIVANTE : TÉLÉCHARGER VOS PHOTOS POUR PUBLIER
+																VOTRE ANNONCE
 															</a>
 														</div>
-															)
+													)
 													}
 												</div>
 											</div>
@@ -600,14 +646,17 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 												<div className="container mx-auto text-center">
 													<div
 														className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600">
-														<i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> ÉTAPE 2
+														<i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> ÉTAPE
+														2
 													</div>
 													<p className="text-md leading-relaxed text-gray-500"> Telecharger 10
 														photos MAX pour publier votre annonce ( ficher jpg, png, gif ),
 														Téléchargez des photos de votre voiture depuis l'extérieur, du
 														tableau de bord avec le moteur allumé, de la console centrale
 														etc </p>
-													<p className="text-md leading-relaxed text-orange-500"> <i class="fas fa-exclamation-triangle animate-bounce"></i> Conseil : Cachez votre plaque d'immatriculation  </p>
+													<p className="text-md leading-relaxed text-orange-500"><i
+														class="fas fa-exclamation-triangle animate-bounce"></i> Conseil
+														: Cachez votre plaque d'immatriculation </p>
 													<div className="demoPhotos flex justify-center">
 														<div className="mr-4 p-3">
 															<img
@@ -641,7 +690,8 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 													<ImageUpload/>
 													<div
 														className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600">
-														<i className="fas fa-paper-plane text-base mr-1 animate-bounce"></i> C’est parti!
+														<i className="fas fa-paper-plane text-base mr-1 animate-bounce"></i> C’est
+														parti!
 													</div>
 													<h4 className="text-xl font-semibold">
 														OU VOUS POUVEZ
@@ -663,8 +713,12 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														</Link>
 													</button>
 													<p className="notifyForPrice text-md leading-relaxed text-gray-500 text-left">
-														<i className="fas fa-flag-checkered animate-bounce"></i> Attention : le prix de vente de votre véhicule n'est pas inscrit dans la colonne de la côte car celle-ci est destinée à l'estimation élaborée par nos ingénieurs et experts automobiles.
-														Calculez la côte personnalisée de votre véhicule avec <Link href="/prix"> notre tarif Premium  </Link>.
+														<i className="fas fa-flag-checkered animate-bounce"></i> Attention
+														: le prix de vente de votre véhicule n'est pas inscrit dans la
+														colonne de la côte car celle-ci est destinée à l'estimation
+														élaborée par nos ingénieurs et experts automobiles.
+														Calculez la côte personnalisée de votre véhicule avec <Link
+														href="/prix"> notre tarif Premium </Link>.
 													</p>
 												</div>
 											</div>

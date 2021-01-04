@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import MesAnnoncesLists from '../components/Annonce/MesAnnoncesLists.js';
 import Pagination from '../components/Annonce/Pagination.js';
-import {listPubs} from "helpers/constant";
+import {listPubs} from "../helpers/constant";
 import {connect} from "react-redux";
+import {useRouter} from "next/router";
 
 const MesAnnonces = ({
                          dispatch,
@@ -29,9 +30,9 @@ const MesAnnonces = ({
                     </h4>
                     <div className="flex justify-center">
                         {listPubs.map(listPub => (
-                            <div className="mr-4 p-3 text-center">
+                            <div key={listPub.title.replace(/\s+/g, '_')} className="mr-4 p-3 text-center">
 								<span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
-								  <i className={listPub.icon}></i>
+								  <i className={listPub.icon}> </i>
 								</span>
                                 <span className="text-sm text-gray-500">{listPub.title}</span>
                             </div>
