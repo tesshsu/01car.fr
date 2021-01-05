@@ -11,7 +11,10 @@ module.exports = withFonts(
     withCSS(
         withImages(
             withSass({
-                /*basePath: '',
+                /*env: {
+                    customKey: 'my-value',
+                },
+                basePath: '',
                 exportPathMap: function () {
                     return {
                         '/': {page: '/'}

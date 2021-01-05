@@ -6,7 +6,8 @@ import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
 import useLoggedUser from 'service/hooks/useLoggedUser';
 import {fetchUser} from 'service/actions/user';
 import {connect} from 'react-redux';
-import {useRouter }  from "next/router";
+import {useRouter} from "next/router";
+
 
 const Navbar = ({dispatch, loading, user, hasErrors}) => {
   const [navbarOpen, setNavbarOpen] = React.useState(false);

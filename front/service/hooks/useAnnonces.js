@@ -42,7 +42,15 @@ export default function useAnnonces() {
 
   const addPhoto = useCallback(async (carId, payload) => {
     try {
-      await dispatch(ANNONCES_ACTIONS.addPhoto(carId, payload));
+      return await dispatch(ANNONCES_ACTIONS.addPhoto(carId, payload));
+    } catch (err) {
+      console.log("add_car_photo_error", err);
+    }
+  }, [dispatch]);
+
+  const removePhoto = useCallback(async (carId, payload) => {
+    try {
+      return await dispatch(ANNONCES_ACTIONS.removePhoto(carId, payload));
     } catch (err) {
       console.log("add_car_photo_error", err);
     }
@@ -52,6 +60,7 @@ export default function useAnnonces() {
     car: car,
     create,
     addPhoto,
+    removePhoto,
     editCar,
     modifyCar,
     deleteCar,
