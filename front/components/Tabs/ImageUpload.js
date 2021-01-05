@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import ImageUploading from "react-images-uploading";
 import useAnnonces from '../../service/hooks/useAnnonces';
 import {Field, Form} from 'react-final-form';
@@ -18,6 +18,17 @@ const ImageUpload = ({
         removePhoto
     } = useAnnonces();
     const maxNumber = 10;
+
+    useEffect(() => {
+        let imageList = car?.uploads.map(upload => {
+            let image = {};
+            image.id = upload.id;
+            image.data_url = process.env.NEXT_PUBLIC_API_URL + upload.url;
+            return image;
+        });
+
+        setImages(imageList);
+    }, [dispatch])
 
     const ImgUploadAdapter = ({input, values, ...rest}) => (
         <ImageUploading
@@ -75,15 +86,10 @@ const ImageUpload = ({
     )
 
     const onChange = async (imageList, addUpdateIndex) => {
-        // data for submit
-        console.log(imageList, addUpdateIndex);
-        console.log("images=", images);
-
         // check for images to removed
         let currentImagesIds = imageList.map(i => i.id);
         let imagesRemoved = images.filter(img => !currentImagesIds.includes(img.id));
 
-        console.log("toremoved=", imagesRemoved);
         if(imagesRemoved.length > 0){
             imagesRemoved.forEach(img => {
                 let { id } = img;
@@ -94,7 +100,6 @@ const ImageUpload = ({
                 }
             });
         }
-
 
         // Handle new images
         if (addUpdateIndex !== undefined) {
@@ -115,7 +120,7 @@ const ImageUpload = ({
     };
 
     const onSubmit = async (values) => {
-        try {
+       /* try {
             let {
                 ...payload
             } = values;
@@ -127,15 +132,14 @@ const ImageUpload = ({
         } catch (err) {
             console.log(err);
             alert('Impossible ajouter photos');
-        }
+        }*/
     }
     return (
         <div className="blockUploadImage">
-            <Form
+            <Form onSubmit={onSubmit}
                 initialValues={{
                     uploads: [],
                 }}
-                onSubmit={onSubmit}
                 render={({handleSubmit, form, submitting, values}) => (
                     <form onSubmit={handleSubmit}>
                         <div>
