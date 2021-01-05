@@ -1,8 +1,9 @@
 import React from 'react';
 import ImageUploading from "react-images-uploading";
-import useAnnonces from 'service/hooks/useAnnonces';
+import useAnnonces from '../../service/hooks/useAnnonces';
 import {Field, Form} from 'react-final-form';
 import {connect} from 'react-redux';
+import {dataURLtoBlob} from "../../helpers/Utils";
 
 const ImageUpload = ({
                          dispatch,
@@ -13,9 +14,11 @@ const ImageUpload = ({
     const [images, setImages] = React.useState([]);
     const [isUpload, setIsUpload] = React.useState(false);
     const {
-        addPhoto
+        addPhoto,
+        removePhoto
     } = useAnnonces();
     const maxNumber = 10;
+
     const ImgUploadAdapter = ({input, values, ...rest}) => (
         <ImageUploading
             {...input}
@@ -71,34 +74,44 @@ const ImageUpload = ({
         </ImageUploading>
     )
 
-    const dataURLtoBlob = (dataurl) => {
-        var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-            bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-        while (n--) {
-            u8arr[n] = bstr.charCodeAt(n);
-        }
-        return new Blob([u8arr], {type: mime});
-    }
-
     const onChange = async (imageList, addUpdateIndex) => {
         // data for submit
         console.log(imageList, addUpdateIndex);
-        setImages(imageList);
+        console.log("images=", images);
 
-        //file =  new file();
-        //const file = this.fileInput.files.push(file);
+        // check for images to removed
+        let currentImagesIds = imageList.map(i => i.id);
+        let imagesRemoved = images.filter(img => !currentImagesIds.includes(img.id));
 
-        if (imageList.length > 0) {
+        console.log("toremoved=", imagesRemoved);
+        if(imagesRemoved.length > 0){
+            imagesRemoved.forEach(img => {
+                let { id } = img;
+                try {
+                    const response = removePhoto(car?.id, {id});
+                } catch (err) {
+                    console.log('Impossible supprimer photos', err);
+                }
+            });
+        }
+
+
+        // Handle new images
+        if (addUpdateIndex !== undefined) {
+            const image = imageList[addUpdateIndex];
             const formData = new FormData();
-            formData.append("uploads[]", dataURLtoBlob(imageList[0].data_url), "filename.png");
+            formData.append("id", car?.id);
+            formData.append("uploads[]", dataURLtoBlob(image.data_url), image.file.name);
 
             try {
-                await addPhoto(car?.id, formData);
+                const response = await addPhoto(car?.id, formData);
+                image.id = response[0].id;
             } catch (err) {
-                console.log(err);
-                alert('Impossible ajouter photos');
+                console.log('Impossible ajouter photos', err);
             }
         }
+
+        setImages(imageList);
     };
 
     const onSubmit = async (values) => {

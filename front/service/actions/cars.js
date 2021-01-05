@@ -20,6 +20,10 @@ export const ADD_CAR_PHOTO = 'ADD_CAR_PHOTO';
 export const ADD_CAR_PHOTO_SUCCESS = 'ADD_CAR_PHOTO_SUCCESS';
 export const ADD_CAR_PHOTO_FAILURE = 'ADD_CAR_PHOTO_SUCCESS';
 
+export const DELETE_CAR_PHOTO = 'ADD_CAR_PHOTO';
+export const DELETE_CAR_PHOTO_SUCCESS = 'ADD_CAR_PHOTO_SUCCESS';
+export const DELETE_CAR_PHOTO_FAILURE = 'ADD_CAR_PHOTO_SUCCESS';
+
 export const UPDATE_CAR = 'UPDATE_CAR'
 export const UPDATE_CAR_SUCCESS = 'UPDATE_CAR_SUCCESS'
 export const UPDATE_CAR_FAILURE = 'UPDATE_CAR_FAILURE'
@@ -71,12 +75,29 @@ export const createCarFailure = () => ({
     type: CREATE_CAR_FAILURE,
 })
 
+const addCarPhotoAction = () => ({
+    type: ADD_CAR_PHOTO,
+});
+
 export const addCarPhotoFailure = () => ({
     type: ADD_CAR_PHOTO_FAILURE,
 })
 
 export const addCarPhotoSuccess = (response) => ({
     type: ADD_CAR_PHOTO_SUCCESS,
+    payload: response,
+});
+
+const deleteCarPhotoAction = () => ({
+    type: DELETE_CAR_PHOTO,
+});
+
+export const deleteCarPhotoFailure = () => ({
+    type: DELETE_CAR_PHOTO_FAILURE,
+})
+
+export const deleteCarPhotoSuccess = (response) => ({
+    type: DELETE_CAR_PHOTO_SUCCESS,
     payload: response,
 })
 
@@ -162,12 +183,29 @@ export function create(payload) {
 
 export function addPhoto(carId, payload) {
     return async (dispatch, getState) => {
-        dispatch(updateCar())
+        dispatch(addCarPhotoAction())
         try {
             const response = await API.Annonces.addPhoto(carId, payload);
             dispatch(addCarPhotoSuccess(response));
+            return response;
         } catch (err) {
             await dispatch(addCarPhotoFailure());
+            throw err;
+        } finally {
+            dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
+        }
+    };
+}
+
+export function removePhoto(carId, payload) {
+    return async (dispatch, getState) => {
+        dispatch(deleteCarPhotoAction())
+        try {
+            const response = await API.Annonces.removePhoto(carId, payload);
+            dispatch(deleteCarPhotoSuccess(response));
+            return response;
+        } catch (err) {
+            await dispatch(deleteCarPhotoFailure());
             throw err;
         } finally {
             dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));

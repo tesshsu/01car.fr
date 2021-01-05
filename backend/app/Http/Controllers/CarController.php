@@ -16,6 +16,8 @@ use App\Constants\OwnerType;
 use App\Constants\SaleReason;
 use App\Constants\TimeConstant;
 use App\Http\Resources\Car as CarResource;
+use App\Http\Resources\Cart as CartResource;
+use App\Http\Resources\Upload as UploadResource;
 use App\Http\Resources\CarPaginatorCollection;
 use App\Models\Car;
 use App\Models\CarAttribute;
@@ -196,6 +198,8 @@ class CarController extends Controller
             $uploadedFileArr = array($uploadedFileArr);
         }
 
+        $uploads = collect([]);
+
         foreach ($uploadedFileArr as $uploadedFile) {
             $path = null;
             $filename = null;
@@ -226,10 +230,12 @@ class CarController extends Controller
 
                 // save new entries
                 $car->uploads()->attach($upload);
+
+                $uploads->push($upload);
             }
         }
 
-        return $this->renderJson($car->id);
+        return response()->json(UploadResource::collection($uploads->all()));
     }
 
     private function validateEntity($reqCar, $car)
