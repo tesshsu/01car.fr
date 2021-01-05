@@ -53,7 +53,7 @@ export default function AnnonceFavoris() {
 								  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
 								}
 							  >
-								Voir
+								Voir <i className="fas fa-clipboard-check"></i>
 							  </a>
 						  </Link>
 						</button>
@@ -68,7 +68,7 @@ export default function AnnonceFavoris() {
 								  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
 								}
 							  >
-								Supprimer l'annonce
+								Supprimer l'annonce <i className="fas fa-trash"></i>
 							  </a>
 						  </Link>
 						</button>

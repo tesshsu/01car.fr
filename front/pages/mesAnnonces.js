@@ -22,7 +22,7 @@ const MesAnnonces = ({
     return (
         <>
             <IndexNavbar fixed/>
-            <main className="favoris-page">
+            <main className="mesAnnonces-page">
                 <section className="mt-24 relative bg-gray-800">
                     <h4 className="text-3xl font-bold text-white text-center">
                         Gérer mes annonces déposées
