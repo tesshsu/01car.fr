@@ -79,7 +79,7 @@ const Vendre = ({
                                     RÉPONSES AU QUESTIONNAIRES DE CONFIANCE <span className="font-bold text-orange-500">(Premium)</span>
                                 </h1>) : (
                                 <h1 className="font-bold text-4xl text-gray-700 mt-4 text-center">
-                                    Publier et vendre votre véhicule
+                                    Répondez et publiez votre annonce
                                 </h1>
                             )
                             }

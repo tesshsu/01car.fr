@@ -1,8 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import { createPopper } from "@popperjs/core";
+import {useRouter }  from "next/router";
 
 const IndexDropdown = () => {
+  const router = useRouter();
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
@@ -21,9 +23,7 @@ const IndexDropdown = () => {
       <Link href="/prix">
 			<a
 				href="#"
-				className={
-						"text-4xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
-						}
+                className={ (router.pathname === '/prix' ? 'bg-orange-500' : 'bg-gray-800') + " text-white active:bg-gray-700 text-lg font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-2 ease-linear transition-all duration-150"}
 			>
               <i className="fas fa-cart-plus"></i>
 			</a>

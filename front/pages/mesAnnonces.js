@@ -6,7 +6,6 @@ import MesAnnoncesLists from '../components/Annonce/MesAnnoncesLists.js';
 import Pagination from '../components/Annonce/Pagination.js';
 import {listPubs} from "../helpers/constant";
 import {connect} from "react-redux";
-import {useRouter} from "next/router";
 
 const MesAnnonces = ({
                          dispatch,
@@ -23,7 +22,7 @@ const MesAnnonces = ({
     return (
         <>
             <IndexNavbar fixed/>
-            <main className="favoris-page">
+            <main className="mesAnnonces-page">
                 <section className="mt-24 relative bg-gray-800">
                     <h4 className="text-3xl font-bold text-white text-center">
                         Gérer mes annonces déposées
@@ -45,14 +44,19 @@ const MesAnnonces = ({
                             <MesAnnoncesLists/>
                         </div>
                         <div className="flex content-center items-center justify-center h-full mb-24 mt-8">
-                            <Pagination transparent
-                                        current_page={current_page}
-                                        from={from}
-                                        to={to}
-                                        per_page={per_page}
-                                        last_page={last_page}
-                                        total={total}
-                            />
+                            {total >= 11 ?(
+                                <Pagination transparent
+                                            current_page={current_page}
+                                            from={from}
+                                            to={to}
+                                            per_page={per_page}
+                                            last_page={last_page}
+                                            total={total}
+                                />
+                            ):(
+                                null
+                            ) }
+
                         </div>
                     </div>
                 </section>

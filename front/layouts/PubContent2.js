@@ -14,7 +14,7 @@ export default function PubContent2() {
 					  Vous êtes Vendeur ?
 					</h3>
 					<p className="mt-4 text-md leading-relaxed text-white">
-					 Vendez votre véhicule  à un particulier en toute transparence
+					 Vendez votre véhicule en toute transparence
 					</p>
 					<ul className="list-none mt-6">
 					  <li className="py-2">
@@ -64,7 +64,7 @@ export default function PubContent2() {
 									className="button-payer-top-list bg-gray-800 text-white active:bg-grey-500 text-sm font-bold uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
 									type="button"
 								  >
-									<Link href="/prix">
+									<Link href="/vendre">
 										  <a
 											href="#pablo"
 											className={
@@ -110,7 +110,7 @@ export default function PubContent2() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-							  Achetez un véhicule à un particulier avec minimum de risques
+								Achetez un véhicule avec un minimum de risque
 							</h4>
 						  </div>
 						</div>

@@ -138,7 +138,7 @@ sub {
 sup {
   top: -0.5em;
 }
-  
+
 /* Embedded content
    ========================================================================== */
 
@@ -721,6 +721,9 @@ video {
 @media (min-width: 1024px) {
   .container {
     max-width: 1024px;
+  }
+  .favoris-block  img{
+    max-width: 30rem;
   }
 }
 

@@ -31,14 +31,14 @@ export const dateDispoOptions = [
 
 export const furmeurOptions = [
     {note: 0, label: '', value: ''},
-    {note: 1, label: 'non fumeur', value: 'false'},
-    {note: 0, label: 'fumeur', value: 'true'}
+    {note: 1, label: 'non fumeur', value: false},
+    {note: 0, label: 'fumeur', value: true}
 ]
 
 export const OuiOptions = [
     {note: 0, label: '', value: ''},
-    {note: 1, label: 'Oui', value: 'true'},
-    {note: 0, label: 'Non', value: 'false'}
+    {note: 1, label: 'Oui', value: true},
+    {note: 0, label: 'Non', value: false}
 ]
 
 export const NonOptions = [
@@ -56,7 +56,7 @@ export const raisonVendreOptions = [
 
 export const numMainsOptions = [
     {note: 0, label: '', value: ''},
-    {note: 1, label: '1ère main', value: '1'},
+    {note: 1, label: '1ère main ou 2ème main', value: '1'},
     {note: 0, label: '3ème main ou plus', value: '3'}
 ]
 
