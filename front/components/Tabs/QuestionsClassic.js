@@ -178,6 +178,8 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 							</a>
 						</li>
 					</ul>
+					{editCar && (<p className="text-md font-semibold text-center">Vous etez en mode de modifier <i
+						className="far fa-edit animate-bounce"></i></p>)}
 					<div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
 						<div className="px-4 py-5 flex-auto">
 							<Form
@@ -596,35 +598,37 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 																		Veuillez vérifier les champs avec * afin de compléter le questionnaire
 																	</p>
 																</div>
-															) : (
+															):(
 																<div className="sendQuestions text-center">
-																	<button
-																		className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-																		type="submit"
-																		disabled={invalid || submitting}
-																	>
-																		<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER
-																	</button>
-																	<p className="text-md leading-relaxed text-gray-500">
-																		Votre annonce
-																		sera pré-remplie à l’issue de ce questionnaire.
-																		Vous ACCEPTEZ
-																		les conditions pour publier votre annonce
-																		<Link href="/footer/policy">
-																			<a
-																				href="#"
-																				className={
-																					"text-sm font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
-																				}
+																	<div className="w-full px-4">
+																		<div className="w-full px-4">
+																			<button
+																				className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+																				type="submit"
+																				disabled={invalid || submitting}
 																			>
-																				Lire la politique de confidentialité
-																			</a>
-																		</Link>
-																	</p>
+																				<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER
+																			</button>
+																			<p className="text-md leading-relaxed text-gray-500">
+																				Votre annonce
+																				sera pré-remplie à l’issue de ce questionnaire.
+																				Vous ACCEPTEZ
+																				les conditions pour publier votre annonce
+																				<Link href="/footer/policy">
+																					<a
+																						href="#"
+																						className={
+																							"text-sm font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
+																						}
+																					>
+																						Lire la politique de confidentialité
+																					</a>
+																				</Link>
+																			</p>
+																		</div>
+																	</div>
 																</div>
-															)
-															}
-
+															)}
 														</div>
 													) : (
 														<div className="finalStep text-center">
@@ -646,8 +650,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 																VOTRE ANNONCE
 															</a>
 														</div>
-													)
-													}
+													)}
 												</div>
 											</div>
 											<div className={openTab === 4 ? "block" : "hidden"} id="link4">
@@ -704,30 +707,51 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 													<h4 className="text-xl font-semibold">
 														OU VOUS POUVEZ
 													</h4>
-													<button
-														className="button-payer-top-list bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-														type="button"
-													>
-														<Link href="/prix">
-															<a
-																href="#pablo"
-																className={
-																	"text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
-																}
-															>
-																<i className="far fa-laugh mr-1 animate-spin"></i> Continuez
-																pour passer en tête de liste
-															</a>
-														</Link>
-													</button>
-													<p className="notifyForPrice text-md leading-relaxed text-gray-500 text-left">
-														<i className="fas fa-flag-checkered animate-bounce"></i> Attention
-														: le prix de vente de votre véhicule n'est pas inscrit dans la
-														colonne de la côte car celle-ci est destinée à l'estimation
-														élaborée par nos ingénieurs et experts automobiles.
-														Calculez la côte personnalisée de votre véhicule avec <Link
-														href="/prix"> notre tarif Premium </Link>.
-													</p>
+													{editCar ?(
+														<button
+															className="button-payer-top-list bg-orange-500 text-white active:bg-grey-500 text-sm uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+															type="button"
+														>
+															<Link href="/vendrePremium">
+																<a
+																	href="#pablo"
+																	className={
+																		"text-md py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
+																	}
+																>
+																	<i className="far fa-edit"></i> Continuer modifier les questionaires 11 -20
+																</a>
+															</Link>
+														</button>
+													):(
+														<button
+															className="button-payer-top-list bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+															type="button"
+														>
+															<Link href="/prix">
+																<a
+																	href="#pablo"
+																	className={
+																		"text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
+																	}
+																>
+																	<i className="far fa-laugh mr-1 animate-spin"></i> Continuez
+																	pour passer en tête de liste
+																</a>
+															</Link>
+														</button>
+													)}
+													{!editCar &&(
+														<p className="notifyForPrice text-md leading-relaxed text-gray-500 text-left">
+															<i className="fas fa-flag-checkered animate-bounce"></i> Attention
+															: le prix de vente de votre véhicule n'est pas inscrit dans la
+															colonne de la côte car celle-ci est destinée à l'estimation
+															élaborée par nos ingénieurs et experts automobiles.
+															Calculez la côte personnalisée de votre véhicule avec <Link
+															href="/prix"> notre tarif Premium </Link>.
+														</p>
+													)}
+
 												</div>
 											</div>
 										</div>
