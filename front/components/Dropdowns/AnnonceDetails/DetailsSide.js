@@ -2,7 +2,10 @@ import React, {useEffect} from 'react';
 import MondalContact from "components/Mondal/MondalContact.js";
 import NoteConfiance from "components/Tabs/NoteConfiance.js";
 import {connect} from "react-redux";
-import {pubs} from 'helpers/constant';
+import useLoggedUser from "../../../service/hooks/useLoggedUser";
+import useAnnonces from "../../../service/hooks/useAnnonces";
+import Link from "next/link";
+
 const DetailsSide = ({ dispatch,
 					  loading,
 					  car}) => {
@@ -13,8 +16,20 @@ const DetailsSide = ({ dispatch,
 	  { icon: "fas fa-car-side", value: car?.doors },
 	  { icon: "fas fa-car-battery", value: car?.power }
   ];
-
+	const {isAuthentificated, loggedUser} = useLoggedUser();
+	const {
+		editCar
+	} = useAnnonces();
   let prix_api = car?.price
+
+	const handleEdit = async (id) => {
+		try {
+			await editCar(id);
+		} catch (err) {
+			console.log(err);
+		}
+	}
+
   return (
     <>
         <div className="w-full lg:w-4/12 px-12 mt-4">
@@ -52,6 +67,28 @@ const DetailsSide = ({ dispatch,
 				<div className="flex flex-wrap content-center items-center justify-center h-full">
 					<MondalContact transparent />
                 </div>
+			</div>
+			<div className="flex flex-wrap mt-2">
+				{isAuthentificated && car?.premium == true && (
+					<div className="button-block justify-left">
+						<button
+							className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 mr-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+							type="button"
+						>
+							<Link href="/vendre">
+								<a
+									href="#"
+									onClick={(e) => handleEdit(car?.id)}
+									className={
+										"text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
+									}
+								>
+									Modifier <i className="far fa-edit"></i>
+								</a>
+							</Link>
+						</button>
+					</div>
+				)}
 			</div>
         </div>
     </>
