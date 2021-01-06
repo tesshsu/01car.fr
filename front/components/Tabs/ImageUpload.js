@@ -4,6 +4,7 @@ import useAnnonces from '../../service/hooks/useAnnonces';
 import {Field, Form} from 'react-final-form';
 import {connect} from 'react-redux';
 import {dataURLtoBlob} from "../../helpers/Utils";
+import Link from "next/link";
 
 const ImageUpload = ({
                          dispatch,
@@ -120,19 +121,7 @@ const ImageUpload = ({
     };
 
     const onSubmit = async (values) => {
-       /* try {
-            let {
-                ...payload
-            } = values;
 
-            console.log("car_id=", car?.id, values);
-
-            const data = {...payload};
-            await addPhoto(car?.id, data);
-        } catch (err) {
-            console.log(err);
-            alert('Impossible ajouter photos');
-        }*/
     }
     return (
         <div className="blockUploadImage">
@@ -150,14 +139,17 @@ const ImageUpload = ({
                                 component={ImgUploadAdapter}
                             />
                         </div>
-                        {values.uploads.length > 0 ? (
+                        {images?.length > 0 ? (
+                            <Link href={car?.id ? (`/annonce?id=${car?.id}`) : ("#")} {...car}>
                             <button
                                 className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                 type="submit"
                                 disabled={submitting}
                             >
-                                <i className="fas fa-paper-plane text-base mr-1 animate-bounce"></i> ENVOYER
-                            </button>) : (null)
+                                <i className="fas fa-paper-plane text-base mr-1 animate-bounce"></i> Envoyer et Voir votre Annonce
+                            </button>
+                            </Link>
+                                ) : (null)
                         }
                     </form>
                 )}
