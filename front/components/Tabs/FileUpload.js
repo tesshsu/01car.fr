@@ -26,6 +26,9 @@ class FileUpload extends PureComponent {
     const formData = new FormData();
     formData.append("image", file);
     this.props.onSubmit(formData);
+    if(file){
+      alert("fichier envoye");
+    }
   };
   validateForm = values => {
     const errors = {};
@@ -79,13 +82,13 @@ class FileUpload extends PureComponent {
                 </button>
               )}
               {submitting && (
-                <button className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
+                <button className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
 				    onClick={this.handleCancel}
 				>
                   Annuler
                 </button>
               )}
-			  
+
             </div>
             {(submitting || message) && <hr />}
             {submitting && (
