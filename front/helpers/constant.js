@@ -256,7 +256,7 @@ export const classics = [
 	{list: "10 photos gratuites"}
 ];
 export const premiums = [
-    {list: "Rassurer l'acheteur grâce notre questionnaires"},
+    {list: "Rassurer l'acheteur grâce à notre questionnaire"},
     {list: "Tête de liste, grande visibilité"},
     {list: "Logo qualité garantie"},
     {list: "Modifier à tout moment le prix du véhicule"},

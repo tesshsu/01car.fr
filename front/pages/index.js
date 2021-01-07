@@ -93,7 +93,7 @@ export default function Index() {
 	  <section className="compare-block mt-48 md:mt-40 pb-40 relative bg-gray-200">
         <div className="compare-description-block items-center flex flex-wrap justify-center mb-3 md\:hidden">
 			<h1 className="font-bold text-3xl text-gray-800 break-words w-70">
-				Concept :  répondez au questionnaire de <span className="font-bold text-3xl text-orange-500">confiance</span> afin de rassurer l'acheteur et de vendre votre véhicule rapidement
+				Concept :  répondez au questionnaire de <span className="font-bold text-3xl text-orange-500">CONFIANCE</span> afin de rassurer l'acheteur et de vendre votre véhicule rapidement
 			</h1>
 		  </div>
 		<div

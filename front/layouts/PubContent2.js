@@ -84,7 +84,7 @@ export default function PubContent2() {
 						Vous êtes acheteur ?
 					</h3>
 					<p className="mt-4 text-md leading-relaxed text-white">
-						Achetez  un véhicule avec un minimum de risques.
+						Achetez  un véhicule avec un minimum de risques
 					</p>
 					<ul className="list-none mt-6">
 					  <li className="py-2">
@@ -110,7 +110,7 @@ export default function PubContent2() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-								Achetez un véhicule avec un minimum de risque
+								Achetez un véhicule avec un minimum de risques
 							</h4>
 						  </div>
 						</div>
