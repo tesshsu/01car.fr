@@ -81,6 +81,9 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 		}
 	}, [isAuthentificated]);
 
+	const refreshPage= async () => {
+		window.location.reload();
+	}
 	//submit
 
 	const onSubmit = async (values) => {
@@ -178,8 +181,19 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 							</a>
 						</li>
 					</ul>
-					{editCar && (<p className="text-md font-semibold text-center">Vous etez en mode de modifier <i
-						className="far fa-edit animate-bounce"></i></p>)}
+					{editCar && (
+						<div className="w-full px-4 flex-1 text-center">
+							<p className="text-md font-semibold text-center">Vous etez en mode de modifier <i
+								className="far fa-edit animate-bounce"></i></p>
+							<button
+								className="bg-gray-600 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+								onClick={ refreshPage }
+							>
+								<i className="fas fa-pen-square"></i> Je veux créé autre annonce
+
+							</button>
+						</div>
+					)}
 					<div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
 						<div className="px-4 py-5 flex-auto">
 							<Form
