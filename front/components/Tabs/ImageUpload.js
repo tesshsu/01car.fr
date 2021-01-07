@@ -5,6 +5,7 @@ import {Field, Form} from 'react-final-form';
 import {connect} from 'react-redux';
 import {dataURLtoBlob} from "../../helpers/Utils";
 import Link from "next/link";
+import {useRouter} from "next/router";
 
 const ImageUpload = ({
                          dispatch,
@@ -19,7 +20,7 @@ const ImageUpload = ({
         removePhoto
     } = useAnnonces();
     const maxNumber = 10;
-
+    const router = useRouter();
     useEffect(() => {
         let imageList = car?.uploads.map(upload => {
             let image = {};
@@ -139,7 +140,7 @@ const ImageUpload = ({
                                 component={ImgUploadAdapter}
                             />
                         </div>
-                        {images?.length > 0 ? (
+                        {images?.length > 0 && router.pathname === '/vendre' ? (
                             <Link href={car?.id ? (`/annonce?id=${car?.id}`) : ("#")} {...car}>
                             <button
                                 className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
