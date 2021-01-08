@@ -31,36 +31,51 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 	const [isFirst, setIsFrist] = React.useState(true)
 	const [hasErrors, setHasErrors] = React.useState(true);
 	const [editCar, setEditCar] = React.useState(false);
-	const sendPostQuestionsvalues = car ? car : {
-		brand: "",
-		model: "",
-		generation: "sg",
-		phase: 6,
-		id_carBody: 2,
-		fuel: "",
-		transmission: "",
-		car_body: "",
-		doors: 5,
-		power: 526,
-		version: "",
-		dt_entry_service: "",
-		km: "",
-		license_plate: "",
-		dt_valuation: "",
-		score_recognition: 4.3,
-		score_valuation: 6.3,
-		estimate_price: "",
-		price: 9134.61,
-		currency: "EUR",
-		owner_type: "",
-		available: "",
-		smoking: "",
-		duplicate_keys: "",
-		sale_reason: "",
-		hand_number: "",
-		state: "",
-		country: "",
-		comfort: ""
+	const sendPostQuestionsvalues = {
+		id: car?.id,
+		brand: car?.brand,
+		model: car?.model,
+		generation: car?.generation,
+		phase: car?.phase,
+		id_carBody: car?.id_carBody,
+		fuel: car?.fuel,
+		transmission: car?.transmission,
+		car_body: car?.car_body,
+		doors: car?.doors,
+		power: car?.power,
+		version: car?.version,
+		dt_entry_service: car?.dt_entry_service,
+		km: car?.km,
+		license_plate: car?.license_plate,
+		dt_valuation: car?.dt_valuation,
+		score_recognition: car?.score_recognition,
+		score_valuation: car?.score_valuation,
+		estimate_price: car?.estimate_price,
+		price: car?.price,
+		currency: car?.currency,
+		owner_type: car?.owner_type,
+		available: car?.available,
+		smoking: car?.smoking,
+		duplicate_keys: car?.duplicate_keys,
+		sale_reason: car?.sale_reason,
+		hand_number: car?.hand_number,
+		state: car?.state,
+		country: car?.country,
+		equipments: {
+			comfort: car?.equipments?.comfort,
+			outside: car?.equipments?.outside,
+			inside: car?.equipments?.inside,
+			anti_theft: car?.equipments?.anti_theft,
+			other: car?.equipments?.other,
+			security: car?.equipments?.security,
+		},
+
+		outside_option: car?.equipments?.outside?.length > 0,
+		inside_option: car?.equipments?.inside?.length > 0,
+		anti_theft_option: car?.equipments?.anti_theft?.length > 0,
+		comfort_option: car?.equipments?.comfort?.length > 0,
+		security_option: car?.equipments?.security?.length > 0,
+		other_option: car?.equipments?.other?.length > 0,
 	}
 
 	const {
@@ -499,7 +514,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														Équipements de série et options :</p>
 												</div>
 
-												<QuestionsOptions/>
+												<QuestionsOptions values={values}/>
 
 												<div className="flex flex-wrap mt-8">
 													<div className="w-full lg:w-6/12 px-4">
