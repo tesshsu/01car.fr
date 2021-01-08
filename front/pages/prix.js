@@ -1,22 +1,81 @@
 import React, {useEffect, useState} from 'react';
 import Link from "next/link";
-import ModalPayment from "components/Mondal/ModalPayment.js";
+import Stripe from "stripe";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import { parseCookies, setCookie } from "nookies";
 import useLoggedUser from 'service/hooks/useLoggedUser';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import PubContent from "layouts/PubContent.js";
 import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
 import {classics, premiums, pubTransparents } from "helpers/constant";
+import CheckoutForm from "components/Cards/CardChekoutForm";
+import {Modal} from "react-responsive-modal";
+import "react-responsive-modal/styles.css";
+const stripePromise = loadStripe("pk_test_51HgmzIBjqnSC21bhUov33uWhuXhCFQBnwRcy1pfJgKmXv42GkV7vLZJ0uNR26SdEUomqGHDnGhCXvxn0MY6GjIg100F67arXkO");
+
+export const getServerSideProps = async ctx => {
+    const stripe = new Stripe("sk_test_51HgmzIBjqnSC21bhuUPX8DMnH1ynu6iKdvoVMhjUqKgdVqDGKmrBximAok0WD9ypSgk6b3uq1ZE1uqsEEoM4PKzP00iDeWHIKx");
+
+    let paymentIntent;
+
+    const { paymentIntentId } = await parseCookies(ctx);
+    console.log('paymentIntentId1: ', paymentIntent);
+    if (paymentIntentId) {
+        paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+        console.log('paymentIntentId: ', paymentIntent);
+        return {
+            props: {
+                paymentIntent
+            }
+        };
+    }
+
+    paymentIntent = await stripe.paymentIntents.create({
+        amount: 1000,
+        currency: "eur",
+        receipt_email:"info@01car.fr"
+    });
+
+    setCookie(ctx, "paymentIntentId", paymentIntent.id);
+
+    return {
+        props: {
+            paymentIntent
+        }
+    };
+};
+
+
+const ModalPayment = ({ paymentIntent }) => (
+    <Elements
+        stripe={stripePromise}
+        options={{
+            style: {
+                complete: {
+                    backgroundColor: "#ed8936"
+                }
+            },
+        }}
+    >
+        <CheckoutForm paymentIntent={paymentIntent} />
+    </Elements>
+);
 
 export default function Prix() {
    const {
     isAuthentificated,
     loggedUser
   } = useLoggedUser();
-
+    const [showModal, setShowModal] = React.useState(false);
   let [tokken,settokken]=useState(null);
+    const onClickPayment = async e => {
+        e.preventDefault();
+        return setShowModal(true);
+    }
 
-  useEffect(() => {
+    useEffect(() => {
     if (isAuthentificated && loggedUser) {
         try{
 			const getTokken=async ()=>{
@@ -35,6 +94,44 @@ export default function Prix() {
     <>
       <IndexNavbar fixed />
       <main className="prix-page">
+          {showModal ? (
+              <>
+                  <Modal closeOnEsc={false} open={open} onClose={() => setShowModal(true)}>
+                      <section>
+                          <div className="product flex flex-wrap justify-center mt-4">
+                              <div className="w-full md:w-6/12 px-4">
+                                  <img
+                                      src={require("assets/img/profile.jpg")}
+                                      alt="Abonement Premium"
+                                      className="ProductImg shadow rounded-full max-w-full h-auto align-middle border-none"
+                                  />
+                              </div>
+                              <div className="w-full md:w-6/12 px-4">
+                                  <div className="description">
+                                      <h1 className="ml-3 leading-6 font-medium text-orange-500 text-2xl">Tarif Premium *</h1>
+                                      <div className="ml-3 leading-6 font-medium text-orange-500 text-4xl">6.99€</div>
+                                      <p className="ml-3 leading-6 font-medium text-gray-500 text-md">*Le tarif est pour une annonce et dure dans un mois</p>
+                                      <p className="ml-3 leading-6 font-medium text-gray-500 text-md">
+                                          vous acceptez
+                                          les conditions pour diriger ver le payment et notre politique de confidentialité
+                                          <Link href="/footer/policy">
+                                              <a
+                                                  className={
+                                                      "text-sm font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
+                                                  }
+                                              >
+                                                  Lire la politique de confidentialité
+                                              </a>
+                                          </Link>
+                                      </p>
+                                  </div>
+                              </div>
+                          </div>
+                          <ModalPayment/>
+                      </section>
+                  </Modal>
+              </>
+          ) : null}
         <div className="relative pt-16 pb-20 flex content-center items-center justify-center min-h-screen-75">
           <div
             className="absolute top-0 w-full h-full bg-center bg-cover"
@@ -171,7 +268,20 @@ export default function Prix() {
 							  </Link>
 					  </button>
 					     ) : (
-					       <ModalPayment />
+                          <button
+                              className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 mr-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+                              type="button"
+                          >
+                                  <a
+                                      href="#"
+                                      onClick={onClickPayment}
+                                      className={
+                                          "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
+                                      }
+                                  >
+                                      Vendez votre véhicule en tête de liste <i className="far fa-thumbs-up animate-ping-small"></i>
+                                  </a>
+                          </button>
 						 )
 					  }
 					</div>
