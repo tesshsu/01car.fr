@@ -49,7 +49,16 @@ export const getServerSideProps = async ctx => {
 
 
 const ModalPayment = ({ paymentIntent }) => (
-    <Elements stripe={stripePromise}>
+    <Elements
+        stripe={stripePromise}
+        options={{
+            style: {
+                complete: {
+                    backgroundColor: "#ed8936"
+                }
+            },
+        }}
+    >
         <CheckoutForm paymentIntent={paymentIntent} />
     </Elements>
 );
@@ -61,7 +70,8 @@ export default function Prix() {
   } = useLoggedUser();
     const [showModal, setShowModal] = React.useState(false);
   let [tokken,settokken]=useState(null);
-    const onClickPayment = async () => {
+    const onClickPayment = async e => {
+        e.preventDefault();
         return setShowModal(true);
     }
 
@@ -106,7 +116,6 @@ export default function Prix() {
                                           les conditions pour diriger ver le payment et notre politique de confidentialité
                                           <Link href="/footer/policy">
                                               <a
-                                                  href="#"
                                                   className={
                                                       "text-sm font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
                                                   }
@@ -265,7 +274,7 @@ export default function Prix() {
                           >
                                   <a
                                       href="#"
-                                      onClick={(e) => onClickPayment()}
+                                      onClick={onClickPayment}
                                       className={
                                           "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
                                       }
