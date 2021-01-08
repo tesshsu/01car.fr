@@ -19,7 +19,6 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/styles/tailwind.css";
 import CookieConsent from "react-cookie-consent";
 import * as LOGGED_USER_ACTIONS from "../service/actions/loggedUser";
-
 //combien all the reducers
 const logger = createLogger();
 const rootReducers = combineReducers({
