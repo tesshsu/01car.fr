@@ -61,7 +61,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 		hand_number: car?.hand_number,
 		state: car?.state,
 		country: car?.country,
-		equipments: {
+		equipments: car?.id && {
 			comfort: car?.equipments?.comfort,
 			outside: car?.equipments?.outside,
 			inside: car?.equipments?.inside,

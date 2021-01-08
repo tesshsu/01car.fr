@@ -96,7 +96,7 @@ export default function Prix() {
       <main className="prix-page">
           {showModal ? (
               <>
-                  <Modal closeOnEsc={false} open={open} onClose={() => setShowModal(true)}>
+                  <Modal closeOnEsc={false} open={open} onClose={() => setShowModal(false)}>
                       <section>
                           <div className="product flex flex-wrap justify-center mt-4">
                               <div className="w-full md:w-6/12 px-4">

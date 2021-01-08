@@ -12,7 +12,6 @@ import {
 import {Condition} from 'helpers/formValidate';
 
 const QuestionsOptions = (props) => {
-
 	let equipments = {
 		outside_option: props?.values?.outside_option,
 		outside: props?.values?.equipments?.outside,
