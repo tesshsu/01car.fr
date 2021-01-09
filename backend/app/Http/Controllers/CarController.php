@@ -162,12 +162,29 @@ class CarController extends Controller
      * @param \App\Models\User $user
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Car $car)
+    public function destroy($id)
     {
+        $car = Car::with('attributes', 'user', 'uploads')->find($id);
+        if ($car == NULL) {
+            return response()->json(['error' => 'NotFound'], 404);
+        }
+
         $currentUser = Auth::user();
         if ($currentUser->id != $car->user_id || !$currentUser->isAdminUser()) {
             return response()->json(['error' => 'Unauthorised'], 403);
         }
+
+        $car->attributes->each(function ($item, $key) {
+            $item->delete();
+        });
+
+        $car->uploads->each(function ($upload, $key) use ($car) {
+            Storage::disk('public')->delete(
+                $upload->path . $upload->name
+            );
+            $car->uploads()->detach($upload);
+        });
+
         $car->delete();
     }
 

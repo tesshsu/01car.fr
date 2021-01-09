@@ -49,7 +49,7 @@ export const NonOptions = [
 
 export const raisonVendreOptions = [
     {note: 0, label: '', value: ''},
-    {note: 1, label: 'Ne correspond pas à mes attentes', value: 'Noneed'},
+    {note: 1, label: 'Ne correspond pas à mes attentes', value: 'not_expected'},
     {note: 1, label: 'Changement de situation', value: 'change'},
     {note: 1, label: 'Autre projet', value: 'other'}
 ]
