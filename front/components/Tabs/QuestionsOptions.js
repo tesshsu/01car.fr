@@ -13,18 +13,19 @@ import {Condition} from 'helpers/formValidate';
 
 const QuestionsOptions = (props) => {
 	let equipments = {
-		outside_option: props?.values?.outside_option,
-		outside: props?.values?.equipments?.outside,
-		inside_option: props?.values?.inside_option,
-		inside: props?.values?.equipments?.inside,
-		anti_theft_option: props?.values?.anti_theft_option,
-		anti_theft: props?.values?.equipments?.anti_theft,
+		 outside_option: props?.values?.outside_option,
+		// outside: props?.values?.equipments?.outside,
+		 inside_option: props?.values?.inside_option,
+		// inside: props?.values?.equipments?.inside,
+		 anti_theft_option: props?.values?.anti_theft_option,
+		// anti_theft: props?.values?.equipments?.anti_theft,
 		comfort_option: props?.values?.comfort_option,
-		comfort: props?.values?.equipments?.comfort,
-		other_option: props?.values?.other_option,
-		other: props?.values?.equipments?.other,
-		security_option: props?.values?.security_option,
-		security: props?.values?.equipments?.security,
+		// comfort: props?.values?.equipments?.comfort,
+		 other_option: props?.values?.other_option,
+		// other: props?.values?.equipments?.other,
+		 security_option: props?.values?.security_option,
+		// security: props?.values?.equipments?.security,
+		comfort: props?.values?.comfort
 	}
 	let outside_option = equipments.outside_option;
 	let inside_option = equipments.inside_option;

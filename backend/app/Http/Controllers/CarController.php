@@ -96,6 +96,13 @@ class CarController extends Controller
         // Update expiration date
         $newCar->expire_at = Carbon::now()->addDays(TimeConstant::EXPIRATION_DURATION_IN_DAYS);
         $newCar->save();
+
+        $this->updateAttributes($newCar, $reqCar);
+
+        // Update cra note
+        $newCar->confidence_note = Car::calcConfidenceNote($newCar);
+        $newCar->save();
+
         return $this->renderJson($newCar->id);
     }
 
@@ -141,6 +148,8 @@ class CarController extends Controller
 
         // Update allowed fields
         $this->updateCarFields($car, $reqCar);
+        $this->updateAttributes($car, $reqCar);
+        $car->confidence_note = Car::calcConfidenceNote($car);
 
         $car->save();
         //
@@ -286,24 +295,23 @@ class CarController extends Controller
         // Handle date format
         $car->dt_entry_service  = isset($reqCar->dt_entry_service ) ? Carbon::parse($reqCar->dt_entry_service)->toDateTime() : $car->dt_entry_service ;
         $car->dt_valuation  = isset($reqCar->dt_valuation ) ? Carbon::parse($reqCar->dt_valuation)->toDateTime() : $car->dt_valuation ;
+    }
 
+    private function updateAttributes($car, $reqCar){
         if (isset($reqCar->equipments)) {
             collect(EquipmentCategory::list())->each(function ($item, $key) use ($car, $reqCar) {
                 if (isset($reqCar->equipments[$item])) {
-                    $this->updateAttributes($car, (array)$reqCar->equipments[$item], $item);
+                    $this->updateAttributesByCategory($car, (array)$reqCar->equipments[$item], $item);
                 }
             });
-
         }
 
         if (isset($reqCar->options) && isset($reqCar->options["premium"])) {
-            $this->updateAttributes($car, (array)$reqCar->options["premium"], EquipmentCategory::PREMIUM);
+            $this->updateAttributesByCategory($car, (array)$reqCar->options["premium"], EquipmentCategory::PREMIUM);
         }
-
-        $car->confidence_note = Car::calcConfidenceNote($car);
     }
 
-    private function updateAttributes(Car $car, $reqAttributes, $category)
+    private function updateAttributesByCategory(Car $car, $reqAttributes, $category)
     {
         $attributesInDB = $car->attributes()->getResults()->filter(function ($value, $key) use ($category) {
             return $value->category == $category;
