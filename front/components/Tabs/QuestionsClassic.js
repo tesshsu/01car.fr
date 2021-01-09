@@ -28,7 +28,7 @@ import PubContentConnection from "../../layouts/PubContentConnection.js";
 const QuestionsClassic = ({dispatch, loading, car}) => {
 	const [openTab, setOpenTab] = React.useState(1);
 	const [showModal, setShowModal] = React.useState(false);
-	const [isFirst, setIsFrist] = React.useState(true)
+	const [isFirst, setIsFirst] = React.useState(true)
 	const [hasErrors, setHasErrors] = React.useState(true);
 	const [editCar, setEditCar] = React.useState(false);
 	const sendPostQuestionsvalues = {
@@ -78,6 +78,9 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 		other_option: car?.equipments?.other?.length > 0,
 	}
 
+	console.log("sendPostQuestionsvalues=", sendPostQuestionsvalues)
+	console.log("car=", car)
+
 	const {
 		isAuthentificated
 	} = useLoggedUser();
@@ -103,6 +106,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 
 	const onSubmit = async (values) => {
 		try {
+			console.log("sun=", car)
 			if (car) {
 				await modifyCar(car?.id, values);
 			} else {
@@ -110,7 +114,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 				values.duplicate_keys = transformValueToBoolean(values.duplicate_keys);
 				await create(values);
 			}
-			setIsFrist(false)
+			setIsFirst(false)
 
 		} catch (err) {
 			console.log(err);

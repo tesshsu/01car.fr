@@ -18,7 +18,7 @@ import useAnnonces from 'service/hooks/useAnnonces';
 const QuestionsPremier = ({dispatch, loading, car}) => {
   const [openTab, setOpenTab] = React.useState(1);
   const [hasErrors, setHasErrors] = React.useState(true)
-    const [isFirst,setIsFrist] = React.useState(true)
+    const [isFirst,setIsFirst] = React.useState(true)
     const [editCar, setEditCar] = React.useState(false)
     const sendPostQuestionsPremiumValues = car ? car : {
         Under_warranty:'',
@@ -52,7 +52,7 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
             } else {
                 await create(values);
             }
-            setIsFrist(false)
+            setIsFirst(false)
 
         } catch (err) {
             console.log(err);
