@@ -24,7 +24,7 @@ import useAnnonces from '../../service/hooks/useAnnonces';
 import {Modal} from "react-responsive-modal";
 import PubContentThreeIcons from "../../layouts/PubContentThreeIcons.js";
 import PubContentConnection from "../../layouts/PubContentConnection.js";
-
+import QuestionsPremier from "./QuestionsPremier";
 const QuestionsClassic = ({dispatch, loading, car}) => {
 	const [openTab, setOpenTab] = React.useState(1);
 	const [showModal, setShowModal] = React.useState(false);
@@ -199,6 +199,27 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 								véhicule
 							</a>
 						</li>
+						{editCar && (
+						<li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+							<a
+								className={
+									"text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+									(openTab === 5
+										? "text-white bg-orange-500"
+										: "text-gray-600 bg-white")
+								}
+								onClick={e => {
+									e.preventDefault();
+									setOpenTab(5);
+								}}
+								data-toggle="tab"
+								href="#link5"
+								role="tablist"
+							>
+								<i className="fas fa-book text-base mr-1"></i> Questions Premium
+							</a>
+						</li>
+						)}
 					</ul>
 					{editCar && (
 						<div className="w-full px-4 flex-1 text-center">
@@ -665,11 +686,13 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														</div>
 													) : (
 														<div className="finalStep text-center">
-															<p className="text-xl leading-relaxed text-gray-800">Bravo !
-																Vous avez répondu à toutes les questions !! <i
-																	className="far fa-thumbs-up animate-ping"></i></p>
+															{editCar ? (<p className="text-xl leading-relaxed text-gray-800">Bravo !
+																Vous avez répondu à toutes les questions classic !! </p>) : (
+																<p className="text-xl leading-relaxed text-gray-800">Bravo !
+																	Vous pouvez continuer sur les questions premium !! </p>
+															)}
 															<a
-																className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
+																className="text-kl bg-orange-500 text-white font-bold uppercase px-2 py-5 shadow-lg rounded block leading-normal "
 																onClick={e => {
 																	e.preventDefault();
 																	setOpenTab(4);
@@ -679,8 +702,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 																role="tablist"
 															>
 																<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
-																ÉTAPE SUIVANTE : TÉLÉCHARGER VOS PHOTOS POUR PUBLIER
-																VOTRE ANNONCE
+																ÉTAPE SUIVANTE
 															</a>
 														</div>
 													)}
@@ -732,29 +754,46 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														</div>
 													</div>
 													<ImageUpload/>
-													<div
-														className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600">
-														<i className="fas fa-paper-plane text-base mr-1 animate-bounce"></i> C’est
-														parti!
-													</div>
-													<h4 className="text-xl font-semibold">
-														OU VOUS POUVEZ
-													</h4>
+													{editCar ?(
+														<div className="w-full">
+															<h4 className="text-xl font-semibold">
+																OR
+															</h4>
+															<h4 className="text-xl font-semibold">
+																JE VEUX CONTINUER MODIFIER SUR
+															</h4>
+														</div>
+													):(
+														<div className="w-full">
+															<div
+																className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600">
+																<i className="fas fa-paper-plane text-base mr-1 animate-bounce"></i> C’est
+																parti!
+															</div>
+															<h4 className="text-xl font-semibold">
+																OU VOUS POUVEZ
+															</h4>
+														</div>
+													)}
+
 													{editCar ?(
 														<button
 															className="button-payer-top-list bg-orange-500 text-white active:bg-grey-500 text-sm uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
 															type="button"
 														>
-															<Link href="/vendrePremium">
-																<a
-																	href="#pablo"
-																	className={
-																		"text-md py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
-																	}
-																>
-																	<i className="far fa-edit"></i> Continuer modifier les questionaires 11 -20
-																</a>
-															</Link>
+															<a
+																className="text-kl font-bold uppercase px-2 py-5 rounded block leading-normal "
+																onClick={e => {
+																	e.preventDefault();
+																	setOpenTab(5);
+																}}
+																data-toggle="tab"
+																href="#link5"
+																role="tablist"
+															>
+																<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
+																les questions premium
+															</a>
 														</button>
 													):(
 														<button
@@ -787,6 +826,11 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 
 												</div>
 											</div>
+											{editCar ? (
+												<div className={openTab === 5 ? "block" : "hidden"} id="link5">
+												  <QuestionsPremier values={values}  />
+												</div>
+											) : (null)}
 										</div>
 									</form>
 								)}
