@@ -112,7 +112,7 @@ const QuestionsPremier = (props) => {
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
                                               <Field
                                                   name="option.premium[]"
-                                                  initialValue={options?.premium?.value}
+                                                  initialValue={options?.premium?.includes("under_warranty")}
                                                   component="select"
                                                   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
                                               >

@@ -31,6 +31,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 	const [isFirst, setIsFirst] = React.useState(true)
 	const [hasErrors, setHasErrors] = React.useState(true);
 	const [editCar, setEditCar] = React.useState(false);
+	const [carPremium, setCarPremium] = React.useState(false);
 	const sendPostQuestionsvalues = {
 		id: car?.id,
 		brand: car?.brand,
@@ -80,7 +81,6 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 
 	console.log("sendPostQuestionsvalues=", sendPostQuestionsvalues)
 	console.log("car=", car)
-
 	const {
 		isAuthentificated
 	} = useLoggedUser();
@@ -107,7 +107,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 	const onSubmit = async (values) => {
 		try {
 			console.log("sun=", car)
-			if (car) {
+			if (car && editCar == true ) {
 				await modifyCar(car?.id, values);
 			} else {
 				values.smoking = transformValueToBoolean(values.smoking);
@@ -655,41 +655,107 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 															):(
 																<div className="sendQuestions text-center">
 																	<div className="w-full px-4">
-																		<div className="w-full px-4">
-																			<button
-																				className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-																				type="submit"
-																				disabled={invalid || submitting}
-																			>
-																				<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER
-																			</button>
-																			<p className="text-md leading-relaxed text-gray-500">
-																				Votre annonce
-																				sera pré-remplie à l’issue de ce questionnaire.
-																				Vous ACCEPTEZ
-																				les conditions pour publier votre annonce
-																				<Link href="/footer/policy">
-																					<a
-																						href="#"
-																						className={
-																							"text-sm font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
-																						}
-																					>
-																						Lire la politique de confidentialité
-																					</a>
-																				</Link>
-																			</p>
-																		</div>
+																		{editCar ? (
+																			<div className="w-full px-4">
+																				<p className="text-xl uppercase leading-relaxed font-bold text-gray-800">Bravo !
+																					Vous avez modifier à toutes les questions classic !! <i
+																						className="far fa-thumbs-up animate-ping"></i></p>
+																				<label
+																					className="block uppercase text-gray-700 text-md mb-2"
+																					htmlFor="suivePremium"
+																				>
+																					Souhaitiez vous continuer modifier le questionnaire premium ?
+																				</label>
+																				<div
+																					className="relative flex w-full flex-wrap items-stretch mb-3">
+																					<Field name="suivePremium"
+																						   component="select"
+																						   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+																						<option
+																							value=""> </option>
+																						<option
+																							value="Oui">Oui</option>
+																						<option
+																							value="Non">Non</option>
+																					</Field>
+																					<div
+																						className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
+																						<i className="fas fa-angle-down text-2xl my-2"></i>
+																					</div>
+
+
+																					<Condition when="suivePremium" is="Oui">
+																						<div className="container mx-auto text-center">
+																						<a
+																							className="text-kl mt-4 bg-orange-500 text-white font-bold uppercase px-2 py-5 shadow-lg rounded block"
+																							onClick={e => {
+																								e.preventDefault();
+																								setOpenTab(5);
+																							}}
+																							data-toggle="tab"
+																							href="#link5"
+																							role="tablist"
+																						>
+																							<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
+																							Modifier Premium
+																						</a>
+																						</div>
+																					</Condition>
+
+																					<Condition when="suivePremium" is="Non">
+																						<div className="container mx-auto text-center">
+																							<button
+																								className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+																								type="submit"
+																								disabled={submitting}
+																							>
+																								<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER MODIFICATIONS
+																							</button>
+																						</div>
+																					</Condition>
+
+
+																				</div>
+
+																			</div>
+																		) : (
+																			<div className="w-full px-4">
+																				<button
+																					className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+																					type="submit"
+																					disabled={submitting}
+																				>
+																					<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER
+																				</button>
+																				<p className="text-md leading-relaxed text-gray-500">
+																					Votre annonce
+																					sera pré-remplie à l’issue de ce questionnaire.
+																					Vous ACCEPTEZ
+																					les conditions pour publier votre annonce
+																					<Link href="/footer/policy">
+																						<a
+																							href="#"
+																							className={
+																								"text-sm font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
+																							}
+																						>
+																							Lire la politique de confidentialité
+																						</a>
+																					</Link>
+																				</p>
+																			</div>
+																		)}
+
 																	</div>
 																</div>
 															)}
 														</div>
 													) : (
 														<div className="finalStep text-center">
-															{editCar ? (<p className="text-xl leading-relaxed text-gray-800">Bravo !
-																Vous avez répondu à toutes les questions classic !! </p>) : (
-																<p className="text-xl leading-relaxed text-gray-800">Bravo !
-																	Vous pouvez continuer sur les questions premium !! </p>
+															{editCar ? (<p className="text-xl leading-relaxed text-gray-800">Vous pouvez continuer sur les questions premium !! </p>) : (
+																<p className="text-xl leading-relaxed text-gray-800">
+																	Bravo !
+																	Vous avez répondu à toutes les questions classic !!</p>
 															)}
 															<a
 																className="text-kl bg-orange-500 text-white font-bold uppercase px-2 py-5 shadow-lg rounded block leading-normal "
@@ -754,65 +820,6 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														</div>
 													</div>
 													<ImageUpload/>
-													{editCar ?(
-														<div className="w-full">
-															<h4 className="text-xl font-semibold">
-																OR
-															</h4>
-															<h4 className="text-xl font-semibold">
-																JE VEUX CONTINUER MODIFIER SUR
-															</h4>
-														</div>
-													):(
-														<div className="w-full">
-															<div
-																className="text-3xl block my-2 p-3 text-white font-bold rounded border border-solid border-gray-200 bg-gray-600">
-																<i className="fas fa-paper-plane text-base mr-1 animate-bounce"></i> C’est
-																parti!
-															</div>
-															<h4 className="text-xl font-semibold">
-																OU VOUS POUVEZ
-															</h4>
-														</div>
-													)}
-
-													{editCar ?(
-														<button
-															className="button-payer-top-list bg-orange-500 text-white active:bg-grey-500 text-sm uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-															type="button"
-														>
-															<a
-																className="text-kl font-bold uppercase px-2 py-5 rounded block leading-normal "
-																onClick={e => {
-																	e.preventDefault();
-																	setOpenTab(5);
-																}}
-																data-toggle="tab"
-																href="#link5"
-																role="tablist"
-															>
-																<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
-																les questions premium
-															</a>
-														</button>
-													):(
-														<button
-															className="button-payer-top-list bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-4 py-2 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-															type="button"
-														>
-															<Link href="/prix">
-																<a
-																	href="#pablo"
-																	className={
-																		"text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
-																	}
-																>
-																	<i className="far fa-laugh mr-1 animate-spin"></i> Continuez
-																	pour passer en tête de liste
-																</a>
-															</Link>
-														</button>
-													)}
 													{!editCar &&(
 														<p className="notifyForPrice text-md leading-relaxed text-gray-500 text-left">
 															<i className="fas fa-flag-checkered animate-bounce"></i> Attention
@@ -826,7 +833,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 
 												</div>
 											</div>
-											{editCar ? (
+											{editCar && car.length > 0 ? (
 												<div className={openTab === 5 ? "block" : "hidden"} id="link5">
 												  <QuestionsPremier values={values}  />
 												</div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Field } from 'react-final-form';
-
+import Link from "next/link";
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const onSubmit = async values => {
 	await sleep(300)
@@ -26,7 +26,7 @@ export default function AnnonceSearchForm() {
 														{...input}
 														type="text"
 														className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-														placeholder="Rechercher"
+														placeholder="Marque Model ..."
 													/>
 												</div>
 											)}
@@ -80,11 +80,19 @@ export default function AnnonceSearchForm() {
 									</div>
 									<div className="w-full px-4 flex-1">
 										<button
-											className="bg-orange-500 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-											type="submit"
-											disabled={submitting}
+											className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+											type="button"
 										>
-											Rechercher
+											<Link href="/annonces">
+												<a
+													href="#pablo"
+													className={
+														"text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
+													}
+												>
+													Recherche
+												</a>
+											</Link>
 										</button>
 									</div>
 								</div>
