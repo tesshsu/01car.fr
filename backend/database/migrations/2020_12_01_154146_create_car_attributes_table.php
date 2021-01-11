@@ -23,7 +23,7 @@ class CreateCarAttributesTable extends Migration
 
         Schema::table('car_attributes', function(Blueprint $table) {
             $table->foreign('car_id')->references('id')->on('cars')
-                ->onDelete('restrict')
+                ->onDelete('cascade')
                 ->onUpdate('restrict');
         });
     }
