@@ -19,6 +19,9 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/styles/tailwind.css";
 import CookieConsent from "react-cookie-consent";
 import * as LOGGED_USER_ACTIONS from "../service/actions/loggedUser";
+import Stripe from "stripe";
+import { loadStripe } from "@stripe/stripe-js";
+import { parseCookies, setCookie } from "nookies";
 //combien all the reducers
 const logger = createLogger();
 const rootReducers = combineReducers({
@@ -49,6 +52,40 @@ Router.events.on("routeChangeError", () => {
 });
 
 setupApiClient();
+
+const stripePromise = loadStripe("pk_test_51HgmzIBjqnSC21bhUov33uWhuXhCFQBnwRcy1pfJgKmXv42GkV7vLZJ0uNR26SdEUomqGHDnGhCXvxn0MY6GjIg100F67arXkO");
+
+export const getServerSideProps = async ctx => {
+  const stripe = new Stripe("sk_test_51HgmzIBjqnSC21bhuUPX8DMnH1ynu6iKdvoVMhjUqKgdVqDGKmrBximAok0WD9ypSgk6b3uq1ZE1uqsEEoM4PKzP00iDeWHIKx");
+
+  let paymentIntent;
+
+  const { paymentIntentId } = await parseCookies(ctx);
+  console.log('paymentIntentId1: ', paymentIntent);
+  if (paymentIntentId) {
+    paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+    console.log('paymentIntentId: ', paymentIntent);
+    return {
+      props: {
+        paymentIntent
+      }
+    };
+  }
+
+  paymentIntent = await stripe.paymentIntents.create({
+    amount: 1000,
+    currency: "eur",
+    receipt_email:"info@01car.fr"
+  });
+
+  setCookie(ctx, "paymentIntentId", paymentIntent.id);
+
+  return {
+    props: {
+      paymentIntent
+    }
+  };
+};
 
 function getCookie(cname) {
   if (typeof window === "undefined") return null;

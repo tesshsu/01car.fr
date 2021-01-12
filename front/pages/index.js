@@ -5,7 +5,7 @@ import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import PubContent from "layouts/PubContent.js";
 import PubContent2 from "layouts/PubContent2.js";
-
+import AnnonceSearchForm from "../components/Annonce/AnnonceSearchForm";
 
 export default function Index() {
   const router = useRouter()
@@ -89,8 +89,14 @@ export default function Index() {
           alt="..."
         />
       </section>
-
-	  <section className="compare-block mt-48 md:mt-40 pb-40 relative bg-gray-200">
+          <AnnonceSearchForm />
+          <div className="comment-marche-block justify-center text-center flex flex-wrap mt-24">
+              <div className="w-full md:w-6/12 px-12 md:px-4">
+                  <h2 className="font-semibold text-4xl">Comment ça marche ?</h2>
+              </div>
+          </div>
+          <PubContent2 />
+	  <section className="compare-block pb-40 relative bg-gray-200">
         <div className="compare-description-block items-center flex flex-wrap justify-center mb-3 md\:hidden">
 			<h1 className="font-bold text-3xl text-gray-800 break-words w-70">
 				Concept :  répondez au questionnaire de <span className="font-bold text-3xl text-orange-500">CONFIANCE</span> afin de rassurer l'acheteur et de vendre votre véhicule rapidement
@@ -178,7 +184,7 @@ export default function Index() {
 					</div>
 					<div className="w-full align-center logoNoteConfiance">
 					    <button
-								  className="bg-orange-500 text-white active:bg-gray-700 border-dashed border-2 shadow-2xl-orange text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-xl outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+								  className="bg-orange-500 z-50 text-white active:bg-gray-700 border-dashed border-2 shadow-2xl-orange text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-xl outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
 								  type="button"
 								>
 								  <i className="far fa-thumbs-up"></i> Note de confiance
@@ -226,7 +232,7 @@ export default function Index() {
 											  "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
 											}
 										  >
-											<i className="fas fa-thumbs-up"></i> Vendez votre véhicule en tête de liste
+											<i className="fas fa-thumbs-up"></i> Vendez
 										  </a>
 							</Link>
 						</button>
@@ -236,11 +242,6 @@ export default function Index() {
               </div>
             </div>
 
-          </div>
-        </div>
-        <div className="comment-marche-block justify-center text-center flex flex-wrap mt-16">
-          <div className="w-full md:w-6/12 px-12 md:px-4">
-            <h2 className="font-semibold text-4xl">Comment ça marche ?</h2>
           </div>
         </div>
       </section>
@@ -300,15 +301,15 @@ export default function Index() {
         </div>
       </section>
 	  <PubContent />
-      <section className="final-block block relative z-1 bg-white-700">
-	  <div className="container mx-auto px-4 pb-32">
+      <section className="final-block block relative z-1 bg-orange-500">
+	  <div className="container mx-auto px-4 pb-32 pt-8">
           <div className="items-center flex flex-wrap">
             <div className="w-full md:w-5/12 ml-auto px-12 md:px-4">
               <div className="md:pr-12">
                 <div className="text-orange-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
                   <i className="fas fa-thumbs-up text-xl animate-ping"></i>
                 </div>
-                <h3 className="text-3xl font-semibold">
+                <h3 className="text-3xl font-semibold text-white">
                     Rejoignez-nous sur o1car.fr
                 </h3>
               </div>
@@ -328,7 +329,6 @@ export default function Index() {
           </div>
         </div>
 	  </section>
-      <PubContent2 />
 	  </main>
       <Footer />
     </>

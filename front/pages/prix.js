@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Link from "next/link";
-import Stripe from "stripe";
-import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import { parseCookies, setCookie } from "nookies";
 import useLoggedUser from 'service/hooks/useLoggedUser';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
@@ -13,40 +10,8 @@ import {classics, premiums, pubTransparents } from "helpers/constant";
 import CheckoutForm from "components/Cards/CardChekoutForm";
 import {Modal} from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
+import { loadStripe } from "@stripe/stripe-js";
 const stripePromise = loadStripe("pk_test_51HgmzIBjqnSC21bhUov33uWhuXhCFQBnwRcy1pfJgKmXv42GkV7vLZJ0uNR26SdEUomqGHDnGhCXvxn0MY6GjIg100F67arXkO");
-
-export const getServerSideProps = async ctx => {
-    const stripe = new Stripe("sk_test_51HgmzIBjqnSC21bhuUPX8DMnH1ynu6iKdvoVMhjUqKgdVqDGKmrBximAok0WD9ypSgk6b3uq1ZE1uqsEEoM4PKzP00iDeWHIKx");
-
-    let paymentIntent;
-
-    const { paymentIntentId } = await parseCookies(ctx);
-    console.log('paymentIntentId1: ', paymentIntent);
-    if (paymentIntentId) {
-        paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
-        console.log('paymentIntentId: ', paymentIntent);
-        return {
-            props: {
-                paymentIntent
-            }
-        };
-    }
-
-    paymentIntent = await stripe.paymentIntents.create({
-        amount: 1000,
-        currency: "eur",
-        receipt_email:"info@01car.fr"
-    });
-
-    setCookie(ctx, "paymentIntentId", paymentIntent.id);
-
-    return {
-        props: {
-            paymentIntent
-        }
-    };
-};
-
 
 const ModalPayment = ({ paymentIntent }) => (
     <Elements

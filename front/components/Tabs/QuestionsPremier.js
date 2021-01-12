@@ -3,63 +3,51 @@ import CardPriceVehicule from "components/Cards/CardPriceVehicule.js";
 import FileUpload from "components/Tabs/FileUpload.js";
 import NotificationDropdown from "components/Dropdowns/NotificationDropdown.js";
 import { Form, Field } from 'react-final-form';
+import {connect} from 'react-redux'
 import Link from "next/link";
 import ImageUpload from "components/Tabs/ImageUpload.js";
 import {
     OuiOptions,
     NonOptions,
-    prochaineEntretienOptions
+    prochaineEntretienOptions,
+    premuim_options
 } from 'helpers/constant';
 import * as formValidate from 'helpers/formValidate';
 import {Condition, Error} from 'helpers/formValidate';
-import useAnnonces from 'service/hooks/useAnnonces';
 
 
-const QuestionsPremier = ({dispatch, loading, car}) => {
+const QuestionsPremier = (props) => {
   const [openTab, setOpenTab] = React.useState(1);
   const [hasErrors, setHasErrors] = React.useState(true)
     const [isFirst,setIsFirst] = React.useState(true)
     const [editCar, setEditCar] = React.useState(false)
-    const sendPostQuestionsPremiumValues = car ? car : {
-        Under_warranty:'',
-        had_accident:'',
-        defects:'',
-        km_certificate:'',
-        technical_check_ok:'',
-        periodic_maintenance:'',
-        next_maintenance_under_5000km:'',
-        purchase_invoice:'',
-        gray_card:'',
-        maintenance_log:'',
-    }
-    const {
-        create,
-        modifyCar
-    } = useAnnonces();
-
     useEffect(() => {
-        if(car){
-            return setEditCar(true)
+        if (Error) {
+            return setHasErrors(true);
         }
-    }, [dispatch]);
+    }, [props]);
+    let options = {
+        under_warranty: props?.values?.under_warranty,
+        had_accident: props?.values?.had_accident,
+        defects: props?.values?.defects,
+        km_certificate: props?.values?.km_certificate,
+        technical_check_ok: props?.values?.technical_check_ok,
+        periodic_maintenance: props?.values?.periodic_maintenance,
+        next_maintenance_under_5000km: props?.values?.next_maintenance_under_5000km,
+        purchase_invoice: props?.values?.purchase_invoice,
+        gray_card: props?.values?.gray_card,
+        maintenance_log: props?.values?.maintenance_log,
+    }
 
-    //submit
-
-	const onSubmit = async (values)=>{
-        try {
-            if (car) {
-                await modifyCar(car?.id, values);
-            } else {
-                await create(values);
-            }
-            setIsFirst(false)
-
-        } catch (err) {
-            console.log(err);
-            setHasErrors(true)
-        }
-	  }
-
+    let under_warranty = options.premium
+    let had_accident = options.premium
+    let defects = options.premium
+    let km_certificate = options.premium
+    let technical_check_ok = options.premium
+    let periodic_maintenance = options.premium
+    let next_maintenance_under_5000km = options.premium
+    let gray_card = options.premium
+    let maintenance_log = options.premium
 
   return (
     <>
@@ -74,7 +62,7 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
                 className={
                   "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
                   (openTab === 1
-                    ? "text-white bg-orange-500"
+                    ? "text-white bg-blue-500"
                     : "text-gray-600 bg-white")
                 }
                 onClick={e => {
@@ -93,7 +81,7 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
                 className={
                   "text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
                   (openTab === 2
-                    ? "text-white bg-orange-500"
+                    ? "text-white bg-blue-500"
                     : "text-gray-600 bg-white")
                 }
                 onClick={e => {
@@ -110,11 +98,7 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
           </ul>
           <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
             <div className="px-4 py-5 flex-auto">
-				<Form
-					initialValues={sendPostQuestionsPremiumValues}
-					onSubmit={onSubmit}
-				    render={({ handleSubmit, form, submitting, values, invalid }) => (
-                            <form onSubmit={handleSubmit}>
+
                                 <div className="tab-content tab-space">
                                 <div className={openTab === 1 ? "block" : "hidden"} id="link1">
                                   <div className="flex flex-wrap">
@@ -123,13 +107,18 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
                                                 htmlFor="under_warranty"
                                           >
-                                              {editCar ? "Q11- le véhicule Est-il sous garantie?" : "* Q11- le véhicule Est-il sous garantie? :"}
+                                              Q11- le véhicule Est-il sous garantie?
                                           </label>
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                              <Field name="under_warranty" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                                  {OuiOptions.map(OuiOption => (
-                                                      <option value={OuiOption.value}>{OuiOption.label}</option>
-                                                  ))}
+                                              <Field
+                                                  name="option.premium[]"
+                                                  initialValue={options?.premium?.includes("under_warranty")}
+                                                  component="select"
+                                                  className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                                              >
+                                                  <option value=""> </option>
+                                                  <option value="Under_warranty">Oui</option>
+                                                  <option value="">Non</option>
                                               </Field>
                                               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
                                                   <i className="fas fa-angle-down text-2xl my-2"></i>
@@ -142,11 +131,10 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
                                                 htmlFor="had_accident"
                                           >
-                                              {editCar ? "Q12- Véhicule ayant déjà subit 1 Accident (même mineur) ?" : "* Q12- Véhicule ayant déjà subit 1 Accident (même mineur) ? :"}
-
+                                              Q12- Véhicule ayant déjà subit 1 Accident (même mineur) ?
                                           </label>
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                              <Field name="had_accident" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                              <Field name="had_accident" component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                   {NonOptions.map(NonOption => (
                                                       <option value={NonOption.value}>{NonOption.label}</option>
                                                   ))}
@@ -164,11 +152,10 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
                                                 htmlFor="defects"
                                              >
-                                                 {editCar ? "Q13- Le véhicule a t-il des défauts (griffes, coups, usures…) ?" : "* Q13- Le véhicule a t-il des défauts (griffes, coups, usures…) ? :"}
-
+                                                 Q13- Le véhicule a t-il des défauts (griffes, coups, usures…) ?
                                             </label>
                                             <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                                <Field name="defects" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <Field name="defects" component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                     {NonOptions.map(NonOption => (
                                                         <option value={NonOption.value}>{NonOption.label}</option>
                                                     ))}
@@ -188,11 +175,10 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
                                                 htmlFor="km_certificate"
                                               >
-                                                {editCar ? "Q14- Pouvez-vous justifier le parcours kilométrique ?" : "* Q14- Pouvez-vous justifier le parcours kilométrique ?"}
-
+                                                Q14- Pouvez-vous justifier le parcours kilométrique ?
                                              </label>
                                             <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                                <Field name="km_certificate" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                                <Field name="km_certificate" component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                     {OuiOptions.map(OuiOption => (
                                                         <option value={OuiOption.value}>{OuiOption.label}</option>
                                                     ))}
@@ -213,7 +199,7 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
 
                                           </label>
                                            <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                               <Field name="technical_check_ok" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                               <Field name="technical_check_ok" component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                    {OuiOptions.map(OuiOption => (
                                                        <option value={OuiOption.value}>{OuiOption.label}</option>
                                                    ))}
@@ -239,7 +225,7 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
                                             href="#link2"
                                             role="tablist"
                                           >
-                                            <i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>  3ème étape: 16 -20 questions
+                                            <i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>  16 -20 questions
                                         </a>
                                   </div>
 
@@ -251,11 +237,10 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
                                                 htmlFor="periodic_maintenance"
                                           >
-                                              {editCar ? "Q16- Respect des entretiens périodiques ?" : "* Q16- Respect des entretiens périodiques ?"}
-
+                                              Q16- Respect des entretiens périodiques ?
                                           </label>
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                              <Field name="periodic_maintenance" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                              <Field name="periodic_maintenance" component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                   {OuiOptions.map(OuiOption => (
                                                       <option value={OuiOption.value}>{OuiOption.label}</option>
                                                   ))}
@@ -271,11 +256,10 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
                                                 htmlFor="next_maintenance_under_5000km"
                                           >
-                                              {editCar ? " Q17- Prochain entretien ?" : " * Q17- Prochain entretien ?"}
-
+                                              Q17- Prochain entretien ?
                                           </label>
                                           <div className="relative flex w-full flex-wrap items-stretch mb-3">
-                                              <Field name="next_maintenance_under_5000km" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                              <Field name="next_maintenance_under_5000km" component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                   {prochaineEntretienOptions.map(prochaineEntretienOption => (
                                                       <option value={prochaineEntretienOption.value}>{prochaineEntretienOption.label}</option>
                                                   ))}
@@ -293,10 +277,10 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
                                                 htmlFor="purchase_invoice"
                                           >
-                                              {editCar ? " Q18- Facture d'achat?" : " * Q18- Facture d'achat ?"}
+                                              Q18- Facture d'achat ?
                                           </label>
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                              <Field name="purchase_invoice" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                              <Field name="purchase_invoice" component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                   {OuiOptions.map(OuiOption => (
                                                       <option value={OuiOption.value}>{OuiOption.label}</option>
                                                   ))}
@@ -316,11 +300,10 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
                                                 htmlFor="gray_card"
                                           >
-                                              {editCar ? "Q19- Carte Grise ?" : "* Q19- Carte Grise ?"}
-
+                                              Q19- Carte Grise ?
                                           </label>
                                            <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                               <Field name="gray_card" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                               <Field name="gray_card"  component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                    {OuiOptions.map(OuiOption => (
                                                        <option value={OuiOption.value}>{OuiOption.label}</option>
                                                    ))}
@@ -341,11 +324,10 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
                                                 className="block uppercase text-gray-700 text-md font-bold mb-2"
                                                 htmlFor="maintenance_log"
                                           >
-                                              {editCar ? "Q20- Possédez-vous le Carnet d’entretien?" : "* Q20- Possédez-vous le Carnet d’entretien ?"}
-
+                                              Q20- Possédez-vous le Carnet d’entretien ?
                                           </label>
                                           <div className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
-                                              <Field name="maintenance_log" validate={formValidate.required} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                                              <Field name="maintenance_log" component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                                   {OuiOptions.map(OuiOption => (
                                                       <option value={OuiOption.value}>{OuiOption.label}</option>
                                                   ))}
@@ -363,43 +345,41 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
                                     <div className="flex flex-wrap mt-12 px-4 align-center justify-center">
                                         {isFirst ? (
                                             <div className="finalBlock text-center">
-                                                {invalid ? (
+                                                {options ? (
+                                                        <div className="sendQuestions text-center">
+                                                            <button
+                                                                className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                                                type="submit"
+                                                            >
+                                                                <i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER
+                                                            </button>
+                                                            <p className="text-md leading-relaxed text-gray-500">
+                                                                Votre annonce
+                                                                sera pré-remplie à l’issue de ce questionnaire. Vous ACCEPTEZ
+                                                                les conditions pour publier votre annonce
+                                                                <Link href="/footer/policy">
+                                                                    <a
+                                                                        href="#"
+                                                                        className={
+                                                                            "text-sm font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
+                                                                        }
+                                                                    >
+                                                                        Lire la politique de confidentialité
+                                                                    </a>
+                                                                </Link>
+                                                            </p>
+                                                        </div>
+                                                ) : (
                                                     <div className="invalideQuestions text-center">
                                                         <button
                                                             className="bg-gray-600 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                                             type="submit"
-                                                            disabled={invalid}
                                                         >
                                                             <i className="fas fa-exclamation-circle text-base mr-1 animate-bounce"></i> Veuillez remplir tous les champs
 
                                                         </button>
                                                         <p className="text-md leading-relaxed text-gray-500">
                                                             Veuillez verifier les champs avec * pour repondre votre questionnaire
-                                                        </p>
-                                                    </div>
-                                                ) : (
-                                                    <div className="sendQuestions text-center">
-                                                        <button
-                                                            className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                                            type="submit"
-                                                            disabled={submitting}
-                                                        >
-                                                            <i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER
-                                                        </button>
-                                                        <p className="text-md leading-relaxed text-gray-500">
-                                                            Votre annonce
-                                                            sera pré-remplie à l’issue de ce questionnaire. Vous ACCEPTEZ
-                                                            les conditions pour publier votre annonce
-                                                            <Link href="/footer/policy">
-                                                                <a
-                                                                    href="#"
-                                                                    className={
-                                                                        "text-sm font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
-                                                                    }
-                                                                >
-                                                                    Lire la politique de confidentialité
-                                                                </a>
-                                                            </Link>
                                                         </p>
                                                     </div>
                                                   )
@@ -424,9 +404,7 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
                                    </div>
                                 </div>
                               </div>
-                        </form>
-                    )}
-				/>
+
             </div>
           </div>
         </div>
@@ -435,11 +413,10 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
   );
 }
 
-/*const mapStateToProps = (state) => ({
-  loading: state.response.loading,
-  response: state.response.response,
-  hasErrors: state.response.hasErrors,
+const mapStateToProps = (state) => ({
+    loading: state.carsReducer.loading,
+    car: state.carsReducer.selectedCar,
+    hasErrors: state.carsReducer.hasErrors,
 })
-export default connect(mapStateToProps)(QuestionsClassic)*/
+export default connect(mapStateToProps)(QuestionsPremier)
 
-export default QuestionsPremier
