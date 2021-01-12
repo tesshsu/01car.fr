@@ -35,7 +35,6 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 	const [isClickSubmit3, setisClickSubmit3] = React.useState(true)
 	const [hasErrors, setHasErrors] = React.useState(true);
 	const [editCar, setEditCar] = React.useState(false);
-	const [carPremium, setCarPremium] = React.useState(false);
 	const sendPostQuestionsvalues = {
 		id: car?.id,
 		brand: car?.brand,
@@ -83,7 +82,6 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 		other_option: car?.equipments?.other?.length > 0,
 	}
 
-	console.log("sendPostQuestionsvalues=", sendPostQuestionsvalues)
 	const {
 		isAuthentificated
 	} = useLoggedUser();
@@ -109,7 +107,6 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 
 	const onSubmit = async (values) => {
 		try {
-			console.log("sun=", car)
 			if (car && editCar == true ) {
 				await modifyCar(car?.id, values);
 				if(openTab === 1){
