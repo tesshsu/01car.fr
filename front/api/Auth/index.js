@@ -21,11 +21,11 @@ export function modify_password({ password }) {
 }
 
 export function signInWithFacebook(payload) {
-  return client.post('/api/auth/signInWithFacebook', payload)
+  return client.get('/api/auth/redirect/facebook', payload)
     .then(({ data }) => data);
 }
 
 export function signInWithGoogle(payload) {
-  return client.post('/api/auth/google', payload)
+  return client.get('/api/auth/redirect/google', payload)
     .then(({ data }) => data);
 }

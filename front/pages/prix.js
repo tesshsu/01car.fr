@@ -15,7 +15,7 @@ import {Modal} from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 const stripePromise = loadStripe("pk_test_51HgmzIBjqnSC21bhUov33uWhuXhCFQBnwRcy1pfJgKmXv42GkV7vLZJ0uNR26SdEUomqGHDnGhCXvxn0MY6GjIg100F67arXkO");
 
-export const getServerSideProps = async ctx => {
+export const prix = async ctx => {
     const stripe = new Stripe("sk_test_51HgmzIBjqnSC21bhuUPX8DMnH1ynu6iKdvoVMhjUqKgdVqDGKmrBximAok0WD9ypSgk6b3uq1ZE1uqsEEoM4PKzP00iDeWHIKx");
 
     let paymentIntent;

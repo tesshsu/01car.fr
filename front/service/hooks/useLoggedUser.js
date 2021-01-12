@@ -5,6 +5,8 @@ import * as LOGGED_USER_ACTIONS from '../actions/loggedUser';
 
 export default function useLoggedUser() {
   const loggedUser = useSelector(state => state.loggedUser);
+  const provider = useSelector(state => state.provider);
+  const url = useSelector(state => state.url);
 
   const dispatch = useDispatch();
 
@@ -17,18 +19,18 @@ export default function useLoggedUser() {
     payload => dispatch(LOGGED_USER_ACTIONS.register(payload)),
     [dispatch]
   );
-  
+
   const forgetPassword = useCallback(
     payload => dispatch(LOGGED_USER_ACTIONS.forget_password(payload)),
     [dispatch]
   );
-  
+
   const modifyPassword = useCallback(
     password => dispatch(LOGGED_USER_ACTIONS.modify_password(password)),
     [dispatch]
   );
-  
-  
+
+
   const updateLoggedUser = useCallback(
     payload => dispatch(LOGGED_USER_ACTIONS.updateUserInfo(payload)),
     [dispatch]
@@ -38,7 +40,7 @@ export default function useLoggedUser() {
     () => dispatch(LOGGED_USER_ACTIONS.signInUsingFacebook()),
     [dispatch]
   );
-  
+
   const signInUsingGoogle = useCallback(
     () => dispatch(LOGGED_USER_ACTIONS.signInUsingGoogle()),
     [dispatch]
@@ -48,16 +50,19 @@ export default function useLoggedUser() {
     () => dispatch(LOGGED_USER_ACTIONS.logout()),
     [dispatch]
   );
- 
-  
+
+
   return {
     isAuthentificated: loggedUser.isAuthentificated,
     loggedUser: loggedUser,
+    url: url,
+    provider: provider,
     login,
     register,
 	forgetPassword,
 	modifyPassword,
     signInUsingFacebook,
+    signInUsingGoogle,
     logout,
 	updateLoggedUser
   };

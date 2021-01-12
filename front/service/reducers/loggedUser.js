@@ -2,11 +2,16 @@ import * as LOGGED_USER_ACTIONS from '../actions/loggedUser';
 
 const initialState = {
   isAuthentificated: false,
-  loggedUser: null
+  loggedUser: null,
+  provider: null,
+  url: null,
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
+
+    case LOGGED_USER_ACTIONS.LOGIN_PROVIDER:
+      return { ...state, url: action.payload.url, provider: action.payload.provider};
     case LOGGED_USER_ACTIONS.LOGIN:
       return { ...state, isAuthentificated: true, loggedUser: { ...action.payload.user } };
     case LOGGED_USER_ACTIONS.LOGOUT:
