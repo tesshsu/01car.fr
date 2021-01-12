@@ -21,12 +21,8 @@ export default function Index() {
                   o1car, c'est quoi?
               </h1>
               <h1 className="font-bold text-4xl text-orange-700">
-                Sécuriser au maximum l'achat de votre véhicule.
+                  01car.fr est le 1er dite d'accompagnement sécurisé pour l'achat ou la vente de votre véhicule.
               </h1>
-              <p className="mt-4 text-lg leading-relaxed text-gray-500">
-                ACHETEZ FACILEMENT VOTRE VÉHICULE AVEC UN MINIMUM DE RISQUES.
-                1er SITE D’ACCOMPAGNEMENT AFIN DE SÉCURISER LA VENTE DE VÉHICULES.
-              </p>
               <div className="mt-4">
                 <button
                   className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"

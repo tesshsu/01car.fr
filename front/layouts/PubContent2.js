@@ -114,7 +114,7 @@ export default function PubContent2() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-								Trouvez votre vvéhicule de mieux grace l'indice de confiance
+								Vendez votre véhicule grâce a l'indice de confiance
 							</h4>
 						  </div>
 						</div>
