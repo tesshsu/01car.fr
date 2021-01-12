@@ -3,46 +3,62 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\User as UserResource;
 use App\Models\SocialAccount;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialController extends Controller
 {
     public function redirect($provider)
     {
-        return Socialite::driver($provider)->redirect();
+        $url = Socialite::driver($provider)->stateless()->redirect()->getTargetUrl();
+        return response()->json(['provider' => $provider,
+            'url' => $url
+            ],
+            200);
     }
 
     public function callback($provider)
     {
-        $getInfo = Socialite::driver($provider)->user();
+        $getInfo = Socialite::driver($provider)->stateless()->user();
         $user = $this->createUser($getInfo,$provider);
 
         auth()->login($user);
-        return redirect()->to('/home');
 
 
-        ///$user = Socialite::driver('github')->user();
+        $user = Auth::user();
 
-        // $user->token;
+        $user = User::find($user->id);
+        $answer['token'] = $user->createToken('MyApp')->accessToken;
+        $answer['user'] = new UserResource($user);
+        return response()->json($answer, 200);
 
     }
 
     function createUser($getInfo,$provider){
+        $user = User::where('email', $getInfo->email)->first();
 
-        $user = User::where('provider_id', $getInfo->id)->first();
         if (!$user) {
             $user = User::create([
-                'name'     => $getInfo->name,
-                'email'    => $getInfo->email,
-                'password' => $provider,
+                'name' => $getInfo->name,
+                'email' => $getInfo->email,
+                'password' => bcrypt(Str::random(20)),
             ]);
+        }
 
+        $socialAccount = SocialAccount::with('user')
+            ->where('user_id', $user->id)
+            ->where('provider', $provider)
+            ->where('provider_user_id', $getInfo->id)->first();
+
+        if (!$socialAccount) {
             $socialAccount = SocialAccount::create([
-                'user_id'     => $getInfo->name,
-                'provider_user_id'    => $getInfo->email,
-                'provider' => $provider,
+                'user_id'           => $user->id,
+                'provider_user_id'  => $getInfo->id,
+                'provider'          => bcrypt($provider)
             ]);
         }
         return $user;

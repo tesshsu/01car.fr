@@ -14,14 +14,15 @@ return [
     |
     */
     'facebook' => [
-        'client_id' => '662992494584898',
-        'client_secret' => '3d792115f30bb2e09b2d405a1c757680',
-        'redirect' => 'https://www.tutsmake.com/laravel-example/callback/facebook',
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => env('FACEBOOK_CLIENT_CALLBACK')
+
     ],
     'google' => [
-        'client_id' => 'xxxx',
-        'client_secret' => 'xxx',
-        'redirect' => 'https://www.tutsmake.com/laravel-example/callback/facebook',
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_CLIENT_CALLBACK')
     ],
 
     'mailgun' => [
