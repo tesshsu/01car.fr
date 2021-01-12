@@ -33,6 +33,9 @@ export default function PubContent() {
 		    <div className="container mx-auto px-4 pb-32 pt-16">
 			  <div className="items-center flex flex-wrap">
 				<div className="w-full md:w-5/12 ml-auto px-12 md:px-4">
+					<h1 className="font-bold text-4xl text-orange-700">
+						Avantages pour le vendeur
+					</h1>
 				  <div className="md:pr-12">
 					<h3 className="text-xl font-semibold">
 						Payez le questionnaire 20 pour obtenir une note de <span className="font-bold text-3xl text-orange-500">confiance MAXIMALE</span> et tous les <span className="font-bold text-3xl text-orange-500">AVANTAGES</span> pour vendre votre vehicule sur o1car.fr
