@@ -25,10 +25,12 @@ import {Modal} from "react-responsive-modal";
 import PubContentThreeIcons from "../../layouts/PubContentThreeIcons.js";
 import PubContentConnection from "../../layouts/PubContentConnection.js";
 import QuestionsPremier from "./QuestionsPremier";
+
 const QuestionsClassic = ({dispatch, loading, car}) => {
 	const [openTab, setOpenTab] = React.useState(1);
 	const [showModal, setShowModal] = React.useState(false);
 	const [isFirst, setIsFirst] = React.useState(true)
+	const [isClickSubmit, setisClickSubmit] = React.useState(false)
 	const [hasErrors, setHasErrors] = React.useState(true);
 	const [editCar, setEditCar] = React.useState(false);
 	const [carPremium, setCarPremium] = React.useState(false);
@@ -80,7 +82,6 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 	}
 
 	console.log("sendPostQuestionsvalues=", sendPostQuestionsvalues)
-	console.log("car=", car)
 	const {
 		isAuthentificated
 	} = useLoggedUser();
@@ -95,7 +96,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 		if (!isAuthentificated) {
 			return setShowModal(true);
 		}else if(isAuthentificated && car){
-			return setEditCar(true)
+			return setEditCar(true), setisClickSubmit(true)
 		}
 	}, [isAuthentificated]);
 
@@ -200,25 +201,25 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 							</a>
 						</li>
 						{editCar && (
-						<li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
-							<a
-								className={
-									"text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
-									(openTab === 5
-										? "text-white bg-orange-500"
-										: "text-gray-600 bg-white")
-								}
-								onClick={e => {
-									e.preventDefault();
-									setOpenTab(5);
-								}}
-								data-toggle="tab"
-								href="#link5"
-								role="tablist"
-							>
-								<i className="fas fa-book text-base mr-1"></i> Questions Premium
-							</a>
-						</li>
+							<li className="-mb-px mr-2 last:mr-0 flex-auto text-center">
+								<a
+									className={
+										"text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal " +
+										(openTab === 5
+											? "text-white bg-orange-500"
+											: "text-gray-600 bg-white")
+									}
+									onClick={e => {
+										e.preventDefault();
+										setOpenTab(5);
+									}}
+									data-toggle="tab"
+									href="#link5"
+									role="tablist"
+								>
+									<i className="fas fa-book text-base mr-1"></i> Questions Premium
+								</a>
+							</li>
 						)}
 					</ul>
 					{editCar && (
@@ -239,7 +240,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 							<Form
 								initialValues={sendPostQuestionsvalues}
 								onSubmit={onSubmit}
-								render={({handleSubmit, form, submitting, values, invalid}) => (
+								render={({handleSubmit, form, submitting, values, pristine, reset, invalid}) => (
 									<form onSubmit={handleSubmit}>
 										<div className="tab-content tab-space">
 											<div className={openTab === 1 ? "block" : "hidden"} id="link1">
@@ -361,19 +362,67 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 												</div>
 
 												<div className="flex flex-wrap mt-12 px-4 align-center justify-center">
-													<a
-														className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
-														onClick={e => {
-															e.preventDefault();
-															setOpenTab(2);
-														}}
-														data-toggle="tab"
-														href="#link2"
-														role="tablist"
-													>
-														<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i> QUESTIONS
-														: 1-5
-													</a>
+													{editCar ? (
+														<div className="finalBlock text-center">
+															{invalid && hasErrors ? (
+																<div className="sendQuestions text-center">
+																	<button
+																		className="bg-gray-600 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+																		type="submit"
+																		disabled={invalid}
+																	>
+																		<i className="fas fa-exclamation-circle text-base mr-1 animate-bounce"></i> Prenez
+																		soin de répondre à toutes les questions afin de
+																		valider votre annonce
+
+																	</button>
+																	<p className="text-md leading-relaxed text-gray-500">
+																		Veuillez vérifier les champs avec * afin de compléter le questionnaire
+																	</p>
+																</div>
+															):(
+																<div className="sendQuestions text-center">
+																	{isFirst ? (
+																		<button
+																			className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+																			type="submit"
+																			disabled={submitting}
+																		>
+																			<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER MODIFICATION
+																		</button>
+																		):(
+																		<a
+																			className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
+																			onClick={e => {
+																				e.preventDefault();
+																				setOpenTab(2);
+																			}}
+																			data-toggle="tab"
+																			href="#link2"
+																			role="tablist"
+																		>
+																			<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i> SUITE QUESTIONS
+																			: 1-5
+																		</a>
+																		)}
+																</div>
+																)}
+														</div>
+													):(
+														<a
+															className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
+															onClick={e => {
+																e.preventDefault();
+																setOpenTab(2);
+															}}
+															data-toggle="tab"
+															href="#link2"
+															role="tablist"
+														>
+															<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i> SUITE QUESTIONS
+															: 1-5
+														</a>
+													)}
 												</div>
 
 											</div>
@@ -511,19 +560,68 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 												</div>
 
 												<div className="flex flex-wrap mt-12 px-4 align-center justify-center">
-													<a
-														className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
-														onClick={e => {
-															e.preventDefault();
-															setOpenTab(3);
-														}}
-														data-toggle="tab"
-														href="#link3"
-														role="tablist"
-													>
-														<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i> QUESTIONS
-														: 6-10
-													</a>
+													{editCar ? (
+														<div className="finalBlock text-center">
+															{invalid && hasErrors ? (
+																<div className="sendQuestions text-center">
+																	<button
+																		className="bg-gray-600 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+																		type="submit"
+																		disabled={invalid}
+																	>
+																		<i className="fas fa-exclamation-circle text-base mr-1 animate-bounce"></i> Prenez
+																		soin de répondre à toutes les questions afin de
+																		valider votre annonce
+
+																	</button>
+																	<p className="text-md leading-relaxed text-gray-500">
+																		Veuillez vérifier les champs avec * afin de compléter le questionnaire
+																	</p>
+																</div>
+															):(
+																<div className="sendQuestions text-center">
+																		<button
+																			className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+																			type="submit"
+																			disabled={submitting}
+																		>
+																			<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER MODIFICATION
+																		</button>
+																	<p className="text-md leading-relaxed text-gray-500">
+																		Et continuer prochanine etap 6-10
+																	</p>
+																		<a
+																			className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
+																			onClick={e => {
+																				e.preventDefault();
+																				setOpenTab(3);
+																			}}
+																			data-toggle="tab"
+																			href="#link3"
+																			role="tablist"
+																		>
+																			<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i> SUITE QUESTIONS
+																			: 6-10
+																		</a>
+
+																</div>
+															)}
+														</div>
+													):(
+														<a
+															className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
+															onClick={e => {
+																e.preventDefault();
+																setOpenTab(3);
+															}}
+															data-toggle="tab"
+															href="#link3"
+															role="tablist"
+														>
+															<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i> SUITE QUESTIONS
+															: 6-10
+														</a>
+													)}
 												</div>
 											</div>
 
@@ -634,7 +732,6 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 												</div>
 
 												<div className="flex flex-wrap mt-6 px-4 align-center justify-center">
-													{isFirst ? (
 														<div className="finalBlock text-center">
 															{invalid && hasErrors ? (
 																<div className="sendQuestions text-center">
@@ -657,92 +754,76 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 																	<div className="w-full px-4">
 																		{editCar ? (
 																			<div className="w-full px-4">
-																				<p className="text-xl uppercase leading-relaxed font-bold text-gray-800">Bravo !
-																					Vous avez modifier à toutes les questions classic !! <i
-																						className="far fa-thumbs-up animate-ping"></i></p>
-																				<label
-																					className="block uppercase text-gray-700 text-md mb-2"
-																					htmlFor="suivePremium"
-																				>
-																					Souhaitiez vous continuer modifier le questionnaire premium ?
-																				</label>
-																				<div
-																					className="relative flex w-full flex-wrap items-stretch mb-3">
-																					<Field name="suivePremium"
-																						   component="select"
-																						   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-																						<option
-																							value=""> </option>
-																						<option
-																							value="Oui">Oui</option>
-																						<option
-																							value="Non">Non</option>
-																					</Field>
-																					<div
-																						className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-																						<i className="fas fa-angle-down text-2xl my-2"></i>
-																					</div>
-
-
-																					<Condition when="suivePremium" is="Oui">
-																						<div className="container mx-auto text-center">
-																						<a
-																							className="text-kl mt-4 bg-orange-500 text-white font-bold uppercase px-2 py-5 shadow-lg rounded block"
-																							onClick={e => {
-																								e.preventDefault();
-																								setOpenTab(5);
-																							}}
-																							data-toggle="tab"
-																							href="#link5"
-																							role="tablist"
-																						>
-																							<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
-																							Modifier Premium
-																						</a>
-																						</div>
-																					</Condition>
-
-																					<Condition when="suivePremium" is="Non">
-																						<div className="container mx-auto text-center">
-																							<button
-																								className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-																								type="submit"
-																								disabled={submitting}
-																							>
-																								<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER MODIFICATIONS
-																							</button>
-																						</div>
-																					</Condition>
-
-
-																				</div>
-
-																			</div>
-																		) : (
-																			<div className="w-full px-4">
 																				<button
 																					className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
 																					type="submit"
 																					disabled={submitting}
 																				>
-																					<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER
+																					<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER MODIFICATIONS
 																				</button>
-																				<p className="text-md leading-relaxed text-gray-500">
-																					Votre annonce
-																					sera pré-remplie à l’issue de ce questionnaire.
-																					Vous ACCEPTEZ
-																					les conditions pour publier votre annonce
-																					<Link href="/footer/policy">
-																						<a
-																							href="#"
-																							className={
-																								"text-sm font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
-																							}
+																				<a
+																					className="text-kl mt-4 bg-orange-500 text-white font-bold uppercase px-2 py-5 shadow-lg rounded block"
+																					onClick={e => {
+																						e.preventDefault();
+																						setOpenTab(5);
+																					}}
+																					data-toggle="tab"
+																					href="#link5"
+																					role="tablist"
+																				>
+																					<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
+																					Modifier Premium
+																				</a>
+																			</div>
+																		) : (
+																			<div className="w-full px-4">
+																			{isFirst ? (
+																				<div className="sendQuestions text-center">
+																						<button
+																							className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+																							type="submit"
+																							disabled={submitting}
 																						>
-																							Lire la politique de confidentialité
+																							<i className="fas fa-car-alt text-base mr-1 animate-bounce"></i> ENVOYER
+																						</button>
+																						<p className="text-md leading-relaxed text-gray-500">
+																							Votre annonce
+																							sera pré-remplie à l’issue de ce questionnaire.
+																							Vous ACCEPTEZ
+																							les conditions pour publier votre annonce
+																							<Link href="/footer/policy">
+																								<a
+																									href="#"
+																									className={
+																										"text-sm font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
+																									}
+																								>
+																									Lire la politique de confidentialité
+																								</a>
+																							</Link>
+																						</p>
+																					</div>
+																				):(
+																					<div className="finalStep text-center">
+																						<p className="text-xl leading-relaxed text-gray-800">Bravo !
+																							Vous avez répondu à toutes les questions !! <i
+																								className="far fa-thumbs-up animate-ping"></i></p>
+																						<a
+																							className="text-kl bg-orange-500 text-white font-bold uppercase px-4 py-5 shadow-lg rounded block leading-normal "
+																							onClick={e => {
+																								e.preventDefault();
+																								setOpenTab(4);
+																							}}
+																							data-toggle="tab"
+																							href="#link2"
+																							role="tablist"
+																						>
+																							<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
+																							ÉTAPE SUIVANTE : TÉLÉCHARGER VOS PHOTOS POUR PUBLIER
+																							VOTRE ANNONCE
 																						</a>
-																					</Link>
-																				</p>
+																					</div>
+																				)}
 																			</div>
 																		)}
 
@@ -750,28 +831,6 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 																</div>
 															)}
 														</div>
-													) : (
-														<div className="finalStep text-center">
-															{editCar ? (<p className="text-xl leading-relaxed text-gray-800">Vous pouvez continuer sur les questions premium !! </p>) : (
-																<p className="text-xl leading-relaxed text-gray-800">
-																	Bravo !
-																	Vous avez répondu à toutes les questions classic !!</p>
-															)}
-															<a
-																className="text-kl bg-orange-500 text-white font-bold uppercase px-2 py-5 shadow-lg rounded block leading-normal "
-																onClick={e => {
-																	e.preventDefault();
-																	setOpenTab(4);
-																}}
-																data-toggle="tab"
-																href="#link2"
-																role="tablist"
-															>
-																<i className="fas fa-arrow-right text-base mr-1 animate-bounce"></i>
-																ÉTAPE SUIVANTE
-															</a>
-														</div>
-													)}
 												</div>
 											</div>
 											<div className={openTab === 4 ? "block" : "hidden"} id="link4">
@@ -833,9 +892,9 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 
 												</div>
 											</div>
-											{editCar && car.length > 0 ? (
+											{editCar ? (
 												<div className={openTab === 5 ? "block" : "hidden"} id="link5">
-												  <QuestionsPremier values={values}  />
+													<QuestionsPremier values={values}  />
 												</div>
 											) : (null)}
 										</div>

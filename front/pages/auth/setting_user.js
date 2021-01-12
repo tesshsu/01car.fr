@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Form, Field } from 'react-final-form';
+import React, { useEffect } from "react";
+import { Field } from 'react-final-form';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import {fetchUser} from 'service/actions/user';
@@ -8,7 +8,6 @@ import Router from "next/router";
 import {connect} from 'react-redux';
 import LoadSaveReinitializeForm from 'helpers/LoadSaveReinitializeForm'
 import CardAcceptCondition from "components/Cards/CardAcceptCondition.js";
-import Notice from "components/Notices/Notice.js";
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
