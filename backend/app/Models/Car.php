@@ -4,7 +4,6 @@ namespace App\Models;
 
 use App\Constants\AvailablePeriod;
 use App\Constants\CarState;
-use App\Constants\EquipmentCategory;
 use App\Constants\Equipments\PremiumEquipment;
 use App\Constants\OwnerType;
 use App\Constants\SaleReason;
@@ -96,6 +95,11 @@ class Car extends Model
         return $this->hasMany(CarAttribute::class);
     }
 
+    public function premiumOptions(): hasOne
+    {
+        return $this->hasOne(CarPremiumOption::class);
+    }
+
     /**
      * The uploads that belong to the car.
      */
@@ -106,38 +110,37 @@ class Car extends Model
 
     public function getUploadPath(): string
     {
-        return  'files/u' . $this->user_id . '/c'  . $this->id . '/uploads/';
+        return 'files/u' . $this->user_id . '/c' . $this->id . '/uploads/';
     }
 
-    public static function calcConfidenceNote(Car $car){
+    public static function calcConfidenceNote(Car $car)
+    {
         $confidence_note = 0;
-        if(Str::of($car->licence_plate)->trim()->isNotEmpty()) $confidence_note++;
-        if($car->owner_type == OwnerType::PRIVATE ) $confidence_note++;
-        if($car->available == AvailablePeriod::IMMEDIATELY) $confidence_note++;
-        if(!$car->smoking) $confidence_note++;
-        if($car->duplicate_keys) $confidence_note++;
-        if(Arr::exists(SaleReason::list(), $car->sale_reason) ) $confidence_note++;
-        if($car->estimate_price  > 0) $confidence_note++;
-        if($car->hand_number == 1 || $car->hand_number == 2) $confidence_note++;
-        if($car->state == CarState::NEW) $confidence_note++;
-        if($car->country == 'FR') $confidence_note++;
+        if (Str::of($car->licence_plate)->trim()->isNotEmpty()) $confidence_note++;
+        if ($car->owner_type == OwnerType::PRIVATE) $confidence_note++;
+        if ($car->available == AvailablePeriod::IMMEDIATELY) $confidence_note++;
+        if (!$car->smoking) $confidence_note++;
+        if ($car->duplicate_keys) $confidence_note++;
+        if (Arr::exists(SaleReason::list(), $car->sale_reason)) $confidence_note++;
+        if ($car->estimate_price > 0) $confidence_note++;
+        if ($car->hand_number == 1 || $car->hand_number == 2) $confidence_note++;
+        if ($car->state == CarState::NEW) $confidence_note++;
+        if ($car->country == 'FR') $confidence_note++;
 
-        $attributes = $car->attributes()->getResults()->filter(function ($value, $key) {
-            return $value->category == EquipmentCategory::PREMIUM;
-        })->map(function ($item, $key) {
-                return $item->name;
-        })->all();
 
-        if( Arr::exists($attributes, PremiumEquipment::UNDER_WARRANTY)) $confidence_note++;
-        if( !Arr::exists($attributes, PremiumEquipment::HAD_ACCIDENT)) $confidence_note++;
-        if( !Arr::exists($attributes, PremiumEquipment::DEFECTS)) $confidence_note++;
-        if( Arr::exists($attributes, PremiumEquipment::KM_CERTIFICATE)) $confidence_note++;
-        if( Arr::exists($attributes, PremiumEquipment::TECHNICAL_CHECK_OK)) $confidence_note++;
-        if( Arr::exists($attributes, PremiumEquipment::PERIODIC_MAINTENANCE)) $confidence_note++;
-        if( Arr::exists($attributes, PremiumEquipment::NEXT_MAINTENANCE_UNDER_5000KM)) $confidence_note++;
-        if( Arr::exists($attributes, PremiumEquipment::PURCHASE_INVOICE)) $confidence_note++;
-        if( Arr::exists($attributes, PremiumEquipment::GRAY_CARD)) $confidence_note++;
-        if( Arr::exists($attributes, PremiumEquipment::MAINTENANCE_LOG)) $confidence_note++;
+        $premiumOptions = $car->premiumOptions()->getResults();
+        if($premiumOptions) {
+            if ($premiumOptions->under_warranty) $confidence_note++;
+            if (!$premiumOptions->accident) $confidence_note++;
+            if (!$premiumOptions->defects) $confidence_note++;
+            if ($premiumOptions->km_certificate) $confidence_note++;
+            if ($premiumOptions->technical_check_ok) $confidence_note++;
+            if ($premiumOptions->periodic_maintenance) $confidence_note++;
+            if ($premiumOptions->next_maintenance_under_5000km) $confidence_note++;
+            if ($premiumOptions->purchase_invoice) $confidence_note++;
+            if ($premiumOptions->gray_card) $confidence_note++;
+            if ($premiumOptions->maintenance_log) $confidence_note++;
+        }
 
         return $confidence_note;
     }

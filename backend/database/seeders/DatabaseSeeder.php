@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Car;
 use App\Models\CarAttribute;
+use App\Models\CarPremiumOption;
 use App\Models\Upload;
 use App\Models\User;
 use Database\Factories\UploadFactory;
@@ -26,6 +27,8 @@ class DatabaseSeeder extends Seeder
         User::factory(100)
             ->has(Car::factory()
                 ->has(CarAttribute::factory(rand(0, 15)), 'attributes')
+
+                ->has(CarPremiumOption::factory(1)->configure(), 'premiumOptions')
                 ->has(Upload::factory(rand(1, 4))->state(function (array $attributes, Car $car) {
                     $path = $car->getUploadPath();
 

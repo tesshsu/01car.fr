@@ -52,7 +52,7 @@ class CarController extends Controller
      */
     public function index(Request $request)
     {
-        $carsReq = Car::with('attributes', 'user', 'uploads');
+        $carsReq = Car::with('attributes', 'premiumOptions', 'user', 'uploads');
 
         if ($request->has('premium')) {
             $premium = $request->query('premium');
@@ -364,7 +364,7 @@ class CarController extends Controller
 
     private function renderJson($id): \Illuminate\Http\JsonResponse
     {
-        $car = Car::with('attributes', 'user', 'uploads')->find($id);
+        $car = Car::with('attributes', 'premiumOptions', 'user', 'uploads')->find($id);
         if ($car == NULL) {
             return response()->json(['error' => 'NotFound'], 404);
         }
