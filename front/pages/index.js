@@ -151,7 +151,7 @@ export default function Index() {
                     ></polygon>
                   </svg>
                   <h4 className="text-xl font-bold text-white">
-                    10 questions
+                      Répondez aux 10 Questions
                   </h4>
                   <p className="text-md font-light mt-2 text-white">
                     Note de confiance 10/20 max
@@ -159,7 +159,7 @@ export default function Index() {
 							  className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
 							  type="button"
 							>
-							  <i className="fas fa-arrow-alt-circle-right"></i> Vendre
+							  <i className="fas fa-arrow-alt-circle-right"></i> Cliquez ici
 					</button>
                   </p>
                 </blockquote>
@@ -187,7 +187,7 @@ export default function Index() {
 						</button>
 					</div>
                       <div className="w-full align-center text-white prixCompare">
-                          <span className="font-bold px-1 text-4xl text-right underline">6.99</span> €
+                          <span className="font-bold px-1 text-5xl text-right shadow-2xl-orange underline">6.99</span> €
                       </div>
 					<img
 					  alt="..."
@@ -212,7 +212,7 @@ export default function Index() {
 						></polygon>
 					  </svg>
 					  <h4 className="text-3xl font-bold text-orange-500">
-						20 questions :
+                          Répondez aux 20 Questions
 					  </h4>
 					  <span className="text-lg font-light mt-2 text-white mr-2">
 						Note de confiance 20/20 max
@@ -228,7 +228,7 @@ export default function Index() {
 											  "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
 											}
 										  >
-											<i className="fas fa-thumbs-up"></i> Vendez
+											<i className="fas fa-thumbs-up"></i> Cliquez ici
 										  </a>
 							</Link>
 						</button>
