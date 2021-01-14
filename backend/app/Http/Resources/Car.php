@@ -3,11 +3,11 @@
 namespace App\Http\Resources;
 
 use App\Constants\EquipmentCategory;
-use App\Http\Resources\User as UserResource;
+use App\Http\Resources\CarPremiumOption as CarPremiumOptionResource;
 use App\Http\Resources\Upload as UploadResource;
+use App\Http\Resources\User as UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;
-use phpDocumentor\Reflection\DocBlock\Tags\Formatter;
 
 class Car extends JsonResource
 {
@@ -22,10 +22,12 @@ class Car extends JsonResource
         $groupedEquipments = $this->whenLoaded('attributes')->groupBy('category');
         $equipments = collect(EquipmentCategory::list())
             ->flatMap(function ($item, $key) use ($groupedEquipments) {
-                return [  $item => $groupedEquipments->has( [$item]) ?
-                    $groupedEquipments[$item]->map(function ($equip) { return $equip->name;})->unique() : []
-            ];
-        });
+                return [$item => $groupedEquipments->has([$item]) ?
+                    $groupedEquipments[$item]->map(function ($equip) {
+                        return $equip->name;
+                    })->unique() : []
+                ];
+            });
 
         return [
             'id' => $this->id,
@@ -47,8 +49,8 @@ class Car extends JsonResource
             'power' => $this->power,
             'version' => $this->version,
             'km' => $this->km,
-            'dt_entry_service' =>  Carbon::parse($this->dt_entry_service)->toIso8601String(),
-            'dt_valuation' =>  Carbon::parse($this->dt_valuation)->toIso8601String(),
+            'dt_entry_service' => Carbon::parse($this->dt_entry_service)->toIso8601String(),
+            'dt_valuation' => Carbon::parse($this->dt_valuation)->toIso8601String(),
 
             'score_recognition' => $this->score_recognition,
             'score_valuation' => $this->score_valuation,
@@ -70,7 +72,7 @@ class Car extends JsonResource
             'country' => $this->country,
             'owner' => new UserResource($this->whenLoaded('user')),
             'equipments' => $equipments,
-            'premiumOptions' => $this->whenLoaded('premiumOptions'),
+            'premiumOptions' => new CarPremiumOptionResource($this->whenLoaded('premiumOptions')),
             'uploads' => UploadResource::collection($this->uploads),
         ];
     }

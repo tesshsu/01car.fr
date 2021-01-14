@@ -12,7 +12,7 @@ class CarPremiumOption extends Model
     public $timestamps = false;
     protected $table = 'car_premium_options';
 
-    protected $fillable = ['car_id',
+    protected $fillable = [
         'under_warranty',
         'accident',
         'defects',

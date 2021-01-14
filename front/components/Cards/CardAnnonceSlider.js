@@ -17,7 +17,7 @@ const CardAnnonceSlider = ({ dispatch,
 		  customPaging: function(i) {
 				return (
 				  <a>
-					<img src={ ENVS.DEV.API_URL + uploadFiles[i].url } />
+					<img src={ process.env.NEXT_PUBLIC_API_URL + uploadFiles[i].url } />
 				  </a>
 				);
 			},
@@ -44,7 +44,7 @@ const CardAnnonceSlider = ({ dispatch,
 			  ]
 		};
 
-    //const imgSrc = uploadFiles ? (ENVS.DEV.API_URL + uploadFile.url) : (require("assets/img/car/default.jpg"))
+    //const imgSrc = uploadFiles ? (process.env.NEXT_PUBLIC_API_URL + uploadFile.url) : (require("assets/img/car/default.jpg"))
 	//const imgAlt = uploadFiles ? uploadFile.name : "defalut carImg"
 	return (
         <>
@@ -53,7 +53,7 @@ const CardAnnonceSlider = ({ dispatch,
 					{
 						uploadFiles?.map(uploadFile => (
 							<div>
-								<img class="sliderImg" src={ENVS.DEV.API_URL + uploadFile.url} alt={uploadFile.name}/>
+								<img className="sliderImg" src={process.env.NEXT_PUBLIC_API_URL + uploadFile.url} alt={uploadFile.name}/>
 							</div>
 						))}
 				</Slider> ) : (

@@ -29,7 +29,7 @@ Authorization: Bearer {{token}}
   },
   "options":{
     "premium":[
-      "had_accident",
+      "accident",
       "technical_check_ok"
     ]
   }

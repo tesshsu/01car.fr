@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import DetailsBasic from "components/Dropdowns/AnnonceDetails/DetailsBasic.js";
 import DetailsSide from "components/Dropdowns/AnnonceDetails/DetailsSide.js";
 import DetailsDropdown from "components/Dropdowns/AnnonceDetails/DetailsDropdown.js";
-import DetailsPremiumDropdown from "components/Dropdowns/AnnonceDetails/DetailsPremiumDropdown.js";
+import DetailsPremiumDropdown from "../../components/Dropdowns/AnnonceDetails/DetailsPremiumDropdown.js";
 import CardAnnonceSlide from "components/Cards/CardAnnonceSlider.js";
 import FavorisButton from 'components/Favoris/FavorisButton';
 import ShareButton from 'components/Annonce/ShareButton';

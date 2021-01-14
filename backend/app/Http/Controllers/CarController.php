@@ -10,17 +10,16 @@ use App\Constants\Equipments\ComfortEquipment;
 use App\Constants\Equipments\InsideEquipment;
 use App\Constants\Equipments\OtherEquipment;
 use App\Constants\Equipments\OutsideEquipment;
-use App\Constants\Equipments\PremiumEquipment;
 use App\Constants\Equipments\SecurityEquipment;
 use App\Constants\OwnerType;
 use App\Constants\SaleReason;
 use App\Constants\TimeConstant;
 use App\Http\Resources\Car as CarResource;
-use App\Http\Resources\Cart as CartResource;
-use App\Http\Resources\Upload as UploadResource;
 use App\Http\Resources\CarPaginatorCollection;
+use App\Http\Resources\Upload as UploadResource;
 use App\Models\Car;
 use App\Models\CarAttribute;
+use App\Models\CarPremiumOption;
 use App\Models\Upload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -29,7 +28,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-use Ramsey\Uuid\Type\Time;
 
 class CarController extends Controller
 {
@@ -61,7 +59,7 @@ class CarController extends Controller
 
         if ($request->has('owner')) {
             $owner = Str::of($request->query('owner'))->trim();
-            if(!$owner->isEmpty()) {
+            if (!$owner->isEmpty()) {
                 $carsReq->where('user_id', $owner);
             }
         }
@@ -98,6 +96,7 @@ class CarController extends Controller
         $newCar->save();
 
         $this->updateAttributes($newCar, $reqCar);
+        $this->updatePremiumOptions($newCar, $reqCar);
 
         // Update cra note
         $newCar->confidence_note = Car::calcConfidenceNote($newCar);
@@ -136,7 +135,7 @@ class CarController extends Controller
 
         $currentUser = Auth::user();
         if (!$currentUser->canEditCar($car)
-           /* || ($currentUser->id == $car->user_id && !$car->premium)*/) {
+            /* || ($currentUser->id == $car->user_id && !$car->premium)*/) {
             return response()->json(['error' => 'Unauthorised'], 403);
         }
 
@@ -149,6 +148,8 @@ class CarController extends Controller
         // Update allowed fields
         $this->updateCarFields($car, $reqCar);
         $this->updateAttributes($car, $reqCar);
+        $this->updatePremiumOptions($car, $reqCar);
+
         $car->confidence_note = Car::calcConfidenceNote($car);
 
         $car->save();
@@ -220,7 +221,7 @@ class CarController extends Controller
         }
 
         $uploadedFileArr = $request->file('uploads');
-        if(!is_array($uploadedFileArr)){
+        if (!is_array($uploadedFileArr)) {
             $uploadedFileArr = array($uploadedFileArr);
         }
 
@@ -292,7 +293,16 @@ class CarController extends Controller
             'equipments.comfort' => ['array', Rule::in(ComfortEquipment::list())],
             'equipments.other' => ['array', Rule::in(OtherEquipment::list())],
             'equipments.security' => ['array', Rule::in(SecurityEquipment::list())],
-            'options.premium' => ['array', Rule::in(PremiumEquipment::list())],
+            'premiumOptions.under_warranty' => 'boolean',
+            'premiumOptions.accident' => 'boolean',
+            'premiumOptions.defects' => 'boolean',
+            'premiumOptions.km_certificate' => 'boolean',
+            'premiumOptions.technical_check_ok' => 'boolean',
+            'premiumOptions.periodic_maintenance' => 'boolean',
+            'premiumOptions.next_maintenance_under_5000km' => 'boolean',
+            'premiumOptions.purchase_invoice' => 'boolean',
+            'premiumOptions.gray_card' => 'boolean',
+            'premiumOptions.maintenance_log' => 'boolean'
         ],
             $messages = [
                 'required' => 'The :attribute field is required.',
@@ -306,15 +316,33 @@ class CarController extends Controller
     private function updateCarFields($car, $reqCar)
     {
         collect($car->getFillable())->each(function ($item, $key) use ($car, $reqCar) {
-             $car->{ $item }  = isset($reqCar->{ $item } ) ? $reqCar->{ $item } : $car->{ $item } ;
+            $car->{$item} = isset($reqCar->{$item}) ? $reqCar->{$item} : $car->{$item};
         });
 
         // Handle date format
-        $car->dt_entry_service  = isset($reqCar->dt_entry_service ) ? Carbon::parse($reqCar->dt_entry_service)->toDateTime() : $car->dt_entry_service ;
-        $car->dt_valuation  = isset($reqCar->dt_valuation ) ? Carbon::parse($reqCar->dt_valuation)->toDateTime() : $car->dt_valuation ;
+        $car->dt_entry_service = isset($reqCar->dt_entry_service) ? Carbon::parse($reqCar->dt_entry_service)->toDateTime() : $car->dt_entry_service;
+        $car->dt_valuation = isset($reqCar->dt_valuation) ? Carbon::parse($reqCar->dt_valuation)->toDateTime() : $car->dt_valuation;
     }
 
-    private function updateAttributes($car, $reqCar){
+    private function updatePremiumOptions($car, $reqCar)
+    {
+        if ($car->premium && !$car->premiumOptions && $reqCar->premiumOptions) {
+            $car->premiumOptions = new CarPremiumOption();
+            $car->premiumOptions->car_id = $car->id;
+        }
+        if ($car->premiumOptions && $reqCar->premiumOptions) {
+            collect($car->premiumOptions->getFillable())->each(function ($item, $key) use ($car, $reqCar) {
+                $car->premiumOptions->{$item} = isset(((object)$reqCar->premiumOptions)->{$item}) ?
+                    ((object)$reqCar->premiumOptions)->{$item} :
+                    $car->premiumOptions->{$item};
+            });
+
+            $car->premiumOptions->save();
+        }
+    }
+
+    private function updateAttributes($car, $reqCar)
+    {
         if (isset($reqCar->equipments)) {
             collect(EquipmentCategory::list())->each(function ($item, $key) use ($car, $reqCar) {
                 if (isset($reqCar->equipments[$item])) {

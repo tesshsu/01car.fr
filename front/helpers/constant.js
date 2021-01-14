@@ -37,8 +37,8 @@ export const furmeurOptions = [
 
 export const OuiOptions = [
     {note: 0, label: '', value: ''},
-    {note: 1, label: 'Oui', value: 1},
-    {note: 0, label: 'Non', value: 0}
+    {note: 1, label: 'Oui', value: true},
+    {note: 0, label: 'Non', value: false}
 ]
 
 export const NonOptions = [
@@ -193,7 +193,7 @@ export const premium_options_display_next_maintenance = (res) => {
 
 export const premuim_options = {
     "Under_warranty": "Sous garantie",
-    "had_accident": "Ayant déjà subit 1 accident",
+    "accident": "Ayant déjà subit 1 accident",
     "defects": "Des défauts griffes, coups, usures",
     "km_certificate": "Justifier le parcours kilometrique",
     "technical_check_ok": "Contrôle technique ok",
@@ -206,7 +206,7 @@ export const premuim_options = {
 
 export const premium_ncs = [
     {icon: "fas fa-file-contract", name: "Sous garantie", value: "under_warranty", displayFunction: premium_options_display_yes_no},
-    {icon: "fas fa-car-crash", name: "Ayant déjà subit 1 accident", value: "had_accident", displayFunction: premium_options_display_yes_no},
+    {icon: "fas fa-car-crash", name: "Ayant déjà subit 1 accident", value: "accident", displayFunction: premium_options_display_yes_no},
     {icon: "fas fa-heart-broken", name: "Des défauts griffes, coups, usures", value: "defects", displayFunction: premium_options_display_yes_no},
     {icon: "fas fa-file-medical-alt", name: "Justifier le parcours kilometrique", value: "km_certificate", displayFunction: premium_options_display_yes_no},
     {icon: "fas fa-calendar-check", name: "Contrôle technique ok", value: "technical_check_ok", displayFunction: premium_options_display_yes_no},
