@@ -64,18 +64,29 @@ export default function PubContent2() {
 						  <div className="w-full px-4 flex-1 rounded border border-solid border-gray-200 py-1 mr-4">
 							  <h4 className="text-xl block my-2 p-3 font-bold text-white">Classic</h4>
 							  <p className="px-3 flex items-start text-6xl leading-none tracking-tight font-medium text-gray-900"><span
-								  className="mt-2 mr-2 text-4xl">€</span><span>0
+								  className="mt-2 mr-2 text-4xl">€</span><span>0 euro
 							  </span></p>
 							  <hr className="mt-6 border-b-1 border-gray-400" />
-							  <h4 className="text-md block my-2 p-3 font-bold text-white">valide pour tous annonce classic, sans modifications, sans note de conficance</h4>
+							  <ul className="my-2 p-3 font-bold text-white">
+								  <li>- Annonce pré-rempli </li>
+								  <li>- Annonce gratuite </li>
+								  <li>- 10 photos gratuites </li>
+							  </ul>
 						  </div>
 						  <div className="w-full px-4 flex-1 rounded border border-solid border-gray-200 py-1 px-2">
 							  <h4 className="text-xl block my-2 p-3 font-bold text-white">Premium</h4>
 							  <p className="px-3 flex items-start text-6xl leading-none tracking-tight font-medium text-gray-900"><span
-								  className="mt-2 mr-2 text-4xl">€</span><span>6,99
+								  className="mt-2 mr-2 text-4xl">€</span><span>6,99 euro
 							  </span></p>
 							  <hr className="mt-6 border-b-1 border-gray-400" />
-							  <h4 className="text-md block my-2 p-3 font-bold text-white">valide part mois, par une annonce, avec modifications illimite durant un mois par un annonce</h4>
+							  <ul className="my-2 p-3 font-bold text-white">
+								  <li>- Rassurer l'acheteur grâce à notre questionnaire  </li>
+								  <li>- Tête de liste, grande visibilité  </li>
+								  <li>- Logo qualité garantie  </li>
+								  <li>- Modifier à tout moment le prix du véhicule - - Estimation du véhicule par des professionnels qualifiés   </li>
+								  <li>- 10 photos gratuites   </li>
+								  <li>- Vente rapide garantie  </li>
+							  </ul>
 						  </div>
 					  </div>
 					 <button
@@ -150,22 +161,26 @@ export default function PubContent2() {
 					</ul>
 					 <div className="avantagePosterPart flex flex-wrap">
 						 <div className="w-full px-4 flex-1 rounded border border-solid border-gray-200 py-1 mr-4">
-							 <h4 className="text-xl block my-2 p-3 font-bold text-white">Avec annonces Classic</h4>
-							 <p className="px-3 flex items-start text-6xl leading-none tracking-tight font-medium text-gray-900"><span
-								 className="mt-2 mr-2 text-4xl">Basic</span><span><i
-								 className="fas fa-clipboard-list"></i>
-							  </span></p>
+							 <h4 className="text-xl block my-2 p-3 font-bold text-white">On cherche et compare les meilleurs offres</h4>
 							 <hr className="mt-6 border-b-1 border-gray-400" />
-							 <h4 className="text-md block my-2 p-3 font-bold text-white">Trouve les offres minimux note de confiance</h4>
+							 <div className="mt-6 hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
+								 <img
+									 alt="..."
+									 className="align-middle border-none max-w-full h-auto rounded-lg"
+									 src={require("assets/img/landing.jpg")}
+								 />
+							 </div>
 						 </div>
 						 <div className="w-full px-4 flex-1 rounded border border-solid border-gray-200 py-1 px-2">
-							 <h4 className="text-xl block my-2 p-3 font-bold text-white">Avec annonces Premium</h4>
-							 <p className="px-3 flex items-start text-6xl leading-none tracking-tight font-medium text-gray-900"><span
-								 className="mt-2 mr-2 text-4xl">Top</span><span><i
-								 className="far fa-thumbs-up"></i>
-							  </span></p>
+							 <h4 className="text-xl block my-2 p-3 font-bold text-white">- Le meilleur véhicule est à vous ! C'est parti !!</h4>
 							 <hr className="mt-6 border-b-1 border-gray-400" />
-							 <h4 className="text-md block my-2 p-3 font-bold text-white">Trouve les offres avec maxima note de confiance, et le prix au marche avec notre analyse de donnes national</h4>
+							 <div className="mt-6 hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
+								 <img
+									 alt="..."
+									 className="align-middle border-none max-w-full h-auto rounded-lg"
+									 src={require("assets/img/profile.jpg")}
+								 />
+							 </div>
 						 </div>
 					 </div>
 					 <button
