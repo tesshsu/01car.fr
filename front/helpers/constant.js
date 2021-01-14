@@ -1,3 +1,40 @@
+//user info
+export const departementOptions = [
+    {label: '01 Ain', value: '01 Ain'},
+    {label: '03 Allier', value: '03 Allier'},
+    {label: '04 Alpes-de-Haute-Provence', value: '04 Alpes-de-Haute-Provence'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+    {label: '06 Alpes-Maritimes', value: '06 Alpes-Maritimes'},
+    {label: '07 Ardèche', value: '07 Ardèche'},
+    {label: '08 Ardennes', value: '08 Ardennes'},
+    {label: '09 Ariège', value: '09 Ariège'},
+    {label: '10 Aubes', value: '10 Aube'},
+    {label: '11 Aude', value: '11 Aude'},
+    {label: '12 Aveyron', value: '12 Aveyron'},
+    {label: '13 Bouches-du-Rhône', value: '13 Bouches-du-Rhône'},
+    {label: '14 Calvados', value: '14 Calvados'},
+    {label: '15 Cantal', value: '15 Cantal'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+    {label: '05 Hautes-Alpes', value: '05 Hautes-Alpes'},
+
+
+];
 //page questions part
 
 export const mapToObject= function(m){

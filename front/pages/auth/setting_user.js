@@ -8,7 +8,9 @@ import Router from "next/router";
 import {connect} from 'react-redux';
 import LoadSaveReinitializeForm from 'helpers/LoadSaveReinitializeForm'
 import CardAcceptCondition from "components/Cards/CardAcceptCondition.js";
-
+import {
+	departementOptions
+} from 'helpers/constant';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 
@@ -17,7 +19,8 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 	let record = {
 		  phone: user.phone,
 		  name: user.name,
-		  email: user.email
+		  email: user.email,
+		  departement: user.departement
 	 }
 
 	const load = async () => {
@@ -34,11 +37,12 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 	}
 
 	const postLoadFormat = values => {
-	  const { name, email, phone } = values
+	  const { name, email, phone, departement } = values
 	  return {
 		name,
 		email,
-		phone: phone
+		phone: phone,
+		  departement: departement,
 	  }
 	}
 
@@ -47,7 +51,8 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 		...originalValues,
 		name: values.name,
 		email: values.email,
-		phone: values.phone
+		phone: values.phone,
+		  departement: values.departement
 	  }
 	}
     //submit to patch profil API
@@ -163,6 +168,24 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 							  disabled={submitting}
 							/>
 						   </div>
+							<div className="relative w-full mb-3">
+								<label
+									className="block uppercase text-gray-700 text-xs font-bold mb-2"
+									htmlFor="departement"
+								>
+									Votre département :
+								</label>
+								<Field
+									className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+									name="departement"
+									component="select"
+									disabled={submitting}
+								>
+								{departementOptions.map(departementOption => (
+									<option value={departementOption.value}>{departementOption.label}</option>
+								))}
+								</Field>
+							</div>
                           <CardAcceptCondition />
 						  <div className="text-center mt-6">
 							<button
