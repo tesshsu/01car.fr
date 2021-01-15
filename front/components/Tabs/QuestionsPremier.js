@@ -25,11 +25,6 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
         modifyCar
     } = useAnnonces();
 
-    useEffect(() => {
-        if (car) {
-            return setisClickFianlSubmit(true)
-        }
-    }, [dispatch]);
 
     //submit
     const onSubmit = async (values) => {
@@ -51,7 +46,7 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
             await modifyCar(car?.id, values);
             if (openTab === 1) {
                 setIsFirst(false)
-            } else (
+            } else if(openTab === 2) (
                 setisClickFianlSubmit(false)
             )
         } catch (err) {
@@ -451,8 +446,6 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
                                                 <div className="flex flex-wrap mt-12 px-4 align-center justify-center">
                                                     {isClickFianlSubmit ? (
                                                         <div className="finalStep text-center">
-                                                            <Link
-                                                                href={car?.id ? (`/annonce?id=${car?.id}`) : ("#")} {...car}>
                                                                 <button
                                                                     className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                                                                     type="submit"
@@ -461,7 +454,6 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
                                                                     <i className="fas fa-paper-plane text-base mr-1 animate-bounce"></i> Modifer
                                                                     Premium
                                                                 </button>
-                                                            </Link>
                                                         </div>
                                                     ) : (
                                                         <div className="finalStep text-center">
@@ -479,8 +471,8 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
                                                                 </button>
                                                             </Link>
                                                         </div>
-                                                    )
-                                                    }
+                                                    )}
+
                                                 </div>
                                             </div>
                                         </div>
