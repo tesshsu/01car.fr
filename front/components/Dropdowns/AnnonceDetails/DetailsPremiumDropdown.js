@@ -24,7 +24,7 @@ const DetailsPremiumDropdown = ({
   };
 
   const carHasOption = (premium_opt) => {
-      return premium_options_display(premium_opt, car?.options?.prenium?.includes(premium_opt.value));
+      return premium_options_display(premium_opt, car?.premiumOptions[premium_opt?.value]);
     }
 
   return (

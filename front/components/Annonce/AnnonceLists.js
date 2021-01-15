@@ -59,7 +59,7 @@ const AnnonceLists = ({ loading,
 						{car.uploads.length > 0 ? (
 							<img
 								alt={car?.uploads[0].name}
-								src={ENVS.DEV.API_URL + car?.uploads[0].url}
+								src={process.env.NEXT_PUBLIC_API_URL + car?.uploads[0].url}
 								className="carImageSingle shadow-lg mx-auto rounded-lg"
 							  />
 							  ) : (
@@ -113,7 +113,7 @@ const AnnonceLists = ({ loading,
 					{car.uploads.length > 0 ? (
 						<img
 							alt={car?.uploads[0].name}
-							src={ENVS.DEV.API_URL + car?.uploads[0].url}
+							src={process.env.NEXT_PUBLIC_API_URL + car?.uploads[0].url}
 							className="carImageSingle shadow-lg mx-auto rounded-lg"
 						  />
 						  ) : (

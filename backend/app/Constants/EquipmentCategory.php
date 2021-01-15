@@ -17,7 +17,6 @@ abstract class EquipmentCategory
     const ANTI_THEFT = 'anti_theft';
     const COMFORT = 'comfort';
     const OTHER = 'other';
-    const PREMIUM = 'premium';
     const SECURITY = 'security';
 
     public static $available_category_list = array(
@@ -26,7 +25,6 @@ abstract class EquipmentCategory
         self::ANTI_THEFT,
         self::COMFORT,
         self::OTHER,
-        self::PREMIUM,
         self::SECURITY,
     );
 
@@ -48,8 +46,6 @@ abstract class EquipmentCategory
                 return OtherEquipment::list();
             case self::OUTSIDE:
                 return OutsideEquipment::list();
-            case self::PREMIUM:
-                return PremiumEquipment::list();
             case self::SECURITY:
                 return SecurityEquipment::list();
             default:

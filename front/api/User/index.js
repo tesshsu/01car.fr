@@ -1,8 +1,8 @@
 import client from '../client';
 
-export function getUser(id) {
+export function getUser() {
   return client
-    .get(`/api/v1/profil/${id}`)
+    .get(`/api/v1/profil`)
     .then(({ data }) => data);
 }
 

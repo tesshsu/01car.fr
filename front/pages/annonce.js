@@ -2,7 +2,7 @@ import React from "react";
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
-import AnnonceDetail from "components/Annonce/AnnonceDetail.js";
+import AnnonceDetail from "../components/Annonce/AnnonceDetail.js";
 import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
 import {connect} from "react-redux";
 
