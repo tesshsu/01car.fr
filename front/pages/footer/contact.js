@@ -26,7 +26,7 @@ export default function Contact() {
             <IndexNavbar fixed />
             <main className="contact-page">
                 <section className="relative block py-24 lg:pt-0 bg-gray-900">
-                    <div className="container mx-auto px-4 pt-20">
+                    <div className="contactContent container mx-auto px-4 pt-32">
                         <div className="contactForm flex flex-wrap justify-center mt-32">
                             <div className="w-full lg:w-6/12 px-4">
                                     <div className="relative">
