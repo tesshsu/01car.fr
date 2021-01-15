@@ -1,6 +1,5 @@
 import * as API from '../../api';
 import * as LOADING_OVERLAY_ACTIONS from './loadingOverlay';
-import { useCallback } from 'react';
 
 export const LOGIN_PROVIDER = 'loggedUser/LOGIN_PROVIDER';
 export const LOGIN = 'loggedUser/LOGIN';
@@ -8,12 +7,19 @@ export const LOGOUT = 'loggedUser/LOGOUT';
 export const UPDATE = 'loggedUser/UPDATE';
 export const FETCH = 'loggedUser/FETCH';
 
+export const GET_USER_SUCCESS = 'loggedUser/GET_USER_SUCCESS';
 
-export function login({ email, password }) {
+export const getUserSuccess = (user) => ({
+  type: GET_USER_SUCCESS,
+  payload: user,
+})
+
+
+export function login({email, password}) {
   return async (dispatch) => {
     dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Connexion...'));
     try {
-      const { token, user } = await API.Auth.login({ email, password });
+      const {token, user} = await API.Auth.login({email, password});
       await localStorage.setItem('ACCESS_TOKEN', token);
       dispatch({
         type: LOGIN,
@@ -22,7 +28,7 @@ export function login({ email, password }) {
         }
       });
     } catch (err) {
-      await dispatch({ type: LOGOUT });
+      await dispatch({type: LOGOUT});
       throw err;
     } finally {
       dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
@@ -30,11 +36,11 @@ export function login({ email, password }) {
   };
 }
 
-export function forget_password({ email }) {
+export function forget_password({email}) {
   return async (dispatch) => {
     dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Sending...'));
     try {
-      await API.Auth.forget_password({ email });
+      await API.Auth.forget_password({email});
       await dispatch(fetch());
     } catch (err) {
       throw err;
@@ -44,11 +50,11 @@ export function forget_password({ email }) {
   };
 }
 
-export function modify_password( password ) {
+export function modify_password(password) {
   return async (dispatch) => {
     dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Sending...'));
     try {
-      await API.Auth.modify_password({ password });
+      await API.Auth.modify_password({password});
       await dispatch(fetch());
     } catch (err) {
       throw err;
@@ -63,17 +69,17 @@ export function register(payload) {
     dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Création du compte...'));
 
     try {
-		const {
-			  token, user
-		} = await API.Auth.register(payload);
+      const {
+        token, user
+      } = await API.Auth.register(payload);
 
-		await localStorage.setItem('ACCESS_TOKEN', token);
-		dispatch({
-          type: LOGIN,
-          payload: {
-            user
-          }
-        });
+      await localStorage.setItem('ACCESS_TOKEN', token);
+      dispatch({
+        type: LOGIN,
+        payload: {
+          user
+        }
+      });
 
     } catch (err) {
       throw err;
@@ -89,7 +95,7 @@ export function signInUsingFacebook() {
 
     try {
 
-      const { provider, url } = await API.Auth.signInWithFacebook();
+      const {provider, url} = await API.Auth.signInWithFacebook();
       dispatch({
         type: LOGIN_PROVIDER,
         payload: {
@@ -99,7 +105,7 @@ export function signInUsingFacebook() {
       });
 
     } catch (err) {
-      console.warn('Connexion error',err);
+      console.warn('Connexion error', err);
       throw err;
     } finally {
       dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
@@ -112,7 +118,7 @@ export function signInUsingGoogle() {
     dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Connexion a Google...'));
 
     try {
-      const { provider, url } = await API.Auth.signInWithGoogle();
+      const {provider, url} = await API.Auth.signInWithGoogle();
       dispatch({
         type: LOGIN_PROVIDER,
         payload: {
@@ -121,28 +127,44 @@ export function signInUsingGoogle() {
         }
       });
     } catch (err) {
-      console.warn('Connexion error',err);
+      console.warn('Connexion error', err);
       throw err;
     } finally {
       dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
     }
   };
 }
+
 export function logout(id) {
   return async (dispatch, getState) => {
     await localStorage.removeItem('ACCESS_TOKEN');
-    await dispatch({ type: LOGOUT });
+    await dispatch({type: LOGOUT});
     localStorage.clear();
   };
 }
 
+
+// Combine them all in an asynchronous thunk
+export function authenticated(token) {
+  return async (dispatch) => {
+    try {
+      await localStorage.setItem('ACCESS_TOKEN', token);
+      const response = await API.User.getUser();
+      dispatch(getUserSuccess(response))
+     // await fetchUser();
+    } catch (err) {
+      console.warn(err);
+      throw err;
+    }
+  }
+}
+
 export function updateUserInfo(payload) {
-   return async (dispatch, getState) => {
-    const { loggedUser } = getState().loggedUser;
+  return async (dispatch, getState) => {
+    const {loggedUser} = getState().loggedUser;
 
     try {
       const user = await API.User.updateProfil(loggedUser.id, payload);
-      console.log(user);
       dispatch(update(user));
     } catch (err) {
       console.warn(err);

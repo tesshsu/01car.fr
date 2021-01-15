@@ -1,24 +1,28 @@
-import React from "react";
+import React, {useEffect} from "react";
 import useLoggedUser from '../service/hooks/useLoggedUser';
 import {useRouter} from "next/router";
+import {connect} from "react-redux";
 
-export default function FacebookConnectButton() {
+const FacebookConnectButton = ({
+                         dispatch,
+                                 url
+                       }) => {
   const router = useRouter();
   const {
     signInUsingFacebook,
+    isAuthentificated,
     loggedUser
   } = useLoggedUser();
+
+  useEffect(() => {
+    if (url) {
+      window.location = url;
+    }
+  }, [dispatch, isAuthentificated, loggedUser]);
 
   async function facebookConnect() {
     try {
       await signInUsingFacebook();
-
-      console.log("loggedUser=", loggedUser);
-      if (loggedUser?.url) {
-        window.location = loggedUser.url;
-      }
-      //router.push();
-
     } catch (err) {
       alert(
           'Connexion error',
@@ -37,4 +41,11 @@ export default function FacebookConnectButton() {
       </button>
   );
 }
+
+
+const mapStateToProps = (state) => ({
+  url: state.loggedUser.url,
+})
+
+export default connect(mapStateToProps)(FacebookConnectButton)
 

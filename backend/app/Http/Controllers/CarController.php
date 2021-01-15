@@ -19,7 +19,6 @@ use App\Http\Resources\CarPaginatorCollection;
 use App\Http\Resources\Upload as UploadResource;
 use App\Models\Car;
 use App\Models\CarAttribute;
-use App\Models\CarPremiumOption;
 use App\Models\Upload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -174,10 +173,11 @@ class CarController extends Controller
         if ($currentUser->id != $car->user_id || !$currentUser->isAdminUser()) {
             return response()->json(['error' => 'Unauthorised'], 403);
         }
-
         $car->attributes->each(function ($item, $key) {
             $item->delete();
         });
+
+        $car->premiumOptions()->delete();
 
         $car->uploads->each(function ($upload, $key) use ($car) {
             Storage::disk('public')->delete(
@@ -324,20 +324,22 @@ class CarController extends Controller
         $car->dt_valuation = isset($reqCar->dt_valuation) ? Carbon::parse($reqCar->dt_valuation)->toDateTime() : $car->dt_valuation;
     }
 
-    private function updatePremiumOptions($car, $reqCar)
+    private function updatePremiumOptions(Car $car, $reqCar)
     {
-        if ($car->premium && !$car->premiumOptions && $reqCar->premiumOptions) {
-            $car->premiumOptions = new CarPremiumOption();
-            $car->premiumOptions->car_id = $car->id;
-        }
-        if ($car->premiumOptions && $reqCar->premiumOptions) {
-            collect($car->premiumOptions->getFillable())->each(function ($item, $key) use ($car, $reqCar) {
-                $car->premiumOptions->{$item} = isset(((object)$reqCar->premiumOptions)->{$item}) ?
-                    ((object)$reqCar->premiumOptions)->{$item} :
-                    $car->premiumOptions->{$item};
-            });
+        if ($car->premium && isset($reqCar->premiumOptions)) {
+            $premiumOptions = $car->premiumOptions()->firstOrNew(
+                ['car_id' => $car->id],
+            );
 
-            $car->premiumOptions->save();
+            if ($premiumOptions && $reqCar->premiumOptions) {
+                collect($premiumOptions->getFillable())->each(function ($item, $key) use ($premiumOptions, $reqCar) {
+                    $premiumOptions->{$item} = isset(((object)$reqCar->premiumOptions)->{$item}) ?
+                        ((object)$reqCar->premiumOptions)->{$item} :
+                        $premiumOptions->{$item};
+                });
+
+                $premiumOptions->save();
+            }
         }
     }
 
