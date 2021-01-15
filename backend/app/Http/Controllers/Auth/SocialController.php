@@ -35,10 +35,8 @@ class SocialController extends Controller
         $answer['token'] = $user->createToken('MyApp')->accessToken;
         $answer['user'] = new UserResource($user);
 
-        $url = "http://localhost:3011/auth/authenticated?token=" . $answer['token'];
+        $url = env('01CAR_FRONT_LOGIN_CALLBACK')  . "?token=" . $answer['token'];
         return response()->redirectTo($url);
-
-   //     return response()->json($answer, 200);
     }
 
     function createUser($getInfo,$provider){
