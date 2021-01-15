@@ -9,13 +9,13 @@ export default function PubContentConnection() {
 		    <div className="container mx-auto px-4 pb-32">
 			  <div className="items-center flex flex-wrap">
 			    <p className="mt-2 text-xl">
-					La Connexion vous permet de déposer et gérer vos annonces. Un accès de paiement en sécurisé. Ajouter les annonces aux favoris qui vous intéressent
+					La Connexion vous permet de déposer et et gérer vos annonces. Le paiement est sécurisé. Vos annonces préférées sont stockées dans la rubrique favoris.
 				</p>
 
 				<div className="w-full md:w-6/12 ml-auto px-12 md:px-4">
 				  <div className="md:pr-12">
 					<p className="text-md leading-relaxed text-white">
-					 Vendez votre véhicule  à un particulier en toute transparence
+						Vendez votre véhicule en toute transparence
 					</p>
 					<ul className="list-none mt-6">
 					  <li className="py-2">
@@ -55,7 +55,7 @@ export default function PubContentConnection() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-								Prise de contact facile avec le vendeur
+								Prise de contact rapide avec l'acheteur
 							</h4>
 						  </div>
 						</div>
@@ -67,7 +67,7 @@ export default function PubContentConnection() {
 				<div className="w-full md:w-6/12 mr-auto px-4 pt-24 md:pt-0 mt-4">
 				 <div className="md:pr-12">
 					<p className="mt-4 text-md leading-relaxed text-white">
-						Achetez  un véhicule à un particulier avec un minimum de risques.
+						Achetez un véhicule avec un minimum de risques
 					</p>
 					<ul className="list-none mt-6">
 					  <li className="py-2">
@@ -107,7 +107,7 @@ export default function PubContentConnection() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-								contact rapide avec le vendeur immédiatement
+								Prise de contact rapide avec le vendeur
 							</h4>
 						  </div>
 						</div>

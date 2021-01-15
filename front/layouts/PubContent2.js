@@ -54,7 +54,7 @@ export default function PubContent2() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-								2 formules aux choix:
+								2 formules au choix :
 							</h4>
 						  </div>
 						</div>
@@ -62,13 +62,13 @@ export default function PubContent2() {
 					</ul>
 					  <div className="avantagePosterPart flex flex-wrap">
 						  <div className="w-full px-4 flex-1 rounded border border-solid border-gray-200 py-1 mr-4">
-							  <h4 className="text-xl block my-2 p-3 font-bold text-white">Classic</h4>
+							  <h4 className="text-xl block my-2 p-3 font-bold text-white">Basic</h4>
 							  <p className="px-3 flex items-start text-6xl leading-none tracking-tight font-medium text-gray-900"><span
 								  className="mt-2 mr-2 text-4xl">€</span><span>0 euro
 							  </span></p>
 							  <hr className="mt-6 border-b-1 border-gray-400" />
 							  <ul className="my-2 p-3 font-bold text-white">
-								  <li>- Annonce pré-rempli </li>
+								  <li>- Annonce pré-remplie </li>
 								  <li>- Annonce gratuite </li>
 								  <li>- 10 photos gratuites </li>
 							  </ul>
@@ -78,6 +78,7 @@ export default function PubContent2() {
 							  <p className="px-3 flex items-start text-6xl leading-none tracking-tight font-medium text-gray-900"><span
 								  className="mt-2 mr-2 text-4xl">€</span><span>6,99 euro
 							  </span></p>
+							  <p className="mt-2 mr-2 text-xl text-center">par annonce/mois</p>
 							  <hr className="mt-6 border-b-1 border-gray-400" />
 							  <ul className="my-2 p-3 font-bold text-white">
 								  <li>- Rassurer l'acheteur grâce à notre questionnaire  </li>
@@ -125,7 +126,7 @@ export default function PubContent2() {
 						  </div>
 						  <div>
 							<h4 className="text-gray-800">
-								Vendez votre véhicule grâce a l'indice de confiance
+								Vendez votre véhicule grâce à l'indice de confiance
 							</h4>
 						  </div>
 						</div>
@@ -161,7 +162,7 @@ export default function PubContent2() {
 					</ul>
 					 <div className="avantagePosterPart flex flex-wrap">
 						 <div className="w-full px-4 flex-1 rounded border border-solid border-gray-200 py-1 mr-4">
-							 <h4 className="text-xl block my-2 p-3 font-bold text-white">On cherche et compare les meilleurs offres</h4>
+							 <h4 className="text-xl block my-2 p-3 font-bold text-white">On cherche et compare les meilleures offres</h4>
 							 <hr className="mt-6 border-b-1 border-gray-400" />
 							 <div className="mt-6 hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
 								 <img

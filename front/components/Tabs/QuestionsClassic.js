@@ -135,8 +135,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 				{showModal ? (
 					<>
 						<Modal closeOnEsc={false} open={open} onClose={() => setShowModal(true)}>
-							<h2 className="text-2xl font-semibold text-center">Connectez-vous pour accéder au
-								questionnaire de confiance</h2>
+							<h2 className="text-2xl font-semibold text-center">Créez votre compte personnel pour accéder au questionnaire de confiance </h2>
 							<PubContentThreeIcons/>
 							<PubContentConnection/>
 						</Modal>
