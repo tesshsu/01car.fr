@@ -3,9 +3,9 @@ import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import { Form, Field } from 'react-final-form';
 import CardAcceptCondition from "components/Cards/CardAcceptCondition.js";
+import{ emailjs, init } from 'emailjs-com';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const required = value => (value ? undefined : 'Champs obligatoires')
-const mustBeNumber = value => (isNaN(value) ? 'Must be a number' : undefined)
 const composeValidators = (...validators) => value =>
   validators.reduce((error, validator) => error || validator(value), undefined)
 const onSubmit = async values => {
@@ -13,8 +13,17 @@ const onSubmit = async values => {
   window.alert(JSON.stringify(values, 0, 2))
 }
 
-
+init("user_lGeJ5l257EdFgoGRMiuiz");
 export default function Contact() {
+    const onSubmit = async (e) => {
+        //e.preventDefault();
+        emailjs.sendForm('service_zf331yg', 'template_he9yqcz', e.target, 'user_lGeJ5l257EdFgoGRMiuiz')
+            .then((result) => {
+                window.location.reload()  //This is if you still want the page to reload (since e.preventDefault() cancelled that behavior)
+            }, (error) => {
+                console.log(error.text);
+            });
+    }
   return (
     <>
       <IndexNavbar fixed />
@@ -22,8 +31,8 @@ export default function Contact() {
         <section className="relative block h-screen contact-section">
           <div
             className="w-full h-full bg-center bg-gray-900"
-          >			
-          </div>          
+          >
+          </div>
         </section>
         <section className="relative block py-24 lg:pt-0 bg-gray-900">
           <div className="container mx-auto px-4">
@@ -43,17 +52,17 @@ export default function Contact() {
                     <h4 className="text-2xl font-semibold">
                       Contactez o1car en remplissant le formulaire
                     </h4>
-                    
+
 					<Form
 						onSubmit={onSubmit}
 						render={({ handleSubmit, form, submitting, pristine, values }) => (
-						<form onSubmit={handleSubmit}>                 
-						    <Field name="name" validate={required}>
+						<form onSubmit={handleSubmit}>
+						    <Field name="from_name" validate={required}>
 							    {({ input, meta }) => (
 								  <div className="relative w-full mb-3">
 									<label
 									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
-									  htmlFor="name"
+									  htmlFor="from_name"
 									>
 									  Nom
 									</label>
@@ -66,12 +75,12 @@ export default function Contact() {
 								  </div>
 								)}
                             </Field>
-							<Field name="email" validate={required}>
+							<Field name="from_email" validate={required}>
 							    {({ input, meta }) => (
 								  <div className="relative w-full mb-3">
 									<label
 									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
-									  htmlFor="email"
+									  htmlFor="from_email"
 									>
 									  Email
 									</label>
@@ -84,12 +93,12 @@ export default function Contact() {
 								  </div>
 								)}
                             </Field>
-							<Field name="message" validate={required}>
+							<Field name="html_message" validate={required}>
 							    {({ input, meta }) => (
 								  <div className="relative w-full mb-3">
 									<label
 									  className="block uppercase text-gray-700 text-xs font-bold mb-2"
-									  htmlFor="message"
+									  htmlFor="html_message"
 									>
 									  Message
 									</label>
@@ -114,7 +123,7 @@ export default function Contact() {
 						  </div>
 						</form>
 					)}
-				 />                 
+				 />
                  </div>
                </div>
               </div>
