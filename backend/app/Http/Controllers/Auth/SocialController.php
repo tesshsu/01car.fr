@@ -34,8 +34,11 @@ class SocialController extends Controller
         $user = User::find($user->id);
         $answer['token'] = $user->createToken('MyApp')->accessToken;
         $answer['user'] = new UserResource($user);
-        return response()->json($answer, 200);
 
+        $url = "http://localhost:3011/auth/authenticated?token=" . $answer['token'];
+        return response()->redirectTo($url);
+
+   //     return response()->json($answer, 200);
     }
 
     function createUser($getInfo,$provider){

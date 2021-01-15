@@ -18,6 +18,8 @@ export default function reducer(state = initialState, action) {
       return { ...state, isAuthentificated: false, loggedUser: null };
     case LOGGED_USER_ACTIONS.UPDATE:
       return { ...state, loggedUser: { ...action.payload.user } };
+    case LOGGED_USER_ACTIONS.GET_USER_SUCCESS:
+      return { ...state, isAuthentificated: true, loggedUser: { ...action.payload } };
     default:
       return state;
   }

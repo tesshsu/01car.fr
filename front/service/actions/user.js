@@ -33,10 +33,8 @@ export const updateUserFailure = () => ({
 export function fetchUser() {
     return async (dispatch) => {
         dispatch(getUser())
-
         try {
             const response = await API.User.getUser();
-
             dispatch(getUserSuccess(response))
         } catch (error) {
             dispatch(getUserFailure())
