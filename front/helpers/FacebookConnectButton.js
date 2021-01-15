@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import useLoggedUser from '../service/hooks/useLoggedUser';
 import {useRouter} from "next/router";
-import {authenticated} from "../service/actions";
 import {connect} from "react-redux";
 
 const FacebookConnectButton = ({
