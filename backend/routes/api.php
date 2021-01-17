@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -53,6 +54,8 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::apiResource('/v1/cars', CarController::class);
     Route::post('/v1/cars/{car_id}/uploads', [CarController::class,'addFiles'])->name('car.addFiles');
     Route::delete('/v1/cars/{car_id}/uploads/{id}', [CarController::class,'removeFiles'])->name('car.removeFiles');
+
+    Route::apiResource('/v1/favorites', FavoriteController::class);
 });
 
 
