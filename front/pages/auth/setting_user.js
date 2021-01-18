@@ -37,12 +37,11 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 	}
 
 	const postLoadFormat = values => {
-	  const { name, email, phone, departement } = values
+	  const { name, email, phone } = values
 	  return {
 		name,
 		email,
-		phone,
-		  departement: departement,
+		phone
 	  }
 	}
 
@@ -51,8 +50,7 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 		...originalValues,
 		name: values.name,
 		email: values.email,
-		phone: values.phone,
-		  departement: values.departement
+		phone: values.phone
 	  }
 	}
     //submit to patch profil API
@@ -168,24 +166,6 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 							  disabled={submitting}
 							/>
 						   </div>
-							<div className="relative w-full mb-3">
-								<label
-									className="block uppercase text-gray-700 text-xs font-bold mb-2"
-									htmlFor="departement"
-								>
-									Votre département :
-								</label>
-								<Field
-									className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-									name="departement"
-									component="select"
-									disabled={submitting}
-								>
-								{departementOptions.map(departementOption => (
-									<option value={departementOption.value}>{departementOption.label}</option>
-								))}
-								</Field>
-							</div>
                           <CardAcceptCondition />
 						  <div className="text-center mt-6">
 							<button
