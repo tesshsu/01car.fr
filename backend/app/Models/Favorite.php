@@ -35,4 +35,9 @@ class Favorite extends Model
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
+
+    public function car(): HasOne
+    {
+        return $this->hasOne(Car::class, 'id', 'entity_id');
+    }
 }

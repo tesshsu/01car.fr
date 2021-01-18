@@ -34,7 +34,7 @@ class FavoriteController extends Controller
     public function index(Request $request)
     {
         $currentUser = Auth::user();
-        $favoritesReq = Favorite::query();
+        $favoritesReq = Favorite::with('car', 'car.uploads');
         $favoritesReq->where('user_id', $currentUser->id);
 
         $favoritesLengthAwarePaginator = $favoritesReq->paginate($request->perPage, ['*'], $request->pageName, $request->page);
@@ -124,7 +124,7 @@ class FavoriteController extends Controller
      */
     public function destroy($id)
     {
-        $favorite = Favorite::with('attributes', 'user', 'uploads')->find($id);
+        $favorite = Favorite::find($id);
         if ($favorite == NULL) {
             return response()->json(['error' => 'NotFound'], 404);
         }
@@ -161,7 +161,7 @@ class FavoriteController extends Controller
 
     private function renderJson($id): \Illuminate\Http\JsonResponse
     {
-        $favorite = Favorite::find($id);
+        $favorite = Favorite::with('car', 'car.uploads')->find($id);
         if ($favorite == NULL) {
             return response()->json(['error' => 'NotFound'], 404);
         }

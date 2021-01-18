@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Validator;
 class RegisterController extends Controller
 {
 
+    public $successStatus = 200;
+
     /**
      * Create a new controller instance.
      *

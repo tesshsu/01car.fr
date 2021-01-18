@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Http\Resources\User as UserResource;
+use App\Http\Resources\Car as CarResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;
 
@@ -22,6 +23,7 @@ class Favorite extends JsonResource
             'updated_at' => Carbon::parse($this->updated_at)->toIso8601String(),
             'category' => $this->category,
             'entity_id' => $this->entity_id,
+            'entity' => new CarResource($this->whenLoaded('car')),
             'owner' => new UserResource($this->whenLoaded('user')),
         ];
     }

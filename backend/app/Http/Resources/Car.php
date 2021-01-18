@@ -7,6 +7,7 @@ use App\Http\Resources\CarPremiumOption as CarPremiumOptionResource;
 use App\Http\Resources\Upload as UploadResource;
 use App\Http\Resources\User as UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\MissingValue;
 use Illuminate\Support\Carbon;
 
 class Car extends JsonResource
@@ -19,15 +20,19 @@ class Car extends JsonResource
      */
     public function toArray($request)
     {
-        $groupedEquipments = $this->whenLoaded('attributes')->groupBy('category');
-        $equipments = collect(EquipmentCategory::list())
-            ->flatMap(function ($item, $key) use ($groupedEquipments) {
-                return [$item => $groupedEquipments->has([$item]) ?
-                    $groupedEquipments[$item]->map(function ($equip) {
-                        return $equip->name;
-                    })->unique() : []
-                ];
-            });
+        $groupedEquipments = $this->whenLoaded('attributes');
+        $equipments = new MissingValue();
+        if (!$groupedEquipments instanceof MissingValue) {
+            $groupedEquipments = $groupedEquipments->groupBy('category');
+            $equipments = collect(EquipmentCategory::list())
+                ->flatMap(function ($item, $key) use ($groupedEquipments) {
+                    return [$item => $groupedEquipments->has([$item]) ?
+                        $groupedEquipments[$item]->map(function ($equip) {
+                            return $equip->name;
+                        })->unique() : []
+                    ];
+                });
+        }
 
         return [
             'id' => $this->id,
@@ -73,7 +78,7 @@ class Car extends JsonResource
             'owner' => new UserResource($this->whenLoaded('user')),
             'equipments' => $equipments,
             'premiumOptions' => new CarPremiumOptionResource($this->whenLoaded('premiumOptions')),
-            'uploads' => UploadResource::collection($this->uploads),
+            'uploads' => UploadResource::collection($this->whenLoaded('uploads')),
         ];
     }
 }
