@@ -36,7 +36,7 @@ class SocialController extends Controller
         $answer['user'] = new UserResource($user);
 
         $url = env('01CAR_FRONT_LOGIN_CALLBACK')  . "?token=" . $answer['token'];
-        return response()->redirectTo($url);
+        return redirect()->away($url);
     }
 
     function createUser($getInfo,$provider){

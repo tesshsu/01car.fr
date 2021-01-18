@@ -75,6 +75,11 @@ class User extends Authenticatable
         return $this->id == $car->user_id || $this->isAdminUser();
     }
 
+    public function canEditFavorite($favorite): bool
+    {
+        return $this->id == $favorite->user_id || $this->isAdminUser();
+    }
+
 
     public function sendPasswordResetNotification($token)
     {
