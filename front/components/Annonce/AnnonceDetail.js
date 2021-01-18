@@ -33,7 +33,7 @@ const AnnonceDetail = ({
 					/> ) : ( null )
 				}
 				<h4 className="marqueBlock bg-orange-500 font-bold text-2xl text-white px-4 py-3 shadow-lg">
-					<span className="brand">{car?.brand}</span> - <span className="model">{car?.model}</span> <span
+					<span className="brand">{car?.brand}</span> <span
 					className="generation">{car?.generation} | <i class="fas fa-hourglass-half"></i> <Moment element="fr" locale="fr" fromNow>{car?.expire_at}</Moment></span>
 					<span className="favoris"><FavorisButton/></span>
 

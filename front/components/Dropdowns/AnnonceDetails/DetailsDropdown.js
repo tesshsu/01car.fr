@@ -34,7 +34,7 @@ const DetailsDropdown = ({
 			case 'private':
 				return 'particulier';
 			case 'immediately':
-				return 'ONE_MONTH';
+				return 'Immédiatement';
 			case 'Dans un mois':
 				return 'Dans un mois';
 			case 'later':
@@ -45,6 +45,8 @@ const DetailsDropdown = ({
 				return 'non';
 			case 'false':
 				return 'non';
+			case 'not_expected':
+				return 'Ne correspond pas à mes attentes';
 			case 'change':
 				return 'Changer de véhicule';
 			case 'other':
@@ -89,10 +91,17 @@ const DetailsDropdown = ({
 									className={nc.icon}></i> {nc.name} </span>
 							</div>
 							<div className="w-full px-4 flex-1">
-							    <span
-									className="question-1 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">
-								  {renderSwitchValue(nc.value)}
-								</span>
+								{ nc.value == null ? (
+									<span
+										className="question-1 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">
+								        pas d'information
+								    </span>
+								):(
+									<span
+										className="question-1 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">
+								      {renderSwitchValue(nc.value)}
+								    </span>
+								)}
 							</div>
 						</div>
 					</div>

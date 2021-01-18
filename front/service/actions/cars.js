@@ -143,7 +143,12 @@ export function fetchCars(page = 1, perPage = 18, owner = undefined) {
 
         try {
             const response = await API.Annonces.search(perPage, page, owner);
-            dispatch(getCarsSuccess(response));
+
+            if(response.data){
+                dispatch(getCarsSuccess(response));
+            }else{
+                dispatch(getCarsFailure())
+            }
 
         } catch (error) {
             dispatch(getCarsFailure())

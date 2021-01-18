@@ -6,10 +6,13 @@ import MesAnnoncesLists from '../components/Annonce/MesAnnoncesLists.js';
 import Pagination from '../components/Annonce/Pagination.js';
 import {listPubs} from "../helpers/constant";
 import {connect} from "react-redux";
+import useLoggedUser from "../service/hooks/useLoggedUser";
+import useAnnonces from "../service/hooks/useAnnonces";
 const MesAnnonces = ({
                          dispatch,
                          loading,
                          cars,
+                         selectedCar,
                          current_page,
                          from,
                          to,
@@ -18,6 +21,7 @@ const MesAnnonces = ({
                          total,
                          hasErrors
                      }) => {
+
     return (
         <>
             <IndexNavbar fixed/>
@@ -40,31 +44,29 @@ const MesAnnonces = ({
                 <section className="pt-10 pb-8 mt-4">
                     <div className="container mx-auto px-4">
                         <div className="flex flex-wrap">
-                            { total == 0 ? (
-                                    <div className="container mx-auto text-center">
-                                        <h5 className="text-xl font-semibold pb-4">
-                                            Vous n'aviez pas encore des annonces, publiez une annonce rapidement !!
-                                        </h5>
-                                        <button
-                                            className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
-                                            type="button"
-                                        >
-                                            <Link href="/vendre">
-                                                <a
-                                                    href="#pablo"
-                                                    className={
-                                                        "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
-                                                    }
-                                                >
-                                                    <i className="fas fa-thumbs-up animate-ping"></i> Cliquez ici
-                                                </a>
-                                            </Link>
-                                        </button>
-                                    </div>
-                            ):(
-                                <MesAnnoncesLists/>
-                            )}
-
+                            <MesAnnoncesLists/>
+                            { total == 0  ? (
+                                <div className="container mx-auto text-center">
+                                    <h5 className="text-xl font-semibold pb-4">
+                                        Vous n'avez pas encore des annonces, publiez une annonce rapidement !!
+                                    </h5>
+                                    <button
+                                        className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
+                                        type="button"
+                                    >
+                                        <Link href="/vendre">
+                                            <a
+                                                href="#pablo"
+                                                className={
+                                                    "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
+                                                }
+                                            >
+                                                <i className="fas fa-thumbs-up animate-ping"></i> Cliquez ici
+                                            </a>
+                                        </Link>
+                                    </button>
+                                </div>
+                            ):( '' )}
                         </div>
                         <div className="flex content-center items-center justify-center h-full mb-24 mt-8">
                             {total >= 11 ?(

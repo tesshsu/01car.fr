@@ -9,13 +9,24 @@ const ModalContact = ({ dispatch,
   const [showModal, setShowModal] = React.useState(false);
   return (
     <>
-      <button
-        className="bg-orange-500 text-white active:bg-gray-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-        type="button"
-        onClick={() => setShowModal(true)}
-      >
-        Contacter le vendeur
-      </button>
+        {car?.premium == true ? (
+            <button
+                className="bg-orange-500 text-white active:bg-gray-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button"
+                onClick={() => setShowModal(true)}
+            >
+                Contacter le vendeur pour d'achat
+            </button>
+        ):(
+            <button
+                className="bg-orange-500 text-white active:bg-gray-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button"
+                onClick={() => setShowModal(true)}
+            >
+                Contacter le vendeur pour plus details
+            </button>
+        )}
+
       {showModal ? (
         <>
           <div

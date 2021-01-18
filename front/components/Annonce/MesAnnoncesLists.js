@@ -45,6 +45,9 @@ const MesAnnoncesLists = ({
         return <p>Loading annonces...</p>;
     }
 
+    if(hasErrors){
+        return <p>pas de cars...</p>;
+    }
     const handleEdit = async (id) => {
         try {
             await editCar(id);

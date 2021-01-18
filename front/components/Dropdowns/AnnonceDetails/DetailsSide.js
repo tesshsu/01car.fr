@@ -17,10 +17,23 @@ const DetailsSide = ({ dispatch,
 	  { icon: "fas fa-car-battery", value: car?.power }
   ];
 	const {isAuthentificated, loggedUser} = useLoggedUser();
+	const [isowner, setIsowner] = React.useState(false);
+	const [ispremium, setIspremium] = React.useState(false);
 	const {
 		editCar
 	} = useAnnonces();
-  let prix_api = car?.price
+
+    let prix_api = car?.price
+    let car_owner_id = car?.owner.id
+	let car_premium = car?.premium
+	useEffect(() => {
+		const owner = loggedUser?.loggedUser?.id;
+		if( owner == car_owner_id){
+			setIsowner(true);
+		}else if(car_premium == true){
+			setIspremium(true);
+		}
+	}, [dispatch])
 
 	const handleEdit = async (id) => {
 		try {
@@ -56,20 +69,50 @@ const DetailsSide = ({ dispatch,
 			{basics.map(basic => (
 				<div className="flex flex-wrap">
 					<div className="w-4/12">
-						<span className="text-lg block p-3 text-gray-800 rounded border border-solid border-gray-200"><i className={basic.icon}></i></span>
+						<span className="text-lg block p-3  mt-2 text-gray-800 rounded border border-solid border-gray-200"><i className={basic.icon}></i></span>
 					</div>
+
 					<div className="w-8/12">
-					  <span className="carburant text-lg block p-3 text-gray-800 rounded border border-solid border-gray-200">{basic.value}</span>
+						{ basic.value !== null ? (
+							<span className="carburant text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200"> {basic.value}</span>
+						):(
+							<div className="button-block">
+								{isAuthentificated && isowner ? (
+									<span
+										className="question-1 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">
+										<Link href="/prix">
+											<a
+												href="#"
+												className="text-blue-500"
+											>
+												ajouter d'information
+											</a>
+										</Link>
+								    </span>
+								):(
+									<span
+										className="question-1 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">
+								      pas d'information
+								    </span>
+								)}
+							</div>
+
+						)}
 					</div>
 				</div>
 			))}
 			<div className="flex flex-wrap mt-2">
 				<div className="flex flex-wrap content-center items-center justify-center h-full">
-					<MondalContact transparent />
+					{isowner ? (
+						null
+					):(
+						<MondalContact transparent />
+					)}
+
                 </div>
 			</div>
 			<div className="flex flex-wrap mt-2">
-				{isAuthentificated && car?.premium == true && (
+				{ car?.premium == true && isowner ? (
 					<div className="button-block justify-left">
 						<button
 							className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 mr-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
@@ -88,6 +131,8 @@ const DetailsSide = ({ dispatch,
 							</Link>
 						</button>
 					</div>
+				) :(
+					null
 				)}
 			</div>
         </div>

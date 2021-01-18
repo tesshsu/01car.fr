@@ -1,13 +1,23 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux'
 import moment from 'moment';
-
+import useLoggedUser from "../../../service/hooks/useLoggedUser";
+import Link from "next/link";
 const DetailsBasic = ({
 						 dispatch,
 						 car,
 						 loading,
 					   }) => {
   let yearOfcar = car?.dt_entry_service;
+	const {isAuthentificated, loggedUser} = useLoggedUser();
+	const [isowner, setIsowner] = React.useState(false);
+	let car_owner_id = car?.owner.id
+	useEffect(() => {
+		const owner = loggedUser?.loggedUser?.id;
+		if( owner == car_owner_id){
+			setIsowner(true);
+		}
+	}, [dispatch])
   const basics = [
 	  { icon: "fas fa-gas-pump", name: "Energie", value: car?.fuel },
 	  { icon: "fas fa-tachometer-alt", name: "Kilométrage", value: car?.km },
@@ -31,7 +41,30 @@ const DetailsBasic = ({
 							  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i className={basic.icon}></i> {basic.name}: </span>
 						</div>
 						<div className="w-full px-4 flex-1">
-							  <span className="carburant text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200"> {basic.value}</span>
+							{ basic.value !== null ? (
+								<span className="carburant text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200"> {basic.value}</span>
+							):(
+								<div className="button-block">
+									{isAuthentificated && isowner ? (
+										<span
+											className="question-1 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">
+										<Link href="/prix">
+											<a
+												href="#"
+												className="text-blue-500"
+											>
+												ajouter d'information
+											</a>
+										</Link>
+								    </span>
+									):(
+										<span
+											className="question-1 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">
+								      pas d'information
+								    </span>
+									)}
+								</div>
+							)}
 						</div>
 					</div>
 				</div>
