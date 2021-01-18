@@ -22,11 +22,13 @@ import * as LOGGED_USER_ACTIONS from "../service/actions/loggedUser";
 import Stripe from "stripe";
 import { loadStripe } from "@stripe/stripe-js";
 import { parseCookies, setCookie } from "nookies";
+import {favoritesReducer} from "../service/reducers";
 //combien all the reducers
 const logger = createLogger();
 const rootReducers = combineReducers({
   user: userReducer,
   carsReducer: carsReducer,
+  favoritesReducer: favoritesReducer,
   ...reducers,
 });
 const store = createStore(
