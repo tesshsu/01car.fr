@@ -1,13 +1,11 @@
 import React from "react";
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
-import { Form, Field } from 'react-final-form';
 import CardAcceptCondition from "components/Cards/CardAcceptCondition.js";
 import * as emailjs from 'emailjs-com';
 import {Modal} from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import PubContentThreeIcons from "../../layouts/PubContentThreeIcons";
-import PubContentConnection from "../../layouts/PubContentConnection";
 
 export default function Contact() {
     const [showModal, setShowModal] = React.useState(false);

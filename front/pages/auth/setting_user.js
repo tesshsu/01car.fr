@@ -8,14 +8,14 @@ import Router from "next/router";
 import {connect} from 'react-redux';
 import LoadSaveReinitializeForm from 'helpers/LoadSaveReinitializeForm'
 import CardAcceptCondition from "components/Cards/CardAcceptCondition.js";
-import {
-	departementOptions
-} from 'helpers/constant';
+import {Modal} from "react-responsive-modal";
+import "react-responsive-modal/styles.css";
+import PubContentThreeIcons from "../../layouts/PubContentThreeIcons";
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 
 const Setting_user = ({dispatch, loading, user, hasErrors}) => {
-
+	const [showModal, setShowModal] = React.useState(false);
 	let record = {
 		  phone: user.phone,
 		  name: user.name,
@@ -74,12 +74,11 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 		  } = values;
 
 		  const data = { ...payload };
-		  console.log(data);
 		  await updateLoggedUser(data);
 		} catch (err) {
 		   console.log(err.response);
 		} finally {
-		   alert("votre profil été modifier");
+			setShowModal(true)
 		}
 	  }
 
@@ -96,6 +95,14 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 	  <section className="mt-20 px-12 bg-gray-800">
 
       <div className="container mx-auto px-4 h-full">
+		  {showModal ? (
+			  <>
+				  <Modal closeOnEsc={false} open={open} onClose={() => setShowModal(false)}>
+					  <PubContentThreeIcons/>
+					  <h2 className="text-2xl font-semibold text-center">Votre modification a bien été envoyé</h2>
+				  </Modal>
+			  </>
+		  ) : null}
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full mt-20 mb-8 lg:w-6/12 px-4">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">

@@ -133,9 +133,6 @@ export default function Login() {
 								)
 							}
 						  </div>
-                          {submitError || invalid && (
-							 <Notice text="identifiant ou mot de passe incorrect" />
-						  )}
 						</form>
 					)}
 				/>
