@@ -41,7 +41,7 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 	  return {
 		name,
 		email,
-		phone: phone,
+		phone,
 		  departement: departement,
 	  }
 	}
