@@ -76,7 +76,7 @@ export default function dataPersonal() {
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-1">
                     <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                      <div className="mr-4 p-3 text-center">                       
+                      <div className="mr-4 p-3 text-center">
 						<span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
                           <i className="far fa-smile text-lg mr-1"></i>
                         </span>
@@ -113,7 +113,7 @@ export default function dataPersonal() {
                         La société 01car est située au Chemin de la pierre du diable,910 RTE de vallauris, 06220 Vallauris. Les coordonnées de son Délégué à la protection des données sont les suivantes : BELKACEM LAOUDI.
                       </p>
 					  <h4 className="text-2xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
-					   Pour quoi vos données personnelles sont-elles utilisées ?
+                          Pourquoi  vos données personnelles sont-elles utilisées ?
 					  </h4>
 					  <ul>
 					    <li>Gérer votre compte utilisateur</li>
@@ -147,7 +147,7 @@ export default function dataPersonal() {
 						<li>Un droit à l’effacement (ou droit à l’oubli) de vos données personnelles, lequel peut être limité au regard de nos obligations contractuelles ou légales,</li>
 						<li>Un droit d’opposition, sous réserve de justifier de raisons tenant à votre situation particulière, et du droit de demander la limitation du traitement de vos données personnelles, dans certains cas prévus par la règlementation,</li>
 						<li>Un droit de retirer votre consentement à tout moment, pour les finalités pour lesquelles nous avons collecté votre consentement.</li>
-					    
+
 					  </ul>
 					  <h4 className="text-2xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
 					   Modification des informations sur la protection de vos données personnelles

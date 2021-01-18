@@ -10,8 +10,8 @@ const onSubmit = async values => {
 export default function AnnonceSearchForm() {
 	return (
 		<>
-			<section className="mt-6">
-				<div className="container px-4 mx-auto border-2 rounded bg-orange-500 py-4">
+			<section className="mt-16">
+				<div className="container px-4 mx-auto border-2 rounded bg-orange-500 py-4 z-40">
                    <h1 className="text-2xl font-semibold text-white text-center">1er Site d'accompagnement sécurisé dans la vente et l'achat de véhicules</h1>
 					<p className="text-md font-light mt-2 text-center">Sur 01car.fr, on cherche et on trouve les meilleurs affaires </p>
 					<Form
@@ -25,9 +25,23 @@ export default function AnnonceSearchForm() {
 												<div className="relative w-full mb-3">
 													<input
 														{...input}
-														type="text"
+														type="number"
 														className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
 														placeholder="Marque Model ..."
+													/>
+												</div>
+											)}
+										</Field>
+									</div>
+									<div className="w-full px-4 flex-1">
+										<Field name="search">
+											{({ input, meta }) => (
+												<div className="relative w-full mb-3">
+													<input
+														{...input}
+														type="text"
+														className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
+														placeholder="code postal ..."
 													/>
 												</div>
 											)}
@@ -52,7 +66,7 @@ export default function AnnonceSearchForm() {
 									<div className="w-full px-4 flex-1">
 										<div className="relative flex w-full flex-wrap items-stretch mb-3">
 											<Field name="question-2" component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-												<option value="0" selected="selected">Prix max</option>
+												<option value="0" selected="selected">Prix</option>
 												<option value="3000">3 000 € maxi</option>
 												<option value="4500">4 500 € maxi</option>
 												<option value="6000">6 000 € maxi</option>
