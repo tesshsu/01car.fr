@@ -63,30 +63,30 @@ export default function PubContent2() {
 					  <div className="avantagePosterPart flex flex-wrap">
 						  <div className="w-full px-4 flex-1 rounded border border-solid border-gray-200 py-1 mr-4">
 							  <h4 className="text-xl block my-2 p-3 font-bold text-white">Basic</h4>
-							  <p className="px-3 flex items-start text-6xl leading-none tracking-tight font-medium text-gray-900"><span
-								  className="mt-2 mr-2 text-4xl">€</span><span>0 euro
+							  <p className="px-3 flex items-start text-3xl leading-none tracking-tight font-medium text-gray-900"><span
+								  className="mt-2 mr-2 text-2xl">€</span><span>0 euro
 							  </span></p>
 							  <hr className="mt-6 border-b-1 border-gray-400" />
 							  <ul className="my-2 p-3 font-bold text-white">
-								  <li>- Annonce pré-remplie </li>
-								  <li>- Annonce gratuite </li>
-								  <li>- 10 photos gratuites </li>
+								  <li>1. Annonce pré-remplie </li>
+								  <li>2. Annonce gratuite </li>
+								  <li>3. 10 photos gratuites </li>
 							  </ul>
 						  </div>
 						  <div className="w-full px-4 flex-1 rounded border border-solid border-gray-200 py-1 px-2">
 							  <h4 className="text-xl block my-2 p-3 font-bold text-white">Premium</h4>
-							  <p className="px-3 flex items-start text-6xl leading-none tracking-tight font-medium text-gray-900"><span
-								  className="mt-2 mr-2 text-4xl">€</span><span>6,99 euro
+							  <p className="px-3 flex items-start text-3xl leading-none tracking-tight font-medium text-gray-900"><span
+								  className="mt-2 mr-2 text-2xl">€</span><span>6,99 euro
 							  </span></p>
 							  <p className="mt-2 mr-2 text-xl text-center">par annonce/mois</p>
 							  <hr className="mt-6 border-b-1 border-gray-400" />
 							  <ul className="my-2 p-3 font-bold text-white">
-								  <li>- Rassurer l'acheteur grâce à notre questionnaire  </li>
-								  <li>- Tête de liste, grande visibilité  </li>
-								  <li>- Logo qualité garantie  </li>
-								  <li>- Modifier à tout moment le prix du véhicule - - Estimation du véhicule par des professionnels qualifiés   </li>
-								  <li>- 10 photos gratuites   </li>
-								  <li>- Vente rapide garantie  </li>
+								  <li>1. Rassurer l'acheteur grâce à notre questionnaire  </li>
+								  <li>2. Tête de liste, grande visibilité  </li>
+								  <li>3. Logo qualité garantie  </li>
+								  <li>4. Modifier à tout moment le prix du véhicule - - Estimation du véhicule par des professionnels qualifiés   </li>
+								  <li>5. 10 photos gratuites   </li>
+								  <li>6. Vente rapide garantie  </li>
 							  </ul>
 						  </div>
 					  </div>
@@ -162,7 +162,8 @@ export default function PubContent2() {
 					</ul>
 					 <div className="avantagePosterPart flex flex-wrap">
 						 <div className="w-full px-4 flex-1 rounded border border-solid border-gray-200 py-1 mr-4">
-							 <h4 className="text-xl block my-2 p-3 font-bold text-white">On cherche et compare les meilleures offres</h4>
+							 <h4 className="text-2xl block my-2 p-3 font-bold text-white">On cherche et compare les meilleures offres</h4>
+							 <div className="text-center"><i className="fas fa-search animate-ping text-6xl"></i></div>
 							 <hr className="mt-6 border-b-1 border-gray-400" />
 							 <div className="mt-6 hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
 								 <img
@@ -173,7 +174,8 @@ export default function PubContent2() {
 							 </div>
 						 </div>
 						 <div className="w-full px-4 flex-1 rounded border border-solid border-gray-200 py-1 px-2">
-							 <h4 className="text-xl block my-2 p-3 font-bold text-white">- Le meilleur véhicule est à vous ! C'est parti !!</h4>
+							 <h4 className="text-2xl block my-2 p-3 font-bold text-white">Le meilleur véhicule est à vous ! C'est parti !!</h4>
+							 <div className="text-center"> <i className="fas fa-thumbs-up animate-bounce text-6xl"></i></div>
 							 <hr className="mt-6 border-b-1 border-gray-400" />
 							 <div className="mt-6 hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
 								 <img

@@ -77,7 +77,7 @@ const DetailsSide = ({ dispatch,
 							<span className="carburant text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200"> {basic.value}</span>
 						):(
 							<div className="button-block">
-								{isAuthentificated && isowner ? (
+								{ car_premium == false && isowner ? (
 									<span
 										className="question-1 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">
 										<Link href="/prix">

@@ -12,6 +12,7 @@ const DetailsBasic = ({
 	const {isAuthentificated, loggedUser} = useLoggedUser();
 	const [isowner, setIsowner] = React.useState(false);
 	let car_owner_id = car?.owner.id
+	let car_premium = car?.premium
 	useEffect(() => {
 		const owner = loggedUser?.loggedUser?.id;
 		if( owner == car_owner_id){
@@ -45,7 +46,7 @@ const DetailsBasic = ({
 								<span className="carburant text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200"> {basic.value}</span>
 							):(
 								<div className="button-block">
-									{isAuthentificated && isowner ? (
+									{ car_premium == false && isowner ? (
 										<span
 											className="question-1 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">
 										<Link href="/prix">
@@ -60,8 +61,8 @@ const DetailsBasic = ({
 									):(
 										<span
 											className="question-1 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">
-								      pas d'information
-								    </span>
+								            pas d'information
+										</span>
 									)}
 								</div>
 							)}
