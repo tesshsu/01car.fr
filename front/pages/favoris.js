@@ -7,7 +7,7 @@ import Pagination from "../components/Annonce/Pagination.js";
 import {listPubs} from "../helpers/constant";
 import {connect} from "react-redux";
 import {useRouter} from "next/router";
-import {list} from "../api/Favorites";
+import {fetchFavorites} from '../service/actions/favorites';
 
 const Favoris = ({ dispatch,
                       loading,
@@ -21,7 +21,8 @@ const Favoris = ({ dispatch,
                       hasErrors}) => {
     const router = useRouter();
     useEffect(() => {
-        // dispatch(list(router.query.page, router.query.perPage))
+        const per_page_req = router.query.perPage ? router.query.perPage : 10;
+         dispatch(fetchFavorites(router.query.page, per_page_req))
     }, [dispatch]);
 
     return (

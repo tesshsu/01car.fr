@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Link from "next/link";
 import {connect} from "react-redux";
+import {fetchFavorites} from "../../service/actions/favorites";
 
 
 const AnnonceFavoris = ({
@@ -14,16 +15,21 @@ const AnnonceFavoris = ({
         return <p>Loading annonces...</p>;
     }
 
+    useEffect(() => {
+        console.log(favorites);
+    }, [dispatch]);
+
+
     return (
         <>
             {favorites?.map(favorite => (
                 <div className="container px-4 mx-auto">
                     <div className="favoris-block flex-wrap">
                         <div className="w-full px-4 mt-4 flex-1">
-                            {favorite?.car.uploads.length > 0 ? (
+                            {favorite?.entity?.uploads?.length > 0 ? (
                                 <img
-                                    alt={favorite?.car?.uploads[0].name}
-                                    src={process.env.NEXT_PUBLIC_API_URL + car?.uploads[0].url}
+                                    alt={favorite?.entity?.uploads[0].name}
+                                    src={process.env.NEXT_PUBLIC_API_URL + favorite?.entity?.uploads[0].url}
                                     className="shadow-lg mx-auto rounded-lg"
                                 />
                             ) : (
@@ -38,29 +44,29 @@ const AnnonceFavoris = ({
 			  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">
 			        <div className="top justify-between">
 					  <div className="font-bold text-lg text-orange-700 text-center py-2 m-2">
-					     {favorite?.car?.brand} - {favorite?.car?.model}
+					     {favorite?.entity?.brand} - {favorite?.entity?.model}
 					  </div>
 					  <div class="price font-bold text-orange-500  text-2xl text-center bg-gray-400 px-4 py-2">
-					    {favorite?.car?.price} €
+					    {favorite?.entity?.price} €
 					  </div>
 					</div>
 					<div className="container mx-auto">
 					  <div className="flex flex-wrap">
 							<div className="w-1/3">
 							  <span
-                                  className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorite?.car?.Energie}</span>
+                                  className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorite?.entity?.Energie}</span>
 							</div>
 							<div className="w-1/3">
 							  <span
-                                  className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorite?.car?.Boite}</span>
+                                  className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorite?.entity?.Boite}</span>
 							</div>
 							<div className="w-1/3">
 							  <span
-                                  className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorite?.car?.km} km</span>
+                                  className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorite?.entity?.km} km</span>
 							</div>
 							<div className="w-1/3">
 							  <span
-                                  className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorite?.car?.year}</span>
+                                  className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorite?.entity?.year}</span>
 							</div>
 						  </div>
 					</div>
@@ -97,7 +103,7 @@ const AnnonceFavoris = ({
 						</button>
                     </div>
 					<p className="mt-4 px-6 py-2 text-md leading-relaxed bg-gray-600 text-white font-bold uppercase rounded text-center">
-						NOTE DE CONFIANCE: {favorite?.car?.nc}/20
+						NOTE DE CONFIANCE: {favorite?.entity?.nc}/20
 				    </p>
 
 			  </span>
@@ -111,15 +117,15 @@ const AnnonceFavoris = ({
 
 
 const mapStateToProps = (state) => ({
-    loading: state.carsReducer.loading,
-    cars: state.carsReducer.cars,
-    current_page: state.carsReducer.current_page,
-    from: state.carsReducer.from,
-    to: state.carsReducer.to,
-    per_page: state.carsReducer.per_page,
-    last_page: state.carsReducer.last_page,
-    total: state.carsReducer.total,
-    hasErrors: state.carsReducer.hasErrors,
+    loading: state.favoritesReducer.loading,
+    favorites: state.favoritesReducer.favorites,
+    current_page: state.favoritesReducer.current_page,
+    from: state.favoritesReducer.from,
+    to: state.favoritesReducer.to,
+    per_page: state.favoritesReducer.per_page,
+    last_page: state.favoritesReducer.last_page,
+    total: state.favoritesReducer.total,
+    hasErrors: state.favoritesReducer.hasErrors,
 })
 
 export default connect(mapStateToProps)(AnnonceFavoris);
