@@ -228,7 +228,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 					</ul>
 					{editCar && (
 						<div className="w-full px-4 flex-1 text-center">
-							<p className="text-md font-semibold text-center">Vous etez en mode de modifier <i
+							<p className="text-md font-semibold text-center">Vous êtes en train de modifier votre annonce <i
 								className="far fa-edit animate-bounce"></i></p>
 							<button
 								className="bg-gray-600 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
