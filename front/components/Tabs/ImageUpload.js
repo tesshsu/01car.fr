@@ -81,6 +81,12 @@ const ImageUpload = ({
                             </div>
                         ))}
                     </div>
+                    { imageList.length > maxNumber ? (
+                        <p className="text-center text-lg mt-4 text-orange-500"><i
+                            className="fas fa-exclamation-triangle animate-bounce"></i> Telecharger 10 photos MAX</p>
+                    ):(
+                        null
+                    )}
 
                 </div>
             )}
@@ -127,33 +133,33 @@ const ImageUpload = ({
     return (
         <div className="blockUploadImage">
             <Form onSubmit={onSubmit}
-                initialValues={{
-                    uploads: [],
-                }}
-                render={({handleSubmit, form, submitting, values}) => (
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <Field
-                                name="uploads"
-                                type="file"
-                                value={values.uploads}
-                                component={ImgUploadAdapter}
-                            />
-                        </div>
-                        {images?.length > 0 && router.pathname === '/vendre' ? (
-                            <Link href={car?.id ? (`/annonce?id=${car?.id}`) : ("#")} {...car}>
-                            <button
-                                className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                type="submit"
-                                disabled={submitting}
-                            >
-                                <i className="fas fa-paper-plane text-base mr-1 animate-bounce"></i> Envoyer et Voir votre Annonce
-                            </button>
-                            </Link>
-                                ) : (null)
-                        }
-                    </form>
-                )}
+                  initialValues={{
+                      uploads: [],
+                  }}
+                  render={({handleSubmit, form, submitting, values}) => (
+                      <form onSubmit={handleSubmit}>
+                          <div>
+                              <Field
+                                  name="uploads"
+                                  type="file"
+                                  value={values.uploads}
+                                  component={ImgUploadAdapter}
+                              />
+                          </div>
+                          {images?.length > 0 && router.pathname === '/vendre' ? (
+                              <Link href={car?.id ? (`/annonce?id=${car?.id}`) : ("#")} {...car}>
+                                  <button
+                                      className="bg-orange-500 text-white active:bg-grey-500 text-sm font-bold uppercase px-12 py-4 my-4 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                      type="submit"
+                                      disabled={submitting}
+                                  >
+                                      <i className="fas fa-paper-plane text-base mr-1 animate-bounce"></i> Envoyer et Voir votre Annonce
+                                  </button>
+                              </Link>
+                          ) : (null)
+                          }
+                      </form>
+                  )}
             />
         </div>
     );
@@ -166,4 +172,3 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps)(ImageUpload)
-

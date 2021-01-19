@@ -87,7 +87,7 @@ const DetailsPremiumDropdown = ({
 						</div>
 					  </li>
 				</ul>
-				{premium_ncs.map(premium_nc => (
+				{premium_ncs?.map(premium_nc => (
 					<div className="container px-2 mx-auto">
 						<div className="flex flex-wrap">
 							<div className="w-full px-4 flex-1">
