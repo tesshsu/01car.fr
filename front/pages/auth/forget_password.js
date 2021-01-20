@@ -39,17 +39,15 @@ export default function ForgetPassword() {
                 </div>
                 <Form
 					  initialValues={{
-						email: ''
+                          email: ''
 					  }}
-					  onSubmit={async ({ email, password }) => {
+					  onSubmit={async ({email}) => {
 						await formValidate.sleep(300)
                           setIsloading(true)
 							try {
-							  await forgetPassword(
-								email.trim(),
-                                setShowModal(true),
-                                setIsloading(false)
-							  );
+							  await forgetPassword(email.trim());
+                                setIsloading(false),
+                                setShowModal(true)
 						} catch (err) {
 						    setShowError(true)
 						}
@@ -69,6 +67,8 @@ export default function ForgetPassword() {
 									<input
 									  {...input}
 									  type="email"
+                                      name="email"
+                                      value={values.email}
 									  className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
 									  placeholder="Email"
 									/>{meta.error && meta.touched && <span className="text-orange-500 text-sm">{meta.error}</span>}
