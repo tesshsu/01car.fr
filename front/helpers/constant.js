@@ -191,19 +191,6 @@ export const premium_options_display_next_maintenance = (res) => {
     return res ? 'Moins de 5000km' : 'Plus de 5000km'
 }
 
-export const premuim_options = {
-    "Under_warranty": "Sous garantie",
-    "accident": "Ayant déjà subit 1 accident",
-    "defects": "Des défauts griffes, coups, usures",
-    "km_certificate": "Justifier le parcours kilometrique",
-    "technical_check_ok": "Contrôle technique ok",
-    "periodic_maintenance": "Respect des entretiens périodiques",
-    "next_maintenance_under_5000km": "Prochain entretien dans moins de 5000km",
-    "purchase_invoice": "Facture d'achat",
-    "gray_card": "Carte grise",
-    "maintenance_log": "Possède le carnet d'entretien",
-}
-
 export const premium_ncs = [
     {icon: "fas fa-file-contract", name: "Sous garantie", value: "under_warranty", displayFunction: premium_options_display_yes_no},
     {icon: "fas fa-car-crash", name: "Ayant déjà subit 1 accident", value: "accident", displayFunction: premium_options_display_yes_no},

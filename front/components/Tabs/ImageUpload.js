@@ -96,7 +96,7 @@ const ImageUpload = ({
     const onChange = async (imageList, addUpdateIndex) => {
         // check for images to removed
         let currentImagesIds = imageList.map(i => i.id);
-        let imagesRemoved = imageList.filter(img => !currentImagesIds.includes(img.id));
+        let imagesRemoved = images.filter(img => !currentImagesIds.includes(img.id));
 
         if(imagesRemoved.length > 0){
             imagesRemoved.forEach(img => {

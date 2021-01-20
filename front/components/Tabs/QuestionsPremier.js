@@ -4,7 +4,6 @@ import FileUpload from "components/Tabs/FileUpload.js";
 import NotificationDropdown from "components/Dropdowns/NotificationDropdown.js";
 import {Field, Form} from 'react-final-form';
 import Link from "next/link";
-import ImageUpload from "components/Tabs/ImageUpload.js";
 import {NonOptions, OuiOptions, prochaineEntretienOptions} from '../../helpers/constant';
 import {Condition, Error} from 'helpers/formValidate';
 import useAnnonces from 'service/hooks/useAnnonces';
@@ -189,12 +188,6 @@ const QuestionsPremier = ({dispatch, loading, car}) => {
                                                                 <i className="fas fa-angle-down text-2xl my-2"></i>
                                                             </div>
                                                             <Error name="premiumOptions.defects"/>
-                                                            <Condition when="premiumOptions.defects" is='true'
-                                                                       className="mt-2">
-                                                                <p className="text-md leading-relaxed text-gray-500"> Télécharger
-                                                                    les défauts du véhicule si il y aura les defauts</p>
-                                                                <ImageUpload/>
-                                                            </Condition>
                                                         </div>
                                                     </div>
                                                     <div className="w-full lg:w-6/12 px-4">

@@ -906,7 +906,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														tableau de bord avec le moteur allumé, de la console centrale
 														etc </p>
 													<p className="text-md leading-relaxed text-orange-500"><i
-														class="fas fa-exclamation-triangle animate-bounce"></i> Conseil
+														className="fas fa-exclamation-triangle animate-bounce"></i> Conseil
 														: Cachez votre plaque d'immatriculation </p>
 													<div className="demoPhotos flex justify-center">
 														<div className="mr-4 p-3">
