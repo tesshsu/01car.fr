@@ -4,30 +4,33 @@ import Auth from "layouts/Auth.js";
 import { Form, Field } from 'react-final-form';
 import * as formValidate from 'helpers/formValidate';
 import useLoggedUser from 'service/hooks/useLoggedUser';
+import {Modal} from "react-responsive-modal";
+import "react-responsive-modal/styles.css";
+import PubContentThreeIcons from "../../layouts/PubContentThreeIcons";
 
 export default function ForgetPassword() {
   const {
     forgetPassword
   } = useLoggedUser();
-  
-  const onSubmit = async (email)=>{
-	try {
-      await forgetPassword(email);
-	  if(email){
-		 alert("verifier votre email");
-	  }
-    } catch (err) {
-      console.log(err.response);
-    }
-  }
-  
+    const [showModal, setShowModal] = React.useState(false);
+    const [isloading, setIsloading] = React.useState(false);
+    const [showError, setShowError] = React.useState(false);
+
   return (
     <>
       <div className="container mx-auto px-4 mt-16 h-full">
+          {showModal ? (
+              <>
+                  <Modal closeOnEsc={false} open={open} onClose={() => setShowModal(false)}>
+                      <PubContentThreeIcons/>
+                      <h2 className="text-2xl font-semibold text-center">Veuillez confirmer votre email pour modifier votre password</h2>
+                  </Modal>
+              </>
+          ) : null}
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-4/12 px-4">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-gray-300 border-0">
-              <div className="rounded-t mb-0 px-6 py-6">              
+              <div className="rounded-t mb-0 px-6 py-6">
                 <hr className="mt-6 border-b-1 border-gray-400" />
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
@@ -40,19 +43,20 @@ export default function ForgetPassword() {
 					  }}
 					  onSubmit={async ({ email, password }) => {
 						await formValidate.sleep(300)
+                          setIsloading(true)
 							try {
 							  await forgetPassword(
-								email.trim()
+								email.trim(),
+                                setShowModal(true),
+                                setIsloading(false)
 							  );
-
-						    Router.back();
 						} catch (err) {
-						  alert("Email incorrects!");
+						    setShowError(true)
 						}
 					  }}
 					  render={({ submitError, handleSubmit, form, submitting, pristine, values, invalid
 					  }) => (
-						<form onSubmit={handleSubmit}>                 
+						<form onSubmit={handleSubmit}>
 						    <Field name="email" validate={formValidate.required}>
 							    {({ input, meta }) => (
 								  <div className="relative w-full mb-3">
@@ -79,6 +83,14 @@ export default function ForgetPassword() {
 							>
 							  Envoyer
 							</button>
+                              {isloading ? (
+                                  <div className="loading text-center text-orange-500 text-xl"><i className="fas fa-spinner animate-spin"></i></div>
+                              ):(
+                                  null
+                              )}
+                              {showError? (
+                                  <p className="loading text-center text-orange-500 text-xl"></p>
+                              ): null}
 						  </div>
 						</form>
 					)}
