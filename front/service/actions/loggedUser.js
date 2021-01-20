@@ -5,7 +5,6 @@ export const LOGIN_PROVIDER = 'loggedUser/LOGIN_PROVIDER';
 export const LOGIN = 'loggedUser/LOGIN';
 export const LOGOUT = 'loggedUser/LOGOUT';
 export const UPDATE = 'loggedUser/UPDATE';
-export const FETCH = 'loggedUser/FETCH';
 
 export const GET_USER_SUCCESS = 'loggedUser/GET_USER_SUCCESS';
 

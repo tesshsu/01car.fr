@@ -11,12 +11,12 @@ export function register(payload) {
 }
 
 export function forget_password({ email }) {
-  return client.post('/api/auth/forget_password', { email })
+  return client.post('/api/password/email', { email })
     .then(({ data }) => data);
 }
 
 export function modify_password({ password }) {
-  return client.post('/api/auth/modify_password', { password })
+  return client.post('/api/password/reset', { password })
     .then(({ data }) => data);
 }
 
