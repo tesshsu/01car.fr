@@ -10,16 +10,35 @@ import {fetchCar} from 'service/actions/cars';
 import Moment from 'react-moment';
 
 import {connect} from 'react-redux'
-import {useRouter} from "next/router";
+import Router, {useRouter} from "next/router";
+import {create} from "../../service/actions/favorites";
+import useLoggedUser from "../../service/hooks/useLoggedUser";
 
 const AnnonceDetail = ({
 						   dispatch,
 						   car
 					   }) => {
 	const router = useRouter();
+	const {
+		isAuthentificated,
+		loggedUser
+	} = useLoggedUser();
+
 	useEffect(() => {
 		dispatch(fetchCar(router.query.id))
 	}, [dispatch])
+
+	const onClickFavorite = async (payload) => {
+		try {
+			if (!isAuthentificated || !loggedUser) {
+				Router.push("/auth/login")
+			} else {
+				dispatch(create(payload));
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	}
 
 	return (
 		<>
@@ -35,7 +54,7 @@ const AnnonceDetail = ({
 				<h4 className="marqueBlock bg-orange-500 font-bold text-2xl text-white px-4 py-3 shadow-lg">
 					<span className="brand">{car?.brand}</span> <span
 					className="generation">{car?.generation} | <i class="fas fa-hourglass-half"></i> <Moment element="fr" locale="fr" fromNow>{car?.expire_at}</Moment></span>
-					<span className="favoris"><FavorisButton/></span>
+					<span className="favoris"><FavorisButton category="car" entity_id={car?.id} action={onClickFavorite}/></span>
 
 				</h4>
 				<h4 className="marqueBlock font-bold text-2xl text-white mt-16 px-4 py-3">

@@ -6,7 +6,6 @@ import {fetchFavorites} from "../../service/actions/favorites";
 
 const AnnonceFavoris = ({
                             loading,
-                            dispatch,
                             favorites,
                             hasErrors
                         }) => {
@@ -14,11 +13,6 @@ const AnnonceFavoris = ({
     if (loading) {
         return <p>Loading annonces...</p>;
     }
-
-    useEffect(() => {
-        console.log(favorites);
-    }, [dispatch]);
-
 
     return (
         <>
@@ -118,14 +112,7 @@ const AnnonceFavoris = ({
 
 const mapStateToProps = (state) => ({
     loading: state.favoritesReducer.loading,
-    favorites: state.favoritesReducer.favorites,
-    current_page: state.favoritesReducer.current_page,
-    from: state.favoritesReducer.from,
-    to: state.favoritesReducer.to,
-    per_page: state.favoritesReducer.per_page,
-    last_page: state.favoritesReducer.last_page,
-    total: state.favoritesReducer.total,
-    hasErrors: state.favoritesReducer.hasErrors,
+    favorites: state.favoritesReducer.favorites
 })
 
 export default connect(mapStateToProps)(AnnonceFavoris);

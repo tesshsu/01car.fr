@@ -52,6 +52,7 @@ class FavoriteController extends Controller
     {
         $reqFavorite = (object)$request->json()->all();
         $currentUser = Auth::user();
+        $reqFavorite->user_id = $currentUser->id;
 
         // Validate
         $validator = $this->validateEntity($reqFavorite, null);
@@ -138,11 +139,19 @@ class FavoriteController extends Controller
     }
 
 
-    private function validateEntity($reqFavorite, $favorite)
+    private function validateEntity($reqFavorite, Favorite $favorite =  null)
     {
         return Validator::make((array)$reqFavorite, [
             'category' => ['required', 'max:' . Favorite::fieldsSizeMax('category'), Rule::in(FavoriteCategory::list()) ],
-            'entity_id' => ['required', 'integer'],
+            'entity_id' => ['required',
+                'integer',
+                Rule::unique('favorites')->where(function ($query) use ($reqFavorite) {
+                    return $query->where('category', $reqFavorite->category)
+                        ->where('entity_id', $reqFavorite->entity_id)
+                        ->where('user_id', $reqFavorite->user_id);
+                }),
+                ],
+
         ],
             $messages = [
                 'required' => 'The :attribute field is required.',

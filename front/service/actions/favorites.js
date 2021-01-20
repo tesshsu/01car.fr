@@ -99,7 +99,7 @@ export function fetchFavorite(id) {
         dispatch(getFavorite())
 
         try {
-            const response = await API.Annonces.get(id);
+            const response = await API.Favorites.get(id);
             dispatch(getFavoriteSuccess(response));
 
         } catch (error) {
@@ -111,7 +111,7 @@ export function fetchFavorite(id) {
 export function create(payload) {
     return async (dispatch) => {
         try {
-            const response = await API.Annonces.create(
+            const response = await API.Favorites.create(
                 payload
             );
             dispatch(createFavoriteSuccess(response));
@@ -127,7 +127,7 @@ export function create(payload) {
 export function deleteFavorite(carId, payload) {
     return async (dispatch) => {
         try {
-            const response = await API.Annonces.deleteFavorite(carId, payload);
+            const response = await API.Favorites.deleteFavorite(carId, payload);
             dispatch(deleteFavoriteSuccess(carId, response));
         } catch (err) {
             await dispatch(deleteFavoriteFailure(carId,));

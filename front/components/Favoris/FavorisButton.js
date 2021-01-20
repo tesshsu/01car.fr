@@ -1,58 +1,58 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import useLoggedUser from 'service/hooks/useLoggedUser';
 import Router from "next/router";
+import {create} from "../../service/actions/favorites";
 
 
-export default function FavorisButton() {
-  const {
-    isAuthentificated,
-    loggedUser
-  } = useLoggedUser();
+export default function FavorisButton(props) {
+    const {
+        isAuthentificated,
+        loggedUser
+    } = useLoggedUser();
 
-  let [tokken,settokken]=useState(null);
+    useEffect(() => {
 
-  useEffect(() => {
-    if (isAuthentificated && loggedUser) {
-        try{
-			const getTokken=async ()=>{
-              const tok= await localStorage.getItem('ACCESS_TOKEN');
-			  if(tok){
-				settokken(tok);
-			  }
-			}
-			getTokken();
-		}catch(err){
-			console.log(err);
-        }
+    }, [isAuthentificated, loggedUser]);
+
+    const [isClick, setIsClick] = React.useState(false);
+
+    const style = {
+        color: isClick ? '#ed8936' : '#fff',
     }
-  }, [isAuthentificated, loggedUser]);
 
-  const [isClick, setIsClick] = React.useState(false);
+    const onClickFavoris = (e) => {
+        e.preventDefault();
 
-  const style = {
-    color: isClick ? '#ed8936' : '#fff',
-  }
+        let payload = {
+            "category": props.category,
+            "entity_id": props.entity_id
+        }
+        props.action(payload);
 
-  const onClickFavoris = (e) => {
-    e.preventDefault()
-    setIsClick(true)
-  }
+        // if (!isAuthentificated || !loggedUser) {
+        //     Router.push("/auth/login")
+        // } else {
+        //
+        //
+        //     console.log(payload);
+        //     create(payload);
+            setIsClick(true);
 
-  const handleClickToLogin = (e) => {
-    e.preventDefault()
-    Router.push("/auth/login")
-  }
+        // }
 
-  return (
-   <>
-        <button
-				className="bg-gray-600 w-8 h-8 rounded-full outline-none focus:outline-none ml-2 mb-1"
-				type="button"
-				onClick={!isAuthentificated || (tokken = null) ? handleClickToLogin : onClickFavoris}
-		>
-		  <i className="far fa-heart" style={style}></i>
-		</button>
-        { isClick ? <span className="text-xs text-gray-500"> Ajoutées</span> : null }
-    </>
-  );
+    }
+
+
+    return (
+        <>
+            <button
+                className="bg-gray-600 w-8 h-8 rounded-full outline-none focus:outline-none ml-2 mb-1"
+                type="button"
+                onClick={onClickFavoris}
+            >
+                <i className="far fa-heart" style={style}> </i>
+            </button>
+            {isClick ? <span className="text-xs text-gray-500"> Ajoutées</span> : null}
+        </>
+    );
 }
