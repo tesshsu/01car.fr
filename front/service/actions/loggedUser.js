@@ -35,12 +35,11 @@ export function login({email, password}) {
   };
 }
 
-export function forget_password({email}) {
+export function forget_password(payload) {
   return async (dispatch) => {
     dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Sending...'));
     try {
-      await API.Auth.forget_password({email});
-      await dispatch(fetch());
+      await API.Auth.forget_password(payload);
     } catch (err) {
       throw err;
     } finally {
@@ -49,12 +48,11 @@ export function forget_password({email}) {
   };
 }
 
-export function modify_password(password) {
+export function modify_password(payload) {
   return async (dispatch) => {
     dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(true, 'Sending...'));
     try {
-      await API.Auth.modify_password({password});
-      await dispatch(fetch());
+      await API.Auth.modify_password(payload);
     } catch (err) {
       throw err;
     } finally {

@@ -26,7 +26,7 @@ export default function useLoggedUser() {
   );
 
   const modifyPassword = useCallback(
-    password => dispatch(LOGGED_USER_ACTIONS.modify_password(password)),
+      payload => dispatch(LOGGED_USER_ACTIONS.modify_password(payload)),
     [dispatch]
   );
 

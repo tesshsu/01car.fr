@@ -145,7 +145,7 @@ export default function Login() {
 
                 <Link href="/auth/forget_password">
 					<a
-					  href="#pablo"
+					  href="/auth/forget_password"
 					  className="text-gray-300"
 					>
 					  <small>Mot de passe oublié ?</small>

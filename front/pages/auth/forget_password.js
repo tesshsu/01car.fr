@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import Auth from "layouts/Auth.js";
+import Auth from "../../layouts/Auth.js";
 import { Form, Field } from 'react-final-form';
-import * as formValidate from 'helpers/formValidate';
-import useLoggedUser from 'service/hooks/useLoggedUser';
+import * as formValidate from '../../helpers/formValidate';
+import useLoggedUser from '../../service/hooks/useLoggedUser';
 import {Modal} from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import PubContentThreeIcons from "../../layouts/PubContentThreeIcons";
@@ -41,13 +41,13 @@ export default function ForgetPassword() {
 					  initialValues={{
                           email: ''
 					  }}
-					  onSubmit={async ({email}) => {
+					  onSubmit={async (values) => {
 						await formValidate.sleep(300)
                           setIsloading(true)
 							try {
-							  await forgetPassword(email.trim());
-                                setIsloading(false),
-                                setShowModal(true)
+							  await forgetPassword({ email : values?.email.trim()});
+                                setIsloading(false);
+                                setShowModal(true);
 						} catch (err) {
 						    setShowError(true)
 						}

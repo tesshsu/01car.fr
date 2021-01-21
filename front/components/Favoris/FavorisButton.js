@@ -1,7 +1,5 @@
 import React, {useEffect} from 'react';
 import useLoggedUser from 'service/hooks/useLoggedUser';
-import Router from "next/router";
-import {create} from "../../service/actions/favorites";
 
 
 export default function FavorisButton(props) {
