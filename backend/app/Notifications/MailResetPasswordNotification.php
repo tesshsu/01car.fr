@@ -24,7 +24,7 @@ class MailResetPasswordNotification extends ResetPassword
     public function __construct($token)
     {
         parent::__construct($token);
-        $this->pageUrl = env('APP_FRONTEND_PASSWORD_RESET_URL', route('password.reset'));
+        $this->pageUrl = env('01CAR_FRONT_PASSWORD_RESET_URL', route('password.reset'));
         //
     }
 
