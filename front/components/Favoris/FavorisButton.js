@@ -27,7 +27,6 @@ export default function FavorisButton(props) {
         }
         props.action(payload);
         setIsClick(true);
-
     }
 
 

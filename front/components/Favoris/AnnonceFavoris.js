@@ -30,7 +30,7 @@ const AnnonceFavoris = ({
     return (
         <>
             {favorites?.map(favorite => (
-                <div className="container px-4 mx-auto">
+                <div className="container px-4 mx-auto" id={favorite?.entity?.id} >
                     <div className="favoris-block flex-wrap">
                         <div className="w-full px-4 mt-4 flex-1">
                             {favorite?.entity?.uploads?.length > 0 ? (

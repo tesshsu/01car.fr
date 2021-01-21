@@ -16,7 +16,8 @@ import useLoggedUser from "../../service/hooks/useLoggedUser";
 
 const AnnonceDetail = ({
 						   dispatch,
-						   car
+						   car,
+						   favorites
 					   }) => {
 	const router = useRouter();
 	const {
@@ -24,11 +25,16 @@ const AnnonceDetail = ({
 		loggedUser
 	} = useLoggedUser();
 
+	const isFavorite = (id) => {
+		let currentFavoritesIs = favorites?.map(i => i.entity_id);
+		return currentFavoritesIs.includes(id);
+	}
+
 	useEffect(() => {
 		dispatch(fetchCar(router.query.id))
 	}, [dispatch])
 
-	const onClickFavorite = async (payload) => {
+	const onClickFavoris = async (payload) => {
 		try {
 			if (!isAuthentificated || !loggedUser) {
 				Router.push("/auth/login")
@@ -54,7 +60,16 @@ const AnnonceDetail = ({
 				<h4 className="marqueBlock bg-orange-500 font-bold text-2xl text-white px-4 py-3 shadow-lg">
 					<span className="brand">{car?.brand}</span> <span
 					className="generation">{car?.generation} | <i class="fas fa-hourglass-half"></i> <Moment element="fr" locale="fr" fromNow>{car?.expire_at}</Moment></span>
-					<span className="favoris"><FavorisButton category="car" entity_id={car?.id} action={onClickFavorite}/></span>
+					<span className="favoris">
+						{isFavorite(car?.id) ? (
+							<button
+								className="bg-orange-500 w-8 h-8 rounded-full outline-none focus:outline-none ml-2 mb-1"
+								type="button"
+							>
+								<i className="fas fa-heart text-white"> </i>
+							</button>
+						): (<FavorisButton category="car" entity_id={car?.id} action={onClickFavoris}/>)}
+					</span>
 
 				</h4>
 				<h4 className="marqueBlock font-bold text-2xl text-white mt-16 px-4 py-3">
@@ -84,6 +99,7 @@ const mapStateToProps = (state) => ({
 	loading: state.carsReducer.loading,
 	car: state.carsReducer.selectedCar,
 	hasErrors: state.carsReducer.hasErrors,
+	favorites: state.favoritesReducer.favorites
 })
 
 export default connect(mapStateToProps)(AnnonceDetail)

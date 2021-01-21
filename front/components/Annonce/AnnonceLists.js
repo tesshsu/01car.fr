@@ -11,15 +11,22 @@ const AnnonceLists = ({
                           loading,
                           dispatch,
                           cars,
-                          hasErrors
+                          hasErrors,
+                          favorites
                       }) => {
 
     const [search, setSearch] = useState("");
     const [filteredCars, setFilteredCars] = useState([]);
+    const [isAlreadyFavorite, setIsAlreadyFavorite] = React.useState(false)
     const {
         isAuthentificated,
         loggedUser
     } = useLoggedUser();
+
+    const isFavorite = (id) => {
+        let currentFavoritesIs = favorites?.map(i => i.entity_id);
+        return currentFavoritesIs.includes(id);
+    }
 
     useEffect(() => {
         setFilteredCars(
@@ -28,17 +35,15 @@ const AnnonceLists = ({
                 car.version?.toLowerCase().includes(search.toLowerCase())
             )
         );
+
     }, [search, cars]);
 
     const onClickFavoris = async (payload) => {
         try {
-            if (!isAuthentificated || !loggedUser) {
-                Router.push("/auth/login")
-            } else {
-                dispatch(create(payload));
-            }
+            dispatch(create(payload));
         } catch (err) {
             console.log(err);
+            setIsAlreadyFavorite(true)
         }
     }
 
@@ -96,7 +101,19 @@ const AnnonceLists = ({
                             <div className="w-full px-4 py-2 flex-1">
                                 <h4 className="font-bold text-lg text-orange-700">
                                     <span className="uppercase">{car.brand}</span> - {car?.model} | {car?.version}
-                                    <FavorisButton category="car" entity_id={car?.id} action={onClickFavoris}/>
+                                    {isFavorite(car?.id) ? (
+                                        <button
+                                            className="bg-orange-500 w-8 h-8 rounded-full outline-none focus:outline-none ml-2 mb-1"
+                                            type="button"
+                                        >
+                                            <i className="far fa-heart"> </i>
+                                        </button>
+                                    ): (<FavorisButton category="car" entity_id={car?.id} action={onClickFavoris}/>)}
+
+                                    {isAlreadyFavorite && (
+                                        <div className="favorisIcon text-orange-500">Déjà ajoutée</div>
+                                    )}
+
                                 </h4>
                                 <p className="text-md leading-relaxed text-gray-500">
                                     <Moment
@@ -198,6 +215,7 @@ const mapStateToProps = (state) => ({
     last_page: state.carsReducer.last_page,
     total: state.carsReducer.total,
     hasErrors: state.carsReducer.hasErrors,
+    favorites: state.favoritesReducer.favorites
 })
 
 export default connect(mapStateToProps)(AnnonceLists)
