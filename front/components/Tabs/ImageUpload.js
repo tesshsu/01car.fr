@@ -95,20 +95,21 @@ const ImageUpload = ({
 
     const onChange = async (imageList, addUpdateIndex) => {
         // check for images to removed
-        let currentImagesIds = imageList.map(i => i.id);
-        let imagesRemoved = images.filter(img => !currentImagesIds.includes(img.id));
-
-        if(imagesRemoved.length > 0){
-            imagesRemoved.forEach(img => {
-                let { id } = img;
-                try {
-                    const response = removePhoto(car?.id, {id});
-                } catch (err) {
-                    console.log('Impossible supprimer photos', err);
-                }
-            });
+        if(car.length > 0){
+            let currentImagesIds = imageList.map(i => i.id);
+            let imagesRemoved = images.filter(img => !currentImagesIds.includes(img.id));
+            if(imagesRemoved.length > 0){
+                imagesRemoved.forEach(img => {
+                    let { id } = img;
+                    try {
+                        const response = removePhoto(car?.id, {id});
+                    } catch (err) {
+                        console.log('Impossible supprimer photos', err);
+                    }
+                });
+            }
         }
-
+        
         // Handle new images
         if (addUpdateIndex !== undefined) {
             const image = imageList[addUpdateIndex];

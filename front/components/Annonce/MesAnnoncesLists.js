@@ -114,6 +114,11 @@ const MesAnnoncesLists = ({
                                           className="fas fa-calendar-check"></i> <Moment
                                           format="DD/MM/YYYY">{car.created_at}</Moment></span>
                                     </div>
+                                      {car.premium == true && (
+                                          <span className="myAnnocePremium relative font-bold text-2xl uppercase text-orange-500 mt-4 ml-2"><i
+                                              className="far fa-thumbs-up animate-bounce"></i>
+                                          </span>
+                                      )}
                                   </div>
                             </div>
                                 <div className="button-block justify-left">
