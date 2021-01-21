@@ -43,7 +43,7 @@ const AnnonceLists = ({
     }
 
     if (loading) {
-        return <p>Loading annonces...</p>;
+        return <p>Chargement des annonces ...</p>;
     }
 
     return (

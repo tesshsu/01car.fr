@@ -26,17 +26,7 @@ export default function FavorisButton(props) {
             "entity_id": props.entity_id
         }
         props.action(payload);
-
-        // if (!isAuthentificated || !loggedUser) {
-        //     Router.push("/auth/login")
-        // } else {
-        //
-        //
-        //     console.log(payload);
-        //     create(payload);
-            setIsClick(true);
-
-        // }
+        setIsClick(true);
 
     }
 

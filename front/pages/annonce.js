@@ -15,8 +15,8 @@ const Annonce = ({dispatch,
                 per_page,
                 last_page,
                 total,
-                hasErrors,
-                 id}) => {
+                hasErrors,}) => {
+
    return (
     <>
       <IndexNavbar fixed />
@@ -50,7 +50,7 @@ const mapStateToProps = (state) => ({
     per_page: state.carsReducer.per_page,
     last_page: state.carsReducer.last_page,
     total: state.carsReducer.total,
-    hasErrors: state.carsReducer.hasErrors,
+    hasErrors: state.carsReducer.hasErrors
 })
 
 export default connect(mapStateToProps)(Annonce)

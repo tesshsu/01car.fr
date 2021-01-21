@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-
+import Link from "next/link";
 import IndexNavbar from "../components/Navbars/IndexNavbar.js";
 import Footer from "../components/Footers/Footer.js";
 import AnnonceFavoris from "../components/Favoris/AnnonceFavoris.js";
@@ -8,7 +8,6 @@ import {listPubs} from "../helpers/constant";
 import {connect} from "react-redux";
 import {useRouter} from "next/router";
 import {fetchFavorites} from '../service/actions/favorites';
-
 const Favoris = ({ dispatch,
                       loading,
                       favorites,
@@ -48,16 +47,42 @@ const Favoris = ({ dispatch,
                     <div className="container mx-auto px-4">
                         <div className="flex flex-wrap">
                             <AnnonceFavoris transparent/>
+                            { total == 0  ? (
+                                <div className="container mx-auto text-center">
+                                    <h5 className="text-xl font-semibold pb-4">
+                                        Vous n'avez pas encore des annonces favoris !!
+                                    </h5>
+                                    <button
+                                        className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none  ease-linear transition-all duration-150"
+                                        type="button"
+                                    >
+                                        <Link href="/annonces">
+                                            <a
+                                                href="#pablo"
+                                                className={
+                                                    "text-xl py-1 px-4 font-normal block w-full whitespace-no-wrap font-bold bg-transparent text-white-500"
+                                                }
+                                            >
+                                                <i className="fas fa-arrow-circle-right animate-ping"></i> Voir annonces
+                                            </a>
+                                        </Link>
+                                    </button>
+                                </div>
+                            ):( '' )}
                         </div>
                         <div className="flex content-center items-center justify-center h-full mb-24 mt-8">
-                            <Pagination transparent
-                                        current_page={current_page}
-                                        from={from}
-                                        to={to}
-                                        per_page={per_page}
-                                        last_page={last_page}
-                                        total={total}
-                            />
+                            {total >= 11 ?(
+                                <Pagination transparent
+                                            current_page={current_page}
+                                            from={from}
+                                            to={to}
+                                            per_page={per_page}
+                                            last_page={last_page}
+                                            total={total}
+                                />
+                            ):(
+                                null
+                            ) }
                         </div>
                     </div>
                 </section>

@@ -1,8 +1,8 @@
 import React, {useEffect} from "react";
 import Link from "next/link";
 import {connect} from "react-redux";
-import {fetchFavorites} from "../../service/actions/favorites";
-
+import Moment from 'react-moment';
+import useFavorites from "../../service/hooks/useFavorites";
 
 const AnnonceFavoris = ({
                             loading,
@@ -11,7 +11,20 @@ const AnnonceFavoris = ({
                         }) => {
 
     if (loading) {
-        return <p>Loading annonces...</p>;
+        return <p>Chargement des annonces ...</p>;
+    }
+    const {
+        deleteFavorite
+    } = useFavorites();
+
+    const handleDelete = async (id) => {
+        try {
+            if (confirm('Voulez vous vraiment supprimer cette annonce?')) {
+                await deleteFavorite(id, {});
+            }
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     return (
@@ -37,7 +50,7 @@ const AnnonceFavoris = ({
                         <div className="w-full px-4 flex-1">
 			  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">
 			        <div className="top justify-between">
-					  <div className="font-bold text-lg text-orange-700 text-center py-2 m-2">
+					  <div className="font-bold text-3xl text-orange-700 text-center py-2 m-2">
 					     {favorite?.entity?.brand} - {favorite?.entity?.model}
 					  </div>
 					  <div class="price font-bold text-orange-500  text-2xl text-center bg-gray-400 px-4 py-2">
@@ -48,11 +61,11 @@ const AnnonceFavoris = ({
 					  <div className="flex flex-wrap">
 							<div className="w-1/3">
 							  <span
-                                  className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorite?.entity?.Energie}</span>
+                                  className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorite?.entity?.fuel}</span>
 							</div>
 							<div className="w-1/3">
 							  <span
-                                  className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorite?.entity?.Boite}</span>
+                                  className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorite?.entity?.transmission}</span>
 							</div>
 							<div className="w-1/3">
 							  <span
@@ -60,7 +73,8 @@ const AnnonceFavoris = ({
 							</div>
 							<div className="w-1/3">
 							  <span
-                                  className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorite?.entity?.year}</span>
+                                  className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200"><Moment
+                                  format="DD/MM/YYYY">{favorite?.entity?.dt_entry_service}</Moment></span>
 							</div>
 						  </div>
 					</div>
@@ -69,35 +83,34 @@ const AnnonceFavoris = ({
                             className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 mr-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
                             type="button"
                         >
-						  <Link href="/annonce">
-							  <a
-                                  href="#pablo"
-                                  className={
-                                      "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
-                                  }
-                              >
-								Voir <i className="fas fa-clipboard-check"></i>
-							  </a>
-						  </Link>
+						      <Link href={favorite?.entity?.id ? (`/annonce?id=${favorite?.entity?.id}`) : ("#")} {...favorite}>
+                                          <a
+                                              href={favorite?.entity?.id ? (`/annonce?id=${favorite?.entity?.id}`) : ("#")}
+                                              className={
+                                                  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
+                                              }
+                                          >
+                                            Voir <i className="fas fa-clipboard-check"></i>
+                                          </a>
+						      </Link>
 						</button>
 						 <button
                              className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
                              type="button"
                          >
-						  <Link href="/annonces">
-							  <a
-                                  href="#pablo"
-                                  className={
-                                      "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
-                                  }
-                              >
-								Supprimer l'annonce <i className="fas fa-trash"></i>
-							  </a>
-						  </Link>
-						</button>
+                                          <a
+                                              href="#"
+                                              onClick={(e) => handleDelete(favorite?.id)}
+                                              className={
+                                                  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
+                                              }
+                                          >
+                                            Supprimer l'annonce <i className="fas fa-trash"></i>
+                                          </a>
+                                    </button>
                     </div>
 					<p className="mt-4 px-6 py-2 text-md leading-relaxed bg-gray-600 text-white font-bold uppercase rounded text-center">
-						NOTE DE CONFIANCE: {favorite?.entity?.nc}/20
+						NOTE DE CONFIANCE: {favorite?.entity?.confidence_note}/20
 				    </p>
 
 			  </span>

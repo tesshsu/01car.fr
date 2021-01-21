@@ -12,12 +12,6 @@ const MesAnnoncesLists = ({
                               dispatch,
                               loading,
                               cars,
-                              current_page,
-                              from,
-                              to,
-                              per_page,
-                              last_page,
-                              total,
                               hasErrors
                           }) => {
 
@@ -42,7 +36,7 @@ const MesAnnoncesLists = ({
     }, [dispatch])
 
     if (loading) {
-        return <p>Loading annonces...</p>;
+        return <p>Chargement des annonces ...</p>;
     }
 
     if(hasErrors){

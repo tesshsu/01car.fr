@@ -64,12 +64,12 @@ export const deleteFavoriteAction = () => ({
     type: DELETE_FAVORITE,
 });
 
-export const deleteFavoriteSuccess = (carId, response) => ({
+export const deleteFavoriteSuccess = (favoriteId, response) => ({
     type: DELETE_FAVORITE_SUCCESS,
-    payload: {carId, response}
+    payload: {favoriteId, response}
 })
 
-export const deleteFavoriteFailure = (carId) => ({
+export const deleteFavoriteFailure = (favoriteId) => ({
     type: DELETE_FAVORITE_FAILURE,
 });
 
@@ -124,13 +124,13 @@ export function create(payload) {
     };
 }
 
-export function deleteFavorite(carId, payload) {
+export function deleteFavorite(favoriteId, payload) {
     return async (dispatch) => {
         try {
-            const response = await API.Favorites.deleteFavorite(carId, payload);
-            dispatch(deleteFavoriteSuccess(carId, response));
+            const response = await API.Favorites.deleteFavorite(favoriteId, payload);
+            dispatch(deleteFavoriteSuccess(favoriteId, response));
         } catch (err) {
-            await dispatch(deleteFavoriteFailure(carId,));
+            await dispatch(deleteFavoriteFailure(favoriteId,));
             throw err;
         } finally {
             dispatch(LOADING_OVERLAY_ACTIONS.setVisibility(false));
