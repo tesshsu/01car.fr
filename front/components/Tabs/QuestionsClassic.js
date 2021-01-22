@@ -226,7 +226,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 							</li>
 						)}
 					</ul>
-					{editCar && (
+					{editCar ? (
 						<div className="w-full px-4 flex-1 text-center">
 							<p className="text-md font-semibold text-center">Vous êtes en train de modifier votre annonce <i
 								className="far fa-edit animate-bounce"></i></p>
@@ -237,6 +237,11 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 								<i className="fas fa-pen-square"></i> Je veux créé autre annonce
 
 							</button>
+						</div>
+					) :(
+						<div className="w-full px-4 flex-1 text-center">
+							<p className="text-md font-semibold text-center">Veuillez préparer votre carte grise avant remplir les questionnaires <i
+								className="far fa-edit animate-bounce"></i></p>
 						</div>
 					)}
 					<div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">

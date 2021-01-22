@@ -22,6 +22,7 @@ const CardAnnonceSlider = ({ dispatch,
 				);
 			},
 		  dots: true,
+		  arrows: true,
 		  dotsClass: "slick-dots slick-thumb",
 		  adaptiveHeight: false,
 		  className: "annoceSlider",

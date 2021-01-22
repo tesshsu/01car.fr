@@ -54,12 +54,12 @@ const AnnonceDetail = ({
 					<img
 							alt="..."
 							src={require("assets/img/qualite_logo.png")}
-							className="hasPrenium w-full align-center togBadge animate-ping ease-in-out"
+							className="hasPrenium w-full align-center togBadgeBig animate-ping ease-in-out"
 					/> ) : ( null )
 				}
 				<h4 className="marqueBlock bg-orange-500 font-bold text-2xl text-white px-4 py-3 shadow-lg">
 					<span className="brand">{car?.brand}</span> <span
-					className="generation">{car?.generation} | <i class="fas fa-hourglass-half"></i> <Moment element="fr" locale="fr" fromNow>{car?.expire_at}</Moment></span>
+					className="generation">{car?.generation} | <i class="fas fa-hourglass-half"></i> <Moment format="DD" element="fr" locale="fr" fromNow>{car?.expire_at}</Moment> Jours </span>
 					<span className="favoris">
 						{isFavorite(car?.id) ? (
 							<button

@@ -78,7 +78,7 @@ const AnnonceLists = ({
                             <img
                                 alt="..."
                                 src={require("assets/img/qualite_logo.png")}
-                                className="w-full align-center togBadge animate-ping ease-in-out"
+                                className="w-full align-center togBadge animate-bounce-small ease-in-out"
                             />
                             <div className="togBadgeTime text-lg pb-2">
                                 <i className="far fa-clock"></i> <Moment format="DD/MM/YYYY">{car?.created_at}</Moment>

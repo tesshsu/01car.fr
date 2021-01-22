@@ -3939,6 +3939,17 @@ video {
 }
 
 /*pages layout*/
+.slick-prev:before, .slick-next:before{
+  color: #ed8936 !important;
+  font-size: 3rem !important;
+}
+.slick-prev{
+  left: 3px!important;
+  z-index: 30 !important;
+}
+.slick-next{
+  right: 30px!important;
+}
 .bannerCompare{
 	position: absolute;
     top: 10px;
@@ -3958,9 +3969,13 @@ video {
 }
 .togBadge{
 	position: absolute;
-    top: 30px;
-    right: 30px;
-    width: 100px;
+    right: 10px;
+    width: 70px;
+}
+.togBadgeBig{
+  position: absolute;
+  right: 10px;
+  width: 100px
 }
 .togBadgePrix{
 	position: absolute;
