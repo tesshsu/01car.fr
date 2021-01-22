@@ -51,6 +51,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 		dt_entry_service: car?.dt_entry_service,
 		km: car?.km,
 		license_plate: car?.license_plate,
+		codePostal:  car?.codePostal,
 		dt_valuation: car?.dt_valuation,
 		score_recognition: car?.score_recognition,
 		score_valuation: car?.score_valuation,
@@ -345,28 +346,48 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														<Error name="km"/>
 													</div>
 												</div>
-												<div className="flex flex-wrap mt-2 px-4">
-													<label
-														className="block uppercase text-gray-700 text-md font-bold mb-2"
-														htmlFor="license_plate"
-													>
-														{editCar ? "Immatriculation :" : "*Immatriculation :"}
-													</label>
-													<div
-														className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
+												<div className="flex flex-wrap">
+													<div className="w-full lg:w-6/12 px-4">
+														<label
+															className="block uppercase text-gray-700 text-md font-bold mb-2"
+															htmlFor="license_plate"
+														>
+															{editCar ? "Immatriculation :" : "*Immatriculation :"}
+														</label>
+														<div
+															className="fa-select relative flex w-full flex-wrap items-stretch mb-3">
+															<Field
+																name="license_plate"
+																validate={formValidate.composeValidators(formValidate.required, formValidate.matchImmatriculation)}
+																component="input"
+																type="text"
+																value={values.license_plate}
+																placeholder="AA-123-BC"
+																className="px-3 py-2 placeholder-gray-400 text-gray-700 relative border border-gray-400 bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
+															/>
+															<Error name="license_plate"/>
+															<div className="text-sm leading-relaxed text-gray-600">cette
+																information ne sera pas visible sur l'annonce.
+															</div>
+														</div>
+													</div>
+													<div className="w-full lg:w-6/12 px-4">
+														<label
+															className="block uppercase text-gray-700 text-md font-bold mb-2"
+															htmlFor="codePostal"
+														>
+															{editCar ? "Code postal :" : "*Code postal :"}
+														</label>
 														<Field
-															name="license_plate"
-															validate={formValidate.composeValidators(formValidate.required, formValidate.matchImmatriculation)}
+															name="codePostal"
+															validate={formValidate.composeValidators(formValidate.required, formValidate.matchCodepostal)}
 															component="input"
 															type="text"
-															value={values.license_plate}
-															placeholder="AA-123-BC"
+															value={values.codePostal}
+															placeholder="06130"
 															className="px-3 py-2 placeholder-gray-400 text-gray-700 relative border border-gray-400 bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 														/>
-														<Error name="license_plate"/>
-														<div className="text-sm leading-relaxed text-gray-600">cette
-															information ne sera pas visible sur l'annonce.
-														</div>
+														<Error name="codePostal"/>
 													</div>
 												</div>
 
