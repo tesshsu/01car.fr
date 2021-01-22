@@ -926,11 +926,16 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														<i className="fas fa-arrow-down text-base mr-1 animate-bounce"></i> ÉTAPE
 														2
 													</div>
-													<p className="text-md leading-relaxed text-gray-500"> Telecharger 10
-														photos MAX pour publier votre annonce ( ficher jpg, png, gif ),
+													<p className="text-md leading-relaxed text-gray-500"> Telecharger des
+														photos pour publier votre annonce ( ficher jpg, png, gif ),
 														Téléchargez des photos de votre voiture depuis l'extérieur, du
 														tableau de bord avec le moteur allumé, de la console centrale
 														etc </p>
+													{editCar && car?.premium == true ? (
+														<p className="text-md leading-relaxed text-orange-500"> Vous auriez 10 photos pour Télécharger (forfait premium)</p>
+													):(
+														<p className="text-md leading-relaxed text-orange-500"> Vous auriez 3 photos pour Télécharger (basic)</p>
+													)}
 													<p className="text-md leading-relaxed text-orange-500"><i
 														className="fas fa-exclamation-triangle animate-bounce"></i> Conseil
 														: Cachez votre plaque d'immatriculation </p>

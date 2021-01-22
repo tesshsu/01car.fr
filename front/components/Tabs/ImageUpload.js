@@ -14,13 +14,14 @@ const ImageUpload = ({
                          hasErrors
                      }) => {
     const [images, setImages] = React.useState([]);
-    const [isUpload, setIsUpload] = React.useState(false);
     const {
         addPhoto,
         removePhoto
-    } = useAnnonces();
-    const maxNumber = 10;
+    } = useAnnonces();;
     const router = useRouter();
+    const Ispremium = car?.premium
+    let maxNumber = Ispremium == true ? 10 : 3;
+
     useEffect(() => {
         let imageList = car?.uploads.map(upload => {
             let image = {};
@@ -83,7 +84,7 @@ const ImageUpload = ({
                     </div>
                     { imageList.length > maxNumber ? (
                         <p className="text-center text-lg mt-4 text-orange-500"><i
-                            className="fas fa-exclamation-triangle animate-bounce"></i> Telecharger 10 photos MAX</p>
+                            className="fas fa-exclamation-triangle animate-bounce"></i> Telecharger {maxNumber} photos MAX</p>
                     ):(
                         null
                     )}
@@ -109,7 +110,7 @@ const ImageUpload = ({
                 });
             }
         }
-        
+
         // Handle new images
         if (addUpdateIndex !== undefined) {
             const image = imageList[addUpdateIndex];
