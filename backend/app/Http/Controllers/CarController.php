@@ -63,7 +63,45 @@ class CarController extends Controller
             }
         }
 
+        // filter on price
+        if ($request->has('price_min')) {
+            $price_min = $request->query('price_min');
+            $carsReq->where('price', '>=', $price_min);
+        }
+        if ($request->has('price_max')) {
+            $price_max = $request->query('price_max');
+            $carsReq->where('price', '<=', $price_max);
+        }
+
+        // filter on km
+        if ($request->has('km_min')) {
+            $km_min = $request->query('km_min');
+            $carsReq->where('km', '>=', $km_min);
+        }
+        if ($request->has('km_max')) {
+            $km_max = $request->query('km_max');
+            $carsReq->where('km', '<=', $km_max);
+        }
+
+        // filter on postal
+        if ($request->has('postal_code')) {
+            $postal_code = Str::of($request->query('postal_code'))->trim();
+            $carsReq->where('postal_code', 'like', $postal_code . '%');
+        }
+
+        if ($request->has('brand')) {
+            $brands = Str::of($request->query('brand'))->split('/[\s,]+/');;
+            $brands->each(function ($brand, $key) use ($carsReq) {
+                $carsReq->where(function ($query) use ($brand) {
+                    $query->where('brand', 'like', '%' . $brand . '%')
+                        ->orWhere('model', 'like', '%' . $brand . '%');
+                });
+            });
+
+        }
+
         $carsReq->orderBy('premium', 'desc');
+        
         $carsLengthAwarePaginator = $carsReq->paginate($request->perPage, ['*'], $request->pageName, $request->page);
 
         return response()->json(new CarPaginatorCollection($carsLengthAwarePaginator));
