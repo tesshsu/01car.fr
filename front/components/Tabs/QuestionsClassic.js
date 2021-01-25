@@ -380,10 +380,10 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														</label>
 														<Field
 															name="codePostal"
-															validate={formValidate.composeValidators(formValidate.required, formValidate.matchCodepostal)}
+															//validate={formValidate.composeValidators(formValidate.required, formValidate.matchCodepostal)}
 															component="input"
 															type="text"
-															value={values.codePostal}
+															//value={values.codePostal}
 															placeholder="06130"
 															className="px-3 py-2 placeholder-gray-400 text-gray-700 relative border border-gray-400 bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 														/>
