@@ -18,10 +18,10 @@ export default function Index() {
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
               <h1 className="font-bold text-4xl text-orange-700">
-                  o1car, c'est quoi?
+                  1car, c'est quoi?
               </h1>
               <h1 className="font-bold text-4xl text-orange-700">
-                  01car.fr est le 1er dite d'accompagnement sécurisé pour l'achat ou la vente de votre véhicule.
+                  1car.fr est le 1er dite d'accompagnement sécurisé pour l'achat ou la vente de votre véhicule.
               </h1>
               <div className="mt-4">
                 <button

@@ -15,7 +15,7 @@ export default function FooterAdmin() {
                   href="https://www.creative-tim.com?ref=twnjs-footer-admin"
                   className="text-gray-600 hover:text-gray-800 text-sm font-semibold py-1"
                 >
-                  01car.fr
+                  1car.fr
                 </a>
               </div>
             </div>

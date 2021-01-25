@@ -76,7 +76,7 @@ export default function Policy() {
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-1">
                     <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                      <div className="mr-4 p-3 text-center">                       
+                      <div className="mr-4 p-3 text-center">
 						<span className="text-xl font-bold block uppercase tracking-wide text-orange-500">
                           <i className="far fa-smile text-lg mr-1"></i>
                         </span>
@@ -109,22 +109,22 @@ export default function Policy() {
 					   Qui sont les responsables de traitement de vos données personnelles ?
 					  </h4>
                       <p className="mb-4 text-lg leading-relaxed text-gray-800">
-                        Le site 01car.fr est édité par la société 01car (ci-après « 01car » ou « nous »), sous le n°484680426, en leur qualité de responsables de traitement.
-                        La société 01car est située au Chemin de la pierre du diable,910 RTE de vallauris, 06220 Vallauris. Les coordonnées de son Délégué à la protection des données sont les suivantes : BELKACEM LAOUDI.
-                      </p>					  
+                        Le site 1car.fr est édité par la société 1car (ci-après « 1car » ou « nous »), sous le n°484680426, en leur qualité de responsables de traitement.
+                        La société 1car est située au Chemin de la pierre du diable,910 RTE de vallauris, 06220 Vallauris. Les coordonnées de son Délégué à la protection des données sont les suivantes : BELKACEM LAOUDI.
+                      </p>
 					  <ul>
-					    <li>Le directeur de la publication du site 01car.fr est Monsieur Laoudi Belkacem</li>
+					    <li>Le directeur de la publication du site 1car.fr est Monsieur Laoudi Belkacem</li>
 						<li>L'hébergement du site est effectué par OVH - 2 rue kellermann - BP 80157 - 59053 ROUBAIX Cedex 1.</li>
 					  </ul>
 					  <h4 className="text-2xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
 					   Conditions générales
 					  </h4>
 					   <p className="mb-4 text-lg leading-relaxed text-gray-800">
-                        Les conditions générales de 01car.fr et de ses partenaires sont disponibles ci-dessous :
+                        Les conditions générales de 1car.fr et de ses partenaires sont disponibles ci-dessous :
                       </p>
 					   <ul>
-					    <li>Conditions générales de prestation de 01car.fr </li>
-						<li>Conditions générales de Strip</li>					    
+					    <li>Conditions générales de prestation de 1car.fr </li>
+						<li>Conditions générales de Strip</li>
 					  </ul>
 					  <Link href="/vendre">
                       <a

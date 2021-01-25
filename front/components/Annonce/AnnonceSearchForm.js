@@ -13,7 +13,7 @@ export default function AnnonceSearchForm() {
 			<section className="mt-16">
 				<div className="container px-4 mx-auto border-2 rounded bg-orange-500 py-4 z-40">
                    <h1 className="text-2xl font-semibold text-white text-center">1er Site d'accompagnement sécurisé dans la vente et l'achat de véhicules</h1>
-					<p className="text-md font-light mt-2 text-center">Sur 01car.fr, on cherche et on trouve les meilleurs affaires </p>
+					<p className="text-md font-light mt-2 text-center">Sur 1car.fr, on cherche et on trouve les meilleurs affaires </p>
 					<Form
 						onSubmit={onSubmit}
 						render={({ handleSubmit, form, submitting, pristine, values }) => (

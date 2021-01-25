@@ -109,8 +109,8 @@ export default function dataPersonal() {
 					   Qui sont les responsables de traitement de vos données personnelles ?
 					  </h4>
                       <p className="mb-4 text-lg leading-relaxed text-gray-800">
-                        Vos données personnelles sont traitées par la société 01car (ci-après « 01car » ou « nous »), en leur qualité de responsables de traitement.
-                        La société 01car est située au Chemin de la pierre du diable,910 RTE de vallauris, 06220 Vallauris. Les coordonnées de son Délégué à la protection des données sont les suivantes : BELKACEM LAOUDI.
+                        Vos données personnelles sont traitées par la société 1car (ci-après « 1car » ou « nous »), en leur qualité de responsables de traitement.
+                        La société 1car est située au Chemin de la pierre du diable,910 RTE de vallauris, 06220 Vallauris. Les coordonnées de son Délégué à la protection des données sont les suivantes : BELKACEM LAOUDI.
                       </p>
 					  <h4 className="text-2xl font-semibold leading-normal mb-2 text-gray-800 mb-2">
                           Pourquoi  vos données personnelles sont-elles utilisées ?

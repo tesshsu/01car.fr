@@ -38,7 +38,7 @@ export default function PubContent() {
 					</h1>
 				  <div className="md:pr-12">
 					<h3 className="text-xl font-semibold">
-						Payez le questionnaire 20 pour obtenir une note de <span className="font-bold text-3xl text-orange-500">confiance MAXIMALE</span> et tous les <span className="font-bold text-3xl text-orange-500">AVANTAGES</span> pour vendre votre vehicule sur o1car.fr
+						Payez le questionnaire 20 pour obtenir une note de <span className="font-bold text-3xl text-orange-500">confiance MAXIMALE</span> et tous les <span className="font-bold text-3xl text-orange-500">AVANTAGES</span> pour vendre votre vehicule sur 1car.fr
 					</h3>
 					<p className="mt-4 text-lg leading-relaxed text-gray-600">
 						Mettez toutes les chances de votre côté

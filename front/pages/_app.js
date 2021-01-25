@@ -152,7 +152,7 @@ export default class MyApp extends App {
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
-          <title>01car.fr</title>
+          <title>1car.fr</title>
         </Head>
         <Provider store={store}>
           <Layout>

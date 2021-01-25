@@ -21,7 +21,7 @@ export default function FooterSmall(props) {
                   href="https://01car.fr/"
                   className="text-white hover:text-gray-400 text-sm font-semibold py-1"
                 >
-                  01car.fr
+                  1car.fr
                 </a>
               </div>
             </div>
@@ -67,7 +67,7 @@ export default function FooterSmall(props) {
 					  </a>
 				  </Link>
                 </li>
-				
+
               </ul>
             </div>
           </div>

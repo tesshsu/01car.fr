@@ -49,7 +49,7 @@ export default function Contact() {
                                     <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white">
 
                                             <h4 className="text-2xl font-semibold px-3">
-                                                Contactez 01car.fr par email en remplissant ce formulaire :
+                                                Contactez 1car.fr par email en remplissant ce formulaire :
                                             </h4>
                                             <form className="contact-form py-4 px-4" onSubmit={sendEmail}>
                                                 <input className="block uppercase text-gray-700 text-xs font-bold mb-2"type="hidden" name="contact_number" />
