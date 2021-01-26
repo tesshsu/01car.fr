@@ -97,11 +97,19 @@ class CarController extends Controller
                         ->orWhere('model', 'like', '%' . $brand . '%');
                 });
             });
-
+        }
+        if ($request->has('model')) {
+            $brands = Str::of($request->query('model'))->split('/[\s,]+/');;
+            $brands->each(function ($brand, $key) use ($carsReq) {
+                $carsReq->where(function ($query) use ($brand) {
+                    $query->where('brand', 'like', '%' . $brand . '%')
+                        ->orWhere('model', 'like', '%' . $brand . '%');
+                });
+            });
         }
 
         $carsReq->orderBy('premium', 'desc');
-        
+
         $carsLengthAwarePaginator = $carsReq->paginate($request->perPage, ['*'], $request->pageName, $request->page);
 
         return response()->json(new CarPaginatorCollection($carsLengthAwarePaginator));
@@ -325,6 +333,7 @@ class CarController extends Controller
             'hand_number' => ['integer', 'min:1', 'max:3'],
             'state' => ['max:' . Car::fieldsSizeMax('state'), Rule::in(CarState::list())],
             'country' => ['max:' . Car::fieldsSizeMax('country')],
+            'postal_code' => ['max:' . Car::fieldsSizeMax('postal_code')],
             'equipments.outside' => ['array', Rule::in(OutsideEquipment::list())],
             'equipments.inside' => ['array', Rule::in(InsideEquipment::list())],
             'equipments.anti_theft' => ['array', Rule::in(AntiTheftEquipment::list())],

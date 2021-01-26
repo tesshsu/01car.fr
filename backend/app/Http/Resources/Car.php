@@ -75,6 +75,7 @@ class Car extends JsonResource
             'hand_number' => $this->hand_number,
             'state' => $this->state,
             'country' => $this->country,
+            'postal_code'=> $this->postal_code,
             'owner' => new UserResource($this->whenLoaded('user')),
             'equipments' => $equipments,
             'premiumOptions' => new CarPremiumOptionResource($this->whenLoaded('premiumOptions')),

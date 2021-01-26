@@ -33,7 +33,7 @@ php_path='/opt/plesk/php/7.3/bin/php'
 cd ../backend
 cp .env.prod .env
 
-zip -r backend.zip .
+zip -x 'public/storage' -x 'storage/app/public/files/*' -r backend.zip .
 
 mv backend.zip ../server/target/backend.zip
 
@@ -60,4 +60,5 @@ ssh -o StrictHostKeyChecking=no ${ssh_user}@${server_address}  "cd ${app_path} &
     unzip backend.zip && \
     ${php_path} artisan migrate:fresh --seed  && \
     ${php_path} artisan passport:client --personal"
+
 

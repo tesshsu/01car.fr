@@ -37,6 +37,7 @@ class Car extends Model
         'sale_reason' => 16,
         'state' => 12,
         'country' => 2,
+        'postal_code' => 5,
         'license_plate' => 16
     );
 
@@ -83,6 +84,7 @@ class Car extends Model
         'hand_number',
         'state',
         'country',
+        'postal_code'
     ];
 
     public function user(): HasOne

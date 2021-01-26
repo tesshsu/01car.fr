@@ -60,6 +60,8 @@ class CreateCarsTable extends Migration
             $table->integer('hand_number')->nullable();
             $table->string('state', 12)->nullable();
             $table->string('country', 2)->nullable();
+            $table->string('postal_code', 5)->nullable();
+
 
         });
 
