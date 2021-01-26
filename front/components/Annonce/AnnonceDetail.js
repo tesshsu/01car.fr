@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from "react"
 import DetailsBasic from "components/Dropdowns/AnnonceDetails/DetailsBasic.js";
 import DetailsSide from "components/Dropdowns/AnnonceDetails/DetailsSide.js";
 import DetailsDropdown from "components/Dropdowns/AnnonceDetails/DetailsDropdown.js";
@@ -20,6 +20,7 @@ const AnnonceDetail = ({
 						   favorites
 					   }) => {
 	const router = useRouter();
+	const [navbarOpen, setNavbarOpen] = React.useState(false);
 	const {
 		isAuthentificated,
 		loggedUser
@@ -84,8 +85,20 @@ const AnnonceDetail = ({
 					<DetailsDropdown/>
 				</div>
 
-				<div className="flex flex-wrap">
-					<DetailsPremiumDropdown/>
+				<div className="flex flex-wrap p-4">
+					<button type="button" className="mr-4 p-2 border border-solid border-gray-600 text-lg text-orange-500 font-bold uppercase rounded" onClick={() => setNavbarOpen(!navbarOpen)}>
+						<i className="far fa-thumbs-up animate-bounce"></i> Premium note de Confiance <i
+						className="fas fa-chevron-circle-down"></i></button>
+					<div
+						className={
+							"flex flex-wrap mt-4" +
+							(navbarOpen ? " block" : " hidden")
+						}
+						id="example-navbar-warning"
+					>
+						<DetailsPremiumDropdown/>
+					</div>
+
 				</div>
 			</div>
 

@@ -114,7 +114,7 @@ export default function AnnonceSearchForm() {
 									</div>
 								</div>
 								<div className="text-center mt-2">
-									<button type="button" className="mt-2 text-lg" onClick={() => setNavbarOpen(!navbarOpen)}> plus de critères ? <i
+									<button type="button" className="mt-2 text-lg px-2" onClick={() => setNavbarOpen(!navbarOpen)}> plus de critères ? <i
 										className="fas fa-chevron-circle-down"></i></button>
 									<div
 										className={
