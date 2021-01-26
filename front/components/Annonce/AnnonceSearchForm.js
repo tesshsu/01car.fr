@@ -1,7 +1,16 @@
 import React, {useEffect, useState} from "react"
 import { Form, Field } from 'react-final-form';
 import Link from "next/link";
-import {fuelOptions, kmFilterOptions, priceFilterOptions, boiteFilterOptions, statusFilterOptions, minYearFilterOptions, maxYearFilterOptions, marqueFilterOptions} from "../../helpers/constant";
+import {fuelOptions,
+	kmFilterOptions,
+	priceFilterOptions,
+	boiteFilterOptions,
+	statusFilterOptions,
+	minYearFilterOptions,
+	maxYearFilterOptions,
+	marqueFilterOptions
+} from "../../helpers/constant";
+import {useRouter }  from "next/router";
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const onSubmit = async values => {
 	await sleep(300)
@@ -13,6 +22,7 @@ export default function AnnonceSearchForm() {
 	const [error, setError] = useState(null);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [items, setItems] = useState([]);
+	const router = useRouter();
 	useEffect(() => {
 		fetch("https://www.automobile.fr/ajax/car/3500/models")
 			.then(res => res.json())
@@ -30,10 +40,8 @@ export default function AnnonceSearchForm() {
 
 	return (
 		<>
-			<section className="mt-16">
-				<div className="container px-4 mx-auto border-2 rounded bg-orange-500 py-4 z-40">
-                   <h1 className="text-2xl font-semibold text-white text-center">1er Site d'accompagnement sécurisé dans la vente et l'achat de véhicules</h1>
-					<p className="text-md font-light mt-2 text-center">Sur 1car.fr, on cherche et on trouve les meilleurs affaires </p>
+			<section className="annonceSearchForm mt-4">
+				<div className="container px-4 mx-auto border-2 rounded bg-orange-500 py-2 z-40">
 					<Form
 						onSubmit={onSubmit}
 						render={({ handleSubmit, form, submitting, pristine, values }) => (

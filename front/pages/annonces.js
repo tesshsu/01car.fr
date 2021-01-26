@@ -7,6 +7,7 @@ import PubContentThreeIcons from '../layouts/PubContentThreeIcons.js';
 import {connect} from "react-redux";
 import {fetchCars} from 'service/actions/cars';
 import {useRouter }  from "next/router";
+import AnnonceSearchForm from "../components/Annonce/AnnonceSearchForm";
 
 const Annonces = ({ dispatch,
                     loading,
@@ -34,6 +35,7 @@ const Annonces = ({ dispatch,
 		</section>
 		<section className="pt-10 pb-8 mt-4">
           <div className="container mx-auto px-4">
+              <AnnonceSearchForm transparent />
             <div className="flex flex-wrap">
                 <AnnonceLists transparent />
             </div>
