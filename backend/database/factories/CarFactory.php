@@ -66,6 +66,7 @@ class CarFactory extends Factory
             'hand_number'=> $this->faker->numberBetween(1, 3),
             'state'=> $this->faker->randomElement( CarState::list() ),
             'country'=> $this->faker->randomElement( ['FR', 'ZZ'] ),
+            'postal_code'=> Str::of($this->faker->postcode())->replace(' ', ''),
             'confidence_note' =>  $this->faker->numberBetween(0, 20),
         ];
     }

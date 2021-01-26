@@ -72,6 +72,52 @@
               "entity": {
                 "type": "Request",
                 "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": [
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "email",
+                        "value": "root@email.com"
+                      },
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "password",
+                        "value": "root"
+                      }
+                    ]
+                  },
+                  "bodyType": "Form",
+                  "textBody": ""
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "${\"01car\"}",
+                  "path": "/api/auth/redirect/facebook"
+                },
+                "id": "be6044df-b591-4136-b07a-f7c01ad375dc",
+                "name": "login - facebook",
+                "headers": []
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
                   "requestBody": true,
                   "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
                   "name": "POST"
@@ -132,6 +178,64 @@
                   }
                 ]
               }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": [
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "email",
+                        "value": "test2@email.com"
+                      },
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "password",
+                        "value": "root"
+                      },
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "password_confirmation",
+                        "value": "root"
+                      },
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "name",
+                        "value": "test1"
+                      }
+                    ]
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"name\": \"test\",\n  \"email\": \"tesst2@email.com\",\n  \"password\": \"1111111111\",\n  \"password_confirmation\": \"1111111111\"\n }\n"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "${\"01car\"}",
+                  "path": "/api/auth/redirect/facebook"
+                },
+                "id": "bd147734-61b0-433a-b1aa-b1d7e34292c0",
+                "name": "register - facebook",
+                "headers": []
+              }
             }
           ]
         },
@@ -158,13 +262,13 @@
                       {
                         "enabled": true,
                         "type": "File",
-                        "name": "file"
+                        "name": "uploads[]"
                       },
                       {
                         "enabled": true,
                         "type": "Text",
-                        "name": "name",
-                        "value": "dfdf"
+                        "name": "id",
+                        "value": "1"
                       }
                     ]
                   },
@@ -181,7 +285,7 @@
                     "version": "V11"
                   },
                   "host": "${\"01car\"}",
-                  "path": "/api/v1/cars/5/uploads"
+                  "path": "/api/v1/cars/1/uploads"
                 },
                 "id": "113912b8-91c2-4487-889a-d4e9fd8eba45",
                 "name": "Car - add picture",
@@ -289,7 +393,7 @@
                   },
                   "bodyType": "Text",
                   "textBodyEditorHeight": 391,
-                  "textBody": "{\n  \"id\": 5,\n  \"premium\": true,\n  \"options\":{\n    \"premium\":[\n        \"under_warranty\",\n         \"technical_check_ok\"\n     ]\n  \t}\n}"
+                  "textBody": "{\n  \"id\": 1,\n  \"equipments\":{\n    \"outside\":[\n        \"4_wheel_drive\",\n        \"chrome_tailpipes\",\n        \"aluminum_rims\"\n          ],\n    \"inside\":[],\n    \"anti_theft\":[],\n    \"comfort\":[],\n    \"other\":[],\n    \"security\":[]\n    }\n}\n"
                 },
                 "uri": {
                   "query": {
@@ -301,7 +405,7 @@
                     "version": "V11"
                   },
                   "host": "${\"01car\"}",
-                  "path": "/api/v1/cars/5"
+                  "path": "/api/v1/cars/1"
                 },
                 "id": "c8741c26-0056-4dc4-a57b-6438118bb974",
                 "name": "car  update - one field",
@@ -365,7 +469,7 @@
                     "version": "V11"
                   },
                   "host": "${\"01car\"}",
-                  "path": "/api/v1/cars/"
+                  "path": "/api/v1/cars"
                 },
                 "id": "3fb5b90c-09f6-43bf-ba97-595a9cdfd009",
                 "name": "car - create",
@@ -485,7 +589,7 @@
                     "version": "V11"
                   },
                   "host": "${\"01car\"}",
-                  "path": "/api/v1/cars/5"
+                  "path": "/api/v1/cars/1"
                 },
                 "id": "97827549-73a7-4287-867b-ca1747a2e38f",
                 "name": "car - show",
@@ -608,7 +712,7 @@
                       {
                         "enabled": true,
                         "name": "currentPage",
-                        "value": "2"
+                        "value": "1"
                       }
                     ]
                   },
@@ -628,7 +732,6 @@
                     "value": "application/json"
                   },
                   {
-                    "enabled": true,
                     "name": "Authorization",
                     "value": "Bearer ${token_01car}"
                   }
@@ -667,7 +770,45 @@
                 "uri": {
                   "query": {
                     "delimiter": "&",
-                    "items": []
+                    "items": [
+                      {
+                        "name": "premium",
+                        "value": ""
+                      },
+                      {
+                        "name": "owner",
+                        "value": ""
+                      },
+                      {
+                        "enabled": true,
+                        "name": "price_min",
+                        "value": "7000"
+                      },
+                      {
+                        "enabled": true,
+                        "name": "price_max",
+                        "value": "8000"
+                      },
+                      {
+                        "enabled": true,
+                        "name": "km_min",
+                        "value": "7"
+                      },
+                      {
+                        "enabled": true,
+                        "name": "km_max",
+                        "value": "50"
+                      },
+                      {
+                        "name": "postal_code",
+                        "value": ""
+                      },
+                      {
+                        "enabled": true,
+                        "name": "brand",
+                        "value": "Porche cayenne "
+                      }
+                    ]
                   },
                   "scheme": {
                     "name": "http",
@@ -687,6 +828,327 @@
                   {
                     "name": "Authorization",
                     "value": "Bearer ${token_01car}"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "be4419a1-1da7-4f2b-9143-ee841ff09e6e",
+            "name": "favorite"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                  "name": "POST"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": [
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "name",
+                        "value": "test"
+                      },
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "type",
+                        "value": "customer"
+                      }
+                    ]
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n  \"id\": 1,\n  \"category\": \"car\",\n  \"entity_id\": 1\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "${\"01car\"}",
+                  "path": "/api/v1/favorites"
+                },
+                "id": "a40c0e15-77db-4fd5-a443-7e275e09d301",
+                "name": "favorite - save",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer ${token_01car}"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": [
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "name",
+                        "value": "test"
+                      },
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "type",
+                        "value": "customer"
+                      }
+                    ]
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n\"name\": \"test\",\n\"type\": \"customer\",\n\"street\": null,\n\"postalcode\": null,\n\"city\": null,\n\"section\": null,\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "${\"01car\"}",
+                  "path": "/api/v1/favorites/1"
+                },
+                "id": "cc86f5fa-499e-4a6d-abd9-bf33d7f5d18f",
+                "name": "favorites  - show",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer ${token_01car}"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.1",
+                  "name": "GET"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": [
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "name",
+                        "value": "test"
+                      },
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "type",
+                        "value": "customer"
+                      }
+                    ]
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n\"name\": \"test\",\n\"type\": \"customer\",\n\"street\": null,\n\"postalcode\": null,\n\"city\": null,\n\"section\": null,\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "${\"01car\"}",
+                  "path": "/api/v1/favorites"
+                },
+                "id": "1adfb3b9-1912-4857-b973-eece6bbc1621",
+                "name": "favorites - list",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer ${token_01car}"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "entity": {
+            "type": "Service",
+            "id": "8ef68b11-4fa1-4306-b167-dae8c1ccea1d",
+            "name": "password"
+          },
+          "children": [
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                  "name": "POST"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": [
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "name",
+                        "value": "test"
+                      },
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "type",
+                        "value": "customer"
+                      }
+                    ]
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n    \"email\": \"root@email.com\"\n}"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "${\"01car\"}",
+                  "path": "/api/password/email"
+                },
+                "id": "d3624c46-60a4-4673-8038-d641a82ca12b",
+                "name": "password - email",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer ${token_01car}"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "entity": {
+                "type": "Request",
+                "method": {
+                  "requestBody": true,
+                  "link": "http://tools.ietf.org/html/rfc7231#section-4.3.3",
+                  "name": "POST"
+                },
+                "body": {
+                  "formBody": {
+                    "overrideContentType": true,
+                    "encoding": "application/x-www-form-urlencoded",
+                    "items": [
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "name",
+                        "value": "test"
+                      },
+                      {
+                        "enabled": true,
+                        "type": "Text",
+                        "name": "type",
+                        "value": "customer"
+                      }
+                    ]
+                  },
+                  "bodyType": "Text",
+                  "textBody": "{\n    \"email\": \"root@email.com\",\n    \"token\": \"ca26fd8194d0ff2a4f4b9405b776aeb94f63ac47b264eef81e8dfcf486ea75fc\",\n    \"password\": \"root\",\n   \"password_confirmation\": \"root\"\n}\n"
+                },
+                "uri": {
+                  "query": {
+                    "delimiter": "&",
+                    "items": []
+                  },
+                  "scheme": {
+                    "name": "http",
+                    "version": "V11"
+                  },
+                  "host": "${\"01car\"}",
+                  "path": "/api/password/reset"
+                },
+                "id": "780622f3-a369-4f0e-8105-930846f61f5f",
+                "name": "password - reset",
+                "headers": [
+                  {
+                    "enabled": true,
+                    "name": "Authorization",
+                    "value": "Bearer ${token_01car}"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "enabled": true,
+                    "name": "Content-Type",
+                    "value": "application/json"
                   }
                 ]
               }
