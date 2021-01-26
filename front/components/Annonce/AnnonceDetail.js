@@ -60,7 +60,7 @@ const AnnonceDetail = ({
 				<h4 className="marqueBlock bg-orange-500 font-bold text-2xl text-white px-4 py-3 shadow-lg">
 					<span className="brand">{car?.brand}</span> <span
 					className="generation">{car?.generation} | <i class="fas fa-hourglass-half"></i> <Moment format="DD" element="fr" locale="fr" fromNow>{car?.expire_at}</Moment> Jours </span>
-					<span className="codePostal ml-2"><i className="fas fa-map-marker-alt"></i> 06 </span>
+					<span className="codePostal ml-2"><i className="fas fa-map-marker-alt"></i> {car?.postal_code} </span>
 					<span className="favoris">
 						{isFavorite(car?.id) ? (
 							<button

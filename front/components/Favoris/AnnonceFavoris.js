@@ -77,7 +77,7 @@ const AnnonceFavoris = ({
                                   format="DD/MM/YYYY">{favorite?.entity?.dt_entry_service}</Moment></span>
 							</div>
                           <div className="w-1/3">
-                                  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200"><i className="fas fa-map-marker-alt"></i> 06 </span>
+                                  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200"><i className="fas fa-map-marker-alt"></i> {favorite?.entity?.postal_code} </span>
                               </div>
 						  </div>
 					</div>

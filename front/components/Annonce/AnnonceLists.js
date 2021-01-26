@@ -119,7 +119,7 @@ const AnnonceLists = ({
                                     <Moment
                                         format="DD/MM/YYYY">{car?.dt_entry_service}</Moment> | <span>{car?.km}</span> KM <i
                                     className="far fa-grin-beam text-orange-500"></i>
-                                    <span className="codePostal ml-2"><i className="fas fa-map-marker-alt"></i> 06 </span>
+                                    <span className="codePostal ml-2"><i className="fas fa-map-marker-alt"></i> {car?.postal_code} </span>
                                 </p>
 
                             </div>
