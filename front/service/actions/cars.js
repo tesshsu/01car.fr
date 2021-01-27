@@ -157,12 +157,12 @@ export function fetchCars(page = 1, perPage = 18, owner = undefined) {
 }
 
 //Filter cars
-export function filterCars(page = 1, perPage = 18, postal_code, price_min, price_max, km_min, km_max, brand, model, owner_type, fuel, transmission) {
+export function filterCars(page = 1, perPage = 18, postal_code, price_min, price_max, km_min, km_max, brand, model, owner_type, fuel, transmission, year_min, year_max) {
     return async (dispatch) => {
         dispatch(getCars())
 
         try {
-            const response = await API.Annonces.filter(perPage, page, postal_code, price_min, price_max, km_min, km_max, brand, model, owner_type, fuel, transmission);
+            const response = await API.Annonces.filter(perPage, page, postal_code, price_min, price_max, km_min, km_max, brand, model, owner_type, fuel, transmission, year_min, year_max);
 
             if(response.data){
                 dispatch(getCarsSuccess(response));

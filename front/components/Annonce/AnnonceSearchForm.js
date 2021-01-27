@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react"
 import { Form, Field } from 'react-final-form';
 import Link from "next/link";
+import AnnonceLists from "./AnnonceLists";
 import {fuelOptions,
 	kmMinFilterOptions,
 	kmMaxFilterOptions,
@@ -22,37 +23,27 @@ const onSubmit = async values => {
 }
 
 const AnnonceSearchForm = ({
-							  dispatch,
-							  loading,
-							  cars,
-							  hasErrors
-						  }) => {
+							   dispatch,
+							   loading,
+							   cars,
+							   hasErrors
+						   }) => {
 	const [navbarOpen, setNavbarOpen] = React.useState(false);
-	const [error, setError] = useState(null);
-	const [isLoaded, setIsLoaded] = useState(false);
-	const [items, setItems] = useState([]);
+	const [issetFilter, setIsSetFilter] = React.useState(false)
 	const router = useRouter();
-	useEffect(() => {
-		fetch("https://www.automobile.fr/ajax/car/3500/models")
-			.then(res => res.json())
-			.then(
-				(result) => {
-					setIsLoaded(true);
-					setItems(result.items);
-				},
-				(error) => {
-					setIsLoaded(true);
-					setError(error);
-				}
-			)
-	}, [])
 
 	const onSubmit = async (values) => {
 		const per_page_req = router.query.perPage ? router.query.perPage : 10;
 		try {
-			if (cars) {
-				await fetchCars(router.query.page, per_page_req, postal_code, price_min, price_max, km_min, km_max, brand, model, owner_type, fuel, transmission)
-			}
+			let {
+				...payload
+			} = values;
+
+			const data = { ...payload };
+			//await filterCars(router.query.page, per_page_req, postal_code, price_min, price_max, km_min, km_max, brand, model, owner_type, fuel, transmission, year_min, year_max)
+			await filterCars(router.query.page, per_page_req, data)
+			setIsSetFilter(true)
+
 		} catch (err) {
 			console.log(err);
 		}
@@ -63,6 +54,20 @@ const AnnonceSearchForm = ({
 			<section className="annonceSearchForm mt-4">
 				<div className="container px-4 mx-auto border-2 rounded bg-orange-500 py-2 z-40">
 					<Form
+						initialValues={{
+							postal_code:'',
+							price_min: '',
+							price_max: '',
+							km_min: '',
+							km_max: '',
+							brand: '',
+							model: '',
+							owner_type: '',
+							fuel: '',
+							transmission: '',
+							year_min: '',
+							year_max: ''
+						}}
 						onSubmit={onSubmit}
 						render={({ handleSubmit, form, submitting, pristine, values }) => (
 							<form onSubmit={handleSubmit}>
@@ -103,6 +108,7 @@ const AnnonceSearchForm = ({
 														{...input}
 														type="text"
 														value={values.postal_code}
+														name="postal_code"
 														className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
 														placeholder="code postal de ville ou région"
 													/>
@@ -110,7 +116,6 @@ const AnnonceSearchForm = ({
 											)}
 										</Field>
 									</div>
-
 								</div>
 								<div className="w-full"></div>
 								<div className="flex flex-wrap mt-4">
@@ -179,45 +184,45 @@ const AnnonceSearchForm = ({
 										}
 										id="example-navbar-warning"
 									>
-											<div className="w-full px-2 flex-1">
-												<div className="relative flex w-full flex-wrap items-stretch mb-3">
-													<Field name="fuel"  value={values.fuel} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-														{fuelOptions.map(fuelOption => (
-															<option
-																value={fuelOption.value}>{fuelOption.label}</option>
-														))}
-													</Field>
-													<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500 shadow">
-														<i className="fas fa-angle-down text-2xl my-2"></i>
-													</div>
+										<div className="w-full px-2 flex-1">
+											<div className="relative flex w-full flex-wrap items-stretch mb-3">
+												<Field name="fuel"  value={values.fuel} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+													{fuelOptions.map(fuelOption => (
+														<option
+															value={fuelOption.value}>{fuelOption.label}</option>
+													))}
+												</Field>
+												<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500 shadow">
+													<i className="fas fa-angle-down text-2xl my-2"></i>
 												</div>
 											</div>
-											<div className="w-full px-2 flex-1">
-												<div className="relative flex w-full flex-wrap items-stretch mb-3">
-													<Field name="transmission" value={values.transmission} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-														{boiteFilterOptions.map(boiteFilterOption => (
-															<option
-																value={boiteFilterOption.value}>{boiteFilterOption.label}</option>
-														))}
-													</Field>
-													<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500 shadow">
-														<i className="fas fa-angle-down text-2xl my-2"></i>
-													</div>
+										</div>
+										<div className="w-full px-2 flex-1">
+											<div className="relative flex w-full flex-wrap items-stretch mb-3">
+												<Field name="transmission" value={values.transmission} component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+													{boiteFilterOptions.map(boiteFilterOption => (
+														<option
+															value={boiteFilterOption.value}>{boiteFilterOption.label}</option>
+													))}
+												</Field>
+												<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500 shadow">
+													<i className="fas fa-angle-down text-2xl my-2"></i>
 												</div>
 											</div>
-											<div className="w-full px-2 flex-1">
-												<div className="relative flex w-full flex-wrap items-stretch mb-3">
-													<Field name="owner_type" component="select"  value={values.owner_type} className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-														{statusFilterOptions.map(statusFilterOption => (
-															<option
-																value={statusFilterOption.value}>{statusFilterOption.label}</option>
-														))}
-													</Field>
-													<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500 shadow">
-														<i className="fas fa-angle-down text-2xl my-2"></i>
-													</div>
+										</div>
+										<div className="w-full px-2 flex-1">
+											<div className="relative flex w-full flex-wrap items-stretch mb-3">
+												<Field name="owner_type" component="select"  value={values.owner_type} className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+													{statusFilterOptions.map(statusFilterOption => (
+														<option
+															value={statusFilterOption.value}>{statusFilterOption.label}</option>
+													))}
+												</Field>
+												<div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500 shadow">
+													<i className="fas fa-angle-down text-2xl my-2"></i>
 												</div>
 											</div>
+										</div>
 										<div className="w-full"></div>
 										<div className="w-full px-4 flex-1 mt-2">
 											<div className="relative flex w-full flex-wrap items-stretch mb-3">
@@ -247,39 +252,47 @@ const AnnonceSearchForm = ({
 										</div>
 									</div>
 								</div>
-
+								<div className="w-full px-4 flex-1 text-center mt-2">
+									<button
+										className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+										type="submit"
+										disabled={submitting}
+									>
+										Recherche
+									</button>
+								</div>
 							</form>
 						)}
 					/>
-					<div className="w-full px-4 flex-1 text-center mt-2">
-						{router.pathname === '/annonces' ? (
-							<button
-								className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
-								type="button"
-							>
-								Recherche
-							</button>
-						):(
-							<button
-								className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
-								type="button"
-							>
-								<Link href="/annonces">
-									<a
-										href="#pablo"
-										className={
-											"text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
-										}
-									>
-										Recherche
-									</a>
-								</Link>
-							</button>
-						)}
-
-					</div>
 				</div>
 			</section>
+			{issetFilter ? (
+				<div className="mt-4 showFilterResult">
+					{cars?.map((car, idx) => (
+						<div key={`car_${car.id}`} id={`car_${car.id}`} className="container px-4 mx-auto my-4">
+							<div className="w-full px-4 flex-1">
+						<span
+							className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">
+							<div className="top justify-between">
+                                  <div className="font-bold text-2xl uppercase text-orange-700 text-center py-2 m-2">
+                                     {car?.brand} {car?.generation}
+                                  </div>
+                                  <div
+									  className="price font-bold text-orange-500  text-2xl text-center bg-gray-400 px-4 py-2">
+                                    {car?.estimate_price} €
+                                  </div>
+                                </div>
+						</span>
+							</div>
+						</div>
+					))}
+				</div>
+			):(
+				<div className="flex flex-wrap">
+					<AnnonceLists transparent />
+				</div>
+			)}
+
 		</>
 	);
 }

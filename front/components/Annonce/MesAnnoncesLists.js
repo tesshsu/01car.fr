@@ -4,7 +4,6 @@ import Link from "next/link";
 import {fetchCars} from 'service/actions/cars';
 import Router, {useRouter} from "next/router";
 import Moment from 'react-moment';
-import ENVS from '../../environment';
 import useLoggedUser from "../../service/hooks/useLoggedUser";
 import useAnnonces from "../../service/hooks/useAnnonces";
 

@@ -6,7 +6,6 @@ import Moment from 'react-moment';
 import Router from "next/router";
 import {create} from "../../service/actions/favorites";
 import useLoggedUser from "../../service/hooks/useLoggedUser";
-
 const AnnonceLists = ({
                           loading,
                           dispatch,
@@ -18,10 +17,6 @@ const AnnonceLists = ({
     const [search, setSearch] = useState("");
     const [filteredCars, setFilteredCars] = useState([]);
     const [isAlreadyFavorite, setIsAlreadyFavorite] = React.useState(false)
-    const {
-        isAuthentificated,
-        loggedUser
-    } = useLoggedUser();
 
     const isFavorite = (id) => {
         let currentFavoritesIs = favorites?.map(i => i.entity_id);
@@ -53,14 +48,14 @@ const AnnonceLists = ({
 
     return (
         <>
-            <div className="relative flex w-full flex-wrap items-stretch">
+            <div className="relative flex w-full flex-wrap items-stretch mt-4">
                 <span
                         className="z-10 h-full leading-snug font-normal absolute text-center text-gray-400 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
 						<i className="fas fa-search"></i>
 					</span>
                 <input
                     type="text"
-                    placeholder="Chercher ici..."
+                    placeholder="Ou chercher marque modele mot clé ici..."
                     className="px-3 py-3 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
                     onChange={(e) => setSearch(e.target.value)}
                 />
