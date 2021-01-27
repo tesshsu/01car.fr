@@ -6,6 +6,8 @@ import Pagination from '../components/Annonce/Pagination.js';
 import PubContentThreeIcons from '../layouts/PubContentThreeIcons.js';
 import {connect} from "react-redux";
 import AnnonceSearchForm from "../components/Annonce/AnnonceSearchForm";
+import {fetchCars} from 'service/actions/cars';
+import {useRouter }  from "next/router";
 
 const Annonces = ({ dispatch,
                     loading,
@@ -17,6 +19,11 @@ const Annonces = ({ dispatch,
                     last_page,
                     total,
                     hasErrors}) => {
+
+    const router = useRouter();
+    useEffect(() => {
+        dispatch(fetchCars(router.query.page, router.query.perPage))
+    }, [dispatch])
 
    return (
     <>
@@ -31,6 +38,7 @@ const Annonces = ({ dispatch,
 		<section className="pt-10 pb-8 mt-4">
           <div className="container mx-auto px-4">
               <AnnonceSearchForm transparent />
+
 			<div className="flex content-center items-center justify-center h-full mb-24 mt-8">
                <Pagination transparent
                            current_page={current_page}

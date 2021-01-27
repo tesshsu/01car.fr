@@ -13,7 +13,7 @@ import {fuelOptions,
 	maxYearFilterOptions,
 	marqueFilterOptions
 } from "../../helpers/constant";
-import {filterCars} from 'service/actions/cars';
+import {fetchCars, filterCars} from 'service/actions/cars';
 import {connect} from "react-redux";
 import {useRouter }  from "next/router";
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -34,6 +34,8 @@ const AnnonceSearchForm = ({
 
 	const onSubmit = async (values) => {
 		const per_page_req = router.query.perPage ? router.query.perPage : 10;
+		const postal_code = values.postal_code
+		const brand = values.brand
 		try {
 			let {
 				...payload
@@ -41,7 +43,7 @@ const AnnonceSearchForm = ({
 
 			const data = { ...payload };
 			//await filterCars(router.query.page, per_page_req, postal_code, price_min, price_max, km_min, km_max, brand, model, owner_type, fuel, transmission, year_min, year_max)
-			await filterCars(router.query.page, per_page_req, data)
+			dispatch(filterCars(router.query.page, per_page_req, postal_code, brand))
 			setIsSetFilter(true)
 
 		} catch (err) {
@@ -274,7 +276,10 @@ const AnnonceSearchForm = ({
 						<span
 							className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">
 							<div className="top justify-between">
-                                  <div className="font-bold text-2xl uppercase text-orange-700 text-center py-2 m-2">
+                                <div className="font-bold text-2xl uppercase text-orange-700 text-center py-2 m-2">
+                                    ID : {car?.id}
+                                  </div>
+								<div className="font-bold text-2xl uppercase text-orange-700 text-center py-2 m-2">
                                      {car?.brand} {car?.generation}
                                   </div>
                                   <div
