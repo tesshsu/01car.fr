@@ -6,7 +6,10 @@ import * as ANNONCES_ACTIONS from '../actions/cars';
 export default function useAnnonces() {
   const dispatch = useDispatch();
   const car = useSelector(state => state.selectedCar);
+  
   const fetchAnnonces = useCallback(() => dispatch(ANNONCES_ACTIONS.fetchCars(page=1, perPage=18)), [dispatch]);
+  
+  const filterAnnonces = useCallback(() => dispatch(ANNONCES_ACTIONS.filterCars(page=1, perPage=18)), [dispatch]);
 
   const create = useCallback(async (payload) => {
     try {
@@ -64,6 +67,7 @@ export default function useAnnonces() {
     editCar,
     modifyCar,
     deleteCar,
-    fetchAnnonces
+    fetchAnnonces,
+	filterAnnonces
   };
 }

@@ -19,6 +19,27 @@ export function search(perPage, page, owner) {
       .then(({ data }) => data);
 }
 
+export function filter(perPage, page, postal_code, price_min, price_max, km_min, km_max, brand, model, owner_type, fuel, transmission) {
+	let url = `/api/v1/cars/search?`;
+	url += perPage ? 'perPage=' + perPage  : '',
+	url += page ? 'page=' + page  : '',
+	url += postal_code ? 'postal_code=' + postal_code  : '',
+	url += price_min ? 'price_min=' + price_min  : '',
+	url += price_max ? 'price_max=' + price_max  : '',
+	url += km_min ? 'km_min=' + km_min  : '',
+	url += km_max ? 'km_max=' + km_max  : '',
+	url += brand ? 'brand=' + brand  : '',
+	url += model ? 'model=' + model  : '',
+	url += owner_type ? 'owner_type=' + owner_type  : '',
+	url += fuel ? 'fuel=' + fuel  : '',
+	url += transmission ? 'transmission=' + transmission  : '';
+	
+	
+  return client
+      .get(url)
+      .then(({ data }) => data);
+}
+
 export async function addPhoto(carId, payload) {
   payload.id = carId;
   return client
