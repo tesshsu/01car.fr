@@ -15,15 +15,8 @@ import {fuelOptions,
 } from "../../helpers/constant";
 import {filterCars} from 'service/actions/cars';
 import {connect} from "react-redux";
-import Moment from 'react-moment';
 import {useRouter }  from "next/router";
-import FavorisButton from "../Favoris/FavorisButton";
-import {create} from "../../service/actions/favorites";
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-const onSubmit = async values => {
-	await sleep(300)
-	window.alert('Nous vous envoyer le lien qui vous permettra de réinitialiser votre mot de passe.')
-}
+
 
 const AnnonceSearchForm = ({
 							   dispatch,
@@ -274,15 +267,29 @@ const AnnonceSearchForm = ({
 										</div>
 									</div>
 								</div>
-								<div className="w-full px-4 flex-1 text-center mt-2">
-									<button
-										className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
-										type="submit"
-										disabled={submitting}
-									>
-										Recherche
-									</button>
-								</div>
+								{ router.pathname === '/annonces' ? (
+									<div className="w-full px-4 flex-1 text-center mt-2">
+										<button
+											className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+											type="submit"
+											disabled={submitting}
+										>
+											Recherche
+										</button>
+									</div>
+								):(
+									<div className="w-full px-4 flex-1 text-center mt-2">
+										<Link href="/annonces">
+										<button
+											className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+											type="button"
+										>
+											Recherche rapide
+										</button>
+										</Link>
+									</div>
+								)}
+
 							</form>
 						)}
 					/>
@@ -290,11 +297,19 @@ const AnnonceSearchForm = ({
 			</section>
 			{issetFilter ? (
 				<div className="flex flex-wrap">
-					<AnnonceLists transparent />
+				{ router.pathname === '/annonces' ? (
+								<AnnonceLists transparent />
+						) : (
+							null
+						)}
 				</div>
 			):(
 				<div className="flex flex-wrap">
-					<AnnonceLists transparent />
+					{ router.pathname === '/annonces' ? (
+						<AnnonceLists transparent />
+					) : (
+						null
+					)}
 				</div>
 			)}
 
