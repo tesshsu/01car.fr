@@ -3,10 +3,9 @@ import Link from "next/link";
 import {connect} from 'react-redux'
 import FavorisButton from 'components/Favoris/FavorisButton';
 import Moment from 'react-moment';
-import Router from "next/router";
+import {useRouter }  from "next/router";
 import {create} from "../../service/actions/favorites";
-import useLoggedUser from "../../service/hooks/useLoggedUser";
-
+import useAnnonces from "../../service/hooks/useAnnonces";
 const AnnonceLists = ({
                           loading,
                           dispatch,
@@ -15,13 +14,13 @@ const AnnonceLists = ({
                           favorites
                       }) => {
 
+    const router = useRouter();
     const [search, setSearch] = useState("");
     const [filteredCars, setFilteredCars] = useState([]);
     const [isAlreadyFavorite, setIsAlreadyFavorite] = React.useState(false)
     const {
-        isAuthentificated,
-        loggedUser
-    } = useLoggedUser();
+        filterAnnonces
+    } = useAnnonces();
 
     const isFavorite = (id) => {
         let currentFavoritesIs = favorites?.map(i => i.entity_id);
@@ -53,18 +52,22 @@ const AnnonceLists = ({
 
     return (
         <>
-            <div className="relative flex w-full flex-wrap items-stretch">
+            {router.pathname === '/annonces' ? (
+                <div className="relative flex w-full flex-wrap items-stretch mt-4">
                 <span
-                        className="z-10 h-full leading-snug font-normal absolute text-center text-gray-400 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
+                    className="z-10 h-full leading-snug font-normal absolute text-center text-gray-400 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3">
 						<i className="fas fa-search"></i>
 					</span>
-                <input
-                    type="text"
-                    placeholder="Chercher ici..."
-                    className="px-3 py-3 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
-                    onChange={(e) => setSearch(e.target.value)}
-                />
-            </div>
+                    <input
+                        type="text"
+                        placeholder="Ou chercher marque modele mot clé ici..."
+                        className="px-3 py-3 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+                </div>
+            ):(
+                null
+            )}
             {filteredCars?.map((car, idx) => car?.premium ?
                 (
                     <Link key={idx} href={car?.id ? (`/annonce?id=${car?.id}`) : ("#")} {...car}>
@@ -182,6 +185,7 @@ const AnnonceLists = ({
                                     <Moment
                                         format="DD/MM/YYYY">{car?.dt_entry_service}</Moment> | <span>{car?.km}</span> KM <i
                                     className="far fa-grin-beam text-orange-500"></i>
+                                    <span className="codePostal ml-2"><i className="fas fa-map-marker-alt"></i> {car?.postal_code} </span>
                                 </p>
                             </div>
                             <hr className="border-b-1 border-gray-400"/>
