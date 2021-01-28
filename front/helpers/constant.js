@@ -191,7 +191,7 @@ export const kmMinFilterOptions = [
 ];
 
 export const kmMaxFilterOptions = [
-    {label: 'Km-min', value: ''},
+    {label: 'Km-max', value: ''},
     {label: '5 000 Km max', value: '5000'},
     {label: '7 000 Km max', value: '7000'},
     {label: '10 000 Km max', value: '10000'},

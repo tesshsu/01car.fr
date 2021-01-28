@@ -13,9 +13,12 @@ import {fuelOptions,
 	maxYearFilterOptions,
 	marqueFilterOptions
 } from "../../helpers/constant";
-import {fetchCars, filterCars} from 'service/actions/cars';
+import {filterCars} from 'service/actions/cars';
 import {connect} from "react-redux";
+import Moment from 'react-moment';
 import {useRouter }  from "next/router";
+import FavorisButton from "../Favoris/FavorisButton";
+import {create} from "../../service/actions/favorites";
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 const onSubmit = async values => {
 	await sleep(300)
@@ -31,20 +34,51 @@ const AnnonceSearchForm = ({
 	const [navbarOpen, setNavbarOpen] = React.useState(false);
 	const [issetFilter, setIsSetFilter] = React.useState(false)
 	const router = useRouter();
+	const [isAlreadyFavorite, setIsAlreadyFavorite] = React.useState(false)
+
+	const isFavorite = (id) => {
+		let currentFavoritesIs = favorites?.map(i => i.entity_id);
+		return currentFavoritesIs.includes(id);
+	}
+
+	const onClickFavoris = async (payload) => {
+		try {
+			dispatch(create(payload));
+		} catch (err) {
+			console.log(err);
+			setIsAlreadyFavorite(true)
+		}
+	}
+
+	if (loading) {
+		return <p>Chargement des annonces ...</p>;
+	}
+
+	if(hasErrors){
+		return <p>pas de cars...</p>;
+	}
 
 	const onSubmit = async (values) => {
 		const per_page_req = router.query.perPage ? router.query.perPage : 10;
 		const postal_code = values.postal_code
 		const brand = values.brand
+		const price_min = values.price_min
+		const price_max = values.price_max
+		const km_min = values.km_min
+		const km_max = values.km_max
+		const model = values.model
+		const owner_type = values.owner_type
+		const fuel = values.fuel
+		const transmission = values.transmission
+		const year_min = values.year_min
+		const year_max = values.year_max
 		try {
-			let {
-				...payload
-			} = values;
-
-			const data = { ...payload };
-			//await filterCars(router.query.page, per_page_req, postal_code, price_min, price_max, km_min, km_max, brand, model, owner_type, fuel, transmission, year_min, year_max)
-			dispatch(filterCars(router.query.page, per_page_req, postal_code, brand))
+			dispatch(filterCars(router.query.page, per_page_req, postal_code, price_min, price_max, km_min, km_max, brand, model, owner_type, fuel, transmission, year_min, year_max))
 			setIsSetFilter(true)
+			console.log("data_filter_fuel :", fuel)
+			console.log("data_filter_transmission :", transmission)
+			console.log("data_filter_year :", year_min)
+			console.log("data_filter_year :", year_max)
 
 		} catch (err) {
 			console.log(err);
@@ -269,33 +303,11 @@ const AnnonceSearchForm = ({
 				</div>
 			</section>
 			{issetFilter ? (
-				<div className="mt-4 showFilterResult">
-					{cars?.map((car, idx) => (
-						<div key={`car_${car.id}`} id={`car_${car.id}`} className="container px-4 mx-auto my-4">
-							<div className="w-full px-4 flex-1">
-						<span
-							className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">
-							<div className="top justify-between">
-                                <div className="font-bold text-2xl uppercase text-orange-700 text-center py-2 m-2">
-                                    ID : {car?.id}
-                                  </div>
-								<div className="font-bold text-2xl uppercase text-orange-700 text-center py-2 m-2">
-                                     {car?.brand} {car?.generation}
-                                  </div>
-                                  <div
-									  className="price font-bold text-orange-500  text-2xl text-center bg-gray-400 px-4 py-2">
-                                    {car?.estimate_price} €
-                                  </div>
-                                </div>
-						</span>
-							</div>
-						</div>
-					))}
-				</div>
-			):(
 				<div className="flex flex-wrap">
 					<AnnonceLists transparent />
 				</div>
+			):(
+				null
 			)}
 
 		</>
