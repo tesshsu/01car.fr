@@ -21,6 +21,7 @@ const Annonces = ({ dispatch,
                     hasErrors}) => {
 
     const router = useRouter();
+
     useEffect(() => {
         dispatch(fetchCars(router.query.page, router.query.perPage))
     }, [dispatch])
@@ -38,7 +39,6 @@ const Annonces = ({ dispatch,
 		<section className="pt-10 pb-8 mt-4">
           <div className="container mx-auto px-4">
               <AnnonceSearchForm transparent />
-
 			<div className="flex content-center items-center justify-center h-full mb-24 mt-8">
                 {total >= 11 ?(
                     <Pagination transparent

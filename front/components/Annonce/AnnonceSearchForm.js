@@ -34,21 +34,6 @@ const AnnonceSearchForm = ({
 	const [navbarOpen, setNavbarOpen] = React.useState(false);
 	const [issetFilter, setIsSetFilter] = React.useState(false)
 	const router = useRouter();
-	const [isAlreadyFavorite, setIsAlreadyFavorite] = React.useState(false)
-
-	const isFavorite = (id) => {
-		let currentFavoritesIs = favorites?.map(i => i.entity_id);
-		return currentFavoritesIs.includes(id);
-	}
-
-	const onClickFavoris = async (payload) => {
-		try {
-			dispatch(create(payload));
-		} catch (err) {
-			console.log(err);
-			setIsAlreadyFavorite(true)
-		}
-	}
 
 	if (loading) {
 		return <p>Chargement des annonces ...</p>;
@@ -59,7 +44,7 @@ const AnnonceSearchForm = ({
 	}
 
 	const onSubmit = async (values) => {
-		const per_page_req = router.query.perPage ? router.query.perPage : 10;
+		const per_page_req = router.query.perPage ? router.query.perPage : 18;
 		const postal_code = values.postal_code
 		const brand = values.brand
 		const price_min = values.price_min
@@ -75,6 +60,7 @@ const AnnonceSearchForm = ({
 		try {
 			dispatch(filterCars(router.query.page, per_page_req, postal_code, price_min, price_max, km_min, km_max, brand, model, owner_type, fuel, transmission, year_min, year_max))
 			setIsSetFilter(true)
+
 			console.log("data_filter_fuel :", fuel)
 			console.log("data_filter_transmission :", transmission)
 			console.log("data_filter_year :", year_min)
@@ -307,7 +293,9 @@ const AnnonceSearchForm = ({
 					<AnnonceLists transparent />
 				</div>
 			):(
-				null
+				<div className="flex flex-wrap">
+					<AnnonceLists transparent />
+				</div>
 			)}
 
 		</>
