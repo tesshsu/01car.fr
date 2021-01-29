@@ -10,9 +10,11 @@ import {fuelOptions,
 	boiteFilterOptions,
 	statusFilterOptions,
 	minYearFilterOptions,
-	maxYearFilterOptions,
-	marqueFilterOptions
+	maxYearFilterOptions
 } from "../../helpers/constant";
+import {marqueFilterOptions,
+	modelFilterOptions
+} from "../../helpers/constantMarque";
 import {filterCars} from 'service/actions/cars';
 import {connect} from "react-redux";
 import {useRouter }  from "next/router";
@@ -27,6 +29,17 @@ const AnnonceSearchForm = ({
 	const [navbarOpen, setNavbarOpen] = React.useState(false);
 	const [issetFilter, setIsSetFilter] = React.useState(false)
 	const router = useRouter();
+	const [marqueX, setMarqueX] = useState("");
+
+	const selectedMarque = (e) =>{
+		setMarqueX(e.target.value);
+	};
+
+	useEffect( ()=>{
+		console.log(marqueX);
+		//console.log(stateX[marqueX]);
+	},[marqueX]);
+
 
 	if (loading) {
 		return <p>Chargement des annonces ...</p>;
@@ -48,16 +61,16 @@ const AnnonceSearchForm = ({
 		const owner_type = values.owner_type
 		const fuel = values.fuel
 		const transmission = values.transmission
-		const year_min = values.year_min
-		const year_max = values.year_max
+		const dt_entry_service_min = values.dt_entry_service_min
+		const dt_entry_service_max = values.dt_entry_service_max
 		try {
-			dispatch(filterCars(router.query.page, per_page_req, postal_code, price_min, price_max, km_min, km_max, brand, model, owner_type, fuel, transmission, year_min, year_max))
+			dispatch(filterCars(router.query.page, per_page_req, postal_code, price_min, price_max, km_min, km_max, brand, model, owner_type, fuel, transmission, dt_entry_service_min, dt_entry_service_max))
 			setIsSetFilter(true)
-
+			console.log("data_owner_type :", owner_type)
 			console.log("data_filter_fuel :", fuel)
 			console.log("data_filter_transmission :", transmission)
-			console.log("data_filter_year :", year_min)
-			console.log("data_filter_year :", year_max)
+			console.log("data_filter_year :", dt_entry_service_min)
+			console.log("data_filter_year :", dt_entry_service_max)
 
 		} catch (err) {
 			console.log(err);
@@ -80,8 +93,8 @@ const AnnonceSearchForm = ({
 							owner_type: '',
 							fuel: '',
 							transmission: '',
-							year_min: '',
-							year_max: ''
+							dt_entry_service_min: '',
+							dt_entry_service_max: ''
 						}}
 						onSubmit={onSubmit}
 						render={({ handleSubmit, form, submitting, pristine, values }) => (
@@ -89,11 +102,13 @@ const AnnonceSearchForm = ({
 								<div className="flex flex-wrap mt-4">
 									<div className="w-full px-3 flex-1">
 										<div className="relative flex w-full flex-wrap items-stretch mb-3">
-											<Field name="brand" component="select" value={values.brand}  className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-												{marqueFilterOptions.map(marqueFilterOption => (
-													<option
-														value={marqueFilterOption.value}>{marqueFilterOption.label}</option>
-												))}
+											<Field name="brand" component="select" value={values.brand}  onChange={selectedMarque} className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+												{
+													marqueFilterOptions.map( (marqueFilterOption) =>(
+
+														<option key={marqueFilterOption.code} value={marqueFilterOption.code} >{marqueFilterOption.name}</option>
+													))
+												}
 											</Field>
 											<div
 												className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
@@ -104,10 +119,14 @@ const AnnonceSearchForm = ({
 									<div className="w-full px-3 flex-1">
 										<div className="relative flex w-full flex-wrap items-stretch mb-3">
 											<Field name="model" component="select" value={values.model} className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-												{marqueFilterOptions.map(marqueFilterOption => (
-													<option
-														value={marqueFilterOption.model}>{marqueFilterOption.model}</option>
-												))}
+												{ !marqueX &&  <option>*--NONE--*</option>}
+												{
+													marqueX && modelFilterOptions[marqueX].map( (item) =>(
+
+														<option >{item}</option>
+
+													))
+												}
 											</Field>
 											<div
 												className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
@@ -241,7 +260,7 @@ const AnnonceSearchForm = ({
 										<div className="w-full"></div>
 										<div className="w-full px-4 flex-1 mt-2">
 											<div className="relative flex w-full flex-wrap items-stretch mb-3">
-												<Field name="year_min" component="select"  value={values.year_min} className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+												<Field name="dt_entry_service_min" component="select"  value={values.dt_entry_service_min} className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 													{minYearFilterOptions.map(minYearFilterOption => (
 														<option
 															value={minYearFilterOption.value}>{minYearFilterOption.label}</option>
@@ -254,7 +273,7 @@ const AnnonceSearchForm = ({
 										</div>
 										<div className="w-full px-4 flex-1 mt-2">
 											<div className="relative flex w-full flex-wrap items-stretch mb-3">
-												<Field name="year_max" component="select"  value={values.year_max} className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+												<Field name="dt_entry_service_max" component="select"  value={values.dt_entry_service_max} className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 													{maxYearFilterOptions.map(maxYearFilterOption => (
 														<option
 															value={maxYearFilterOption.value}>{maxYearFilterOption.label}</option>

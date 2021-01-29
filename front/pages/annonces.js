@@ -50,7 +50,7 @@ const Annonces = ({ dispatch,
                                 total={total}
                     />
                 ):(
-                    null
+                    <p className="mt-4 text-center text-gray-700 text-xl">Aucune annonce ne correspond à vos critères.....</p>
                 ) }
 
             </div>
