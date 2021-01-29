@@ -6,109 +6,6 @@ export const mapToObject= function(m){
     });
 }
 
-export const marqueFilterOptions = [
-    {label: 'Abarth', value: 'Abarth', modele: [
-            "500",
-            "Abarth 124 spider",
-            "Grande Punto"
-        ]
-    },
-    {label: 'Aleko', value: 'Aleko',
-        modele: [
-            "100",
-            "Aleko 124 spider",
-            "Grande Aleko"
-        ]},
-    {label: 'Alfa Romeo', value: 'Alfa Romeo'},
-    {label: 'Alpina', value: 'Alpina'},
-    {label: 'Aro', value: 'Aro'},
-    {label: 'Aston Martin', value: 'Aston Martin'},
-    {label: 'Audi', value: 'Audi'},
-    {label: 'Auverland', value: 'Auverland'},
-    {label: 'BMW', value: 'BMW'},
-    {label: 'Bentley', value: 'Bentley'},
-    {label: 'Bertone', value: 'Bertone'},
-    {label: 'Buggy', value: 'Buggy'},
-    {label: 'Buick', value: 'Buick'},
-    {label: 'Cadillac', value: 'Cadillac'},
-    {label: 'Caterham', value: 'Caterham'},
-    {label: 'Chrysler', value: 'Chrysler'},
-    {label: 'Citroën', value: 'Citroën'},
-    {label: 'Corvette', value: 'Corvette'},
-    {label: 'DS', value: 'DS'},
-    {label: 'Dacia', value: 'Dacia'},
-    {label: 'Daewoo', value: 'Daewoo'},
-    {label: 'Daihatsu', value: 'Daihatsu'},
-    {label: 'Daimler', value: 'Daimler'},
-    {label: 'Dangel', value: 'Dangel'},
-    {label: 'De la Chapelle', value: 'De la Chapelle'},
-    {label: 'Dodge', value: 'Dodge'},
-    {label: 'Donkervoort', value: 'Donkervoort'},
-    {label: 'Ferrari', value: 'Ferrari'},
-    {label: 'Fiat', value: 'Fiat'},
-    {label: 'Ford', value: 'Ford'},
-    {label: 'GMC', value: 'GMC'},
-    {label: 'Gac Gonow', value: 'Gac Gonow'},
-    {label: 'Honda', value: 'Honda'},
-    {label: 'Infiniti', value: 'Infiniti'},
-    {label: 'Isuzu', value: 'Isuzu'},
-    {label: 'Jaguar', value: 'Jaguar'},
-    {label: 'Jeep', value: 'Jeep'},
-    {label: 'Kia', value: 'Kia'},
-    {label: 'Lada', value: 'Lada'},
-    {label: 'Lamborghini', value: 'Lamborghini'},
-    {label: 'Lancia', value: 'Lancia'},
-    {label: 'Landwin', value: 'Landwin'},
-    {label: 'Land-Rover', value: 'Land-Rover'},
-    {label: 'Lexus', value: 'Lexus'},
-    {label: 'Lotus', value: 'Lotus'},
-    {label: 'Land-Rover', value: 'Land-Rover'},
-    {label: 'MG', value: 'MG'},
-    {label: 'MPM Motos', value: 'MPM Motos'},
-    {label: 'Mahindra', value: 'Mahindra'},
-    {label: 'Maruti', value: 'Maruti'},
-    {label: 'Maserati', value: 'Maserati'},
-    {label: 'Maybach', value: 'Maybach'},
-    {label: 'Mazda', value: 'Mazda'},
-    {label: 'Mega', value: 'Mega'},
-    {label: 'Mazda', value: 'Mazda'},
-    {label: 'Mercedes', value: 'Mercedes'},
-    {label: 'Mini', value: 'Mini'},
-    {label: 'Mitsubishi', value: 'MMitsubishi'},
-    {label: 'Morgan', value: 'Morgan'},
-    {label: 'Mitsubishi', value: 'MMitsubishi'},
-    {label: 'Nissan', value: 'Nissan'},
-    {label: 'Opel', value: 'Opel'},
-    {label: 'PGO', value: 'PGO'},
-    {label: 'Polski/FSO', value: 'Polski/FSO'},
-    {label: 'Pontiac', value: 'Pontiac'},
-    {label: 'Porsche', value: 'Porsche'},
-    {label: 'Proton', value: 'Proton'},
-    {label: 'Renault', value: 'Renault'},
-    {label: 'Rolls-Royce', value: 'Rolls-Royce'},
-    {label: 'Rover', value: 'Rovert'},
-    {label: 'Rover', value: 'Saab'},
-    {label: 'Santana', value: 'Santana'},
-    {label: 'Saab', value: 'Saab'},
-    {label: 'Seat', value: 'Seat'},
-    {label: 'Shuanghuan', value: 'Shuanghuan'},
-    {label: 'Skoda', value: 'Skoda'},
-    {label: 'Smart', value: 'Smart'},
-    {label: 'Ssangyong', value: 'Ssangyong'},
-    {label: 'Subaru', value: 'Subaru'},
-    {label: 'Suzuki', value: 'Suzuki'},
-    {label: 'TVR', value: 'TVR'},
-    {label: 'Talbot', value: 'Talbot'},
-    {label: 'Tata', value: 'Tata'},
-    {label: 'Tesla', value: 'Tesla'},
-    {label: 'Toyota', value: 'Toyota'},
-    {label: 'Venturi', value: 'Venturi'},
-    {label: 'Volkswagen', value: 'Volkswagen'},
-    {label: 'Volvo', value: 'Volvo'},
-    {label: 'Wallys', value: 'Wallys'}
-];
-
-
 export const fuelOptions = [
     {note: 0, label: 'Energie', value: ''},
 	{note: 0, label: 'Diesel', value: 'Diesel'},
@@ -216,13 +113,13 @@ export const kmMaxFilterOptions = [
 export const boiteFilterOptions = [
     {label: 'Boîte de vitesse', value: ''},
     {label: 'manual', value: 'manual'},
-    {label: 'Automatique', value: 'Automatique'}
+    {label: 'Automatique', value: 'automatic'}
 ];
 
 export const statusFilterOptions = [
     {label: 'Annonceurs', value: ''},
-    {label: 'Professionnels', value: 'Professionnels'},
-    {label: 'Particuliers', value: 'Particuliers'}
+    {label: 'Professionnels', value: 'pro'},
+    {label: 'Particuliers', value: 'private'}
 ];
 
 export const statuVendeurOptions = [

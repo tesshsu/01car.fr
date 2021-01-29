@@ -19,7 +19,7 @@ export function search(perPage, page, owner) {
       .then(({ data }) => data);
 }
 
-export function filter(perPage, page, postal_code, price_min, price_max, km_min, km_max, brand, model, owner_type, fuel, transmission, year_min, year_max) {
+export function filter(perPage, page, postal_code, price_min, price_max, km_min, km_max, brand, model, owner_type, fuel, transmission, dt_entry_service_min, dt_entry_service_max) {
 	let url = `/api/v1/cars/search?`;
 	url += perPage ? 'perPage=' + perPage  : '',
 	url += page ? '&page=' + page  : '',
@@ -33,10 +33,10 @@ export function filter(perPage, page, postal_code, price_min, price_max, km_min,
 	url += owner_type ? '&owner_type=' + owner_type  : '',
 	url += fuel ? '&fuel=' + fuel  : '',
 	url += transmission ? '&transmission=' + transmission  : '',
-	url += year_min ? '&year_min=' + year_min  : '',
-	url += year_max ? '&year_max=' + year_max  : '';
-	
-	
+	url += dt_entry_service_min ? '&dt_entry_service_min=' + dt_entry_service_min  : '',
+	url += dt_entry_service_max ? '&dt_entry_service_max=' + dt_entry_service_max  : '';
+
+
   return client
       .get(url)
       .then(({ data }) => data);
