@@ -39,35 +39,35 @@ class OrderController extends Controller
                 'email' => $user->email
             ],
             'token' => $token['id']
-
         ]);
 
-        $stripeCustomer = $stripe->customers->create([
-            'email' => $user->email,
-            'name' => $user->name,
-            'phone' => $user->phone,
-            'preferred_locales' => ['fr' ],
-            'source' => $source['id'],
-            'metadata' => [
-                'user_id' => $user->id
-            ],
+        $stripeCustomer = $stripe->customers->retrieve('cus_IrTWNdGylUjgBJ');
+        if($stripeCustomer == null) {
+            $stripeCustomer = $stripe->customers->create([
+                'email' => $user->email,
+                'name' => $user->name,
+                'phone' => $user->phone,
+                'preferred_locales' => ['fr'],
+                'source' => $source['id'],
+                'metadata' => [
+                    'user_id' => $user->id
+                ],
+            ]);
+        }
 
-        ]);
+        $charge_description = "Annonce premium pour Citroen c3";
 
         $charge = $stripe->charges->create([
+            'description' => $charge_description,
             'amount' => 1000,
             'currency'=> "eur",
-            'receipt_email' => "info@01car.fr",
+            'receipt_email' => $user->email,
             'customer' => $stripeCustomer['id'],
             'source' =>  $source['id']
         ]);
 
 
-
-        //$data['secret'] =  $intent->client_secret;
-
         return response()->json($charge);
 
-        return response()->json($orders);
     }
 }

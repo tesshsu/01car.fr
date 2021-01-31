@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -63,5 +64,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 Route::group(['middleware' => ['auth:api', 'api.admin']], function () {
     // Users routes
     Route::apiResource('/v1/users', UserController::class);
+
+    Route::apiResource('/v1/orders', OrderController::class);
 });
 
