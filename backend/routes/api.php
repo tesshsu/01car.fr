@@ -7,10 +7,9 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SocialController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\FavoriteController;
-use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,12 +48,12 @@ Route::get('/v1/cars/{id}', [CarController::class, 'show'])->name('car.show');
 // Protected routes
 Route::group(['middleware' => ['auth:api']], function () {
 
-    Route::get('/v1/profil', [ProfilController::class,'show'])->name('profil.show');
-    Route::patch('/v1/profil', [ProfilController::class,'update'])->name('profil.update');
+    Route::get('/v1/profil', [ProfilController::class, 'show'])->name('profil.show');
+    Route::patch('/v1/profil', [ProfilController::class, 'update'])->name('profil.update');
 
     Route::apiResource('/v1/cars', CarController::class);
-    Route::post('/v1/cars/{car_id}/uploads', [CarController::class,'addFiles'])->name('car.addFiles');
-    Route::delete('/v1/cars/{car_id}/uploads/{id}', [CarController::class,'removeFiles'])->name('car.removeFiles');
+    Route::post('/v1/cars/{car_id}/uploads', [CarController::class, 'addFiles'])->name('car.addFiles');
+    Route::delete('/v1/cars/{car_id}/uploads/{id}', [CarController::class, 'removeFiles'])->name('car.removeFiles');
 
     Route::apiResource('/v1/favorites', FavoriteController::class);
 });
@@ -65,6 +64,8 @@ Route::group(['middleware' => ['auth:api', 'api.admin']], function () {
     // Users routes
     Route::apiResource('/v1/users', UserController::class);
 
-    Route::apiResource('/v1/orders', OrderController::class);
+    Route::get('/v1/payments', [PaymentController::class, 'index'])->name('payment.list');
+    Route::get('/v1/payments/{id}', [PaymentController::class, 'show'])->name('payment.show');
+    Route::post('/v1/payments', [PaymentController::class, 'store'])->name('payment.store');
 });
 

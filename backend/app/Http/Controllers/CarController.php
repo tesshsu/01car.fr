@@ -30,8 +30,6 @@ use Illuminate\Validation\Rule;
 
 class CarController extends Controller
 {
-    public $successStatus = 200;
-
     /**
      * Create a new controller instance.
      *
