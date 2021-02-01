@@ -157,6 +157,26 @@ export function fetchCars(page = 1, perPage = 18, owner = undefined) {
     }
 }
 
+//Filter cars
+export function filterCars(page = 1, perPage = 18, postal_code, price_min, price_max, km_min, km_max, brand, model, owner_type, fuel, transmission, year_min, year_max) {
+    return async (dispatch) => {
+        dispatch(getCars())
+
+        try {
+            const response = await API.Annonces.filter(perPage, page, postal_code, price_min, price_max, km_min, km_max, brand, model, owner_type, fuel, transmission, year_min, year_max);
+
+            if(response.data){
+                dispatch(getCarsSuccess(response));
+            }else{
+                dispatch(getCarsFailure())
+            }
+
+        } catch (error) {
+            dispatch(getCarsFailure())
+        }
+    }
+}
+
 export function fetchCar(id) {
     return async (dispatch) => {
         dispatch(getCar())

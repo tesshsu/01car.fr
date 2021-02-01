@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react"
 import {connect} from "react-redux";
 import {
 	anti_theft_equipments,
@@ -15,7 +15,7 @@ const DetailsDropdown = ({
 							 car
 						 }) => {
 
-
+	const [navbarOpen, setNavbarOpen] = React.useState(false);
 	const ncs = [
 		{icon: "fas fa-male", name: "Annonces par", value: car?.owner_type},
 		{icon: "far fa-calendar-check", name: "Vehicule est disponible", value: car?.available},
@@ -106,90 +106,100 @@ const DetailsDropdown = ({
 						</div>
 					</div>
 				))}
-
-				<h4 className="mt-2 px-6 py-2 text-xl leading-relaxed text-gray-600 underline font-bold uppercase rounded">
-					ÉQUIPEMENTS DE SÉRIE ET OPTIONS:
-				</h4>
-				{Equips?.outside?.length > 0 ? (
-					<div className="container px-2 mx-auto">
-						<div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Exterieur equipements :
-						</div>
-						<div className="flex flex-wrap">
-							{Equips.outside?.map(i => (
-								<div className="w-full px-3 flex-1">
+				<div className="blockEquipment text-center mt-2 p-4">
+					<button type="button" className="mr-4 p-2 border border-solid border-gray-600 text-lg text-gray-600 font-bold uppercase rounded" onClick={() => setNavbarOpen(!navbarOpen)}>
+						<i className="fas fa-tools"></i> ÉQUIPEMENTS DE SÉRIE ET OPTIONS <i
+						className="fas fa-chevron-circle-down"></i></button>
+					<div
+						className={
+							"flex flex-wrap mt-4" +
+							(navbarOpen ? " block" : " hidden")
+						}
+						id="example-navbar-warning"
+					>
+						{Equips?.outside?.length > 0 ? (
+							<div className="container px-2 mx-auto">
+								<div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Exterieur equipements :
+								</div>
+								<div className="flex flex-wrap">
+									{Equips.outside?.map(i => (
+										<div className="w-full px-3 flex-1">
 									<span
 										className="exEquiplist text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {outside_equipments[i]}</span>
+										</div>
+									))}
 								</div>
-							))}
-						</div>
-					</div>) : (null)}
+							</div>) : (null)}
 
-				{Equips?.inside?.length > 0 ? (
-					<div className="container px-2 mx-auto">
-						<div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Interieur equipements :
-						</div>
-						<div className="flex flex-wrap">
-							{Equips.inside?.map(i => (
-								<div className="w-full px-3 flex-1">
+						{Equips?.inside?.length > 0 ? (
+							<div className="container px-2 mx-auto">
+								<div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Interieur equipements :
+								</div>
+								<div className="flex flex-wrap">
+									{Equips.inside?.map(i => (
+										<div className="w-full px-3 flex-1">
 									<span
 										className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {inside_equipments[i]} </span>
+										</div>
+									))}
 								</div>
-							))}
-						</div>
-					</div>) : (null)}
+							</div>) : (null)}
 
-				{Equips?.security?.length > 0 ? (
-					<div className="container px-2 mx-auto">
-						<div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Securite equipements :
-						</div>
-						<div className="flex flex-wrap">
-							{Equips.security?.map(i => (
-								<div className="w-full px-3 flex-1">
+						{Equips?.security?.length > 0 ? (
+							<div className="container px-2 mx-auto">
+								<div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Securite equipements :
+								</div>
+								<div className="flex flex-wrap">
+									{Equips.security?.map(i => (
+										<div className="w-full px-3 flex-1">
 									<span
 										className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {security_equipments[i]} </span>
+										</div>
+									))}
 								</div>
-							))}
-						</div>
-					</div>) : (null)}
+							</div>) : (null)}
 
-				{Equips?.anti_theft?.length > 0 ? (
-					<div className="container px-2 mx-auto">
-						<div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Antivol equipements :</div>
-						<div className="flex flex-wrap">
-							{Equips.anti_theft?.map(i => (
-								<div className="w-full px-3 flex-1">
+						{Equips?.anti_theft?.length > 0 ? (
+							<div className="container px-2 mx-auto">
+								<div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Antivol equipements :</div>
+								<div className="flex flex-wrap">
+									{Equips.anti_theft?.map(i => (
+										<div className="w-full px-3 flex-1">
 									<span
 										className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {anti_theft_equipments[i]} </span>
+										</div>
+									))}
 								</div>
-							))}
-						</div>
-					</div>) : (null)}
+							</div>) : (null)}
 
-				{Equips?.confort?.length > 0 ? (
-					<div className="container px-2 mx-auto">
-						<div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Confort equipements :</div>
-						<div className="flex flex-wrap">
-							{Equips.confort?.map(i => (
-								<div className="w-full px-3 flex-1">
+						{Equips?.confort?.length > 0 ? (
+							<div className="container px-2 mx-auto">
+								<div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Confort equipements :</div>
+								<div className="flex flex-wrap">
+									{Equips.confort?.map(i => (
+										<div className="w-full px-3 flex-1">
 									<span
 										className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {comfort_equipments[i]} </span>
+										</div>
+									))}
 								</div>
-							))}
-						</div>
-					</div>) : (null)}
+							</div>) : (null)}
 
-				{Equips?.other?.length > 0 ? (
-					<div className="container px-2 mx-auto">
-						<div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Autre equipements :</div>
-						<div className="flex flex-wrap">
-							{Equips.other?.map(i => (
-								<div className="w-full px-3 flex-1">
+						{Equips?.other?.length > 0 ? (
+							<div className="container px-2 mx-auto">
+								<div className="text-gray-600 px-4 text-lg underline mt-2 font-bold">Autre equipements :</div>
+								<div className="flex flex-wrap">
+									{Equips.other?.map(i => (
+										<div className="w-full px-3 flex-1">
 									<span
 										className="text-md block my-2 p-3 text-gray-600 rounded border border-solid border-gray-200"> {other_equipments[i]} </span>
+										</div>
+									))}
 								</div>
-							))}
-						</div>
-					</div>) : (null)}
+							</div>) : (null)}
+					</div>
+				</div>
+
 			</div>
 		</>
 	);

@@ -51,7 +51,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 		dt_entry_service: car?.dt_entry_service,
 		km: car?.km,
 		license_plate: car?.license_plate,
-		codePostal:  car?.codePostal,
+		postal_code:  car?.postal_code,
 		dt_valuation: car?.dt_valuation,
 		score_recognition: car?.score_recognition,
 		score_valuation: car?.score_valuation,
@@ -374,20 +374,20 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 													<div className="w-full lg:w-6/12 px-4">
 														<label
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
-															htmlFor="codePostal"
+															htmlFor="postal_code"
 														>
 															{editCar ? "Code postal :" : "*Code postal :"}
 														</label>
 														<Field
-															name="codePostal"
-															//validate={formValidate.composeValidators(formValidate.required, formValidate.matchCodepostal)}
+															name="postal_code"
+															validate={formValidate.composeValidators(formValidate.required, formValidate.matchCodepostal)}
 															component="input"
 															type="text"
-															//value={values.codePostal}
+															value={values.postal_code}
 															placeholder="06130"
 															className="px-3 py-2 placeholder-gray-400 text-gray-700 relative border border-gray-400 bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 														/>
-														<Error name="codePostal"/>
+														<Error name="postal_code"/>
 													</div>
 												</div>
 

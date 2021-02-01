@@ -714,7 +714,7 @@ video {
 	margin-top: 2em;
   }
   .home-page .top-block{
-	height: 75vh;
+	height: 60vh;
   }
 }
 
@@ -3939,6 +3939,9 @@ video {
 }
 
 /*pages layout*/
+.home-page .top-block{
+  margin-bottom: 10rem;
+}
 .slick-prev:before, .slick-next:before{
   color: #ed8936 !important;
   font-size: 3rem !important;

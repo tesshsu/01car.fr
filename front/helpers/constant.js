@@ -16,36 +16,110 @@ export const fuelOptions = [
     {note: 0, label: 'Hybrid', value: 'Hybrid'}
 ];
 
-export const priceFilterOptions = [
-    {label: 'Prix max', value: ''},
-    {label: '3 000 € maxi', value: '3000'},
-    {label: '4 500 € maxi', value: '4500'},
-    {label: '6 000 € maxi', value: '6000'},
-    {label: '7 500 € maxi', value: '7500'},
-    {label: '9 000 € maxi', value: '9000'},
-    {label: '12 000 € maxi', value: '12000'}
+export const priceMinFilterOptions = [
+    {label: 'Prix min', value: ''},
+    {label: '1 000 € min', value: '1000'},
+    {label: '2 500 € min', value: '2500'},
+    {label: '3 000 € min', value: '3000'},
+    {label: '4 500 € min', value: '4500'},
+    {label: '5 000 € min', value: '5000'},
+    {label: '6 000 € min', value: '6000'},
+    {label: '7 000 € min', value: '7000'},
+    {label: '8 000 € min', value: '8000'},
+    {label: '9 000 € min', value: '9000'},
+    {label: '10 000 € min', value: '10000'},
+    {label: '12 000 € min', value: '12000'},
+    {label: '13 000 € min', value: '13000'},
+    {label: '14 000 € min', value: '14000'},
+    {label: '15 000 € min', value: '15000'},
+    {label: '17 000 € min', value: '17000'},
+    {label: '20 000 € min', value: '20000'},
+    {label: '22 000 € min', value: '22000'},
+    {label: '23 000 € min', value: '23000'},
+    {label: '25 000 € min', value: '25000'},
+    {label: '30 000 € min', value: '30000'}
 ];
 
-export const kmFilterOptions = [
-    {label: 'Km', value: ''},
-    {label: '25 000 Km maxi', value: '25000'},
-    {label: '50 000 Km maxi', value: '50000'},
-    {label: '75 000 Km maxi', value: '75000'},
-    {label: '100 000 Km maxi', value: '100000'},
-    {label: '125 000 Km maxi', value: '125000'},
-    {label: '140 000 Km maxi', value: '140000'}
+export const priceMaxFilterOptions = [
+    {label: 'Prix max', value: ''},
+    {label: '1 000 € max', value: '1000'},
+    {label: '2 500 € max', value: '2500'},
+    {label: '3 000 € max', value: '3000'},
+    {label: '4 500 € max', value: '4500'},
+    {label: '5 000 € max', value: '5000'},
+    {label: '6 000 € max', value: '6000'},
+    {label: '7 000 € max', value: '7000'},
+    {label: '8 000 € max', value: '8000'},
+    {label: '9 000 € max', value: '9000'},
+    {label: '10 000 € max', value: '10000'},
+    {label: '12 000 € max', value: '12000'},
+    {label: '13 000 € max', value: '13000'},
+    {label: '14 000 € max', value: '14000'},
+    {label: '15 000 € max', value: '15000'},
+    {label: '17 000 € max', value: '17000'},
+    {label: '20 000 € max', value: '20000'},
+    {label: '22 000 € max', value: '22000'},
+    {label: '23 000 € max', value: '23000'},
+    {label: '25 000 € max', value: '25000'},
+    {label: '30 000 € max', value: '30000'}
+];
+
+export const kmMinFilterOptions = [
+    {label: 'Km-min', value: ''},
+    {label: '5 000 Km min', value: '5000'},
+    {label: '7 000 Km min', value: '7000'},
+    {label: '10 000 Km min', value: '10000'},
+    {label: '12 000 Km min', value: '120000'},
+    {label: '15 000 Km min', value: '15000'},
+    {label: '18 000 Km min', value: '18000'},
+    {label: '20 000 Km min', value: '20000'},
+    {label: '22 000 Km min', value: '220000'},
+    {label: '25 000 Km min', value: '250000'},
+    {label: '30 000 Km min', value: '30000'},
+    {label: '40 000 Km min', value: '40000'},
+    {label: '50 000 Km min', value: '50000'},
+    {label: '60 000 Km min', value: '60000'},
+    {label: '70 000 Km min', value: '70000'},
+    {label: '80 000 Km min', value: '80000'},
+    {label: '90 000 Km min', value: '90000'},
+    {label: '100 000 Km min', value: '100000'},
+    {label: '150 000 Km min', value: '1500000'},
+    {label: '200 000 Km min', value: '2000000'}
+];
+
+export const kmMaxFilterOptions = [
+    {label: 'Km-max', value: ''},
+    {label: '5 000 Km max', value: '5000'},
+    {label: '7 000 Km max', value: '7000'},
+    {label: '10 000 Km max', value: '10000'},
+    {label: '12 000 Km max', value: '120000'},
+    {label: '15 000 Km max', value: '15000'},
+    {label: '18 000 Km max', value: '18000'},
+    {label: '20 000 Km max', value: '20000'},
+    {label: '22 000 Km max', value: '220000'},
+    {label: '25 000 Km max', value: '250000'},
+    {label: '30 000 Km max', value: '30000'},
+    {label: '40 000 Km max', value: '40000'},
+    {label: '50 000 Km max', value: '50000'},
+    {label: '60 000 Km max', value: '60000'},
+    {label: '70 000 Km max', value: '70000'},
+    {label: '80 000 Km max', value: '80000'},
+    {label: '90 000 Km max', value: '90000'},
+    {label: '100 000 Km max', value: '100000'},
+    {label: '150 000 Km max', value: '1500000'},
+    {label: '200 000 Km max', value: '2000000'}
 ];
 
 export const boiteFilterOptions = [
     {label: 'Boîte de vitesse', value: ''},
     {label: 'manual', value: 'manual'},
-    {label: 'Automatique', value: 'Automatique'}
+    {label: 'Automatique', value: 'automatic'}
 ];
 
 export const statusFilterOptions = [
     {label: 'Annonceurs', value: ''},
-    {label: 'Professionnels', value: 'Professionnels'},
-    {label: 'Particuliers', value: 'Particuliers'}
+    {label: 'Professionnels', value: 'pro'},
+    {label: 'Particuliers', value: 'private'}
 ];
 
 export const statuVendeurOptions = [

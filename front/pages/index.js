@@ -13,10 +13,15 @@ export default function Index() {
     <>
       <IndexNavbar fixed />
       <main className="home-page">
-	  <section className="top-block header relative pt-16 items-center flex">
+          <div className="titleForHomePage mt-32">
+              <h1 className="text-2xl font-semibold text-gray-700 text-center">1er Site d'accompagnement sécurisé dans la vente et l'achat de véhicules</h1>
+              <p className="text-md font-light mt-2 text-center">Sur 1car.fr, on cherche et on trouve les meilleurs affaires </p>
+              <AnnonceSearchForm />
+          </div>
+	  <section className="top-block header relative items-center flex">
         <div className="container mx-auto items-center flex flex-wrap">
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
-            <div className="pt-32 sm:pt-0">
+            <div className="pt-16 sm:pt-0">
               <h1 className="font-bold text-4xl text-orange-700">
                   1car, c'est quoi?
               </h1>
@@ -80,17 +85,11 @@ export default function Index() {
             </div>
         </div>
         <img
-          className="bgImg absolute top-0 b-auto right-0 pt-16 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860-px"
+          className="bgImg absolute top-0 b-auto right-0 sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860-px"
           src={require("assets/img/pattern_nextjs.png")}
           alt="..."
         />
       </section>
-          <AnnonceSearchForm />
-          <div className="comment-marche-block justify-center text-center flex flex-wrap mt-24">
-              <div className="w-full md:w-6/12 px-12 md:px-4">
-                  <h2 className="font-semibold text-4xl">Comment ça marche ?</h2>
-              </div>
-          </div>
           <PubContent2 />
 	  <section className="compare-block pb-40 relative bg-gray-200">
         <div className="compare-description-block items-center flex flex-wrap justify-center mb-3 md\:hidden">
