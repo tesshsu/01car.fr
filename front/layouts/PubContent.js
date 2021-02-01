@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Link from "next/link";
-import useLoggedUser from 'service/hooks/useLoggedUser';
-import ModalPayment from "components/Mondal/ModalPayment.js";
+import useLoggedUser from '../service/hooks/useLoggedUser';
+import ModalPayment from "../components/Modal/ModalPayment.js";
 import {basics} from "helpers/constant";
 
 export default function PubContent() {

@@ -1,5 +1,5 @@
 import React from "react";
-import ContactVendeur from "components/Tabs/ContactVendeur.js";
+import ContactVendeur from "../../components/Tabs/ContactVendeur.js";
 import Link from "next/link";
 import {connect} from "react-redux";
 

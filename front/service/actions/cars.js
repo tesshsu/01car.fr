@@ -114,11 +114,12 @@ const updateCarFailure = () => ({
     type: UPDATE_CAR_FAILURE,
 });
 
-const editingCar = (carId) => ({
+const editingCar = (carId, selectedCar) => ({
     type: EDIT_CAR,
     payload: {
         editing: true,
-        carId: carId
+        carId: carId,
+        selectedCar: selectedCar
     }
 });
 
@@ -250,9 +251,9 @@ export function modifyCar(id, payload) {
     }
 }
 
-export function editCar(carId) {
+export function editCar(carId, selectedCar) {
     return async (dispatch) => {
-        dispatch(editingCar(carId));
+        dispatch(editingCar(carId, selectedCar));
     };
 }
 
