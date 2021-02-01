@@ -27,9 +27,9 @@ export default function useAnnonces() {
     }
   }, [dispatch]);
 
-  const editCar = useCallback(async (carId) => {
+  const editCar = useCallback(async (carId, selectedCar) => {
     try {
-      await dispatch(ANNONCES_ACTIONS.editCar(carId));
+      await dispatch(ANNONCES_ACTIONS.editCar(carId, selectedCar));
     } catch (err) {
       console.log("update_car_error", err);
     }

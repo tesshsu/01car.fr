@@ -43,7 +43,8 @@ const MesAnnoncesLists = ({
     }
     const handleEdit = async (id) => {
         try {
-            await editCar(id);
+            let selectedCars = cars?.filter(item => item.id === id);
+            await editCar(id, selectedCars.length > 0 ? selectedCars[0]: undefined );
         } catch (err) {
             console.log(err);
         }
@@ -136,7 +137,7 @@ const MesAnnoncesLists = ({
                                           </a>
                                       </Link>
                                     </button>
-                                    {isAuthentificated && car?.premium == true ? (
+                                    {isAuthentificated && car?.premium === true ? (
                                         <button
                                             className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 mr-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
                                             type="button"
@@ -161,6 +162,7 @@ const MesAnnoncesLists = ({
                                             <Link href="/prix">
                                                 <a
                                                     href="#"
+                                                    onClick={(e) => handleEdit(car?.id)}
                                                     className={
                                                         "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
                                                     }

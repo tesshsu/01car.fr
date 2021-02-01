@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
-import MondalContact from "components/Mondal/MondalContact.js";
-import NoteConfiance from "components/Tabs/NoteConfiance.js";
+import NoteConfiance from "../../../components/Tabs/NoteConfiance.js";
 import {connect} from "react-redux";
 import useLoggedUser from "../../../service/hooks/useLoggedUser";
 import useAnnonces from "../../../service/hooks/useAnnonces";
@@ -106,7 +105,7 @@ const DetailsSide = ({ dispatch,
 					{isowner ? (
 						null
 					):(
-						<MondalContact transparent />
+						<ModalContact transparent />
 					)}
 
                 </div>

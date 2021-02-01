@@ -30,8 +30,6 @@ use Illuminate\Validation\Rule;
 
 class CarController extends Controller
 {
-    public $successStatus = 200;
-
     /**
      * Create a new controller instance.
      *
@@ -53,7 +51,9 @@ class CarController extends Controller
 
         if ($request->has('premium')) {
             $premium = $request->query('premium');
-            $carsReq->where('premium', $premium);
+            if (!$premium->isEmpty()) {
+                $carsReq->where('premium', $premium);
+            }
         }
 
         if ($request->has('owner')) {
@@ -65,47 +65,93 @@ class CarController extends Controller
 
         // filter on price
         if ($request->has('price_min')) {
-            $price_min = $request->query('price_min');
-            $carsReq->where('price', '>=', $price_min);
+            $price_min = Str::of($request->query('price_min'))->trim();;
+            if (!$price_min->isEmpty()) {
+                $carsReq->where('price', '>=', $price_min);
+            }
         }
         if ($request->has('price_max')) {
-            $price_max = $request->query('price_max');
-            $carsReq->where('price', '<=', $price_max);
+            $price_max = Str::of($request->query('price_max'))->trim();;
+            if (!$price_max->isEmpty()) {
+                $carsReq->where('price', '<=', $price_max);
+            }
         }
 
         // filter on km
         if ($request->has('km_min')) {
-            $km_min = $request->query('km_min');
-            $carsReq->where('km', '>=', $km_min);
+            $km_min = Str::of($request->query('km_min'))->trim();;
+            if (!$km_min->isEmpty()) {
+                $carsReq->where('km', '>=', $km_min);
+            }
         }
         if ($request->has('km_max')) {
-            $km_max = $request->query('km_max');
-            $carsReq->where('km', '<=', $km_max);
+            $km_max = Str::of($request->query('km_max'))->trim();;
+            if (!$km_max->isEmpty()) {
+                $carsReq->where('km', '<=', $km_max);
+            }
+        }
+
+        // filter on dt_entry_service
+        if ($request->has('dt_entry_service_min')) {
+            $dt_entry_service_min = Str::of($request->query('dt_entry_service_min'))->trim();
+            if (!$dt_entry_service_min->isEmpty()) {
+                $carsReq->where('dt_entry_service', '>=', $dt_entry_service_min);
+            }
+        }
+        if ($request->has('dt_entry_service_max')) {
+            $dt_entry_service_max = Str::of($request->query('dt_entry_service_max'))->trim();
+            if (!$dt_entry_service_max->isEmpty()) {
+                $carsReq->where('dt_entry_service', '<=', $dt_entry_service_max);
+            }
         }
 
         // filter on postal
         if ($request->has('postal_code')) {
             $postal_code = Str::of($request->query('postal_code'))->trim();
-            $carsReq->where('postal_code', 'like', $postal_code . '%');
+            if (!$postal_code->isEmpty()) {
+                $carsReq->where('postal_code', 'like', $postal_code . '%');
+            }
         }
 
         if ($request->has('brand')) {
-            $brands = Str::of($request->query('brand'))->split('/[\s,]+/');;
-            $brands->each(function ($brand, $key) use ($carsReq) {
-                $carsReq->where(function ($query) use ($brand) {
-                    $query->where('brand', 'like', '%' . $brand . '%')
-                        ->orWhere('model', 'like', '%' . $brand . '%');
+            $brands = Str::of($request->query('brand'))->trim()->split('/[\s,]+/');;
+            if (!$brands->isEmpty()) {
+                $brands->each(function ($brand, $key) use ($carsReq) {
+                    $carsReq->where(function ($query) use ($brand) {
+                        $query->where('brand', 'like', '%' . $brand . '%')
+                            ->orWhere('model', 'like', '%' . $brand . '%');
+                    });
                 });
-            });
+            }
         }
         if ($request->has('model')) {
-            $brands = Str::of($request->query('model'))->split('/[\s,]+/');;
-            $brands->each(function ($brand, $key) use ($carsReq) {
-                $carsReq->where(function ($query) use ($brand) {
-                    $query->where('brand', 'like', '%' . $brand . '%')
-                        ->orWhere('model', 'like', '%' . $brand . '%');
+            $models = Str::of($request->query('model'))->trim()->split('/[\s,]+/');
+            if (!$models->isEmpty()) {
+                $models->each(function ($model, $key) use ($carsReq) {
+                    $carsReq->where(function ($query) use ($model) {
+                        $query->where('brand', 'like', '%' . $model . '%')
+                            ->orWhere('model', 'like', '%' . $model . '%');
+                    });
                 });
-            });
+            }
+        }
+        if ($request->has('fuel')) {
+            $fuel = Str::of($request->query('fuel'))->trim();
+            if (!$fuel->isEmpty()) {
+                $carsReq->where('fuel', '=', $fuel);
+            }
+        }
+        if ($request->has('transmission')) {
+            $transmission = Str::of($request->query('transmission'))->trim();
+            if (!$transmission->isEmpty()) {
+                $carsReq->where('transmission', '=', $transmission);
+            }
+        }
+        if ($request->has('owner_type')) {
+            $owner_type = Str::of($request->query('owner_type'))->trim();
+            if (!$owner_type->isEmpty()) {
+                $carsReq->where('owner_type', '=', $owner_type);
+            }
         }
 
         $carsReq->orderBy('premium', 'desc');

@@ -780,33 +780,33 @@
                         "value": ""
                       },
                       {
-                        "enabled": true,
                         "name": "price_min",
                         "value": "7000"
                       },
                       {
-                        "enabled": true,
                         "name": "price_max",
                         "value": "8000"
                       },
                       {
-                        "enabled": true,
                         "name": "km_min",
                         "value": "7"
                       },
                       {
-                        "enabled": true,
                         "name": "km_max",
                         "value": "50"
                       },
                       {
+                        "enabled": true,
                         "name": "postal_code",
-                        "value": ""
+                        "value": "94"
                       },
                       {
-                        "enabled": true,
                         "name": "brand",
                         "value": "Porche cayenne "
+                      },
+                      {
+                        "name": "model",
+                        "value": ""
                       }
                     ]
                   },
