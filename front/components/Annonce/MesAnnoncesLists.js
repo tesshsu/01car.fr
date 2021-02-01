@@ -82,7 +82,7 @@ const MesAnnoncesLists = ({
                                 className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">
 							    <div className="top justify-between">
                                   <div className="font-bold text-2xl uppercase text-orange-700 text-center py-2 m-2">
-                                     {car?.brand} {car?.generation} | <i className="far fa-clock"></i> <Moment
+                                     {car?.brand} {car?.model} {car?.generation} | <i className="far fa-clock"></i> <Moment
                                       format="DD/MM/YYYY">{car?.expire_at}</Moment>
                                   </div>
                                   <div

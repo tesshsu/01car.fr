@@ -31,7 +31,7 @@ const AnnonceLists = ({
         setFilteredCars(
             cars?.filter((car) =>
                 car.brand?.toLowerCase().includes(search.toLowerCase()) ||
-                car.version?.toLowerCase().includes(search.toLowerCase())
+                car.model?.toLowerCase().includes(search.toLowerCase())
             )
         );
 

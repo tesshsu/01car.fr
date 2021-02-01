@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from "react";
 import Link from "next/link";
 import {connect} from 'react-redux'
 import QuestionsOptions from "../../components/Tabs/QuestionsOptions.js";
@@ -17,6 +17,10 @@ import {
 	raisonVendreOptions,
 	statuVendeurOptions
 } from '../../helpers/constant';
+import {
+	marqueFilterOptions,
+	modelFilterOptions
+} from "../../helpers/constantMarque";
 import * as formValidate from '../../helpers/formValidate';
 import {Condition, Error} from '../../helpers/formValidate';
 import "react-responsive-modal/styles.css";
@@ -35,9 +39,11 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 	const [isClickSubmit3, setisClickSubmit3] = React.useState(true)
 	const [hasErrors, setHasErrors] = React.useState(true);
 	const [editCar, setEditCar] = React.useState(false);
+	const [marqueX, setMarqueX] = useState("");
+	const [selectedBrand, setSelectedBrand] = useState("");
 	const sendPostQuestionsvalues = {
 		id: car?.id,
-		brand: car?.brand,
+		selectedBrand: car?.brand,
 		model: car?.model,
 		generation: car?.generation,
 		phase: car?.phase,
@@ -104,7 +110,10 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 	const refreshPage= async () => {
 		window.location.reload();
 	}
-	//submit
+
+	const selectedMarque = (e) =>{
+		setMarqueX(e.target.value);
+	};
 
 	const onSubmit = async (values) => {
 		try {
@@ -255,29 +264,56 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 										<div className="tab-content tab-space">
 											<div className={openTab === 1 ? "block" : "hidden"} id="link1">
 												<div className="flex flex-wrap">
-													<div className="w-full lg:w-6/12 px-4">
-														<label
-															className="block uppercase text-gray-700 text-md font-bold mb-2"
-															htmlFor="brand"
-														>
-															{editCar ? "Marque modèle :" : "*Marque modèle :"}
-														</label>
-														<div
-															className="relative flex w-full flex-wrap items-stretch mb-3">
+													<div className="w-full lg:w-4/12 px-4">
+															<label
+																className="block uppercase text-gray-700 text-md font-bold mb-2"
+																htmlFor="brand"
+															>
+																{editCar ? "Marque :" : "*Marque :"}
+															</label>
+
 															<Field
 																name="brand"
-																validate={formValidate.composeValidators(formValidate.required, formValidate.matchMarqueModel)}
-																component="input"
+																component="select"
 																value={values.brand}
-																type="text"
-																placeholder="BMW SERIE 3"
-																className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded border border-gray-400 text-sm shadow focus:outline-none focus:shadow-outline w-full pl-10"
-															/>
+																onClick={selectedMarque}
+																className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+																{ !selectedBrand &&  <option>*--Choosir votre medele--*</option>}
+																{
+																	marqueFilterOptions.map( (marqueFilterOption) =>(
+
+																		<option value={marqueFilterOption.code} >{marqueFilterOption.name}</option>
+																	))
+																}
+															</Field>
 															<Error name="brand"/>
-														</div>
 													</div>
 
-													<div className="w-full lg:w-6/12 px-4">
+													<div className="w-full lg:w-4/12 px-4">
+														<label
+															className="block uppercase text-gray-700 text-md font-bold mb-2"
+															htmlFor="model"
+														>
+															{editCar ? "Modèle :" : "*Modèle :"}
+														</label>
+														<Field
+															name="model"
+															component="select"
+															value={values.model}
+															className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+															{ !marqueX &&  <option>*--Tout les modèles--*</option>}
+															{
+																marqueX && modelFilterOptions[marqueX].map( (item) =>(
+
+																	<option >{item}</option>
+
+																))
+															}
+														</Field>
+														<Error name="model"/>
+													</div>
+
+													<div className="w-full lg:w-4/12 px-4">
 														<label
 															className="block uppercase text-gray-700 text-md font-bold mb-2"
 															htmlFor="dt_entry_service"
