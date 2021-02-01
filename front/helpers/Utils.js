@@ -1,6 +1,5 @@
 
 export const transformValueToBoolean = (value) => {
-    console.log("value=", value);
     return value?.toString()?.toLowerCase() === "true" || value === 1 || value === '1' || value === true;
 }
 

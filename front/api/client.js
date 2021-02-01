@@ -1,6 +1,7 @@
 import axios from 'axios';
 import ENVS from '../environment';
 import Cookie from "js-cookie";
+import {loadStripe} from "@stripe/stripe-js";
 const client = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   timeout: 10000

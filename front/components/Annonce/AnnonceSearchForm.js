@@ -85,7 +85,7 @@ export default function AnnonceSearchForm() {
 										<div className="relative flex w-full flex-wrap items-stretch mb-3">
 											<Field name="km" component="select" className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 												{priceFilterOptions.map(priceFilterOption => (
-													<option
+													<option key={priceFilterOption.value}
 														value={priceFilterOption.value}>{priceFilterOption.label}</option>
 												))}
 											</Field>

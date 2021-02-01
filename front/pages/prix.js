@@ -1,32 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import Link from "next/link";
-import { Elements } from "@stripe/react-stripe-js";
+import {CardElement, Elements} from "@stripe/react-stripe-js";
 import useLoggedUser from 'service/hooks/useLoggedUser';
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import PubContent from "layouts/PubContent.js";
 import PubContentThreeIcons from "layouts/PubContentThreeIcons.js";
 import {classics, premiums, pubTransparents } from "helpers/constant";
-import CheckoutForm from "components/Cards/CardChekoutForm";
+
 import {Modal} from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
-import { loadStripe } from "@stripe/stripe-js";
-const stripePromise = loadStripe("pk_test_51HgmzIBjqnSC21bhUov33uWhuXhCFQBnwRcy1pfJgKmXv42GkV7vLZJ0uNR26SdEUomqGHDnGhCXvxn0MY6GjIg100F67arXkO");
 
-const ModalPayment = ({ paymentIntent }) => (
-    <Elements
-        stripe={stripePromise}
-        options={{
-            style: {
-                complete: {
-                    backgroundColor: "#ed8936"
-                }
-            },
-        }}
-    >
-        <CheckoutForm paymentIntent={paymentIntent} />
-    </Elements>
-);
+import ModalPayment from "../components/Modal/ModalPayment";
 
 export default function Prix() {
    const {
@@ -34,28 +19,39 @@ export default function Prix() {
     loggedUser
   } = useLoggedUser();
     const [showModal, setShowModal] = React.useState(false);
-  let [tokken,settokken]=useState(null);
+
+
     const onClickPayment = async e => {
         e.preventDefault();
         return setShowModal(true);
     }
 
-    useEffect(() => {
-    if (isAuthentificated && loggedUser) {
-        try{
-			const getTokken=async ()=>{
-              const tok= await localStorage.getItem('ACCESS_TOKEN');
-			  if(tok){
-				settokken(tok);
-			  }
-			}
-			getTokken();
-		}catch(err){
-			console.log(err);
+
+    const onPaymentSubmit = async (token) => {
+        try {
+
+            console.log("token=", token);
+
+            console.log('Received Stripe token:', token);
+
+            // You can also use confirmCardPayment with the PaymentIntents API automatic confirmation flow.
+            // See our confirmCardPayment documentation for more:
+            // https://stripe.com/docs/stripe-js/reference#stripe-confirm-card-payment
+
+
+            if (error) throw new Error(error.message);
+
+            if (status === "succeeded") {
+                destroyCookie(null, "paymentIntentId");
+            }
+        } catch (err) {
+
         }
     }
-  }, [isAuthentificated, loggedUser]);
-  return (
+
+
+
+    return (
     <>
       <IndexNavbar fixed />
       <main className="prix-page">
@@ -92,7 +88,7 @@ export default function Prix() {
                                   </div>
                               </div>
                           </div>
-                          <ModalPayment/>
+                          <ModalPayment onSubmit={onPaymentSubmit}/>
                       </section>
                   </Modal>
               </>
@@ -128,37 +124,37 @@ export default function Prix() {
           <div className="flex flex-wrap items-center">
             <div className="classic-block w-12/12 md:w-4/12 lg:w-5/12 px-12 md:px-4 -mt-32 pt-6 bg-gray-200">
               <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg bg-white-800 border-2 border-gray-200">
-                <h2 class="mt-2 text-center text-3xl leading-9 font-semibold font-display text-gray-900">
+                <h2 className="mt-2 text-center text-3xl leading-9 font-semibold font-display text-gray-900">
 					Classic
 				</h2>
-				<div class="mt-4 flex items-center justify-center font-display">
-					<span class="px-3 flex items-start text-6xl leading-none tracking-tight font-medium text-gray-900">
-					  <span class="mt-2 mr-2 text-4xl">
+				<div className="mt-4 flex items-center justify-center font-display">
+					<span className="px-3 flex items-start text-6xl leading-none tracking-tight font-medium text-gray-900">
+					  <span className="mt-2 mr-2 text-4xl">
 						€
 					  </span>
 					  <span>
 						0
 					  </span>
 					</span>
-					<span class="text-2xl leading-8 font-semibold text-gray-400 tracking-wide">
+					<span className="text-2xl leading-8 font-semibold text-gray-400 tracking-wide">
 					  euro
 					</span>
 				</div>
 				<hr className="mt-6 border-b-1 border-gray-400" />
-                <div class="flex-1 flex flex-col justify-between border-t-2 border-gray-100 p-6 bg-gray-50 sm:p-10 lg:p-6 xl:p-10">
+                <div className="flex-1 flex flex-col justify-between border-t-2 border-gray-100 p-6 bg-gray-50 sm:p-10 lg:p-6 xl:p-10">
 					<ul>
 					 {classics.map(classic => (
-						  <li class="mt-4 mx-4 flex items-start">
-							<div class="flex-shrink-0">
-							 <i class="fas fa-check"></i>
+						  <li className="mt-4 mx-4 flex items-start">
+							<div className="flex-shrink-0">
+							 <i className="fas fa-check"></i>
 							</div>
-							<p class="ml-3 text-base leading-6 font-medium text-gray-500">
+							<p className="ml-3 text-base leading-6 font-medium text-gray-500">
 							{classic.list}
 							</p>
 						  </li>
 					 ))}
 					</ul>
-					<div class="mt-8 text-center my-4">
+					<div className="mt-8 text-center my-4">
 					  <button
 							  className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
 							  type="button"
@@ -185,38 +181,38 @@ export default function Prix() {
 					  src="https://i.ibb.co/zRmF4Sr/best-choice-png-1.png"
 					  className="w-full align-center togBadgePrix"
 					/>
-				<h2 class="mt-2 text-center text-3xl leading-9 font-semibold font-display text-gray-900">
+				<h2 className="mt-2 text-center text-3xl leading-9 font-semibold font-display text-gray-900">
 					Premium
 				</h2>
-				<div class="mt-4 flex items-center justify-center font-display">
-					<span class="px-3 flex items-start text-6xl leading-none tracking-tight font-medium text-gray-900">
-					  <span class="mt-2 mr-2 text-4xl">
+				<div className="mt-4 flex items-center justify-center font-display">
+					<span className="px-3 flex items-start text-6xl leading-none tracking-tight font-medium text-gray-900">
+					  <span className="mt-2 mr-2 text-4xl">
 						€
 					  </span>
 					  <span>
 						6.99
 					  </span>
 					</span>
-					<span class="text-2xl leading-8 font-semibold text-gray-400 tracking-wide">
+					<span className="text-2xl leading-8 font-semibold text-gray-400 tracking-wide">
 					  euro
 					</span>
 				</div>
 				<hr className="mt-6 border-b-1 border-gray-400" />
-                <div class="flex-1 flex flex-col justify-between border-t-2 border-gray-100 p-6 bg-gray-50 sm:p-10 lg:p-6 xl:p-10">
+                <div className="flex-1 flex flex-col justify-between border-t-2 border-gray-100 p-6 bg-gray-50 sm:p-10 lg:p-6 xl:p-10">
 					<ul>
 					  {premiums.map(premium => (
-						  <li class="mt-4 mx-4 flex items-start">
-							<div class="flex-shrink-0">
-							 <i class="fas fa-check"></i>
+						  <li className="mt-4 mx-4 flex items-start">
+							<div className="flex-shrink-0">
+							 <i className="fas fa-check"> </i>
 							</div>
-							<p class="ml-3 text-base leading-6 font-medium text-gray-500 text-xl">
+							<p className="ml-3 text-base leading-6 font-medium text-gray-500 text-xl">
 							{premium.list}
 							</p>
 						  </li>
 					   ))}
 					</ul>
-					<div class="mt-8 text-center my-4">
-					  {!isAuthentificated || (tokken = null) ? (
+					<div className="mt-8 text-center my-4">
+					  {!isAuthentificated ? (
 					       <button
 							  className="ProductBlockButton bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
 							  type="button"
@@ -228,7 +224,7 @@ export default function Prix() {
 									  "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
 									}
 								  >
-									<i class="far fa-laugh mr-1 animate-spin"></i> Vendre votre véhicule sur Top list
+									<i className="far fa-laugh mr-1 animate-spin"></i> Vendre votre véhicule sur Top list
 								  </a>
 							  </Link>
 					  </button>

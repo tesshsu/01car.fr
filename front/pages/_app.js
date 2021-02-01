@@ -23,6 +23,7 @@ import Stripe from "stripe";
 import { loadStripe } from "@stripe/stripe-js";
 import { parseCookies, setCookie } from "nookies";
 import {favoritesReducer} from "../service/reducers";
+import {setupStripe} from "../api/stripeClient";
 //combien all the reducers
 const logger = createLogger();
 const rootReducers = combineReducers({
@@ -36,6 +37,9 @@ const store = createStore(
   applyMiddleware(thunkMiddleware, logger)
 );
 
+//------------------------
+// Router setup
+//------------------------
 Router.events.on("routeChangeStart", (url) => {
   console.log(`Loading: ${url}`);
   document.body.classList.add("body-page-transition");
@@ -53,42 +57,15 @@ Router.events.on("routeChangeError", () => {
   document.body.classList.remove("body-page-transition");
 });
 
+//------------------------
+// API setup
+//------------------------
 setupApiClient();
+setupStripe();
 
-const stripePromise = loadStripe("pk_test_51HgmzIBjqnSC21bhUov33uWhuXhCFQBnwRcy1pfJgKmXv42GkV7vLZJ0uNR26SdEUomqGHDnGhCXvxn0MY6GjIg100F67arXkO");
-
-export const getServerSideProps = async ctx => {
-  const stripe = new Stripe("sk_test_51HgmzIBjqnSC21bhuUPX8DMnH1ynu6iKdvoVMhjUqKgdVqDGKmrBximAok0WD9ypSgk6b3uq1ZE1uqsEEoM4PKzP00iDeWHIKx");
-
-  let paymentIntent;
-
-  const { paymentIntentId } = await parseCookies(ctx);
-  console.log('paymentIntentId1: ', paymentIntent);
-  if (paymentIntentId) {
-    paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
-    console.log('paymentIntentId: ', paymentIntent);
-    return {
-      props: {
-        paymentIntent
-      }
-    };
-  }
-
-  paymentIntent = await stripe.paymentIntents.create({
-    amount: 1000,
-    currency: "eur",
-    receipt_email:"info@01car.fr"
-  });
-
-  setCookie(ctx, "paymentIntentId", paymentIntent.id);
-
-  return {
-    props: {
-      paymentIntent
-    }
-  };
-};
-
+//------------------------
+// Cookie init
+//------------------------
 function getCookie(cname) {
   if (typeof window === "undefined") return null;
   var name = cname + "=";
@@ -128,7 +105,7 @@ export default class MyApp extends App {
     return { pageProps };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const isAuthenticated = getCookie("user");
     if (isAuthenticated) {
       const loggedUser = JSON.parse(isAuthenticated).loggedUser;
