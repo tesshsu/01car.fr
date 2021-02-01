@@ -13,6 +13,8 @@ import "react-responsive-modal/styles.css";
 import ModalPayment from "../components/Modal/ModalPayment";
 import {connect} from "react-redux";
 import {createPayment} from "../service/actions/payments";
+import useFavorites from "../service/hooks/useFavorites";
+import usePayments from "../service/hooks/usePayments";
 
 
 const Prix = ({
@@ -27,6 +29,9 @@ const Prix = ({
     } = useLoggedUser();
     const [showModal, setShowModal] = React.useState(false);
 
+    const {
+        createPayment
+    } = usePayments();
 
     const onClickPayment = async e => {
         e.preventDefault();
@@ -45,15 +50,7 @@ const Prix = ({
             paymentRequest.provider = 'stripe';
             paymentRequest.token = token.id;
 
-            console.log(paymentRequest);
-
-            const res = dispatch(createPayment(paymentRequest));
-
-            console.log("res=", res);
-
-            if (status === "succeeded") {
-
-            }
+            return await createPayment(paymentRequest);
         } catch (err) {
 
         }

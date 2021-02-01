@@ -99,6 +99,7 @@ export function createPayment(payload) {
                 payload
             );
             dispatch(createPaymentSuccess(response));
+            return response;
         } catch (err) {
             await dispatch(createPaymentFailure());
             throw err;
