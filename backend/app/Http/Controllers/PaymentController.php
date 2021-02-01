@@ -142,10 +142,12 @@ class PaymentController extends Controller
         ]);
 
         // Search if customer exist
+        $stripeCustomer = null;
         $payment = Payment::where('user_id', $user->id)
             ->whereNotNull('provider_user_id')->first();
-
-        $stripeCustomer = $stripe->customers->retrieve($payment->provider_user_id);
+        if($payment) {
+            $stripeCustomer = $stripe->customers->retrieve($payment->provider_user_id);
+        }
         if ($stripeCustomer == null) {
             $stripeCustomer = $stripe->customers->create([
                 'email' => $user->email,
