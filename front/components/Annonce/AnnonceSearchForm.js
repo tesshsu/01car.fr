@@ -170,7 +170,7 @@ const AnnonceSearchForm = ({
 										<div className="relative flex w-full flex-wrap items-stretch mb-3">
 											<Field name="km_max" component="select"  value={values.km_max} className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 												{kmMaxFilterOptions.map(kmMaxFilterOption => (
-													<option key={priceFilterOption.value}
+													<option
 														value={kmMaxFilterOption.value}>{kmMaxFilterOption.label}</option>
 												))}
 											</Field>
