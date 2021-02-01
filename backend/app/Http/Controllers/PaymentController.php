@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 
 use App\Constants\Payments\PaymentProvider;
 use App\Constants\Payments\PaymentStatus;
+use App\Constants\TimeConstant;
 use App\Http\Resources\Car as CarResource;
 use App\Http\Resources\PaymentPaginatorCollection;
 use App\Models\Car;
 use App\Models\Payment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -71,6 +73,12 @@ class PaymentController extends Controller
         $newPayment->save();
 
         $charge = $this->pay($currentUser, $car, $newPayment, $request);
+
+        if($charge->status === PaymentStatus::SUCCEEDED){
+            $car->premium = true;
+            $car->expire_at = Carbon::now()->addDays(TimeConstant::EXPIRATION_DURATION_IN_DAYS);
+            $car->save();
+        }
 
         return response()->json($charge);
         return $this->renderJson($newPayment->id);
