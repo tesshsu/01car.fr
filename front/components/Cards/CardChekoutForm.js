@@ -28,7 +28,7 @@ const CheckoutForm = (props) => {
 				props.onSubmit(token).then(
 					function (result) {
 						console.log("result=", result);
-						if (result.status === "succeeded") {
+						if (result?.status === "succeeded") {
 							setCheckoutError(null);
 							setCheckoutSuccess(true);
 						} else {
@@ -47,7 +47,7 @@ const CheckoutForm = (props) => {
 		}
 	};
 
-	if (checkoutSuccess) return <p>Payment successful!</p>;
+	if (checkoutSuccess) return <p className="text-orange-500 text-md text-center font-bold mt-4">Votre paiement à été traité avec succèsl!</p>;
 
 	return (
 		<div className="mt-4 text-center my-4 mt-6">

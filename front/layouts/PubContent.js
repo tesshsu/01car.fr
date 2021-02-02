@@ -6,27 +6,10 @@ import {basics} from "helpers/constant";
 
 export default function PubContent() {
   const {
-    isAuthentificated,
-    loggedUser
+    isAuthentificated
   } = useLoggedUser();
 
-  let [tokken,settokken]=useState(null);
 
-  useEffect(() => {
-    if (isAuthentificated && loggedUser) {
-        try{
-			const getTokken=async ()=>{
-              const tok= await localStorage.getItem('ACCESS_TOKEN');
-			  if(tok){
-				settokken(tok);
-			  }
-			}
-			getTokken();
-		}catch(err){
-			console.log(err);
-        }
-    }
-  }, [isAuthentificated, loggedUser]);
   return (
     <>
       <section className="block relative z-1 bg-white-700">
@@ -61,7 +44,7 @@ export default function PubContent() {
 						  </li>
 					  ))}
 					</ul>
-					{!isAuthentificated || (tokken = null) ? (
+					{!isAuthentificated ? (
 					       <button
 							  className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
 							  type="button"
@@ -78,7 +61,21 @@ export default function PubContent() {
 							  </Link>
 					  </button>
 					     ) : (
-					       <ModalPayment />
+						<button
+							className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 mr-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+							type="button"
+						>
+							<Link href="/mesAnnonces">
+								<a
+									href="#pablo"
+									className={
+										"text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
+									}
+								>
+									<i className="fas fa-list-alt animate-bounce"></i> Choisir votre annonce
+								</a>
+							</Link>
+						</button>
 						 )
 					  }
 				  </div>

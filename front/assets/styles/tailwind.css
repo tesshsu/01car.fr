@@ -4097,3 +4097,13 @@ video {
 .myAnnocePremium{
   right: 0;
 }
+/*page payment*/
+.topImagePayment{
+  position: absolute;
+  width: 200px;
+}
+.togBadgePayment {
+  position: absolute;
+  right: 25rem;
+  width: 150px;
+}

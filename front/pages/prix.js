@@ -12,8 +12,6 @@ import "react-responsive-modal/styles.css";
 
 import ModalPayment from "../components/Modal/ModalPayment";
 import {connect} from "react-redux";
-import {createPayment} from "../service/actions/payments";
-import useFavorites from "../service/hooks/useFavorites";
 import usePayments from "../service/hooks/usePayments";
 
 
@@ -25,37 +23,8 @@ const Prix = ({
               }) => {
     const {
         isAuthentificated,
-        loggedUser
     } = useLoggedUser();
     const [showModal, setShowModal] = React.useState(false);
-
-    const {
-        createPayment
-    } = usePayments();
-
-    const onClickPayment = async e => {
-        e.preventDefault();
-        return setShowModal(true);
-    }
-
-
-    const onPaymentSubmit = async (token) => {
-        try {
-            let paymentRequest = {};
-            paymentRequest.user_id = loggedUser?.loggedUser?.id;
-            paymentRequest.car_id = car?.id;
-            paymentRequest.amount = 699; // in cents
-            paymentRequest.currency = "eur";
-            paymentRequest.description = "Annonce Premium pour " + (car?.brand ? car?.brand : "") + " " + ( car?.model ? car?.model : "");
-            paymentRequest.provider = 'stripe';
-            paymentRequest.token = token.id;
-
-            return await createPayment(paymentRequest);
-        } catch (err) {
-
-        }
-    }
-
 
     return (
         <>
@@ -252,16 +221,17 @@ const Prix = ({
                                                     className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 mr-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
                                                     type="button"
                                                 >
-                                                    <a
-                                                        href="#"
-                                                        onClick={onClickPayment}
-                                                        className={
-                                                            "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
-                                                        }
-                                                    >
-                                                        Vendez votre véhicule en tête de liste <i
-                                                        className="far fa-thumbs-up animate-ping-small"></i>
-                                                    </a>
+                                                    <Link href="/mesAnnonces">
+                                                        <a
+                                                            href="#"
+                                                            className={
+                                                                "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
+                                                            }
+                                                        >
+                                                            Vendez votre véhicule en tête de liste <i
+                                                            className="far fa-thumbs-up animate-ping-small"></i>
+                                                        </a>
+                                                    </Link>
                                                 </button>
                                             )
                                             }

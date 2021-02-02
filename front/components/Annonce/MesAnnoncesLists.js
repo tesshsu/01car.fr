@@ -18,18 +18,11 @@ const MesAnnoncesLists = ({
     const {isAuthentificated, loggedUser} = useLoggedUser();
     const {
         editCar,
-        deleteCar,
+        deleteCar
     } = useAnnonces();
 
     useEffect(() => {
-        if (!isAuthentificated) {
-            Router.push("/");
-        }
-    }, [isAuthentificated]);
-
-    useEffect(() => {
         const owner = loggedUser?.loggedUser?.id;
-        // set default value for by page
         const per_page_req = router.query.perPage ? router.query.perPage : 10;
         dispatch(fetchCars(router.query.page, per_page_req, owner))
     }, [dispatch])
@@ -38,27 +31,27 @@ const MesAnnoncesLists = ({
         return <p>Chargement des annonces ...</p>;
     }
 
-    if(hasErrors){
-        return <p>pas de cars...</p>;
-    }
     const handleEdit = async (id) => {
         try {
-            let selectedCars = cars?.filter(item => item.id === id);
-            await editCar(id, selectedCars.length > 0 ? selectedCars[0]: undefined );
+            await editCar(id, {});
         } catch (err) {
             console.log(err);
         }
     }
 
+
     const handleDelete = async (id) => {
+        let selectedCars = cars?.filter(item => item.id === id);
+        let MyselectedCar = selectedCars.length > 0 ? selectedCars[0]: undefined;
         try {
             if (confirm('Voulez vous vraiment supprimer cette annonce?')) {
-                await deleteCar(id, {});
+                await deleteCar(id, MyselectedCar);
             }
         } catch (err) {
             console.log(err);
         }
     }
+
     return (
         <>
             {cars?.map((car, idx) => (
@@ -114,11 +107,11 @@ const MesAnnoncesLists = ({
                                           className="fas fa-calendar-check"></i> <Moment
                                           format="DD/MM/YYYY">{car.created_at}</Moment></span>
                                     </div>
-                                      {car.premium == true && (
-                                          <span className="myAnnocePremium relative font-bold text-2xl uppercase text-orange-500 mt-4 ml-2"><i
-                                              className="far fa-thumbs-up animate-bounce"></i>
+                                  {car.premium == true && (
+                                      <span className="myAnnocePremium relative font-bold text-2xl uppercase text-orange-500 mt-4 ml-2"><i
+                                          className="far fa-thumbs-up animate-bounce"></i>
                                           </span>
-                                      )}
+                                  )}
                                   </div>
                             </div>
                                 <div className="button-block justify-left">
@@ -158,9 +151,10 @@ const MesAnnoncesLists = ({
                                         <button
                                             className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 mr-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
                                             type="button"
+                                            onClick={(e) => handleEdit(car?.id)}
                                         >
-                                            <Link href="/prix">
-                                                <a
+                                            <Link href="/payment">
+                                            <a
                                                     href="#"
                                                     onClick={(e) => handleEdit(car?.id)}
                                                     className={
@@ -173,10 +167,10 @@ const MesAnnoncesLists = ({
                                         </button>
                                     )}
 
-                                     <button
-                                         className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
-                                         type="button"
-                                     >
+                                    <button
+                                        className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+                                        type="button"
+                                    >
                                           <a
                                               href="#"
                                               onClick={(e) => handleDelete(car?.id)}

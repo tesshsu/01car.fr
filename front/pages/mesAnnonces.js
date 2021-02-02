@@ -6,8 +6,7 @@ import MesAnnoncesLists from '../components/Annonce/MesAnnoncesLists.js';
 import Pagination from '../components/Annonce/Pagination.js';
 import {listPubs} from "../helpers/constant";
 import {connect} from "react-redux";
-import useLoggedUser from "../service/hooks/useLoggedUser";
-import useAnnonces from "../service/hooks/useAnnonces";
+
 const MesAnnonces = ({
                          dispatch,
                          loading,
