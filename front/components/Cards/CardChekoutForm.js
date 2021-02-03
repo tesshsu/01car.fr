@@ -17,6 +17,7 @@ const CheckoutForm = (props) => {
 				color: '#ed8936',
 				fontWeight: 500,
 				fontSize: '18px',
+				backgroundColor: '#eee',
 				fontSmoothing: 'antialiased',
 				':-webkit-autofill': {color: '#a0aec0'},
 				'::placeholder': {color: '#a0aec0'},
@@ -93,7 +94,7 @@ const CheckoutForm = (props) => {
 				<CardElement options={CARD_OPTIONS} />
 
 				<button
-					className="bg-gray-800 text-white active:bg-gray-700 text-xs font-bold uppercase px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
+					className="bg-gray-800 text-white mt-4 active:bg-gray-700 text-xs font-bold uppercase px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
 					type="submit"
 					disabled={!stripe}
 				>

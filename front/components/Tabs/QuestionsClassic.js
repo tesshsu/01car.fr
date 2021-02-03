@@ -90,7 +90,8 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 	}
 
 	const {
-		isAuthentificated
+		isAuthentificated,
+		loggedUser
 	} = useLoggedUser();
 
 	const {
@@ -100,7 +101,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 
 
 	useEffect(() => {
-		if (!isAuthentificated) {
+		if (!isAuthentificated && !loggedUser) {
 			return setShowModal(true);
 		}else if(isAuthentificated && car){
 			return setEditCar(true), setisClickSubmit(true)
@@ -278,7 +279,6 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 																value={values.brand}
 																onClick={selectedMarque}
 																className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-																{ !selectedBrand &&  <option>*--Choosir votre medele--*</option>}
 																{
 																	marqueFilterOptions.map( (marqueFilterOption) =>(
 

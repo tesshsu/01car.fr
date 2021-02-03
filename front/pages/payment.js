@@ -119,6 +119,16 @@ const Payment = ({
                         </div>
                     </div>
                     <div className="mb-12 text-center p-8">
+                        <p className="ml-3 leading-6 font-medium text-gray-600 text-md">
+                            Accepter des paiements par cartes bancaires :
+                            <span className="">
+                                <img
+                                    alt="defalut carImg"
+                                    src={require("assets/img/credit-cards.png")}
+                                    className="shadow-lg mx-auto rounded-lg"
+                                />
+                            </span>
+                        </p>
                         <ModalPayment onSubmit={onPaymentSubmit}/>
                     </div>
                 </section>

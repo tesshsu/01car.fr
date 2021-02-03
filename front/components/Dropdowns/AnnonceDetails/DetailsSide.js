@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import useLoggedUser from "../../../service/hooks/useLoggedUser";
 import useAnnonces from "../../../service/hooks/useAnnonces";
 import Link from "next/link";
-
+import ModalContact from "../../../components/Modal/ModalContact.js";
 const DetailsSide = ({ dispatch,
 					  loading,
 					  car}) => {
@@ -79,7 +79,7 @@ const DetailsSide = ({ dispatch,
 								{ car_premium == false && isowner ? (
 									<span
 										className="question-1 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">
-										<Link href="/prix">
+										<Link href="/payment">
 											<a
 												href="#"
 												className="text-blue-500"
