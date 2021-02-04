@@ -228,7 +228,7 @@ const Prix = ({
                                                                 "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
                                                             }
                                                         >
-                                                            Vendez votre véhicule en tête de liste <i
+                                                            Voir votre annonces pour changer à premium <i
                                                             className="far fa-thumbs-up animate-ping-small"></i>
                                                         </a>
                                                     </Link>

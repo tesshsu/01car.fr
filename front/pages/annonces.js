@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import IndexNavbar from '../components/Navbars/IndexNavbar.js';
 import Footer from '../components/Footers/Footer.js';
-import AnnonceLists from '../components/Annonce/AnnonceLists.js';
 import Pagination from '../components/Annonce/Pagination.js';
 import PubContentThreeIcons from '../layouts/PubContentThreeIcons.js';
 import {connect} from "react-redux";
