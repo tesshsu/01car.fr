@@ -54,7 +54,7 @@ const AnnonceFavoris = ({
 					     {favorite?.entity?.brand} - {favorite?.entity?.model}
 					  </div>
 					  <div class="price font-bold text-orange-500  text-2xl text-center bg-gray-400 px-4 py-2">
-					    {favorite?.entity?.price} €
+					    {favorite?.entity?.estimate_price} €
 					  </div>
 					</div>
 					<div className="container mx-auto">
@@ -63,10 +63,12 @@ const AnnonceFavoris = ({
 							  <span
                                   className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorite?.entity?.fuel}</span>
 							</div>
-							<div className="w-1/3">
+                          {favorite?.entity?.transmission && (
+                              <div className="w-1/3">
 							  <span
                                   className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorite?.entity?.transmission}</span>
-							</div>
+                              </div>
+                          )}
 							<div className="w-1/3">
 							  <span
                                   className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">{favorite?.entity?.km} km</span>
