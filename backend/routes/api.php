@@ -56,6 +56,10 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::delete('/v1/cars/{car_id}/uploads/{id}', [CarController::class, 'removeFiles'])->name('car.removeFiles');
 
     Route::apiResource('/v1/favorites', FavoriteController::class);
+
+    Route::get('/v1/payments', [PaymentController::class, 'index'])->name('payment.list');
+    Route::get('/v1/payments/{id}', [PaymentController::class, 'show'])->name('payment.show');
+    Route::post('/v1/payments', [PaymentController::class, 'store'])->name('payment.store');
 });
 
 
@@ -63,9 +67,5 @@ Route::group(['middleware' => ['auth:api']], function () {
 Route::group(['middleware' => ['auth:api', 'api.admin']], function () {
     // Users routes
     Route::apiResource('/v1/users', UserController::class);
-
-    Route::get('/v1/payments', [PaymentController::class, 'index'])->name('payment.list');
-    Route::get('/v1/payments/{id}', [PaymentController::class, 'show'])->name('payment.show');
-    Route::post('/v1/payments', [PaymentController::class, 'store'])->name('payment.store');
 });
 
