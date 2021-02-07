@@ -1,7 +1,7 @@
 import React, {useEffect} from "react"
 import {connect} from "react-redux";
 import Link from "next/link";
-import {fetchCars} from 'service/actions/cars';
+import {fetchCars} from '../../service/actions/cars';
 import Router, {useRouter} from "next/router";
 import Moment from 'react-moment';
 import useLoggedUser from "../../service/hooks/useLoggedUser";

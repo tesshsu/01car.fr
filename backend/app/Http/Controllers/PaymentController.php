@@ -116,7 +116,7 @@ class PaymentController extends Controller
     private function validateEntity($reqPayment)
     {
         return Validator::make((array)$reqPayment, [
-            'description' => ['required', 'max:' . 128],
+            'description' => ['required', 'max:' . Payment::fieldsSizeMax('description')],
             'amount' => ['required', 'integer'],
             'currency' => ['required', 'max:' . Payment::fieldsSizeMax('currency')],
             'provider' => ['required',

@@ -13,6 +13,7 @@ class Payment extends Model
     protected $table = 'payments';
 
     public static $fields_sizeMax = array(
+        'description' => 128,
         'provider' => 16,
         'provider_user_id'=> 256,
         'provider_payment_id'=> 256,
@@ -32,6 +33,7 @@ class Payment extends Model
      * @var array
      */
     protected $fillable = [
+        'description',
         'provider',
         'amount',
         'currency',
