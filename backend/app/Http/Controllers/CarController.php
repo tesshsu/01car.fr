@@ -155,7 +155,25 @@ class CarController extends Controller
             }
         }
 
+        // filter on dt_entry_service
+        if ($request->has('expire_at_min')) {
+            $expire_at_min = Str::of($request->query('expire_at_min'))->trim();
+            if (!$expire_at_min->isEmpty()) {
+                $carsReq->where('expire_at', '>=', $expire_at_min);
+            }
+        }
+        if ($request->has('expire_at_max')) {
+            $expire_at_max = Str::of($request->query('expire_at_max'))->trim();
+            if (!$expire_at_max->isEmpty()) {
+                $carsReq->where('expire_at', '<=', $expire_at_max);
+            }
+        }
+        if(!$request->has('expire_at_min')  && !$request->has('expire_ate_max')){
+            $carsReq->where('expire_at', '>=', Carbon::today());
+        }
+
         $carsReq->orderBy('premium', 'desc');
+        $carsReq->inRandomOrder();
 
         $carsLengthAwarePaginator = $carsReq->paginate($request->perPage, ['*'], $request->pageName, $request->page);
 

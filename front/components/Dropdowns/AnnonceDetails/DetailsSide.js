@@ -49,12 +49,12 @@ const DetailsSide = ({ dispatch,
 				Prix du vendeur
 			</div>
 			<div className="priceVehicule font-bold px-1 text-5xl text-orange-500 text-left underline">
-				{car?.estimate_price} €
+				{car?.price} €
 			</div>
 			{ prix_api != null && car?.premium  ? (
 				<div className="flex flex-wrap rounded border border-solid border-gray-500 p-1">
 				<div className="priceVehicule font-bold px-1 text-xl text-gray-800 text-left">
-					<span className="font-bold px-1 text-xl text-orange-500 text-left underline">Entre {car?.price} € et 19 278 €</span>
+					<span className="font-bold px-1 text-xl text-orange-500 text-left underline">Entre {car?.estimate_price_min} € et {car?.estimate_price_max} €</span>
 				</div>
 				<p className="text-md block p-3 text-orange-500 rounded"><i class="far fa-thumbs-up"></i> Valeur estimée par la base de données nationale </p>
 				</div>

@@ -81,7 +81,7 @@ const MesAnnoncesLists = ({
                                   </div>
                                   <div
                                       className="price font-bold text-orange-500  text-2xl text-center bg-gray-400 px-4 py-2">
-                                    {car?.estimate_price} €
+                                    {car?.price} €
                                   </div>
                                 </div>
                               <div className="container mx-auto">

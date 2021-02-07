@@ -58,7 +58,10 @@ scp target/backend.zip ${ssh_user}@${server_address}:${app_path}
 
 ssh -o StrictHostKeyChecking=no ${ssh_user}@${server_address}  "cd ${app_path} && \
     unzip backend.zip && \
-    ${php_path} artisan migrate:fresh --seed  && \
-    ${php_path} artisan passport:client --personal"
+    ${php_path} artisan migrate
+
+
+###    ${php_path} artisan migrate:fresh --seed  && \
+###    ${php_path} artisan passport:client --personal"
 
 

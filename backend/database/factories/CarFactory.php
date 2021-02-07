@@ -45,7 +45,7 @@ class CarFactory extends Factory
             'displacement' => $this->faker->word(),
             'power' => $this->faker->numberBetween(50, 1000),
             'version' =>  $this->faker->word(),
-            'km' => $this->faker->randomNumber(),
+            'km' => $this->faker->numberBetween(1000, 450000),
 
             'dt_entry_service' => $this->faker->dateTime(),
             'dt_valuation' => $this->faker->dateTime(),

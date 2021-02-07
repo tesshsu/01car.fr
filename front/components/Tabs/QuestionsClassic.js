@@ -61,7 +61,8 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 		dt_valuation: car?.dt_valuation,
 		score_recognition: car?.score_recognition,
 		score_valuation: car?.score_valuation,
-		estimate_price: car?.estimate_price,
+		estimate_price_min: car?.estimate_price_min,
+		estimate_price_max: car?.estimate_price_max,
 		price: car?.price,
 		currency: car?.currency,
 		owner_type: car?.owner_type,
@@ -699,15 +700,15 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														{editCar ? "Q6- Indiquez votre prix de vente :" : "* Q6- Indiquez votre prix de vente :"}
 													</label>
 													<Field
-														name="estimate_price"
+														name="price"
 														validate={formValidate.composeValidators(formValidate.required, formValidate.mustBeNumber)}
 														component="input"
 														type="text"
-														value={values.estimate_price}
+														value={values.price}
 														placeholder="12420"
 														className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white border border-gray-400 rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
 													/>
-													<Error name="estimate_price"/>
+													<Error name="price"/>
 												</div>
 
 
