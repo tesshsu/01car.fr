@@ -30,6 +30,7 @@ use Illuminate\Validation\Rule;
 
 class CarController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -154,7 +155,25 @@ class CarController extends Controller
             }
         }
 
+        // filter on dt_entry_service
+        if ($request->has('expire_at_min')) {
+            $expire_at_min = Str::of($request->query('expire_at_min'))->trim();
+            if (!$expire_at_min->isEmpty()) {
+                $carsReq->where('expire_at', '>=', $expire_at_min);
+            }
+        }
+        if ($request->has('expire_at_max')) {
+            $expire_at_max = Str::of($request->query('expire_at_max'))->trim();
+            if (!$expire_at_max->isEmpty()) {
+                $carsReq->where('expire_at', '<=', $expire_at_max);
+            }
+        }
+        if(!$request->has('expire_at_min')  && !$request->has('expire_ate_max')){
+            $carsReq->where('expire_at', '>=', Carbon::today());
+        }
+
         $carsReq->orderBy('premium', 'desc');
+        $carsReq->inRandomOrder();
 
         $carsLengthAwarePaginator = $carsReq->paginate($request->perPage, ['*'], $request->pageName, $request->page);
 
@@ -244,7 +263,7 @@ class CarController extends Controller
         $car->confidence_note = Car::calcConfidenceNote($car);
 
         $car->save();
-        //
+
         return $this->renderJson($car->id);
     }
 
@@ -254,7 +273,8 @@ class CarController extends Controller
      * @param \App\Models\User $user
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public
+    function destroy($id)
     {
         $car = Car::with('attributes', 'user', 'uploads')->find($id);
         if ($car == NULL) {
@@ -281,7 +301,8 @@ class CarController extends Controller
         $car->delete();
     }
 
-    public function removeFiles(Request $request, $car_id, $id)
+    public
+    function removeFiles(Request $request, $car_id, $id)
     {
         $car = Car::with('uploads')->findOrFail($car_id);
         $upload = Upload::findOrFail($id);
@@ -299,7 +320,8 @@ class CarController extends Controller
     }
 
 
-    public function addFiles(Request $request, $id): \Illuminate\Http\JsonResponse
+    public
+    function addFiles(Request $request, $id): \Illuminate\Http\JsonResponse
     {
         $car = Car::with('uploads')->find($id);
 
@@ -357,7 +379,8 @@ class CarController extends Controller
         return response()->json(UploadResource::collection($uploads->all()));
     }
 
-    private function validateEntity($reqCar, $car)
+    private
+    function validateEntity($reqCar, $car)
     {
         return Validator::make((array)$reqCar, [
             'brand' => 'max:' . Car::fieldsSizeMax('brand'),
@@ -406,7 +429,8 @@ class CarController extends Controller
         );
     }
 
-    private function updateCarFields($car, $reqCar)
+    private
+    function updateCarFields($car, $reqCar)
     {
         collect($car->getFillable())->each(function ($item, $key) use ($car, $reqCar) {
             $car->{$item} = isset($reqCar->{$item}) ? $reqCar->{$item} : $car->{$item};
@@ -417,7 +441,8 @@ class CarController extends Controller
         $car->dt_valuation = isset($reqCar->dt_valuation) ? Carbon::parse($reqCar->dt_valuation)->toDateTime() : $car->dt_valuation;
     }
 
-    private function updatePremiumOptions(Car $car, $reqCar)
+    private
+    function updatePremiumOptions(Car $car, $reqCar)
     {
         if ($car->premium && isset($reqCar->premiumOptions)) {
             $premiumOptions = $car->premiumOptions()->firstOrNew(
@@ -436,7 +461,8 @@ class CarController extends Controller
         }
     }
 
-    private function updateAttributes($car, $reqCar)
+    private
+    function updateAttributes($car, $reqCar)
     {
         if (isset($reqCar->equipments)) {
             collect(EquipmentCategory::list())->each(function ($item, $key) use ($car, $reqCar) {
@@ -451,7 +477,8 @@ class CarController extends Controller
         }
     }
 
-    private function updateAttributesByCategory(Car $car, $reqAttributes, $category)
+    private
+    function updateAttributesByCategory(Car $car, $reqAttributes, $category)
     {
         $attributesInDB = $car->attributes()->getResults()->filter(function ($value, $key) use ($category) {
             return $value->category == $category;
@@ -493,4 +520,5 @@ class CarController extends Controller
         }
         return response()->json(new CarResource($car));
     }
+
 }

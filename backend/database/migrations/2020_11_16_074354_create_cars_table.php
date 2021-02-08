@@ -43,7 +43,8 @@ class CreateCarsTable extends Migration
 
             $table->integer('confidence_note')->nullable();
 
-            $table->double('estimate_price', 15, 2)->nullable();
+            $table->double('estimate_price_min', 15, 2)->nullable();
+            $table->double('estimate_price_max', 15, 2)->nullable();
             $table->double('price', 15, 2)->nullable();
             $table->string('currency', 4)->nullable();
 

@@ -10,6 +10,7 @@ use App\Http\Resources\Car as CarResource;
 use App\Http\Resources\PaymentPaginatorCollection;
 use App\Models\Car;
 use App\Models\Payment;
+use App\Services\AutovisualClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -21,10 +22,24 @@ use Stripe\StripeClient;
 
 class PaymentController extends Controller
 {
+    private $autovisualClient;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->autovisualClient = new AutovisualClient(
+            config()->get('services.autovisual')
+        );
+    }
+
 
     public function index(Request $request)
     {
-        $paymentsReq = Car::with('car', 'user');
+        $paymentsReq = Payment::with('car', 'user');
 
         if ($request->has('owner')) {
             $owner = Str::of($request->query('owner'))->trim();
@@ -75,13 +90,16 @@ class PaymentController extends Controller
         $charge = $this->pay($currentUser, $car, $newPayment, $request);
 
         if($charge->status === PaymentStatus::SUCCEEDED){
-            $car->premium = true;
             $car->expire_at = Carbon::now()->addDays(TimeConstant::EXPIRATION_DURATION_IN_DAYS);
+            if(!$car->premium) {
+                $this->updateDataFromAutovisual($car);
+                $car->premium = true;
+            }
+
             $car->save();
         }
 
         return response()->json($charge);
-        return $this->renderJson($newPayment->id);
     }
 
     /**
@@ -98,7 +116,7 @@ class PaymentController extends Controller
     private function validateEntity($reqPayment)
     {
         return Validator::make((array)$reqPayment, [
-            'description' => ['required', 'max:' . 128],
+            'description' => ['required', 'max:' . Payment::fieldsSizeMax('description')],
             'amount' => ['required', 'integer'],
             'currency' => ['required', 'max:' . Payment::fieldsSizeMax('currency')],
             'provider' => ['required',
@@ -197,6 +215,36 @@ class PaymentController extends Controller
             return response()->json(['error' => 'NotFound'], 404);
         }
         return response()->json(new CarResource($payment));
+    }
+
+    private function updateDataFromAutovisual($car)
+    {
+        // Add autovisual data
+        $data = $car->getAutovisualData();
+        $data["txt"] = "renault clio";
+        $data["dt_entry_service"] = "2011-02-11";
+        $data["km"] = "82000";
+
+        // define the option
+        $data["value"] = true;
+        $data["transaction"] = false;
+        $data["market"] = false;
+
+        $autovisualResponse = (object)$this->autovisualClient->getInfo($data);
+
+        // Update car data with response
+        if(isset($autovisualResponse->recognition)) {
+            collect($car->getAutovisualFillable())->each(function ($item, $key) use ($car, $autovisualResponse) {
+                $car->{$item} = isset($autovisualResponse->recognition->{$item}) ? $autovisualResponse->recognition->{$item} : $car->{$item};
+            });
+        }
+
+        if(isset($autovisualResponse->value)) {
+            $car->estimate_price_min = isset($autovisualResponse->value->c) ? $autovisualResponse->recognition->c : $car->estimate_price_min;
+            $car->estimate_price_max = isset($autovisualResponse->value->b) ? $autovisualResponse->recognition->b : $car->estimate_price_max;
+        }
+
+        return $autovisualResponse;
     }
 
 }

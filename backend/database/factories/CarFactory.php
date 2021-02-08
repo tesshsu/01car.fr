@@ -45,14 +45,15 @@ class CarFactory extends Factory
             'displacement' => $this->faker->word(),
             'power' => $this->faker->numberBetween(50, 1000),
             'version' =>  $this->faker->word(),
-            'km' => $this->faker->randomNumber(),
+            'km' => $this->faker->numberBetween(1000, 450000),
 
             'dt_entry_service' => $this->faker->dateTime(),
             'dt_valuation' => $this->faker->dateTime(),
 
             'score_recognition' => $this->faker->randomFloat( 1, 0.0, 10.0),
             'score_valuation' => $this->faker->randomFloat( 1, 0.0, 10.0),
-            'estimate_price' => $this->faker->randomFloat( 2, 500.0, 15000.0),
+            'estimate_price_min' => $this->faker->randomFloat( 2, 500.0, 15000.0),
+            'estimate_price_max' => $this->faker->randomFloat( 2, 500.0, 15000.0),
             'price' => $this->faker->randomFloat( 2, 500.0, 15000.0),
             'currency' => 'EUR',
 

@@ -16,8 +16,9 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('car_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->bigInteger('car_id')->unsigned()->nullable();
+            $table->string('description', 128)->nullable();
             $table->string('provider', 16);
             $table->string('provider_user_id', 256)->nullable();
             $table->string('provider_payment_id', 256)->nullable();;
@@ -28,10 +29,10 @@ class CreatePaymentsTable extends Migration
 
         Schema::table('payments', function(Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users')
-                ->onDelete('restrict')
+                ->onDelete('cascade')
                 ->onUpdate('restrict');
             $table->foreign('car_id')->references('id')->on('cars')
-                ->onDelete('restrict')
+                ->onDelete('SET NULL')
                 ->onUpdate('restrict');
         });
     }

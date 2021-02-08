@@ -46,4 +46,9 @@ return [
         'secret_key' => env('STRIPE_SECRET_KEY'),
     ],
 
+    'autovisual' => [
+        'api_url' => env('AUTOVISUAL_API_URL'),
+        'api_key' => env('AUTOVISUAL_API_KEY'),
+    ],
+
 ];

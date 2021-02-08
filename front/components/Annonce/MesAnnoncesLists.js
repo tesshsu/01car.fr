@@ -1,7 +1,7 @@
 import React, {useEffect} from "react"
 import {connect} from "react-redux";
 import Link from "next/link";
-import {fetchCars} from 'service/actions/cars';
+import {fetchCars} from '../../service/actions/cars';
 import Router, {useRouter} from "next/router";
 import Moment from 'react-moment';
 import useLoggedUser from "../../service/hooks/useLoggedUser";
@@ -81,7 +81,7 @@ const MesAnnoncesLists = ({
                                   </div>
                                   <div
                                       className="price font-bold text-orange-500  text-2xl text-center bg-gray-400 px-4 py-2">
-                                    {car?.estimate_price} €
+                                    {car?.price} €
                                   </div>
                                 </div>
                               <div className="container mx-auto">

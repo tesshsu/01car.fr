@@ -61,8 +61,10 @@ class Car extends JsonResource
             'score_valuation' => $this->score_valuation,
             'confidence_note' => $this->confidence_note,
 
-            'estimate_price' => $this->estimate_price,
-            'price' => $this->price,
+            'price'=> $this->price,
+            'estimate_price_min'=> $this->estimate_price_min,
+            'estimate_price_max'=> $this->estimate_price_max,
+
             'currency' => $this->currency,
 
             'license_plate' => $this->license_plate,

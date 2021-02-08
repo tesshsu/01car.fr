@@ -71,8 +71,10 @@ class Car extends Model
         'score_recognition',
         'score_valuation',
 
-        'estimate_price',
         'price',
+        'estimate_price_min',
+        'estimate_price_max',
+
         'currency',
         'license_plate',
 
@@ -86,6 +88,28 @@ class Car extends Model
         'country',
         'postal_code'
     ];
+
+    protected $autovisual_fields = [
+        'generation',
+        'phase',
+        'id_carBody',
+        'carBody',
+        'finishing',
+        'displacement',
+        'power',
+        'version',
+        'dt_valuation',
+        'score_recognition',
+        'score_valuation',
+
+        'estimate_price_min',
+        'estimate_price_max',
+    ];
+
+    public function getAutovisualFillable()
+    {
+        return $this->autovisual_fields;
+    }
 
     public function user(): HasOne
     {
@@ -124,14 +148,14 @@ class Car extends Model
         if (!$car->smoking) $confidence_note++;
         if ($car->duplicate_keys) $confidence_note++;
         if (Arr::exists(SaleReason::list(), $car->sale_reason)) $confidence_note++;
-        if ($car->estimate_price > 0) $confidence_note++;
+        if ($car->price > 0) $confidence_note++;
         if ($car->hand_number == 1 || $car->hand_number == 2) $confidence_note++;
         if ($car->state == CarState::NEW) $confidence_note++;
         if ($car->country == 'FR') $confidence_note++;
 
 
         $premiumOptions = $car->premiumOptions()->getResults();
-        if($premiumOptions) {
+        if ($premiumOptions) {
             if ($premiumOptions->under_warranty) $confidence_note++;
             if (!$premiumOptions->accident) $confidence_note++;
             if (!$premiumOptions->defects) $confidence_note++;
@@ -145,6 +169,18 @@ class Car extends Model
         }
 
         return $confidence_note;
+    }
+
+    public function getAutovisualData()
+    {
+        return [
+            "txt" => $this->brand . ' ' . $this->model,
+            "km" => $this->km,
+            "dt_entry_service" => $this->dt_entry_service,
+            "fuel" => $this->fuel === 'essence' ? 'gasoline' : $this->fuel,
+            "transmission" => $this->transmission,
+            "country_ref" => $this->country
+        ];
     }
 
 }
