@@ -90,20 +90,22 @@ class Car extends Model
     ];
 
     protected $autovisual_fields = [
-        'generation',
-        'phase',
-        'id_carBody',
-        'carBody',
-        'finishing',
-        'displacement',
-        'power',
-        'version',
-        'dt_valuation',
-        'score_recognition',
-        'score_valuation',
+        'generation' =>'generation',
+        'phase'=>'phase',
+        'id_carBody'=>'id_carBody',
+        'carBody'=>'carBody',
+        'finishing'=>'finishing',
+        'displacement'=>'displacement',
+        'transmission'=>'transmission',
+        'doors'=>'doors',
+        'power'=>'power',
+        'version'=>'version',
+        'dt_valuation'=>'dt_valuation',
+        'score_recognition'=>'scoreRecognition',
+        'score_valuation'=>'scoreValuation',
 
-        'estimate_price_min',
-        'estimate_price_max',
+        'estimate_price_min'=>'estimate_price_min',
+        'estimate_price_max'=>'estimate_price_max',
     ];
 
     public function getAutovisualFillable()
@@ -178,7 +180,6 @@ class Car extends Model
             "km" => $this->km,
             "dt_entry_service" => $this->dt_entry_service,
             "fuel" => $this->fuel === 'essence' ? 'gasoline' : $this->fuel,
-            "transmission" => $this->transmission,
             "country_ref" => $this->country
         ];
     }

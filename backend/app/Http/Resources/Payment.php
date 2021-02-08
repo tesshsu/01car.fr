@@ -19,13 +19,12 @@ class Payment extends JsonResource
             'id' => $this->id,
             'created_at' => Carbon::parse($this->created_at)->toIso8601String(),
             'updated_at' => Carbon::parse($this->updated_at)->toIso8601String(),
+            'description' => $this->description,
             'provider' => $this->provider,
             'provider_payment_id'=> $this->provider_payment_id,
             'amount' => $this->amount,
             'currency' => $this->currency,
             'status' => $this->status,
-
-
         ];
     }
 }

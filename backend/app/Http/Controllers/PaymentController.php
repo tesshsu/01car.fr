@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use App\Constants\Payments\PaymentProvider;
 use App\Constants\Payments\PaymentStatus;
 use App\Constants\TimeConstant;
-use App\Http\Resources\Car as CarResource;
+use App\Http\Resources\Payment as PaymentResource;
 use App\Http\Resources\PaymentPaginatorCollection;
 use App\Models\Car;
 use App\Models\Payment;
@@ -110,6 +110,9 @@ class PaymentController extends Controller
      */
     public function show($id)
     {
+        $car = Car::find($id);
+        $this->updateDataFromAutovisual($car);
+        $car->save();
         return $this->renderJson($id);
     }
 
@@ -214,16 +217,13 @@ class PaymentController extends Controller
         if ($payment == NULL) {
             return response()->json(['error' => 'NotFound'], 404);
         }
-        return response()->json(new CarResource($payment));
+        return response()->json(new PaymentResource($payment));
     }
 
     private function updateDataFromAutovisual($car)
     {
         // Add autovisual data
         $data = $car->getAutovisualData();
-        $data["txt"] = "renault clio";
-        $data["dt_entry_service"] = "2011-02-11";
-        $data["km"] = "82000";
 
         // define the option
         $data["value"] = true;
@@ -234,14 +234,16 @@ class PaymentController extends Controller
 
         // Update car data with response
         if(isset($autovisualResponse->recognition)) {
-            collect($car->getAutovisualFillable())->each(function ($item, $key) use ($car, $autovisualResponse) {
-                $car->{$item} = isset($autovisualResponse->recognition->{$item}) ? $autovisualResponse->recognition->{$item} : $car->{$item};
+            $recognition = (object) $autovisualResponse->recognition;
+            collect($car->getAutovisualFillable())->each(function ($item, $key) use ($car, $recognition) {
+                $car->{$key} = isset($recognition->{$item}) ? Str::lower($recognition->{$item}) : $car->{$key};
             });
         }
 
         if(isset($autovisualResponse->value)) {
-            $car->estimate_price_min = isset($autovisualResponse->value->c) ? $autovisualResponse->recognition->c : $car->estimate_price_min;
-            $car->estimate_price_max = isset($autovisualResponse->value->b) ? $autovisualResponse->recognition->b : $car->estimate_price_max;
+            $value = (object) $autovisualResponse->value;
+            $car->estimate_price_min = isset($value->c) ? $value->c : $car->estimate_price_min;
+            $car->estimate_price_max = isset($value->b) ? $value->b : $car->estimate_price_max;
         }
 
         return $autovisualResponse;
