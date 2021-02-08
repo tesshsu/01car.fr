@@ -85,21 +85,23 @@ const AnnonceDetail = ({
 					<DetailsDropdown/>
 				</div>
 
-				<div className="flex flex-wrap p-4">
-					<button type="button" className="mr-4 p-2 border border-solid border-gray-600 text-lg text-orange-500 font-bold uppercase rounded" onClick={() => setNavbarOpen(!navbarOpen)}>
-						<i className="far fa-thumbs-up animate-bounce"></i> Premium note de Confiance <i
-						className="fas fa-chevron-circle-down"></i></button>
-					<div
-						className={
-							"flex flex-wrap mt-4" +
-							(navbarOpen ? " block" : " hidden")
-						}
-						id="example-navbar-warning"
-					>
-						<DetailsPremiumDropdown/>
-					</div>
+				{car?.premium == true &&(
+					<div className="flex flex-wrap p-4">
+						<button type="button" className="mr-4 p-2 border border-solid border-gray-600 text-lg text-orange-500 font-bold uppercase rounded" onClick={() => setNavbarOpen(!navbarOpen)}>
+							<i className="far fa-thumbs-up animate-bounce"></i> Premium note de Confiance <i
+							className="fas fa-chevron-circle-down"></i></button>
+						<div
+							className={
+								"flex flex-wrap mt-4" +
+								(navbarOpen ? " block" : " hidden")
+							}
+							id="example-navbar-warning"
+						>
+							<DetailsPremiumDropdown/>
+						</div>
 
-				</div>
+					</div>
+				)}
 			</div>
 
 			<DetailsSide/>

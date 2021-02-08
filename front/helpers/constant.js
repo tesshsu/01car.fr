@@ -7,7 +7,7 @@ export const mapToObject= function(m){
 }
 
 export const fuelOptions = [
-    {note: 0, label: 'Energie', value: ''},
+    {note: 0, label: '', value: ''},
 	{note: 0, label: 'Diesel', value: 'Diesel'},
     {note: 0, label: 'Électrique', value: 'Electric'},
     {note: 0, label: 'Essence', value: 'Gasoline'},
