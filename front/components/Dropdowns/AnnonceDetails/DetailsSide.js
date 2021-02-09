@@ -44,7 +44,7 @@ const DetailsSide = ({ dispatch,
 
   return (
     <>
-        <div className="w-full lg:w-4/12 px-12 mt-4">
+        <div className="sideDetails w-full lg:w-4/12 px-12 mt-4">
 			<div className="priceVehicule font-bold px-1 text-2xl text-gray-800 text-left">
 				Prix du vendeur
 			</div>

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react"
+import {isMobile} from 'react-device-detect';
 import DetailsBasic from "components/Dropdowns/AnnonceDetails/DetailsBasic.js";
 import DetailsSide from "components/Dropdowns/AnnonceDetails/DetailsSide.js";
 import DetailsDropdown from "components/Dropdowns/AnnonceDetails/DetailsDropdown.js";
@@ -51,6 +52,9 @@ const AnnonceDetail = ({
 		<>
 			<div className="w-full lg:w-8/12 lg:mb-0 mb-12  my-6 shadow-lg rounded-lg">
 				<CardAnnonceSlide/>
+				{isMobile && (
+					<DetailsSide/>
+				)}
 				{ car?.premium ? (
 					<img
 							alt="..."
@@ -104,7 +108,9 @@ const AnnonceDetail = ({
 				)}
 			</div>
 
-			<DetailsSide/>
+			{!isMobile && (
+				<DetailsSide/>
+			)}
 
 		</>
 	);

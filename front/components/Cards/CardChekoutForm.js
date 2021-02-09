@@ -17,6 +17,7 @@ const CheckoutForm = (props) => {
 				color: '#ed8936',
 				fontWeight: 500,
 				fontSize: '18px',
+				lineHeight: '1.429',
 				backgroundColor: '#eee',
 				fontSmoothing: 'antialiased',
 				':-webkit-autofill': {color: '#a0aec0'},

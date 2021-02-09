@@ -50,7 +50,7 @@ const AnnonceFavoris = ({
                         <div className="w-full px-4 flex-1">
 			  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">
 			        <div className="top justify-between">
-					  <div className="font-bold text-2xl text-orange-700 text-center py-2 m-2">
+					  <div className="titlePart font-bold text-2xl text-orange-700 text-center py-2 m-2">
 					     {favorite?.entity?.brand} - {favorite?.entity?.model}
                           { favorite?.entity?.premium == true ? (
                               <span className="text-md text-orange-500 mt-8"> Premium <i
@@ -90,7 +90,7 @@ const AnnonceFavoris = ({
 					</div>
 					<div className="button-block justify-left">
 						<button
-                            className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 mr-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+                            className="voirButton bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 mr-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
                             type="button"
                         >
 						      <Link href={favorite?.entity?.id ? (`/annonce?id=${favorite?.entity?.id}`) : ("#")} {...favorite}>

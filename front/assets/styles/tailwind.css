@@ -596,6 +596,30 @@ video {
 }
 /* for portable part*/
 @media (max-width: 768px) {
+  .text-xl{
+    font-size: 1rem !important;
+  }
+  .favoris-page .titlePart{
+    font-size: 1.2rem !important;
+  }
+  .favoris-page .voirButton{
+    margin-bottom: 10px!important;
+  }
+  .sideDetails{
+    order: 1!important;
+  }
+  .annonceSearchForm .flex-1{
+    flex: auto !important;
+  }
+  .contactLogo{
+    margin-left: 3rem !important;
+  }
+  .contactForm{
+    margin-top: -3rem !important;
+  }
+  .mesAnnonces-page button{
+    margin: 4px 0;
+  }
   .hasPrenium {
     position: absolute;
     top: 350px !important;
@@ -4094,6 +4118,9 @@ video {
 .contactContent{
   margin-top: 0;
 }
+
+/*MyAnnonce page*/
+
 .myAnnocePremium{
   right: 0;
 }
