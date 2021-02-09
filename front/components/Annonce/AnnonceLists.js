@@ -178,8 +178,20 @@ const AnnonceLists = ({
                             </div>
                             <div className="w-full px-4 py-2 flex-1">
                                 <h4 className="font-bold text-lg text-orange-700">
-                                    <span className="uppercase">{car?.brand}</span> - {car.model} | {car.version}
-                                    <FavorisButton category="car" entity_id={car?.id} action={onClickFavoris()}/>
+                                    <span className="uppercase">{car.brand}</span> - {car?.model} | {car?.version}
+                                    {isFavorite(car?.id) ? (
+                                        <button
+                                            className="bg-orange-500 w-8 h-8 rounded-full outline-none focus:outline-none ml-2 mb-1"
+                                            type="button"
+                                        >
+                                            <i className="far fa-heart"> </i>
+                                        </button>
+                                    ): (<FavorisButton category="car" entity_id={car?.id} action={onClickFavoris}/>)}
+
+                                    {isAlreadyFavorite && (
+                                        <div className="favorisIcon text-orange-500">Déjà ajoutée</div>
+                                    )}
+
                                 </h4>
                                 <p className="text-md leading-relaxed text-gray-500">
                                     <Moment

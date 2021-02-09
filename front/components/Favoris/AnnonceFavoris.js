@@ -50,11 +50,16 @@ const AnnonceFavoris = ({
                         <div className="w-full px-4 flex-1">
 			  <span className="text-sm block my-4 p-3 text-gray-800 rounded border border-solid border-gray-200">
 			        <div className="top justify-between">
-					  <div className="font-bold text-3xl text-orange-700 text-center py-2 m-2">
+					  <div className="font-bold text-2xl text-orange-700 text-center py-2 m-2">
 					     {favorite?.entity?.brand} - {favorite?.entity?.model}
+                          { favorite?.entity?.premium == true ? (
+                              <span className="text-md text-orange-500 mt-8"> Premium <i
+                                  className="fas fa-thumbs-up"></i></span>
+                              ) : ( null )
+                          }
 					  </div>
 					  <div class="price font-bold text-orange-500  text-2xl text-center bg-gray-400 px-4 py-2">
-					    {favorite?.entity?.estimate_price} €
+					    {favorite?.entity?.price} €
 					  </div>
 					</div>
 					<div className="container mx-auto">

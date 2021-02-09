@@ -39,7 +39,7 @@ const Annonces = ({ dispatch,
           <div className="container mx-auto px-4">
               <AnnonceSearchForm transparent />
 			<div className="flex content-center items-center justify-center h-full mb-24 mt-8">
-                {total >= 11 ?(
+                {total >= 13 ?(
                     <Pagination transparent
                                 current_page={current_page}
                                 from={from}
@@ -49,7 +49,7 @@ const Annonces = ({ dispatch,
                                 total={total}
                     />
                 ):(
-                    <p className="mt-4 text-center text-gray-700 text-xl">Aucune annonce ne correspond à vos critères.....</p>
+                    null
                 ) }
 
             </div>
