@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
 import useLoggedUser from 'service/hooks/useLoggedUser';
-
+import Router, {useRouter} from "next/router";
 
 export default function FavorisButton(props) {
     const {
         isAuthentificated,
         loggedUser
     } = useLoggedUser();
-
+    const router = useRouter();
     useEffect(() => {
 
     }, [isAuthentificated, loggedUser]);
@@ -25,8 +25,16 @@ export default function FavorisButton(props) {
             "category": props.category,
             "entity_id": props.entity_id
         }
-        props.action(payload);
-        setIsClick(true);
+        try{
+            if (!isAuthentificated || !loggedUser) {
+                Router.push("/auth/login")
+            }else{
+                props.action(payload);
+                setIsClick(true);
+            }
+        }catch (err) {
+            console.log(err);
+        }
     }
 
 

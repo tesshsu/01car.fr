@@ -596,6 +596,9 @@ video {
 }
 /* for portable part*/
 @media (max-width: 768px) {
+  .togBadgeBig{
+    width: 70px !important;
+  }
   .text-xl{
     font-size: 1rem !important;
   }
@@ -622,7 +625,7 @@ video {
   }
   .hasPrenium {
     position: absolute;
-    top: 350px !important;
+    top: 570px !important;
     right: 10% !important;  }
   .annoceSlider .sliderImg {
     width: 35rem !important;

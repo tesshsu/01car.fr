@@ -6,6 +6,7 @@ import Moment from 'react-moment';
 import {useRouter }  from "next/router";
 import {create} from "../../service/actions/favorites";
 import useAnnonces from "../../service/hooks/useAnnonces";
+
 const AnnonceLists = ({
                           loading,
                           dispatch,
@@ -18,9 +19,6 @@ const AnnonceLists = ({
     const [search, setSearch] = useState("");
     const [filteredCars, setFilteredCars] = useState([]);
     const [isAlreadyFavorite, setIsAlreadyFavorite] = React.useState(false)
-    const {
-        filterAnnonces
-    } = useAnnonces();
 
     const isFavorite = (id) => {
         let currentFavoritesIs = favorites?.map(i => i.entity_id);
