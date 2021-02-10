@@ -4079,6 +4079,9 @@ video {
 	color: #ed8936;
 	text-decoration: underline;
 }
+.vendre-page .react-responsive-modal-closeButton{
+    display: none !important;
+}
 .ImagelistPart .image-item__btn-wrapper{
 	text-align: center;
 }

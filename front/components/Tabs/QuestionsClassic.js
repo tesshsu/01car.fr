@@ -102,7 +102,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 
 
 	useEffect(() => {
-		if (!isAuthentificated && !loggedUser) {
+		if (!isAuthentificated) {
 			return setShowModal(true);
 		}else if(isAuthentificated && car){
 			return setEditCar(true), setisClickSubmit(true)
@@ -146,7 +146,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 			<div className="flex flex-wrap">
 				{showModal ? (
 					<>
-						<Modal closeOnEsc={false} open={open} onClose={() => setShowModal(true)}>
+						<Modal closeOnEsc={false} open={open} >
 							<h2 className="text-2xl font-semibold text-center">Créez votre compte personnel pour accéder au questionnaire de confiance </h2>
 							<PubContentThreeIcons/>
 							<PubContentConnection/>
