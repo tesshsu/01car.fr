@@ -118,8 +118,8 @@ const Payment = ({
                             </div>
                         </div>
                     </div>
-                    <div className="mb-12 text-center p-8">
-                        <p className="ml-3 leading-6 font-medium text-gray-600 text-md">
+                    <div className="paymentformBlock mb-12 text-center p-8">
+                        <p className="ml-3 leading-6 font-medium text-gray-600 text-md mb-4">
                             Accepter des paiements par cartes bancaires :
                             <span className="">
                                 <img

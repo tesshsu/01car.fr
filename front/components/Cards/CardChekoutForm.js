@@ -15,11 +15,10 @@ const CheckoutForm = (props) => {
 			base: {
 				iconColor: '#ed8936',
 				color: '#ed8936',
-				fontWeight: 500,
-				fontSize: '18px',
-				lineHeight: '1.429',
-				backgroundColor: '#eee',
+				fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
+				fontSize: '16px',
 				fontSmoothing: 'antialiased',
+
 				':-webkit-autofill': {color: '#a0aec0'},
 				'::placeholder': {color: '#a0aec0'},
 			},
@@ -89,7 +88,7 @@ const CheckoutForm = (props) => {
 	</div> ;
 
 	return (
-		<div className="mt-4 text-center my-4 mt-6">
+		<div className="stripPaymentBlock mt-4 text-center my-4 mt-6">
 			<form onSubmit={handleSubmit}>
 
 				<CardElement options={CARD_OPTIONS} />
