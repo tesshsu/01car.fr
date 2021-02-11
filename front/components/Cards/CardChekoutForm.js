@@ -18,7 +18,7 @@ const CheckoutForm = (props) => {
 				fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
 				fontSize: '16px',
 				fontSmoothing: 'antialiased',
-
+				padding: '11px 15px 11px 0',
 				':-webkit-autofill': {color: '#a0aec0'},
 				'::placeholder': {color: '#a0aec0'},
 			},

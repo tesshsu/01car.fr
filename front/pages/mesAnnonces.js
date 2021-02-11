@@ -41,11 +41,11 @@ const MesAnnonces = ({
                     </div>
                 </section>
                 <section className="pt-10 pb-8 mt-4">
-                    <div className="container mx-auto px-4">
+                    <div className="container mx-auto px-4 mt-32">
                         <div className="flex flex-wrap">
                             <MesAnnoncesLists/>
                             { total == 0  ? (
-                                <div className="container mx-auto text-center">
+                                <div className="container mx-auto text-center rounded border border-solid border-gray-200 py-2">
                                     <h5 className="text-xl font-semibold pb-4">
                                         Vous n'avez pas encore des annonces, publiez une annonce rapidement !!
                                     </h5>

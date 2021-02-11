@@ -596,6 +596,9 @@ video {
 }
 /* for portable part*/
 @media (max-width: 768px) {
+  .classic-myannonce-block{
+    margin-top: 0.25rem !important;
+  }
   .togBadgeBig{
     width: 70px !important;
   }
@@ -736,9 +739,6 @@ video {
   }
   .favoris-block .top{
 	display: flex;
-  }
-  .favoris-block .button-block{
-	margin-top: 2em;
   }
   .home-page .top-block{
 	height: 60vh;
@@ -4151,8 +4151,7 @@ stripPaymentBlock .StripeElement {
 
 .stripPaymentBlock input {
   width: 100%;
-  padding: 11px 15px 11px 0;
-  color: #fff;
+  padding: 11px 15px 11px 0 !important;
   background-color: transparent;
   -webkit-animation: 1ms void-animation-out;
 }
