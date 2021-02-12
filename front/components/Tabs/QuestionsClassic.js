@@ -29,6 +29,8 @@ import useAnnonces from '../../service/hooks/useAnnonces';
 import {Modal} from "react-responsive-modal";
 import PubContentThreeIcons from "../../layouts/PubContentThreeIcons.js";
 import PubContentConnection from "../../layouts/PubContentConnection.js";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import QuestionsPremier from "./QuestionsPremier";
 
 const QuestionsClassic = ({dispatch, loading, car}) => {
@@ -41,6 +43,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 	const [hasErrors, setHasErrors] = React.useState(true);
 	const [editCar, setEditCar] = React.useState(false);
 	const [marqueX, setMarqueX] = useState("");
+	const [startDate, setStartDate] = useState(new Date());
 	const sendPostQuestionsvalues = {
 		id: car?.id,
 		selectedBrand: car?.brand,
@@ -338,15 +341,20 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 														</label>
 														<div
 															className="relative flex w-full flex-wrap items-stretch mb-3">
-															<Field
-																name="dt_entry_service"
-																validate={formValidate.required}
-																component="input"
-																type="date"
-																value={values.dt_entry_service}
-																format={formValidate.formatDate}
-																className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded border border-gray-400 text-sm shadow focus:outline-none focus:shadow-outline w-full pl-10"
-															/>
+															{isSafari ? (
+																 <DatePicker selected={startDate} onChange={date => setStartDate(date)} />
+																): (
+																  <Field
+																		name="dt_entry_service"
+																		validate={formValidate.required}
+																		component="input"
+																		type="date"
+																		value={values.dt_entry_service}
+																		format={formValidate.formatDate}
+																		className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded border border-gray-400 text-sm shadow focus:outline-none focus:shadow-outline w-full pl-10"
+																	/>
+																)}
+															
 															<Error name="dt_entry_service"/>
 														</div>
 													</div>
