@@ -40,7 +40,6 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 	const [hasErrors, setHasErrors] = React.useState(true);
 	const [editCar, setEditCar] = React.useState(false);
 	const [marqueX, setMarqueX] = useState("");
-	const [selectedBrand, setSelectedBrand] = useState("");
 	const sendPostQuestionsvalues = {
 		id: car?.id,
 		selectedBrand: car?.brand,
