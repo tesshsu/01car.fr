@@ -105,7 +105,7 @@ const AnnonceSearchForm = ({
 									<div className="w-full px-3 flex-1">
 										<div className="relative flex w-full flex-wrap items-stretch mb-3">
 											{isSafari ? (
-												<Field name="brand" component="select" value={values.brand}  onClick={selectedMarque}  className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+												<Field name="brand" component="select" value={values.brand}  onChange={selectedMarque}  className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 													{
 														marqueFilterOptions.map( (marqueFilterOption) =>(
 

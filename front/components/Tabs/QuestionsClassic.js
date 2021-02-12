@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import QuestionsOptions from "../../components/Tabs/QuestionsOptions.js";
 import ImageUpload from "../../components/Tabs/ImageUpload.js";
 import {Field, Form} from 'react-final-form';
+import {isSafari} from 'react-device-detect';
 import useLoggedUser from '../../service/hooks/useLoggedUser';
 import {transformValueToBoolean} from "../../helpers/Utils";
 import {
@@ -272,7 +273,21 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 															>
 																{editCar ? "Marque :" : "*Marque :"}
 															</label>
+														{isSafari ? (
+															<Field
+																name="brand"
+																component="select"
+																value={values.brand}
+																onChange={selectedMarque}
+																className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+																{
+																	marqueFilterOptions.map( (marqueFilterOption) =>(
 
+																		<option value={marqueFilterOption.code} >{marqueFilterOption.name}</option>
+																	))
+																}
+															</Field>
+														):(
 															<Field
 																name="brand"
 																component="select"
@@ -286,6 +301,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 																	))
 																}
 															</Field>
+															)}
 															<Error name="brand"/>
 													</div>
 
