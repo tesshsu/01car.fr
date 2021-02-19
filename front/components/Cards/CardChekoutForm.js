@@ -69,7 +69,7 @@ const CheckoutForm = (props) => {
 
 	if (checkoutSuccess) return <div className="successPayment">
 		<p className="text-orange-500 text-md text-center font-bold">Votre paiement à été traité avec succèsl!
-		Vous pouvez modifier à tout moment depuis votre annonce.</p>
+		Vous pouvez modifier et répondes questions premium à tout moment depuis votre annonce : </p>
 		<button
 			className="bg-orange-500 mt-2 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
 			type="button"
@@ -81,7 +81,7 @@ const CheckoutForm = (props) => {
 						"text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
 					}
 				>
-					Voir Mes Annonces
+					Voir Mes Annonces puis modifier votre véhicule sur Top list!!
 				</a>
 			</Link>
 		</button>

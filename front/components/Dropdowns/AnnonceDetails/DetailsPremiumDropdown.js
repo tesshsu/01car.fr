@@ -1,8 +1,11 @@
-import React from "react";
+import React, {useEffect} from 'react';
 import {connect} from 'react-redux'
 import { createPopper } from "@popperjs/core";
 import {premium_ncs} from 'helpers/constant';
+import useLoggedUser from "../../../service/hooks/useLoggedUser";
 import {premium_options_display} from "../../../helpers/constant";
+import Link from "next/link";
+import useAnnonces from "../../../service/hooks/useAnnonces";
 
 const DetailsPremiumDropdown = ({
 						 dispatch,
@@ -13,6 +16,15 @@ const DetailsPremiumDropdown = ({
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
+    const {loggedUser} = useLoggedUser();
+  const [isowner, setIsowner] = React.useState(false);
+    let car_owner_id = car?.owner.id
+    useEffect(() => {
+        const owner = loggedUser?.loggedUser?.id;
+        if( owner == car_owner_id){
+            setIsowner(true);
+        }
+    }, [dispatch])
   const openDropdownPopover = () => {
     createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
       placement: "bottom-start",
@@ -22,14 +34,25 @@ const DetailsPremiumDropdown = ({
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
+    const {
+        editCar
+    } = useAnnonces();
 
   const carHasOption = (premium_opt) => {
       return premium_options_display(premium_opt, car?.premiumOptions[premium_opt?.value]);
     }
 
+    const handleEdit = async (id) => {
+        try {
+            await editCar(id);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
   return (
     <>
-       {car?.premium ? (
+       {car?.premium && car?.premiumOptions ? (
 		<div className="container px-2 mx-auto">
 		<div className="w-full px-8 py-2 px-2 flex-1">
 			<h4 className="mt-2 px-2 py-2 text-2xl leading-relaxed text-orange-500 font-bold underline uppercase rounded animate-bounce-once">
@@ -94,14 +117,43 @@ const DetailsPremiumDropdown = ({
 							  <span className="text-xl block my-2 p-3 text-gray-800 font-bold rounded border border-solid border-gray-200"><i class={premium_nc.icon}></i> {premium_nc.name} </span>
 							</div>
 							<div className="w-full px-4 flex-1">
-							  <span className="question-11 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">{carHasOption(premium_nc)}</span>
+                                <span className="question-11 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">{carHasOption(premium_nc)}</span>
 							</div>
 						</div>
 					</div>
 				))}
 			</div>
 	    </div>
-        </div>) : (null)}
+        </div>) : (
+           <div className="container px-2 mx-auto">
+               { car?.premium == true && isowner ? (
+                   <div className="button-block justify-left">
+                       <button
+                           className="bg-orange-500 text-white active:bg-gray-700 text-xs font-bold uppercase px-4 py-2 mr-2 rounded shadow hover:shadow-lg outline-none focus:outline-none ease-linear transition-all duration-150"
+                           type="button"
+                       >
+                           <Link href="/vendre">
+                               <a
+                                   href="#"
+                                   onClick={(e) => handleEdit(car?.id)}
+                                   className={
+                                       "text-sm py-1 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-white-500"
+                                   }
+                               >
+                                   Répondez votre questions premium <i className="far fa-edit"></i>
+                               </a>
+                           </Link>
+                       </button>
+                   </div>
+               ) :(
+                   <span
+                       className="question-1 text-xl block my-2 p-3 text-orange-500 rounded border border-solid border-gray-200">
+                       pas d'information
+                   </span>
+               )}
+           </div>
+
+       )}
     </>
   );
 };

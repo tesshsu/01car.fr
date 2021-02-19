@@ -101,6 +101,13 @@ const Payment = ({
 
                                 <p className="ml-3 leading-6 font-medium text-gray-600 text-md mt-4">*Le tarif
                                     est pour une annonce et dure dans un mois</p>
+                                <ul className="ml-3 leading-6 font-medium text-gray-600 text-md mt-4">
+                                    <li>Votre annonce sera sur Top list</li>
+                                    <li>Ajouter le note de confiance</li>
+                                    <li>10 photos gratuites</li>
+                                    <li>Estimation du véhicule par des professionnels qualifiés</li>
+                                    <li>Logo qualité garantie</li>
+                                </ul>
                                 <p className="ml-3 leading-6 text-gray-500 text-md mt-2">
                                     vous acceptez
                                     les conditions pour diriger ver le payment et notre politique de
