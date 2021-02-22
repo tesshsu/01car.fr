@@ -6,6 +6,7 @@ import * as emailjs from 'emailjs-com';
 import {Modal} from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import PubContentThreeIcons from "../../layouts/PubContentThreeIcons";
+import {isSafari} from 'react-device-detect';
 
 export default function Contact() {
     const [showModal, setShowModal] = React.useState(false);
@@ -15,7 +16,11 @@ export default function Contact() {
         setIsloading(true)
         emailjs.sendForm('service_zf331yg', 'template_he9yqcz', e.target, 'user_lGeJ5l257EdFgoGRMiuiz')
             .then((result) => {
-                setShowModal(true),
+                if(isSafari){
+                    alert("Votre message a bien été envoyé, Nous vous répondrons au plus vite")
+                }else{
+                    setShowModal(true)
+                }
                 setIsloading(false)
             }, (error) => {
                 console.log(error.text);

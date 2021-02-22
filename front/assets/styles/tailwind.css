@@ -594,6 +594,12 @@ video {
     max-width: 640px;
   }
 }
+/*for small mac*/
+@media screen and (min-width: 1025px) and (max-width: 1280px) {
+  .togBadgePayment {
+    right: 2rem !important;
+  }
+}
 /* for portable part*/
 @media (max-width: 768px) {
   .classic-myannonce-block{
@@ -751,6 +757,7 @@ video {
   }
   .favoris-block  img{
     max-width: 30rem;
+    max-height: 18rem;
   }
 }
 

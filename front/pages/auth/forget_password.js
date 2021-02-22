@@ -7,6 +7,7 @@ import useLoggedUser from '../../service/hooks/useLoggedUser';
 import {Modal} from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import PubContentThreeIcons from "../../layouts/PubContentThreeIcons";
+import {isSafari} from 'react-device-detect';
 
 export default function ForgetPassword() {
   const {
@@ -47,7 +48,11 @@ export default function ForgetPassword() {
 							try {
 							  await forgetPassword({ email : values?.email.trim()});
                                 setIsloading(false);
-                                setShowModal(true);
+                                if(isSafari){
+                                    alert("Votre message a bien été envoyé, Nous vous répondrons au plus vite")
+                                }else{
+                                    setShowModal(true)
+                                }
 						} catch (err) {
 						    setShowError(true)
 						}

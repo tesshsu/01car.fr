@@ -12,7 +12,6 @@ import "react-responsive-modal/styles.css";
 
 import ModalPayment from "../components/Modal/ModalPayment";
 import {connect} from "react-redux";
-import usePayments from "../service/hooks/usePayments";
 
 
 const Prix = ({
@@ -24,54 +23,11 @@ const Prix = ({
     const {
         isAuthentificated,
     } = useLoggedUser();
-    const [showModal, setShowModal] = React.useState(false);
 
     return (
         <>
             <IndexNavbar fixed/>
             <main className="prix-page">
-                {showModal ? (
-                    <>
-                        <Modal closeOnEsc={false} open={open} onClose={() => setShowModal(false)}>
-                            <section>
-                                <div className="product flex flex-wrap justify-center mt-4">
-                                    <div className="w-full md:w-6/12 px-4">
-                                        <img
-                                            src={require("assets/img/profile.jpg")}
-                                            alt="Abonnement Premium"
-                                            className="ProductImg shadow rounded-full max-w-full h-auto align-middle border-none"
-                                        />
-                                    </div>
-                                    <div className="w-full md:w-6/12 px-4">
-                                        <div className="description">
-                                            <h1 className="ml-3 leading-6 font-medium text-orange-500 text-2xl">Tarif
-                                                Premium *</h1>
-                                            <div className="ml-3 leading-6 font-medium text-orange-500 text-4xl">6.99€
-                                            </div>
-                                            <p className="ml-3 leading-6 font-medium text-gray-500 text-md">*Le tarif
-                                                est pour une annonce et dure dans un mois</p>
-                                            <p className="ml-3 leading-6 font-medium text-gray-500 text-md">
-                                                vous acceptez
-                                                les conditions pour diriger ver le payment et notre politique de
-                                                confidentialité
-                                                <Link href="/footer/policy">
-                                                    <a
-                                                        className={
-                                                            "text-sm font-normal block w-full whitespace-no-wrap bg-transparent text-orange-500"
-                                                        }
-                                                    >
-                                                        Lire la politique de confidentialité
-                                                    </a>
-                                                </Link>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <ModalPayment onSubmit={onPaymentSubmit}/>
-                            </section>
-                        </Modal>
-                    </>
-                ) : null}
                 <div className="relative pt-16 pb-20 flex content-center items-center justify-center min-h-screen-75">
                     <div
                         className="absolute top-0 w-full h-full bg-center bg-cover"

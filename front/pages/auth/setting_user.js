@@ -11,6 +11,7 @@ import CardAcceptCondition from "components/Cards/CardAcceptCondition.js";
 import {Modal} from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import PubContentThreeIcons from "../../layouts/PubContentThreeIcons";
+import {isSafari} from 'react-device-detect';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 
@@ -78,7 +79,11 @@ const Setting_user = ({dispatch, loading, user, hasErrors}) => {
 		} catch (err) {
 		   console.log(err.response);
 		} finally {
-			setShowModal(true)
+			if(isSafari){
+				alert("Votre modification a bien été envoyé")
+			}else{
+				setShowModal(true)
+			}
 		}
 	  }
 

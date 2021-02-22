@@ -19,16 +19,9 @@ const Payment = ({
         loggedUser
     } = useLoggedUser();
 
-    const [showModal, setShowModal] = React.useState(false);
-
     const {
         createPayment
     } = usePayments();
-
-    const onClickPayment = async e => {
-        e.preventDefault();
-        return setShowModal(true);
-    }
 
     const onPaymentSubmit = async (token) => {
         try {
@@ -62,7 +55,7 @@ const Payment = ({
                     ))}
                 </div>
                 <section className="container px-4 mx-auto border-2 rounded border-gray-500 py-10 z-40">
-                    <div className="product flex flex-wrap mt-8 mb-12">
+                    <div className="product flex flex-wrap mt-8">
                         <div className="w-full md:w-6/12 px-4">
                             <img
                                 alt="..."

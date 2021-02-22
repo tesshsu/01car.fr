@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import Link from "next/link";
 import {connect} from 'react-redux'
+import {isSafari} from 'react-device-detect';
 import QuestionsOptions from "../../components/Tabs/QuestionsOptions.js";
 import ImageUpload from "../../components/Tabs/ImageUpload.js";
 import {Field, Form} from 'react-final-form';
-import {isSafari} from 'react-device-detect';
 import useLoggedUser from '../../service/hooks/useLoggedUser';
 import {transformValueToBoolean} from "../../helpers/Utils";
 import {
@@ -42,7 +42,6 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 	const [isClickSubmit3, setisClickSubmit3] = React.useState(true)
 	const [hasErrors, setHasErrors] = React.useState(true);
 	const [editCar, setEditCar] = React.useState(false);
-	const [marqueX, setMarqueX] = useState("");
 	const [startDate, setStartDate] = useState(new Date());
 	const sendPostQuestionsvalues = {
 		id: car?.id,
@@ -115,10 +114,6 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 	const refreshPage= async () => {
 		window.location.reload();
 	}
-
-	const selectedMarque = (e) =>{
-		setMarqueX(e.target.value);
-	};
 
 	const onSubmit = async (values) => {
 		try {
@@ -276,35 +271,17 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 															>
 																{editCar ? "Marque :" : "*Marque :"}
 															</label>
-														{isSafari ? (
 															<Field
 																name="brand"
 																component="select"
 																value={values.brand}
-																onChange={selectedMarque}
 																className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 																{
 																	marqueFilterOptions.map( (marqueFilterOption) =>(
-
-																		<option value={marqueFilterOption.code} >{marqueFilterOption.name}</option>
+																		<option key={marqueFilterOption.code} value={marqueFilterOption.code} >{marqueFilterOption.name}</option>
 																	))
 																}
 															</Field>
-														):(
-															<Field
-																name="brand"
-																component="select"
-																value={values.brand}
-																onClick={selectedMarque}
-																className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-																{
-																	marqueFilterOptions.map( (marqueFilterOption) =>(
-
-																		<option value={marqueFilterOption.code} >{marqueFilterOption.name}</option>
-																	))
-																}
-															</Field>
-															)}
 															<Error name="brand"/>
 													</div>
 
@@ -320,12 +297,10 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 															component="select"
 															value={values.model}
 															className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-															{ !marqueX &&  <option>*--Tout les modèles--*</option>}
+															{ !values?.brand &&  <option>*--Tout les modèles--*</option>}
 															{
-																marqueX && modelFilterOptions[marqueX].map( (item) =>(
-
-																	<option >{item}</option>
-
+																values?.brand && modelFilterOptions[values?.brand]?.map( (item) =>(
+																	<option key={item} value={item}>{item}</option>
 																))
 															}
 														</Field>
@@ -354,7 +329,7 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 																		className="px-3 py-2 placeholder-gray-400 text-gray-700 relative bg-white bg-white rounded border border-gray-400 text-sm shadow focus:outline-none focus:shadow-outline w-full pl-10"
 																	/>
 																)}
-															
+
 															<Error name="dt_entry_service"/>
 														</div>
 													</div>

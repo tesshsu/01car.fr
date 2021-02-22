@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from "react"
-import { Form, Field, FormSpy } from 'react-final-form';
+import React from "react"
+import { Form, Field } from 'react-final-form';
 import Link from "next/link";
 import AnnonceLists from "./AnnonceLists";
-import {isSafari} from 'react-device-detect';
 import {fuelOptions,
 	kmMinFilterOptions,
 	kmMaxFilterOptions,
