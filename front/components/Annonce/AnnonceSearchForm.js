@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react"
-import { Form, Field } from 'react-final-form';
+import { Form, Field, FormSpy } from 'react-final-form';
 import Link from "next/link";
 import AnnonceLists from "./AnnonceLists";
 import {isSafari} from 'react-device-detect';
@@ -19,7 +19,6 @@ import {marqueFilterOptions,
 import {filterCars} from 'service/actions/cars';
 import {connect} from "react-redux";
 import {useRouter }  from "next/router";
-import DetailsSide from "../Dropdowns/AnnonceDetails/DetailsSide";
 
 
 const AnnonceSearchForm = ({
@@ -31,16 +30,21 @@ const AnnonceSearchForm = ({
 	const [navbarOpen, setNavbarOpen] = React.useState(false);
 	const [issetFilter, setIsSetFilter] = React.useState(false)
 	const router = useRouter();
-	const [marqueX, setMarqueX] = useState("");
 
-	const selectedMarque = (e) =>{
-		setMarqueX(e.target.value);
-	};
-
-	useEffect( ()=>{
-		console.log(marqueX);
-		//console.log(stateX[marqueX]);
-	},[marqueX]);
+	let initialValues = {
+			postal_code:'',
+			price_min: '',
+			price_max: '',
+			km_min: '',
+			km_max: '',
+			brand: '',
+			model: '',
+			owner_type: '',
+			fuel: '',
+			transmission: '',
+			dt_entry_service_min: '',
+			dt_entry_service_max: '',
+	}
 
 
 	if (loading) {
@@ -84,61 +88,39 @@ const AnnonceSearchForm = ({
 			<section className="annonceSearchForm mt-4">
 				<div className="container px-4 mx-auto border-2 rounded bg-orange-500 py-2 z-40">
 					<Form
-						initialValues={{
-							postal_code:'',
-							price_min: '',
-							price_max: '',
-							km_min: '',
-							km_max: '',
-							brand: '',
-							model: '',
-							owner_type: '',
-							fuel: '',
-							transmission: '',
-							dt_entry_service_min: '',
-							dt_entry_service_max: ''
-						}}
+						initialValues={initialValues}
 						onSubmit={onSubmit}
 						render={({ handleSubmit, form, submitting, pristine, values }) => (
 							<form onSubmit={handleSubmit}>
 								<div className="flex flex-wrap mt-4">
 									<div className="w-full px-3 flex-1">
 										<div className="relative flex w-full flex-wrap items-stretch mb-3">
-											{isSafari ? (
-												<Field name="brand" component="select" value={values.brand}  onChange={selectedMarque}  className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+												<Field name="brand"
+													   component="select"
+													   value={values?.brand}
+													   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 													{
 														marqueFilterOptions.map( (marqueFilterOption) =>(
-
 															<option key={marqueFilterOption.code} value={marqueFilterOption.code} >{marqueFilterOption.name}</option>
 														))
 													}
 												</Field>
-											):(
-												<Field name="brand" component="select" value={values.brand}  onClick={selectedMarque}  className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-													{
-														marqueFilterOptions.map( (marqueFilterOption) =>(
-
-															<option key={marqueFilterOption.code} value={marqueFilterOption.code} >{marqueFilterOption.name}</option>
-														))
-													}
-												</Field>
-											)}
-
 											<div
 												className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white bg-orange-500">
-												<i className="fas fa-angle-down text-2xl my-2"></i>
+												<i className="fas fa-angle-down text-2xl my-2"> </i>
 											</div>
 										</div>
 									</div>
 									<div className="w-full px-3 flex-1">
 										<div className="relative flex w-full flex-wrap items-stretch mb-3">
-											<Field name="model" component="select" value={values.model} className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-												{ !marqueX &&  <option>*--Tout les modèles--*</option>}
+											<Field name="model"
+												   component="select"
+												   value={values.model}
+												   className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-3 py-2 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+												{ !values?.brand &&  <option>*--Tout les modèles--*</option>}
 												{
-													marqueX && modelFilterOptions[marqueX].map( (item) =>(
-
-														<option >{item}</option>
-
+													values?.brand && modelFilterOptions[values?.brand]?.map( (item) =>(
+														<option key={item} value={item}>{item}</option>
 													))
 												}
 											</Field>
