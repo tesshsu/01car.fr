@@ -138,7 +138,6 @@ const QuestionsClassic = ({dispatch, loading, car}) => {
 		}
 	}
 
-
 	return (
 		<>
 			<div className="flex flex-wrap">
