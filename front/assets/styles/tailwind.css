@@ -4076,6 +4076,9 @@ video {
 .annoceSlider .slick-dots img{
 	border: 1px solid #fff;
 }
+.react-responsive-modal-closeButton{
+  display: none !important;
+}
 .vendre-page .ImagelistPart img{
 	padding: 5px;
     box-shadow: 0 0 8px 2px rgba(0,0,0,.1);
@@ -4085,9 +4088,6 @@ video {
 .vendre-page .notifyForPrice a{
 	color: #ed8936;
 	text-decoration: underline;
-}
-.vendre-page .react-responsive-modal-closeButton{
-    display: none !important;
 }
 .ImagelistPart .image-item__btn-wrapper{
 	text-align: center;
@@ -4254,9 +4254,6 @@ stripPaymentBlock .StripeElement {
 }
 .checkout-button:hover {
   opacity: 0.8;
-}
-.vendre-page .react-responsive-modal-closeButton{
-	display: none !important;
 }
 .carImageSingle{
 	width: 395px;
