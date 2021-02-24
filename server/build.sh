@@ -4,9 +4,9 @@
 project_path=$(pwd)
 laradock_path='/cygdrive/d/dev/websites/laradock'
 
-app_path='/var/www/vhosts/01car.fr/api.01car.fr/'
-server_address=51.210.190.6
-ssh_user=admin01car_ssh
+app_path='/homez.1032/yvlrzew/api.1car.fr/'
+server_address=ssh.cluster030.hosting.ovh.net
+ssh_user=yvlrzew-vacha
 php_path='/opt/plesk/php/7.3/bin/php'
 
 
@@ -58,10 +58,14 @@ scp target/backend.zip ${ssh_user}@${server_address}:${app_path}
 
 ssh -o StrictHostKeyChecking=no ${ssh_user}@${server_address}  "cd ${app_path} && \
     unzip backend.zip && \
-    ${php_path} artisan migrate
+    ${php_path} artisan migrate"
 
 
 ###    ${php_path} artisan migrate:fresh --seed  && \
 ###    ${php_path} artisan passport:client --personal"
 
+
+
+Client ID: 1
+Client secret: bYkIKLAolbjA7yhMZV1CP7CgqqHqUtiDB2bTip2j
 
