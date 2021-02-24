@@ -7,11 +7,11 @@ const ENVS = {
   },
   DEV: {
     ENV: 'DEV',
-	API_URL: 'https://api.01car.fr'
+	API_URL: 'https://api.1car.fr'
   },
   PROD: {
     ENV: 'PROD',
-	API_URL: 'https://api.01car.fr'
+	API_URL: 'https://api.1car.fr'
   },
 };
 

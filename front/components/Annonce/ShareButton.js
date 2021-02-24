@@ -22,7 +22,7 @@ const ShareButton= ({
 
   let carId = car?.id;
   const title = "Bonjour, Je Partager cette Annonce de véhicule";
-  const shareUrl = carId ? `https://01car.fr/annonce?id=${carId}`  : "https://01car.fr/" ;
+  const shareUrl = carId ? `https://1car.fr/annonce?id=${carId}`  : "https://1car.fr/" ;
   return (
    <>
         <ul className="flex pl-0 rounded list-none flex-wrap">

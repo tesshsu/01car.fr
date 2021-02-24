@@ -18,7 +18,7 @@ export default function FooterSmall(props) {
               <div className="text-sm text-gray-600 font-semibold py-1 text-center md:text-left">
                 Copyright © {new Date().getFullYear()}{" "}
                 <a
-                  href="https://01car.fr/"
+                  href="https://1car.fr/"
                   className="text-white hover:text-gray-400 text-sm font-semibold py-1"
                 >
                   1car.fr

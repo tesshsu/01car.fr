@@ -36,7 +36,7 @@ export default function Footer() {
                   className="bg-white text-blue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <a href="https://01car.fr/"  target="_blank">
+                  <a href="https://1car.fr/"  target="_blank">
 				   <i className="fab fa-facebook-square"></i>
 				  </a>
                 </button>
@@ -44,7 +44,7 @@ export default function Footer() {
                     className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                     type="button"
                 >
-                  <a href="https://01car.fr/"  target="_blank">
+                  <a href="https://1car.fr/"  target="_blank">
 				   <i className="fab fa-instagram"></i>
 				  </a>
                 </button>
@@ -52,7 +52,7 @@ export default function Footer() {
                   className="bg-white text-pink-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2"
                   type="button"
                 >
-                  <a href="https://01car.fr/"  target="_blank">
+                  <a href="https://1car.fr/"  target="_blank">
 				   <i className="fab fa-pinterest-p"></i>
 				  </a>
                 </button>
@@ -121,7 +121,7 @@ export default function Footer() {
           <div className="flex flex-wrap items-center md:justify-between justify-center">
             <div className="w-full md:w-4/12 px-4 mx-auto text-center">
               <div className="text-sm text-gray-600 font-semibold py-1">
-                Copyright © {new Date().getFullYear()} 01car.fr                .
+                Copyright © {new Date().getFullYear()} 1car.fr                .
               </div>
             </div>
           </div>
