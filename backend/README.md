@@ -236,6 +236,9 @@ php artisan vendor:publish --tag=laravel-notifications
 /opt/plesk/php/7.3/bin/php artisan storage:link
 ```
 
+scp .    yvlrzew-vacha@ssh.cluster030.hosting.ovh.net:
+ssh_user=
+
 
 
 
