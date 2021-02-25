@@ -282,7 +282,7 @@ class CarController extends Controller
         }
 
         $currentUser = Auth::user();
-        if ($currentUser->id != $car->user_id || !$currentUser->isAdminUser()) {
+        if ($currentUser->id != $car->user_id && !$currentUser->isAdminUser()) {
             return response()->json(['error' => 'Unauthorised'], 403);
         }
         $car->attributes->each(function ($item, $key) {
