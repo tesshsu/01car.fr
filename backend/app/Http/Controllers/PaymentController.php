@@ -221,9 +221,6 @@ class PaymentController extends Controller
     {
         // Add autovisual data
         $data = $car->getAutovisualData();
-        $data["txt"] = "renault clio";
-        $data["dt_entry_service"] = "2011-02-11";
-        $data["km"] = "82000";
 
         // define the option
         $data["value"] = true;
