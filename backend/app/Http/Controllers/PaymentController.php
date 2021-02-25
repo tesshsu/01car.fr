@@ -19,6 +19,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Stripe\Stripe;
 use Stripe\StripeClient;
+use Throwable;
 
 class PaymentController extends Controller
 {
@@ -63,43 +64,47 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        $currentUser = Auth::user();
-        $reqPayment = (object)$request->json()->all();
+        try {
+            $currentUser = Auth::user();
+            $reqPayment = (object)$request->json()->all();
 
-        // Validate
-        $validator = $this->validateEntity($reqPayment);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()->messages()], 401);
-        }
-
-        // Check car owner
-        $car = Car::find($reqPayment->car_id);
-        if ($car === NULL || $currentUser->id !== $car->user_id) {
-            return response()->json(['error' => 'Invalid parameters'], 422);
-        }
-
-        //
-        // Create entity
-        $newPayment = new Payment;
-        $this->updatePaymentFields($newPayment, $reqPayment);
-        $newPayment->user_id = $currentUser->id;
-        $newPayment->car_id = $reqPayment->car_id;
-        $newPayment->status = PaymentStatus::PENDING;
-        $newPayment->save();
-
-        $charge = $this->pay($currentUser, $car, $newPayment, $request);
-
-        if ($charge->status === PaymentStatus::SUCCEEDED) {
-            $car->expire_at = Carbon::now()->addDays(TimeConstant::EXPIRATION_DURATION_IN_DAYS);
-            if (!$car->premium) {
-                $this->updateDataFromAutovisual($car);
-                $car->premium = true;
+            // Validate
+            $validator = $this->validateEntity($reqPayment);
+            if ($validator->fails()) {
+                return response()->json(['error' => $validator->errors()->messages()], 401);
             }
 
-            $car->save();
-        }
+            // Check car owner
+            $car = Car::find($reqPayment->car_id);
+            if ($car === NULL || $currentUser->id !== $car->user_id) {
+                return response()->json(['error' => 'Invalid parameters'], 422);
+            }
 
-        return response()->json($charge);
+            //
+            // Create entity
+            $newPayment = new Payment;
+            $this->updatePaymentFields($newPayment, $reqPayment);
+            $newPayment->user_id = $currentUser->id;
+            $newPayment->car_id = $reqPayment->car_id;
+            $newPayment->status = PaymentStatus::PENDING;
+            $newPayment->save();
+
+            $charge = $this->pay($currentUser, $car, $newPayment, $request);
+
+            if ($charge->status === PaymentStatus::SUCCEEDED) {
+                $car->expire_at = Carbon::now()->addDays(TimeConstant::EXPIRATION_DURATION_IN_DAYS);
+
+                if (!$car->premium) {
+                    $this->updateDataFromAutovisual($car);
+                    $car->premium = true;
+                }
+                $car->save();
+            }
+
+            return response()->json($charge);
+        } catch (Throwable $ex){
+            return response()->json(['error' => $ex->getMessage()], 500);
+        }
     }
 
     /**
@@ -150,60 +155,74 @@ class PaymentController extends Controller
 
     private function payStripe($user, $car, $newPayment, $request)
     {
-        $config = config()->get('services.stripe');
+        try {
+            $charge = (object)array();
+            $charge->status = PaymentStatus::FAILED;
 
-        // Get order from stripe API
-        Stripe::setApiKey($config['secret_key']);
-        $stripe = new StripeClient(
-            $config['secret_key']
-        );
+            $config = config()->get('services.stripe');
 
-        $source = $stripe->sources->create([
-            'type' => 'card',
-            'currency' => $request->currency,
-            'owner' => [
-                'email' => $user->email
-            ],
-            'token' => $request->token
-        ]);
+            // Get order from stripe API
+            Stripe::setApiKey($config['secret_key']);
+            $stripe = new StripeClient(
+                $config['secret_key']
+            );
 
-        // Search if customer exist
-        $stripeCustomer = null;
-        $payment = Payment::where('user_id', $user->id)
-            ->whereNotNull('provider_user_id')->first();
-        if ($payment) {
-            $stripeCustomer = $stripe->customers->retrieve($payment->provider_user_id);
-        }
-        if ($stripeCustomer == null) {
-            $stripeCustomer = $stripe->customers->create([
-                'email' => $user->email,
-                'name' => $user->name,
-                'phone' => $user->phone,
-                'preferred_locales' => ['fr'],
+            $source = $stripe->sources->create([
+                'type' => 'card',
+                'currency' => $request->currency,
+                'owner' => [
+                    'email' => $user->email
+                ],
+                'token' => $request->token
+            ]);
+
+
+            // Search if customer exist
+            $stripeCustomer = null;
+            $payment = Payment::where('user_id', $user->id)
+                ->whereNotNull('provider_user_id')->first();
+
+
+            if ($payment) {
+                $stripeCustomer = $stripe->customers->retrieve($payment->provider_user_id);
+            }
+            if ($stripeCustomer == null) {
+                $stripeCustomer = $stripe->customers->create([
+                    'email' => $user->email,
+                    'name' => $user->name,
+                    'phone' => $user->phone,
+                    'preferred_locales' => ['fr'],
+                    'source' => $source['id'],
+                    'metadata' => [
+                        'user_id' => $user->id
+                    ],
+                ]);
+            }
+
+
+            $charge = $stripe->charges->create([
+                'description' => $request->description,
+                'amount' => $request->amount,
+                'currency' => $request->currency,
+                'receipt_email' => $user->email,
+                'customer' => $stripeCustomer['id'],
                 'source' => $source['id'],
                 'metadata' => [
-                    'user_id' => $user->id
+                    'user_id' => $user->id,
+                    'car_id' => $car->id
                 ],
             ]);
+
+            $newPayment->status = $charge->status;
+            $newPayment->provider_user_id = $stripeCustomer['id'];
+            $newPayment->provider_payment_id = $charge['id'];
+            $newPayment->save();
+
+        } catch (Throwable $ex) {
+            $newPayment->status = PaymentStatus::FAILED;
+            $newPayment->save();
+            $charge->error = $ex->getMessage();
         }
-
-        $charge = $stripe->charges->create([
-            'description' => $request->description,
-            'amount' => $request->amount,
-            'currency' => $request->currency,
-            'receipt_email' => $user->email,
-            'customer' => $stripeCustomer['id'],
-            'source' => $source['id'],
-            'metadata' => [
-                'user_id' => $user->id,
-                'car_id' => $car->id
-            ],
-        ]);
-
-        $newPayment->status = $charge->status;
-        $newPayment->provider_user_id = $stripeCustomer['id'];
-        $newPayment->provider_payment_id = $charge['id'];
-        $newPayment->save();
 
         return $charge;
     }
