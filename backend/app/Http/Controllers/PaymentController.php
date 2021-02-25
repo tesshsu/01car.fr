@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use App\Constants\Payments\PaymentProvider;
 use App\Constants\Payments\PaymentStatus;
 use App\Constants\TimeConstant;
-use App\Http\Resources\Car as CarResource;
+use App\Http\Resources\Payment as PaymentResource;
 use App\Http\Resources\PaymentPaginatorCollection;
 use App\Models\Car;
 use App\Models\Payment;
@@ -89,9 +89,9 @@ class PaymentController extends Controller
 
         $charge = $this->pay($currentUser, $car, $newPayment, $request);
 
-        if($charge->status === PaymentStatus::SUCCEEDED){
+        if ($charge->status === PaymentStatus::SUCCEEDED) {
             $car->expire_at = Carbon::now()->addDays(TimeConstant::EXPIRATION_DURATION_IN_DAYS);
-            if(!$car->premium) {
+            if (!$car->premium) {
                 $this->updateDataFromAutovisual($car);
                 $car->premium = true;
             }
@@ -120,8 +120,8 @@ class PaymentController extends Controller
             'amount' => ['required', 'integer'],
             'currency' => ['required', 'max:' . Payment::fieldsSizeMax('currency')],
             'provider' => ['required',
-                        'max:' . Payment::fieldsSizeMax('provider'),
-                        Rule::in(PaymentProvider::list())],
+                'max:' . Payment::fieldsSizeMax('provider'),
+                Rule::in(PaymentProvider::list())],
             'token' => ['required'],
             'car_id' => ['required'],
         ],
@@ -171,7 +171,7 @@ class PaymentController extends Controller
         $stripeCustomer = null;
         $payment = Payment::where('user_id', $user->id)
             ->whereNotNull('provider_user_id')->first();
-        if($payment) {
+        if ($payment) {
             $stripeCustomer = $stripe->customers->retrieve($payment->provider_user_id);
         }
         if ($stripeCustomer == null) {
@@ -202,7 +202,7 @@ class PaymentController extends Controller
 
         $newPayment->status = $charge->status;
         $newPayment->provider_user_id = $stripeCustomer['id'];
-        $newPayment->provider_payment_id= $charge['id'];
+        $newPayment->provider_payment_id = $charge['id'];
         $newPayment->save();
 
         return $charge;
@@ -214,7 +214,7 @@ class PaymentController extends Controller
         if ($payment == NULL) {
             return response()->json(['error' => 'NotFound'], 404);
         }
-        return response()->json(new CarResource($payment));
+        return response()->json(new PaymentResource($payment));
     }
 
     private function updateDataFromAutovisual($car)
@@ -230,15 +230,17 @@ class PaymentController extends Controller
         $autovisualResponse = (object)$this->autovisualClient->getInfo($data);
 
         // Update car data with response
-        if(isset($autovisualResponse->recognition)) {
-            collect($car->getAutovisualFillable())->each(function ($item, $key) use ($car, $autovisualResponse) {
-                $car->{$item} = isset($autovisualResponse->recognition->{$item}) ? $autovisualResponse->recognition->{$item} : $car->{$item};
+        if (isset($autovisualResponse->recognition)) {
+            $recognition = (object)$autovisualResponse->recognition;
+            collect($car->getAutovisualFillable())->each(function ($item, $key) use ($car, $recognition) {
+                $car->{$key} = isset($recognition->{$item}) ? Str::lower($recognition->{$item}) : $car->{$key};
             });
         }
 
-        if(isset($autovisualResponse->value)) {
-            $car->estimate_price_min = isset($autovisualResponse->value->c) ? $autovisualResponse->recognition->c : $car->estimate_price_min;
-            $car->estimate_price_max = isset($autovisualResponse->value->b) ? $autovisualResponse->recognition->b : $car->estimate_price_max;
+        if (isset($autovisualResponse->value)) {
+            $value = (object)$autovisualResponse->value;
+            $car->estimate_price_min = isset($value->c) ? $value->c : $car->estimate_price_min;
+            $car->estimate_price_max = isset($value->b) ? $value->b : $car->estimate_price_max;
         }
 
         return $autovisualResponse;
