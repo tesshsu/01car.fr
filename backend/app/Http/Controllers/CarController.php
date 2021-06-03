@@ -323,6 +323,19 @@ class CarController extends Controller
     public
     function addFiles(Request $request, $id): \Illuminate\Http\JsonResponse
     {
+         $validator = Validator::make($request->all(), [
+            'uploads.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:16384',
+        ],
+            $messages = [
+                'required' => 'The :attribute field is required.',
+                'max' => 'The :attribute value is larger than :max ko.',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+        
         $car = Car::with('uploads')->find($id);
 
         // check that id are the same
